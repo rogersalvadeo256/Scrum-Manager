@@ -2,7 +2,7 @@ package statics;
 
 import java.io.IOException;
 
-import db.querys.QUERYs_FRIENDSHIP;
+import friendship.QUERYs_FRIENDSHIP;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -62,6 +62,10 @@ public class GENERAL_STORE {
 	
 	
 	public static void SHOW_PROJECT() { 
+			
+		
+		
+//		List<?> listProject = DB_OPERATION.QUERY("FROM PROJECT INNER JOIN USER_PROFILE UP ON UP.PROF_COD = PROJECT.");
 		
 		
 		

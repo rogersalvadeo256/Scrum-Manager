@@ -12,7 +12,6 @@ public class TableEditor implements Callback<TableColumn<USER_PROFILE, ImageView
 	public TableCell<USER_PROFILE, ImageView> call(TableColumn<USER_PROFILE, ImageView> param) {
 		return new InviteFriend();
 	}
-
 	class InviteFriend extends TableCell<USER_PROFILE, ImageView> {
 
 		private ImageView image;
@@ -30,7 +29,6 @@ public class TableEditor implements Callback<TableColumn<USER_PROFILE, ImageView
 
 			setText(null);
 		}
-
 		@Override
 		protected void updateItem(ImageView item, boolean empty) {
 			super.updateItem(item, empty);

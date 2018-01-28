@@ -14,9 +14,5 @@ public class HBProfileContentForgotPassword extends HBProfileContent{
 	public HBProfileContentForgotPassword(USER_REGISTRATION u) throws IOException {
 		super(u);
 		super.getBtnAdd().setVisible(false);;
-	}
-	
-	
-	
-	
+	}	
 }

@@ -1,4 +1,4 @@
-package db.querys;
+package friendship;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +57,6 @@ public class QUERYs_FRIENDSHIP {
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<USER_PROFILE> friendsList() {
-		// EntityManager em = Database.createEntityManager();
-		// Query q = em.createQuery("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD
-		// AND FRQ_REQUEST_STATUS= 'ACCEPTED' OR FRQ_COD_PROF_REQUESTED_BY = :COD AND
-		// FRQ_REQUEST_STATUS = 'ACCEPTED'");
-		// q.setParameter("COD", SESSION.getProfileLogged().getCod());
 
 		List<USER_PROFILE> listReturn = new ArrayList<USER_PROFILE>();
 
@@ -81,19 +76,6 @@ public class QUERYs_FRIENDSHIP {
 
 
 		}
-
-		// for (FRIENDSHIP rq : (List<FRIENDSHIP>) q.getResultList()) {
-		//
-		// Query q1 = em.createQuery("FROM USER_PROFILE WHERE PROF_COD = :COD OR PROF_COD
-		// = :COD2 AND PROF_COD <> :USER_ONLINE");
-		// q1.setParameter("COD", rq.getRequestedBy());
-		// q1.setParameter("COD2", rq.getReceiver());
-		// q1.setParameter("USER_ONLINE", SESSION.getProfileLogged().getCod());
-		//
-		// for (USER_PROFILE up : (List<USER_PROFILE>) q1.getResultList()) {
-		// listReturn.add(up);
-		// }
-		// }
 		return listReturn;
 	}
 

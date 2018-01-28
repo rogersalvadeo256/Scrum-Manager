@@ -24,8 +24,8 @@ public class HBProjectComponent extends HBox{
 		this.lblDesPiece = new Label(p.getProjDescription());
 		
 		this.lblCreator = new Label("Criador: ");
-		USER_PROFILE pu = (USER_PROFILE) DB_OPERATION.QUERY( "FROM USER_PROFILE WHERE USER_COD = :COD", "COD", p.getProjCreator()).get(0);
-		this.lblCreatorName = new Label(pu.getName());
+//		USER_PROFILE pu = (USER_PROFILE) DB_OPERATION.QUERY( "FROM USER_PROFILE WHERE USER_COD = :COD", "COD", p.getProjCreator()).get(0);
+//		this.lblCreatorName = new Label(pu.getName());
 		
 		layout.getChildren().addAll(lblName, lblDesPiece);
 		

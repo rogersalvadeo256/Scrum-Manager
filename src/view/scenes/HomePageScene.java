@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 import application.main.Window;
 import db.pojos.USER_PROFILE;
-import db.querys.QUERYs_FRIENDSHIP;
+import friendship.QUERYs_FRIENDSHIP;
 import friendship.SearchFriend;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -71,7 +71,9 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-
+		
+		Window.mainStage.setResizable(true);
+		
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
@@ -97,12 +99,11 @@ public class HomePageScene extends Scene {
 
 					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
 						USER_PROFILE up = SESSION.getProfileLogged();
-
+						DB_OPERATION.MERGE(up);
 					}
 					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue())) {
 						USER_PROFILE up = SESSION.getProfileLogged();
 						up.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
-
 						DB_OPERATION.MERGE(up);
 					}
 				}

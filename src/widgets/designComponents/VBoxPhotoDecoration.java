@@ -31,7 +31,7 @@ public class VBoxPhotoDecoration extends VBox {
 		
 		this.vbContainer.setAlignment(Pos.CENTER);
 
-		this.vbContainer.setPrefHeight(500);
+		this.vbContainer.setPrefHeight(50);
 
 		this.vbContainer.setTranslateY(-20);
 

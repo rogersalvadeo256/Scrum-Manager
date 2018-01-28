@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import db.pojos.USER_PROFILE;
-import db.querys.QUERYs_FRIENDSHIP;
 import friendship.FriendshipActions;
+import friendship.QUERYs_FRIENDSHIP;
 import javafx.scene.layout.VBox;
 import view.popoups.FriendListPOPOUP;
 import widgets.designComponents.HBFriendContent;

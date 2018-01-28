@@ -16,11 +16,11 @@ public class StandartLayoutPOPOUP extends Stage {
 
 		this.initOwner(owner);
 		this.initModality(Modality.WINDOW_MODAL);
-		this.setWidth(400);
-		this.setHeight(600);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.layout = new VBox();
 		this.scene = new Scene(layout);
+		
+		
 		this.setScene(scene);
 		this.initStyle(StageStyle.UNDECORATED);
 

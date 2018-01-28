@@ -1,5 +1,7 @@
 package db.pojos;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,6 +28,14 @@ public class PROJECT_MEMBER {
 	@Column(name = "MDR_PROJECT") 
 	private int mbrProject;
 	
+	public int getMbrProject() {
+		return mbrProject;
+	}
+
+	public void setMbrProject(int mbrProject) {
+		this.mbrProject = mbrProject;
+	}
+
 	public int getMbrId() {
 		return mbrId;
 	}
@@ -54,8 +64,8 @@ public class PROJECT_MEMBER {
 		return mbrDtAdd;
 	}
 
-	public void setMbrDtAdd(java.util.Date mbrDtAdd) {
-		this.mbrDtAdd = mbrDtAdd;
+	public void setMbrDtAdd() {
+		this.mbrDtAdd = Calendar.getInstance().getTime();
 	}
 
 	@Temporal(TemporalType.DATE)

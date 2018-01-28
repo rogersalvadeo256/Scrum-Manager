@@ -6,7 +6,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 import application.controllers.NewProjectSceneController;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,43 +15,52 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import table.util.friendInvite.TableInviteFriends;
 import validation.CheckEmptyFields;
 
 public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
-	private Label lblProjectName, lblDescProject;
+	private Label lblProjectName, lblAboutTheProject;
 	private TextField txtProjectName;
-	private TextArea txtDescProject;
+	private TextArea txtAboutTheProject;
 
 
 	private NewProjectSceneController controller;
 
-	/*
-	 * btnCancel - close the window and delete everthing btnGoBack - serialization of the
-	 * defined things - if the user try to create another project, show a message
-	 */
-	private Button btnFinish, btnCancel, btnInvite, btnGoBack;
+	private Button btnFinish, btnInvite, btnGoBack, btnAboutTheProject;
 	private HBox hbButtons;
-	private HBox hbHeader;
+
+	private HBox layoutForInviteComponents;
+
 
 	public NewProjectPOPOUP(Stage mainStage) throws FileNotFoundException {
 		super(mainStage);
 
+		this.setWidth(300);
+		this.setHeight(500);
+
 		this.controller = new NewProjectSceneController();
 
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("Descrição do Projeto");
+		this.lblAboutTheProject = new Label("Descrição do Projeto");
 		this.txtProjectName = new TextField();
-		this.txtDescProject = new TextArea();
-		this.txtDescProject.setId("descProject");
-		this.txtDescProject.setId("txtDescProject");
+		this.txtAboutTheProject = new TextArea();
+		this.txtAboutTheProject.setId("descProject");
+		this.txtAboutTheProject.setId("txtDescProject");
 		this.hbButtons = new HBox();
 
 		this.scene.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
 
 		this.txtProjectName.setMaxWidth(300);
-		this.txtDescProject.setMaxWidth(300);
-		this.txtDescProject.setPrefRowCount(10);
-		this.txtDescProject.setWrapText(true);
+		this.txtAboutTheProject.setMaxWidth(300);
+		this.txtAboutTheProject.setPrefRowCount(10);
+		this.txtAboutTheProject.setWrapText(true);
+
+		this.btnAboutTheProject = new Button();
+		this.btnFinish = new Button("Criar Projeto");
+		this.btnFinish.setId("btnSalve");
+
+		this.btnInvite = new Button("Convidar Amigos");
+		this.btnInvite.setId("btnInvite");
 
 		int SIZE = 30;
 		ImageView buttonImage = new ImageView(new Image(new FileInputStream(new File("resources/images/icons/back_arrow_icon.png"))));
@@ -64,14 +72,12 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.btnGoBack.setGraphic(buttonImage);
 		this.btnGoBack.setMaxWidth(100);
 		this.btnGoBack.setMaxHeight(100);
-		this.hbHeader = new HBox();
-		this.hbHeader.getChildren().add(this.btnGoBack);
-		this.hbHeader.prefWidth(this.getWidth());
-		this.hbHeader.setAlignment(Pos.CENTER_LEFT);
+		// this.hbHeader = new HBox();
+		// this.hbHeader.getChildren().add(this.btnGoBack);
+		// this.hbHeader.prefWidth(this.getWidth());
+		// this.hbHeader.setAlignment(Pos.CENTER_LEFT);
 
 		this.txtProjectName.setAlignment(Pos.CENTER);
-		this.btnFinish = new Button("Salvar");
-		this.btnFinish.setId("btnSalve");
 
 
 		this.btnGoBack.setOnAction(e -> {
@@ -82,30 +88,92 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 
 			CheckEmptyFields cef = new CheckEmptyFields();
 
-			if (!cef.isTextFieldEmpty(txtProjectName) && !cef.isTextAreaEmpty(txtDescProject)) {
-				controller.actionFinish(txtProjectName.getText(), txtDescProject.getText());
+			if (!cef.isTextFieldEmpty(txtProjectName) && !cef.isTextAreaEmpty(txtAboutTheProject)) {
+				// controller.actionFinish(txtProjectName.getText(),
+				// txtDescProject.getText());
 			}
 		});
 
-		
-		this.btnInvite = new Button("Convidar amigos");
-		this.btnInvite.setId("btnInvite");
-		this.btnCancel = new Button("Cancelar");
-		this.btnCancel.setId("btnCancel");
+		this.btnInvite.setOnAction(e -> {
+			inviteFriend();
+		});
 
-		hbButtons.getChildren().addAll(btnFinish, btnCancel);
-		hbButtons.setSpacing(10);
-		hbButtons.setAlignment(Pos.CENTER);
+		initialLayout();
+	}
+
+	private void inviteFriend() {
+		boolean t = layoutForInviteComponents == null ? true : false;
+
+		if (t)	layoutForInviteComponents = new HBox();
+
+		boolean isTheVBOX = this.scene.getRoot() == layout ? true : false;
+
+		if (isTheVBOX) {
+			layoutForInviteComponents.getChildren().add(layout);
+			this.scene.setRoot(layoutForInviteComponents);
+			this.btnInvite.setText("Cancelar");
+			
+			TableInviteFriends tableFriends = new TableInviteFriends();
+			
+			this.layoutForInviteComponents.getChildren().add(tableFriends);
+			
+			return;
+		}
+		boolean isTheHBOX = this.scene.getRoot() == layoutForInviteComponents ? true : false;
+		if (isTheHBOX) {
+			layoutForInviteComponents.getChildren().clear();
+			this.scene.setRoot(layout);
+			this.sizeToScene();
+			this.setWidth(300);
+			this.setHeight(500);
+			this.btnInvite.setText("Convidar amigos");
+			
+			
+			return;
+		}
+	}
+
+	private void aboutTheProject() {
+
+		this.layout.getChildren().clear();
+
+		this.layout.getChildren().addAll(this.lblProjectName, this.txtProjectName);
+		this.layout.getChildren().addAll(lblAboutTheProject);
+		this.layout.getChildren().add(txtAboutTheProject);
+		this.layout.getChildren().add(btnAboutTheProject);
+
+		this.btnAboutTheProject.setText("Cancelar ");
+		this.btnAboutTheProject.setOnAction(e -> {
+			initialLayout();
+		});
+
+		this.layout.getChildren().addAll(this.btnInvite);
+		this.layout.getChildren().addAll(this.btnFinish);
+		this.layout.getChildren().add(this.btnGoBack);
+	}
+
+	private void initialLayout() {
+
+		this.layout.getChildren().clear();
+
+		this.btnAboutTheProject.setText("Sobre o projeto..");
+
+		this.btnAboutTheProject.setOnAction(e -> {
+			aboutTheProject();
+		});
+
+		this.layout.getChildren().addAll(this.lblProjectName, this.txtProjectName, this.btnAboutTheProject);
+		this.layout.getChildren().addAll(this.btnInvite);
+		this.layout.getChildren().addAll(this.btnFinish);
+		this.layout.getChildren().add(this.btnGoBack);
 
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
-
-		this.layout.getChildren().addAll(this.hbHeader);
-		this.layout.getChildren().addAll(this.lblProjectName, this.txtProjectName);
-		this.layout.getChildren().addAll(this.lblDescProject, this.txtDescProject);
-		this.layout.getChildren().addAll(this.btnInvite);
-		this.layout.getChildren().addAll(this.hbButtons);
 	}
+	
+	
+	
+	
 
 
 }

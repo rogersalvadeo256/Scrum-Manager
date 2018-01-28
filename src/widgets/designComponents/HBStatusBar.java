@@ -19,6 +19,7 @@ public class HBStatusBar extends HBox {
 	 * negative for busy or inactive
 	 */
 	ToggleButton tbNegative;
+	
 	ToggleGroup toggleGroup;
 
 	public HBStatusBar(boolean availability, String strNegative, String strPositive) {

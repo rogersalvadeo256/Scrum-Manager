@@ -5,7 +5,6 @@ import java.util.List;
 
 import db.pojos.FRIENDSHIP;
 import db.pojos.USER_PROFILE;
-import db.querys.QUERYs_FRIENDSHIP;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.GENERAL_STORE;
@@ -27,7 +26,6 @@ public class FriendshipActions {
 	public FriendshipActions(USER_PROFILE p) {
 		this.p = p;
 	}
-
 	/**
 	 * The parameter are the user that going to receive the friendship request
 	 * 

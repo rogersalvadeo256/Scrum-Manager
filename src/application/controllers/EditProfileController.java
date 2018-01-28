@@ -47,7 +47,7 @@ public class EditProfileController {
 		this.check = new CheckEmptyFields();
 		this.btnChangeAnswer = new Button("Alterar");
 		this.btnChangeQuestion = new Button("Alterar");
-		this.hbDeleteAccount = new HBStatusBar(false);
+		this.hbDeleteAccount = new HBStatusBar(false, "Desativar Conta", "Conta Ativa");
 
 		// this.btnDeleteAccount = new Button("Deletar conta");
 
@@ -262,7 +262,6 @@ public class EditProfileController {
 			});
 		});
 	}
-
 	private void deleteAccount(ActionEvent e, Stage stage) throws ClassNotFoundException, FileNotFoundException, SQLException {
 
 		if (this.em == null)
