@@ -36,7 +36,6 @@ public class HBStatusBar extends HBox {
 			tbPositive.setSelected(true);
 		return;
 	}
-
 	private void init() {
 		this.getStylesheets().add(this.getClass().getResource("/css/TOGGLE.css").toExternalForm());
 
@@ -47,8 +46,10 @@ public class HBStatusBar extends HBox {
 
 		this.toggleGroup = new ToggleGroup();
 
-		this.tbNegative.setToggleGroup(toggleGroup);
-		this.tbPositive.setToggleGroup(toggleGroup);
+		this.toggleGroup.getToggles().addAll(tbNegative, tbPositive);
+		
+//		this.tbNegative.setToggleGroup(toggleGroup);
+//		this.tbPositive.setToggleGroup(toggleGroup);
 
 		this.tbPositive.setId("btnAvailable");
 		this.tbNegative.setId("btnBusy");
@@ -62,4 +63,3 @@ public class HBStatusBar extends HBox {
 		this.toggleGroup.selectedToggleProperty().addListener(a);
 	}
 }
-

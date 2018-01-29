@@ -1,6 +1,7 @@
 package db.util;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityManager;
@@ -8,13 +9,13 @@ import javax.persistence.Query;
 
 import application.main.Window;
 import db.hibernate.factory.Database;
-import db.pojos.USER_PROFILE;
 import db.pojos.USER_REGISTRATION;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
+import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
@@ -24,7 +25,6 @@ import view.popoups.ActivateAccount;
 import widgets.alertMessage.CustomAlert;
 
 public class Login {
-	private EntityManager em;
 	private CheckEmptyFields checkFields;
 
 	public Login() {
@@ -45,29 +45,29 @@ public class Login {
 	 */
 	public boolean valideLogin(TextField userNameOrEmail, PasswordField password, RadioButton btnStayConnected) throws IOException {
 		if (!isFieldEmpty(userNameOrEmail, password)) {
-			if (em == null)
-				this.em = Database.createEntityManager();
-			Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME AND USER_PASSWORD=:USER_PASSWORD");
-			q.setParameter("USER_NAME", userNameOrEmail.getText());
-			q.setParameter("USER_PASSWORD", password.getText());
-
-			USER_REGISTRATION u = (USER_REGISTRATION) q.getResultList().get(0);
-
-			if (u.getStatus().toString().equals(ENUMS.ACCOUNT_STATUS.INACTIVE.getValue().toString())) {
+			
+			@SuppressWarnings("rawtypes")
+			List q = DB_OPERATION.QUERY("FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME AND USER_PASSWORD=:USER_PASSWORD",new String[] {"USER_NAME", "USER_PASSWORD"}, new String[] {userNameOrEmail.getText(), password.getText()});
+					
+			if(q.isEmpty()) { 
+				q.clear();
+				return false;
+			}
+			if (((USER_REGISTRATION) q.get(0)).getStatus().toString().equals(ENUMS.ACCOUNT_STATUS.INACTIVE.getValue().toString())) {
 
 				Optional<ButtonType> result = new CustomAlert(AlertType.ERROR, "Usuario Inativo", "O usuario informado esta inativo", "Clique em OK para reativar a sua conta").showAndWait();
 				if (result.get() == ButtonType.OK) {
 					new ActivateAccount(Window.mainStage).showAndWait();
 				}
 			}
-
-
-			if (!q.getResultList().isEmpty()) {
-				SESSION.START_SESSION((USER_REGISTRATION) q.getResultList().get(0));
+			if (!q.isEmpty()) {
+				SESSION.START_SESSION((USER_REGISTRATION) q.get(0));
 				if (btnStayConnected.isSelected())
 					SERIALIZATION.serialization(SESSION.getUserLogged(), FileType.SESSION);
+				q.clear();
 				return true;
 			}
+			q.clear();
 		}
 		return false;
 	}

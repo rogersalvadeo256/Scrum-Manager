@@ -19,7 +19,17 @@ public class ENUMS {
 		}
 
 	}
-
+	
+	public void a () { 
+		
+		String a = "ON_HOLD";
+		
+		REQUEST_STATUS.ON_HOLD.getValue();
+		
+		
+	}
+	
+	
 	public static enum DISPONIBILITY_FOR_PROJECT {
 		AVAILABLE("AVAILABLE"),
 		BUSY("BUSY");

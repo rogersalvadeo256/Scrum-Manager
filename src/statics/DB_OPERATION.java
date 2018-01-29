@@ -25,15 +25,16 @@ public class DB_OPERATION {
 	 * The parameter EntityManager can be null, in the function he will be instantiated
 	 * 
 	 * The Object parameter had to be an mapped object to this work
+	 * @param <T>
 	 * 
 	 * 
 	 * @param EntityManager
 	 * @param Object
 	 * 
 	 */
-	public static void PERSIST(EntityManager em, Object o) {
-		if (em == null)
-			Database.createEntityManager();
+	public static <T> void PERSIST( T o) {
+		EntityManager em=Database.createEntityManager();
+	
 		em.getTransaction().begin();
 		em.persist(o);
 		em.getTransaction().commit();
@@ -43,9 +44,9 @@ public class DB_OPERATION {
 	}
 
 
-	public static void MERGE(EntityManager em, Object o) {
-		if (em == null)
-			em = Database.createEntityManager();
+	public static void MERGE(Object o) {
+		
+		EntityManager em = Database.createEntityManager();
 
 		em.getTransaction().begin();
 		em.merge(o);
@@ -57,10 +58,8 @@ public class DB_OPERATION {
 
 
 	@SuppressWarnings("unchecked")
-	public static List<Object> QUERY(EntityManager em, String query) {
-
-		if (em == null)
-			Database.createEntityManager();
+	public static List<Object> QUERY(String query) {
+		EntityManager em = 	Database.createEntityManager();
 
 		Query q = em.createQuery(query);
 
@@ -68,9 +67,8 @@ public class DB_OPERATION {
 
 	}
 	@SuppressWarnings("unchecked")
-	public static List<Object> QUERY(EntityManager em, String query, String param, Object paramArgs) {
-		if (em == null)
-			Database.createEntityManager();
+	public static List<Object> QUERY(String query, String param, Object paramArgs) {
+		EntityManager em = Database.createEntityManager();
 
 		Query q = em.createQuery(query);
 		q.setParameter(param, paramArgs);
@@ -95,9 +93,8 @@ public class DB_OPERATION {
 	 * @author jefter66
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<Object> QUERY(EntityManager em, String query, String[] strings, int[] paramArgs) {
-		if (em == null)
-			em = Database.createEntityManager();
+	public static List<Object> QUERY(String query, String[] strings, int[] paramArgs) {
+		EntityManager em = Database.createEntityManager();
 		Query q = em.createQuery(query);
 
 		for (int i = 0; i < strings.length; i++) {
@@ -116,9 +113,8 @@ public class DB_OPERATION {
 	 * @author jefter66
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<Object> QUERY(EntityManager em, String query, String[] strings, String[] paramArgs) {
-		if (em == null)
-			em = Database.createEntityManager();
+	public static List<Object> QUERY(String query, String[] strings, String[] paramArgs) {
+		EntityManager	em = Database.createEntityManager();
 		Query q = em.createQuery(query);
 
 		for (int i = 0; i < strings.length; i++) {
@@ -127,33 +123,8 @@ public class DB_OPERATION {
 		return q.getResultList();
 	}
 
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

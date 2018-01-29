@@ -3,9 +3,7 @@ package friendship;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
-import db.hibernate.factory.Database;
 import db.pojos.FRIENDSHIP;
 import db.pojos.USER_PROFILE;
 import db.querys.QUERYs_FRIENDSHIP;
@@ -15,7 +13,6 @@ import statics.SESSION;
 
 public class FriendshipActions {
 
-	private EntityManager em;
 	private USER_PROFILE p;
 
 	/**
@@ -28,7 +25,6 @@ public class FriendshipActions {
 	 *            pRequest
 	 */
 	public FriendshipActions(USER_PROFILE p) {
-		this.em = null;
 		this.p = p;
 	}
 
@@ -46,34 +42,33 @@ public class FriendshipActions {
 		friendshipRequest.setSendDate();
 		friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
 
-		DB_OPERATION.PERSIST(this.em, friendshipRequest);
-
+		DB_OPERATION.PERSIST(friendshipRequest);
 
 	}
 
 	public void acceptRequest() {
 
-		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY(this.em, "FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER",
-				new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
+		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER"
+				,new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()});
 
 		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
 
 
-		DB_OPERATION.MERGE(this.em, frq);
+		DB_OPERATION.MERGE(frq);
 
 		SESSION.UPDATE_SESSION();
 	}
 
 	public void refuseRequest() {
 
-		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY(this.em, "FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER",
-				new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
 
-
+		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY = :COD_PROF_SENDER"
+				,new String[] {"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()});
+		
+		
 		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
 
-		DB_OPERATION.MERGE(this.em, fr);
-
+		DB_OPERATION.MERGE(fr);
 
 		SESSION.UPDATE_SESSION();
 	}
@@ -86,14 +81,12 @@ public class FriendshipActions {
 				r.setStatus(ENUMS.REQUEST_STATUS.REMOVED.getValue());
 				FRIENDSHIP fr = r;
 
-				DB_OPERATION.MERGE(this.em, fr);
+				DB_OPERATION.MERGE(fr);
 
 				SESSION.UPDATE_SESSION();
 				return;
 			}
-
 		}
-
 	}
 
 }

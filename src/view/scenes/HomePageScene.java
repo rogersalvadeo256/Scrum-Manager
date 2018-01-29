@@ -25,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -63,7 +64,7 @@ public class HomePageScene extends Scene {
 	private SearchFriend searchUser;
 	private Toast toast, toast2;
 	private HBStatusBar statusBar;
-
+	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 
@@ -89,10 +90,12 @@ public class HomePageScene extends Scene {
 		this.statusBar = new HBStatusBar(true);
 		
 		this.statusBar.setGroupEvent(new ChangeListener<Toggle>() {
-		
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 		
+				newValue = newValue == null ? oldValue : newValue;
+				newValue.setSelected(true);
+				
 				if (newValue.isSelected()) {
 					EntityManager em = null;
 		
@@ -127,7 +130,7 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends);
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends,vbLeftColumn,vbRightColumn);
 		GENERAL_STORE.loadComponentsHOME();
 
 		this.profileImg.setOnMouseClicked(e -> {
@@ -190,7 +193,7 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
 			try {
-				new ProfileEditPOPOUP(Window.mainStage).showAndWait();
+				new ProfileEditPOPOUP(Window.mainStage).show();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
@@ -204,7 +207,7 @@ public class HomePageScene extends Scene {
 		this.btnFriends.setOnAction(e -> {
 			if (!QUERYs_FRIENDSHIP.friendsList().isEmpty()) {
 				try {
-					new FriendListPOPOUP(Window.mainStage).showAndWait();
+					new FriendListPOPOUP(Window.mainStage).show();
 					return;
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -320,27 +323,6 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.getStyleClass().add("vbox");
 		this.vbProfileInfo.setId("profile-info");
 
-		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
-		this.vbProfileInfo.setSpacing(25);
-		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail,statusBar);
-		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
-		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
-		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
-		AnchorPane.setRightAnchor(vbProfileInfo, 750.0);
-		this.layout.getChildren().add(vbProfileInfo);
-
-		this.vbLeftColumn = new VBox();
-		this.vbLeftColumn.getStyleClass().add("vbox");
-		this.vbLeftColumn.getChildren().add(this.lblCurrentProject);
-
-		this.vbLeftColumn.setPrefWidth(400);
-		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
-
-		this.vbRightColumn = new VBox();
-		this.vbRightColumn.getStyleClass().add("vbox");
-		this.vbRightColumn.setId("rightColumn");
-		this.vbRightColumn.getChildren().add(this.lblProjectsDone);
 
 		this.hbStartProject = new HBox();
 		this.hbStartProject.getChildren().add(new Label("Começar projeto"));
@@ -355,12 +337,35 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
+		
+		
+		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
+		this.vbProfileInfo.setSpacing(25);
+		this.vbProfileInfo.setAlignment(Pos.CENTER);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail,statusBar,hbStartProject);
+		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
+		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
+		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
+		AnchorPane.setRightAnchor(vbProfileInfo, 750.0);
+		this.layout.getChildren().add(vbProfileInfo);
+
+		this.vbLeftColumn = new VBox();
+		this.vbLeftColumn.getStyleClass().add("vbox");
+		this.vbLeftColumn.getChildren().add(this.lblProjectsDone);
+
+		this.vbLeftColumn.setPrefWidth(400);
+		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
+
+		this.vbRightColumn = new VBox();
+		this.vbRightColumn.getStyleClass().add("vbox");
+		this.vbRightColumn.setId("rightColumn");
+		this.vbRightColumn.getChildren().add(this.lblCurrentProject);
+
 
 		this.vbRightColumn.setPrefWidth(400);
 		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);
 
 		this.vbRightColumn.setSpacing(50);
-		this.vbRightColumn.getChildren().add(hbStartProject);
 
 		AnchorPane.setTopAnchor(vbRightColumn, 70.0);
 		AnchorPane.setBottomAnchor(vbRightColumn, 5.0);

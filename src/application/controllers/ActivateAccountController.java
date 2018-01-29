@@ -91,7 +91,7 @@ public class ActivateAccountController {
 	private void userActive() {
 		if (ur.getStatus().toString().equals(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue())) {
 			Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Já está ativo", "O usuario informado já está ativo", "Esqueceu sua senha? clique em OK para recuperar senha")
-					.showAndWait();;
+					.showAndWait();
 
 			if (result.get() == ButtonType.OK) {
 				screen.close();
