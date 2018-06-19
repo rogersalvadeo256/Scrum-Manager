@@ -26,13 +26,14 @@ public class LoginScreen {
 	private GridPane layout;
 	private Insets borders;
 	private DatabaseConnection connect;
-	private Stage sourceScene;
+	private static Stage sourceScene;
 	private RegistrationForm form;
 
-	public LoginScreen(Stage sourceScene) throws ClassNotFoundException {
+	
+	
+	public LoginScreen(Stage sourceScene) throws ClassNotFoundException, SQLException {
 
 		this.layout = new GridPane();
-		this.sourceScene = sourceScene;
 		this.form = new RegistrationForm();
 
 		this.message = new Label("");

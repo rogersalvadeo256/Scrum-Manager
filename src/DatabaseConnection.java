@@ -38,14 +38,12 @@ public class DatabaseConnection {
 
 			user_name = confirmation.getString("user_name");
 			passWord = confirmation.getString("password");
-		}
 
-		if (userName.equals(user_name) && password.equals(passWord)) {
-			return true;
-		} else {
-			return false;
+			if (userName.equals(user_name) && password.equals(passWord)) {
+				return true;
+			}
 		}
-
+		return false;
 	}
 
 }
