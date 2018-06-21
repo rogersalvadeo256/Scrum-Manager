@@ -1,7 +1,5 @@
 import java.sql.SQLException;
 
-import javax.imageio.spi.RegisterableService;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,24 +11,27 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.layout.HBox;
 
-public class RegistrationForm {
+public class RegistrationForm  extends Scene {
 
+	private final Label message;
 	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
 	private PasswordField passwordField, confirmPasswordField;
 	private Button btnRegister, btnCancel;
 	private GridPane layout;
-	private final Label message;
 	private Insets borders;
 	private Button btnExit;
 	private ValidationMethods validation;
 	private ValidateRegistrationData data;
 
 	public RegistrationForm() throws ClassNotFoundException, SQLException {
+		
+		super(new HBox());
+	
+		
 		this.layout = new GridPane();
-
 		this.data = new ValidateRegistrationData();
 
 		this.validation = new ValidationMethods();
@@ -54,19 +55,9 @@ public class RegistrationForm {
 		this.btnExit = new Button("Sair");
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button("Cancelar");
-
 		this.btnRegister.setMaxWidth(600);
-		this.btnCancel.setMaxWidth(600);
-		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
-			@Override
-			public void handle(ActionEvent event) {
-
-			}
-		});
-
-		this.btnExit.setMaxWidth(600);
-		this.btnExit.setOnAction(actionEvent -> Platform.exit());
+		this.borders = new Insets(50);
 
 		this.layout.add(lblName, 0, 0, 1, 1);
 		this.layout.add(txtName, 1, 0, 2, 1);
@@ -80,10 +71,31 @@ public class RegistrationForm {
 		this.layout.add(lblPassword, 0, 3, 1, 1);
 		this.layout.add(passwordField, 1, 3, 2, 1);
 
-		this.layout.add(lblConfirmPassword, 0, 4, 1, 1); // confirmar senha automaticamente, antes de clicar no botao
+		this.layout.add(lblConfirmPassword, 0, 4, 1, 1);
 		this.layout.add(confirmPasswordField, 1, 4, 2, 1);
 
 		this.layout.add(btnRegister, 0, 5, 2, 1);
+
+		this.btnCancel.setMaxWidth(600);
+		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				try {
+					Window.janela.setScene(new LoginScreen());
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+
+		this.layout.add(btnExit, 1, 5, 2, 1);
+		this.btnExit.setMaxWidth(600);
+		this.btnExit.setOnAction(actionEvent -> Platform.exit());
+
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -92,52 +104,50 @@ public class RegistrationForm {
 				validation.textTooBig(RegistrationForm.this.txtName.getText(), 80);
 				validation.textTooBig(RegistrationForm.this.txtUserName.getText(), 60);
 				validation.textTooBig(RegistrationForm.this.txtEmail.getText(), 25);
-				
-				
-//				try {
-//					if (data.queryForExistentEmail(RegistrationForm.this.txtEmail.getText())) {
-//						RegistrationForm.this.txtEmail.clear();
-//					}
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//
-//				try {
-//					if (data.queryForExistentUserName(RegistrationForm.this.txtUserName.getText())) {
-//						RegistrationForm.this.txtUserName.clear();
-//					}
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+
 				if (validation.wrongPassword(RegistrationForm.this.passwordField.getText(),
-					RegistrationForm.this.confirmPasswordField.getText())) {
+						RegistrationForm.this.confirmPasswordField.getText())) {
 					RegistrationForm.this.passwordField.clear();
 					RegistrationForm.this.confirmPasswordField.clear();
+				} else {
+					String name = RegistrationForm.this.txtName.getText();
+					String userName = RegistrationForm.this.txtUserName.getText();
+					String email = RegistrationForm.this.txtEmail.getText();
+					String password = RegistrationForm.this.passwordField.getText();
+
+					try {
+						data.insert(name, userName, email, password);
+					} catch (SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-				
-			
-				
+
 			}
 		});
 
 		this.layout.add(btnCancel, 0, 6, 2, 1);
+		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
-		this.layout.add(btnExit, 1, 5, 2, 1);
+			@Override
+			public void handle(ActionEvent event) {
 
-		this.borders = new Insets(50);
-		this.layout.setHgap(10); // espaço colocado horizontalmente
-		this.layout.setVgap(10); // espaço colocado verticalmente
+				try {
+					Window.janela.setScene(new LoginScreen());
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+		this.layout.setHgap(10);
+		this.layout.setVgap(10);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setPadding(borders);
 		this.layout.setMinSize(600, 400);
+	
+		this.setRoot(layout);
 
 	}
-
-	public Scene registerScene() {
-		Scene register = new Scene(layout);
-		return register;
-	}
-
 }

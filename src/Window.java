@@ -4,15 +4,13 @@ import javafx.stage.Stage;
 
 public class Window extends Stage {
 
- 	private LoginScreen login;
+	
+	public static Stage janela;
+	
  	public  Window() throws ClassNotFoundException, SQLException {
-		
-		// depois colocar um preloader screen
  		
-		this.login = new LoginScreen(this);
-		this.setScene(login.loginScene());
-		this.setTitle("Login");
+ 		Window.janela = this;
+ 		janela.setScene(new LoginScreen());
 		this.show();
-		
 	}
 }

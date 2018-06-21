@@ -1,8 +1,6 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.mysql.jdbc.Statement;
-
 public class ValidateRegistrationData {
 
 	private DatabaseConnection data;
@@ -57,26 +55,20 @@ public class ValidateRegistrationData {
 		}
 		return false;
 	}
-	
-	
-	
-	public void insert(String name, String userName, String email, String password) throws SQLException { 
-		
-		String insert = "insert into "+ table + "(name,user_name, email, password) values "+ name+ ", "+ userName +", "
-				+ email+", "+ password+"';";
+
+	public void insert(String name, String userName, String email, String password) throws SQLException {
+
+
+		String insert = "insert into " + table + "(name, user_name, email, password) value ('" + name + "','" + userName + 
+				"', '" + email + "', '" + password + "');";
 		
 		try {
-		commands.execute(insert);
-		} catch (SQLException a) { 
+			commands.execute(insert);
+		} catch (SQLException a) {
 			a.printStackTrace();
-			
+
 		}
-		
-		
-		
-		
-		
-		
+
 	}
 	
 	
@@ -92,28 +84,5 @@ public class ValidateRegistrationData {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

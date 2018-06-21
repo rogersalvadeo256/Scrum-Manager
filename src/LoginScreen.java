@@ -1,6 +1,5 @@
 
 import java.sql.SQLException;
-
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -12,30 +11,29 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
-public class LoginScreen {
+public class LoginScreen extends Scene{
 
-	private Label lblEmail, lblPassword;
 	private final Label message;
+	private Label lblEmail, lblPassword;
 
 	private Button btnLogin, btnExit, btnSingIn;
 	private TextField txtEmail;
-	private final PasswordField txtPassword;
+	private PasswordField txtPassword;
 	private GridPane layout;
 	private Insets borders;
 	private DatabaseConnection connect;
-	private static Stage sourceScene;
-	private RegistrationForm form;
 
 	
-	
-	public LoginScreen(Stage sourceScene) throws ClassNotFoundException, SQLException {
+	public LoginScreen() throws ClassNotFoundException, SQLException {
 
+		super(new HBox());
+		
+		
 		this.layout = new GridPane();
-		this.form = new RegistrationForm();
-
+		
 		this.message = new Label("");
 
 		this.connect = new DatabaseConnection();
@@ -66,58 +64,65 @@ public class LoginScreen {
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
 
-	}
-
-	public Scene loginScene() throws ClassNotFoundException {
-
+		
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
-				String name = LoginScreen.this.txtEmail.getText();
-				String pass = LoginScreen.this.txtPassword.getText();
-
-				try {
-					if (connect.validateLogin(name, pass)) {
-						message.setText("rigth, you can pass");
-						message.setTextFill(Color.rgb(21, 117, 84));
-					} else {
-						message.setText("you shall not pass ");
-						message.setTextFill(Color.rgb(210, 39, 30));
-					}
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+				Window.janela.setScene(new Home());
+				
+				
+				
+//				String name = LoginScreen.this.txtEmail.getText();
+//				String pass = LoginScreen.this.txtPassword.getText();
+//
+//				try {
+//					if (connect.validateLogin(name, pass)) {
+//						message.setText("rigth, you can pass");
+//						message.setTextFill(Color.rgb(21, 117, 84));
+//					} else {
+//						message.setText("you shall not pass ");
+//						message.setTextFill(Color.rgb(210, 39, 30));
+//					}
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
 			}
 		});
 
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
-
+		
 		this.btnSingIn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) {
-				Stage stage = new Stage();
-				stage.setTitle("Formulario de cadastro");
-				stage.setScene(form.registerScene());
-				stage.show();
-				sourceScene.hide();
+			public void handle(ActionEvent event) { 
+				try {
+					Window.janela.setScene(new RegistrationForm());
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
 			}
 		});
 
 		this.borders = new Insets(50);
 		this.layout.setHgap(10); // espaço colocado horizontalmente
-		this.layout.setVgap(5); // espaço colocado verticalmente
+		this.layout.setVgap(10); // espaço colocado verticalmente
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setPadding(borders);
 		this.layout.setMinSize(400, 300);
 
-		Scene login = new Scene(layout);
+		
+		
+		this.setRoot(layout);
 
-		return login;
 	}
 
 }
