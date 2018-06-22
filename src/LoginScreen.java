@@ -66,7 +66,7 @@ public class LoginScreen extends Scene{
 		this.btnSingIn.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
-
+		this.getStylesheets().add(LoginScreen.class.getResource("style.css").toExternalForm());
 		
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
