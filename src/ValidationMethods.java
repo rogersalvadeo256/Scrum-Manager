@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.TextField;
 
 public class ValidationMethods {
@@ -17,11 +18,12 @@ public class ValidationMethods {
 		this.data = new ValidateRegistrationData();
 		this.message = new ArrayList<String>();
 		this.alertMessage = new ArrayList<String>();
+		this.formWarnings = new Alert(null);
 	}
 
 	public void validation(String name, String email, String userName, String password, String passwordConfirmation)
 			throws SQLException {
-
+		
 		this.message.add(checkUserName(userName));
 		this.message.add(checkEmail(email));
 		this.message.add(wrongPassword(password, passwordConfirmation));
@@ -36,6 +38,14 @@ public class ValidationMethods {
 			this.formWarnings.setAlertType(AlertType.ERROR);
 			this.formWarnings.setTitle("Error");
 			this.formWarnings.show();
+		}
+		if(!this.message.isEmpty()) { 
+			this.formWarnings.setAlertType(AlertType.ERROR);
+			this.formWarnings.setHeaderText("Nenhum campo foi preenchido");
+			this.formWarnings.setContentText("Digite novamente");
+			this.formWarnings.setTitle("Nenhum campo preenchido");
+			this.formWarnings.show();
+			
 		}
 		else { 
 			data.insert(name, email, userName, password);
