@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 
-public class RegistrationForm  extends Scene {
+public class RegistrationForm extends Scene {
 
 	private final Label message;
 	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
@@ -27,10 +27,9 @@ public class RegistrationForm  extends Scene {
 	private ValidateRegistrationData data;
 
 	public RegistrationForm() throws ClassNotFoundException, SQLException {
-		
+
 		super(new HBox());
-	
-		
+
 		this.layout = new GridPane();
 		this.data = new ValidateRegistrationData();
 
@@ -101,28 +100,21 @@ public class RegistrationForm  extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				validation.textTooBig(RegistrationForm.this.txtName.getText(), 80);
-				validation.textTooBig(RegistrationForm.this.txtUserName.getText(), 60);
-				validation.textTooBig(RegistrationForm.this.txtEmail.getText(), 25);
+				String name = RegistrationForm.this.txtName.getText();
+				String email = RegistrationForm.this.txtEmail.getText();
+				String userName = RegistrationForm.this.txtUserName.getText();
+				String passwordConfirmation = RegistrationForm.this.confirmPasswordField.getText();
+				String password = RegistrationForm.this.passwordField.getText();
 
-				if (validation.wrongPassword(RegistrationForm.this.passwordField.getText(),
-						RegistrationForm.this.confirmPasswordField.getText())) {
-					RegistrationForm.this.passwordField.clear();
-					RegistrationForm.this.confirmPasswordField.clear();
-				} else {
-					String name = RegistrationForm.this.txtName.getText();
-					String userName = RegistrationForm.this.txtUserName.getText();
-					String email = RegistrationForm.this.txtEmail.getText();
-					String password = RegistrationForm.this.passwordField.getText();
-
-					try {
-						data.insert(name, userName, email, password);
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+				try {
+					validation.validation(name, userName, email, password, passwordConfirmation);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-
+			
+			
+			
 			}
 		});
 
@@ -146,7 +138,7 @@ public class RegistrationForm  extends Scene {
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setPadding(borders);
 		this.layout.setMinSize(600, 400);
-	
+
 		this.setRoot(layout);
 
 	}

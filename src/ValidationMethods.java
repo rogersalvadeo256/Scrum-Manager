@@ -1,5 +1,6 @@
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -9,86 +10,63 @@ public class ValidationMethods {
 
 	private ValidateRegistrationData data;
 	private Alert formWarnings;
-	private Alert emailWarning;
-	private Alert userNameWarning;
-	private Alert wrongPassword;
-	private Alert sucessufullRegistered;
-	private Alert unknowError;
+	private ArrayList<String> message;
+	private ArrayList<String> alertMessage;
 
 	public ValidationMethods() throws ClassNotFoundException, SQLException {
 		this.data = new ValidateRegistrationData();
-
-		this.formWarnings = new Alert(AlertType.WARNING, "O  digitado é muito grande");
-		this.emailWarning = new Alert(AlertType.WARNING, "O email informado já está cadastrado");
-		this.userNameWarning = new Alert(AlertType.WARNING, "Este nome de usuario já está em uso");
-		this.wrongPassword = new Alert(AlertType.WARNING, "As senhas não correspondem, digite novamente");
-		this.unknowError = new Alert(AlertType.ERROR, "Algo no seu cadastro está errado");
-		this.sucessufullRegistered = new Alert(AlertType.CONFIRMATION, "Cadastro com sucesso");
-	
+		this.message = new ArrayList<String>();
+		this.alertMessage = new ArrayList<String>();
 	}
 
-	public void textTooBig(String texto, int lengthAllowed) {
-		if (texto.toString().length() > lengthAllowed) {
-			formWarnings.setTitle("Erro");
-			formWarnings.show();
-		}
-	}
-	public void emailAlreadyRegistered() {
-		emailWarning.setTitle("Erro com o email");
-		emailWarning.show();
-	}
-
-	public void userNameAlearyTaken() {
-		userNameWarning.setTitle("Erro com o nome de usuario");
-		userNameWarning.show();
-	}
-
-	public void wrongPassword(String password, String confirmPassword, TextField txtPassword,
-			TextField txtConfirmPassword) {
-
-		if (!password.equals(confirmPassword)) {
-			wrongPassword.setTitle("Senhas diferentes");
-			wrongPassword.show();
-			txtPassword.clear();
-			txtConfirmPassword.clear();
-		}
-	}
-
-	public boolean wrongPassword(String password, String confirmPassword) {
-
-		if (!password.equals(confirmPassword)) {
-			wrongPassword.setTitle("Senhas diferentes");
-			wrongPassword.show();
-			return true;
-		}
-		return false;
-	}
-
-	public void sucessufullRegistered( boolean email,boolean userName, boolean password)
+	public void validation(String name, String email, String userName, String password, String passwordConfirmation)
 			throws SQLException {
 
-		if(userName && email && password) { 
-			
-			unknowError.setTitle("usuario de bosta");
-			unknowError.show();
-				
-		} else {
+		this.message.add(checkUserName(userName));
+		this.message.add(checkEmail(email));
+		this.message.add(wrongPassword(password, passwordConfirmation));
 
-			sucessufullRegistered.setTitle("CADASTRADO");
-			sucessufullRegistered.show();
+		if(!this.message.isEmpty()) {
+			for (int i =0;i<this.message.size();i++) {
+				this.alertMessage.add(this.message.get(i));
+			}
+			for(int j =0; j < alertMessage.size(); j++) {
+				this.formWarnings.setContentText(alertMessage.get(j) + " \n");
+			}
+			this.formWarnings.setAlertType(AlertType.ERROR);
+			this.formWarnings.setTitle("Error");
+			this.formWarnings.show();
 		}
+		else { 
+			data.insert(name, email, userName, password);
+			this.formWarnings.setAlertType(AlertType.CONFIRMATION);
+			this.formWarnings.setTitle("Cadastrado");
+			this.formWarnings.setContentText("Cadastro realizado com sucesso");
+			this.formWarnings.show();
+		}
+
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String checkEmail(String email) throws SQLException {
+		if (data.queryForExistentEmail(email)) {
+			return "Email já cadastrado";
+		}
+		return null;
+	}
+
+	public String checkUserName(String userName) throws SQLException {
+
+		if (data.queryForExistentUserName(userName)) {
+			return "Nome de usuario já cadastrado";
+		}
+		return null;
+	}
+
+	public String wrongPassword(String password, String passwordConfirmation) {
+
+		if (!password.equals(passwordConfirmation)) {
+			return "As senhas digitadas não correspodem.";
+		}
+		return null;
+	}
 }

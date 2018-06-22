@@ -8,6 +8,7 @@ public abstract class ExitButtonListener implements EventHandler<ActionEvent> {
 	@Override
 	public void handle(ActionEvent event) {
 		Platform.exit();
+		Window.janela.close();
 	}
 	
 	

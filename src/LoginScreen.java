@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -25,7 +26,7 @@ public class LoginScreen extends Scene{
 	private GridPane layout;
 	private Insets borders;
 	private DatabaseConnection connect;
-
+	private Hyperlink esqueciSenha;
 	
 	public LoginScreen() throws ClassNotFoundException, SQLException {
 
@@ -36,6 +37,8 @@ public class LoginScreen extends Scene{
 		
 		this.message = new Label("");
 
+		this.esqueciSenha = new Hyperlink("Esqueci minha senha");
+		
 		this.connect = new DatabaseConnection();
 
 		this.lblEmail = new Label("UserName");
@@ -54,8 +57,8 @@ public class LoginScreen extends Scene{
 		this.layout.add(lblPassword, 0, 1);
 		this.layout.add(txtPassword, 1, 1);
 
-		this.layout.add(message, 1, 2);
-
+		this.layout.add(message, 1, 3);
+		this.layout.add(esqueciSenha, 1 , 2);
 		this.layout.add(btnLogin, 0, 5, 2, 1);
 		this.layout.add(btnExit, 0, 7, 2, 1);
 		this.layout.add(btnSingIn, 0, 6, 2, 1);
