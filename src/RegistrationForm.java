@@ -26,14 +26,14 @@ public class RegistrationForm extends Scene {
 	private ValidationMethods validation;
 	private ValidateRegistrationData data;
 
-	public RegistrationForm() throws ClassNotFoundException, SQLException {
+	public RegistrationForm() { //throws ClassNotFoundException, SQLException {
 
 		super(new HBox());
 
 		this.layout = new GridPane();
-		this.data = new ValidateRegistrationData();
-
-		this.validation = new ValidationMethods();
+//		this.data = new ValidateRegistrationData();
+//
+//		this.validation = new ValidationMethods();
 
 		this.lblName = new Label("Nome: ");
 		this.lblUserName = new Label("Nome de usuario: ");
@@ -73,7 +73,7 @@ public class RegistrationForm extends Scene {
 		this.layout.add(lblConfirmPassword, 0, 4, 1, 1);
 		this.layout.add(confirmPasswordField, 1, 4, 2, 1);
 
-		this.layout.add(btnRegister, 0, 5, 2, 1);
+		this.layout.add(btnRegister, 1, 5, 2, 1);
 
 		this.btnCancel.setMaxWidth(600);
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
@@ -81,22 +81,26 @@ public class RegistrationForm extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				try {
-					Window.janela.setScene(new LoginScreen());
-				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					Window.janela.setScene(new LoginScreen());
+//				} catch (ClassNotFoundException | SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 
 			}
 		});
 
-		this.layout.add(btnExit, 1, 5, 2, 1);
+		this.layout.add(btnExit, 0, 6, 2, 1);
 		this.btnExit.setMaxWidth(600);
+		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
+		String css=this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+		this.getStylesheets().add(css);
+		
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
-
+			
 			@Override
 			public void handle(ActionEvent event) {
 
@@ -106,19 +110,19 @@ public class RegistrationForm extends Scene {
 				String passwordConfirmation = RegistrationForm.this.confirmPasswordField.getText();
 				String password = RegistrationForm.this.passwordField.getText();
 
-				try {
-					validation.validation(name, userName, email, password, passwordConfirmation);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				try {
+//					validation.validation(name, userName, email, password, passwordConfirmation);
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			
 			
 			
 			}
 		});
 
-		this.layout.add(btnCancel, 0, 6, 2, 1);
+		this.layout.add(btnCancel,0, 5, 2, 1);
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override

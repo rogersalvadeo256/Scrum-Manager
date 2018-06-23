@@ -66,7 +66,10 @@ public class LoginScreen extends Scene{
 		this.btnSingIn.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
-		this.getStylesheets().add(LoginScreen.class.getResource("style.css").toExternalForm());
+		//this.getStylesheets().add(LoginScreen.class.getResource("/styles/style.css").toExternalForm());
+		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
+		this.getStylesheets().add(css);
+		
 		
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
@@ -102,15 +105,15 @@ public class LoginScreen extends Scene{
 
 			@Override
 			public void handle(ActionEvent event) { 
-				try {
+//				try {
 					Window.janela.setScene(new RegistrationForm());
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+//				} catch (ClassNotFoundException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (SQLException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			
 			}
 		});
