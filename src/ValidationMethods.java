@@ -21,62 +21,58 @@ public class ValidationMethods {
 		this.formWarnings = new Alert(null);
 	}
 
-	public void validation(String name, String email, String userName, String password, String passwordConfirmation)
-			throws SQLException {
-		
-		this.message.add(checkUserName(userName));
-		this.message.add(checkEmail(email));
-		this.message.add(wrongPassword(password, passwordConfirmation));
+	public void validation(TextField name, TextField email, TextField userName, TextField password,
+			TextField passwordConfirmation) throws SQLException {
+		this.message = null;
+//		this.message.add(checkUserName(userName.getText()));
+//		this.message.add(checkEmail(email.getText()));
 
-		if(!this.message.isEmpty()) {
-			for (int i =0;i<this.message.size();i++) {
+		if(!checkEmail(email) || email.getText() == null){
+			this.alertMessage.add("there seems to have a problem with your email");
+		}
+		if (!(wrongPassword(password, passwordConfirmation))
+				|| password.getText() == null && passwordConfirmation.getText() == null) {
+			this.message.add("password is wrong");
+		}
+		if(!checkUserName(userName) || userName.getText() == null) {
+			this.message.add("user name already in use");
+		}
+		
+		
+		
+		if (!this.message.isEmpty()) {
+			for (int i = 0; i < this.message.size(); i++) {
 				this.alertMessage.add(this.message.get(i));
 			}
-			for(int j =0; j < alertMessage.size(); j++) {
+			for (int j = 0; j < alertMessage.size(); j++) {
 				this.formWarnings.setContentText(alertMessage.get(j) + " \n");
 			}
 			this.formWarnings.setAlertType(AlertType.ERROR);
 			this.formWarnings.setTitle("Error");
 			this.formWarnings.show();
 		}
-		if(!this.message.isEmpty()) { 
-			this.formWarnings.setAlertType(AlertType.ERROR);
-			this.formWarnings.setHeaderText("Nenhum campo foi preenchido");
-			this.formWarnings.setContentText("Digite novamente");
-			this.formWarnings.setTitle("Nenhum campo preenchido");
-			this.formWarnings.show();
-			
-		}
-		else { 
-			data.insert(name, email, userName, password);
-			this.formWarnings.setAlertType(AlertType.CONFIRMATION);
-			this.formWarnings.setTitle("Cadastrado");
-			this.formWarnings.setContentText("Cadastro realizado com sucesso");
-			this.formWarnings.show();
-		}
-
 	}
 
-	public String checkEmail(String email) throws SQLException {
-		if (data.queryForExistentEmail(email)) {
-			return "Email já cadastrado";
+	public boolean checkEmail(TextField email) throws SQLException {
+		if (data.queryForExistentEmail(email.getText())) {
+			return false;
 		}
-		return null;
+		return true;
 	}
 
-	public String checkUserName(String userName) throws SQLException {
+	public boolean checkUserName(TextField userName) throws SQLException {
 
-		if (data.queryForExistentUserName(userName)) {
-			return "Nome de usuario já cadastrado";
+		if (data.queryForExistentUserName(userName.getText())) {
+			return false;
 		}
-		return null;
+		return true;
 	}
 
-	public String wrongPassword(String password, String passwordConfirmation) {
+	public boolean wrongPassword(TextField password, TextField passwordConfirmation) {
 
-		if (!password.equals(passwordConfirmation)) {
-			return "As senhas digitadas não correspodem.";
+		if (!password.getText().equals(passwordConfirmation.getText())) {
+			return false;
 		}
-		return null;
+		return true;
 	}
 }

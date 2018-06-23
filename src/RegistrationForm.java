@@ -106,15 +106,14 @@ public class RegistrationForm extends Scene {
 				String passwordConfirmation = RegistrationForm.this.confirmPasswordField.getText();
 				String password = RegistrationForm.this.passwordField.getText();
 
-				try {
-					validation.validation(name, email, userName, password, passwordConfirmation);
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			
-			
-			
+//				try {	
+////					validation.validation(name, email, userName, password, passwordConfirmation);
+//				} catch (SQLException e) {
+//					e.printStackTrace();
+//				}
+//			
+//			
+//			
 			}
 		});
 
