@@ -2,14 +2,7 @@
 	-fx-text-fill:white;
 	-fx-background-color:#000;
 	-fx-padding:10;
-	-fx-margin:20;
 	-fx-background-radius: 15 15 15 15;
-	-fx-font: bold, italic, "Arial";
-}
-
-#exitbtn: hover{
-	-fx-background-color:red;
-	-fx-text-fill:white;
 }
 
 .button:hover{
@@ -22,7 +15,7 @@
 }
 
 .text-input{
-	-fx-background-color:#B0E0E6;
+	-fx-background-color:#00cc66;
 	-fx-text-fill:white;
 	-fx-background-radius: 15 15 15 15;
 }
@@ -37,5 +30,13 @@
 }
 
 .root{
-	-fx-background-color:#2E8B57;
+	-fx-background-color:linear-gradient(purple,green);
+}
+
+#vbox{
+	-fx-border-color: blue;
+    -fx-border-insets: 5.0;
+    -fx-border-width: 3.0;
+    /*-fx-border-style: dashed;*/
+    -fx-background-color:green;
 }
