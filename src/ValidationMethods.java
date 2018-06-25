@@ -24,8 +24,6 @@ public class ValidationMethods {
 	public void validation(TextField name, TextField email, TextField userName, TextField password,
 			TextField passwordConfirmation) throws SQLException {
 		this.message = null;
-//		this.message.add(checkUserName(userName.getText()));
-//		this.message.add(checkEmail(email.getText()));
 
 		if(!checkEmail(email) || email.getText() == null){
 			this.alertMessage.add("there seems to have a problem with your email");
@@ -37,8 +35,6 @@ public class ValidationMethods {
 		if(!checkUserName(userName) || userName.getText() == null) {
 			this.message.add("user name already in use");
 		}
-		
-		
 		
 		if (!this.message.isEmpty()) {
 			for (int i = 0; i < this.message.size(); i++) {

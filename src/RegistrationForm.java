@@ -26,13 +26,16 @@ public class RegistrationForm extends Scene {
 	private ValidationMethods validation;
 	private ValidateRegistrationData data;
 
-	public RegistrationForm() throws ClassNotFoundException, SQLException {
+	public RegistrationForm() throws ClassNotFoundException, SQLException { // throws ClassNotFoundException,
+																			// SQLException {
 
 		super(new HBox());
 
 		this.layout = new GridPane();
-		this.data = new ValidateRegistrationData();
+		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+		this.getStylesheets().add(css);
 
+		
 		this.validation = new ValidationMethods();
 
 		this.lblName = new Label("Nome: ");
@@ -73,7 +76,7 @@ public class RegistrationForm extends Scene {
 		this.layout.add(lblConfirmPassword, 0, 4, 1, 1);
 		this.layout.add(confirmPasswordField, 1, 4, 2, 1);
 
-		this.layout.add(btnRegister, 0, 5, 2, 1);
+		this.layout.add(btnRegister, 1, 5, 2, 1);
 
 		this.btnCancel.setMaxWidth(600);
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
@@ -91,8 +94,9 @@ public class RegistrationForm extends Scene {
 			}
 		});
 
-		this.layout.add(btnExit, 1, 5, 2, 1);
+		this.layout.add(btnExit, 0, 6, 2, 1);
 		this.btnExit.setMaxWidth(600);
+		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
@@ -100,24 +104,18 @@ public class RegistrationForm extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				String name = RegistrationForm.this.txtName.getText();
-				String email = RegistrationForm.this.txtEmail.getText();
-				String userName = RegistrationForm.this.txtUserName.getText();
-				String passwordConfirmation = RegistrationForm.this.confirmPasswordField.getText();
-				String password = RegistrationForm.this.passwordField.getText();
+				try {
+					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
+							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
+							RegistrationForm.this.confirmPasswordField);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 
-//				try {	
-////					validation.validation(name, email, userName, password, passwordConfirmation);
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			
-//			
-//			
 			}
 		});
 
-		this.layout.add(btnCancel, 0, 6, 2, 1);
+		this.layout.add(btnCancel, 0, 5, 2, 1);
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override

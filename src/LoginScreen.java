@@ -33,6 +33,9 @@ public class LoginScreen extends Scene {
 		super(new HBox());
 
 		this.getStylesheets().add(LoginScreen.class.getResource("style.css").toExternalForm());
+		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
+		this.getStylesheets().add(css);
+		
 
 		this.layout = new GridPane();
 
@@ -67,7 +70,7 @@ public class LoginScreen extends Scene {
 		this.btnSingIn.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
-
+		
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -75,20 +78,20 @@ public class LoginScreen extends Scene {
 				//
 				Window.janela.setScene(new Home());
 
-//				String name = LoginScreen.this.txtEmail.getText();
-//				String pass = LoginScreen.this.txtPassword.getText();
-//
-//				try {
-//					if (connect.validateLogin(name, pass)) {
-//						message.setText("rigth, you can pass");
-//						message.setTextFill(Color.BLACK);
-//					} else {
-//						message.setText("you shall not pass ");
-//						message.setTextFill(Color.RED);
-//					}
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
+				String name = LoginScreen.this.txtEmail.getText();
+				String pass = LoginScreen.this.txtPassword.getText();
+
+				try {
+					if (connect.validateLogin(name, pass)) {
+						message.setText("rigth, you can pass");
+						message.setTextFill(Color.BLACK);
+					} else {
+						message.setText("you shall not pass ");
+						message.setTextFill(Color.RED);
+					}
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 
 				}
 		});
@@ -101,10 +104,7 @@ public class LoginScreen extends Scene {
 			public void handle(ActionEvent event) {
 				try {
 					Window.janela.setScene(new RegistrationForm());
-				} catch (ClassNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (SQLException e) {
+				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
