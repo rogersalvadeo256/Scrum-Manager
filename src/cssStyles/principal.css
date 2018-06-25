@@ -1,0 +1,42 @@
+.button{
+	-fx-text-fill:white;
+	-fx-background-color:#000;
+	-fx-padding:10;
+	-fx-background-radius: 15 15 15 15;
+}
+
+.button:hover{
+	-fx-text-fill:black;
+	-fx-background-color:#33d77a;
+}
+
+.label{
+	-fx-text-fill:white;	
+}
+
+.text-input{
+	-fx-background-color:#00cc66;
+	-fx-text-fill:white;
+	-fx-background-radius: 15 15 15 15;
+}
+
+.text-input: focused{
+	-fx-background-color:#85e085;
+	-fx-text-fill:black;
+}
+
+.hyperlink{
+	-fx-text-fill:white;
+}
+
+.root{
+	-fx-background-color:linear-gradient(purple,green);
+}
+
+#vbox{
+	-fx-border-color: blue;
+    -fx-border-insets: 5.0;
+    -fx-border-width: 3.0;
+    /*-fx-border-style: dashed;*/
+    -fx-background-color:green;
+}
