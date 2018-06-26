@@ -42,7 +42,6 @@ public class ValidationMethods {
 
 	}
 
-<<<<<<< HEAD
 	public void validation(TextField name, TextField email, TextField userName, TextField password,
 			TextField passwordConfirmation) throws SQLException {
 		this.message = null;
@@ -58,18 +57,15 @@ public class ValidationMethods {
 			this.message.add("user name already in use");
 		}
 		
-=======
 	public void validation(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 
 		 this.addMessage(name, email, userName, password, passwordConfirmation);
 
->>>>>>> ramoJefter
 		if (!this.message.isEmpty()) {
 			for (int i = 0; i < this.message.size(); i++) {
 				this.alertMessage.add(this.message.get(i));
 			}
-<<<<<<< HEAD
 			for (int j = 0; j < alertMessage.size(); j++) {
 				this.formWarnings.setContentText(alertMessage.get(j) + " \n");
 			}
@@ -82,7 +78,6 @@ public class ValidationMethods {
 	public boolean checkEmail(TextField email) throws SQLException {
 		if (data.queryForExistentEmail(email.getText())) {
 			return false;
-=======
 
 			this.formWarnings.setAlertType(AlertType.ERROR);
 			this.formWarnings.setTitle("Error");
@@ -139,17 +134,13 @@ public class ValidationMethods {
 	public String checkName(TextField name) {
 		if (name.getText().trim().isEmpty()) {
 			return this.emptyAlert.get(0);
->>>>>>> ramoJefter
 		}
-		return true;
+		return null;
 	}
-
-<<<<<<< HEAD
-	public boolean checkUserName(TextField userName) throws SQLException {
+	public String checkUserName(TextField userName) throws SQLException {
 
 		if (data.queryForExistentUserName(userName.getText())) {
-			return false;
-=======
+			return null;
 	public String checkEmail(TextField email) throws SQLException {
 		if (data.queryForExistentEmail(email.getText())) {
 			return this.errorAlert.get(0);
@@ -168,17 +159,14 @@ public class ValidationMethods {
 		
 		if (data.queryForExistentUserName(userName.getText())) {
 			return this.errorAlert.get(1);
->>>>>>> ramoJefter
 		}
-		return true;
+		return null;
 	}
 
-<<<<<<< HEAD
 	public boolean wrongPassword(TextField password, TextField passwordConfirmation) {
 
 		if (!password.getText().equals(passwordConfirmation.getText())) {
-			return false;
-=======
+			return null;
 	public String wrongPassword(PasswordField password, PasswordField passwordConfirmation) {
 
 		if (password.getText().isEmpty() || passwordConfirmation.getText().isEmpty()) {
@@ -187,8 +175,7 @@ public class ValidationMethods {
 		
 		if (!password.getText().equals(passwordConfirmation.getText())) {
 			return this.errorAlert.get(2);
->>>>>>> ramoJefter
 		}
-		return true;
+		return null;
 	}
 }
