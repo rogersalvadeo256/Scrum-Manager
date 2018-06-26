@@ -96,7 +96,7 @@ public class RegistrationForm extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
-		String css=this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
 		
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {

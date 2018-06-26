@@ -39,8 +39,11 @@ public class Home extends Scene {
 	public Home() {
 		super(new HBox());
 
-		String css=this.getClass().getResource("/cssStyles/principal.css").toExternalForm();
+		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
+//		
+//		String css2=this.getClass().getResource("/cssStyles/bgground2.css").toExternalForm();
+//		this.getStylesheets().add(css2);
 		
 		
 		this.layout = new GridPane();
@@ -92,6 +95,9 @@ public class Home extends Scene {
 		this.content.setPadding(new Insets(10));
 		this.content.setSpacing(5);
 
+		this.btnExit.setId("exitbtn");
+		
+		
 		this.columnLeft.setTranslateX(20);
 		this.columnLeft.setTranslateY(40);
 		this.columnLeft.setPadding(new Insets(10));

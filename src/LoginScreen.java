@@ -69,7 +69,8 @@ public class LoginScreen extends Scene{
 		//this.getStylesheets().add(LoginScreen.class.getResource("/styles/style.css").toExternalForm());
 		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
-		
+
+		this.btnExit.setId("exitbtn");
 		
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
