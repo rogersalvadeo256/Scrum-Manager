@@ -24,16 +24,14 @@ public class RegistrationForm extends Scene {
 	private Insets borders;
 	private Button btnExit;
 	private ValidationMethods validation;
-	private ValidateRegistrationData data;
 
-	public RegistrationForm() { //throws ClassNotFoundException, SQLException {
-
+	public RegistrationForm() throws ClassNotFoundException, SQLException { 
 		super(new HBox());
 
 		this.layout = new GridPane();
-//		this.data = new ValidateRegistrationData();
-//
-//		this.validation = new ValidationMethods();
+		new ValidateRegistrationData();
+
+		this.validation = new ValidationMethods();
 
 		this.lblName = new Label("Nome: ");
 		this.lblUserName = new Label("Nome de usuario: ");
@@ -81,12 +79,12 @@ public class RegistrationForm extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-//				try {
-//					Window.janela.setScene(new LoginScreen());
-//				} catch (ClassNotFoundException | SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				try {
+					Window.janela.setScene(new LoginScreen());
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -96,42 +94,25 @@ public class RegistrationForm extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
-		String css=this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
 		this.getStylesheets().add(css);
-		
+
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
 
-				String name = RegistrationForm.this.txtName.getText();
-				String email = RegistrationForm.this.txtEmail.getText();
-				String userName = RegistrationForm.this.txtUserName.getText();
-				String passwordConfirmation = RegistrationForm.this.confirmPasswordField.getText();
-				String password = RegistrationForm.this.passwordField.getText();
-
-<<<<<<< HEAD
 				try {
-					validation.validation(name, email, userName, password, passwordConfirmation);
+					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
+							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
+							RegistrationForm.this.confirmPasswordField);
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-=======
-//				try {
-//					validation.validation(name, userName, email, password, passwordConfirmation);
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
->>>>>>> cabdea3f7688054365dccc88c72b87353418eb74
-			
-			
-			
 			}
 		});
 
-		this.layout.add(btnCancel,0, 5, 2, 1);
+		this.layout.add(btnCancel, 0, 5, 2, 1);
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override

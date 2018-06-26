@@ -15,7 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
-public class LoginScreen extends Scene{
+public class LoginScreen extends Scene {
 
 	private final Label message;
 	private Label lblEmail, lblPassword;
@@ -27,18 +27,17 @@ public class LoginScreen extends Scene{
 	private Insets borders;
 	private DatabaseConnection connect;
 	private Hyperlink esqueciSenha;
-	
+
 	public LoginScreen() throws ClassNotFoundException, SQLException {
 
 		super(new HBox());
-		
-		
+
 		this.layout = new GridPane();
-		
+
 		this.message = new Label("");
 
 		this.esqueciSenha = new Hyperlink("Esqueci minha senha");
-		
+
 		this.connect = new DatabaseConnection();
 
 		this.lblEmail = new Label("UserName");
@@ -58,7 +57,7 @@ public class LoginScreen extends Scene{
 		this.layout.add(txtPassword, 1, 1);
 
 		this.layout.add(message, 1, 3);
-		this.layout.add(esqueciSenha, 1 , 2);
+		this.layout.add(esqueciSenha, 1, 2);
 		this.layout.add(btnLogin, 0, 5, 2, 1);
 		this.layout.add(btnExit, 0, 7, 2, 1);
 		this.layout.add(btnSingIn, 0, 6, 2, 1);
@@ -66,55 +65,51 @@ public class LoginScreen extends Scene{
 		this.btnSingIn.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
-		//this.getStylesheets().add(LoginScreen.class.getResource("/styles/style.css").toExternalForm());
-		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
+		// this.getStylesheets().add(LoginScreen.class.getResource("/styles/style.css").toExternalForm());
+		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
-		
-		
+
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
 				Window.janela.setScene(new Home());
+
+				 String name = LoginScreen.this.txtEmail.getText();
+				 String pass = LoginScreen.this.txtPassword.getText();
 				
-				
-				
-//				String name = LoginScreen.this.txtEmail.getText();
-//				String pass = LoginScreen.this.txtPassword.getText();
-//
-//				try {
-//					if (connect.validateLogin(name, pass)) {
-//						message.setText("rigth, you can pass");
-//						message.setTextFill(Color.rgb(21, 117, 84));
-//					} else {
-//						message.setText("you shall not pass ");
-//						message.setTextFill(Color.rgb(210, 39, 30));
-//					}
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
+				 try {
+				 if (connect.validateLogin(name, pass)) {
+				 message.setText("rigth, you can pass");
+				 message.setTextFill(Color.rgb(21, 117, 84));
+				 } else {
+				 message.setText("you shall not pass ");
+				 message.setTextFill(Color.rgb(210, 39, 30));
+				 }
+				 } catch (SQLException e) {
+				 // TODO Auto-generated catch block
+				 e.printStackTrace();
+				 }
 
 			}
 		});
 
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
-		
+
 		this.btnSingIn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
-			public void handle(ActionEvent event) { 
-//				try {
+			public void handle(ActionEvent event) {
+				// try {
+				try {
 					Window.janela.setScene(new RegistrationForm());
-//				} catch (ClassNotFoundException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (SQLException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-			
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//
+
 			}
 		});
 
@@ -125,8 +120,6 @@ public class LoginScreen extends Scene{
 		this.layout.setPadding(borders);
 		this.layout.setMinSize(400, 300);
 
-		
-		
 		this.setRoot(layout);
 
 	}
