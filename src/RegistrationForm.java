@@ -24,18 +24,27 @@ public class RegistrationForm extends Scene {
 	private Insets borders;
 	private Button btnExit;
 	private ValidationMethods validation;
+<<<<<<< HEAD
 	private ValidateRegistrationData data;
 
 	public RegistrationForm() throws ClassNotFoundException, SQLException { // throws ClassNotFoundException,
 																			// SQLException {
+=======
+>>>>>>> ramoJefter
 
+	public RegistrationForm() throws ClassNotFoundException, SQLException { 
 		super(new HBox());
 
 		this.layout = new GridPane();
+<<<<<<< HEAD
 		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
 		this.getStylesheets().add(css);
 
 		
+=======
+		new ValidateRegistrationData();
+
+>>>>>>> ramoJefter
 		this.validation = new ValidationMethods();
 
 		this.lblName = new Label("Nome: ");
@@ -99,6 +108,12 @@ public class RegistrationForm extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
+<<<<<<< HEAD
+=======
+		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+		this.getStylesheets().add(css);
+
+>>>>>>> ramoJefter
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -111,7 +126,10 @@ public class RegistrationForm extends Scene {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+<<<<<<< HEAD
 
+=======
+>>>>>>> ramoJefter
 			}
 		});
 
