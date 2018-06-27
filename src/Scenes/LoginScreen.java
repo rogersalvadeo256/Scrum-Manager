@@ -1,5 +1,9 @@
+package Scenes;
 
 import java.sql.SQLException;
+
+import Database.DatabaseConnection;
+import Main.Window;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,7 +69,6 @@ public class LoginScreen extends Scene {
 		this.btnSingIn.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
-		// this.getStylesheets().add(LoginScreen.class.getResource("/styles/style.css").toExternalForm());
 		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
 
@@ -76,21 +79,21 @@ public class LoginScreen extends Scene {
 
 				Window.janela.setScene(new Home());
 
-				 String name = LoginScreen.this.txtEmail.getText();
-				 String pass = LoginScreen.this.txtPassword.getText();
-				
-				 try {
-				 if (connect.validateLogin(name, pass)) {
-				 message.setText("rigth, you can pass");
-				 message.setTextFill(Color.rgb(21, 117, 84));
-				 } else {
-				 message.setText("you shall not pass ");
-				 message.setTextFill(Color.rgb(210, 39, 30));
-				 }
-				 } catch (SQLException e) {
-				 // TODO Auto-generated catch block
-				 e.printStackTrace();
-				 }
+				String name = LoginScreen.this.txtEmail.getText();
+				String pass = LoginScreen.this.txtPassword.getText();
+
+				try {
+					if (connect.validateLogin(name, pass)) {
+						message.setText("rigth, you can pass");
+						message.setTextFill(Color.rgb(21, 117, 84));
+					} else {
+						message.setText("you shall not pass ");
+						message.setTextFill(Color.rgb(210, 39, 30));
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});

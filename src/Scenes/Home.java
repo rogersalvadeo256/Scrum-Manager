@@ -1,6 +1,8 @@
+package Scenes;
 
 import com.mysql.jdbc.BufferRow;
 
+import Main.Window;
 import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

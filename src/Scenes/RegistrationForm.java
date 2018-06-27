@@ -1,5 +1,9 @@
+package Scenes;
 import java.sql.SQLException;
 
+import Database.ValidateRegistrationData;
+import Main.Window;
+import Validations.ValidationMethods;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,10 +29,13 @@ public class RegistrationForm extends Scene {
 	private Button btnExit;
 	private ValidationMethods validation;
 
-	public RegistrationForm() throws ClassNotFoundException, SQLException { 
+	public RegistrationForm() throws ClassNotFoundException, SQLException {
 		super(new HBox());
 
 		this.layout = new GridPane();
+		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+		this.getStylesheets().add(css);
+
 		new ValidateRegistrationData();
 
 		this.validation = new ValidationMethods();
@@ -94,9 +101,6 @@ public class RegistrationForm extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
-		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
-		this.getStylesheets().add(css);
-
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -124,7 +128,6 @@ public class RegistrationForm extends Scene {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 		});
 		this.layout.setHgap(10);

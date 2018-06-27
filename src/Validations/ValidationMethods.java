@@ -1,8 +1,10 @@
+package Validations;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
+import Database.ValidateRegistrationData;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DialogPane;
