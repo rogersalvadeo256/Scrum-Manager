@@ -105,12 +105,15 @@ public class Home extends Scene {
 		this.columnLeft.setPadding(new Insets(10));
 		this.btnNewProject = new Button("Novo Projeto");
 		this.lblNewProject = new Label("Começar novo projeto");
+		this.lblNewProject.setId("lblvbox");
 		this.lblNewProject.setFont(new Font(20));
 		this.columnLeft.getChildren().addAll(lblNewProject, btnNewProject);
 
 		this.lblProjects = new Label("Projetos em andamento");
+		this.lblProjects.setId("lblvbox");
 		this.lblProjects.setFont(new Font(20));
 		this.myProjects = new Hyperlink("(buscar nome dos projetos no banco de \n dados e colocar aqui");
+		this.myProjects.setId("lblvbox");
 		this.myProjects.setFont(new Font(15));
 		this.columnMiddle.setTranslateX(20);
 		this.columnMiddle.setTranslateY(40);
@@ -118,6 +121,7 @@ public class Home extends Scene {
 		this.columnMiddle.getChildren().addAll(lblProjects, myProjects);
 
 		this.lblMyCompleteProjects = new Label("Projetos Concluidos");
+		this.lblMyCompleteProjects.setId("lblvbox");
 		this.lblMyCompleteProjects.setFont(new Font(20));
 
 		this.columnRight.setTranslateX(20);

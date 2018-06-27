@@ -10,11 +10,6 @@
 	-fx-background-color:#33d77a;
 }
 
-#exitbtn:hover{
-	-fx-text-fill:black;
-	-fx-background-color:red;
-}
-
 .label{
 	-fx-text-fill:white;	
 }
@@ -36,4 +31,20 @@
 
 .root{
 	-fx-background-color:#2E8B57;
+}
+
+/* IDs só aqui pra baixo please */
+
+#exitbtn:hover{
+	-fx-text-fill:black;
+	-fx-background-color:red;
+}
+
+#vbox{
+	-fx-background-color:linear-gradient(green,yellow);
+	-fx-border-color:red;
+}
+
+#lblvbox{
+	-fx-text-fill:black;
 }
