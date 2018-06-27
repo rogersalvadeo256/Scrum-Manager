@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import Database.ValidateRegistrationData;
 import Main.Window;
-import Validations.ValidationMethods;
+import Validations.ValidationOfRegistration;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,7 +28,7 @@ public class RegistrationForm extends Scene {
 	private GridPane layout;
 	private Insets borders;
 	private Button btnExit;
-	private ValidationMethods validation;
+	private ValidationOfRegistration validation;
 	private ValidateRegistrationData data;
 
 	public RegistrationForm() throws ClassNotFoundException, SQLException {
@@ -40,7 +40,7 @@ public class RegistrationForm extends Scene {
 		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
 		this.getStylesheets().add(css);
 
-		this.validation = new ValidationMethods();
+		this.validation = new ValidationOfRegistration();
 
 		this.lblName = new Label("Nome: ");
 		this.lblUserName = new Label("Nome de usuario: ");
