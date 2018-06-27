@@ -42,21 +42,6 @@ public class ValidationMethods {
 
 	}
 
-	public void validation(TextField name, TextField email, TextField userName, TextField password,
-			TextField passwordConfirmation) throws SQLException {
-		this.message = null;
-
-		if(!checkEmail(email) || email.getText() == null){
-			this.alertMessage.add("there seems to have a problem with your email");
-		}
-		if (!(wrongPassword(password, passwordConfirmation))
-				|| password.getText() == null && passwordConfirmation.getText() == null) {
-			this.message.add("password is wrong");
-		}
-		if(!checkUserName(userName) || userName.getText() == null) {
-			this.message.add("user name already in use");
-		}
-		
 	public void validation(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 
@@ -66,21 +51,7 @@ public class ValidationMethods {
 			for (int i = 0; i < this.message.size(); i++) {
 				this.alertMessage.add(this.message.get(i));
 			}
-			for (int j = 0; j < alertMessage.size(); j++) {
-				this.formWarnings.setContentText(alertMessage.get(j) + " \n");
-			}
-			this.formWarnings.setAlertType(AlertType.ERROR);
-			this.formWarnings.setTitle("Error");
-			this.formWarnings.show();
-		}
-	}
 
-	public boolean checkEmail(TextField email) throws SQLException {
-		if (data.queryForExistentEmail(email.getText())) {
-			return false;
-
-			this.formWarnings.setAlertType(AlertType.ERROR);
-			this.formWarnings.setTitle("Error");
 			this.formWarnings.setHeaderText("aaaaa");
 
 			StringBuilder mensagem = new StringBuilder();
@@ -137,36 +108,27 @@ public class ValidationMethods {
 		}
 		return null;
 	}
-	public String checkUserName(TextField userName) throws SQLException {
-
-		if (data.queryForExistentUserName(userName.getText())) {
-			return null;
-	public String checkEmail(TextField email) throws SQLException {
-		if (data.queryForExistentEmail(email.getText())) {
-			return this.errorAlert.get(0);
-		}
-		if (email.getText().equals(null)) {
+	
+	public String checkEmail(TextField email) throws SQLException { 
+		if(email.getText().trim().isEmpty()) {
 			return this.emptyAlert.get(1);
+		}
+		if(data.queryForExistentEmail(email.getText())) {
+			return this.errorAlert.get(1);
 		}
 		return null;
 	}
-
 	public String checkUserName(TextField userName) throws SQLException {
-
 		if (userName.getText().trim().isEmpty()) {
 			return this.emptyAlert.get(2);
 		}
-		
 		if (data.queryForExistentUserName(userName.getText())) {
 			return this.errorAlert.get(1);
 		}
 		return null;
 	}
+		
 
-	public boolean wrongPassword(TextField password, TextField passwordConfirmation) {
-
-		if (!password.getText().equals(passwordConfirmation.getText())) {
-			return null;
 	public String wrongPassword(PasswordField password, PasswordField passwordConfirmation) {
 
 		if (password.getText().isEmpty() || passwordConfirmation.getText().isEmpty()) {
