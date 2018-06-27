@@ -10,6 +10,11 @@
 	-fx-background-color:#33d77a;
 }
 
+#exitbtn:hover{
+	-fx-text-fill:black;
+	-fx-background-color:red;
+}
+
 .label{
 	-fx-text-fill:white;	
 }

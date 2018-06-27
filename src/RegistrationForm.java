@@ -31,8 +31,8 @@ public class RegistrationForm extends Scene {
 
 		super(new HBox());
 		this.layout = new GridPane();
-		
-		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
+
+		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
 
 		this.data = new ValidateRegistrationData();
@@ -100,19 +100,18 @@ public class RegistrationForm extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
-
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
-//				try {
-//					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
-//							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
-//							RegistrationForm.this.confirmPasswordField);
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
+				try {
+					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
+							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
+							RegistrationForm.this.confirmPasswordField);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 

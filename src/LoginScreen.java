@@ -31,9 +31,10 @@ public class LoginScreen extends Scene {
 	public LoginScreen() throws ClassNotFoundException, SQLException {
 
 		super(new HBox());
-//		this.getStylesheets().add(LoginScreen.class.getResource("style.css").toExternalForm());
-//		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
-//		this.getStylesheets().add(css);
+	
+		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
+		this.getStylesheets().add(css);
+	
 		this.layout = new GridPane();
 
 		this.message = new Label("");
@@ -64,6 +65,12 @@ public class LoginScreen extends Scene {
 		this.layout.add(btnExit, 0, 7, 2, 1);
 		this.layout.add(btnSing_In, 0, 6, 2, 1);
 
+		this.btnSing_In.setMaxWidth(500);
+		this.btnLogin.setMaxWidth(500);
+		this.btnExit.setMaxWidth(500);
+		
+		this.btnExit.setId("exitbtn");
+		
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
