@@ -1,5 +1,7 @@
+package Main;
 import java.sql.SQLException;
 
+import Scenes.LoginScreen;
 import javafx.stage.Stage;
 
 public class Window extends Stage {

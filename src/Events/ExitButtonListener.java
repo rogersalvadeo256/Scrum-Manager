@@ -1,4 +1,6 @@
+package Events;
 
+import Main.Window;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

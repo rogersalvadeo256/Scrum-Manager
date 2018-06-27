@@ -20,7 +20,7 @@
 	-fx-background-radius: 15 15 15 15;
 }
 
-.text-input focused{
+.text-input:focused{
 	-fx-background-color:#85e085;
 	-fx-text-fill:black;
 }
