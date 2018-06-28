@@ -4,13 +4,13 @@ import java.sql.SQLException;
 
 import com.mysql.jdbc.Statement;
 
-public class ValidateRegistrationData {
+public class QuerysDataValidation {
 
 	private DatabaseConnection data;
 	private Statement commands;
 	private String table = "users_register";
 
-	public ValidateRegistrationData() throws ClassNotFoundException, SQLException {
+	public QuerysDataValidation() throws ClassNotFoundException, SQLException {
 		this.data = new DatabaseConnection();
 		this.commands = (Statement) data.getConnection().createStatement();
 	}

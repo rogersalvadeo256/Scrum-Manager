@@ -2,7 +2,7 @@ package Scenes;
 
 import java.sql.SQLException;
 
-import Database.ValidateRegistrationData;
+import Database.QuerysDataValidation;
 import Main.Window;
 import Validations.ValidationOfRegistration;
 import javafx.application.Platform;
@@ -29,13 +29,13 @@ public class RegistrationForm extends Scene {
 	private Insets borders;
 	private Button btnExit;
 	private ValidationOfRegistration validation;
-	private ValidateRegistrationData data;
+	private QuerysDataValidation data;
 
 	public RegistrationForm() throws ClassNotFoundException, SQLException {
 		super(new HBox());
 		this.layout = new GridPane();
 
-		this.data = new ValidateRegistrationData();
+		this.data = new QuerysDataValidation();
 
 		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
 		this.getStylesheets().add(css);
@@ -112,6 +112,7 @@ public class RegistrationForm extends Scene {
 					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
 							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
 							RegistrationForm.this.confirmPasswordField);
+					
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}

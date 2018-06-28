@@ -1,19 +1,23 @@
+
 package Validations;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Database.ValidateRegistrationData;
+import Database.QuerysDataValidation;
+import javafx.beans.property.ObjectProperty;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class ValidationOfRegistration {
 
-	private ValidateRegistrationData data;
+	private QuerysDataValidation data;
 	private Alert formWarnings;
 	private ArrayList<String> messageEmptyField;
 	private ArrayList<String> messageDataError;
+
 	private ArrayList<String> alertMessage;
 
 	private final ArrayList<String> emptyAlert;
@@ -22,11 +26,11 @@ public class ValidationOfRegistration {
 	public ValidationOfRegistration() throws ClassNotFoundException, SQLException {
 
 		this.formWarnings = new Alert(null);
-
 		this.formWarnings.setWidth(60);
 		this.formWarnings.setHeight(40);
-
-		this.data = new ValidateRegistrationData();
+		
+		
+		this.data = new QuerysDataValidation();
 
 		this.messageDataError = new ArrayList<String>();
 		this.messageEmptyField = new ArrayList<String>();
@@ -51,19 +55,13 @@ public class ValidationOfRegistration {
 			PasswordField passwordConfirmation) throws SQLException {
 
 		this.emptyField(name, email, userName, password, passwordConfirmation);
-		
 		if (!this.messageEmptyField.isEmpty()) {
 			fieldsEmptyAlert();
 		}
-		
-		
 		this.checkData(email, userName, password, passwordConfirmation);
-		
-		if(!this.messageDataError.isEmpty()) {
+		if (!this.messageDataError.isEmpty()) {
 			errorData();
 		}
-		
-		
 		
 		if (this.messageEmptyField.isEmpty()) {
 			data.insert(name.getText(), email.getText(), userName.getText(), password.getText());
@@ -71,10 +69,14 @@ public class ValidationOfRegistration {
 			this.formWarnings.setTitle("Cadastrado");
 			this.formWarnings.setContentText("Cadastro realizado com sucesso");
 			this.formWarnings.show();
-		}
+			if (formWarnings.getResult() == ButtonType.YES) {
 
+				resetAlert();
+
+			}
+		}
 	}
-	
+
 	public void errorData() throws SQLException {
 		for (int i = 0; i < this.messageEmptyField.size(); i++) {
 			this.alertMessage.add(this.messageDataError.get(i));
@@ -88,10 +90,15 @@ public class ValidationOfRegistration {
 		this.formWarnings.setHeaderText("Algo está errado com os dados informados");
 		this.formWarnings.setContentText(message.toString());
 		this.formWarnings.show();
+		if (formWarnings.getResult() == ButtonType.YES) {
+
+			resetAlert();
+
+		}
 	}
 
 	public void fieldsEmptyAlert() {
-		
+
 		for (int i = 0; i < this.messageEmptyField.size(); i++) {
 			this.alertMessage.add(this.messageEmptyField.get(i));
 		}
@@ -106,8 +113,14 @@ public class ValidationOfRegistration {
 		this.formWarnings.setHeaderText("Algo está errado com os dados informados");
 		this.formWarnings.setContentText(message.toString());
 		this.formWarnings.show();
+		if (formWarnings.getResult() == ButtonType.YES) {
 
+			resetAlert();
+
+		}
 	}
+
+
 	public void emptyField(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 
@@ -120,7 +133,7 @@ public class ValidationOfRegistration {
 		if (this.checkEmail(email).equals(emptyAlert.get(1))) {
 			this.messageEmptyField.add(emptyAlert.get(1));
 		}
-		if (this.wrongPassword(password, passwordConfirmation).equals(emptyAlert.get(2))) {
+		if (this.wrongPassword(password, passwordConfirmation).equals(emptyAlert.get(3))) {
 			this.messageEmptyField.add(emptyAlert.get(3));
 		}
 	}
@@ -134,22 +147,22 @@ public class ValidationOfRegistration {
 		if (this.checkUserName(userName).equals(errorAlert.get(1))) {
 			this.messageDataError.add(errorAlert.get(1));
 		}
-		if (this.wrongPassword(password, passwordConfirmation).equals(errorAlert.get(1))) {
-			this.messageDataError.add(errorAlert.get(1));
+		if (this.wrongPassword(password, passwordConfirmation).equals(errorAlert.get(2))) {
+			this.messageDataError.add(errorAlert.get(2));
 		}
 	}
 
 	public void resetAlert() {
-		this.formWarnings.setTitle(null);
-		this.formWarnings.setHeaderText(null);
-		this.formWarnings.setContentText(null);
+		this.formWarnings.setTitle(new String());
+		this.formWarnings.setHeaderText(new String());
+		this.formWarnings.setContentText(new String());
 	}
-	
+
 	public String checkName(TextField name) {
 		if (name.getText().trim().isEmpty()) {
 			return this.emptyAlert.get(0);
 		}
-		return null;
+		return new String();
 	}
 
 	public String checkEmail(TextField email) throws SQLException {
@@ -159,7 +172,7 @@ public class ValidationOfRegistration {
 		if (data.queryForExistentEmail(email.getText())) {
 			return this.errorAlert.get(1);
 		}
-		return null;
+		return new String();
 	}
 
 	public String checkUserName(TextField userName) throws SQLException {
@@ -169,7 +182,7 @@ public class ValidationOfRegistration {
 		if (data.queryForExistentUserName(userName.getText())) {
 			return this.errorAlert.get(1);
 		}
-		return null;
+		return new String();
 	}
 
 	public String wrongPassword(PasswordField password, PasswordField passwordConfirmation) {
@@ -181,6 +194,6 @@ public class ValidationOfRegistration {
 		if (!password.getText().equals(passwordConfirmation.getText())) {
 			return this.errorAlert.get(2);
 		}
-		return null;
+		return new String();
 	}
 }
