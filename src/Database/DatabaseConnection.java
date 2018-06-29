@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+
 public class DatabaseConnection {
 
 	private Connection connection;
@@ -25,13 +28,14 @@ public class DatabaseConnection {
 		return connection;
 	}
 
-	public boolean enterLogin(String userName, String password) throws SQLException {
+	public boolean enterLogin(TextField userName, PasswordField password) throws SQLException {
 		this.commands = getConnection().createStatement();
 
 		String user_name = null;
 		String passWord = null;
 
-		String query = "select * from users_register where user_name='" + userName + "' && password='" + password + "'";
+		String query = "select * from users_register where user_name='" + userName.getText().toString() + "' && password='"
+				+ password.getText().toString() + "'";
 
 		ResultSet confirmation = commands.executeQuery(query);
 
@@ -40,11 +44,10 @@ public class DatabaseConnection {
 			user_name = confirmation.getString("user_name");
 			passWord = confirmation.getString("password");
 
-			if (userName.equals(user_name) && password.equals(passWord)) {
+			if (userName.getText().equals(user_name.toString()) && password.getText().equals(passWord.toString())) {
 				return true;
 			}
 		}
 		return false;
 	}
-
 }

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import Database.DatabaseConnection;
 import Main.Window;
+import Validations.ValidationLogin;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -38,8 +39,8 @@ public class LoginScreen extends Scene {
 	/*
 	 * labels that will be setted up close to the fields email or user and password
 	 */
-	private Label lblEmailOfUser, lblPassword;
-	private TextField txtEmailOrUser;
+	private Label lblUser, lblPassword;
+	private TextField txtUser;
 	private PasswordField passwordField;
 
 	private Button btnLogin, btnExit, btnSingIn;
@@ -85,8 +86,8 @@ public class LoginScreen extends Scene {
 
 		this.connect = new DatabaseConnection();
 
-		this.lblEmailOfUser = new Label("USERNAME OR EMAIL");
-		this.txtEmailOrUser = new TextField();
+		this.lblUser = new Label("USERNAME OR EMAIL");
+		this.txtUser = new TextField();
 
 		this.lblPassword = new Label("PASSWORD");
 		this.passwordField = new PasswordField();
@@ -107,8 +108,8 @@ public class LoginScreen extends Scene {
 		 * below is setting up the position of the attributes that go to the screen
 		 */
 
-		this.layout.add(lblEmailOfUser, 0, 2, 1, 1);
-		this.layout.add(txtEmailOrUser, 1, 2, 1, 1);
+		this.layout.add(lblUser, 0, 2, 1, 1);
+		this.layout.add(txtUser, 1, 2, 1, 1);
 
 		this.layout.add(lblPassword, 0, 3, 1, 1);
 		this.layout.add(passwordField, 1, 3, 1, 1);
@@ -150,25 +151,31 @@ public class LoginScreen extends Scene {
 				 * scene to the homepage of the software, else, will show the label message in
 				 * red, saying that the data is wrong
 				 */
-				String name = LoginScreen.this.txtEmailOrUser.getText();
-				String pass = LoginScreen.this.passwordField.getText();
 
 				try {
+					ValidationLogin checkForEmptyField = new ValidationLogin(LoginScreen.this.txtUser,
+							LoginScreen.this.passwordField);
+
+					/*
+					 * checking for empty fields, return the label with a error mensage
+					 */
+					if (checkForEmptyField.checkForEmptyField()) {
+						messageLoginValidation.setText("There is nothing typed");
+						messageLoginValidation.setTextFill(Color.rgb(210, 39, 30));
+					}
 					/*
 					 * connect is the object of the class DatabaseConnection
 					 */
-					if (connect.enterLogin(name, pass)) {
-						messageLoginValidation.setText("rigth, you can pass");
-						messageLoginValidation.setTextFill(Color.rgb(21, 117, 84));
 
+					if (connect.enterLogin(LoginScreen.this.txtUser, LoginScreen.this.passwordField)) {
+						messageLoginValidation.setText("Right");
+						messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
 						/*
 						 * to switch scene had to access the mainStage, that is static here is changing
 						 * the scene to the homepage
 						 */
-						// Window.mainStage.setScene(new Home());
-					} else {
-						messageLoginValidation.setText("The data typed is wrog \n or will are not a user");
-						messageLoginValidation.setTextFill(Color.rgb(210, 39, 30));
+						Window.mainStage.setScene(new Home());
+
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();
@@ -176,29 +183,48 @@ public class LoginScreen extends Scene {
 			}
 		});
 
+		/*
+		 * the button exit implement a interface that only serves to exit the program
+		 */
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
+		/*
+		 * button sing in open a scene who contains a registration form to create a
+		 * profile to use the software
+		 */
 		this.btnSingIn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 				try {
+					/*
+					 * change the scene to the RegistrationFom scene, a class that i made
+					 */
 					Window.mainStage.setScene(new RegistrationForm());
 				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
 		});
-
-		// this.borders = new Insets(50);
+		/*
+		 * the insents are the spacing that i put i the padding of the layout
+		 * 
+		 * i had to use a Hgap set a horizontal space between the stuffs in the scene,
+		 * the same for the Vgap, but vertical
+		 */
+		this.borders = new Insets(10);
 		this.layout.setHgap(10); // espaço colocado horizontalmente
 		this.layout.setVgap(10); // espaço colocado verticalmente
 		this.layout.setAlignment(Pos.CENTER);
-		// this.layout.setPadding(borders);
-		this.layout.setMinSize(400, 300);
+		this.layout.setPadding(borders);
+
+		this.layout.setMaxHeight(500);
+		this.layout.setMaxWidth(500);
+		this.layout.setMinWidth(250);
+		this.layout.setMinHeight(250);
 
 		this.setRoot(layout);
 
 	}
+
 }
