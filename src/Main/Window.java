@@ -7,12 +7,12 @@ import javafx.stage.Stage;
 public class Window extends Stage {
 
 	
-	public static Stage janela;
+	public static Stage mainStage;
 	
  	public  Window() throws ClassNotFoundException, SQLException {
  		
- 		Window.janela = this;
- 		janela.setScene(new LoginScreen());
+ 		Window.mainStage = this;
+ 		mainStage.setScene(new LoginScreen());
 		this.show();
 	}
 }

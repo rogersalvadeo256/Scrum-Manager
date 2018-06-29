@@ -25,7 +25,7 @@ public class DatabaseConnection {
 		return connection;
 	}
 
-	public boolean validateLogin(String userName, String password) throws SQLException {
+	public boolean enterLogin(String userName, String password) throws SQLException {
 		this.commands = getConnection().createStatement();
 
 		String user_name = null;

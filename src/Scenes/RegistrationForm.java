@@ -89,7 +89,7 @@ public class RegistrationForm extends Scene {
 			public void handle(ActionEvent event) {
 
 				try {
-					Window.janela.setScene(new LoginScreen());
+					Window.mainStage.setScene(new LoginScreen());
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -126,7 +126,7 @@ public class RegistrationForm extends Scene {
 			public void handle(ActionEvent event) {
 
 				try {
-					Window.janela.setScene(new LoginScreen());
+					Window.mainStage.setScene(new LoginScreen());
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

@@ -1,6 +1,9 @@
 package Scenes;
 
-import com.mysql.jdbc.BufferRow;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import Main.Window;
 import javafx.application.Platform;
@@ -10,10 +13,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.FileChooser;
 
 public class Home extends Scene {
 
@@ -32,7 +38,10 @@ public class Home extends Scene {
 	private Label userName;
 	private Label lblNewProject;
 	private Button btnNewProject;
-
+	
+	private ImageView imagem;
+	
+	
 	private Label lblProjects;
 	private Hyperlink myProjects;
 	private Label lblMyCompleteProjects;
@@ -47,14 +56,15 @@ public class Home extends Scene {
 //		String css2=this.getClass().getResource("/cssStyles/bgground2.css").toExternalForm();
 //		this.getStylesheets().add(css2);
 		
+		this.imagem = new ImageView();
 		
 		this.layout = new GridPane();
 		this.content = new HBox();
 		this.layout.add(content, 0, 2, 1, 1);
 
-		Window.janela.setWidth(850);
-		Window.janela.setHeight(600);
-		Window.janela.setTitle("Principal");
+		Window.mainStage.setWidth(850);
+		Window.mainStage.setHeight(600);
+		Window.mainStage.setTitle("Principal");
 
 		this.top = new HBox();
 		this.layout.add(top, 0, 0, 1, 1);
@@ -65,13 +75,31 @@ public class Home extends Scene {
 		this.top.setTranslateY(20);
 		this.opcoes = new VBox();
 //		this.opcoes.setSpacing(50);
+		
+		
+		
+		//FileChooser fc = new FileChooser();
+		//File f = fc.showOpenDialog(Window.janela);
+		File f = new File("/home/jefter66/Área de Trabalho/35401559_1839819186083425_5919617720290115584_n.jpg");
+		
+		
+		FileInputStream fis;
+		try {
+			fis = new FileInputStream(f);
+			this.imagem.setImage(new Image(fis));
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		
+		
 		this.name = new Label("nome");
 		this.name.setFont(new Font(25));
 		this.userName = new Label("userName");
 		this.userName.setFont(new Font(15));
 		this.nameUserName = new VBox();
-		this.nameUserName.getChildren().addAll(name, userName);
+		this.nameUserName.getChildren().addAll(imagem, name, userName);
 		this.btnExit = new Button("Sair");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 		this.btnEditProfile = new Button("Editar Perfil");

@@ -28,8 +28,7 @@ public class ValidationOfRegistration {
 		this.formWarnings = new Alert(null);
 		this.formWarnings.setWidth(60);
 		this.formWarnings.setHeight(40);
-		
-		
+
 		this.data = new QuerysDataValidation();
 
 		this.messageDataError = new ArrayList<String>();
@@ -62,18 +61,13 @@ public class ValidationOfRegistration {
 		if (!this.messageDataError.isEmpty()) {
 			errorData();
 		}
-		
+
 		if (this.messageEmptyField.isEmpty()) {
 			data.insert(name.getText(), email.getText(), userName.getText(), password.getText());
 			this.formWarnings.setAlertType(AlertType.CONFIRMATION);
 			this.formWarnings.setTitle("Cadastrado");
 			this.formWarnings.setContentText("Cadastro realizado com sucesso");
 			this.formWarnings.show();
-			if (formWarnings.getResult() == ButtonType.YES) {
-
-				resetAlert();
-
-			}
 		}
 	}
 
@@ -90,11 +84,8 @@ public class ValidationOfRegistration {
 		this.formWarnings.setHeaderText("Algo está errado com os dados informados");
 		this.formWarnings.setContentText(message.toString());
 		this.formWarnings.show();
-		if (formWarnings.getResult() == ButtonType.YES) {
-
-			resetAlert();
-
-		}
+		this.alertMessage.clear();
+		this.messageEmptyField.clear();
 	}
 
 	public void fieldsEmptyAlert() {
@@ -112,14 +103,9 @@ public class ValidationOfRegistration {
 		this.formWarnings.setTitle("Error");
 		this.formWarnings.setHeaderText("Algo está errado com os dados informados");
 		this.formWarnings.setContentText(message.toString());
+		
 		this.formWarnings.show();
-		if (formWarnings.getResult() == ButtonType.YES) {
-
-			resetAlert();
-
-		}
 	}
-
 
 	public void emptyField(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
