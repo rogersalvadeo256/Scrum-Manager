@@ -38,11 +38,12 @@
 
 /* área de testes */
 
+/*
 #hbox:hover{
 	-fx-background-color:#000;
 	-fx-border-color:blue;
 }
-
+*/
 
 /* IDs só aqui pra baixo please */
 
@@ -52,8 +53,8 @@
 	-fx-effect: innershadow(gaussian,black,8.0,0.0,0.0,0.0);
 }
 #vbox{
-	-fx-background-color:linear-gradient(green,yellow);
-	-fx-border-color:red;
+	-fx-background-color:white;
+	-fx-border-color:#7997ee;
 	-fx-effect: dropshadow(gaussian,black,8.0,0.0,2.0,0.0);
 }
 #lblvbox{
