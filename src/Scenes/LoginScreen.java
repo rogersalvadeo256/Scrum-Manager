@@ -43,7 +43,7 @@ public class LoginScreen extends Scene {
 	private TextField txtUser;
 	private PasswordField passwordField;
 
-	private Button btnLogin, btnExit, btnSingIn;
+	private Button btnLogin, btnExit, btnSignIn;
 
 	/*
 	 * the scene have a GridPane like the layout
@@ -94,7 +94,7 @@ public class LoginScreen extends Scene {
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("EXIT");
-		this.btnSingIn = new Button("SIGN UP");
+		this.btnSignIn = new Button("SIGN UP");
 
 		/*
 		 * the main class of the program have a Stage that is static, so, i can access
@@ -119,12 +119,12 @@ public class LoginScreen extends Scene {
 		this.layout.add(forgotPassword, 1, 4, 1, 1);
 
 		this.layout.add(btnLogin, 0, 5, 5, 1);
-		this.layout.add(btnSingIn, 0, 6, 5, 1);
+		this.layout.add(btnSignIn, 0, 6, 5, 1);
 		this.layout.add(btnExit, 0, 7, 5, 1);
 		/*
 		 * this method below will allow me make the button size bigger
 		 */
-		this.btnSingIn.setMaxWidth(500);
+		this.btnSignIn.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
 		/*
@@ -191,7 +191,7 @@ public class LoginScreen extends Scene {
 		 * button sing in open a scene who contains a registration form to create a
 		 * profile to use the software
 		 */
-		this.btnSingIn.setOnAction(new EventHandler<ActionEvent>() {
+		this.btnSignIn.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {

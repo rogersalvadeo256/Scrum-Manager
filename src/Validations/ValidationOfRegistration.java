@@ -1,6 +1,11 @@
-
 package Validations;
 
+/*
+ * LoginScreen.java
+ * 
+ * Created on: 28 jun de 2018
+ * 		Autor: jefter66
+ */
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Database.QuerysDataValidation;
@@ -13,6 +18,10 @@ import javafx.scene.control.TextField;
 
 public class ValidationOfRegistration {
 
+	/*
+	 * this object will be used to check if the data typed already exist in the
+	 * database
+	 */
 	private QuerysDataValidation data;
 	private Alert formWarnings;
 	private ArrayList<String> messageEmptyField;
@@ -103,7 +112,7 @@ public class ValidationOfRegistration {
 		this.formWarnings.setTitle("Error");
 		this.formWarnings.setHeaderText("Algo está errado com os dados informados");
 		this.formWarnings.setContentText(message.toString());
-		
+
 		this.formWarnings.show();
 	}
 
