@@ -134,6 +134,7 @@ public class Home extends Scene {
 		 */
 
 		this.projectsColumns = new HBox();
+		this.projectsColumns.setId("hbox");
 
 		/*
 		 * is on the same column that the top hbox, but one line below
