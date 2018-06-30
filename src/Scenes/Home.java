@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
+import org.w3c.dom.css.RGBColor;
+
 import Main.Window;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -20,6 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
@@ -176,6 +179,7 @@ public class Home extends Scene {
 		this.columnLeft.setTranslateY(40);
 		this.columnLeft.setPadding(new Insets(10));
 		this.lblNewProject = new Label("NEW PROJECT");
+		this.lblNewProject.setTextFill(Color.BLACK);
 		this.lblNewProject.setAlignment(Pos.CENTER);
 		this.lblNewProject.setTranslateY(25);
 		this.columnLeft.getChildren().addAll(lblNewProject);

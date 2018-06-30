@@ -1,5 +1,14 @@
 package Main;
 
+/*
+ * SCRUM MANAGER TCC PROJECT
+ * 
+ * 	CREATED ON: 18 JUN  2018
+ * 
+ * AUTHORS: ANDRÉ LOPES,IGOR MANOEL, 
+ * 			JEFTER SANTIAGO, ROGER FERRARO 
+ * 
+ */
 import javafx.application.Application;
 import javafx.stage.Stage;
 

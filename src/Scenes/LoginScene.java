@@ -28,7 +28,7 @@ import javafx.scene.paint.Color;
  * 
  */
 
-public class LoginScreen extends Scene {
+public class LoginScene extends Scene {
 
 	/*
 	 * the label message will be hidden, and just going to show a message if the
@@ -63,7 +63,7 @@ public class LoginScreen extends Scene {
 	 */
 	private DatabaseConnection connect;
 
-	public LoginScreen() throws ClassNotFoundException, SQLException {
+	public LoginScene() throws ClassNotFoundException, SQLException {
 		/*
 		 * i don't know why, but had to be this super(some object()); in the first line
 		 * of the construct
@@ -152,8 +152,8 @@ public class LoginScreen extends Scene {
 				 */
 
 				try {
-					ValidationLogin checkForEmptyField = new ValidationLogin(LoginScreen.this.txtUser,
-							LoginScreen.this.passwordField);
+					ValidationLogin checkForEmptyField = new ValidationLogin(LoginScene.this.txtUser,
+							LoginScene.this.passwordField);
 
 					/*
 					 * checking for empty fields, return the label with a error mensage
@@ -166,7 +166,7 @@ public class LoginScreen extends Scene {
 					 * connect is the object of the class DatabaseConnection
 					 */
 
-					if (connect.enterLogin(LoginScreen.this.txtUser, LoginScreen.this.passwordField)) {
+					if (connect.enterLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
 						messageLoginValidation.setText("Right");
 						messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
 						/*
@@ -199,7 +199,7 @@ public class LoginScreen extends Scene {
 					/*
 					 * change the scene to the RegistrationFom scene, a class that i made
 					 */
-					Window.mainStage.setScene(new RegistrationForm());
+					Window.mainStage.setScene(new RegistrationFormScene());
 				} catch (ClassNotFoundException | SQLException e) {
 					e.printStackTrace();
 				}

@@ -28,7 +28,7 @@ import javafx.scene.text.TextAlignment;
  * 
  */
 
-public class RegistrationForm extends Scene {
+public class RegistrationFormScene extends Scene {
 
 	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
@@ -45,7 +45,7 @@ public class RegistrationForm extends Scene {
 	 */
 	private ValidationOfRegistration validation;
 
-	public RegistrationForm() throws ClassNotFoundException, SQLException {
+	public RegistrationFormScene() throws ClassNotFoundException, SQLException {
 		super(new HBox());
 
 		/*
@@ -123,7 +123,7 @@ public class RegistrationForm extends Scene {
 					/*
 					 * the button cancel change the scene for the login scene
 					 */
-					Window.mainStage.setScene(new LoginScreen());
+					Window.mainStage.setScene(new LoginScene());
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -150,9 +150,9 @@ public class RegistrationForm extends Scene {
 					 * using a class named ValidationOfRegistration, go to check if are some field
 					 * are empty and if the informed data are acceptable (if already exist in the database and etc)
 					 */
-					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
-							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
-							RegistrationForm.this.confirmPasswordField);
+					validation.validation(RegistrationFormScene.this.txtName, RegistrationFormScene.this.txtEmail,
+							RegistrationFormScene.this.txtUserName, RegistrationFormScene.this.passwordField,
+							RegistrationFormScene.this.confirmPasswordField);
 
 				} catch (SQLException e) {
 					e.printStackTrace();
