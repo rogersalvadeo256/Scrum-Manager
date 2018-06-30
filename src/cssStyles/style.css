@@ -36,6 +36,14 @@
 	-fx-background-color:#2E8B57;
 }
 
+/* área de testes */
+
+#hbox:hover{
+	-fx-background-color:#000;
+	-fx-border-color:blue;
+}
+
+
 /* IDs só aqui pra baixo please */
 
 #exitbtn:hover{

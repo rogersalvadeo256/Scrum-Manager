@@ -128,7 +128,7 @@ public class LoginScreen extends Scene {
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
 		/*
-		 * this is where because of the CSS
+		 * this is here because of the CSS
 		 */
 		this.btnExit.setId("exitbtn");
 
