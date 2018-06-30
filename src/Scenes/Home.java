@@ -7,6 +7,8 @@ import java.io.FileNotFoundException;
 
 import Main.Window;
 import javafx.application.Platform;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -25,64 +27,123 @@ public class Home extends Scene {
 
 	private GridPane layout;
 
-	private HBox top;
-	private HBox content;
+	private HBox hbTopScene;
+	private HBox projectsColumns;
 	private VBox columnLeft;
 	private VBox columnMiddle;
 	private VBox columnRight;
 	private Button btnExit;
 	private Button btnEditProfile;
-	private VBox opcoes;
-	private VBox nameUserName;
-	private Label name;
-	private Label userName;
+	private VBox vbBtnOptions;
+	private VBox vbNameUserImage;
+	private Label lblName;
+	private Label lblUserName;
 	private Label lblNewProject;
-	private Button btnNewProject;
-	
+
 	private ImageView imagem;
-	
-	
 	private Label lblProjects;
 	private Hyperlink myProjects;
 	private Label lblMyCompleteProjects;
-	private Hyperlink myCompleteProjects;
 
 	public Home() {
 		super(new HBox());
-
-		String css=this.getClass().getResource("/cssStyles/style.css").toExternalForm();
+		/*
+		 * the css
+		 */
+		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
-//		
-//		String css2=this.getClass().getResource("/cssStyles/bgground2.css").toExternalForm();
-//		this.getStylesheets().add(css2);
-		
-		this.imagem = new ImageView();
-		
-		this.layout = new GridPane();
-		this.content = new HBox();
-		this.layout.add(content, 0, 2, 1, 1);
 
-		Window.mainStage.setWidth(850);
-		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("Principal");
+		Window.mainStage.setWidth(750);
+		Window.mainStage.setHeight(600);
 
-		this.top = new HBox();
-		this.layout.add(top, 0, 0, 1, 1);
-		this.top.setAlignment(Pos.CENTER);
-		this.top.setSpacing(10);
-		this.top.setPadding(new Insets(10));
-		this.top.setTranslateX(10);
-		this.top.setTranslateY(20);
-		this.opcoes = new VBox();
-//		this.opcoes.setSpacing(50);
-		
-		
-		
-		//FileChooser fc = new FileChooser();
-		//File f = fc.showOpenDialog(Window.janela);
+		/*
+		 * the main layout will be a gridpane who will contain a lot of hbox and vbox
+		 */
+		this.layout = new GridPane();
+
+		/*
+		 * this image will contain a profile image of the user the size of the image is
+		 * setting here
+		 */
+		this.imagem = new ImageView();
+		this.imagem.setFitWidth(150);
+		this.imagem.setFitHeight(150);
+
+		this.btnExit = new Button("EXIT");
+		this.btnExit.setOnAction(actionEvent -> Platform.exit());
+		this.btnEditProfile = new Button("EDIT PROFILE");
+
+		/*
+		 * this vbox will have just two buttons and going to stay in the top right of
+		 * the scene
+		 */
+		this.vbBtnOptions = new VBox();
+		this.btnExit.setMinWidth(vbBtnOptions.getPrefWidth());
+
+		this.vbBtnOptions.getChildren().addAll(btnEditProfile, btnExit);
+		this.vbBtnOptions.setSpacing(10);
+		/*
+		 * setting the vbox in the right
+		 */
+		this.vbBtnOptions.setTranslateX(200);
+
+		this.lblName = new Label("nome");
+		this.lblName.setFont(new Font(25));
+		this.lblUserName = new Label("userName");
+		this.lblUserName.setFont(new Font(15));
+
+		/*
+		 * this vbox have will stay on the lef top of the scene contain the image, name
+		 * and username of the user
+		 */
+		this.vbNameUserImage = new VBox();
+		this.vbNameUserImage.setPadding(new Insets(10));
+		this.vbNameUserImage.getChildren().addAll(lblName, lblUserName);
+
+		/*
+		 * this hbox will contain all the vbox above going to stay on the top of the
+		 * scene, defined in the gridpane
+		 */
+		this.hbTopScene = new HBox();
+
+		this.layout.add(hbTopScene, 0, 0, 1, 1);
+		/*
+		 * i put the alignment in the top left because i couldn't setting the image
+		 * above the left column with another way
+		 */
+		this.hbTopScene.setAlignment(Pos.TOP_LEFT);
+		this.hbTopScene.setPadding(new Insets(20));
+		this.hbTopScene.setTranslateX(30);
+		this.hbTopScene.setTranslateY(20);
+
+		this.hbTopScene.setSpacing(10);
+
+		/*
+		 * setting the things in the top part of the layout
+		 */
+		this.hbTopScene.getChildren().addAll(imagem, vbNameUserImage, vbBtnOptions);
+
+		/*
+		 * the idea is making three columns below the image and the name of the user and
+		 * the buttons exit and edit profile in the first column starting from the left,
+		 * will contain a Vbox who will lead to other scene, for start new project and
+		 * etc the middle column, like the previous one, has a vbox with his stuff, this
+		 * column are from the projects in progress the last column, in the right, has
+		 * the project finished
+		 */
+
+		this.projectsColumns = new HBox();
+
+		/*
+		 * is on the same column that the top hbox, but one line below
+		 */
+		this.layout.add(projectsColumns, 0, 2, 1, 1);
+
+		// FileChooser fc = new FileChooser();
+		// File f = fc.showOpenDialog(Window.janela);
 		File f = new File("/home/jefter66/Área de Trabalho/35401559_1839819186083425_5919617720290115584_n.jpg");
-		
-		
+
 		FileInputStream fis;
 		try {
 			fis = new FileInputStream(f);
@@ -92,56 +153,60 @@ public class Home extends Scene {
 			e.printStackTrace();
 		}
 
-		
-		
-		this.name = new Label("nome");
-		this.name.setFont(new Font(25));
-		this.userName = new Label("userName");
-		this.userName.setFont(new Font(15));
-		this.nameUserName = new VBox();
-		this.nameUserName.getChildren().addAll(imagem, name, userName);
-		this.btnExit = new Button("Sair");
-		this.btnExit.setOnAction(actionEvent -> Platform.exit());
-		this.btnEditProfile = new Button("Editar Perfil");
-
-//		this.nameUserName.setTranslateX(10);
-		this.opcoes.setTranslateX(150);
-
-		this.opcoes.getChildren().addAll(btnEditProfile, btnExit);
-		this.opcoes.setSpacing(20);
-
-		this.top.setSpacing(60);
-		this.top.getChildren().addAll(new Label("aqui vai a foto"), nameUserName, opcoes);
-
+		/*
+		 * instantiate the columns
+		 */
 		this.columnMiddle = new VBox();
 		this.columnLeft = new VBox();
 		this.columnRight = new VBox();
-		
+
+		/*
+		 * css stuff
+		 */
 		columnRight.setId("vbox");
 		columnMiddle.setId("vbox");
+		this.btnExit.setId("exitbtn");
 		columnLeft.setId("vbox");
 
-		this.content.getChildren().addAll(columnLeft, columnMiddle, columnRight);
-		this.content.setPadding(new Insets(10));
-		this.content.setSpacing(5);
-
-		this.btnExit.setId("exitbtn");
-		
-		
+		/*
+		 * the left column
+		 */
 		this.columnLeft.setTranslateX(20);
 		this.columnLeft.setTranslateY(40);
 		this.columnLeft.setPadding(new Insets(10));
-		this.btnNewProject = new Button("Novo Projeto");
-		this.lblNewProject = new Label("Começar novo projeto");
-		this.lblNewProject.setId("lblvbox");
-		this.lblNewProject.setFont(new Font(20));
-		this.columnLeft.getChildren().addAll(lblNewProject, btnNewProject);
+		this.lblNewProject = new Label("NEW PROJECT");
+		this.lblNewProject.setAlignment(Pos.CENTER);
+		this.lblNewProject.setTranslateY(25);
+		this.columnLeft.getChildren().addAll(lblNewProject);
+		/*
+		 * if this vbox be clicked a form for create a new project will be called an the
+		 * scene will be changed
+		 */
+		this.columnLeft.setOnMouseClicked(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+
+				/*
+				 * CALL THE FORM OF NEW PROJECT HERE
+				 */
+			}
+		});
 
 		this.lblProjects = new Label("Projetos em andamento");
-		this.lblProjects.setId("lblvbox");
 		this.lblProjects.setFont(new Font(20));
+
+		/*
+		 * i dont think that this hyperlink will stay here for to long time
+		 */
 		this.myProjects = new Hyperlink("(buscar nome dos projetos no banco de \n dados e colocar aqui");
+
+		/*
+		 * css stuff
+		 */
+		this.lblProjects.setId("lblvbox");
 		this.myProjects.setId("lblvbox");
+
 		this.myProjects.setFont(new Font(15));
 		this.columnMiddle.setTranslateX(20);
 		this.columnMiddle.setTranslateY(40);
@@ -149,13 +214,21 @@ public class Home extends Scene {
 		this.columnMiddle.getChildren().addAll(lblProjects, myProjects);
 
 		this.lblMyCompleteProjects = new Label("Projetos Concluidos");
-		this.lblMyCompleteProjects.setId("lblvbox");
 		this.lblMyCompleteProjects.setFont(new Font(20));
+
+		/*
+		 * css stuff
+		 */
+		this.lblMyCompleteProjects.setId("lblvbox");
 
 		this.columnRight.setTranslateX(20);
 		this.columnRight.setTranslateY(40);
 		this.columnRight.setPadding(new Insets(10));
 		this.columnRight.getChildren().addAll(lblMyCompleteProjects);
+
+		this.projectsColumns.setPadding(new Insets(10));
+		this.projectsColumns.setSpacing(5);
+		this.projectsColumns.getChildren().addAll(columnLeft, columnMiddle, columnRight);
 
 		this.setRoot(layout);
 

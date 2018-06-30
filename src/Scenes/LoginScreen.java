@@ -94,7 +94,7 @@ public class LoginScreen extends Scene {
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("EXIT");
-		this.btnSingIn = new Button("SING IN");
+		this.btnSingIn = new Button("SIGN UP");
 
 		/*
 		 * the main class of the program have a Stage that is static, so, i can access
@@ -109,10 +109,10 @@ public class LoginScreen extends Scene {
 		 */
 
 		this.layout.add(lblUser, 0, 2, 1, 1);
-		this.layout.add(txtUser, 1, 2, 1, 1);
+		this.layout.add(txtUser, 1, 2, 2, 1);
 
 		this.layout.add(lblPassword, 0, 3, 1, 1);
-		this.layout.add(passwordField, 1, 3, 1, 1);
+		this.layout.add(passwordField, 1, 3, 2, 1);
 
 		this.layout.add(messageLoginValidation, 0, 4, 1, 1);
 
@@ -121,7 +121,6 @@ public class LoginScreen extends Scene {
 		this.layout.add(btnLogin, 0, 5, 5, 1);
 		this.layout.add(btnSingIn, 0, 6, 5, 1);
 		this.layout.add(btnExit, 0, 7, 5, 1);
-
 		/*
 		 * this method below will allow me make the button size bigger
 		 */
@@ -143,7 +142,7 @@ public class LoginScreen extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				// Window.mainStage.setScene(new Home());
+				 Window.mainStage.setScene(new Home());
 
 				/*
 				 * the contend of the textfield and passwordfield are used in a database query

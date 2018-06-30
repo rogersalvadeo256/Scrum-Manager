@@ -17,39 +17,57 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+
+/*
+ * LoginScreen.java
+ * 
+ * Created on: 28 jun de 2018
+ * 		Autor: jefter66
+ * 
+ */
 
 public class RegistrationForm extends Scene {
 
-	private final Label message;
 	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
 	private PasswordField passwordField, confirmPasswordField;
-	private Button btnRegister, btnCancel;
+	private Button btnRegister, btnCancel, btnExit;
+	/*
+	 * the layout of the scene is made using a single gridpane
+	 */
 	private GridPane layout;
 	private Insets borders;
-	private Button btnExit;
+	/*
+	 * this object are used to validate the fields of the form, making a query in
+	 * the database and sending a message with the result
+	 */
 	private ValidationOfRegistration validation;
-	private QuerysDataValidation data;
 
 	public RegistrationForm() throws ClassNotFoundException, SQLException {
 		super(new HBox());
-		this.layout = new GridPane();
 
-		this.data = new QuerysDataValidation();
-
+		/*
+		 * setting the CSS style from the scene
+		 */
 		String css = this.getClass().getResource("/cssStyles/registration.css").toExternalForm();
 		this.getStylesheets().add(css);
+		/*
+		 * instantiate the objects
+		 */
+		this.layout = new GridPane();
+
+		Window.mainStage.setWidth(600);
+		Window.mainStage.setHeight(600);
 
 		this.validation = new ValidationOfRegistration();
 
-		this.lblName = new Label("Nome: ");
-		this.lblUserName = new Label("Nome de usuario: ");
-		this.lblEmail = new Label("Email: ");
-		this.lblPassword = new Label("Digite sua senha: ");
-		this.lblConfirmPassword = new Label("Confirmar Senha: ");
-
-		this.message = new Label("");
-		this.layout.add(message, 0, 5);
+		this.lblName = new Label("NAME");
+		this.lblUserName = new Label("USERNAME");
+		this.lblEmail = new Label("EMAIL");
+		this.lblPassword = new Label("PASSWORD");
+		this.lblConfirmPassword = new Label("CONFIRM PASSWORD");
 
 		this.txtName = new TextField();
 		this.txtEmail = new TextField();
@@ -58,37 +76,53 @@ public class RegistrationForm extends Scene {
 		this.passwordField = new PasswordField();
 		this.confirmPasswordField = new PasswordField();
 
-		this.btnExit = new Button("Sair");
-		this.btnRegister = new Button("Cadastrar");
-		this.btnCancel = new Button("Cancelar");
-		this.btnRegister.setMaxWidth(600);
+		this.btnExit = new Button("EXIT");
+		this.btnRegister = new Button("OK");
+		this.btnCancel = new Button("CANCEL");
 
 		this.borders = new Insets(50);
 
+		/*
+		 * setting up the position of the attributes that go to the scene
+		 */
 		this.layout.add(lblName, 0, 0, 1, 1);
-		this.layout.add(txtName, 1, 0, 2, 1);
+		this.layout.add(txtName, 1, 0, 4, 1);
 
 		this.layout.add(lblUserName, 0, 1, 1, 1);
-		this.layout.add(txtUserName, 1, 1, 2, 1);
+		this.layout.add(txtUserName, 1, 1, 4, 1);
 
 		this.layout.add(lblEmail, 0, 2, 1, 1);
-		this.layout.add(txtEmail, 1, 2, 2, 1);
+		this.layout.add(txtEmail, 1, 2, 4, 1);
 
 		this.layout.add(lblPassword, 0, 3, 1, 1);
-		this.layout.add(passwordField, 1, 3, 2, 1);
+		this.layout.add(passwordField, 1, 3, 4, 1);
 
 		this.layout.add(lblConfirmPassword, 0, 4, 1, 1);
-		this.layout.add(confirmPasswordField, 1, 4, 2, 1);
+		this.layout.add(confirmPasswordField, 1, 4, 4, 1);
 
-		this.layout.add(btnRegister, 1, 5, 2, 1);
+		this.btnRegister.setMaxWidth(700);
+		this.btnCancel.setMaxWidth(700);
+		this.btnExit.setMaxWidth(700);
 
-		this.btnCancel.setMaxWidth(600);
+		this.layout.add(btnRegister, 0, 5, 6, 1);
+		this.layout.add(btnCancel, 0, 6, 4, 1);
+		this.btnCancel.setTranslateX(-50);
+		this.layout.add(btnExit, 1, 6, 4, 1);
+		this.btnExit.setTranslateX(70);
+
+		/*
+		 * the actions of the buttons
+		 */
+
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
 				try {
+					/*
+					 * the button cancel change the scene for the login scene
+					 */
 					Window.mainStage.setScene(new LoginScreen());
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
@@ -98,8 +132,10 @@ public class RegistrationForm extends Scene {
 			}
 		});
 
-		this.layout.add(btnExit, 0, 6, 2, 1);
-		this.btnExit.setMaxWidth(600);
+		/*
+		 * setId is used in CSS code the button exit use the same class that the other
+		 * button exit in the login screen
+		 */
 		this.btnExit.setId("exitbtn");
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
 
@@ -109,35 +145,29 @@ public class RegistrationForm extends Scene {
 			public void handle(ActionEvent event) {
 
 				try {
+					/*
+					 * before the stuff typed from the registration, will be calling a validation,
+					 * using a class named ValidationOfRegistration, go to check if are some field
+					 * are empty and if the informed data are acceptable (if already exist in the database and etc)
+					 */
 					validation.validation(RegistrationForm.this.txtName, RegistrationForm.this.txtEmail,
 							RegistrationForm.this.txtUserName, RegistrationForm.this.passwordField,
 							RegistrationForm.this.confirmPasswordField);
-					
+
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
 		});
-
-		this.layout.add(btnCancel, 0, 5, 2, 1);
-		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-
-				try {
-					Window.mainStage.setScene(new LoginScreen());
-				} catch (ClassNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-		});
-		this.layout.setHgap(10);
+		
+		/*
+		 * setHgap will set a space in the horizontal , Vgap space in the vertical
+		 */
+		this.layout.setHgap(5);
 		this.layout.setVgap(10);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setPadding(borders);
-		this.layout.setMinSize(600, 400);
+		this.layout.setMinSize(400, 200);
 
 		this.setRoot(layout);
 
