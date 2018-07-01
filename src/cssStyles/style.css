@@ -1,7 +1,8 @@
 .toggle-button {
     -fx-text-fill: white;
-    -fx-base: transparent;
+    -fx-base: #2E8B57;
     -fx-border-width: 15.0;
+    -fx-width: 200.0;
     -fx-background: transparent;
     -fx-focus-color: #00cc66;
     -fx-border-color: transparent;
@@ -10,17 +11,51 @@
 }
 .toggle-button:selected {
     -fx-text-fill: white;
-    -fx-base: transparent;
+    -fx-base: #2E8B57;
     -fx-background: black;
     -fx-focus-color: #00cc66;
     -fx-border-color: transparent;
     -fx-effect: null;
     -fx-border-width: 20.0;
 }
+/*
+ * pra entender o que to fazendo
+ */
+.hbox {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 5.0;
+    -fx-spacing: 5.0;
+}
+.hbox#hboxRightSide{
+	 -fx-background-color: white;
+ 	 -fx-padding: 18.0 3.0 18.0 6.0;
+     -fx-spacing: 5.0;
+     -fx-background-radius: 5.0; 
+}
+.box#hboxLeftSide{
+	 -fx-background-color: white;
+ 	 -fx-padding: 18.0 3.0 18.0 6.0;
+     -fx-spacing: 5.0;
+     -fx-background-radius: 5.0; 
+}
 
-.button {
-    -fx-pref-width: 100.0px;
-    -fx-pref-height: 50.0px;
+
+.vbox {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 5.0;
+    -fx-spacing: 5.0;
+}
+.vbox#teamMembers{
+	-fx-background-color: blue;
+    -fx-padding: 5.0;
+}
+.vbox#projectNameDescription{
+ 	   -fx-background: transparent;
+    -fx-focus-color: #00cc66;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-border-width: 20.0;
+	
 }
 .button{
 	-fx-text-fill:white;
@@ -32,13 +67,17 @@
 	-fx-text-fill:black;
 	-fx-background-color:#33d77a;
 }
+.button {
+    -fx-pref-width: 100.0px;
+    -fx-pref-height: 50.0px;
+}
+
 .label{
 	-fx-text-fill:white;	
 }
 .text-area .content{
 	-fx-background-color:#00cc66;
 	-fx-text-fill:white;
-	-fx-background-radius: 3, 2;
 }
 .text-area:focused{
 	-fx-background-color:#85e085;
@@ -79,11 +118,14 @@
 	-fx-background-color:red;
 	-fx-effect: innershadow(gaussian,black,8.0,0.0,0.0,0.0);
 }
+/*
 #vbox{
 	-fx-background-color:white;
 	-fx-border-color:#7997ee;
 	-fx-effect: dropshadow(gaussian,black,8.0,0.0,2.0,0.0);
 }
+*  
+*/
 #lblvbox{
 	-fx-text-fill:black;
 }

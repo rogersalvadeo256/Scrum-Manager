@@ -11,8 +11,6 @@ import Main.Window;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,28 +24,30 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 public class newProjectScene extends Scene {
 
 	private GridPane layout;
 
+
 	private HBox hbTopLeftScene;
-	private HBox hbCenterScene;
-	private HBox hbDownScene;
+	private HBox hbTopRightScene;
 
 	/*
 	 * this vboxs will stay in the hbox hbTopScene;
 	 */
 	private VBox vbLabelsProjectNameDescription;
 	private VBox vbTxtProjectNameDescription;
+	private HBox hbTextProjectDescription;
+	
 	private VBox vbTeamMembers;
+	
+	
 
-	private HBox vbToggleLeft;
-	private HBox vbToggleRight;
+	private HBox hbToggleUp;
+	private HBox hbToggleDown;
 
-	private VBox hbToggleGroup;
+	private VBox vbToggleGroup;
 
 	private Label lblProjetcName;
 	private Label lblProjectDescription;
@@ -57,12 +57,13 @@ public class newProjectScene extends Scene {
 
 	private Button btnExit;
 	private Button btnComplete;
-
+	private HBox hbButtons;
+	
+	
 	private TextField txt1, txt2, txt3, txt4, txt5, txt6;
 	private Label lbl1, lbl2, lbl3, lbl4, lbl5, lbl6;
 
-	private Label title;
-	
+
 	private VBox vbTeamLabel;
 	private VBox vbTeamTextField;
 	private HBox hbTeam;
@@ -82,26 +83,22 @@ public class newProjectScene extends Scene {
 		super(new HBox());
 
 		this.layout = new GridPane();
-
+		
 		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
 
-		Window.mainStage.setWidth(1000);
-		Window.mainStage.setHeight(800);
+		Window.mainStage.setWidth(900);
+		Window.mainStage.setHeight(600);
+		Window.mainStage.setTitle("New Project");
+		
+		this.hbButtons = new HBox();
+
 
 		this.hbTopLeftScene = new HBox();
-		this.hbCenterScene = new HBox();
-		this.hbDownScene = new HBox();
 
-		this.title = new Label();
-		title.setText("OI PORRA");
-		title.setFont(new Font(30));
-		title.setTextFill( Color.BLUEVIOLET.brighter());
-		title.setAlignment(Pos.CENTER);
-		layout.add(title, 0, 5, 1, 1);
-		title.setTranslateY(100);
-		title.setTranslateX(500);
-		
+		this.hbTopRightScene = new HBox();
+		this.hbTextProjectDescription = new HBox();
+
 		/*
 		 * the name of the members of the project
 		 */
@@ -124,19 +121,20 @@ public class newProjectScene extends Scene {
 
 		this.vbTeamLabel = new VBox();
 		this.vbTeamLabel.setSpacing(20);
+		this.vbTeamLabel.setMaxWidth(Double.MAX_VALUE);
 
 		this.hbTeam = new HBox();
-		this.hbTeam.setSpacing(5);
 
-		this.hbToggleGroup = new VBox();
+		this.vbToggleGroup = new VBox();
 
-		this.vbToggleLeft = new HBox();
-		this.vbToggleRight = new HBox();
-		/*
-		 * 
-		 * SELECIONAR TAMANHO DA EQUIPE E FAZER APARECER TEXTFIELDS DE ACORDO COM O
-		 * NUMERO SELECIONADO
-		 */
+//		vbToggleGroup.getStyleClass().add("vbox");
+
+		this.hbToggleUp = new HBox();
+//		hbToggleUp.getStyleClass().add("hbox");
+
+		this.hbToggleDown = new HBox();
+//		hbToggleDown.getStyleClass().add("hbox");
+
 		this.group = new ToggleGroup();
 
 		this.tb1 = new ToggleButton("1");
@@ -170,22 +168,24 @@ public class newProjectScene extends Scene {
 		this.tb5.setToggleGroup(group);
 		this.tb6.setToggleGroup(group);
 
-		this.vbToggleLeft.getChildren().add(tb1);
-		this.vbToggleLeft.getChildren().add(tb2);
-		this.vbToggleLeft.getChildren().add(tb3);
-		this.vbToggleLeft.setSpacing(10);
+		this.hbToggleUp.getChildren().add(tb1);
+		this.hbToggleUp.getChildren().add(tb2);
+		this.hbToggleUp.getChildren().add(tb3);
 
-		this.vbToggleRight.getChildren().add(tb4);
-		this.vbToggleRight.getChildren().add(tb5);
-		this.vbToggleRight.getChildren().add(tb6);
-		this.vbToggleRight.setSpacing(10);
+		this.hbToggleDown.getChildren().add(tb4);
+		this.hbToggleDown.getChildren().add(tb5);
+		this.hbToggleDown.getChildren().add(tb6);
 
-		this.hbToggleGroup.getChildren().addAll(vbToggleLeft, vbToggleRight);
-		this.hbToggleGroup.setSpacing(10);
+		this.vbToggleGroup.getChildren().addAll(hbToggleUp, hbToggleDown);
+		this.vbToggleGroup.setFillWidth(false);
+		this.vbToggleGroup.setSpacing(10);
+		this.vbToggleGroup.setMaxWidth(20);
+		this.vbToggleGroup.setTranslateX(70);
 
 		/*
 		 * will contain 2 label pointing out the text fields
 		 */
+
 		this.vbLabelsProjectNameDescription = new VBox();
 		/*
 		 * this contain the txtfield and textarea where the labels are pointing
@@ -214,37 +214,58 @@ public class newProjectScene extends Scene {
 		 */
 		this.txtDescription.setWrapText(true);
 
-		this.txtDescription.setTranslateY(20);
 
 		this.vbLabelsProjectNameDescription.setSpacing(20);
-		this.vbLabelsProjectNameDescription.setAlignment(Pos.CENTER_LEFT);
-
+		this.vbLabelsProjectNameDescription.setTranslateY(120);
+		
 		this.vbLabelsProjectNameDescription.getChildren().addAll(lblProjetcName, lblProjectDescription);
+		
+		this.vbTxtProjectNameDescription.setSpacing(50);
 
-		this.vbTxtProjectNameDescription.setSpacing(10);
-		this.vbTxtProjectNameDescription.setAlignment(Pos.CENTER_LEFT);
-
+		this.vbTxtProjectNameDescription.setTranslateY(50);
+		
 		this.vbTxtProjectNameDescription.getChildren().addAll(txtProjectName, txtDescription);
 		
-
-		this.hbTopLeftScene.setPadding(new Insets(150, 0, 0, 50));
+		this.hbTextProjectDescription.getChildren().addAll(vbLabelsProjectNameDescription,vbTxtProjectNameDescription);
+		
+//		hbTextProjectDescription.getStyleClass().add("hbox");
+		
+		this.hbTopLeftScene.setPadding(new Insets(0, 0, 0, 0));
 		this.hbTopLeftScene.setAlignment(Pos.TOP_LEFT);
-		this.hbTopLeftScene.setSpacing(20);
-		this.hbTopLeftScene.getChildren().addAll(vbLabelsProjectNameDescription, vbTxtProjectNameDescription);
+		
+		this.hbTopLeftScene.getChildren().addAll(hbTextProjectDescription);
 
+		this.hbTopLeftScene.setFillHeight(true);
+		this.hbTopLeftScene.prefHeight(500);
+		this.hbTopLeftScene.setTranslateX(50);
+		this.hbTopLeftScene.setTranslateY(50);
+		
+		
+		
+//		hbTopLeftScene.getStyleClass().add("hbox");
+//		this.hbTopLeftScene.setId("hboxLeftSide");
+		
+		
 		this.layout.add(hbTopLeftScene, 0, 0, 1, 1);
-
+		
+		
+		
+		
+		
 		this.vbTeamMembers = new VBox();
+//		vbTeamMembers.getStyleClass().add("vbox");
+//		vbTeamMembers.setId("teamMembers");
 
-		this.lblSelectTeam = new Label("Select the number of members of the team");
+		this.vbTeamMembers.setFillWidth(true);
+		this.vbTeamMembers.setPrefWidth(350);
 
-		this.vbTeamMembers.setAlignment(Pos.TOP_RIGHT);
+		this.lblSelectTeam = new Label("Select the number of  members of the team");
 
-		this.vbTeamMembers.setTranslateY(50);
-		this.vbTeamMembers.setTranslateX(150);
-		this.vbTeamMembers.setSpacing(10);
-		
-		
+		this.lblSelectTeam.setAlignment(Pos.CENTER);
+
+
+		this.vbTeamMembers.setAlignment(Pos.TOP_LEFT);
+
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) {
 
@@ -268,21 +289,45 @@ public class newProjectScene extends Scene {
 				}
 			}
 		});
-		
-		newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
-		this.vbTeamMembers.getChildren().addAll(lblSelectTeam, hbToggleGroup, hbTeam);
-		this.vbTeamMembers.setPadding(new Insets(100, 0, 0, 0));
-		this.layout.add(vbTeamMembers, 1, 0, 1, 2);
 
+		this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+
+		this.vbTeamMembers.getChildren().addAll(lblSelectTeam, vbToggleGroup, hbTeam);
+		this.vbTeamMembers.setSpacing(10);
 		
+		
+		this.hbTopRightScene.getChildren().add(vbTeamMembers);
+		this.hbTopRightScene.setFillHeight(true);
+		this.hbTopRightScene.setPrefHeight(450);
+		this.hbTopRightScene.setAlignment(Pos.TOP_RIGHT);
+		
+		this.hbTopRightScene.setTranslateY(50);
+		
+		this.hbTopRightScene.setTranslateX(100);
+		
+//		hbTopRightScene.getStyleClass().add("hbox");
+//		this.hbTopRightScene.setId("hboxRightSide");
+
+		this.layout.add(hbTopRightScene, 1, 0, 1, 1);
+
 		this.btnExit = new Button("EXIT");
-
+		
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
+		
+		this.btnComplete = new Button("COMPLETE");
 
-		this.btnExit.setPrefWidth(100);
-		this.btnExit.setTranslateY(166);
-		this.layout.add(btnExit, 0, 8, 3, 2);
-
+		
+		this.btnExit.setId("exitbtn");
+		
+		this.hbButtons.getChildren().addAll(btnExit, btnComplete);
+		
+		this.hbButtons.setSpacing(10);
+		this.layout.add(hbButtons, 0, 2, 1, 1);
+		
+		
+		
+		
+		
 		this.setRoot(layout);
 	}
 
@@ -324,29 +369,6 @@ public class newProjectScene extends Scene {
 			newProjectScene.this.vbTeamTextField.getChildren().add(txt6);
 			return;
 		}
-
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
