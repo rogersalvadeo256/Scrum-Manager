@@ -78,7 +78,7 @@ public class RegistrationFormScene extends Scene {
 
 		this.btnExit = new Button("EXIT");
 		this.btnRegister = new Button("OK");
-		this.btnCancel = new Button("CANCEL");
+		this.btnCancel = new Button("BACK");
 
 		this.borders = new Insets(50);
 

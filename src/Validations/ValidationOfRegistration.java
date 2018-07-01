@@ -91,7 +91,7 @@ public class ValidationOfRegistration {
 		this.dataOkay(name, email, userName, password, passwordConfirmation);
 		if (!this.arrayEverthingOK.isEmpty()) {
 			this.arrayEverthingOK.clear();
-			data.insert(name.getText(), email.getText(), userName.getText(), password.getText());
+			data.insert(name.getText(),userName.getText(), email.getText(), password.getText());
 			setTheAlert(AlertType.CONFIRMATION, "Successful Registration", "Successful Registration", "LALALALALA").show();
 			return;
 		}

@@ -3,6 +3,8 @@ package Scenes;
 import java.sql.SQLException;
 
 import Database.DatabaseConnection;
+import Database.LoadProfileHome;
+import Database.Login;
 import Main.Window;
 import Validations.ValidationLogin;
 import javafx.application.Platform;
@@ -42,7 +44,6 @@ public class LoginScene extends Scene {
 	private Label lblUser, lblPassword;
 	private TextField txtUser;
 	private PasswordField passwordField;
-
 	private Button btnLogin, btnExit, btnSignIn;
 
 	/*
@@ -86,7 +87,7 @@ public class LoginScene extends Scene {
 
 		this.connect = new DatabaseConnection();
 
-		this.lblUser = new Label("USERNAME OR EMAIL");
+		this.lblUser = new Label("USERNAME");
 		this.txtUser = new TextField();
 
 		this.lblPassword = new Label("PASSWORD");
@@ -131,7 +132,7 @@ public class LoginScene extends Scene {
 		 * this is here because of the CSS
 		 */
 		this.btnExit.setId("exitbtn");
-
+		
 		/*
 		 * the code below are the functions of the buttons in the screen
 		 * 
@@ -142,7 +143,7 @@ public class LoginScene extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				 Window.mainStage.setScene(new Home());
+				 Window.mainStage.setScene(new newProjectScene());
 
 				/*
 				 * the contend of the textfield and passwordfield are used in a database query
@@ -163,20 +164,24 @@ public class LoginScene extends Scene {
 						messageLoginValidation.setTextFill(Color.rgb(210, 39, 30));
 					}
 					/*
-					 * connect is the object of the class DatabaseConnection
+					 * connect is the object of the class Login() that extends a DatabaseConnection
 					 */
 
-					if (connect.enterLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
-						messageLoginValidation.setText("Right");
-						messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
+					if(new Login().enterLogin(LoginScene.this.txtUser, LoginScene.this.passwordField))	{
+//					messageLoginValidation.setText("Right");
+//					messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
 						/*
 						 * to switch scene had to access the mainStage, that is static here is changing
 						 * the scene to the homepage
 						 */
-						Window.mainStage.setScene(new Home());
-
+						
+						String user = LoginScene.this.txtUser.getText().toString();
+						
+						Window.mainStage.setScene(new HomePageScene(new LoadProfileHome(user)));
 					}
 				} catch (SQLException e) {
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
 					e.printStackTrace();
 				}
 			}

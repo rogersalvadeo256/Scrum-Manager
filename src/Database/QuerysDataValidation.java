@@ -35,8 +35,6 @@ public class QuerysDataValidation {
 	}
 
 	public boolean queryForExistentUserName(String userName) throws SQLException {
-
-
 		
 		String query = "select * from " + table + " where user_name='" + userName.toString() + "';";
 
@@ -50,10 +48,10 @@ public class QuerysDataValidation {
 		return false;
 	}
 
-	public void insert(String name, String userName, String email, String password) throws SQLException {
+	public void insert(String name, String email, String userName, String password) throws SQLException {
 
-		String insert = "insert into " + table + "(name, user_name, email, password) value ('" + name + "','" + userName
-				+ "', '" + email + "', '" + password + "');";
+		String insert = "insert into " + table + "(name, user_name, email, password) value ('" + name + "','" + email
+				+ "', '" + userName + "', '" + password + "');";
 
 		try {
 			commands.execute(insert);

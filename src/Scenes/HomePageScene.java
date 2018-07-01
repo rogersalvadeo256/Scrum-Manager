@@ -1,12 +1,18 @@
 package Scenes;
 
-import java.io.ByteArrayInputStream;
+/*
+ * LoginScreen.java
+ * 
+ * Created on: 27 jun de 2018
+ * 		Autor: jefter66
+ * 
+ */
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.sql.SQLException;
 
-import org.w3c.dom.css.RGBColor;
-
+import Database.LoadProfileHome;
 import Main.Window;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -26,19 +32,23 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.FileChooser;
 
-public class Home extends Scene {
+public class HomePageScene extends Scene {
 
 	private GridPane layout;
 
 	private HBox hbTopScene;
 	private HBox projectsColumns;
+
 	private VBox columnLeft;
 	private VBox columnMiddle;
 	private VBox columnRight;
+
 	private Button btnExit;
 	private Button btnEditProfile;
+
 	private VBox vbBtnOptions;
 	private VBox vbNameUserImage;
+
 	private Label lblName;
 	private Label lblUserName;
 	private Label lblNewProject;
@@ -48,7 +58,12 @@ public class Home extends Scene {
 	private Hyperlink myProjects;
 	private Label lblMyCompleteProjects;
 
-	public Home() {
+	/*
+	 * the construct of the class requires a object LoadProfileHome, this object
+	 * will be used to bring the data from de database and load them on the profile
+	 * of the user, this data include the projects, name, photo etc...
+	 */
+	public HomePageScene(LoadProfileHome load) throws ClassNotFoundException, SQLException {
 		super(new HBox());
 		/*
 		 * the css
@@ -91,9 +106,10 @@ public class Home extends Scene {
 		 */
 		this.vbBtnOptions.setTranslateX(200);
 
-		this.lblName = new Label("nome");
+		this.lblName = new Label();
 		this.lblName.setFont(new Font(25));
-		this.lblUserName = new Label("userName");
+		this.lblUserName = new Label();
+		this.lblUserName.setText(load.bringData().toString());
 		this.lblUserName.setFont(new Font(15));
 
 		/*
@@ -191,10 +207,11 @@ public class Home extends Scene {
 
 			@Override
 			public void handle(Event event) {
-
 				/*
-				 * CALL THE FORM OF NEW PROJECT HERE
+				 * the scene newProjectScene is a form where the user will start a new project
 				 */
+				Window.mainStage.setScene(new newProjectScene());
+
 			}
 		});
 
