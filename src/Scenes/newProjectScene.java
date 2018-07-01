@@ -27,6 +27,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 public class newProjectScene extends Scene {
 
@@ -60,10 +61,12 @@ public class newProjectScene extends Scene {
 	private TextField txt1, txt2, txt3, txt4, txt5, txt6;
 	private Label lbl1, lbl2, lbl3, lbl4, lbl5, lbl6;
 
+	private Label title;
+	
 	private VBox vbTeamLabel;
 	private VBox vbTeamTextField;
 	private HBox hbTeam;
-	
+
 	/*
 	 * used to choose the size of the team
 	 */
@@ -84,14 +87,23 @@ public class newProjectScene extends Scene {
 		this.getStylesheets().add(css);
 
 		Window.mainStage.setWidth(1000);
-		Window.mainStage.setHeight(600);
+		Window.mainStage.setHeight(800);
 
 		this.hbTopLeftScene = new HBox();
 		this.hbCenterScene = new HBox();
 		this.hbDownScene = new HBox();
+
+		this.title = new Label();
+		title.setText("OI PORRA");
+		title.setFont(new Font(30));
+		title.setTextFill( Color.BLUEVIOLET.brighter());
+		title.setAlignment(Pos.CENTER);
+		layout.add(title, 0, 5, 1, 1);
+		title.setTranslateY(100);
+		title.setTranslateX(500);
 		
 		/*
-		 *  the name of the members of the project 
+		 * the name of the members of the project
 		 */
 		this.txt1 = new TextField();
 		this.txt2 = new TextField();
@@ -100,25 +112,22 @@ public class newProjectScene extends Scene {
 		this.txt5 = new TextField();
 		this.txt6 = new TextField();
 
-		this.lbl1 = new Label("Member 1");
-		this.lbl2 = new Label("Member 2");
-		this.lbl3 = new Label("Member 3");
-		this.lbl4 = new Label("Member 4");
-		this.lbl5 = new Label("Member 5");
-		this.lbl6 = new Label("Member 6");
-		
-		
-		
-		this.vbTeamTextField = new VBox();	
-		this.vbTeamTextField.setSpacing(5);
-		
+		this.lbl1 = new Label("Member Name");
+		this.lbl2 = new Label("Member Name");
+		this.lbl3 = new Label("Member Name");
+		this.lbl4 = new Label("Member Name");
+		this.lbl5 = new Label("Member Name");
+		this.lbl6 = new Label("Member Name");
+
+		this.vbTeamTextField = new VBox();
+		this.vbTeamTextField.setSpacing(10);
+
 		this.vbTeamLabel = new VBox();
-		this.vbTeamLabel.setSpacing(5);
-		
+		this.vbTeamLabel.setSpacing(20);
 
 		this.hbTeam = new HBox();
 		this.hbTeam.setSpacing(5);
-		
+
 		this.hbToggleGroup = new VBox();
 
 		this.vbToggleLeft = new HBox();
@@ -132,7 +141,7 @@ public class newProjectScene extends Scene {
 
 		this.tb1 = new ToggleButton("1");
 		tb1.setToggleGroup(group);
-		tb1.setSelected(true);
+		tb1.setSelected(false);
 
 		this.tb2 = new ToggleButton("2");
 		tb2.setToggleGroup(group);
@@ -216,8 +225,9 @@ public class newProjectScene extends Scene {
 		this.vbTxtProjectNameDescription.setAlignment(Pos.CENTER_LEFT);
 
 		this.vbTxtProjectNameDescription.getChildren().addAll(txtProjectName, txtDescription);
+		
 
-		this.hbTopLeftScene.setPadding(new Insets(50, 0, 0, 50));
+		this.hbTopLeftScene.setPadding(new Insets(150, 0, 0, 50));
 		this.hbTopLeftScene.setAlignment(Pos.TOP_LEFT);
 		this.hbTopLeftScene.setSpacing(20);
 		this.hbTopLeftScene.getChildren().addAll(vbLabelsProjectNameDescription, vbTxtProjectNameDescription);
@@ -231,57 +241,112 @@ public class newProjectScene extends Scene {
 		this.vbTeamMembers.setAlignment(Pos.TOP_RIGHT);
 
 		this.vbTeamMembers.setTranslateY(50);
-		this.vbTeamMembers.setTranslateX(100);
+		this.vbTeamMembers.setTranslateX(150);
 		this.vbTeamMembers.setSpacing(10);
-
-
+		
+		
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) {
 
 				if (toggle.equals(newProjectScene.this.tb1)) {
-					newProjectScene.this.vbTeamLabel.getChildren().add(lbl1);
-					newProjectScene.this.vbTeamTextField.getChildren().add(txt1);
-					newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+					selectChildren(1);
 				}
 				if (toggle.equals(newProjectScene.this.tb2)) {
-					newProjectScene.this.vbTeamLabel.getChildren().addAll(lbl1, lbl2);
-					newProjectScene.this.vbTeamTextField.getChildren().addAll(txt1, txt2);
-					newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+					selectChildren(2);
 				}
 				if (toggle.equals(newProjectScene.this.tb3)) {
-					newProjectScene.this.vbTeamLabel.getChildren().addAll(lbl1, lbl2,lbl3);
-					newProjectScene.this.vbTeamTextField.getChildren().addAll(txt1, txt2, txt3);
-					newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+					selectChildren(3);
 				}
 				if (toggle.equals(newProjectScene.this.tb4)) {
-					newProjectScene.this.vbTeamLabel.getChildren().addAll(lbl1, lbl2,lbl3,lbl4);
-					newProjectScene.this.vbTeamTextField.getChildren().addAll(txt1, txt2, txt3, txt4);
-					newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+					selectChildren(4);
 				}
 				if (toggle.equals(newProjectScene.this.tb5)) {
-					newProjectScene.this.vbTeamLabel.getChildren().addAll(lbl1, lbl2,lbl3,lbl4, lbl5);
-					newProjectScene.this.vbTeamTextField.getChildren().addAll(txt1, txt2, txt3, txt4, txt5);
-					newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+					selectChildren(5);
 				}
 				if (toggle.equals(newProjectScene.this.tb6)) {
-					newProjectScene.this.vbTeamLabel.getChildren().addAll(lbl1, lbl2,lbl3,lbl4, lbl5,lbl6);
-					newProjectScene.this.vbTeamTextField.getChildren().addAll(txt1, txt2, txt3, txt4, txt5, txt6);
-					newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+					selectChildren(6);
 				}
 			}
 		});
+		
+		newProjectScene.this.hbTeam.getChildren().addAll(vbTeamLabel, vbTeamTextField);
+		this.vbTeamMembers.getChildren().addAll(lblSelectTeam, hbToggleGroup, hbTeam);
+		this.vbTeamMembers.setPadding(new Insets(100, 0, 0, 0));
+		this.layout.add(vbTeamMembers, 1, 0, 1, 2);
 
 		
-		
-		this.vbTeamMembers.getChildren().addAll(lblSelectTeam, hbToggleGroup,hbTeam);
-		this.layout.add(vbTeamMembers, 1, 0, 1, 1);
-
 		this.btnExit = new Button("EXIT");
-		this.btnExit.setMaxSize(800, 800);
 
 		this.btnExit.setOnAction(actionEvent -> Platform.exit());
+
+		this.btnExit.setPrefWidth(100);
+		this.btnExit.setTranslateY(166);
+		this.layout.add(btnExit, 0, 8, 3, 2);
 
 		this.setRoot(layout);
 	}
 
+	public void removeChildrens() {
+		newProjectScene.this.vbTeamTextField.getChildren().removeAll();
+		newProjectScene.this.vbTeamLabel.getChildren().removeAll();
+		newProjectScene.this.hbTeam.getChildren().removeAll();
+	}
+
+	public void selectChildren(int i) {
+
+		if (i == 1) {
+			newProjectScene.this.vbTeamLabel.getChildren().add(lbl1);
+			newProjectScene.this.vbTeamTextField.getChildren().add(txt1);
+			return;
+		}
+		if (i == 2) {
+			newProjectScene.this.vbTeamLabel.getChildren().add(lbl2);
+			newProjectScene.this.vbTeamTextField.getChildren().add(txt2);
+			return;
+		}
+		if (i == 3) {
+			newProjectScene.this.vbTeamLabel.getChildren().add(lbl3);
+			newProjectScene.this.vbTeamTextField.getChildren().add(txt3);
+			return;
+		}
+		if (i == 4) {
+			newProjectScene.this.vbTeamLabel.getChildren().add(lbl4);
+			newProjectScene.this.vbTeamTextField.getChildren().add(txt4);
+			return;
+		}
+		if (i == 5) {
+			newProjectScene.this.vbTeamLabel.getChildren().add(lbl5);
+			newProjectScene.this.vbTeamTextField.getChildren().add(txt5);
+			return;
+		}
+		if (i == 6) {
+			newProjectScene.this.vbTeamLabel.getChildren().add(lbl6);
+			newProjectScene.this.vbTeamTextField.getChildren().add(txt6);
+			return;
+		}
+
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
