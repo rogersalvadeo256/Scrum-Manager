@@ -1,6 +1,26 @@
+.toggle-button {
+    -fx-text-fill: white;
+    -fx-base: transparent;
+    -fx-border-width: 15.0;
+    -fx-background: transparent;
+    -fx-focus-color: #00cc66;
+    -fx-border-color: transparent;
+    -fx-border-radius: 5.0 0.0 0.0 5.0;
+    -fx-effect: null;
+}
+.toggle-button:selected {
+    -fx-text-fill: white;
+    -fx-base: transparent;
+    -fx-background: black;
+    -fx-focus-color: #00cc66;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-border-width: 20.0;
+}
+
 .button {
-    -fx-pref-width: 100px;
-    -fx-pref-height: 50px;
+    -fx-pref-width: 100.0px;
+    -fx-pref-height: 50.0px;
 }
 .button{
 	-fx-text-fill:white;
@@ -15,7 +35,15 @@
 .label{
 	-fx-text-fill:white;	
 }
-
+.text-area .content{
+	-fx-background-color:#00cc66;
+	-fx-text-fill:white;
+	-fx-background-radius: 3, 2;
+}
+.text-area:focused{
+	-fx-background-color:#85e085;
+	-fx-text-fill:black;
+}
 .text-input{
 	-fx-background-color:#00cc66;
 	-fx-text-fill:white;

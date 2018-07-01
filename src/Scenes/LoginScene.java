@@ -89,7 +89,7 @@ public class LoginScene extends Scene {
 
 		this.lblUser = new Label("USERNAME");
 		this.txtUser = new TextField();
-
+		
 		this.lblPassword = new Label("PASSWORD");
 		this.passwordField = new PasswordField();
 
