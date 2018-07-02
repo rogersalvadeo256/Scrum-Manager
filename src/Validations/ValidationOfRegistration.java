@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import Database.QuerysDataValidation;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -23,7 +25,6 @@ public class ValidationOfRegistration {
 	private QuerysDataValidation data;
 
 	private Alert formWarnings;
-
 	/*
 	 * this two arrays will be populated for constants strings, and is used to check
 	 * if some fields are empty or error with the database
@@ -46,7 +47,8 @@ public class ValidationOfRegistration {
 		this.formWarnings = new Alert(null);
 		this.formWarnings.setWidth(60);
 		this.formWarnings.setHeight(40);
-
+		
+		
 		this.data = new QuerysDataValidation();
 
 		this.arrayErrorDataMessage = new ArrayList<String>();
@@ -73,6 +75,11 @@ public class ValidationOfRegistration {
 		this.constArrayEverthingOK.add("Username ok");
 		this.constArrayEverthingOK.add("Senhas ok");
 
+		
+//		this.formWarnings.set
+		
+		
+		
 	}
 
 	public void validation(TextField name, TextField email, TextField userName, PasswordField password,
@@ -91,8 +98,9 @@ public class ValidationOfRegistration {
 		this.dataOkay(name, email, userName, password, passwordConfirmation);
 		if (!this.arrayEverthingOK.isEmpty()) {
 			this.arrayEverthingOK.clear();
-			data.insert(name.getText(),userName.getText(), email.getText(), password.getText());
-			setTheAlert(AlertType.CONFIRMATION, "Successful Registration", "Successful Registration", "LALALALALA").show();
+			data.insert(name.getText(), userName.getText(), email.getText(), password.getText());
+			setTheAlert(AlertType.CONFIRMATION, "Successful Registration", "Successful Registration", "LALALALALA")
+					.show();
 			return;
 		}
 	}

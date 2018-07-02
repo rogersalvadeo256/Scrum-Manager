@@ -2,7 +2,6 @@ package Scenes;
 
 import java.sql.SQLException;
 
-import Database.DatabaseConnection;
 import Database.LoadProfileHome;
 import Database.Login;
 import Main.Window;
@@ -62,7 +61,6 @@ public class LoginScene extends Scene {
 	 * this is a class created by my, use to make some functions with the database,
 	 * in here, will be used to make validation of login
 	 */
-	private DatabaseConnection connect;
 
 	public LoginScene() throws ClassNotFoundException, SQLException {
 		/*
@@ -75,7 +73,7 @@ public class LoginScene extends Scene {
 		 */
 		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
 		this.getStylesheets().add(css);
-
+		
 		/*
 		 * instantiation of the object declared upon
 		 */
@@ -85,7 +83,6 @@ public class LoginScene extends Scene {
 
 		this.forgotPassword = new Hyperlink("Forgot my password");
 
-		this.connect = new DatabaseConnection();
 
 		this.lblUser = new Label("USERNAME");
 		this.txtUser = new TextField();
@@ -143,7 +140,7 @@ public class LoginScene extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				 Window.mainStage.setScene(new newProjectScene());
+//				 Window.mainStage.setScene(new newProjectScene());
 
 				/*
 				 * the contend of the textfield and passwordfield are used in a database query
