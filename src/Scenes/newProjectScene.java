@@ -10,10 +10,15 @@ package Scenes;
  * 
  */
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import Database.DbLoadProfileHome;
 import Main.Window;
+import SpecialObjects.CreateHBoxWithTextFields;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -21,9 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -39,11 +43,8 @@ public class newProjectScene extends Scene {
 	 *
 	 * the left HBox contain two labels, one textfield and one textarea
 	 * 
-	 * and two buttons, "exit" and "complete"
+	 * and three buttons, "exit" ,"complete" and "back
 	 * 
-	 * 
-	 * the right contain a toggle group with some toggle buttons that, when ate
-	 * press show a textfield and labels
 	 */
 
 	/*
@@ -73,6 +74,10 @@ public class newProjectScene extends Scene {
 	 * the left side
 	 */
 	private HBox hbLeftContainer;
+	/*
+	 * 
+	 * 
+	 */
 
 	/*
 	 * the right side
@@ -86,59 +91,45 @@ public class newProjectScene extends Scene {
 	private VBox vbRightContainer;
 
 	/*
-	 * contain 6 labels and 6 textfields, and going to show them just with the user
-	 * press some toggle button
-	 */
-	private VBox vbMembersLabel;
-	private VBox vbMembersTextField;
-
-	/*
 	 * the vbox upward going to stay here
 	 */
-	private HBox hbMembers;
-
-	private TextField member1, member2, member3, member4, member5, member6;
-	private Label lbl1, lbl2, lbl3, lbl4, lbl5, lbl6;
 
 	/*
-	 * there is two lines with 3 toggle button in each one of them 3 toggle buttons
-	 * will stay in each hbox of this
+	 * over the container will stay this label informed for what the textfield is
+	 * used for
 	 */
-	private HBox hbToggleUp;
-	private HBox hbToggleDown;
 
-	/*
-	 * the two hbox stay in this vbox
-	 */
-	private VBox vbToggleGroup;
-
-	/*
-	 * over the container will stay this label informed what the toggle buttons do
-	 */
 	private Label lblSelectTeam;
+	/*
+	 * the list for the hbox that contain the text fields for the name of memebers
+	 */
 
-	private ToggleGroup toggleButtonsGroup;
-
-	private ToggleButton tb1;
-	private ToggleButton tb2;
-	private ToggleButton tb3;
-	private ToggleButton tb4;
-	private ToggleButton tb5;
-	private ToggleButton tb6;
+	private ArrayList<HBox> listHBmembers;
+	/*
+	 * the hbox(s) that are instantiante when some number are typed in the
+	 * txtNumberMembers
+	 */
+	private VBox vbMembers;
 
 	/*
-	 * the buttons
+	 * 
 	 */
+	private TextField txtNumberMembers;
+	private Button btnNumberMembers;
+
+	private HBox hbNumberMembers;
+	/*
+	 */
+
 	private HBox hbButtons;
 	private Button btnExit;
 	private Button btnComplete;
-
-	/*
-	 * used to choose the size of the team
-	 */
+	private Button btnBack;
 
 	public newProjectScene() {
 		super(new HBox());
+
+		this.listHBmembers = new ArrayList<HBox>();
 
 		this.layout = new GridPane();
 
@@ -160,9 +151,6 @@ public class newProjectScene extends Scene {
 
 		this.hbLeftSide = new HBox();
 
-		/*
-		 * labels
-		 */
 		this.vbLabels = new VBox();
 
 		this.lblProjetcName = new Label("Name of the project");
@@ -182,9 +170,6 @@ public class newProjectScene extends Scene {
 
 		this.vbLabels.getChildren().addAll(lblProjetcName, lblProjectDescription);
 
-		/*
-		 * textfields
-		 */
 		this.vbTextfields = new VBox();
 
 		this.txtProjectName = new TextField();
@@ -232,146 +217,71 @@ public class newProjectScene extends Scene {
 		this.layout.add(hbLeftSide, 0, 0, 1, 1);
 
 		/*
-		 * right
+		 * 
+		 * right side
+		 * 
 		 */
 		this.hbRightSide = new HBox();
 
-		this.vbRightContainer = new VBox();
+		// hbRightSide.getStyleClass().add("hbox");
+		
+		this.hbRightSide.setFillHeight(true);
+		hbRightSide.prefHeight(100);
 
+		this.vbRightContainer = new VBox();
+		
+		// vbRightContainer.getStyleClass().add("vbox");
+		// this.vbRightContainer.setId("rightContainer");
+		
 		this.vbRightContainer.setFillWidth(true);
 		this.vbRightContainer.setPrefWidth(350);
 
 		/*
-		 * the hboxs and the vbox fot the toggle buttons group
-		 */
-		this.vbToggleGroup = new VBox();
-
-		this.hbToggleUp = new HBox();
-
-		this.hbToggleDown = new HBox();
-
-		this.toggleButtonsGroup = new ToggleGroup();
-
-		this.tb1 = new ToggleButton("1");
-		/*
-		 * no button will be selected when the scene start
-		 */
-		tb1.setSelected(false);
-
-		this.tb2 = new ToggleButton("2");
-		tb2.setSelected(false);
-
-		this.tb3 = new ToggleButton("3");
-		tb3.setSelected(false);
-
-		this.tb4 = new ToggleButton("4");
-		tb4.setSelected(false);
-
-		this.tb5 = new ToggleButton("5");
-		tb5.setSelected(false);
-
-		this.tb6 = new ToggleButton("6");
-		tb6.setSelected(false);
-
-		/*
-		 * setting up the buttons in a toggle group
-		 */
-		this.tb1.setToggleGroup(toggleButtonsGroup);
-		this.tb2.setToggleGroup(toggleButtonsGroup);
-		this.tb3.setToggleGroup(toggleButtonsGroup);
-		this.tb4.setToggleGroup(toggleButtonsGroup);
-		this.tb5.setToggleGroup(toggleButtonsGroup);
-		this.tb6.setToggleGroup(toggleButtonsGroup);
-
-		this.hbToggleUp.getChildren().add(tb1);
-		this.hbToggleUp.getChildren().add(tb2);
-		this.hbToggleUp.getChildren().add(tb3);
-		this.hbToggleUp.setSpacing(10);
-
-		this.hbToggleDown.getChildren().add(tb4);
-		this.hbToggleDown.getChildren().add(tb5);
-		this.hbToggleDown.getChildren().add(tb6);
-		this.hbToggleDown.setSpacing(10);
-
-		this.vbToggleGroup.getChildren().addAll(hbToggleUp, hbToggleDown);
-		this.vbToggleGroup.setFillWidth(true);
-		this.vbToggleGroup.setSpacing(10);
-		this.vbToggleGroup.setMaxWidth(Double.MAX_VALUE);
-		this.vbToggleGroup.setTranslateX(70);
-
-		/*
-		 * ending with the toggle stuffs
-		 */
-
-		/*
-		 * the text fields and labels that are shown when the buttons are clicked
-		 * 
-		 */
-
-		/*
 		 * contain vboxs with labels and textfields
 		 */
-		this.hbMembers = new HBox();
 
-		/*
-		 * the name of the members of the project
-		 */
+		this.vbMembers = new VBox();
+		this.vbMembers.setStyle(css);
 		
-		this.member1 = new TextField();
-		this.member2 = new TextField();
-		this.member3 = new TextField();
-		this.member4 = new TextField();
-		this.member5 = new TextField();
-		this.member6 = new TextField();
-
-		this.lbl1 = new Label("Member Name");
-		this.lbl2 = new Label("Member Name");
-		this.lbl3 = new Label("Member Name");
-		this.lbl4 = new Label("Member Name");
-		this.lbl5 = new Label("Member Name");
-		this.lbl6 = new Label("Member Name");
-		this.vbMembersTextField = new VBox();
-		this.vbMembersTextField.setSpacing(10);
-
-		this.vbMembersLabel = new VBox();
-		this.vbMembersLabel.setSpacing(20);
-		this.vbMembersLabel.setMaxWidth(Double.MAX_VALUE);
-
-
-		this.lblSelectTeam = new Label("Select the number of  members of the team");
-
+		// vbMembers.getStyleClass().add("vbox");
+		// this.vbMembers.setId("teamMembers");
 		
-		this.hbMembers.getChildren().addAll(vbMembersLabel, vbMembersTextField);
-		this.hbMembers.setSpacing(10);
-		
+		this.vbMembers.setSpacing(20);
 
-		toggleButtonsGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-			public void changed(ObservableValue<? extends Toggle> ov, Toggle toggle, Toggle new_toggle) {
+		this.btnNumberMembers = new Button();
+		this.txtNumberMembers = new TextField();
+		this.hbNumberMembers = new HBox();
 
-				if (toggle.equals(newProjectScene.this.tb1)) {
-					selectChildren(1);
-				}
-				if (toggle.equals(newProjectScene.this.tb2)) {
-					selectChildren(2);
-				}
-				if (toggle.equals(newProjectScene.this.tb3)) {
-					selectChildren(3);
-				}
-				if (toggle.equals(newProjectScene.this.tb4)) {
-					selectChildren(4);
-				}
-				if (toggle.equals(newProjectScene.this.tb5)) {
-					selectChildren(5);
-				}
-				if (toggle.equals(newProjectScene.this.tb6)) {
-					selectChildren(6);
+		this.hbNumberMembers.getChildren().addAll(txtNumberMembers, btnNumberMembers);
+		this.hbNumberMembers.setSpacing(10);
+		this.hbNumberMembers.setAlignment(Pos.CENTER);
+		this.hbNumberMembers.setSpacing(10);
+		this.hbNumberMembers.setPrefHeight(5);
+
+		txtNumberMembers.setOnKeyPressed(new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+
+				if (event.getCode() == KeyCode.ENTER) {
+
+					Integer txtfields = Integer.parseInt(txtNumberMembers.getText());
+					drawMembersTextFields(txtfields.intValue());
 				}
 			}
 		});
+		this.btnNumberMembers.setOnAction(new EventHandler<ActionEvent>() {
 
+			@Override
+			public void handle(ActionEvent event) {
+				Integer txtfields = Integer.parseInt(txtNumberMembers.getText());
+				drawMembersTextFields(txtfields.intValue());
+			}
+		});
 
-		this.vbRightContainer.getChildren().addAll(lblSelectTeam, vbToggleGroup, hbMembers);
-		this.vbRightContainer.setSpacing(10);
+		this.lblSelectTeam = new Label("Select the number of  members in the team");
+
+		this.vbRightContainer.getChildren().addAll(lblSelectTeam, hbNumberMembers, vbMembers);
+		this.vbRightContainer.setSpacing(20);
 
 		this.hbRightSide.getChildren().add(vbRightContainer);
 		this.hbRightSide.setFillHeight(true);
@@ -381,9 +291,6 @@ public class newProjectScene extends Scene {
 		this.hbRightSide.setTranslateY(50);
 
 		this.hbRightSide.setTranslateX(100);
-
-		// hbTopRightScene.getStyleClass().add("hbox");
-		// this.hbTopRightScene.setId("hboxRightSide");
 
 		this.layout.add(hbRightSide, 1, 0, 1, 1);
 
@@ -395,9 +302,35 @@ public class newProjectScene extends Scene {
 
 		this.btnComplete = new Button("COMPLETE");
 
+		this.btnBack = new Button("BACK");
+
+		this.btnBack.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				try {
+					Window.mainStage.setScene(
+							new HomePageScene(new DbLoadProfileHome(DbLoadProfileHome.User.getUser().toString())));
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			}
+		});
+
 		this.btnExit.setId("exitbtn");
 
-		this.hbButtons.getChildren().addAll(btnExit, btnComplete);
+		this.btnComplete.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+			}
+		});
+
+		this.hbButtons.getChildren().addAll(btnExit, btnComplete, btnBack);
 
 		this.hbButtons.setSpacing(10);
 		this.layout.add(hbButtons, 0, 2, 1, 1);
@@ -405,43 +338,38 @@ public class newProjectScene extends Scene {
 		this.setRoot(layout);
 	}
 
-	public void removeChildrens() {
-		newProjectScene.this.vbMembersTextField.getChildren().removeAll();
-		newProjectScene.this.vbMembersLabel.getChildren().removeAll();
-		newProjectScene.this.hbMembers.getChildren().removeAll();
-	}
+	/*
+	 * Created on 02 Jul
+	 * 
+	 * 
+	 * Autor: André Furlan
+	 * 
+	 */
+	private void drawMembersTextFields(int amount) {
 
-	public void selectChildren(int i) {
+		/*
+		 * remove all the text fields on the vbox
+		 */
+		this.vbMembers.getChildren().clear();
 
-		if (i == 1) {
-			newProjectScene.this.vbMembersLabel.getChildren().add(lbl1);
-			newProjectScene.this.vbMembersTextField.getChildren().add(member1);
-			return;
-		}
-		if (i == 2) {
-			newProjectScene.this.vbMembersLabel.getChildren().add(lbl2);
-			newProjectScene.this.vbMembersTextField.getChildren().add(member2);
-			return;
-		}
-		if (i == 3) {
-			newProjectScene.this.vbMembersLabel.getChildren().add(lbl3);
-			newProjectScene.this.vbMembersTextField.getChildren().add(member3);
-			return;
-		}
-		if (i == 4) {
-			newProjectScene.this.vbMembersLabel.getChildren().add(lbl4);
-			newProjectScene.this.vbMembersTextField.getChildren().add(member4);
-			return;
-		}
-		if (i == 5) {
-			newProjectScene.this.vbMembersLabel.getChildren().add(lbl5);
-			newProjectScene.this.vbMembersTextField.getChildren().add(member5);
-			return;
-		}
-		if (i == 6) {
-			newProjectScene.this.vbMembersLabel.getChildren().add(lbl6);
-			newProjectScene.this.vbMembersTextField.getChildren().add(member6);
-			return;
+		this.listHBmembers.clear();
+		/*
+		 * the parameter are the value typed on a textfield, referring to the number of
+		 * members on the project, and will bring the same numbers of textfields
+		 */
+		int j = 1;
+		for (int i = 0; i < amount; i++) {
+
+			/*
+			 * my class extends Hbox and have just a label and a text field
+			 */
+			CreateHBoxWithTextFields t = new CreateHBoxWithTextFields("Member " + j);
+
+			this.listHBmembers.add(t);
+
+			this.vbMembers.getChildren().add(listHBmembers.get(i));
+
+			j++;
 		}
 	}
 

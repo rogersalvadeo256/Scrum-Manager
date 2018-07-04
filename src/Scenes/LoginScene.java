@@ -2,7 +2,7 @@ package Scenes;
 
 import java.sql.SQLException;
 
-import Database.LoadProfileHome;
+import Database.DbLoadProfileHome;
 import Database.Login;
 import Main.Window;
 import Validations.ValidationLogin;
@@ -139,7 +139,7 @@ public class LoginScene extends Scene {
 
 			@Override
 			public void handle(ActionEvent event) {
-
+				
 //				 Window.mainStage.setScene(new newProjectScene());
 
 				/*
@@ -174,7 +174,7 @@ public class LoginScene extends Scene {
 						
 						String user = LoginScene.this.txtUser.getText().toString();
 						
-						Window.mainStage.setScene(new HomePageScene(new LoadProfileHome(user)));
+						Window.mainStage.setScene(new HomePageScene(new DbLoadProfileHome(user)));
 					}
 				} catch (SQLException e) {
 					e.printStackTrace();

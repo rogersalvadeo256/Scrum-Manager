@@ -30,7 +30,12 @@
      -fx-background-radius: 5.0; 
 }
 
-
+.vbox#rightContainer{
+	    -fx-background-color: red;
+	    -fx-focus-color: #00cc66;
+    -fx-border-color: transparent;
+    -fx-border-width: 20.0;
+}
 .vbox {
     -fx-background-color: #2f4f4f;
     -fx-padding: 5.0;
@@ -62,7 +67,6 @@
     -fx-pref-width: 100.0px;
     -fx-pref-height: 50.0px;
 }
-
 .label{
 	-fx-text-fill:white;	
 }

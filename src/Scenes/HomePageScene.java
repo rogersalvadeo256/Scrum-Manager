@@ -12,7 +12,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
-import Database.LoadProfileHome;
+import Database.DbLoadProfileHome;
 import Main.Window;
 import javafx.application.Platform;
 import javafx.event.Event;
@@ -56,14 +56,13 @@ public class HomePageScene extends Scene {
 	private ImageView imagem;
 	private Label lblProjects;
 	private Hyperlink myProjects;
-	private Label lblMyCompleteProjects;
 
 	/*
 	 * the construct of the class requires a object LoadProfileHome, this object
 	 * will be used to bring the data from de database and load them on the profile
 	 * of the user, this data include the projects, name, photo etc...
 	 */
-	public HomePageScene(LoadProfileHome load) throws ClassNotFoundException, SQLException {
+	public HomePageScene(DbLoadProfileHome load) throws ClassNotFoundException, SQLException {
 		super(new HBox());
 		/*
 		 * the css
@@ -75,6 +74,7 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setWidth(750);
 		Window.mainStage.setHeight(600);
 
+		
 		/*
 		 * the main layout will be a gridpane who will contain a lot of hbox and vbox
 		 */
@@ -233,20 +233,23 @@ public class HomePageScene extends Scene {
 		this.columnMiddle.setTranslateX(20);
 		this.columnMiddle.setTranslateY(40);
 		this.columnMiddle.setPadding(new Insets(10));
+		
 		this.columnMiddle.getChildren().addAll(lblProjects, myProjects);
-
-		this.lblMyCompleteProjects = new Label("Projetos Concluidos");
-		this.lblMyCompleteProjects.setFont(new Font(20));
+		
+		
+		
+//		this.lblMyCompleteProjects = new Label("Projetos Concluidos");
+//		this.lblMyCompleteProjects.setFont(new Font(20));
 
 		/*
 		 * css stuff
 		 */
-		this.lblMyCompleteProjects.setId("lblvbox");
+//		this.lblMyCompleteProjects.setId("lblvbox");
 
 		this.columnRight.setTranslateX(20);
 		this.columnRight.setTranslateY(40);
 		this.columnRight.setPadding(new Insets(10));
-		this.columnRight.getChildren().addAll(lblMyCompleteProjects);
+//		this.columnRight.getChildren().addAll(lblMyCompleteProjects);
 
 		this.projectsColumns.setPadding(new Insets(10));
 		this.projectsColumns.setSpacing(5);
@@ -256,4 +259,40 @@ public class HomePageScene extends Scene {
 
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
