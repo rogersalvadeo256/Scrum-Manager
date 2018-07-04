@@ -12,7 +12,6 @@ public class CreateHBoxWithTextFields extends HBox {
 	public CreateHBoxWithTextFields(String labelText) {
 		
 		
-		
 		this.lblLabel = new Label(labelText.toString());
 		
 		this.txtTextField = new TextField();
@@ -20,8 +19,8 @@ public class CreateHBoxWithTextFields extends HBox {
 		this.setSpacing(20);
 	
 	}
-	public TextField getText() {
-		return txtTextField;
+	public String getText() {
+		return txtTextField.getText();
 	}
 
 	public void setText(TextField text) {

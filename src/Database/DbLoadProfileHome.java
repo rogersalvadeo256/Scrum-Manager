@@ -8,16 +8,15 @@ import com.mysql.jdbc.Statement;
 public class DbLoadProfileHome extends DatabaseConnection {
 
 	private String strUsername;
-	DatabaseConnection connection;
 	private Statement commands;
-
+	private String table = "users_register" ;
+	
 	public DbLoadProfileHome(String strUser) throws ClassNotFoundException, SQLException {
 
 		this.strUsername = new String();
 		this.strUsername = strUser.toString();
-		this.connection = new DatabaseConnection();
 
-		this.commands = (Statement) connection.getConnection().createStatement();
+		this.commands = (Statement) this.getConnection().createStatement();
 	}
 
 	public String getStrUsername() {
@@ -26,7 +25,7 @@ public class DbLoadProfileHome extends DatabaseConnection {
 
 	public String bringData() throws SQLException {
 
-		String query = "select * from users_register where user_name='" + getStrUsername().toString() + "';";
+		String query = "select * from " + table + " where user_name='" + getStrUsername().toString() + "';";
 
 		ResultSet user = this.commands.executeQuery(query);
 

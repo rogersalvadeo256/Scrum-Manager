@@ -13,6 +13,7 @@ package Scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import Database.DbCreateProject;
 import Database.DbLoadProfileHome;
 import Main.Window;
 import SpecialObjects.CreateHBoxWithTextFields;
@@ -104,7 +105,9 @@ public class newProjectScene extends Scene {
 	 * the list for the hbox that contain the text fields for the name of memebers
 	 */
 
-	private ArrayList<HBox> listHBmembers;
+	private ArrayList<String> listMembers;
+
+	private ArrayList<CreateHBoxWithTextFields> listHBmembers;
 	/*
 	 * the hbox(s) that are instantiante when some number are typed in the
 	 * txtNumberMembers
@@ -129,7 +132,8 @@ public class newProjectScene extends Scene {
 	public newProjectScene() {
 		super(new HBox());
 
-		this.listHBmembers = new ArrayList<HBox>();
+		this.listHBmembers = new ArrayList<CreateHBoxWithTextFields>();
+		this.listMembers = new ArrayList<String>();
 
 		this.layout = new GridPane();
 
@@ -224,15 +228,15 @@ public class newProjectScene extends Scene {
 		this.hbRightSide = new HBox();
 
 		// hbRightSide.getStyleClass().add("hbox");
-		
+
 		this.hbRightSide.setFillHeight(true);
 		hbRightSide.prefHeight(100);
 
 		this.vbRightContainer = new VBox();
-		
+
 		// vbRightContainer.getStyleClass().add("vbox");
 		// this.vbRightContainer.setId("rightContainer");
-		
+
 		this.vbRightContainer.setFillWidth(true);
 		this.vbRightContainer.setPrefWidth(350);
 
@@ -242,10 +246,10 @@ public class newProjectScene extends Scene {
 
 		this.vbMembers = new VBox();
 		this.vbMembers.setStyle(css);
-		
+
 		// vbMembers.getStyleClass().add("vbox");
 		// this.vbMembers.setId("teamMembers");
-		
+
 		this.vbMembers.setSpacing(20);
 
 		this.btnNumberMembers = new Button();
@@ -273,6 +277,7 @@ public class newProjectScene extends Scene {
 
 			@Override
 			public void handle(ActionEvent event) {
+
 				Integer txtfields = Integer.parseInt(txtNumberMembers.getText());
 				drawMembersTextFields(txtfields.intValue());
 			}
@@ -326,6 +331,23 @@ public class newProjectScene extends Scene {
 
 			@Override
 			public void handle(ActionEvent event) {
+				
+				saveMembersName(newProjectScene.this.listHBmembers);
+				
+				try {
+					DbCreateProject a = new DbCreateProject();
+
+					a.insertMembers(listMembers);
+						System.out.println("foi");
+
+					if (a.insertProject(newProjectScene.this.txtProjectName.getText(),
+							newProjectScene.this.txtDescription.getText(), listMembers))
+						;
+
+				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 		});
@@ -371,6 +393,14 @@ public class newProjectScene extends Scene {
 
 			j++;
 		}
+	}
+
+	private ArrayList<String> saveMembersName(ArrayList<CreateHBoxWithTextFields> members) {
+
+		for (int i = 0; i < members.size(); i++) {
+			this.listMembers.add(members.get(i).getText());
+		}
+		return listMembers;
 	}
 
 }

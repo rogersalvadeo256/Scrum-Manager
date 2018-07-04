@@ -14,6 +14,8 @@ public class Window extends Stage {
 	
  	public  Window() throws ClassNotFoundException, SQLException {
  		
+
+ 		
  		Window.mainStage = this;
 // 		mainStage.setScene(new newProjectScene());
  		mainStage.setScene(new LoginScene());

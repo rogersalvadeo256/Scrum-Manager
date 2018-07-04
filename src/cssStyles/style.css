@@ -1,19 +1,9 @@
-.toggle-button {
-    -fx-text-fill: white;
-    -fx-base: #2E8B57;
-    -fx-border-width: 15.0;
-    -fx-width: 200.0;
-    -fx-background: transparent;
-    -fx-focus-color: #00cc66;
-    -fx-border-color: transparent;
-    -fx-border-radius: 5.0 0.0 0.0 5.0;
-    -fx-effect: null;
-}
+
 /*
  * pra entender o que to fazendo
  */
 .hbox {
-    -fx-background-color: #2f4f4f;
+    -fx-background-color: white;
     -fx-padding: 5.0;
     -fx-spacing: 5.0;
 }
@@ -23,8 +13,8 @@
      -fx-spacing: 5.0;
      -fx-background-radius: 5.0; 
 }
-.box#hboxLeftSide{
-	 -fx-background-color: white;
+.hbox#hboxLeftSide{
+	 -fx-background-color: blue;
  	 -fx-padding: 18.0 3.0 18.0 6.0;
      -fx-spacing: 5.0;
      -fx-background-radius: 5.0; 
@@ -68,7 +58,7 @@
     -fx-pref-height: 50.0px;
 }
 .label{
-	-fx-text-fill:white;	
+	-fx-text-fill:green;	
 }
 .text-area .content{
 	-fx-background-color:#00cc66;
