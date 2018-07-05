@@ -23,16 +23,16 @@ public class DbLoadProfileHome extends DatabaseConnection {
 		return strUsername;
 	}
 
-	public String bringData() throws SQLException {
+	public String bringUser() throws SQLException {
 
-		String query = "select * from " + table + " where user_name='" + getStrUsername().toString() + "';";
+		String query = "select from " + table + " where user_name='" + getStrUsername().toString() + "';";
 
 		ResultSet user = this.commands.executeQuery(query);
 
 		while (user.next()) {
 
 			String userName = user.getString("user_name");
-
+			String name = user.getString("name");
 			/*
 			 * for accessing the id of the user in another part of the project
 			 */
@@ -44,7 +44,7 @@ public class DbLoadProfileHome extends DatabaseConnection {
 				 * setting the user name 
 				 */
 				DbLoadProfileHome.User.setUser(userName.toString());
-				
+				DbLoadProfileHome.User.setName(name.toString());
 				return userName;
 			}
 		}
@@ -52,11 +52,25 @@ public class DbLoadProfileHome extends DatabaseConnection {
 	}
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public static class User {
 		
 		private static int id_user;
+	
 		private static String user;
-
+		private static String name;
+		
 		public static int getIdUser() { 
 			return id_user;
 		}
@@ -69,6 +83,14 @@ public class DbLoadProfileHome extends DatabaseConnection {
 		public static void setUser(String user) {
 			User.user = user;
 		}
+		public static String getName() {
+			return name;
+		}
+		public static void setName(String name) {
+			User.name = name;
+		}
+	
+	
 	}
 
 	

@@ -74,12 +74,7 @@ public class ValidationOfRegistration {
 		this.constArrayEverthingOK.add("Email ok");
 		this.constArrayEverthingOK.add("Username ok");
 		this.constArrayEverthingOK.add("Senhas ok");
-
-		
-//		this.formWarnings.set
-		
-		
-		
+	
 	}
 
 	public void validation(TextField name, TextField email, TextField userName, PasswordField password,

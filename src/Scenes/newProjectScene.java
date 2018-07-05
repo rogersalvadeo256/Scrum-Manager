@@ -18,6 +18,8 @@ import Database.DbLoadProfileHome;
 import Main.Window;
 import SpecialObjects.CreateHBoxWithTextFields;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -25,6 +27,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -129,9 +133,13 @@ public class newProjectScene extends Scene {
 	private Button btnComplete;
 	private Button btnBack;
 
+	private ScrollPane painel;
+
 	public newProjectScene() {
 		super(new HBox());
 
+		this.painel = new ScrollPane();
+		
 		this.listHBmembers = new ArrayList<CreateHBoxWithTextFields>();
 		this.listMembers = new ArrayList<String>();
 
@@ -215,9 +223,31 @@ public class newProjectScene extends Scene {
 		this.hbLeftSide.setTranslateX(50);
 		this.hbLeftSide.setTranslateY(50);
 
-		// hbTopLeftScene.getStyleClass().add("hbox");
-		// this.hbTopLeftScene.setId("hboxLeftSide");
+//		 hbTopLeftScene.getStyleClass().add("hbox");
+//		 this.hbTopLeftScene.setId("hboxLeftSide");
 
+		this.vbMembers = new VBox();
+		this.painel.setContent(this.vbMembers);
+		painel.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		painel.setPrefSize(120, 400);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		this.layout.add(hbLeftSide, 0, 0, 1, 1);
 
 		/*
@@ -244,8 +274,8 @@ public class newProjectScene extends Scene {
 		 * contain vboxs with labels and textfields
 		 */
 
-		this.vbMembers = new VBox();
-		this.vbMembers.setStyle(css);
+
+//		this.vbMembers.setStyle(css);
 
 		// vbMembers.getStyleClass().add("vbox");
 		// this.vbMembers.setId("teamMembers");
@@ -283,9 +313,10 @@ public class newProjectScene extends Scene {
 			}
 		});
 
+		
 		this.lblSelectTeam = new Label("Select the number of  members in the team");
 
-		this.vbRightContainer.getChildren().addAll(lblSelectTeam, hbNumberMembers, vbMembers);
+		this.vbRightContainer.getChildren().addAll(lblSelectTeam, hbNumberMembers, painel);
 		this.vbRightContainer.setSpacing(20);
 
 		this.hbRightSide.getChildren().add(vbRightContainer);
@@ -315,13 +346,12 @@ public class newProjectScene extends Scene {
 			public void handle(ActionEvent event) {
 
 				try {
-					Window.mainStage.setScene(
-							new HomePageScene(new DbLoadProfileHome(DbLoadProfileHome.User.getUser().toString())));
+							Window.mainStage.setScene(new HomePageScene());
+							
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-
 			}
 		});
 
@@ -341,7 +371,7 @@ public class newProjectScene extends Scene {
 						System.out.println("foi");
 
 					if (a.insertProject(newProjectScene.this.txtProjectName.getText(),
-							newProjectScene.this.txtDescription.getText(), listMembers))
+							newProjectScene.this.txtDescription.getText()))
 						;
 
 				} catch (ClassNotFoundException | SQLException e) {
@@ -356,6 +386,9 @@ public class newProjectScene extends Scene {
 
 		this.hbButtons.setSpacing(10);
 		this.layout.add(hbButtons, 0, 2, 1, 1);
+		
+
+		
 
 		this.setRoot(layout);
 	}

@@ -73,8 +73,7 @@ public class LoginScene extends Scene {
 	private VBox left;
 	private VBox leftRegistration;
 	private HBox hbInformations;
-	
-	
+
 	private HBox right;
 
 	private HBox rightContainer;
@@ -84,9 +83,8 @@ public class LoginScene extends Scene {
 
 	private Label wellcome;
 
-
 	private ArrayList<RegistrationForm> form;
-	
+
 	public LoginScene() throws ClassNotFoundException, SQLException {
 		/*
 		 * i don't know why, but had to be this super(some object()); in the first line
@@ -98,22 +96,20 @@ public class LoginScene extends Scene {
 		 */
 		// String css =
 		// this.getClass().getResource("/cssStyles/style.css").toExternalForm();
-		String css = this.getClass().getResource("/cssStyles/teste.css").toExternalForm();
+		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
 		this.getStylesheets().add(css);
 
 		this.left = new VBox();
 		this.leftRegistration = new VBox();
 		this.hbInformations = new HBox();
-		
-		
+
 		this.right = new HBox();
 		this.vbLogin = new VBox();
 
 		this.rightContainer = new HBox();
 
 		this.form = new ArrayList<RegistrationForm>();
-		
-		
+
 		/*
 		 * instantiation of the object declared upon
 		 */
@@ -125,9 +121,11 @@ public class LoginScene extends Scene {
 
 		this.lblUser = new Label("USERNAME");
 		this.txtUser = new TextField();
+		this.txtUser.setAlignment(Pos.CENTER);
 
 		this.lblPassword = new Label("PASSWORD");
 		this.passwordField = new PasswordField();
+		this.passwordField.setAlignment(Pos.CENTER);
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("EXIT");
@@ -145,19 +143,6 @@ public class LoginScene extends Scene {
 		 * below is setting up the position of the attributes that go to the screen
 		 */
 
-		// this.layout.add(lblUser, 0, 2, 1, 1);
-		// this.layout.add(txtUser, 1, 2, 2, 1);
-		//
-		// this.layout.add(lblPassword, 0, 3, 1, 1);
-		// this.layout.add(passwordField, 1, 3, 2, 1);
-		//
-		// this.layout.add(messageLoginValidation, 0, 4, 1, 1);
-		//
-		// this.layout.add(forgotPassword, 1, 4, 1, 1);
-		//
-		// this.layout.add(btnLogin, 0, 5, 5, 1);
-		// this.layout.add(btnSignIn, 0, 6, 5, 1);
-		// this.layout.add(btnExit, 0, 7, 5, 1);
 		/*
 		 * this method below will allow me make the button size bigger
 		 */
@@ -174,7 +159,6 @@ public class LoginScene extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-				// Window.mainStage.setScene(new newProjectScene());
 
 				/*
 				 * the contend of the textfield and passwordfield are used in a database query
@@ -198,9 +182,7 @@ public class LoginScene extends Scene {
 				}
 			}
 		});
-		
-		
-		
+
 		this.lblSignIn = new Label("SIGN IN");
 		this.lblSignIn.setFont(Font.font(30));
 
@@ -208,16 +190,15 @@ public class LoginScene extends Scene {
 
 		this.lblSignIn.setTranslateY(-60);
 		//
-//		this.vbLogin.getStyleClass().add("vbox");
-//		this.vbLogin.setId("vbLogin");
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,	messageLoginValidation, forgotPassword, btnLogin, btnExit);
+		// this.vbLogin.getStyleClass().add("vbox");
+		// this.vbLogin.setId("vbLogin");
+		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,
+				messageLoginValidation, forgotPassword, btnLogin, btnExit);
 		this.vbLogin.setAlignment(Pos.CENTER);
 		this.vbLogin.setSpacing(20);
 		this.vbLogin.setPrefWidth(400);
 
-		
-		
-//		 this.rightContainer.getStyleClass().add("vbox");
+		// this.rightContainer.getStyleClass().add("vbox");
 		this.rightContainer.getChildren().add(vbLogin);
 		this.rightContainer.setPrefWidth(600);
 		this.rightContainer.setAlignment(Pos.CENTER);
@@ -225,20 +206,19 @@ public class LoginScene extends Scene {
 
 		this.right.getChildren().add(rightContainer);
 		this.right.setPrefHeight(00);
-		
+
 		this.right.getStyleClass().add("hbox");
 		this.right.setId("rightSide");
-		
+
 		this.layout.add(left, 0, 0, 1, 1);
 
 		this.left.setTranslateX(0);
 
-
-//		this.left.setId("hboxLeftSide");
+		// this.left.setId("hboxLeftSide");
 		this.left.setPrefHeight(600);
 		this.left.setAlignment(Pos.CENTER_LEFT);
 
-		this.wellcome = new Label("Wellcome To \n Scrum Manager");
+		this.wellcome = new Label("Welcome To \n Scrum Manager");
 		this.wellcome.setFont(new Font(30));
 
 		Label cadastre = new Label("Register Now");
@@ -263,25 +243,19 @@ public class LoginScene extends Scene {
 
 		this.left.setMaxWidth(800);
 		this.left.setAlignment(Pos.CENTER);
-//
-//		this.wellcome.setTranslateY(-200);
-//		cadastre.setTranslateY(-100);
-//		cadastre.setTranslateX(-220);
-//
+		//
+		//
 		btnSignIn.setTranslateY(-15);
 		btnCancel.setTranslateY(-15);
-//		this.hbInformations.setTranslateY(-220);
-//		this.hbInformations.getStyleClass().add("hbox");
+
 		this.hbInformations.setSpacing(10);
 		hbInformations.getChildren().addAll(wellcome, cadastre, btnSignIn, btnCancel);
 		this.btnCancel.setVisible(false);
-		
-		
-//		this.leftRegistration.getStyleClass().add("vbox");
+
+		// this.leftRegistration.getStyleClass().add("vbox");
 		this.leftRegistration.setPrefWidth(150);
-		this.left.getChildren().addAll(hbInformations,leftRegistration);
-		
-		
+		this.left.getChildren().addAll(hbInformations, leftRegistration);
+
 		/*
 		 * the code below are the functions of the buttons in the screen
 		 * 
@@ -300,17 +274,15 @@ public class LoginScene extends Scene {
 
 			@Override
 			public void handle(ActionEvent event) {
-					
-						
+
 				LoginScene.this.form.clear();
 				btnCancel.setVisible(true);
-				
-				
+
 				RegistrationForm t;
 				try {
 					t = new RegistrationForm();
 					form.add(t);
-					if(!form.isEmpty()) {
+					if (!form.isEmpty()) {
 						LoginScene.this.leftRegistration.getChildren().clear();
 					}
 				} catch (ClassNotFoundException e) {
@@ -321,25 +293,22 @@ public class LoginScene extends Scene {
 					e.printStackTrace();
 				}
 				LoginScene.this.leftRegistration.getChildren().add(form.get(0));
-				
+
 			}
 		});
-		
+
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
-			
+
 			@Override
 			public void handle(ActionEvent event) {
-				
-				
+
 				LoginScene.this.leftRegistration.getChildren().clear();
 				LoginScene.this.hbInformations.getChildren().get(3).setVisible(false);
-				
-				
+
 				LoginScene.this.form.clear();
-				
+
 			}
 		});
-		
 
 		/*
 		 * the insents are the spacing that i put i the padding of the layout
@@ -386,10 +355,9 @@ public class LoginScene extends Scene {
 				 * to switch scene had to access the mainStage, that is static here is changing
 				 * the scene to the homepage
 				 */
+				DbLoadProfileHome.User.setUser( LoginScene.this.txtUser.getText().toString());
 
-				String user = LoginScene.this.txtUser.getText().toString();
-
-				Window.mainStage.setScene(new HomePageScene(new DbLoadProfileHome(user)));
+				Window.mainStage.setScene(new HomePageScene());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

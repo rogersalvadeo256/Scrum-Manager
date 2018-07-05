@@ -1,5 +1,6 @@
 package Database;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -29,22 +30,99 @@ public class DbCreateProject extends DatabaseConnection {
 			}
 		}
 	}
-
-	public boolean insertProject(String projectName, String projectDescription, ArrayList<String> membersName) {
-
-		int numberMembers = membersName.size();
+	public int getIdUser() throws SQLException { 
 		
-		String insert = "insert into " + tableProject + " (project_name, project_description, number_members ,users_register_user_id) value ('" + projectName
-				+ "', '" + projectDescription + "','" + numberMembers + "', '" + DbLoadProfileHome.User.getIdUser()
+		
+		String query = "select id from " + tableMembers ;
+		
+		ResultSet cod  = commands.executeQuery(query);
+		
+		while(cod.next()) {
+			
+			continue;
+			
+		}
+		
+		return Integer.parseInt(cod.getString("id"));
+	
+	}
+	
+	
+	public void insertMemberHasProject () {
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+	public boolean insertProject(String projectName, String projectDescription) {
+
+		
+		String insert = "insert into " + tableProject + " (project_name, project_description ,users_register_user_id) value ('" + projectName
+				+ "', '" + projectDescription + "','" + "', '" + DbLoadProfileHome.User.getIdUser()
 				+ "');";
 		
 		try {
-			if(commands.execute(insert))return true;;
-			
+			if(commands.execute(insert))return true;
+
 		} catch (SQLException a) {
 			a.printStackTrace();
 		}
 		return false;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

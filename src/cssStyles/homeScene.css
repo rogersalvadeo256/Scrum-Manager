@@ -1,0 +1,105 @@
+.root{
+	-fx-background-color:#2E8B57;
+}
+.hbox {
+    -fx-background-color: white;
+    -fx-padding: 5.0;
+    -fx-spacing: 5.0;
+}
+.hbox#hbDown{
+-fx-background-color: black;
+	
+}
+.vbox {
+    -fx-background-color: #2f4f4f;
+    -fx-padding: 5.0;
+    -fx-spacing: 5.0;
+    -fx-border-color: #2e8b57;
+}
+
+.vbox#columnCenter { 
+	
+ -fx-background-color: yellow;
+-fx-border-color: #2e8b57;
+}
+
+.vbox#columnLeft { 
+	
+-fx-background-color: green;	
+	-fx-border-color: #2e8b57;
+}
+
+.vbox#columnRight {
+	-fx-background-color: red;
+	-fx-border-color: #2e8b57;
+	
+}
+.button{
+	-fx-text-fill:white;
+	-fx-background-color:#000;
+	-fx-padding:10.0;
+	-fx-background-radius: 15.0 15.0 15.0 15.0;
+}
+.button:hover{
+	-fx-text-fill:black;
+	-fx-background-color:#33d77a;
+}
+.button {
+    -fx-pref-width: 200.0px;
+    -fx-pref-height: 50.0px;
+}
+
+#exitbtn:hover{
+	-fx-text-fill:black;
+	-fx-background-color:red;
+	-fx-effect: innershadow(gaussian,black,8.0,0.0,0.0,0.0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
