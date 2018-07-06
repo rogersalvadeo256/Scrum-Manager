@@ -17,8 +17,8 @@ public class Window extends Stage {
 
  		
  		Window.mainStage = this;
- 		mainStage.setScene(new newProjectScene());
-// 		mainStage.setScene(new LoginScene());
+// 		mainStage.setScene(new newProjectScene());
+ 		mainStage.setScene(new LoginScene());
 // 		Window.mainStage.setScene(new HomePageScene(new DbLoadProfileHome("jefter66")));
  		this.show();
 	}

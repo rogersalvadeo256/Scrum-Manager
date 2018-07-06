@@ -2,69 +2,111 @@ package Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
 public class DbCreateProject extends DatabaseConnection {
 
 	private Statement commands;
-	private String tableProject = "projects";
 
-	public DbCreateProject() throws ClassNotFoundException, SQLException {
-		this.commands = (Statement) this.getConnection().createStatement();
-	}
-
-
-	/*
-	 * insert in the table members_has_project
-	 */
-	public void insertIDMemberHasProject() throws SQLException {
-
-		String insert = "insert into members_has_project  (codM) value ('" + DbLoadProfileHome.User.getIdUser() + "');";
-
-		commands.execute(insert);
-
-	}
-
-	public void insertIDProjectMemberHasProject() throws SQLException {
-
-		String query = "select * from " + tableProject + " where project_id ";
-		
-		
-		ResultSet teste  = commands.executeQuery(query);
+	public static int projectID;
+	public String projectName;
 	
-		int id =  Integer.parseInt(teste.getString("project_id"));
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	public DbCreateProject()
+			throws ClassNotFoundException, SQLException {
+		this.commands = (Statement) this.getConnection().createStatement();
+
+	
 		
 	}
 
-	/*
-	 * insert project
+	/* 
+	 * dont touch this shit
 	 */
-	public boolean insertProject(String projectName, String projectDescription) throws SQLException {
-
-		String insert = "insert into " + tableProject
-				+ " (project_name, project_description ,users_register_user_id) value ('" + projectName + "', '"
-				+ projectDescription + "','" + "', '" + DbLoadProfileHome.User.getIdUser() + "');";
-
-		if (commands.execute(insert))return true;
-
+	public boolean createProject(String projectName, String projectDescription, ArrayList<String> members) throws SQLException { 
+		this.projectName = projectName;
+		String insert = "insert into projects (project_name, project_description, users_register_user_id) value ('" + projectName + "', '"  + 
+		projectDescription + "', '" + DbLoadProfileHome.User.getIdUser() + "');";
+		
+		if(commands.execute(insert)) {
+			
+			DbCreateProject.projectID =  getProjectID();
+			return true;
+		}
 		else return false;
 	}
-
+	
+	public int getProjectID () throws SQLException { 
+		
+		String query = "select * from projects where project_name='" + this.projectName + "';";
+		
+		ResultSet result = commands.executeQuery(query);
+		int id = 0;
+		while(result.next()) {
+			id = Integer.parseInt(result.getString("project_id"));
+		}
+		return id;
+	}
+	
+	
+//		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

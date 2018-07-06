@@ -106,7 +106,7 @@ public class newProjectScene extends Scene {
 	 * the list for the hbox that contain the text fields for the name of memebers
 	 */
 
-
+	private ArrayList<String> listMembers;
 	private ArrayList<CreateHBoxWithTextFields> listHBmembers;
 	/*
 	 * the hbox(s) that are instantiante when some number are typed in the
@@ -137,6 +137,7 @@ public class newProjectScene extends Scene {
 		this.painel = new ScrollPane();
 
 		this.listHBmembers = new ArrayList<CreateHBoxWithTextFields>();
+		this.listMembers = new ArrayList<String>();
 
 		this.layout = new GridPane();
 
@@ -338,15 +339,36 @@ public class newProjectScene extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 
-
 				try {
+
+					newProjectScene.this.listMembers.clear();
+					for (int i = 0; i < listHBmembers.size(); i++) {
+
+						newProjectScene.this.listMembers.add(newProjectScene.this.listHBmembers.get(i).getText());
+
+					}
 					DbCreateProject a = new DbCreateProject();
-
-
-					if (a.insertProject(newProjectScene.this.txtProjectName.getText(),
-							newProjectScene.this.txtDescription.getText()))
-						;
-
+					
+				
+					a.createProject(newProjectScene.this.txtProjectName.getText(),	newProjectScene.this.txtDescription.getText(), listMembers);
+						
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -361,6 +383,7 @@ public class newProjectScene extends Scene {
 		this.layout.add(hbButtons, 0, 2, 1, 1);
 
 		this.setRoot(layout);
+
 	}
 
 	/*
@@ -398,37 +421,4 @@ public class newProjectScene extends Scene {
 		}
 	}
 
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
