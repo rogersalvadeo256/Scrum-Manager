@@ -14,12 +14,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Database.DbCreateProject;
-import Database.DbLoadProfileHome;
 import Main.Window;
 import SpecialObjects.CreateHBoxWithTextFields;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -109,7 +106,6 @@ public class newProjectScene extends Scene {
 	 * the list for the hbox that contain the text fields for the name of memebers
 	 */
 
-	private ArrayList<String> listMembers;
 
 	private ArrayList<CreateHBoxWithTextFields> listHBmembers;
 	/*
@@ -139,9 +135,8 @@ public class newProjectScene extends Scene {
 		super(new HBox());
 
 		this.painel = new ScrollPane();
-		
+
 		this.listHBmembers = new ArrayList<CreateHBoxWithTextFields>();
-		this.listMembers = new ArrayList<String>();
 
 		this.layout = new GridPane();
 
@@ -223,31 +218,14 @@ public class newProjectScene extends Scene {
 		this.hbLeftSide.setTranslateX(50);
 		this.hbLeftSide.setTranslateY(50);
 
-//		 hbTopLeftScene.getStyleClass().add("hbox");
-//		 this.hbTopLeftScene.setId("hboxLeftSide");
+		// hbTopLeftScene.getStyleClass().add("hbox");
+		// this.hbTopLeftScene.setId("hboxLeftSide");
 
 		this.vbMembers = new VBox();
 		this.painel.setContent(this.vbMembers);
 		painel.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		painel.setPrefSize(120, 400);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 		this.layout.add(hbLeftSide, 0, 0, 1, 1);
 
 		/*
@@ -274,8 +252,7 @@ public class newProjectScene extends Scene {
 		 * contain vboxs with labels and textfields
 		 */
 
-
-//		this.vbMembers.setStyle(css);
+		// this.vbMembers.setStyle(css);
 
 		// vbMembers.getStyleClass().add("vbox");
 		// this.vbMembers.setId("teamMembers");
@@ -313,7 +290,6 @@ public class newProjectScene extends Scene {
 			}
 		});
 
-		
 		this.lblSelectTeam = new Label("Select the number of  members in the team");
 
 		this.vbRightContainer.getChildren().addAll(lblSelectTeam, hbNumberMembers, painel);
@@ -346,8 +322,8 @@ public class newProjectScene extends Scene {
 			public void handle(ActionEvent event) {
 
 				try {
-							Window.mainStage.setScene(new HomePageScene());
-							
+					Window.mainStage.setScene(new HomePageScene());
+
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -361,14 +337,11 @@ public class newProjectScene extends Scene {
 
 			@Override
 			public void handle(ActionEvent event) {
-				
-				saveMembersName(newProjectScene.this.listHBmembers);
-				
+
+
 				try {
 					DbCreateProject a = new DbCreateProject();
 
-					a.insertMembers(listMembers);
-						System.out.println("foi");
 
 					if (a.insertProject(newProjectScene.this.txtProjectName.getText(),
 							newProjectScene.this.txtDescription.getText()))
@@ -386,9 +359,6 @@ public class newProjectScene extends Scene {
 
 		this.hbButtons.setSpacing(10);
 		this.layout.add(hbButtons, 0, 2, 1, 1);
-		
-
-		
 
 		this.setRoot(layout);
 	}
@@ -428,12 +398,37 @@ public class newProjectScene extends Scene {
 		}
 	}
 
-	private ArrayList<String> saveMembersName(ArrayList<CreateHBoxWithTextFields> members) {
 
-		for (int i = 0; i < members.size(); i++) {
-			this.listMembers.add(members.get(i).getText());
-		}
-		return listMembers;
-	}
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

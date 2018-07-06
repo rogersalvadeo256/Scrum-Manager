@@ -2,53 +2,42 @@ package Database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import com.mysql.jdbc.Statement;
 
 public class DbCreateProject extends DatabaseConnection {
 
 	private Statement commands;
-	private String tableMembers = "members";
 	private String tableProject = "projects";
 
 	public DbCreateProject() throws ClassNotFoundException, SQLException {
-
 		this.commands = (Statement) this.getConnection().createStatement();
+	}
 
+
+	/*
+	 * insert in the table members_has_project
+	 */
+	public void insertIDMemberHasProject() throws SQLException {
+
+		String insert = "insert into members_has_project  (codM) value ('" + DbLoadProfileHome.User.getIdUser() + "');";
+
+		commands.execute(insert);
 
 	}
 
-	public void insertMembers(ArrayList<String> membersName) {
+	public void insertIDProjectMemberHasProject() throws SQLException {
 
-		for (int i = 0; i < membersName.size(); i++) {
-			String insert = "insert into " + tableMembers + " (nome) value ('" + membersName.get(i) + "');";
-			try {
-				commands.execute(insert);
-			} catch (SQLException a) {
-				a.printStackTrace();
-			}
-		}
-	}
-	public int getIdUser() throws SQLException { 
+		String query = "select * from " + tableProject + " where project_id ";
 		
 		
-		String query = "select id from " + tableMembers ;
-		
-		ResultSet cod  = commands.executeQuery(query);
-		
-		while(cod.next()) {
-			
-			continue;
-			
-		}
-		
-		return Integer.parseInt(cod.getString("id"));
+		ResultSet teste  = commands.executeQuery(query);
 	
-	}
-	
-	
-	public void insertMemberHasProject () {
+		int id =  Integer.parseInt(teste.getString("project_id"));
+		
+		
+		
+		
 		
 		
 		
@@ -62,67 +51,47 @@ public class DbCreateProject extends DatabaseConnection {
 		
 	}
 
-	public boolean insertProject(String projectName, String projectDescription) {
+	/*
+	 * insert project
+	 */
+	public boolean insertProject(String projectName, String projectDescription) throws SQLException {
 
-		
-		String insert = "insert into " + tableProject + " (project_name, project_description ,users_register_user_id) value ('" + projectName
-				+ "', '" + projectDescription + "','" + "', '" + DbLoadProfileHome.User.getIdUser()
-				+ "');";
-		
-		try {
-			if(commands.execute(insert))return true;
+		String insert = "insert into " + tableProject
+				+ " (project_name, project_description ,users_register_user_id) value ('" + projectName + "', '"
+				+ projectDescription + "','" + "', '" + DbLoadProfileHome.User.getIdUser() + "');";
 
-		} catch (SQLException a) {
-			a.printStackTrace();
-		}
-		return false;
+		if (commands.execute(insert))return true;
+
+		else return false;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
