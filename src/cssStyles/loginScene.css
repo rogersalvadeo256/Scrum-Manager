@@ -4,7 +4,7 @@
     -fx-spacing: 5.0;
 }
 .root{
-	-fx-background-color:#2E8B57;
+	-fx-background-color:#00806C;
 }
 
 #exitbtn:hover{
@@ -57,7 +57,7 @@
 
 .hbox#rightSide{
 	
-	-fx-background-color:#2E8B57;
+	-fx-background-color:#00806C;
 	
 	
 }

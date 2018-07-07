@@ -103,7 +103,7 @@ public class HomePageScene extends Scene {
 		 * the scene
 		 */
 		this.vbBtnOptions = new VBox();
-//		this.vbBtnOptions.getStyleClass().add("vbox");
+		this.vbBtnOptions.getStyleClass().add("vbox");
 
 		this.vbBtnOptions.getChildren().addAll(btnEditProfile, btnExit);
 		this.vbBtnOptions.setSpacing(10);
@@ -132,7 +132,7 @@ public class HomePageScene extends Scene {
 		this.vbNameUser.getStyleClass().add("vbox");
 		this.vbNameUser.getChildren().addAll(lblName, lblUserName);
 		this.vbNameUser.setPrefWidth(300);
-
+		this.vbNameUser.setAlignment(Pos.CENTER);
 		
 		/*
 		 * this hbox will contain all the vbox above going to stay on the top of the
@@ -158,7 +158,7 @@ public class HomePageScene extends Scene {
 		
 		imagem.setTranslateX(10);
 		this.hbTop.getChildren().addAll(imagem, vbNameUser, vbBtnOptions);
-
+		
 		/*
 		 * the idea is making three columns below the image and the name of the user and
 		 * the buttons exit and edit profile in the first column starting from the left,
@@ -181,17 +181,16 @@ public class HomePageScene extends Scene {
 		this.layout.add(hbDown, 0, 2, 1, 1);
 
 		// FileChooser fc = new FileChooser();
-		// File f = fc.showOpenDialog(Window.janela);
-		File f = new File("/home/jefter66/Área de Trabalho/35401559_1839819186083425_5919617720290115584_n.jpg");
-
-		FileInputStream fis;
-		try {
-			fis = new FileInputStream(f);
-			this.imagem.setImage(new Image(fis));
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+////		 File f = fc.showOpenDialog(Window.janela);
+//		File f = new File("/home/jefter66/Área de Trabalho/ptcc/scrum.png");
+////
+//		FileInputStream fis;
+//		try {
+//			fis = new FileInputStream(f);
+//			this.imagem.setImage(new Image(fis));
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
 
 		/*
 		 * instantiate the columns

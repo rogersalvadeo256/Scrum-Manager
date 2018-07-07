@@ -1,7 +1,4 @@
 
-/*
- * pra entender o que to fazendo
- */
 .hbox {
     -fx-background-color: white;
     -fx-padding: 5.0;
@@ -84,7 +81,7 @@
 }
 
 .root{
-	-fx-background-color:#2E8B57;
+	-fx-background-color:#00806C;
 }
 
 /* área de testes */

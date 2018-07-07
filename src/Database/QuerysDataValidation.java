@@ -52,7 +52,6 @@ public class QuerysDataValidation {
 
 		String insert = "insert into " + table + "(name, user_name, email, password) value ('" + name + "','" + email
 				+ "', '" + userName + "', '" + password + "');";
-
 		try {
 			commands.execute(insert);
 		} catch (SQLException a) {

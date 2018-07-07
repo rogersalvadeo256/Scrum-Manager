@@ -363,8 +363,6 @@ public class LoginScene extends Scene {
 				messageLoginValidation.setText("Username or password wrog");
 				messageLoginValidation.setTextFill(Color.rgb(210, 39, 30));
 			}
-			
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {

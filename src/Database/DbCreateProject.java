@@ -13,10 +13,12 @@ public class DbCreateProject extends DatabaseConnection {
 	public static int projectID;
 	public static int memberID;
 
+	ArrayList<Integer> idM;
+	int idP;
 
 	public DbCreateProject() throws ClassNotFoundException, SQLException {
 		this.commands = (Statement) this.getConnection().createStatement();
-
+		this.idM = new ArrayList<Integer>();
 	}
 
 	/*
@@ -29,18 +31,20 @@ public class DbCreateProject extends DatabaseConnection {
 
 		commands.execute(insert);
 		insertMembers(members);
-		insertMhasP(projectName);
-		DbCreateProject.projectID = getProjectID( projectName);
-
+//		insertMhasP(projectName);
+		DbCreateProject.projectID = getProjectID(projectName);
 
 	}
 
+	
+
+	
 	public int getProjectID(String projectName) throws SQLException {
 
 		String query = "select * from projects where project_name='" + projectName + "';";
 
 		ResultSet result = commands.executeQuery(query);
-		int id = (Integer) null;
+		int id = 0;
 		while (result.next()) {
 			id = Integer.parseInt(result.getString("project_id"));
 		}
@@ -55,7 +59,9 @@ public class DbCreateProject extends DatabaseConnection {
 
 		String insert;
 		for (int i = 0; i < members.size(); i++) {
-			insert = "insert into members (nome) value ('" + members.get(i) + "');";
+			insert = "insert into members (nome) value ('" + DbLoadProfileHome.User.getName() + "');";
+			
+//			insert = "insert into members (nome) value ('" + members.get(i) + "');";
 			commands.execute(insert);
 		}
 	}
@@ -64,70 +70,61 @@ public class DbCreateProject extends DatabaseConnection {
 	 * below the operations with the table members_has_project
 	 */
 
-	private void insertMhasP( String projectName) throws SQLException {
-		
-		String  queryM = "select * from members where id is not null;";
+	private void insertMhasP(String projectName) throws SQLException {
+
+		String queryM = "select * from members where id='" + memberID + "';";
+
+		String queryP = "select * from projects where project_name='" + projectName + "';";
 
 		ResultSet resultM = commands.executeQuery(queryM);
-		
-		String queryP = "select * from projects where project_name='" + projectName + "' where project_id is not null;";
-
-
 		while (resultM.next()) {
-
-			int idM = resultM.getInt("id");
-
-			String insert = "insert into members_has_project (codM) values ('" + idM + "');";
-			commands.execute(insert);
+		
+			this.idM.add(Integer.parseInt(resultM.getString("id")));
+	
 		}
-
+		
+		
 		ResultSet resultP = commands.executeQuery(queryP);
 		while (resultP.next()) {
-			
-			int idP = resultP.getInt("project_id");
-			String insert = "insert into members_has_project (CodP) value ('"  + idP + "');" ;
-			commands.execute(insert);
-			
+			idP = Integer.parseInt(resultP.getString("project_id"));
 		}
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
+		String insert = new String();
+		for (int i = 0; i < this.idM.size(); i++) {
+			insert = "insert into members_has_project (codM,CodP) values('" + DbLoadProfileHome.User.getIdUser() + "', '"
+					+  idP  + "');";
+		}
+		commands.execute(insert);
 
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -1,42 +1,49 @@
 .root{
 	-fx-background-color:#2E8B57;
+
 }
+.label{
+	-fx-text-fill:white;	
+}
+
+
 .hbox {
     -fx-background-color: white;
     -fx-padding: 5.0;
     -fx-spacing: 5.0;
 }
 .hbox#hbDown{
--fx-background-color: black;
+-fx-background-color: #2E8B57;
 	
 }
 .vbox {
-    -fx-background-color: #2f4f4f;
+    -fx-background-color: #2E8B57;
     -fx-padding: 5.0;
     -fx-spacing: 5.0;
-    -fx-border-color: #2e8b57;
+    -fx-border-color: #2E8B57;
 }
 
 .vbox#columnCenter { 
 	
- -fx-background-color: yellow;
--fx-border-color: #2e8b57;
+ -fx-background-color: grey;
+-fx-border-color: #2E8B57;
 }
 
 .vbox#columnLeft { 
 	
--fx-background-color: green;	
-	-fx-border-color: #2e8b57;
+-fx-background-color: grey;	
+-fx-border-color: #2E8B57;
 }
 
 .vbox#columnRight {
-	-fx-background-color: red;
+	-fx-background-color: grey;
 	-fx-border-color: #2e8b57;
+	-fx-label-fill: white;
 	
 }
 .button{
-	-fx-text-fill:white;
-	-fx-background-color:#000;
+	-fx-text-fill:green;
+	-fx-background-color:white;
 	-fx-padding:10.0;
 	-fx-background-radius: 15.0 15.0 15.0 15.0;
 }
