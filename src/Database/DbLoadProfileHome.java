@@ -9,46 +9,42 @@ public class DbLoadProfileHome extends DatabaseConnection {
 
 	private String strUsername;
 	private Statement commands;
-	private String table = "users_register" ;
 	
-	public DbLoadProfileHome(String strUser) throws ClassNotFoundException, SQLException {
+	public DbLoadProfileHome() throws ClassNotFoundException, SQLException {
 
 		this.strUsername = new String();
-		this.strUsername = strUser.toString();
 
 		this.commands = (Statement) this.getConnection().createStatement();
+		
+	
 	}
 
 	public String getStrUsername() {
 		return strUsername;
 	}
 
-	public String bringUser() throws SQLException {
+	public void bringUser() throws SQLException {
 
-		String query = "select from " + table + " where user_name='" + getStrUsername().toString() + "';";
+		String query = "select * from users_register where user_name='" + User.getUser().toString() + "';";
 
+		
 		ResultSet user = this.commands.executeQuery(query);
 
-		while (user.next()) {
 
-			String userName = user.getString("user_name");
+		while (user.next()) {
 			String name = user.getString("name");
-			/*
-			 * for accessing the id of the user in another part of the project
-			 */
-			DbLoadProfileHome.User.setIdUser(Integer.parseInt(user.getString("user_id")));
+			String id = user.getString("user_id");
+
+			name = user.getString("name");
+			id = user.getString("user_id");
 			
-			if (userName.equals(DbLoadProfileHome.this.strUsername.toString())) {
-				
-				/*
-				 * setting the user name 
-				 */
-				DbLoadProfileHome.User.setUser(userName.toString());
-				DbLoadProfileHome.User.setName(name.toString());
-				return userName;
-			}
+			
+			DbLoadProfileHome.User.setName(name.toString());
+			DbLoadProfileHome.User.setIdUser(Integer.parseInt(id.toString()));				
+			
+			
+			
 		}
-		return new String();
 	}
 	
 	

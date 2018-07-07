@@ -58,6 +58,7 @@ public class HomePageScene extends Scene {
 	private Label lblCurrentProject;
 	private Label lblProjectsDone;
 	
+	private DbLoadProfileHome e;
 	
 	/*
 	 * the construct of the class requires a object LoadProfileHome, this object
@@ -66,6 +67,10 @@ public class HomePageScene extends Scene {
 	 */
 	public HomePageScene() throws ClassNotFoundException, SQLException {
 		super(new HBox());
+		this.e = new DbLoadProfileHome();
+		e.bringUser();
+
+		
 		/*
 		 * the css
 		 */
@@ -110,11 +115,11 @@ public class HomePageScene extends Scene {
 		 * setting the vbox in the right
 		 */
 
-		this.lblName = new Label(DbLoadProfileHome.User.getName());
+		this.lblName = new Label();
+		this.lblName.setText(DbLoadProfileHome.User.getName());
 		this.lblName.setFont(new Font(25));
+	
 		this.lblUserName = new Label();
-//		this.lblUserName.setText(load.bringData());
-		
 		this.lblUserName.setText(DbLoadProfileHome.User.getUser());
 		this.lblUserName.setFont(new Font(15));
 
