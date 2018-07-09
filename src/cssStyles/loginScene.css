@@ -1,10 +1,15 @@
+.hbox#rightSide{
+	-fx-padding: 10.0;
+	-fx-border-style: solid inside;
+    -fx-border-width: 0px, 0px, 1px, 0px;
+}
+.vbox#vbLogin{
+}
+
 .hbox {
-    -fx-background-color: white;
-    -fx-padding: 5.0;
-    -fx-spacing: 5.0;
 }
 .root{
-	-fx-background-color:#00806C;
+	-fx-background-color:#2A363F;
 }
 
 #exitbtn:hover{
@@ -12,59 +17,70 @@
 	-fx-background-color:red;
 	-fx-effect: innershadow(gaussian,black,8.0,0.0,0.0,0.0);
 }
-
+.button#btnSingUp{ 
+	-fx-background-color:#6DD89F;
+}
+.button#btnSingUp:hover{
+	-fx-text-fill:#2A363F;
+	-fx-background-color:#ffff;
+}
 .hyperlink{
 	-fx-text-fill:green;
 }
 
-
 .text-input:focused{
-	-fx-background-color:#85e085;
-	-fx-text-fill:black;
+	 -fx-min-width: 20.0%;
+    -fx-min-height: 10.0%;
+	 -fx-background-color: #2A363F;
+	-fx-border-color:#465058;
+	-fx-text-fill:#ffff;
+	-fx-placeholder-size:40.0px;
+	-fx-padding: 10.0px;
+	-fx-border-radius: 0.5em;
+
 }
 .text-input{
-	-fx-background-color:#00cc66;
-	-fx-text-fill:white;
+  -fx-min-width: 20.0%;
+    -fx-min-height: 10.0%;
+ -fx-background-color: #2A363F;
+	-fx-border-color:#465058;
+	-fx-text-fill:#ffff;
+	-fx-input-width:100.0%;
 }
 .label{
-	-fx-text-fill:white;	
+	-fx-text-fill:#ffff;	
 }
+.label#messageWrongData{
+	-fx-text-fill:#cc0000;	
+	-fx-font-weight: bold;
+	-fx-font-stretch:ultra-condensed;
+	-fx-font-size: 16.0px;
 
+}
+.hyperlink{
+-fx-text-fill:#babdbf;
+}
 .button {
     -fx-pref-width: 100.0px;
     -fx-pref-height: 50.0px;
 }
 .button:hover{
-	-fx-text-fill:black;
-	-fx-background-color:#33d77a;
+	-fx-text-fill:#2A363F;
+	-fx-background-color:#ffff;
 }
 
 .button{
-	-fx-text-fill:green;
-	-fx-background-color:white;
+	-fx-text-fill:#2A363F;
+	-fx-background-color:#5Fb69C;
 	-fx-padding:10.0;
-	-fx-background-radius: 15.0 15.0 15.0 15.0;
 }
-
 
 .vbox {
     -fx-background-color: #2f4f4f;
     -fx-spacing: 15.0;
-    -fx-height:300;
-    
-    
+    -fx-height:300.0;
 }
 
-.hbox#rightSide{
-	
-	-fx-background-color:#00806C;
-	
-	
-}
-
-.vbox#vbLogin{
-		-fx-background-color:white;
-}
 
 
 

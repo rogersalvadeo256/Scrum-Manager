@@ -25,25 +25,38 @@ public class RegistrationForm extends VBox {
 
 	
 	public RegistrationForm() throws ClassNotFoundException, SQLException {
-
+		
+		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
+		this.getStylesheets().add(css);
+		
 		this.lblName = new Label("NAME");
 		this.lblUserName = new Label("USERNAME");
 		this.lblEmail = new Label("EMAIL");
 		this.lblPassword = new Label("PASSWORD");
 		this.lblConfirmPassword = new Label("CONFIRM PASSWORD");
-
+		
 		this.validation = new ValidationOfRegistration();
 		
 		this.txtName = new TextField();
 		this.txtUserName = new TextField();
 		this.txtEmail = new TextField();
 
+		this.passwordField = new PasswordField();
+		this.confirmPasswordField = new PasswordField();
+		
+		
+		this.txtName.setMaxWidth(300);
+		this.txtUserName.setMaxWidth(300);
+		this.txtEmail.setMaxWidth(300);
+		this.passwordField.setMaxWidth(300);
+		this.confirmPasswordField.setMaxWidth(300);
+		
+		
+		
 		this.txtName.setAlignment(Pos.CENTER);
 		this.txtUserName.setAlignment(Pos.CENTER);
 		this.txtEmail.setAlignment(Pos.CENTER);
 		
-		this.passwordField = new PasswordField();
-		this.confirmPasswordField = new PasswordField();
 		
 		this.passwordField.setAlignment(Pos.CENTER);
 		this.confirmPasswordField.setAlignment(Pos.CENTER);
@@ -75,7 +88,7 @@ public class RegistrationForm extends VBox {
 		});
 		
 		this.setAlignment(Pos.CENTER);
-		this.setSpacing(2);
+		this.setSpacing(5);
 
 	}
 

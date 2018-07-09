@@ -29,6 +29,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 
 /*
@@ -53,7 +54,7 @@ public class LoginScene extends Scene {
 	private Label lblUser, lblSignIn, lblPassword;
 	private TextField txtUser;
 	private PasswordField passwordField;
-	private Button btnLogin, btnExit, btnSignIn;
+	private Button btnLogin, btnExit, btnSignUp;
 	private Button btnCancel;
 	/*
 	 * the scene have a GridPane like the layout
@@ -72,7 +73,6 @@ public class LoginScene extends Scene {
 
 	private VBox left;
 	private VBox leftRegistration;
-	private HBox hbInformations;
 
 	private HBox right;
 
@@ -81,8 +81,13 @@ public class LoginScene extends Scene {
 
 	private ImageView imagem;
 
-	private Label wellcome;
+	private Label welcome;
 
+	private Line line;
+	
+	private 	VBox vbSignUpButtons;
+	
+	
 	private ArrayList<RegistrationForm> form;
 
 	public LoginScene() throws ClassNotFoundException, SQLException {
@@ -101,7 +106,6 @@ public class LoginScene extends Scene {
 
 		this.left = new VBox();
 		this.leftRegistration = new VBox();
-		this.hbInformations = new HBox();
 
 		this.right = new HBox();
 		this.vbLogin = new VBox();
@@ -116,20 +120,33 @@ public class LoginScene extends Scene {
 		this.layout = new GridPane();
 
 		this.messageLoginValidation = new Label("");
-
+		this.messageLoginValidation.setId("messageWrongData");
+		
 		this.forgotPassword = new Hyperlink("Forgot my password");
 
 		this.lblUser = new Label("USERNAME");
 		this.txtUser = new TextField();
 		this.txtUser.setAlignment(Pos.CENTER);
-
+		this.txtUser.setPromptText("UserName");
+		
+		
 		this.lblPassword = new Label("PASSWORD");
 		this.passwordField = new PasswordField();
 		this.passwordField.setAlignment(Pos.CENTER);
+		this.passwordField.setPromptText("Password");
 
+		
+		
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("EXIT");
-		this.btnSignIn = new Button("SIGN UP");
+		this.btnSignUp = new Button("SIGN UP");
+		this.btnSignUp.setId("btnSingUp");
+
+		this.line = new Line();
+		this.line.setEndX(0.0f);
+		this.line.setEndY(350.0f);
+		this.line.setStroke(Color.valueOf("#ffff"));
+		
 		this.btnCancel = new Button("CANCEL");
 		/*
 		 * the main class of the program have a Stage that is static, so, i can access
@@ -146,7 +163,7 @@ public class LoginScene extends Scene {
 		/*
 		 * this method below will allow me make the button size bigger
 		 */
-		this.btnSignIn.setMaxWidth(500);
+		this.btnSignUp.setMaxWidth(500);
 		this.btnLogin.setMaxWidth(500);
 		this.btnExit.setMaxWidth(500);
 		/*
@@ -188,18 +205,20 @@ public class LoginScene extends Scene {
 
 		this.layout.add(right, 1, 0, 1, 1);
 
-		this.lblSignIn.setTranslateY(-60);
-		//
-		// this.vbLogin.getStyleClass().add("vbox");
-		// this.vbLogin.setId("vbLogin");
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,
-				messageLoginValidation, forgotPassword, btnLogin, btnExit);
+		this.lblSignIn.setTranslateY(-30);
+		
+//		 this.vbLogin.getStyleClass().add("vbox");
+//		 this.vbLogin.setId("vbLogin");
+		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,messageLoginValidation, forgotPassword, btnLogin, btnExit);
 		this.vbLogin.setAlignment(Pos.CENTER);
 		this.vbLogin.setSpacing(20);
 		this.vbLogin.setPrefWidth(400);
-
-		// this.rightContainer.getStyleClass().add("vbox");
-		this.rightContainer.getChildren().add(vbLogin);
+		
+		
+		
+//		 this.rightContainer.getStyleClass().add("vbox");
+		this.rightContainer.getChildren().addAll(line,vbLogin);
+		this.rightContainer.setSpacing(40);
 		this.rightContainer.setPrefWidth(600);
 		this.rightContainer.setAlignment(Pos.CENTER);
 		this.right.setTranslateX(0);
@@ -212,14 +231,13 @@ public class LoginScene extends Scene {
 
 		this.layout.add(left, 0, 0, 1, 1);
 
-		this.left.setTranslateX(0);
 
 		// this.left.setId("hboxLeftSide");
 		this.left.setPrefHeight(600);
 		this.left.setAlignment(Pos.CENTER_LEFT);
 
-		this.wellcome = new Label("Welcome To \n Scrum Manager");
-		this.wellcome.setFont(new Font(30));
+		this.welcome = new Label("Welcome To Scrum Manager");
+		this.welcome.setFont(new Font(30));
 
 		Label cadastre = new Label("Register Now");
 		cadastre.setFont(new Font(20));
@@ -228,7 +246,7 @@ public class LoginScene extends Scene {
 		this.imagem.setFitWidth(200);
 		this.imagem.setFitHeight(200);
 
-		File f = new File("/home/jefter66/Área de Trabalho/ptcc/scrum.png");
+		File f = new File("/home/jefter66/java-workspace/SCRUM/images/logo/scrum_icon.png");
 
 		FileInputStream fis;
 		try {
@@ -238,24 +256,51 @@ public class LoginScene extends Scene {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+//		this.layout.add(imagem, 0, 0, 1, 1);
+		
 		this.left.setPrefWidth(650);
 
 		this.left.setMaxWidth(800);
 		this.left.setAlignment(Pos.CENTER);
 		//
 		//
-		btnSignIn.setTranslateY(-15);
+		btnSignUp.setTranslateY(-15);
 		btnCancel.setTranslateY(-15);
 
-		this.hbInformations.setSpacing(10);
-		hbInformations.getChildren().addAll(wellcome, cadastre, btnSignIn, btnCancel);
+		this.layout.add(imagem, 0, 0, 1, 1);
+		this.imagem.setTranslateY(-180);
+		this.layout.add(welcome, 1, 0,1,1);
+		this.welcome.setTranslateY(-200);
+		this.welcome.setTranslateX(-450);
+		
+		this.layout.add(cadastre, 0, 1, 1, 1);
+		cadastre.setTranslateY(-400);
+		cadastre.setTranslateX(450);
+		
+		
+//		this.layout.add(btnSignUp, 1, 1, 1, 1);
+		
+		this.vbSignUpButtons= new VBox();
+		
+		this.btnSignUp.setMaxWidth(80);
+		this.btnCancel.setMaxWidth(80);
+		vbSignUpButtons.setSpacing(10);
 		this.btnCancel.setVisible(false);
 
+		vbSignUpButtons.getChildren().addAll(btnSignUp,btnCancel);
+		
+		this.layout.add(vbSignUpButtons, 1, 1, 1, 1);
+		
+		vbSignUpButtons.setTranslateY(-360);
+		vbSignUpButtons.setTranslateX(-25);
+		
+		
 		// this.leftRegistration.getStyleClass().add("vbox");
 		this.leftRegistration.setPrefWidth(150);
-		this.left.getChildren().addAll(hbInformations, leftRegistration);
+		this.left.getChildren().addAll(leftRegistration);
 
+		this.left.setTranslateY(100);
+		
 		/*
 		 * the code below are the functions of the buttons in the screen
 		 * 
@@ -270,7 +315,7 @@ public class LoginScene extends Scene {
 		 * button sing in open a scene who contains a registration form to create a
 		 * profile to use the software
 		 */
-		this.btnSignIn.setOnAction(new EventHandler<ActionEvent>() {
+		this.btnSignUp.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -303,8 +348,7 @@ public class LoginScene extends Scene {
 			public void handle(ActionEvent event) {
 
 				LoginScene.this.leftRegistration.getChildren().clear();
-				LoginScene.this.hbInformations.getChildren().get(3).setVisible(false);
-
+				LoginScene.this.btnCancel.setVisible(false);
 				LoginScene.this.form.clear();
 
 			}
@@ -342,7 +386,6 @@ public class LoginScene extends Scene {
 			 */
 			if (checkForEmptyField.checkForEmptyField()) {
 				messageLoginValidation.setText("There is nothing typed");
-				messageLoginValidation.setTextFill(Color.rgb(210, 39, 30));
 			}
 			/*
 			 * connect is the object of the class Login() that extends a DatabaseConnection
@@ -361,7 +404,6 @@ public class LoginScene extends Scene {
 			}
 			else {
 				messageLoginValidation.setText("Username or password wrog");
-				messageLoginValidation.setTextFill(Color.rgb(210, 39, 30));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
