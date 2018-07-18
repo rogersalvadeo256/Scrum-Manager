@@ -20,11 +20,6 @@ import javafx.scene.control.TextField;
 public class ValidationOfRegistration {
 
 	/*
-	 * this object will be used to check if the data typed already exist in the
-	 * database
-	 */
-
-	/*
 	* switch this for the hibernate stuff
 	*/
 	private QuerysDataValidation data;
@@ -54,18 +49,13 @@ public class ValidationOfRegistration {
 		
 		this.formWarnings = new Alert(null);
 		this.formWarnings.setWidth(60);
-		this.formWarnings.setHeight(40);
-		
+		this.formWarnings.setHeight(40);		
 		this.fempty = new FieldValidation();
-		
 		this.data = new QuerysDataValidation();
-
 		this.arrayErrorDataMessage = new ArrayList<String>();
 		this.arrayEmptyFieldMessage = new ArrayList<String>();
 		this.arrayEverthingOK = new ArrayList<String>();
-
 		this.finalMessage = new ArrayList<String>();
-
 		this.constArrayFieldEmpty = new ArrayList<String>();
 		this.constArrayDataWrong = new ArrayList<String>();
 		this.constArrayEverthingOK = new ArrayList<String>();
@@ -84,11 +74,9 @@ public class ValidationOfRegistration {
 		this.constArrayEverthingOK.add("Username ok");
 		this.constArrayEverthingOK.add("Senhas ok");
 		
-		MessageDialog a = new MessageDialog();
-		a.applyCss();
-		this.formWarnings.setDialogPane(a);
-		
-		System.out.print(this.formWarnings.getDialogPane().getStyleClass());
+		MessageDialog dialog = new MessageDialog();
+		dialog.applyCss();
+		this.formWarnings.setDialogPane(dialog);
 		
 	}
 	public void validation(TextField name, TextField email, TextField userName, PasswordField password,
@@ -113,88 +101,48 @@ public class ValidationOfRegistration {
 			return;
 		}
 	}
-
-	/*
-	 * this method going to building the message
-	 */
 	public void errorData() throws SQLException {
-
-		/*
-		 * important to remember that this method had to be called after the method
-		 * checkData, this because the array will already contain strings than, the
-		 * message can be built in this loop below
-		 * 
-		 */
 		for (int i = 0; i < this.arrayErrorDataMessage.size(); i++) {
-			/*
-			 * the final message is who going to the stringbuilder, than, to alert
-			 */
 			this.finalMessage.add(this.arrayErrorDataMessage.get(i));
 		}
-
-		/*
-		 * this StringBuilder will had all the strings in the array finalMessage, and
-		 * show for the user in the alert
-		 */
 		StringBuilder alertMessage = new StringBuilder();
-
 		for (String msg : finalMessage) {
 			alertMessage.append(msg + "\n");
 		}
-		/*
-		 * setting up the kind of alert, title, header text
-		 */
 		this.formWarnings.setAlertType(AlertType.ERROR);
 		this.formWarnings.setTitle("Error");
 		this.formWarnings.setHeaderText("Algo está errado com os dados informados");
-		/*
-		 * the string builder
-		 */
 		this.formWarnings.setContentText(alertMessage.toString());
 		this.formWarnings.show();
-		/*
-		 * 
-		 */
 		this.finalMessage.clear();
-		
 	}
-
-	/*
-	 * this function are for setting the stuff about the alert
-	 */
 	public Alert setTheAlert(AlertType alert, String title, String header, String contentText) {
 		this.formWarnings.setAlertType(alert);
 		this.formWarnings.setTitle(title.toString());
 		this.formWarnings.setHeaderText(header);
 		this.formWarnings.setContentText(contentText);
-		this.formWarnings.getContentText();
-		
+		this.formWarnings.getContentText();	
 		return this.formWarnings;
 	}
-
+	
 	public void fieldsEmptyAlert() {
 
 		for (int i = 0; i < this.arrayEmptyFieldMessage.size(); i++) {
 			this.finalMessage.add(this.arrayEmptyFieldMessage.get(i));
 		}
-
 		StringBuilder message = new StringBuilder();
 		for (String msg : finalMessage) {
 			message.append(msg + "\n");
 		}
-
 		this.finalMessage.clear();
 		this.arrayEmptyFieldMessage.clear();
 		this.setTheAlert(AlertType.ERROR, "ERROR", "There is something wrong with the data informed",
 				message.toString()).showAndWait();
-
-		return;
+		return;		
 	}
-
-
+	
 	public void emptyField(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
-
 		if(this.fempty.isTextFieldEmpty(name)){	this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(0));}
 		if(this.fempty.isTextFieldEmpty(email)){ this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(1));}
 		if(this.fempty.isTextFieldEmpty(userName)){ this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(2));}
@@ -202,6 +150,9 @@ public class ValidationOfRegistration {
 	}
 
 
+	/*
+		change it
+	*/
 	public void checkData(TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 

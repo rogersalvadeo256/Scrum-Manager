@@ -14,12 +14,12 @@ import javassist.bytecode.ByteArray;
 @Table(name="profile")
 public class Profile {
 	
+	
 	@Id
 //	@GeneratedValue(strategy=GenerationType.AUTO) 	
 	@Column(name="id")
 	private int id;
-
-
+	
 	@Column
 	String details;
 	

@@ -10,12 +10,8 @@ public class EntityProvider {
 	public EntityManager entityManager;
 
 	public EntityProvider() {
-
 		this.factory = Persistence.createEntityManagerFactory("HibernatePU");
-
 		this.entityManager = factory.createEntityManager();
-
-	
 	}
 
 }
