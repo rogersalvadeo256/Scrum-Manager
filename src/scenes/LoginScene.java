@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,9 +8,11 @@ import java.util.ArrayList;
 
 import Database.DbLoadProfileHome;
 import Database.Login;
-import Main.Window;
-import SpecialObjects.RegistrationForm;
-import Validations.ValidationLogin;
+import auto.instance.objects.RegistrationForm;
+import events.ExitButtonListener;
+import fields.validation.FieldValidation;
+import hibernatebook.annotations.Register;
+import hibernatebook.entity.provider.EntityProvider;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -31,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
+import main.Window;
 
 /*
  * LoginScreen.java
@@ -42,34 +45,17 @@ import javafx.scene.text.Font;
 
 public class LoginScene extends Scene {
 
-	/*
-	 * the label message will be hidden, and just going to show a message if the
-	 * login requests data are right, otherwise, show a error message
-	 */
 	private final Label messageLoginValidation;
 
-	/*
-	 * labels that will be setted up close to the fields email or user and password
-	 */
-	private Label lblUser, lblSignIn, lblPassword;
+	private Label lblUser, lblSignIn, lblPassword, lblWelcome, lblCadastre;
 	private TextField txtUser;
 	private PasswordField passwordField;
-	private Button btnLogin, btnExit, btnSignUp;
-	private Button btnCancel;
-	/*
-	 * the scene have a GridPane like the layout
-	 */
-	private GridPane layout;
 
-	/*
-	 * Hyperlink will lead the user to a screen in order to recover his profile
-	 */
+	private Button btnLogin, btnExit;
+	private Button btnCancel, btnSignUp;
+
 	private Hyperlink forgotPassword;
 
-	/*
-	 * this is a class created by my, use to make some functions with the database,
-	 * in here, will be used to make validation of login
-	 */
 
 	private VBox left;
 	private VBox leftRegistration;
@@ -79,242 +65,200 @@ public class LoginScene extends Scene {
 	private HBox rightContainer;
 	private VBox vbLogin;
 
-	private ImageView imagem;
+	private ImageView imgIcon;
+	private File iconPath;
+	
+	FileInputStream fis;
 
-	private Label welcome;
+
 
 	private Line line;
-	
-	private 	VBox vbSignUpButtons;
-	
-	
+
+	private VBox vbSignUpButtons;
+
 	private ArrayList<RegistrationForm> form;
 
+	private GridPane layout;
+
 	public LoginScene() throws ClassNotFoundException, SQLException {
-		/*
-		 * i don't know why, but had to be this super(some object()); in the first line
-		 * of the construct
-		 */
 		super(new HBox());
-		/*
-		 * 
-		 */
-		// String css =
-		// this.getClass().getResource("/cssStyles/style.css").toExternalForm();
+	
+		Window.mainStage.setWidth(1200);
+		Window.mainStage.setHeight(600);	
+
+
 		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
 		this.getStylesheets().add(css);
+		this.layout = new GridPane();
 
+	
 		this.left = new VBox();
 		this.leftRegistration = new VBox();
+		this.form = new ArrayList<RegistrationForm>();
+
 
 		this.right = new HBox();
 		this.vbLogin = new VBox();
 
 		this.rightContainer = new HBox();
 
-		this.form = new ArrayList<RegistrationForm>();
-
-		/*
-		 * instantiation of the object declared upon
-		 */
-		this.layout = new GridPane();
-
+		
 		this.messageLoginValidation = new Label("");
 		this.messageLoginValidation.setId("messageWrongData");
-		
-		this.forgotPassword = new Hyperlink("Forgot my password");
-
-		this.lblUser = new Label("USERNAME");
+		this.forgotPassword = new Hyperlink("Esqueci minha senha");
+		this.lblUser = new Label("Username");
 		this.txtUser = new TextField();
 		this.txtUser.setAlignment(Pos.CENTER);
-		this.txtUser.setPromptText("UserName");
-		
-		
-		this.lblPassword = new Label("PASSWORD");
+		this.txtUser.setPromptText("Username");
+		this.lblPassword = new Label("Senha");
 		this.passwordField = new PasswordField();
 		this.passwordField.setAlignment(Pos.CENTER);
-		this.passwordField.setPromptText("Password");
+		this.passwordField.setPromptText("Digite sua senha");
+		this.lblWelcome = new Label("Bem Vindo Ao Scrum Manager");
+		this.lblWelcome.setFont(new Font(30));
+		this.lblCadastre = new Label("Registre-se Agora");
+		this.lblCadastre.setFont(new Font(20));
+		this.lblSignIn = new Label("SIGN IN");
+		this.lblSignIn.setFont(Font.font(30));
+		this.lblSignIn.setTranslateY(-30);
 
-		
-		
 		this.btnLogin = new Button("LOGIN");
-		this.btnExit = new Button("EXIT");
+		this.btnExit = new Button("SAIR");
+		this.btnExit.setId("exitbtn");
 		this.btnSignUp = new Button("SIGN UP");
 		this.btnSignUp.setId("btnSingUp");
+		this.btnCancel = new Button("CANCELAR");
+		this.btnCancel.setVisible(false);
+		
+		this.btnSignUp.setMaxWidth(500);
+		this.btnLogin.setMaxWidth(500);
+		this.btnExit.setMaxWidth(500);
+
+		
 
 		this.line = new Line();
 		this.line.setEndX(0.0f);
 		this.line.setEndY(350.0f);
 		this.line.setStroke(Color.valueOf("#ffff"));
+
+	
 		
-		this.btnCancel = new Button("CANCEL");
-		/*
-		 * the main class of the program have a Stage that is static, so, i can access
-		 * him in every place how i want i'm setting the size of my stage for this scene
-		 * that is being building
-		 */
-		Window.mainStage.setWidth(1200);
-		Window.mainStage.setHeight(600);
-
-		/*
-		 * below is setting up the position of the attributes that go to the screen
-		 */
-
-		/*
-		 * this method below will allow me make the button size bigger
-		 */
-		this.btnSignUp.setMaxWidth(500);
-		this.btnLogin.setMaxWidth(500);
-		this.btnExit.setMaxWidth(500);
-		/*
-		 * this is here because of the CSS
-		 */
-		this.btnExit.setId("exitbtn");
 
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
 
-
-				/*
-				 * the contend of the textfield and passwordfield are used in a database query
-				 * that check if it is right if the return boolean value is true, so, go switch
-				 * scene to the homepage of the software, else, will show the label message in
-				 * red, saying that the data is wrong
-				 */
-				logar();
+				
+				EntityProvider provedor = new EntityProvider();
+				Register registrar = new Register();
+				
+				
+				
+				
+				registrar.setName(LoginScene.this.txtUser.getText());
+				provedor.entityManager.getTransaction().begin();
+				provedor.entityManager.persist(registrar);
+				provedor.entityManager.getTransaction().commit();
+				provedor.entityManager.close();
+				
 			}
 		});
 
 		this.passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
 			@Override
 			public void handle(KeyEvent event) {
-
 				if (event.getCode() == KeyCode.ENTER) {
-
 					logar();
-
 				}
 			}
 		});
 
-		this.lblSignIn = new Label("SIGN IN");
-		this.lblSignIn.setFont(Font.font(30));
-
+		
+		
 		this.layout.add(right, 1, 0, 1, 1);
 
-		this.lblSignIn.setTranslateY(-30);
-		
-//		 this.vbLogin.getStyleClass().add("vbox");
-//		 this.vbLogin.setId("vbLogin");
 		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,messageLoginValidation, forgotPassword, btnLogin, btnExit);
 		this.vbLogin.setAlignment(Pos.CENTER);
 		this.vbLogin.setSpacing(20);
 		this.vbLogin.setPrefWidth(400);
-		
-		
-		
-//		 this.rightContainer.getStyleClass().add("vbox");
-		this.rightContainer.getChildren().addAll(line,vbLogin);
+
+		this.rightContainer.getChildren().addAll(line, vbLogin);
 		this.rightContainer.setSpacing(40);
 		this.rightContainer.setPrefWidth(600);
 		this.rightContainer.setAlignment(Pos.CENTER);
 		this.right.setTranslateX(0);
-
 		this.right.getChildren().add(rightContainer);
 		this.right.setPrefHeight(00);
-
 		this.right.getStyleClass().add("hbox");
 		this.right.setId("rightSide");
 
 		this.layout.add(left, 0, 0, 1, 1);
 
+	
+		this.imgIcon = new ImageView();
+		this.imgIcon.getStyleClass().add("logoImage");
+		this.imgIcon.setId("logoImage");
+		this.imgIcon.setFitWidth(200);
+		this.imgIcon.setFitHeight(200);
+		
+		/*
+		this.iconPath = new File("/home/jefter66/java-workspace/SCRUM/images/logo/scrum_icon.png");
 
-		// this.left.setId("hboxLeftSide");
-		this.left.setPrefHeight(600);
-		this.left.setAlignment(Pos.CENTER_LEFT);
-
-		this.welcome = new Label("Welcome To Scrum Manager");
-		this.welcome.setFont(new Font(30));
-
-		Label cadastre = new Label("Register Now");
-		cadastre.setFont(new Font(20));
-
-		this.imagem = new ImageView();
-		this.imagem.setFitWidth(200);
-		this.imagem.setFitHeight(200);
-
-		File f = new File("/home/jefter66/java-workspace/SCRUM/images/logo/scrum_icon.png");
-
-		FileInputStream fis;
 		try {
-			fis = new FileInputStream(f);
-			this.imagem.setImage(new Image(fis));
-		} catch (FileNotFoundException e) {
+			fis = new FileInputStream(iconPath);
+		} catch (FileNotFoundException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-//		this.layout.add(imagem, 0, 0, 1, 1);
-		
-		this.left.setPrefWidth(650);
+		this.imgIcon.setImage(new Image(fis));
+		*/
 
-		this.left.setMaxWidth(800);
-		this.left.setAlignment(Pos.CENTER);
-		//
-		//
-		btnSignUp.setTranslateY(-15);
-		btnCancel.setTranslateY(-15);
+		this.btnSignUp.setTranslateY(-15);
+		this.btnCancel.setTranslateY(-15);
+		
+		
+		this.layout.add(imgIcon, 0, 0, 1, 1);
+		this.imgIcon.setTranslateY(-180);
+		this.layout.add(lblWelcome, 1, 0, 1, 1);
+		this.lblWelcome.setTranslateY(-200);
+		this.lblWelcome.setTranslateX(-450);
 
-		this.layout.add(imagem, 0, 0, 1, 1);
-		this.imagem.setTranslateY(-180);
-		this.layout.add(welcome, 1, 0,1,1);
-		this.welcome.setTranslateY(-200);
-		this.welcome.setTranslateX(-450);
-		
-		this.layout.add(cadastre, 0, 1, 1, 1);
-		cadastre.setTranslateY(-400);
-		cadastre.setTranslateX(450);
-		
-		
-//		this.layout.add(btnSignUp, 1, 1, 1, 1);
-		
-		this.vbSignUpButtons= new VBox();
-		
-		this.btnSignUp.setMaxWidth(80);
-		this.btnCancel.setMaxWidth(80);
-		vbSignUpButtons.setSpacing(10);
-		this.btnCancel.setVisible(false);
+		this.layout.add(lblCadastre, 0, 1, 1, 1);
+		lblCadastre.setTranslateY(-400);
+		lblCadastre.setTranslateX(400);
 
-		vbSignUpButtons.getChildren().addAll(btnSignUp,btnCancel);
+		this.layout.add(btnSignUp, 1, 1, 1, 1);
+		this.layout.add(btnCancel, 1, 1, 1, 1);
 		
-		this.layout.add(vbSignUpButtons, 1, 1, 1, 1);
+		this.btnSignUp.setTranslateY(-400);
+		this.btnSignUp.setTranslateX(-30);
+		this.btnCancel.setTranslateY(-400);
+		this.btnCancel.setTranslateX(-30);
+		this.btnSignUp.setMaxWidth(90);
+		this.btnCancel.setMaxWidth(100);
+	
+
 		
-		vbSignUpButtons.setTranslateY(-360);
-		vbSignUpButtons.setTranslateX(-25);
-		
-		
-		// this.leftRegistration.getStyleClass().add("vbox");
 		this.leftRegistration.setPrefWidth(150);
-		this.left.getChildren().addAll(leftRegistration);
-
-		this.left.setTranslateY(100);
 		
-		/*
-		 * the code below are the functions of the buttons in the screen
-		 * 
-		 */
-
-		/*
-		 * the button exit implement a interface that only serves to exit the program
-		 */
-		this.btnExit.setOnAction(actionEvent -> Platform.exit());
-
-		/*
-		 * button sing in open a scene who contains a registration form to create a
-		 * profile to use the software
-		 */
+		this.left.getChildren().addAll(leftRegistration);
+		this.left.setAlignment(Pos.CENTER_LEFT);
+		this.left.setTranslateY(100);
+		this.left.setAlignment(Pos.CENTER);
+		this.left.setMaxWidth(800);
+		this.left.setPrefWidth(650);
+		this.left.setPrefHeight(600);
+		
+		
+		this.btnExit.setOnAction(new EventHandler<ActionEvent>() {
+				ExitButtonListener exit = new ExitButtonListener(){};
+				@Override
+				public void handle(ActionEvent event) {
+					exit.handle(event);
+				}
+		});
+		
 		this.btnSignUp.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -378,13 +322,12 @@ public class LoginScene extends Scene {
 	private void logar() {
 
 		try {
-			ValidationLogin checkForEmptyField = new ValidationLogin(LoginScene.this.txtUser,
-					LoginScene.this.passwordField);
+			FieldValidation checkField = new FieldValidation();
 
 			/*
 			 * checking for empty fields, return the label with a error mensage
 			 */
-			if (checkForEmptyField.checkForEmptyField()) {
+			if (checkField.isTextFieldEmpty(LoginScene.this.txtUser) || checkField.isPasswordFieldEmpty(LoginScene.this.passwordField)){
 				messageLoginValidation.setText("There is nothing typed");
 			}
 			/*
@@ -392,17 +335,16 @@ public class LoginScene extends Scene {
 			 */
 
 			if (new Login().enterLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
-				// messageLoginValidation.setText("Right");
-				// messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
+				messageLoginValidation.setText("Right");
+				messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
 				/*
 				 * to switch scene had to access the mainStage, that is static here is changing
 				 * the scene to the homepage
 				 */
-				DbLoadProfileHome.User.setUser( LoginScene.this.txtUser.getText().toString());
+				DbLoadProfileHome.User.setUser(LoginScene.this.txtUser.getText().toString());
 
 				Window.mainStage.setScene(new HomePageScene());
-			}
-			else {
+			} else {
 				messageLoginValidation.setText("Username or password wrog");
 			}
 		} catch (SQLException e) {

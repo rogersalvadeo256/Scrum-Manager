@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 /*
  * newProjectScene.java
  * 
@@ -14,8 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Database.DbCreateProject;
-import Main.Window;
-import SpecialObjects.CreateHBoxWithTextFields;
+import auto.instance.objects.CreateHBoxWithTextFields;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,6 +32,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import main.Window;
 
 public class newProjectScene extends Scene {
 
@@ -352,21 +352,7 @@ public class newProjectScene extends Scene {
 				
 					a.createProject(newProjectScene.this.txtProjectName.getText(),	newProjectScene.this.txtDescription.getText(), listMembers);
 						
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
+							
 				
 				} catch (ClassNotFoundException | SQLException e) {
 					// TODO Auto-generated catch block

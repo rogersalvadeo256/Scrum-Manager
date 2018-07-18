@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 /*
  * SCRUM MANAGER TCC PROJECT

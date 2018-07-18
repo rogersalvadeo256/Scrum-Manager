@@ -1,4 +1,4 @@
-package SpecialObjects;
+package auto.instance.objects;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

@@ -1,8 +1,8 @@
-package SpecialObjects;
+package auto.instance.objects;
 
 import java.sql.SQLException;
 
-import Validations.ValidationOfRegistration;
+import fields.validation.ValidationOfRegistration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

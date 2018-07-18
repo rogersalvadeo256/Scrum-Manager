@@ -1,10 +1,9 @@
-package Scenes;
+package scenes;
 
 import java.sql.SQLException;
 
 import Database.QuerysDataValidation;
-import Main.Window;
-import Validations.ValidationOfRegistration;
+import fields.validation.ValidationOfRegistration;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
+import main.Window;
 
 /*
  * LoginScreen.java
@@ -114,6 +114,7 @@ public class RegistrationFormScene extends Scene {
 		 * the actions of the buttons
 		 */
 
+		
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 
 			@Override
@@ -159,7 +160,6 @@ public class RegistrationFormScene extends Scene {
 				}
 			}
 		});
-		
 		/*
 		 * setHgap will set a space in the horizontal , Vgap space in the vertical
 		 */

@@ -1,4 +1,4 @@
-package Scenes;
+package scenes;
 
 /*
  * LoginScreen.java
@@ -14,7 +14,6 @@ import java.sql.SQLException;
 
 
 import Database.DbLoadProfileHome;
-import Main.Window;
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -30,6 +29,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import main.Window;
 
 public class HomePageScene extends Scene {
 

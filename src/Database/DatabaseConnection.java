@@ -15,7 +15,6 @@ public class DatabaseConnection {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public Connection getConnection() throws SQLException {

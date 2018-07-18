@@ -1,11 +1,11 @@
-package Main;
+package main;
 import java.sql.SQLException;
 
 import Database.DbLoadProfileHome;
-import Scenes.HomePageScene;
-import Scenes.LoginScene;
-import Scenes.newProjectScene;
 import javafx.stage.Stage;
+import scenes.HomePageScene;
+import scenes.LoginScene;
+import scenes.newProjectScene;
 
 public class Window extends Stage {
 

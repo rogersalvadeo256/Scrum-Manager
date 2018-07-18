@@ -1,4 +1,4 @@
-package Validations;
+package fields.validation;
 
 /*
  * LoginScreen.java
@@ -9,6 +9,7 @@ package Validations;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Database.QuerysDataValidation;
+import alert.messages.MessageDialog;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Dialog;
@@ -22,6 +23,10 @@ public class ValidationOfRegistration {
 	 * this object will be used to check if the data typed already exist in the
 	 * database
 	 */
+
+	/*
+	* switch this for the hibernate stuff
+	*/
 	private QuerysDataValidation data;
 
 	private Alert formWarnings;
@@ -42,12 +47,16 @@ public class ValidationOfRegistration {
 	private final ArrayList<String> constArrayDataWrong;
 	private final ArrayList<String> constArrayEverthingOK;
 
+	private FieldValidation fempty;
+
 	public ValidationOfRegistration() throws ClassNotFoundException, SQLException {
 
+		
 		this.formWarnings = new Alert(null);
 		this.formWarnings.setWidth(60);
 		this.formWarnings.setHeight(40);
 		
+		this.fempty = new FieldValidation();
 		
 		this.data = new QuerysDataValidation();
 
@@ -74,9 +83,14 @@ public class ValidationOfRegistration {
 		this.constArrayEverthingOK.add("Email ok");
 		this.constArrayEverthingOK.add("Username ok");
 		this.constArrayEverthingOK.add("Senhas ok");
-	
+		
+		MessageDialog a = new MessageDialog();
+		a.applyCss();
+		this.formWarnings.setDialogPane(a);
+		
+		System.out.print(this.formWarnings.getDialogPane().getStyleClass());
+		
 	}
-
 	public void validation(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 
@@ -142,24 +156,22 @@ public class ValidationOfRegistration {
 		 * 
 		 */
 		this.finalMessage.clear();
+		
 	}
 
 	/*
 	 * this function are for setting the stuff about the alert
 	 */
 	public Alert setTheAlert(AlertType alert, String title, String header, String contentText) {
-
 		this.formWarnings.setAlertType(alert);
 		this.formWarnings.setTitle(title.toString());
 		this.formWarnings.setHeaderText(header);
 		this.formWarnings.setContentText(contentText);
 		this.formWarnings.getContentText();
+		
 		return this.formWarnings;
 	}
 
-	/*
-	 * THIS IS NOT WORK VERY WELL YET
-	 */
 	public void fieldsEmptyAlert() {
 
 		for (int i = 0; i < this.arrayEmptyFieldMessage.size(); i++) {
@@ -175,55 +187,21 @@ public class ValidationOfRegistration {
 		this.arrayEmptyFieldMessage.clear();
 		this.setTheAlert(AlertType.ERROR, "ERROR", "There is something wrong with the data informed",
 				message.toString()).showAndWait();
-		// message.delete(0, message.length());
+
 		return;
 	}
 
-	/*
-	 * in order to check if there is some field empty, and if the data already is in
-	 * the database, i create this method, that are using some functions write below
-	 * their
-	 * 
-	 * the logic that i implemented is, using the constants arrays that contain some
-	 * strings, i check every field
-	 * 
-	 * first, the functions checkName,checkEmail,checkUserName, wrongPassword return
-	 * a string value, that string value is the string in the constant array, the
-	 * function remove all the spaces on the textfield an check is is anything
-	 * writed, if isn't something typed, the string that will return is the
-	 * "empty field.." this for all field.
-	 *
-	 * when the function are called here, the method will check if the string is
-	 * equal the constant array for empty field if it is, the array for the message
-	 * empty field will be populated with the string in the certain index
-	 *
-	 * had to remember use this method before checking if the arrayEmptyFieldMessage
-	 * is empty is the validation method
-	 */
+
 	public void emptyField(TextField name, TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 
-		if (this.checkName(name).equals(constArrayFieldEmpty.get(0))) {
-			this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(0));
-		}
-		if (this.checkEmail(email).equals(constArrayFieldEmpty.get(1))) {
-			this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(1));
-		}
-		if (this.checkUserName(userName).equals(constArrayFieldEmpty.get(2))) {
-			this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(2));
-		}
-		if (this.wrongPassword(password, passwordConfirmation).equals(constArrayFieldEmpty.get(3))) {
-			this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(3));
-		}
+		if(this.fempty.isTextFieldEmpty(name)){	this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(0));}
+		if(this.fempty.isTextFieldEmpty(email)){ this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(1));}
+		if(this.fempty.isTextFieldEmpty(userName)){ this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(2));}
+		if(this.fempty.isPasswordFieldEmpty(password) || this.fempty.isPasswordFieldEmpty(passwordConfirmation)){this.arrayEmptyFieldMessage.add(constArrayFieldEmpty.get(3));}
 	}
 
-	/*
-	 * the same logic that the method above the only diference here is the this
-	 * function will acces the database using a object that do some querys and
-	 * checks for the stuffs in the database
-	 * 
-	 * this method also compare if the two fields of password is right
-	 */
+
 	public void checkData(TextField email, TextField userName, PasswordField password,
 			PasswordField passwordConfirmation) throws SQLException {
 

@@ -1,9 +1,9 @@
-package Events;
+package events;
 
-import Main.Window;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import main.Window;
 
 public abstract class ExitButtonListener implements EventHandler<ActionEvent> { 
 
@@ -12,6 +12,4 @@ public abstract class ExitButtonListener implements EventHandler<ActionEvent> {
 		Platform.exit();
 		Window.mainStage.close();
 	}
-	
-	
 }
