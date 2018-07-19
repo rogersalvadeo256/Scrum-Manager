@@ -1,0 +1,111 @@
+
+/*
+ * define icon
+ */
+.EMAIL-ICON{
+	-fx-graphic: url("/resources/images/icons/envelope.png");
+	-fx-graphic-text-gap:10;
+}
+.EMAIL-ICON:hover{
+    -fx-font-weight: bold;
+}
+.FRIEND_ICON{
+	-fx-graphic: url("");
+	-fx-graphic-text-gap:10;
+}
+.MESSAGE_ICON{
+	-fx-graphic: url("");
+	-fx-graphic-text-gap:10;
+}
+.PROJECT_INVITE_ICON{
+ 	-fx-graphic: url("");
+	-fx-graphic-text-gap:10;
+}
+.PROJECT_INVITE_ICON{
+    fx-graphic: url("");
+	-fx-graphic-text-gap:10;
+}
+/*
+ * define background color
+ */
+.GREY:label{
+-fx-fill: #7C97A1;
+}
+.DARK_GREY:label{
+-fx-fill: #62676A;
+}
+.WHITE:label{
+ -fx-fill: #F0F0F0;
+}
+.BLACK:label{
+-fx-fill: #010101;
+}
+.GREEN:label{
+-fx-fill: #30E13C;
+}
+.DARK_GREEN:label{
+-fx-fill: #138D1B;
+}
+/*
+ * effects from label
+ */
+.GREY_HOVER:label{
+-fx-fill: #7C97A1;
+}
+.DARK_GREY_HOVER:label{
+-fx-fill: #62676A;
+}
+.WHITE_HOVER:label{
+-fx-fill: #F0F0F0;
+}
+.BLACK_HOVER:label{
+-fx-fill: #010101;
+}
+.GREEN_HOVER:label{
+-fx-fill: #30E13C;
+}
+.DARK_GREEN_HOVER:label{
+-fx-fill: #138D1B;
+}
+.label{
+-fx-font-family:"Arial Black";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

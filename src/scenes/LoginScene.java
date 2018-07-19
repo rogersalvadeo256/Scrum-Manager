@@ -66,7 +66,6 @@ public class LoginScene extends Scene {
 	private VBox vbLogin;
 
 	private ImageView imgIcon;
-	private File iconPath;
 	
 	FileInputStream fis;
 
@@ -74,7 +73,6 @@ public class LoginScene extends Scene {
 
 	private Line line;
 
-	private VBox vbSignUpButtons;
 
 	private ArrayList<RegistrationForm> form;
 
@@ -153,9 +151,7 @@ public class LoginScene extends Scene {
 				EntityProvider provedor = new EntityProvider();
 				Register registrar = new Register();
 				
-				
-				
-				
+			
 				registrar.setName(LoginScene.this.txtUser.getText());
 				provedor.entityManager.getTransaction().begin();
 				provedor.entityManager.persist(registrar);

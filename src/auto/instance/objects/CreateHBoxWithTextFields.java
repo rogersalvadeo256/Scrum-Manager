@@ -10,20 +10,11 @@ public class CreateHBoxWithTextFields extends HBox {
 	private TextField txtTextField;
 
 	public CreateHBoxWithTextFields(String labelText) {
-		
-		
 		this.lblLabel = new Label(labelText.toString());
-		
 		this.txtTextField = new TextField();
 		this.getChildren().addAll(lblLabel,txtTextField);
 		this.setSpacing(20);
-	
 	}
-	public String getText() {
-		return txtTextField.getText();
-	}
-
-	public void setText(TextField text) {
-		this.txtTextField = text;
-	}
+	public String getText() {return txtTextField.getText();}
+	public void setText(TextField text) {this.txtTextField = text;}
 }

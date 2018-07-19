@@ -15,9 +15,11 @@ public class DbLoadProfileHome extends DatabaseConnection {
 		this.strUsername = new String();
 
 		this.commands = (Statement) this.getConnection().createStatement();
-		
-	
-	}
+			
+		DbLoadProfileHome.User.setIdUser(1);
+		DbLoadProfileHome.User.setName("aaaa");
+		DbLoadProfileHome.User.setUser("akfalfkj");
+		}
 
 	public String getStrUsername() {
 		return strUsername;
@@ -38,9 +40,8 @@ public class DbLoadProfileHome extends DatabaseConnection {
 			name = user.getString("name");
 			id = user.getString("user_id");
 			
-			
-			DbLoadProfileHome.User.setName(name.toString());
-			DbLoadProfileHome.User.setIdUser(Integer.parseInt(id.toString()));				
+//			DbLoadProfileHome.User.setName(name.toString());
+//			DbLoadProfileHome.User.setIdUser(Integer.parseInt(id.toString()));				
 			
 			
 			
