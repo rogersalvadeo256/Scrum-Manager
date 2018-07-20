@@ -2,6 +2,10 @@ package auto.instance.objects;
 
 import java.sql.SQLException;
 
+import design.objects.LabelWithIcon;
+import design.objects.LabelWithIcon.LabelType.BackgroundColor;
+import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
+import design.objects.LabelWithIcon.LabelType.Type;
 import fields.validation.ValidationOfRegistration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,7 +19,7 @@ import javafx.scene.layout.VBox;
 
 public class RegistrationForm extends VBox {
 
-	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
+	private LabelWithIcon lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
 	private PasswordField passwordField, confirmPasswordField;
 	private Button btnRegister;
@@ -26,11 +30,11 @@ public class RegistrationForm extends VBox {
 		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
 		this.getStylesheets().add(css);
 		
-		this.lblName = new Label("NAME");
-		this.lblUserName = new Label("USERNAME");
-		this.lblEmail = new Label("EMAIL");
-		this.lblPassword = new Label("PASSWORD");
-		this.lblConfirmPassword = new Label("CONFIRM PASSWORD");
+		this.lblName = new LabelWithIcon("NAME", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblUserName = new LabelWithIcon("USERNAME", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblEmail = new LabelWithIcon("EMAIL", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblPassword = new LabelWithIcon("PASSWORD", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblConfirmPassword = new LabelWithIcon("CONFIRM PASSWORD", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.validation = new ValidationOfRegistration();
 		this.txtName = new TextField();
 		this.txtUserName = new TextField();

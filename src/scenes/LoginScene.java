@@ -5,21 +5,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import Database.DbLoadProfileHome;
 import Database.Login;
 import auto.instance.objects.RegistrationForm;
 import design.objects.LabelWithIcon;
-import design.objects.LabelWithIcon.LabelType;
 import design.objects.LabelWithIcon.LabelType.BackgroundColor;
 import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
 import design.objects.LabelWithIcon.LabelType.Type;
 import events.ExitButtonListener;
 import fields.validation.FieldValidation;
 import hibernatebook.annotations.Register;
-import hibernatebook.entity.provider.EntityProvider;
 import hibernatebook.inserts.Insert;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -38,7 +34,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import javafx.scene.text.Font;
 import main.Window;
 import referring.css.ReferringCss;
 import referring.css.ReferringCss.cssFile.cssFiles;
@@ -58,36 +53,21 @@ public class LoginScene extends Scene {
 	private LabelWithIcon lblUser, lblSignIn, lblPassword, lblWelcome, lblSignUp;
 	private TextField txtUser;
 	private PasswordField passwordField;
-
 	private Button btnLogin, btnExit;
 	private Button btnCancel, btnSignUp;
-
 	private Hyperlink forgotPassword;
-
-
 	private VBox left;
 	private VBox leftRegistration;
-
 	private HBox right;
-
 	private HBox rightContainer;
 	private VBox vbLogin;
-
 	private ImageView imgIcon;
-	
 	FileInputStream fis;
-
-
-
 	private Line line;
 	private ArrayList<RegistrationForm> form;
-
 	private GridPane layout;
-
-	
 	private File iconPath;
 	private ReferringCss cssReferrer;
-		
 	public LoginScene() throws ClassNotFoundException, SQLException {
 		super(new HBox());
 		this.cssReferrer = new ReferringCss();
@@ -105,22 +85,18 @@ public class LoginScene extends Scene {
 		this.vbLogin = new VBox();
 		this.rightContainer = new HBox();
 
-		this.messageLoginValidation = new Label("");
+		this.messageLoginValidation = new Label(new String());
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
-		this.lblUser = new LabelWithIcon("Username", 10, Type.TITLE, BackgroundColor.GREEN, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.txtUser = new TextField();
-		this.txtUser.setPromptText("Username");
-		this.lblPassword = new LabelWithIcon("Senha",  10, Type.TITLE, BackgroundColor.GREEN, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.passwordField = new PasswordField();
+		this.txtUser.setPromptText("Username");
 		this.passwordField.setPromptText("Digite sua senha");
-		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.GREEN, BackgroundHoverColor.DARK_GREY_HOVER );
-//		this.lblWelcome.setFont(new Font(30));
-		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.GREEN, BackgroundHoverColor.DARK_GREY_HOVER );
-//		this.lblSignUp.setFont(new Font(20));
-		this.lblSignIn = new LabelWithIcon("SIGN IN" ,30, Type.TITLE, BackgroundColor.GREEN, BackgroundHoverColor.DARK_GREY_HOVER );
-//		this.lblSignIn.setFont(Font.font(30));
-//		this.lblSignIn.setTranslateY(-30);
+		this.lblUser = new LabelWithIcon("Username", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblPassword = new LabelWithIcon("Senha",  15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignIn = new LabelWithIcon("SIGN IN" ,35, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");
@@ -223,7 +199,9 @@ public class LoginScene extends Scene {
 			if (new Login().enterLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
 				messageLoginValidation.setText("Right");
 				messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
-
+				/*
+					going to be changed by hibernate stuff
+				*/
 				DbLoadProfileHome.User.setUser(LoginScene.this.txtUser.getText().toString());
 
 				Window.mainStage.setScene(new HomePageScene());

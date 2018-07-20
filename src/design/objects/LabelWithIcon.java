@@ -5,7 +5,6 @@ import design.objects.LabelWithIcon.LabelType.Type;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import referring.css.ReferringCss;
-import referring.css.ReferringCss.cssFile.cssFiles;
 public class LabelWithIcon extends Label {
 
 	private Type type;
@@ -35,6 +34,8 @@ public class LabelWithIcon extends Label {
 		if (LabelType.Type.PROJECT_INVITE_ICON.equals(type)) {this.getStyleClass().add("EMAIL-ICON");}
 		if (LabelType.Type.PROJECT_INVITE_ICON.equals(type)) {this.getStyleClass().add("PROJECT_INVITE_ICON-ICON");}
 		if (LabelType.Type.NO_ICON.equals(type)) {this.getStyleClass().add("NO_ICON-ICON");}
+		if(LabelType.Type.TITLE.equals(type)) {this.getStyleClass().add("TITLE");
+		}
 		/*
 		 * define backgroundcolor
 		 */

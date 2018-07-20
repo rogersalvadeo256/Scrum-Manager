@@ -109,7 +109,7 @@ public class HomePageScene extends Scene {
 		this.lblNewProject.setFont(new Font(20));
 		this.lblNewProject.setAlignment(Pos.CENTER);
 		this.lblDescription = new Label();
-		this.lblEmail = new LabelWithIcon(12, LabelWithIcon.LabelType.Type.EMAIL_ICON,
+		this.lblEmail = new LabelWithIcon(new String(),12, LabelWithIcon.LabelType.Type.EMAIL_ICON,
 				LabelWithIcon.LabelType.BackgroundColor.GREY,
 				LabelWithIcon.LabelType.BackgroundHoverColor.DARK_GREY_HOVER);
 		this.btnEditBio = new Button("Editar Mensagem");
