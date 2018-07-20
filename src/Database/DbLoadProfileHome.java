@@ -39,27 +39,10 @@ public class DbLoadProfileHome extends DatabaseConnection {
 
 			name = user.getString("name");
 			id = user.getString("user_id");
-			
 //			DbLoadProfileHome.User.setName(name.toString());
 //			DbLoadProfileHome.User.setIdUser(Integer.parseInt(id.toString()));				
-			
-			
-			
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public static class User {
 		
@@ -89,31 +72,4 @@ public class DbLoadProfileHome extends DatabaseConnection {
 	
 	
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

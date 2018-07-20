@@ -12,13 +12,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 
-import Database.DbLoadProfileHome;
-import custom.objects.LabelWithIcon;
+import design.objects.LabelWithIcon;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;

@@ -1,8 +1,6 @@
 package hibernatebook.annotations;
 
 import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="register")
+@Table(name="register", schema="Scrum")
 public class Register {
 	
 	public Register() { 
@@ -18,8 +16,9 @@ public class Register {
 	}
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-	private long id;
+	private int id;
 
 	@Column
 	private String userName;
@@ -29,10 +28,10 @@ public class Register {
 	private String email;
 	@Column
 	private String password;
-	@Embedded
-	private Profile profile;
-	
-	
+//	@Embedded
+//	private Profile profile;
+//	
+//	
 	
 	
 	public String getPassword(){ return password; }
@@ -45,7 +44,7 @@ public class Register {
 	public void setName(String name){this.name = name;}
 
 	public long getId(){ return id;}
-	public void setId(long id){this.id = id;}
+	public void setId(int id){this.id = id;}
 
 	public String getUserName(){return userName;}
 	public void setUserName(String userName){this.userName = userName;}

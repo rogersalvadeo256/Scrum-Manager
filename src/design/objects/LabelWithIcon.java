@@ -1,25 +1,27 @@
-package custom.objects;
-
-import custom.objects.LabelWithIcon.LabelType.BackgroundColor;
-import custom.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
-import custom.objects.LabelWithIcon.LabelType.Type;
+package design.objects;
+import design.objects.LabelWithIcon.LabelType.BackgroundColor;
+import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
+import design.objects.LabelWithIcon.LabelType.Type;
 import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
+import referring.css.ReferringCss;
+import referring.css.ReferringCss.cssFile.cssFiles;
 public class LabelWithIcon extends Label {
 
 	private Type type;
 	private BackgroundColor backColor;
 	private BackgroundHoverColor hoverColor;
 	private int size;
-
-	public LabelWithIcon(int size, Type type, BackgroundColor color, BackgroundHoverColor hover) {
-		this.getStylesheets().add(this.getClass().getResource("/cssStyles/label.css").toExternalForm());
+	private ReferringCss cssReferrer;
+	public LabelWithIcon(String text, int size, Type type, BackgroundColor color, BackgroundHoverColor hover) {
+		this.cssReferrer = new ReferringCss();
+		this.cssReferrer.referringLabel(this);	
+		
 		this.size = size;
 		this.type = type;
 		this.backColor = color;
 		this.hoverColor = hover;
+		this.setText(text);
 		defineLabelStyle();
 	}
 	public void defineLabelStyle() {
@@ -67,7 +69,7 @@ public class LabelWithIcon extends Label {
 	
 	public static class LabelType {
 		public static enum Type {
-			NO_ICON, EMAIL_ICON, FRIEND_ICON, MESSAGE_ICON, PROJECT_INVITE_ICON, SEARCH_BUTTON_ICON
+			TITLE, NO_ICON, EMAIL_ICON, FRIEND_ICON, MESSAGE_ICON, PROJECT_INVITE_ICON, SEARCH_BUTTON_ICON
 		};
 		public static enum BackgroundColor {
 			GREY, DARK_GREY, WHITE, BLACK, GREEN, DARK_GREEN;
@@ -77,56 +79,3 @@ public class LabelWithIcon extends Label {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -21,8 +21,8 @@ public class Window extends Stage {
 		FileInputStream fis = new FileInputStream(f);
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
-// 		mainStage.setScene(new LoginScene());
- 		mainStage.setScene(new HomePageScene());
+ 		mainStage.setScene(new LoginScene());
+// 		mainStage.setScene(new HomePageScene());
  		this.show();
 	}
 	
