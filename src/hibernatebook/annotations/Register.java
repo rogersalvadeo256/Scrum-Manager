@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="register", schema="Scrum")
+@Table(name="register")
 public class Register {
 	
 	public Register() { 
@@ -16,9 +16,9 @@ public class Register {
 	}
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
-	private int id;
+	@GeneratedValue(strategy=GenerationType.SEQUENCE)
+	@Column(name="id")
+	private Integer id;
 
 	@Column
 	private String userName;

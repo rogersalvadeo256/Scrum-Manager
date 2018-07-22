@@ -1,3 +1,4 @@
+
 package hibernatebook.inserts;
 
 import hibernatebook.annotations.Register;
@@ -21,29 +22,4 @@ public class Insert {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
