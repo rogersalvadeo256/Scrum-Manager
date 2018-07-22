@@ -1,9 +1,15 @@
 package scenes;
 
+/*
+	
+	not in use anymore
+	
+*/
+
 import java.sql.SQLException;
 
 import Database.QuerysDataValidation;
-import fields.validation.ValidationOfRegistration;
+import fields.ValidationOfRegistration;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

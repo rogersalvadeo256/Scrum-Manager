@@ -1,12 +1,15 @@
-package auto.instance.objects;
-
+package scenes;
 import java.sql.SQLException;
 
 import design.objects.LabelWithIcon;
 import design.objects.LabelWithIcon.LabelType.BackgroundColor;
 import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
 import design.objects.LabelWithIcon.LabelType.Type;
+<<<<<<< HEAD:src/auto/instance/objects/RegistrationForm.java
 import fields.validation.ValidationOfRegistration;
+=======
+import fields.ValidationOfRegistration;
+>>>>>>> ramoJefter:src/scenes/RegistrationForm.java
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

@@ -7,13 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import Database.DbLoadProfileHome;
 import Database.Login;
-import auto.instance.objects.RegistrationForm;
 import design.objects.LabelWithIcon;
 import design.objects.LabelWithIcon.LabelType.BackgroundColor;
 import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
 import design.objects.LabelWithIcon.LabelType.Type;
 import events.ExitButtonListener;
-import fields.validation.FieldValidation;
+import fields.FieldValidation;
 import hibernatebook.annotations.Register;
 import hibernatebook.inserts.Insert;
 import javafx.event.ActionEvent;
@@ -45,12 +44,10 @@ import referring.css.ReferringCss.cssFile.cssFiles;
  * 		Autor: jefter66
  * 
  */
-
 public class LoginScene extends Scene {
 
 	private final Label messageLoginValidation;
-
-	private LabelWithIcon lblUser, lblSignIn, lblPassword, lblWelcome, lblSignUp;
+	private LabelWithIcon  lblSignIn, lblPassword, lblWelcome, lblSignUp, lblUser;
 	private TextField txtUser;
 	private PasswordField passwordField;
 	private Button btnLogin, btnExit;
@@ -62,7 +59,11 @@ public class LoginScene extends Scene {
 	private HBox rightContainer;
 	private VBox vbLogin;
 	private ImageView imgIcon;
+<<<<<<< HEAD
 	FileInputStream fis;
+=======
+	private FileInputStream fis;
+>>>>>>> ramoJefter
 	private Line line;
 	private ArrayList<RegistrationForm> form;
 	private GridPane layout;
@@ -88,15 +89,28 @@ public class LoginScene extends Scene {
 		this.messageLoginValidation = new Label(new String());
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
+<<<<<<< HEAD
 		this.txtUser = new TextField();
+=======
+		this.lblUser = new LabelWithIcon("Username", 10, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.txtUser = new TextField();
+		this.txtUser.setPromptText("Username");
+		this.lblPassword = new LabelWithIcon("Senha",10, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+>>>>>>> ramoJefter
 		this.passwordField = new PasswordField();
 		this.txtUser.setPromptText("Username");
 		this.passwordField.setPromptText("Digite sua senha");
+<<<<<<< HEAD
 		this.lblUser = new LabelWithIcon("Username", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblPassword = new LabelWithIcon("Senha",  15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblSignIn = new LabelWithIcon("SIGN IN" ,35, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+=======
+		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignIn = new LabelWithIcon("SIGN IN" ,30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+>>>>>>> ramoJefter
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");

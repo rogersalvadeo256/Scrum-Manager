@@ -1,4 +1,4 @@
-package fields.validation;
+package fields;
 
 /*
  * LoginScreen.java
@@ -9,7 +9,7 @@ package fields.validation;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import Database.QuerysDataValidation;
-import alert.messages.MessageDialog;
+import alert.message.MessageDialog;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Dialog;

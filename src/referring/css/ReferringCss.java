@@ -2,6 +2,7 @@ package referring.css;
 
 import java.util.ArrayList;
 
+import alert.message.MessageDialog;
 import design.objects.LabelWithIcon;
 import javafx.scene.Scene;
 
@@ -19,12 +20,41 @@ public class ReferringCss {
 		}
 	}
 	public void referringLabel(LabelWithIcon label) { 
-		label.getStylesheets().add(this.getClass().getResource("/cssStyles/label.css").toExternalForm());
-		
+		label.getStylesheets().add(label.getClass().getResource("/cssStyles/label.css").toExternalForm());
+	}
+	public void referringDialogPane(MessageDialog dialog) {
+		dialog.getStylesheets().add(dialog.getClass().getResource("/cssStyles/dialogPane.css").toExternalForm());
 	}
 	public static class cssFile {
 		public static enum cssFiles {
-			LOGIN;
+			LOGIN, HOME_PAGE_SCENE;
 		};
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

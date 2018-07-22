@@ -1,7 +1,6 @@
 .dialog-pane {
-    -fx-background-color: #f0f0f0f0;
-    
- }
+    -fx-background-color:  black;
+}
 .dialog-pane:header *.header-panel{
   	-fx-background-color: grey;
     -fx-font-size: 18px;
@@ -24,18 +23,3 @@
   -fx-border-radius: 6;
   -fx-background-radius: 6;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
