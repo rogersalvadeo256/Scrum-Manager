@@ -46,7 +46,6 @@ public class ValidationOfRegistration {
 
 	public ValidationOfRegistration() throws ClassNotFoundException, SQLException {
 
-		
 		this.formWarnings = new Alert(null);
 		this.formWarnings.setWidth(60);
 		this.formWarnings.setHeight(40);		
@@ -59,7 +58,7 @@ public class ValidationOfRegistration {
 		this.constArrayFieldEmpty = new ArrayList<String>();
 		this.constArrayDataWrong = new ArrayList<String>();
 		this.constArrayEverthingOK = new ArrayList<String>();
-
+	
 		this.constArrayFieldEmpty.add("Campo nome não foi preenchido");
 		this.constArrayFieldEmpty.add("Email não informado");
 		this.constArrayFieldEmpty.add("Nome de usuario não informado");

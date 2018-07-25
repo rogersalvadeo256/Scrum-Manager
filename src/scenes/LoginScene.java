@@ -59,11 +59,7 @@ public class LoginScene extends Scene {
 	private HBox rightContainer;
 	private VBox vbLogin;
 	private ImageView imgIcon;
-<<<<<<< HEAD
-	FileInputStream fis;
-=======
 	private FileInputStream fis;
->>>>>>> ramoJefter
 	private Line line;
 	private ArrayList<RegistrationForm> form;
 	private GridPane layout;
@@ -89,28 +85,19 @@ public class LoginScene extends Scene {
 		this.messageLoginValidation = new Label(new String());
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
-<<<<<<< HEAD
-		this.txtUser = new TextField();
-=======
-		this.lblUser = new LabelWithIcon("Username", 10, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.txtUser = new TextField();
 		this.txtUser.setPromptText("Username");
-		this.lblPassword = new LabelWithIcon("Senha",10, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
->>>>>>> ramoJefter
 		this.passwordField = new PasswordField();
 		this.txtUser.setPromptText("Username");
 		this.passwordField.setPromptText("Digite sua senha");
-<<<<<<< HEAD
 		this.lblUser = new LabelWithIcon("Username", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblPassword = new LabelWithIcon("Senha",  15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblSignIn = new LabelWithIcon("SIGN IN" ,35, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-=======
 		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 		this.lblSignIn = new LabelWithIcon("SIGN IN" ,30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
->>>>>>> ramoJefter
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");

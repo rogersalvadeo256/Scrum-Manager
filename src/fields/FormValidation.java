@@ -12,14 +12,6 @@ public class FormValidation {
 	/*
 	 * create a class to check stuffs in the db and make the functions here
 	 */
-	private static enum empty {
-		YES, NO
-	};
-	private static enum data_error{
-		YES,NO
-	}
-	
-	private ArrayList<empty> field;
 	private ArrayList<String> outMessage;
 	private ArrayList<String> errorDataMessage;
 	private ArrayList<String> errorFieldMessage;
@@ -28,82 +20,99 @@ public class FormValidation {
 	private ArrayList<String> fieldName;
 	private ArrayList<PasswordField> passwordField;
 	private FieldValidation checkFields;
-	
-	public FormValidation(ArrayList<TextField> field, ArrayList<String> fieldName, ArrayList<PasswordField> passwordField) {
-		this.field = new ArrayList<empty>();
+
+	public FormValidation(ArrayList<TextField> field, ArrayList<String> fieldName,
+			ArrayList<PasswordField> passwordField) {
 		this.outMessage = new ArrayList<String>();
 		this.checkFields = new FieldValidation();
 		this.errorFieldMessage = new ArrayList<String>();
 		this.errorDataMessage = new ArrayList<String>();
 		this.confirmationMessage = new ArrayList<String>();
 		this.txtField = new ArrayList<TextField>();
-		this.txtField =field;
+		this.txtField = field;
 		this.fieldName = new ArrayList<String>();
-		this.fieldName=fieldName;
-		this.passwordField =new ArrayList<PasswordField>();
-		this.passwordField=passwordField;
-		
+		this.fieldName = fieldName;
+		this.passwordField = new ArrayList<PasswordField>();
+		this.passwordField = passwordField;
+
 	}
 
 	private void setFieldForValidation() {
 		this.errorFieldMessage.clear();
-		for (int i = 0; i < field.size(); i++) {
+		for (int i = 0; i < txtField.size(); i++) {
 			if (checkFields.isTextFieldEmpty(this.txtField.get(i))) {
-				this.field.add(empty.YES);
 				this.errorFieldMessage.add("O campo " + this.fieldName.get(i) + " não foi preenchido");
-			} else {
-				this.field.add(empty.NO);
+			}
+			if(this.errorDataMessage.isEmpty()) {
+			 if (emailInUse()) {
+			 this.errorDataMessage.add("Email informado já em uso");
+			 }
+			 if (usernameInUse()) {
+			 this.errorDataMessage.add("Nome de usuario já em uso");
+			 }
 			}
 		}
 	}
-
-	private void setPasswordFieldsForValidation() {
-		for (int i = 0; i < this.passwordField.size(); i++) {
-			if (checkFields.isPasswordFieldEmpty(passwordField.get(i))) {
-				this.errorFieldMessage.add("O campo senha não foi preenchido");
-			}
-		}
-	}
-
+	// private void setPasswordFieldsForValidation() {
+	// for (int i = 0; i < this.passwordField.size(); i++) {
+	// if (checkFields.isPasswordFieldEmpty(passwordField.get(i))) {
+	// this.errorFieldMessage.add("O campo senha não foi preenchido");
+	// }
+	// }
+	// }
 	public CustomAlert message(AlertType alert, String title, String header, String contentText) {
 		return new CustomAlert(alert, title, header, contentText);
 	}
 
-	private void valide(boolean formContainPassword) {
-		if(formContainPassword) {
-			setPasswordFieldsForValidation();
-		}
+	public boolean isDataValid() { // (boolean formContainPassword) {
+		// if (formContainPassword) {
+		// setPasswordFieldsForValidation();
+		// }
 		setFieldForValidation();
 		/*
 		 * add the query for checking the data
 		 */
-		for (int i = 0; i < field.size(); i++) {
-			for (int j = 0; j < this.field.size(); j++) {
-				this.outMessage.add(this.errorFieldMessage.get(j));
-				this.outMessage.add(this.errorDataMessage.get(j));
+		if(!this.errorDataMessage.isEmpty() || !this.errorFieldMessage.isEmpty()) {
+			StringBuilder fieldEmptymessage = new StringBuilder();
+			StringBuilder dataErrorMessage = new StringBuilder();
+			for (String msg : this.errorFieldMessage) {
+				fieldEmptymessage.append(msg + "\n");
 			}
-		}
-		if (!this.errorFieldMessage.isEmpty()) {
-			StringBuilder message = new StringBuilder();
-			for (String msg : outMessage) {
-				message.append(msg + "\n");
+			for(String msg: this.errorDataMessage) {
+				dataErrorMessage.append(msg + "\n");
 			}
+			String outMessage = fieldEmptymessage.toString() + dataErrorMessage.toString();
+			
+			this.message(AlertType.ERROR, "ERRO", "Algo errado", outMessage.toString());
+			outMessage = new String();
 			this.outMessage.clear();
 			this.errorFieldMessage.clear();
-			this.message(AlertType.ERROR, "Erro", "Algo está errado", message.toString());
-			return;
+			this.errorDataMessage.clear();
+			return false;
 		}
-		if(!!this.errorDataMessage.isEmpty()) {
-			
-			StringBuilder message=new StringBuilder();
-			for(String msg: outMessage) {
-				message.append(msg + "\n");
-			}
-			
+		if (this.outMessage.isEmpty() && !this.confirmationMessage.isEmpty()) {
+			this.message(AlertType.CONFIRMATION, this.confirmationMessage.get(0), this.confirmationMessage.get(1),
+					this.confirmationMessage.get(2));
+			this.outMessage.clear();
+			this.errorFieldMessage.clear();
+			this.errorDataMessage.clear();
+			return true;
 		}
-		
+		this.outMessage.clear();
+		this.errorFieldMessage.clear();
+		this.errorDataMessage.clear();
+		return false;
+	}
+	/*
+	 * do query in hibernate where
+	 */
+	private boolean emailInUse() {
+		return true;
 	}
 
+	private boolean usernameInUse() {
+		return true;
+	}
 	/*
 	 * for setting the message in the dialog alert
 	 */
@@ -111,10 +120,9 @@ public class FormValidation {
 		this.confirmationMessage.clear();
 		for (int i = 0; i < message.size(); i++) {
 			/*
-			 * the index 0 - title 1 = header 2 = content
+			 * the index 0 = title -- 1 = header -- 2 = content
 			 */
 			this.confirmationMessage.add(message.get(i));
 		}
 	}
-
 }
