@@ -1,4 +1,4 @@
-package Database;
+package Database.Obsoleto;
 
 import java.sql.SQLException;
 

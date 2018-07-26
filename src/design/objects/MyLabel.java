@@ -1,18 +1,18 @@
 package design.objects;
-import design.objects.LabelWithIcon.LabelType.BackgroundColor;
-import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
-import design.objects.LabelWithIcon.LabelType.Type;
+import design.objects.MyLabel.LabelType.BackgroundColor;
+import design.objects.MyLabel.LabelType.BackgroundHoverColor;
+import design.objects.MyLabel.LabelType.Type;
 import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 import referring.css.ReferringCss;
-public class LabelWithIcon extends Label {
+public class MyLabel extends Label {
 
 	private Type type;
 	private BackgroundColor backColor;
 	private BackgroundHoverColor hoverColor;
 	private int size;
 	private ReferringCss cssReferrer;
-	public LabelWithIcon(String text, int size, Type type, BackgroundColor color, BackgroundHoverColor hover) {
+	public MyLabel(String text, int size, Type type, BackgroundColor color, BackgroundHoverColor hover) {
 		this.cssReferrer = new ReferringCss();
 		this.cssReferrer.referringLabel(this);	
 		

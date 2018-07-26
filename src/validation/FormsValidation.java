@@ -1,4 +1,4 @@
-package fields;
+package validation;
 
 import java.util.ArrayList;
 
@@ -7,7 +7,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class FormValidation {
+public class FormsValidation {
 
 	/*
 	 * create a class to check stuffs in the db and make the functions here
@@ -19,12 +19,12 @@ public class FormValidation {
 	private ArrayList<TextField> txtField;
 	private ArrayList<String> fieldName;
 	private ArrayList<PasswordField> passwordField;
-	private FieldValidation checkFields;
+	private CheckEmptyFields checkFields;
 
-	public FormValidation(ArrayList<TextField> field, ArrayList<String> fieldName,
+	public FormsValidation(ArrayList<TextField> field, ArrayList<String> fieldName,
 			ArrayList<PasswordField> passwordField) {
 		this.outMessage = new ArrayList<String>();
-		this.checkFields = new FieldValidation();
+		this.checkFields = new CheckEmptyFields();
 		this.errorFieldMessage = new ArrayList<String>();
 		this.errorDataMessage = new ArrayList<String>();
 		this.confirmationMessage = new ArrayList<String>();

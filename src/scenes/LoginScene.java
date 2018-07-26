@@ -5,15 +5,19 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Database.DbLoadProfileHome;
-import Database.Login;
-import design.objects.LabelWithIcon;
-import design.objects.LabelWithIcon.LabelType.BackgroundColor;
-import design.objects.LabelWithIcon.LabelType.BackgroundHoverColor;
-import design.objects.LabelWithIcon.LabelType.Type;
+
+import Database.Obsoleto.DbLoadProfileHome;
+import Database.Obsoleto.Login;
+import Database.Obsoleto.DbLoadProfileHome.User;
+import design.objects.MyLabel;
+import design.objects.MyLabel.LabelType.BackgroundColor;
+import design.objects.MyLabel.LabelType.BackgroundHoverColor;
+import design.objects.MyLabel.LabelType.Type;
 import events.ExitButtonListener;
-import fields.FieldValidation;
-import hibernatebook.annotations.Register;
+import hibernatebook.annotations.Profile;
+import hibernatebook.annotations.UserRegistration;
+import hibernatebook.entity.provider.EntityProvider;
+import hibernatebook.entity.provider.EntityProvider.Factory;
 import hibernatebook.inserts.Insert;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,6 +40,7 @@ import javafx.scene.shape.Line;
 import main.Window;
 import referring.css.ReferringCss;
 import referring.css.ReferringCss.cssFile.cssFiles;
+import validation.CheckEmptyFields;
 
 /*
  * LoginScreen.java
@@ -47,7 +52,7 @@ import referring.css.ReferringCss.cssFile.cssFiles;
 public class LoginScene extends Scene {
 
 	private final Label messageLoginValidation;
-	private LabelWithIcon  lblSignIn, lblPassword, lblWelcome, lblSignUp, lblUser;
+	private MyLabel  lblSignIn, lblPassword, lblWelcome, lblSignUp, lblUser;
 	private TextField txtUser;
 	private PasswordField passwordField;
 	private Button btnLogin, btnExit;
@@ -61,11 +66,11 @@ public class LoginScene extends Scene {
 	private ImageView imgIcon;
 	private FileInputStream fis;
 	private Line line;
-	private ArrayList<RegistrationForm> form;
+	private ArrayList<RegistrationFormScene> form;
 	private GridPane layout;
 	private File iconPath;
 	private ReferringCss cssReferrer;
-	public LoginScene() throws ClassNotFoundException, SQLException {
+	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		this.cssReferrer = new ReferringCss();
 		this.cssReferrer.referringScene(this, cssFiles.LOGIN);
@@ -77,7 +82,7 @@ public class LoginScene extends Scene {
 		
 		this.left = new VBox();
 		this.leftRegistration = new VBox();
-		this.form = new ArrayList<RegistrationForm>();
+		this.form = new ArrayList<RegistrationFormScene>();
 		this.right = new HBox();
 		this.vbLogin = new VBox();
 		this.rightContainer = new HBox();
@@ -90,14 +95,14 @@ public class LoginScene extends Scene {
 		this.passwordField = new PasswordField();
 		this.txtUser.setPromptText("Username");
 		this.passwordField.setPromptText("Digite sua senha");
-		this.lblUser = new LabelWithIcon("Username", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblPassword = new LabelWithIcon("Senha",  15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblSignIn = new LabelWithIcon("SIGN IN" ,35, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblWelcome = new LabelWithIcon("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblSignUp = new LabelWithIcon("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblSignIn = new LabelWithIcon("SIGN IN" ,30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblUser = new MyLabel("Username", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblPassword = new MyLabel("Senha",  15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblWelcome = new MyLabel("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignUp = new MyLabel("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignIn = new MyLabel("SIGN IN" ,35, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblWelcome = new MyLabel("Bem Vindo Ao \n Scrum Manager", 30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignUp = new MyLabel("Registre-se Agora", 20, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblSignIn = new MyLabel("SIGN IN" ,30, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");
@@ -118,10 +123,16 @@ public class LoginScene extends Scene {
 				/*
 				 * tests area
 				 */
-				Insert insert = new Insert();	
-				Register registrar = new Register();
-				registrar.setName(LoginScene.this.txtUser.getText());
-				insert.insertRegister(registrar);
+				Factory.entityManager.getTransaction().begin();
+				hibernatebook.queries.Login login = new hibernatebook.queries.Login();
+					try {
+						login.field(LoginScene.this.txtUser, LoginScene.this.passwordField);
+					} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				
+				
 			/*
 			 */
 			}
@@ -130,7 +141,22 @@ public class LoginScene extends Scene {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.ENTER) {
-					logar();
+						try {
+//							logar();
+							
+							hibernatebook.queries.Login login = new hibernatebook.queries.Login();
+							login.field(LoginScene.this.txtUser, LoginScene.this.passwordField);
+							
+						} catch (FileNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (ClassNotFoundException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 				}
 			}
 		});
@@ -138,12 +164,7 @@ public class LoginScene extends Scene {
 		this.imgIcon = new ImageView();
 		this.imgIcon.setId("logoImage");
 		this.iconPath = new File("/home/jefter66/java-workspace/SCRUM/resources/images/icons/scrum_icon.png");
-		try {
 			fis = new FileInputStream(iconPath);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		this.imgIcon.setImage(new Image(fis));
 		/*
 		 * this is is important
@@ -159,9 +180,9 @@ public class LoginScene extends Scene {
 			@Override
 			public void handle(ActionEvent event) {
 				signUpPressed();
-				RegistrationForm t;
+				RegistrationFormScene t;
 				try {
-					t = new RegistrationForm();
+					t = new RegistrationFormScene();
 					form.add(t);
 					if (!form.isEmpty()) {
 						LoginScene.this.leftRegistration.getChildren().clear();
@@ -184,36 +205,22 @@ public class LoginScene extends Scene {
 			}
 		});	
 		settingAligment();
-		transaleAxes();
+		setTransaleAxis();
 		addingChildrens();
-		componentsPrefSize();
-		componentsMaxSize();
+		setComponentsPrefSize();
+		setComponentsMaxSize();
 		positioningComponentsOnLayout();
 		this.setRoot(layout);
 	}
-	private void logar() {
-		try {
-			FieldValidation checkField = new FieldValidation();
-			if (checkField.isTextFieldEmpty(LoginScene.this.txtUser) || checkField.isPasswordFieldEmpty(LoginScene.this.passwordField)){
-				messageLoginValidation.setText("There is nothing typed");
-			}
-			if (new Login().enterLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
-				messageLoginValidation.setText("Right");
-				messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
-				/*
-					going to be changed by hibernate stuff
-				*/
-				DbLoadProfileHome.User.setUser(LoginScene.this.txtUser.getText().toString());
-
-				Window.mainStage.setScene(new HomePageScene());
-			} else {
-				messageLoginValidation.setText("Username or password wrog");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+	private void logar() throws FileNotFoundException, ClassNotFoundException, SQLException {
+				
+		hibernatebook.queries.Login log = new hibernatebook.queries.Login();
+		log.field(LoginScene.this.txtUser, LoginScene.this.passwordField);
+		
+		
+		messageLoginValidation.setText(log.dataIsValid());
+		messageLoginValidation.setTextFill(Color.rgb(524, 117, 84));
+		
 	}
 	private void cancelPressed() { 
 		LoginScene.this.imgIcon.setTranslateX(100);
@@ -238,7 +245,7 @@ public class LoginScene extends Scene {
 		LoginScene.this.layout.add(lblSignUp, 0, 1, 1, 1);
 		LoginScene.this.layout.add(left, 0, 0, 1, 1);
 	}
-	private void transaleAxes() { 
+	private void setTransaleAxis() { 
 		LoginScene.this.imgIcon.setTranslateX(100);
 		LoginScene.this.lblWelcome.setTranslateX(-450);
 		LoginScene.this.lblSignUp.setTranslateY(-400);
@@ -257,7 +264,7 @@ public class LoginScene extends Scene {
 		LoginScene.this.btnCancel.setTranslateY(-400);
 		LoginScene.this.left.setTranslateY(100);
 	}
-	private void componentsMaxSize() { 
+	private void setComponentsMaxSize() { 
 		LoginScene.this.layout.setMaxHeight(500);
 		LoginScene.this.layout.setMaxWidth(500);
 		LoginScene.this.layout.setMinWidth(500);
@@ -269,7 +276,7 @@ public class LoginScene extends Scene {
 		LoginScene.this.btnCancel.setMaxWidth(100);
 		LoginScene.this.left.setMaxWidth(800);	
 	}
-	private void componentsPrefSize() { 
+	private void setComponentsPrefSize() { 
 		LoginScene.this.imgIcon.setFitWidth(400);
 		LoginScene.this.imgIcon.setFitHeight(400);
 		LoginScene.this.left.setPrefWidth(650);

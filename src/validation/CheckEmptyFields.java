@@ -1,11 +1,11 @@
-package fields;
+package validation;
 
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class FieldValidation { 
+public class CheckEmptyFields { 
 
-	public FieldValidation(){  
+	public CheckEmptyFields(){  
 
 	}
 	public boolean isTextFieldEmpty(TextField tfield) { 

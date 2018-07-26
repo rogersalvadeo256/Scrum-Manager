@@ -10,13 +10,13 @@ package scenes;
  * 
  */
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import Database.DbCreateProject;
+import Database.Obsoleto.DbCreateProject;
 import auto.instance.objects.CreateHBoxWithTextFields;
 import events.ExitButtonListener;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -185,6 +185,9 @@ public class newProjectScene extends Scene {
 				try {
 					Window.mainStage.setScene(new HomePageScene());
 				} catch (ClassNotFoundException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}

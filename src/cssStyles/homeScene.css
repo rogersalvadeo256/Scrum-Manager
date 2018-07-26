@@ -1,24 +1,28 @@
 .root{
-	-fx-background-color:#2E8B57;
-
+	-fx-background-color:#fffffd;
 }
-.label{
-	-fx-text-fill:white;	
+.hbox#header{
+	-fx-background-color:#211919;
+	-fx-pref-height:50;
 }
-
+.vbox#profile-info{
+	-fx-background-color:#AEA2A2;
+	
+}
+.hbox#menu{
+	-fx-background-color:#211919;
+}
 .button{
 	-fx-text-fill:green;
-	-fx-background-color:white;
-	-fx-padding:10.0;
-	-fx-background-radius: 15.0 15.0 15.0 15.0;
+	-fx-background-color:grey;
 }
 .button:hover{
 	-fx-text-fill:black;
-	-fx-background-color:#33d77a;
+	-fx-background-color:black;
 }
 .button {
-    -fx-pref-width: 200.0px;
-    -fx-pref-height: 50.0px;
+    -fx-pref-width: 80.0px;
+    -fx-pref-height: 5.0px;
 }
 
 #exitbtn:hover{

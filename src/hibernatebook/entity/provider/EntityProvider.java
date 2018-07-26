@@ -5,13 +5,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class EntityProvider {
+	
+	public static class Factory {
+		public static  EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("HibernatePU");;
+		public static EntityManager entityManager = FACTORY.createEntityManager();
+	
 
-	private EntityManagerFactory factory;
-	public EntityManager entityManager;
-	public EntityProvider() {
-		this.factory = Persistence.createEntityManagerFactory("HibernatePU");
-		this.entityManager = factory.createEntityManager();
 	}
-
-
 }

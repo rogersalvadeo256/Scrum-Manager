@@ -10,30 +10,27 @@ import javax.persistence.Table;
 
 import javassist.bytecode.ByteArray;
 
-@Embeddable
+@Entity
 @Table(name="profile")
 public class Profile {
 	
-	
 	@Id
-//	@GeneratedValue(strategy=GenerationType.AUTO) 	
+	@GeneratedValue(strategy=GenerationType.IDENTITY) 	
 	@Column(name="id")
-	private int id;
-	
+	private long id;
 	@Column
-	String details;
-	
-	public int getId() {
-		return id;
-	}
+	private  String details;
+	@Column 
+	private String name;
+//	@Column
+//	private Friend friends;
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
-	
-	
+	public long getId() {return id;}
+	public void setId(int id) {this.id = id;}
+
+	public String getName(){ return name;}
+	public void setName(String name){this.name = name;}
+
 	
 
 }
