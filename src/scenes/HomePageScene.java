@@ -53,8 +53,7 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private ImageView profileImg;
 
-	private MyLabel lblName, lblUsername, lblNewProject, lblCurrentProject, lblProjectsDone;
-	private Label lblDescription;
+	private Label lblName, lblUsername, lblNewProject, lblCurrentProject, lblProjectsDone, lblDescription;
 	private Button btnEditBio;
 	private MyLabel lblEmail;
 
@@ -81,18 +80,17 @@ public class HomePageScene extends Scene {
 		
 		referrer.referringScene(this, cssFiles.HOME_PAGE_SCENE);
 
-		this.lblName = new MyLabel("name come from the DB", 20, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblUsername = new MyLabel(" come from the DB", 15, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblNewProject = new MyLabel("Começar um novo projeto", 20, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblCurrentProject = new MyLabel("Projetos em andamento", 15, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblProjectsDone = new MyLabel("Projetos finalizados", 15, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
+		this.lblName = new Label("name come from the DB");
+		this.lblUsername = new Label("user come from the DB");
+		this.lblNewProject = new Label("Começar um novo projeto");
+		this.lblCurrentProject = new Label("Projetos em andamento");
+		this.lblProjectsDone = new Label("Projetos finalizados");
 		/*
 		 * the user can edit this
+		 */
+		
+		/*
+		 * images for the scene
 		 */
 		this.iconPath.add(new File("resources/images/icons/scrum_icon.png"));
 		this.iconPath.add(new File("resources/images/icons/envelope.png"));
@@ -143,14 +141,23 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setTranslateX(20);
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setPrefWidth(300);
+
 		this.lblDescription=new Label();
-		this.lblDescription.setText("something asfokajflakalskfjalkfjasflksaflkjs \n lafskjalfkjlkasfjljk \n aksfjjalfjk");
+		
 		this.profileImg=new ImageView();
-		this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
-		this.btnEditBio=new Button();
+	
+		this.btnEditBio=new Button("Editar Mensagem");
+		this.btnEditBio.setPrefWidth(200);
+		this.btnEditBio.setPrefHeight(80);
+		
 		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblDescription, btnEditBio);
+		/*
+		 * database
+		 */
+		this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
+		this.lblDescription.setText("something asfokajflakalskfjalkfjasflksaflkjs \n lafskjalfkjlkasfjljk \n aksfjjalfjk");
 
 		this.layout.add(vbProfileInfo, 0, 1, 1, 5);
 		this.vbProfileInfo.setPrefHeight(Window.mainStage.getMaxHeight());
@@ -173,9 +180,8 @@ public class HomePageScene extends Scene {
 		
 		
 		
-		positioningComponentsOnLayout();
-		this.layout.setHgap(15);
-		this.layout.setVgap(20);
+//		this.layout.setHgap(15);
+//		this.layout.setVgap(20);
 		this.setRoot(layout);
 
 	}
@@ -183,25 +189,6 @@ public class HomePageScene extends Scene {
 		image.setFitHeight(80);
 		image.setFitWidth(80);
 		image.setImage(new Image(this.fis.get(fis)));		
-	}
-	private void positioningComponentsOnLayout() {
-
-	}
-
-	private void setComponentsMaxSize() {
-
-	}
-
-	private void setComponentsPrefSize() {
-
-	}
-
-	private void setTransaleAxes() {
-
-	}
-
-	private void setAligment() {
-
 	}
 
 }

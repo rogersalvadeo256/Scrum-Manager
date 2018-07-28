@@ -4,6 +4,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+
+import hibernatebook.entity.provider.EntityProvider;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import scenes.HomePageScene;
@@ -11,7 +13,7 @@ import scenes.LoginScene;
 
 public class Window extends Stage {
 
-	
+	public static EntityProvider DB;
 	public static Stage mainStage;
 	FileOutputStream fis;
 	public  Window() throws ClassNotFoundException, SQLException, FileNotFoundException {
@@ -21,8 +23,12 @@ public class Window extends Stage {
 		FileInputStream fis = new FileInputStream(f);
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
- 		mainStage.setScene(new LoginScene());
-// 		mainStage.setScene(new HomePageScene());
+ 		
+// 		Window.this.DB = new EntityProvider();
+ 		
+ 		
+// 		mainStage.setScene(new LoginScene());
+ 		mainStage.setScene(new HomePageScene());
  		this.show();
 	}
 	

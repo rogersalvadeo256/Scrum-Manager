@@ -21,8 +21,6 @@
 	-fx-background-color:black;
 }
 .button {
-    -fx-pref-width: 80.0px;
-    -fx-pref-height: 5.0px;
 }
 
 #exitbtn:hover{

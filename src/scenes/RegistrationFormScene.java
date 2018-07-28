@@ -8,7 +8,6 @@ import design.objects.MyLabel.LabelType.BackgroundHoverColor;
 import design.objects.MyLabel.LabelType.Type;
 import hibernatebook.annotations.Profile;
 import hibernatebook.annotations.UserRegistration;
-import hibernatebook.entity.provider.EntityProvider.Factory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -16,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import net.bytebuddy.asm.Advice.ArgumentHandler.Factory;
 import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
@@ -91,19 +91,12 @@ public class RegistrationFormScene extends VBox {
 				cadastro.setUserName(RegistrationFormScene.this.txtUserName.getText());
 				perfil.setName(RegistrationFormScene.this.txtName.getText()); 
 				cadastro.setProfile(perfil);
+				/*
+				 * persist
+				 */
 				
-				Factory.entityManager.getTransaction().begin();
-				Factory.entityManager.persist(cadastro);
-				Factory.entityManager.getTransaction().commit();
-				Factory.entityManager.clear();
-				Factory.entityManager.close();
 				
-//				if(RegistrationFormScene.this.validation.isDataValid()) {
-////					 insert  into db
-//					
-//				} else { 
-////					treat the error
-//				}
+				
 			}
 		});
 		this.setAlignment(Pos.CENTER);
