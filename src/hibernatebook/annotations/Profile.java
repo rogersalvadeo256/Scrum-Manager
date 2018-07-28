@@ -16,12 +16,13 @@ public class Profile {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 	
-	@Column(name="id")
+	@Column(name="codProfile")
 	private long id;
 	@Column
 	private  String details;
 	@Column 
 	private String name;
+	
 //	@Column
 //	private Friend friends;
 

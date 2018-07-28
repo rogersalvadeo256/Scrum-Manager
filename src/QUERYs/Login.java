@@ -1,4 +1,4 @@
-package hibernatebook.queries;
+package QUERYs;
 
 import java.io.FileNotFoundException;
 import java.sql.ResultSet;

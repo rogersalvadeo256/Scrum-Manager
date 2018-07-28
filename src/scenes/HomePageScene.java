@@ -66,13 +66,18 @@ public class HomePageScene extends Scene {
 	private VBox vbProfileInfo;
 
 	private HBox hbMenu;
+	private Button btnProject, btnStartProject,btnfriends; 
+
+	private HBox hbProjectsArea;
+	private VBox vbLeftColumn,vbMiddleColumn,vbRightColumn;
+	
 	private ReferringCss referrer;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		this.layout = new GridPane();
 		Window.mainStage.setTitle("Home");
-		Window.mainStage.setWidth(1200);
+		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
 		this.referrer = new ReferringCss();
 		this.iconPath =new ArrayList<File>();
@@ -138,7 +143,6 @@ public class HomePageScene extends Scene {
 
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setAlignment(Pos.TOP_CENTER);
-		this.vbProfileInfo.setTranslateX(20);
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setPrefWidth(300);
 
@@ -151,8 +155,9 @@ public class HomePageScene extends Scene {
 		this.btnEditBio=new Button("Editar Mensagem");
 		this.btnEditBio.setPrefWidth(200);
 		this.btnEditBio.setPrefHeight(80);
-		
+
 		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblDescription, btnEditBio);
+
 		/*
 		 * database
 		 */
@@ -167,20 +172,58 @@ public class HomePageScene extends Scene {
 		this.hbMenu.getStyleClass().add("hbox");
 		this.hbMenu.setId("menu");
 		this.hbMenu.setSpacing(20);
+		this.hbMenu.setPrefWidth(800);
+		
+		this.btnStartProject=new Button("Começar projeto");		
+		this.btnProject=new Button("Meus Projetos");
+		this.btnfriends=new Button("Amigos");
+		this.hbMenu.setAlignment(Pos.CENTER);
+		this.hbMenu.setSpacing(20);
+		this.hbMenu.getChildren().addAll(btnStartProject,btnProject,btnfriends);
 		
 		Label a = new Label("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		this.hbMenu.getChildren().add(a);
 		this.layout.add(hbMenu, 1, 1, 1, 1);
 		
+		this.hbProjectsArea=new HBox();
+		
+		
+		this.vbLeftColumn=new VBox();
+		this.vbLeftColumn.getStyleClass().add("vbox");
+		this.vbLeftColumn.setId("vbLeft");
+		
+		this.vbLeftColumn.setPrefWidth(250);
+		this.vbLeftColumn.setPrefHeight(700);
+		
+		this.vbMiddleColumn=new VBox(); 
+		this.vbMiddleColumn.getStyleClass().add("vbox");
+		this.vbMiddleColumn.setId("vbMiddle");
+		
+		
+		this.vbMiddleColumn.setPrefWidth(250);
+		this.vbMiddleColumn.setPrefHeight(700);
+		
+		this.vbRightColumn=new VBox();
+		this.vbRightColumn.getStyleClass().add("vbox");
+		this.vbRightColumn.setId("vbRight");
+		
+		this.vbRightColumn.setPrefWidth(250);
+		this.vbRightColumn.setPrefHeight(700);
+		
+		this.vbLeftColumn.getChildren().add(new Label("aaaaaaaaaaaaaaaa"));
+		this.vbRightColumn.getChildren().add(new Label("bbbbbbbbbbbbbbbb"));
+		this.vbMiddleColumn.getChildren().add(new Label("ccccccccccccccc"));
+		
+		
+		
+		this.hbProjectsArea.getChildren().addAll(vbLeftColumn,vbMiddleColumn,vbRightColumn);
+		this.layout.add(hbProjectsArea, 1, 2, 1, 1);
+
 		
 		
 		
 		
-		
-		
-		
-		
-//		this.layout.setHgap(15);
+		//		this.layout.setHgap(15);
 //		this.layout.setVgap(20);
 		this.setRoot(layout);
 

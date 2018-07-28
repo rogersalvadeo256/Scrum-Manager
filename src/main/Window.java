@@ -5,15 +5,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
 
-import hibernatebook.entity.provider.EntityProvider;
+import javax.persistence.EntityManager;
+
+import DB.Factory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import scenes.HomePageScene;
 import scenes.LoginScene;
 
 public class Window extends Stage {
 
-	public static EntityProvider DB;
+	public static EntityManager DB;
 	public static Stage mainStage;
 	FileOutputStream fis;
 	public  Window() throws ClassNotFoundException, SQLException, FileNotFoundException {
@@ -24,11 +25,10 @@ public class Window extends Stage {
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
  		
-// 		Window.this.DB = new EntityProvider();
+ 		Window.this.DB = Factory.createEntityManager();
  		
  		
-// 		mainStage.setScene(new LoginScene());
- 		mainStage.setScene(new HomePageScene());
+ 		mainStage.setScene(new LoginScene());
  		this.show();
 	}
 	

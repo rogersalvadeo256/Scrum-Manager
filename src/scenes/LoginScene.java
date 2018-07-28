@@ -5,8 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import QUERYs.Login;
 import events.ExitButtonListener;
-import hibernatebook.queries.Login;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

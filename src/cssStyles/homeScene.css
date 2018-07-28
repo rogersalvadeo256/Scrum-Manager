@@ -10,7 +10,17 @@
 	
 }
 .hbox#menu{
-	-fx-background-color:#211919;
+	-fx-background-color:green;
+	-fx-pref-height:50;
+}
+.vbox#vbLeft{
+	-fx-background-color:purple;
+}
+.vbox#vbMiddle{
+	-fx-background-color:pink;
+}
+.vbox#vbRight{ 
+	-fx-background-color:yellow;
 }
 .button{
 	-fx-text-fill:green;
