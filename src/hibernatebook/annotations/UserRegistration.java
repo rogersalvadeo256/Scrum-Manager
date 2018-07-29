@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name="user_registration")
 public class UserRegistration {
 	public UserRegistration() { 
-		
+		this.userProfile=new Profile();
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +27,11 @@ public class UserRegistration {
 	private String email;
 	@Column
 	private String password;
-	
+
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="Profile")
 	private Profile userProfile;
+	
 	
 	public Profile getProfile() {
 		return this.userProfile;
@@ -51,10 +52,38 @@ public class UserRegistration {
 	public long getId(){ return id;}
 	public void setId(int id){this.id = id;}
 
-
-	
-	
-	
-	
-	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

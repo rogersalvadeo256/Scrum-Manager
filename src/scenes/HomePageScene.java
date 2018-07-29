@@ -53,8 +53,7 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private ImageView profileImg;
 
-	private MyLabel lblName, lblUsername, lblNewProject, lblCurrentProject, lblProjectsDone;
-	private Label lblDescription;
+	private Label lblName, lblUsername, lblNewProject, lblCurrentProject, lblProjectsDone, lblDescription;
 	private Button btnEditBio;
 	private MyLabel lblEmail;
 
@@ -67,13 +66,18 @@ public class HomePageScene extends Scene {
 	private VBox vbProfileInfo;
 
 	private HBox hbMenu;
+	private Button btnProject, btnStartProject,btnfriends; 
+
+	private HBox hbProjectsArea;
+	private VBox vbLeftColumn,vbMiddleColumn,vbRightColumn;
+	
 	private ReferringCss referrer;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		this.layout = new GridPane();
 		Window.mainStage.setTitle("Home");
-		Window.mainStage.setWidth(1200);
+		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
 		this.referrer = new ReferringCss();
 		this.iconPath =new ArrayList<File>();
@@ -81,18 +85,17 @@ public class HomePageScene extends Scene {
 		
 		referrer.referringScene(this, cssFiles.HOME_PAGE_SCENE);
 
-		this.lblName = new MyLabel("name come from the DB", 20, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblUsername = new MyLabel(" come from the DB", 15, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblNewProject = new MyLabel("Começar um novo projeto", 20, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblCurrentProject = new MyLabel("Projetos em andamento", 15, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
-		this.lblProjectsDone = new MyLabel("Projetos finalizados", 15, Type.TITLE, BackgroundColor.WHITE,
-				BackgroundHoverColor.DARK_GREY_HOVER);
+		this.lblName = new Label("name come from the DB");
+		this.lblUsername = new Label("user come from the DB");
+		this.lblNewProject = new Label("Começar um novo projeto");
+		this.lblCurrentProject = new Label("Projetos em andamento");
+		this.lblProjectsDone = new Label("Projetos finalizados");
 		/*
 		 * the user can edit this
+		 */
+		
+		/*
+		 * images for the scene
 		 */
 		this.iconPath.add(new File("resources/images/icons/scrum_icon.png"));
 		this.iconPath.add(new File("resources/images/icons/envelope.png"));
@@ -140,17 +143,26 @@ public class HomePageScene extends Scene {
 
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setAlignment(Pos.TOP_CENTER);
-		this.vbProfileInfo.setTranslateX(20);
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setPrefWidth(300);
+
 		this.lblDescription=new Label();
-		this.lblDescription.setText("something asfokajflakalskfjalkfjasflksaflkjs \n lafskjalfkjlkasfjljk \n aksfjjalfjk");
+		
 		this.profileImg=new ImageView();
-		this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
-		this.btnEditBio=new Button();
+	
+		this.btnEditBio=new Button("Editar Mensagem");
+		this.btnEditBio.setPrefWidth(200);
+		this.btnEditBio.setPrefHeight(80);
+
 		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblDescription, btnEditBio);
+
+		/*
+		 * database
+		 */
+		this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
+		this.lblDescription.setText("something asfokajflakalskfjalkfjasflksaflkjs \n lafskjalfkjlkasfjljk \n aksfjjalfjk");
 
 		this.layout.add(vbProfileInfo, 0, 1, 1, 5);
 		this.vbProfileInfo.setPrefHeight(Window.mainStage.getMaxHeight());
@@ -160,22 +172,59 @@ public class HomePageScene extends Scene {
 		this.hbMenu.getStyleClass().add("hbox");
 		this.hbMenu.setId("menu");
 		this.hbMenu.setSpacing(20);
+		this.hbMenu.setPrefWidth(800);
+		
+		this.btnStartProject=new Button("Começar projeto");		
+		this.btnProject=new Button("Meus Projetos");
+		this.btnfriends=new Button("Amigos");
+		this.hbMenu.setAlignment(Pos.CENTER);
+		this.hbMenu.setSpacing(20);
+		this.hbMenu.getChildren().addAll(btnStartProject,btnProject,btnfriends);
 		
 		Label a = new Label("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 		this.hbMenu.getChildren().add(a);
 		this.layout.add(hbMenu, 1, 1, 1, 1);
 		
+		this.hbProjectsArea=new HBox();
+		
+		
+		this.vbLeftColumn=new VBox();
+		this.vbLeftColumn.getStyleClass().add("vbox");
+		this.vbLeftColumn.setId("vbLeft");
+		
+		this.vbLeftColumn.setPrefWidth(250);
+		this.vbLeftColumn.setPrefHeight(700);
+		
+		this.vbMiddleColumn=new VBox(); 
+		this.vbMiddleColumn.getStyleClass().add("vbox");
+		this.vbMiddleColumn.setId("vbMiddle");
+		
+		
+		this.vbMiddleColumn.setPrefWidth(250);
+		this.vbMiddleColumn.setPrefHeight(700);
+		
+		this.vbRightColumn=new VBox();
+		this.vbRightColumn.getStyleClass().add("vbox");
+		this.vbRightColumn.setId("vbRight");
+		
+		this.vbRightColumn.setPrefWidth(250);
+		this.vbRightColumn.setPrefHeight(700);
+		
+		this.vbLeftColumn.getChildren().add(new Label("aaaaaaaaaaaaaaaa"));
+		this.vbRightColumn.getChildren().add(new Label("bbbbbbbbbbbbbbbb"));
+		this.vbMiddleColumn.getChildren().add(new Label("ccccccccccccccc"));
+		
+		
+		
+		this.hbProjectsArea.getChildren().addAll(vbLeftColumn,vbMiddleColumn,vbRightColumn);
+		this.layout.add(hbProjectsArea, 1, 2, 1, 1);
+
 		
 		
 		
 		
-		
-		
-		
-		
-		positioningComponentsOnLayout();
-		this.layout.setHgap(15);
-		this.layout.setVgap(20);
+		//		this.layout.setHgap(15);
+//		this.layout.setVgap(20);
 		this.setRoot(layout);
 
 	}
@@ -183,25 +232,6 @@ public class HomePageScene extends Scene {
 		image.setFitHeight(80);
 		image.setFitWidth(80);
 		image.setImage(new Image(this.fis.get(fis)));		
-	}
-	private void positioningComponentsOnLayout() {
-
-	}
-
-	private void setComponentsMaxSize() {
-
-	}
-
-	private void setComponentsPrefSize() {
-
-	}
-
-	private void setTransaleAxes() {
-
-	}
-
-	private void setAligment() {
-
 	}
 
 }

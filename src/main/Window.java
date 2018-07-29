@@ -4,14 +4,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+
+import javax.persistence.EntityManager;
+
+import DB.Factory;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import scenes.HomePageScene;
 import scenes.LoginScene;
 
 public class Window extends Stage {
 
-	
+	public static EntityManager DB;
 	public static Stage mainStage;
 	FileOutputStream fis;
 	public  Window() throws ClassNotFoundException, SQLException, FileNotFoundException {
@@ -21,8 +24,11 @@ public class Window extends Stage {
 		FileInputStream fis = new FileInputStream(f);
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
+ 		
+ 		Window.this.DB = Factory.createEntityManager();
+ 		
+ 		
  		mainStage.setScene(new LoginScene());
-// 		mainStage.setScene(new HomePageScene());
  		this.show();
 	}
 	

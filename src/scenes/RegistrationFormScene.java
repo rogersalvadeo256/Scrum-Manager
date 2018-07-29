@@ -2,25 +2,27 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import INSERTS.InsertUserRegistration;
 import design.objects.MyLabel;
 import design.objects.MyLabel.LabelType.BackgroundColor;
 import design.objects.MyLabel.LabelType.BackgroundHoverColor;
 import design.objects.MyLabel.LabelType.Type;
 import hibernatebook.annotations.Profile;
 import hibernatebook.annotations.UserRegistration;
-import hibernatebook.entity.provider.EntityProvider.Factory;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import net.bytebuddy.asm.Advice.ArgumentHandler.Factory;
 import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
 
-	private MyLabel lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
+	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
 	private Button btnRegister;
@@ -37,11 +39,11 @@ public class RegistrationFormScene extends VBox {
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
-		this.lblName = new MyLabel("NAME", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblUserName = new MyLabel("USERNAME", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblEmail = new MyLabel("EMAIL", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblPassword = new MyLabel("PASSWORD", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
-		this.lblConfirmPassword = new MyLabel("CONFIRM PASSWORD", 15, Type.TITLE, BackgroundColor.WHITE, BackgroundHoverColor.DARK_GREY_HOVER );
+		this.lblName = new Label("NAME");
+		this.lblUserName = new Label("USERNAME");
+		this.lblEmail = new Label("EMAIL");
+		this.lblPassword = new Label("PASSWORD");
+		this.lblConfirmPassword = new Label("CONFIRM PASSWORD");
 		this.txtName = new TextField();
 		this.txtUserName = new TextField();
 		this.txtEmail = new TextField();
@@ -83,27 +85,21 @@ public class RegistrationFormScene extends VBox {
 
 			@Override
 			public void handle(ActionEvent event) {
-				UserRegistration cadastro = new UserRegistration();
-				Profile perfil = new Profile();
+				ArrayList<String> data = new ArrayList<String>();
 				
-				cadastro.setEmail(RegistrationFormScene.this.txtEmail.getText());
-				cadastro.setPassword(RegistrationFormScene.this.txtPasswordConfirmation.getText());
-				cadastro.setUserName(RegistrationFormScene.this.txtUserName.getText());
-				perfil.setName(RegistrationFormScene.this.txtName.getText()); 
-				cadastro.setProfile(perfil);
+				data.add(RegistrationFormScene.this.txtName.getText());
+				data.add(RegistrationFormScene.this.txtEmail.getText());
+				data.add(RegistrationFormScene.this.txtUserName.getText());
+				data.add(RegistrationFormScene.this.txtPasswordConfirmation.getText());
 				
-				Factory.entityManager.getTransaction().begin();
-				Factory.entityManager.persist(cadastro);
-				Factory.entityManager.getTransaction().commit();
-				Factory.entityManager.clear();
-				Factory.entityManager.close();
+				InsertUserRegistration.registration(data);
 				
-//				if(RegistrationFormScene.this.validation.isDataValid()) {
-////					 insert  into db
-//					
-//				} else { 
-////					treat the error
-//				}
+				
+				/* persist
+				 */
+				
+				
+				
 			}
 		});
 		this.setAlignment(Pos.CENTER);

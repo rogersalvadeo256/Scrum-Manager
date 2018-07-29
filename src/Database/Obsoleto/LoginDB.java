@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class Login extends DatabaseConnection {
+public class LoginDB extends DatabaseConnection {
 
 	private java.sql.Statement commands;
 
-	public Login() throws ClassNotFoundException {
+	public LoginDB() throws ClassNotFoundException {
 		
 	}
 
