@@ -28,7 +28,6 @@ public class UserRegistration {
 	@Column
 	private String password;
 	
-	
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="Profile")
 	private Profile userProfile;
