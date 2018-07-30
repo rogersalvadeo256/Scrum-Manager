@@ -23,11 +23,7 @@ public class Window extends Stage {
  		File f = new File("/home/jefter66/java-workspace/SCRUM/resources/images/icons/scrum_icon.png");
 		FileInputStream fis = new FileInputStream(f);
  		Window.mainStage.getIcons().add(new Image(fis)); 		
- 		
- 		
- 		Window.this.DB = Factory.createEntityManager();
- 		
- 		
+
  		mainStage.setScene(new LoginScene());
  		this.show();
 	}

@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import QUERYs.Login;
+import QUERYs.QueryRegistrationLogin;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -65,7 +65,7 @@ public class LoginScene extends Scene {
 	private GridPane layout;
 	private File iconPath;
 	private ReferringCss cssReferrer;
-	private Login login;
+	private QueryRegistrationLogin login;
 
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
@@ -175,7 +175,7 @@ public class LoginScene extends Scene {
 		/*
 		 * 
 		 */
-		this.login = new Login();
+		this.login = new QueryRegistrationLogin();
 
 		this.line = new Line();
 		this.line.setEndX(0.0f);
@@ -293,7 +293,7 @@ public class LoginScene extends Scene {
 		/* 
 		 * 
 		 */
-		Login log = new Login();
+		QueryRegistrationLogin log = new QueryRegistrationLogin();
 		log.field(LoginScene.this.txtUser, LoginScene.this.passwordField);
 		if (!log.dataIsValid()) {
 			this.messageLoginValidation.setText("Nome de usuario ou senha invalidos");

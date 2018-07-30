@@ -31,6 +31,7 @@ public class RegistrationFormScene extends VBox {
 	private ArrayList<String> fieldName;
 	private ArrayList<String> message;
 	private FormsValidation validation;
+	private ArrayList<String> data;
 	
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {	
 		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
@@ -60,6 +61,7 @@ public class RegistrationFormScene extends VBox {
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
 		this.btnRegister = new Button("OK");
+		this.data=new ArrayList<String>();
 		
 		this.field.add(txtName);
 		this.field.add(txtEmail);
@@ -79,33 +81,26 @@ public class RegistrationFormScene extends VBox {
 		
 		this.validation=new FormsValidation(field, fieldName, passwordField);
 		this.validation.setConfirmationMessage(message);
-		
-		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail,lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister);
-		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 
+		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				ArrayList<String> data = new ArrayList<String>();
+				if(RegistrationFormScene.this.validation.isDataValid(true)){
+					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtName.getText());
+					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtEmail.getText());
+					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtUserName.getText());
+					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtPasswordConfirmation.getText());
 				
-				data.add(RegistrationFormScene.this.txtName.getText());
-				data.add(RegistrationFormScene.this.txtEmail.getText());
-				data.add(RegistrationFormScene.this.txtUserName.getText());
-				data.add(RegistrationFormScene.this.txtPasswordConfirmation.getText());
-				
-				InsertUserRegistration.registration(data);
-				
-				
-				/* persist
-				 */
-				
-				
-				
+					InsertUserRegistration.registration(data);
+					RegistrationFormScene.this.data.clear();
+				}
 			}
 		});
+		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail);
+		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}
-
 }
 
 

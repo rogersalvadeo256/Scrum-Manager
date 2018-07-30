@@ -20,7 +20,7 @@ import net.bytebuddy.asm.Advice.This;
 import scenes.HomePageScene;
 import validation.CheckEmptyFields;
 
-public class Login {
+public class QueryRegistrationLogin {
 
 	private CheckEmptyFields checkField;
 	private TextField txtUser;
@@ -28,14 +28,16 @@ public class Login {
 	private Query query;
 	private List<UserRegistration> queryResult;
 
-	public Login() {
+	public QueryRegistrationLogin() {
 		this.checkField = new CheckEmptyFields();
 		this.txtUser = new TextField();
 		this.txtPassword = new PasswordField();
 		this.queryResult = new ArrayList<UserRegistration>();
+
 	}
 
-	public void field(TextField username, PasswordField password)throws ClassNotFoundException, FileNotFoundException, SQLException {
+	public void field(TextField username, PasswordField password)
+			throws ClassNotFoundException, FileNotFoundException, SQLException {
 		this.txtUser = username;
 		this.txtPassword = password;
 		if (checkField.isTextFieldEmpty(txtUser) || checkField.isPasswordFieldEmpty(txtPassword)) {
@@ -43,22 +45,29 @@ public class Login {
 			return;
 		}
 	}
+
 	public boolean dataIsValid() throws ClassNotFoundException, FileNotFoundException, SQLException {
-//		Factory.entityManager.getTransaction().begin();
-//		this.query = Factory.entityManager.createQuery("from UserRegistration");
-//		this.queryResult = query.getResultList();
-//		for (UserRegistration user : queryResult) {
-//			if (user.getUserName().equals(this.txtUser.getText()) && user.getPassword().equals(this.txtPassword.getText())) {
-//				Factory.entityManager.clear();
-//				Factory.entityManager.close();
-//				return true;
-//			}
-//		}
-//		Factory.entityManager.clear();
-//		Factory.entityManager.close();
+
+		Window.DB.getTransaction().begin();
+
+		this.query = Window.DB.createQuery("from UserRegistration");
+		this.queryResult = query.getResultList();
+		for (UserRegistration user : queryResult) {
+			if (user.getUserName().equals(this.txtUser.getText())
+					&& user.getPassword().equals(this.txtPassword.getText())) {
+				Window.DB.clear();
+				Window.DB.close();
+				return true;
+			}
+		}
+		Window.DB.clear();
+		Window.DB.close();
 		return false;
 	}
 }
+
+
+
 
 
 
