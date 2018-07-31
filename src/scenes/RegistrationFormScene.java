@@ -2,12 +2,6 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import design.objects.MyLabel;
-import design.objects.MyLabel.LabelType.BackgroundColor;
-import design.objects.MyLabel.LabelType.BackgroundHoverColor;
-import design.objects.MyLabel.LabelType.Type;
-import hibernatebook.annotations.Profile;
-import hibernatebook.annotations.UserRegistration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -16,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import net.bytebuddy.asm.Advice.ArgumentHandler.Factory;
 import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
@@ -84,12 +77,11 @@ public class RegistrationFormScene extends VBox {
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if(RegistrationFormScene.this.validation.isDataValid(true)){
+				if(RegistrationFormScene.this.validation.registration(true)){
 					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtName.getText());
 					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtEmail.getText());
 					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtUserName.getText());
 					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtPasswordConfirmation.getText());
-				
 					RegistrationFormScene.this.data.clear();
 				}
 			}
@@ -100,53 +92,3 @@ public class RegistrationFormScene extends VBox {
 		this.setSpacing(5);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

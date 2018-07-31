@@ -19,7 +19,6 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 		this.manager = Database.createEntityManager();
 		this.result=new ArrayList<UserRegistration>();
 	}
-
 	@Override
 	public boolean insertUser(UserRegistration user) {
 		if (queryValidation(user)) {
@@ -27,6 +26,7 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 			this.manager.persist(user);
 			this.manager.getTransaction().commit();
 			this.manager.clear();
+			return true;
 		}
 		return false;
 	}
