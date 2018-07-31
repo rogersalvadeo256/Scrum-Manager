@@ -2,7 +2,6 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import INSERTS.InsertUserRegistration;
 import design.objects.MyLabel;
 import design.objects.MyLabel.LabelType.BackgroundColor;
 import design.objects.MyLabel.LabelType.BackgroundHoverColor;
@@ -91,7 +90,6 @@ public class RegistrationFormScene extends VBox {
 					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtUserName.getText());
 					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtPasswordConfirmation.getText());
 				
-					InsertUserRegistration.registration(data);
 					RegistrationFormScene.this.data.clear();
 				}
 			}

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import Database.Obsoleto.DbCreateProject;
-import auto.instance.objects.CreateHBoxWithTextFields;
+import auto.instance.objects.HBoxWithTextFields;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -58,7 +58,7 @@ public class newProjectScene extends Scene {
 	private Label lblSelectTeam;
 
 	private ArrayList<String> listMembers;
-	private ArrayList<CreateHBoxWithTextFields> listHBmembers;
+	private ArrayList<HBoxWithTextFields> listHBmembers;
 
 	private Button btnNumberMembers;
 	private Button btnExit;
@@ -73,7 +73,7 @@ public class newProjectScene extends Scene {
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("New Project");
 		this.painel = new ScrollPane();
-		this.listHBmembers = new ArrayList<CreateHBoxWithTextFields>();
+		this.listHBmembers = new ArrayList<HBoxWithTextFields>();
 		this.listMembers = new ArrayList<String>();
 		this.layout = new GridPane();
 		String css = this.getClass().getResource("/cssStyles/style.css").toExternalForm();
@@ -237,7 +237,7 @@ public class newProjectScene extends Scene {
 			/*
 			 * my class extends Hbox and have just a label and a text field
 			 */
-			CreateHBoxWithTextFields t = new CreateHBoxWithTextFields("Member " + j);
+			HBoxWithTextFields t = new HBoxWithTextFields("Member " + j);
 			this.listHBmembers.add(t);
 			this.vbMembers.getChildren().add(listHBmembers.get(i));
 			j++;

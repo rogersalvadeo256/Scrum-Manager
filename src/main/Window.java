@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 
-import DB.Factory;
+import DB.Database;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import scenes.LoginScene;

@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import DB.queries.RegistrationDB;
 import alert.message.CustomAlert;
+import hibernatebook.annotations.Profile;
 import hibernatebook.annotations.UserRegistration;
 import javafx.scene.control.Alert.AlertType;
 import main.Window;
@@ -25,8 +27,6 @@ public class FormsValidation {
 	private ArrayList<String> fieldName;
 	private ArrayList<PasswordField> passwordField;
 	private CheckEmptyFields checkFields;
-	private Query query;
-	private List<UserRegistration> queryResult;
 
 	public FormsValidation(ArrayList<TextField> field, ArrayList<String> fieldName,
 			ArrayList<PasswordField> passwordField) {
@@ -41,33 +41,29 @@ public class FormsValidation {
 		this.fieldName = fieldName;
 		this.passwordField = new ArrayList<PasswordField>();
 		this.passwordField = passwordField;
-		this.queryResult = new ArrayList<UserRegistration>();
-
+		UserRegistration user = new UserRegistration();
+		user.setUserName(txtField.get(2).getText().toString());
+		user.setEmail(txtField.get(1).getText().toString());
+		Profile profile = new Profile();
+		profile.setName(txtField.get(0).getText().toString());
+		user.setProfile(profile);
+		
+		RegistrationDB registration = new RegistrationDB();
+		
+		if(!registration.insertUser(user)) {
+			
+		}
+		
 	}
-
-	private void setFieldForValidation() {
+	private void checkFieldAreEmpty() {
 		this.errorFieldMessage.clear();
-		
-		Window.DB.getTransaction().begin();
-		
-		
 		for (int i = 0; i < txtField.size(); i++) {
 			if (checkFields.isTextFieldEmpty(this.txtField.get(i))) {
 				this.errorFieldMessage.add("O campo " + this.fieldName.get(i) + " não foi preenchido");
 			}
-			if (this.errorDataMessage.isEmpty()) {
-				if (emailInUse(txtField.get(1).toString())) {
-					this.errorDataMessage.add("Email informado já em uso");
-				}
-				if (usernameInUse(txtField.get(2).toString())) {
-					this.errorDataMessage.add("Nome de usuario já em uso");
-				}
-			}
 		}
-		Window.DB.clear();
-		Window.DB.close();
 	}
-	private void setPasswordFieldsForValidation() {
+	private void checkPasswordFieldEmpty() {
 		for (int i = 0; i < this.passwordField.size(); i++) {
 			if (checkFields.isPasswordFieldEmpty(passwordField.get(i))) {
 				this.errorFieldMessage.add("O campo senha não foi preenchido");
@@ -78,12 +74,11 @@ public class FormsValidation {
 	public CustomAlert message(AlertType alert, String title, String header, String contentText) {
 		return new CustomAlert(alert, title, header, contentText);
 	}
-
 	public boolean isDataValid(boolean formContainPassword) {
 		if (formContainPassword) {
-			setPasswordFieldsForValidation();
+			checkPasswordFieldEmpty();
 		}
-		setFieldForValidation();
+		checkFieldAreEmpty();
 		/*
 		 * add the query for checking the data
 		 */
@@ -116,29 +111,6 @@ public class FormsValidation {
 		this.outMessage.clear();
 		this.errorFieldMessage.clear();
 		this.errorDataMessage.clear();
-		return false;
-	}
-
-	private boolean emailInUse(String email) {
-		this.query = Window.DB.createQuery("from UserRegistration");
-		for (UserRegistration user : queryResult) {
-			if (user.getEmail().equals(email))
-				return true;
-			Window.DB.clear();
-		}
-		Window.DB.clear();
-		return false;
-	}
-
-	private boolean usernameInUse(String username) {
-
-		this.query = Window.DB.createQuery("from UserRegistration");
-		for (UserRegistration user : queryResult) {
-			if (user.getEmail().equals(username))
-				return true;
-			Window.DB.clear();
-		}
-		Window.DB.clear();
 		return false;
 	}
 
