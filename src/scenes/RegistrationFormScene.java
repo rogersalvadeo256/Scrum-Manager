@@ -42,6 +42,7 @@ public class RegistrationFormScene extends VBox {
 		this.txtEmail = new TextField();
 		this.txtPasswordField = new PasswordField();
 		this.txtPasswordConfirmation = new PasswordField();
+
 		this.txtName.setMaxWidth(300);
 		this.txtUserName.setMaxWidth(300);
 		this.txtEmail.setMaxWidth(300);

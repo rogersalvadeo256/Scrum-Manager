@@ -38,6 +38,8 @@ public class FormsValidation {
 
 		this.createUserRegistration = new ArrayList<String>();
 
+		this.fieldName = new ArrayList<String>();
+
 		this.txtField = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
 		this.txtField = field;
@@ -52,6 +54,66 @@ public class FormsValidation {
 
 		this.registration = new RegistrationDB();
 	}
+
+	public void setFieldName(ArrayList<String> name) {
+		this.fieldName = name;
+	}
+
+	public void setField(ArrayList<TextField> field) {
+		this.txtField = field;
+	}
+
+	public void setPasswordField(ArrayList<PasswordField> password) {
+		this.passwordField = password;
+	}
+
+	private ArrayList<PasswordField> getPasswordField() {
+		return this.passwordField;
+	}
+
+	private ArrayList<TextField> getTextField() {
+		return this.txtField;
+	}
+
+	private ArrayList<String> getFieldName() {
+		return this.fieldName;
+	}
+
+	public void validationForEmptyField() {
+
+		ArrayList<String> outputMessageContent = new ArrayList<String>();
+
+		if (!this.getFieldName().isEmpty()) {
+			for (int i = 0; i < this.getFieldName().size(); i++) {
+				if (checkFields.isTextFieldEmpty(this.getTextField().get(i))) {
+					outputMessageContent.add("O campo " + this.fieldName.get(i) + " não foi preenchido");
+				}
+			}
+		}
+		if (!this.getPasswordField().isEmpty()) {
+			for (int i = 0; i < this.getPasswordField().size(); i++) {
+				if(this.checkFields.isPasswordFieldEmpty(this.getPasswordField().get(i))) {
+					outputMessageContent.add("O campo senha não foi preenchido");
+				}
+			}
+		}
+		
+		StringBuilder buildContent = new StringBuilder();
+		
+		for (String msg : outputMessageContent) {
+			buildContent.append(msg + "\n");
+		}
+}
+	public void validationForExistentData(UserRegistration registration) { 
+		
+		
+		
+		
+	}
+	
+	/*
+	 * 
+	 */
 	private void checkFieldAreEmpty() {
 		this.errorFieldMessage.clear();
 		for (int i = 0; i < fieldName.size(); i++) {
@@ -60,19 +122,24 @@ public class FormsValidation {
 			}
 		}
 	}
+
 	private void checkPasswordField() {
 		for (int i = 0; i < this.passwordField.size(); i++) {
 			if (checkFields.isPasswordFieldEmpty(passwordField.get(i))) {
 				this.errorFieldMessage.add("O campo senha não foi preenchido");
 			}
 		}
-		if (!this.passwordField.get(0).getText().equals(this.passwordField.get(1).getText())) this.errorDataMessage.add("Senhas diferentes");
-		
-		if(this.passwordField.get(0).getText().length() < 8) this.errorDataMessage.add("Senha muito curta");
-	}	
+		if (!this.passwordField.get(0).getText().equals(this.passwordField.get(1).getText()))
+			this.errorDataMessage.add("Senhas diferentes");
+
+		if (this.passwordField.get(0).getText().length() < 8)
+			this.errorDataMessage.add("Senha muito curta");
+	}
+
 	public CustomAlert message(AlertType alert, String title, String header, String contentText) {
 		return new CustomAlert(alert, title, header, contentText);
 	}
+
 	public boolean registration(boolean formContainPassword) {
 		if (formContainPassword) {
 			checkPasswordField();
@@ -135,6 +202,7 @@ public class FormsValidation {
 		this.errorDataMessage.clear();
 		return false;
 	}
+
 	public void setConfirmationMessage(ArrayList<String> message) {
 		this.confirmationMessage.clear();
 		for (int i = 0; i < message.size(); i++) {

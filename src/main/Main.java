@@ -1,5 +1,6 @@
 package main;
 
+import DB.Database;
 /*
  * SCRUM MANAGER TCC PROJECT
  * 
@@ -18,6 +19,7 @@ public class Main extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		Database.createEntityManager();
 		new Window();
 	}
 }
