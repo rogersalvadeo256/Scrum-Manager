@@ -2,6 +2,8 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import hibernatebook.annotations.Profile;
+import hibernatebook.annotations.UserRegistration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -21,10 +23,10 @@ public class RegistrationFormScene extends VBox {
 	private ArrayList<TextField> field;
 	private ArrayList<PasswordField>passwordField;
 	private ArrayList<String> fieldName;
-	private ArrayList<String> message;
+	private ArrayList<String> confirmationMessage;
 	private FormsValidation validation;
-	private ArrayList<String> data;
-	
+	private UserRegistration registration;
+	private Profile profile;
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {	
 		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
 		this.getStylesheets().add(css);
@@ -54,7 +56,9 @@ public class RegistrationFormScene extends VBox {
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
 		this.btnRegister = new Button("OK");
-		this.data=new ArrayList<String>();
+		
+		this.registration=new UserRegistration();
+		this.profile=new Profile();
 		
 		this.field.add(txtName);
 		this.field.add(txtEmail);
@@ -66,25 +70,32 @@ public class RegistrationFormScene extends VBox {
 		this.fieldName.add("email");
 		this.fieldName.add("nome de usuario");
 		
-		this.message = new ArrayList<String>();
+		this.confirmationMessage = new ArrayList<String>();
 		
-		this.message.add("Cadastro realizado com sucesso");
-		this.message.add("Voce está cadastrado no Scrum Manager");
-		this.message.add("boa");
+		this.confirmationMessage.add("Cadastro realizado com sucesso");
+		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
+		this.confirmationMessage.add("boa");
 		
 		this.validation=new FormsValidation(field, fieldName, passwordField);
-		this.validation.setConfirmationMessage(message);
+		this.validation.setConfirmationMessage(confirmationMessage);
 
 		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				if(RegistrationFormScene.this.validation.registration(true)){
-					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtName.getText());
-					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtEmail.getText());
-					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtUserName.getText());
-					RegistrationFormScene.this.data.add(RegistrationFormScene.this.txtPasswordConfirmation.getText());
-					RegistrationFormScene.this.data.clear();
-				}
+					/*
+					 * validação para campos vazios
+					 */
+					validation.setField(field);
+					validation.setPasswordField(passwordField);
+					validation.setFieldName(fieldName);
+
+					profile.setName(RegistrationFormScene.this.txtName.getText());
+					registration.setEmail(RegistrationFormScene.this.txtEmail.getText());
+					registration.setUserName(RegistrationFormScene.this.txtUserName.getText());
+					registration.setPassword(RegistrationFormScene.this.txtPasswordConfirmation.getText());
+					registration.setProfile(profile);
+					validation.setUserRegistration(RegistrationFormScene.this.registration);
+					validation.registrationOfNewUser();
 			}
 		});
 		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail);

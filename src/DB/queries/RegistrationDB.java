@@ -1,8 +1,5 @@
 package DB.queries;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
@@ -11,74 +8,44 @@ import DB.database.functions.definition.FunctionsRegistrationDatabase;
 import hibernatebook.annotations.UserRegistration;
 
 public class RegistrationDB extends FunctionsRegistrationDatabase {
+	EntityManager manager;
 
-	private EntityManager manager;
-	private Query queryForExistentData;
-	private List<UserRegistration> result;
 	public RegistrationDB() {
 		this.manager = Database.createEntityManager();
-		this.result=new ArrayList<UserRegistration>();
 	}
+
+	/**
+	 * make the persistense for registration
+	 * use after do the query for existent user and validations
+	 * 
+	 * @author jefter66
+	 * @example boolean value = insertUser(user);
+	 * @param UserRegistration
+	 *            user
+	 */
 	@Override
-	public boolean insertUser(UserRegistration user) {
-		if (queryValidation(user)) {
-			this.manager.getTransaction().begin();
-			this.manager.persist(user);
-			this.manager.getTransaction().commit();
-			this.manager.clear();
+	public void insertUser(UserRegistration user) {
+		this.manager.getTransaction().begin();
+		this.manager.persist(user);
+		this.manager.getTransaction().commit();
+		this.manager.clear();
+	}
+	/**
+	 *  if the return value are false, so the user doesn't already exist
+	 * @author jefter66
+	 * @example boolean value = queryValidation(UserRegistration user);
+	 * @param UserRegistration user
+	 */
+	@Override
+	public boolean userExist(UserRegistration user) {
+		Query queryForExistentData = this.manager.createQuery("from UserRegistration where  userName=userName");
+		queryForExistentData.setParameter("userName", user.getUserName());
+
+		if (!queryForExistentData.getResultList().isEmpty()) {
 			return true;
 		}
+		this.manager.clear();
+		this.manager.close();
 		return false;
 	}
-	@Override
-	public boolean queryValidation(UserRegistration user) {
-		this.queryForExistentData = this.manager.createQuery("from UserRegistration");
-		this.result = queryForExistentData.getResultList();
-		
-		for(UserRegistration listOfUsers: this.result) {
-			if(listOfUsers.getUserName().equals(user.getUserName()) || (listOfUsers.getEmail().equals(user.getEmail()))) {
-				return false;
-			}
-		}
-		/*
-		 * if the return are true, the registration is okay
-		 */
-		return true;
-	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

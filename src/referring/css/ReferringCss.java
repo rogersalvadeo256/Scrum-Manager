@@ -12,6 +12,7 @@ public class ReferringCss {
 	public ReferringCss() {
 		this.cssPATHS = new ArrayList<>();
 		cssPATHS.add("css/Styles/loginScene.css");
+		
 	}
 
 	public void referringScene(Scene scene, cssFile.cssFiles file) {
@@ -21,6 +22,7 @@ public class ReferringCss {
 		if(file.equals(cssFile.cssFiles.HOME_PAGE_SCENE)) {
 			scene.getStylesheets().add(scene.getClass().getResource("/cssStyles/homeScene.css").toExternalForm());
 		}
+		
 	}
 	public void referringLabel(MyLabel label) { 
 		label.getStylesheets().add(label.getClass().getResource("/cssStyles/label.css").toExternalForm());
@@ -28,17 +30,14 @@ public class ReferringCss {
 	public void referringDialogPane(MessageDialog dialog) {
 		dialog.getStylesheets().add(dialog.getClass().getResource("/cssStyles/dialogPane.css").toExternalForm());
 	}
+	
+	
 	public static class cssFile {
 		public static enum cssFiles {
 			LOGIN, HOME_PAGE_SCENE;
 		};
 	}
 }
-
-
-
-
-
 
 
 
