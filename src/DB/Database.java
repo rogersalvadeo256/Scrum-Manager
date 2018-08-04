@@ -14,25 +14,6 @@ public class Database {
 	public static void close() {
 		Database.FACTORY.close();
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 

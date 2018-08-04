@@ -28,8 +28,6 @@ public class RegistrationFormScene extends VBox {
 	private UserRegistration registration;
 	private Profile profile;
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {	
-		String css = this.getClass().getResource("/cssStyles/loginScene.css").toExternalForm();
-		this.getStylesheets().add(css);
 		
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();

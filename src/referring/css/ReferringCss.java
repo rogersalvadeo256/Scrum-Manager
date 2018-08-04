@@ -1,42 +1,28 @@
 package referring.css;
 
-import java.util.ArrayList;
-
 import alert.message.MessageDialog;
-import design.objects.MyLabel;
 import javafx.scene.Scene;
 
 public class ReferringCss {
-	private final ArrayList<String> cssPATHS;
-	
-	public ReferringCss() {
-		this.cssPATHS = new ArrayList<>();
-		cssPATHS.add("css/Styles/loginScene.css");
-		
-	}
+	private static final String path = "/cssStyles/";
+	private static final String extension = ".css";
 
-	public void referringScene(Scene scene, cssFile.cssFiles file) {
-		if (file.equals(cssFile.cssFiles.LOGIN)) {
-			scene.getStylesheets().add(scene.getClass().getResource("/cssStyles/loginScene.css").toExternalForm());
+	public  static enum cssFiles {
+		LOGIN_SCENE, HOME_PAGE_SCENE,DIALOG_PANE;
+	};
+
+	public static void referringScene(Scene scene, cssFiles file) {
+		if (file.equals(cssFiles.LOGIN_SCENE)) {
+			scene.getStylesheets().add(scene.getClass().getResource(path + cssFiles.LOGIN_SCENE + extension ).toExternalForm());
 		}
-		if(file.equals(cssFile.cssFiles.HOME_PAGE_SCENE)) {
-			scene.getStylesheets().add(scene.getClass().getResource("/cssStyles/homeScene.css").toExternalForm());
+		if(file.equals(cssFiles.HOME_PAGE_SCENE)) {
+			scene.getStylesheets().add(scene.getClass().getResource(path + cssFiles.HOME_PAGE_SCENE + extension ).toExternalForm());
 		}
+	}
+	public static void referringDialogPane(MessageDialog dialog) {
+		dialog.getStylesheets().add(dialog.getClass().getResource(path + cssFiles.DIALOG_PANE + extension).toExternalForm());
+	}
 		
-	}
-	public void referringLabel(MyLabel label) { 
-		label.getStylesheets().add(label.getClass().getResource("/cssStyles/label.css").toExternalForm());
-	}
-	public void referringDialogPane(MessageDialog dialog) {
-		dialog.getStylesheets().add(dialog.getClass().getResource("/cssStyles/dialogPane.css").toExternalForm());
-	}
-	
-	
-	public static class cssFile {
-		public static enum cssFiles {
-			LOGIN, HOME_PAGE_SCENE;
-		};
-	}
 }
 
 

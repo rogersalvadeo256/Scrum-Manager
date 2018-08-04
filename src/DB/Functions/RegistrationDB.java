@@ -28,7 +28,7 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 		this.manager.clear();
 	}
 	/**
-	 *  if the return value are false, so the user doesn't already exist
+	 *  if the return value are false, so the user doesn't exist
 	 * @author jefter66
 	 * @example boolean value = queryValidation(UserRegistration user);
 	 * @param UserRegistration user
@@ -41,3 +41,27 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 		return false;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

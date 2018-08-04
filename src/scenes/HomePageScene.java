@@ -23,7 +23,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.Window;
 import referring.css.ReferringCss;
-import referring.css.ReferringCss.cssFile.cssFiles;
 
 public class HomePageScene extends Scene {
 
@@ -50,7 +49,6 @@ public class HomePageScene extends Scene {
 	private HBox hbProjectsArea;
 	private VBox vbLeftColumn, vbMiddleColumn, vbRightColumn;
 
-	private ReferringCss referrer;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
@@ -58,12 +56,11 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-		this.referrer = new ReferringCss();
 		this.iconPath = new ArrayList<File>();
 		this.fis = new ArrayList<FileInputStream>();
 
-		referrer.referringScene(this, cssFiles.HOME_PAGE_SCENE);
-
+		ReferringCss.referringScene(this, ReferringCss.cssFiles.HOME_PAGE_SCENE);
+		
 		this.lblName = new Label("name come from the DB");
 		this.lblUsername = new Label("user come from the DB");
 		this.lblNewProject = new Label("Começar um novo projeto");

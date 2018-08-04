@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import DB.Functions.Login;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,7 +28,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import main.Window;
 import referring.css.ReferringCss;
-import referring.css.ReferringCss.cssFile.cssFiles;
 /*
  * LoginScreen.java
  * 
@@ -62,19 +63,23 @@ public class LoginScene extends Scene {
 
 	private GridPane layout;
 	private File iconPath;
-	private ReferringCss cssReferrer;
+	
+	private Login login;
 
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		this.cssReferrer = new ReferringCss();
-		this.cssReferrer.referringScene(this, cssFiles.LOGIN);
-
+		
+		ReferringCss.referringScene(this, ReferringCss.cssFiles.LOGIN_SCENE);
+	
+		
 		this.layout = new GridPane();
 
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("TCC");
 
+		this.login=new Login();
+		
 		/*
 		 * layout
 		 */
@@ -233,31 +238,25 @@ public class LoginScene extends Scene {
 		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				/*
-				 * tests area
-				 */
-				try {
-					logar();
-				} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if(LoginScene.this.login.doLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
+					try {
+						LoginScene.this.messageLoginValidation.setText(new String());
+						Window.mainStage.setScene(new HomePageScene());
+					} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
-				/*
-				 */
+				LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
 			}
 		});
 		this.passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.ENTER) {
-					try {
-						logar();
-					} catch (FileNotFoundException | ClassNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+
 					}
 				}
-			}
 		});
 		this.forgotPassword.setOnAction(new EventHandler<ActionEvent>() {
 			
@@ -283,12 +282,6 @@ public class LoginScene extends Scene {
 		this.layout.add(left, 0, 0, 1, 1);
 		
 		this.setRoot(layout);
-	}
-
-	private void logar() throws FileNotFoundException, ClassNotFoundException, SQLException {
-		
-		
-
 	}
 
 	private void cancelPressed() {
