@@ -1,7 +1,7 @@
 package validation;
-
 import java.util.ArrayList;
-import DB.queries.RegistrationDB;
+
+import DB.Functions.RegistrationDB;
 import alert.message.CustomAlert;
 import hibernatebook.annotations.UserRegistration;
 import javafx.scene.control.Alert;
@@ -9,6 +9,12 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+/**
+ * Make the validation of forms, functions for check if the fields are empty, 
+ * password not equal, data informed already registered
+ * and return of alert for the data.
+ * @author jefter66
+ */
 public class FormsValidation {
 
 	/*

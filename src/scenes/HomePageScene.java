@@ -59,7 +59,7 @@ public class HomePageScene extends Scene {
 
 	private HBox hbHeader;
 	private TextField txtSearch;
-	private MyButton btnSearch;
+	private Button btnSearch;
 	private ImageView scrumIcon, messageIcon, friendRequestIcon, settingsIcon;
 	private ArrayList<File> iconPath;
 	private ArrayList<FileInputStream> fis;
@@ -129,10 +129,30 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setId("header");
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.txtSearch=new TextField();
-		this.btnSearch=new MyButton();
+		this.btnSearch=new Button();
+		this.btnSearch.setPrefWidth(100);
 		this.hbHeader.setSpacing(20);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(scrumIcon, txtSearch, btnSearch,messageIcon,friendRequestIcon);
+		this.btnEditProfile=new Button("Editar Perfil");
+		this.btnEditProfile.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				/*
+				 * open new window with the profile informations and options to edit
+				 */
+			}
+		});
+		this.btnExit=new Button("Sair");
+		this.btnExit.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				/*
+				 * close the program and serialization
+				 */
+			}
+		});
+		this.hbHeader.getChildren().addAll(scrumIcon, txtSearch, btnSearch,messageIcon,friendRequestIcon,btnEditProfile,btnExit);
 
 		this.layout.add(hbHeader, 0, 0, 5, 1);
 
@@ -210,9 +230,6 @@ public class HomePageScene extends Scene {
 		this.vbRightColumn.setPrefWidth(250);
 		this.vbRightColumn.setPrefHeight(700);
 		
-		this.vbLeftColumn.getChildren().add(new Label("aaaaaaaaaaaaaaaa"));
-		this.vbRightColumn.getChildren().add(new Label("bbbbbbbbbbbbbbbb"));
-		this.vbMiddleColumn.getChildren().add(new Label("ccccccccccccccc"));
 		
 		
 		
@@ -224,9 +241,9 @@ public class HomePageScene extends Scene {
 		/*
 		 * espaço horizontal e vertical entre os componentes
 		 */
-		this.layout.setHgap(15);
-		this.layout.setVgap(20);
-		
+//		this.layout.setHgap(15);
+//		this.layout.setVgap(20);
+
 		this.setRoot(layout);
 
 	}

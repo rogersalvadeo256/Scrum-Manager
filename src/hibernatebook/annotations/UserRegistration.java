@@ -12,7 +12,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="user_registration")
+@Table(name="UserRegistration")
 public class UserRegistration {
 	public UserRegistration() { 
 		this.userProfile=new Profile();
@@ -25,7 +25,8 @@ public class UserRegistration {
 	private String userName;
 	@Column
 	private String email;
-	@Column
+
+	@Column(nullable = false)
 	private String password;
 
 	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)

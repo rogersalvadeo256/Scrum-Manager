@@ -1,10 +1,11 @@
-package DB.queries;
+package DB.Functions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import DB.Database;
 import DB.database.functions.definition.FunctionsRegistrationDatabase;
+import DB.database.functions.definition.LoadHomePageDefinition;
 import hibernatebook.annotations.UserRegistration;
 
 public class RegistrationDB extends FunctionsRegistrationDatabase {
@@ -38,14 +39,9 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 	 */
 	@Override
 	public boolean userExist(UserRegistration user) {
-		Query queryForExistentData = this.manager.createQuery("from UserRegistration where  userName=userName");
-		queryForExistentData.setParameter("userName", user.getUserName());
-
-		if (!queryForExistentData.getResultList().isEmpty()) {
-			return true;
-		}
-		this.manager.clear();
-		this.manager.close();
+		Query queryForExistentUserName = this.manager.createQuery("from UserRegistration where  userName=:userName");
+		queryForExistentUserName.setParameter("userName", user.getUserName());
+		if (!queryForExistentUserName.getResultList().isEmpty()) return true;
 		return false;
 	}
 }
