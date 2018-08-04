@@ -181,7 +181,7 @@ public class LoginScene extends Scene {
 		 * image
 		 */
 		this.imgIcon = new ImageView();
-		this.iconPath = new File("/home/jefter66/java-workspace/SCRUM/resources/images/icons/scrum_icon.png");
+		this.iconPath = new File("/home/jefter66/java-workspace/TCC/resources/images/icons/scrum_icon.png");
 		this.fis = new FileInputStream(iconPath);
 		this.imgIcon.setImage(new Image(fis));
 
