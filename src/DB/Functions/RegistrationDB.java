@@ -2,19 +2,15 @@ package DB.Functions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import DB.Database;
 import DB.database.functions.definition.FunctionsRegistrationDatabase;
-import DB.database.functions.definition.LoadHomePageDefinition;
 import hibernatebook.annotations.UserRegistration;
 
 public class RegistrationDB extends FunctionsRegistrationDatabase {
-	EntityManager manager;
-
+	private EntityManager manager;
 	public RegistrationDB() {
 		this.manager = Database.createEntityManager();
 	}
-
 	/**
 	 * make the persistense for registration
 	 * use after do the query for existent user and validations
