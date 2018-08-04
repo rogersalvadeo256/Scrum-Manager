@@ -47,29 +47,7 @@ public class FormsValidation {
 		this.registration = new RegistrationDB();
 	}
 
-	public void setFieldName(ArrayList<String> name) {
-		this.fieldName = name;
-	}
 
-	public void setField(ArrayList<TextField> field) {
-		this.txtField = field;
-	}
-
-	public void setPasswordField(ArrayList<PasswordField> password) {
-		this.passwordField = password;
-	}
-
-	private ArrayList<PasswordField> getPasswordField() {
-		return this.passwordField;
-	}
-
-	private ArrayList<TextField> getTextField() {
-		return this.txtField;
-	}
-
-	private ArrayList<String> getFieldName() {
-		return this.fieldName;
-	}
 
 	/**
 	 * Use to check if the fields are empty going to pupulate a arraylist with a
@@ -177,9 +155,8 @@ public class FormsValidation {
 	 * fields and data existent
 	 * 
 	 * @param formContainPassword
-	 * @return
+	 * @return Alert
 	 */
-
 	public Alert registrationOfNewUser() {
 		String fieldEmptyMessage = checkingForEmptyField();
 		String passwordFieldEmptyMessage = checkingForEmptyPasswordField();
@@ -223,5 +200,28 @@ public class FormsValidation {
 	}	
 	private UserRegistration getUserRegistration() {
 		return this.userRegistration;
+	}
+	public void setFieldName(ArrayList<String> name) {
+		this.fieldName = name;
+	}
+
+	public void setField(ArrayList<TextField> field) {
+		this.txtField = field;
+	}
+
+	public void setPasswordField(ArrayList<PasswordField> password) {
+		this.passwordField = password;
+	}
+
+	private ArrayList<PasswordField> getPasswordField() {
+		return this.passwordField;
+	}
+
+	private ArrayList<TextField> getTextField() {
+		return this.txtField;
+	}
+
+	private ArrayList<String> getFieldName() {
+		return this.fieldName;
 	}
 }

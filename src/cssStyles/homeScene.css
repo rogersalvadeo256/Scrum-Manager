@@ -2,7 +2,7 @@
 	-fx-background-color:#fffffd;
 }
 .hbox#header{
-	-fx-background-color:#211919;
+	-fx-background-color:blue;
 	-fx-pref-height:50;
 }
 .vbox#profile-info{

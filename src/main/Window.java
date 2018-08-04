@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import DB.Database;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import scenes.HomePageScene;
 import scenes.LoginScene;
 
 public class Window extends Stage {
@@ -20,10 +21,12 @@ public class Window extends Stage {
 	public  Window() throws ClassNotFoundException, SQLException, FileNotFoundException {
  		Window.mainStage = this;
  		
- 		File f = new File("/home/jefter66/java-workspace/SCRUM/resources/images/icons/scrum_icon.png");
-		FileInputStream fis = new FileInputStream(f);
- 		Window.mainStage.getIcons().add(new Image(fis)); 		
+// 		File f = new File("/resources/images/icons/scrum_icon.png");
+//		FileInputStream fis = new FileInputStream(f);
+// 		Window.mainStage.getIcons().add(new Image(fis)); 		
+// 		
  		
+// 		mainStage.setScene(new HomePageScene());
  		mainStage.setScene(new LoginScene());
  		this.show();
 	}

@@ -221,10 +221,12 @@ public class HomePageScene extends Scene {
 
 		
 		
+		/*
+		 * espaço horizontal e vertical entre os componentes
+		 */
+		this.layout.setHgap(15);
+		this.layout.setVgap(20);
 		
-		
-		//		this.layout.setHgap(15);
-//		this.layout.setVgap(20);
 		this.setRoot(layout);
 
 	}
