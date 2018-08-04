@@ -286,9 +286,6 @@ public class LoginScene extends Scene {
 	}
 
 	private void logar() throws FileNotFoundException, ClassNotFoundException, SQLException {
-		/* 
-		 *  
-		 */
 		
 		
 

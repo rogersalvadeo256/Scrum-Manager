@@ -39,7 +39,7 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 	 */
 	@Override
 	public boolean userExist(UserRegistration user) {
-		Query queryForExistentUserName = this.manager.createQuery("from UserRegistration where  userName=:userName");
+		Query queryForExistentUserName = this.manager.createQuery("from UserRegistration where userName=:userName");
 		queryForExistentUserName.setParameter("userName", user.getUserName());
 		if (!queryForExistentUserName.getResultList().isEmpty()) return true;
 		return false;
