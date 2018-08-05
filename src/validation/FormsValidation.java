@@ -148,8 +148,8 @@ public class FormsValidation {
 	 * @return boolean
 	 */
 	public boolean validationForExistentData(UserRegistration registration) {
-		if (this.registration.userExist(registration))return true;
-		return false;
+		if (this.registration.userExist(registration))return false;
+		return true;
 	}
 
 	public CustomAlert message(AlertType alert, String title, String header, String contentText) {
@@ -159,8 +159,6 @@ public class FormsValidation {
 	/**
 	 * Make the registration of new user after do all the validations of empty
 	 * fields and data existent
-	 * 
-	 * @param formContainPassword
 	 * @return Alert
 	 */
 	public Alert registrationOfNewUser() {
@@ -174,22 +172,22 @@ public class FormsValidation {
 			passwordFieldEmptyMessage = new String();
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", returnMessage);
 		}
-		String passwordErrorMessage= null;
+		String passwordErrorMessage= new String();
 		if(!validationForPassword(true).isEmpty()){
 			passwordErrorMessage=new String();
 			passwordErrorMessage = validationForPassword(true);
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordErrorMessage);
 		}
-		String passwordFieldErrorMessage = null;
+		String passwordFieldErrorMessage = new String();
 		if(!validationForPassword(false).isEmpty()) {
 			passwordFieldEmptyMessage=new String();
 			passwordFieldEmptyMessage = validationForPassword(false);
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage);
 		}
-			
 		if(!validationForExistentData(this.getUserRegistration())) {
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", "Nome de usuario já está cadastrado");
 		}
+		registration.insertUser(getUserRegistration());
 		return message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro realizado com sucesso", "Voce está cadastrado");
 	}
 	public void setConfirmationMessage(ArrayList<String> message) {
