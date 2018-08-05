@@ -56,9 +56,7 @@ public class QuerysDataValidation {
 			commands.execute(insert);
 		} catch (SQLException a) {
 			a.printStackTrace();
-
 		}
-
 	}
 
 }

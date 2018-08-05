@@ -7,8 +7,11 @@ import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
 
+import DB.Database;
+import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import scenes.HomePageScene;
 import scenes.LoginScene;
 
@@ -23,8 +26,18 @@ public class Window extends Stage {
 		FileInputStream fis = new FileInputStream(new File("resources/images/icons/scrum_icon.png"));
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
-// 		mainStage.setScene(new HomePageScene());
- 		mainStage.setScene(new LoginScene());
+ 		
+ 		Window.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			
+			@Override
+			public void handle(WindowEvent event) {
+				Database.close();
+			}
+		});
+ 		
+ 		
+ 		mainStage.setScene(new HomePageScene());
+// 		mainStage.setScene(new LoginScene());
  		this.show();
 	}
 	

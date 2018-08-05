@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DB.Functions.Login;
+import css.indicator.object.IndicatorOfCss;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -27,7 +28,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import main.Window;
-import referring.css.ReferringCss;
 /*
  * LoginScreen.java
  * 
@@ -69,7 +69,7 @@ public class LoginScene extends Scene {
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		
-		ReferringCss.referringScene(this, ReferringCss.cssFiles.LOGIN_SCENE);
+		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.LOGIN_SCENE);
 	
 		
 		this.layout = new GridPane();

@@ -8,6 +8,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import css.indicator.object.IndicatorOfCss;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -22,7 +24,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.Window;
-import referring.css.ReferringCss;
 
 public class HomePageScene extends Scene {
 
@@ -52,14 +53,22 @@ public class HomePageScene extends Scene {
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
+		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
+		
 		this.layout = new GridPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
+		
 		this.iconPath = new ArrayList<File>();
 		this.fis = new ArrayList<FileInputStream>();
 
-		ReferringCss.referringScene(this, ReferringCss.cssFiles.HOME_PAGE_SCENE);
+		this.lblCurrentProject=new Label("Projetos Atuais");
+		this.lblProjectsDone=new Label("Projetos Concluidos");
+		this.lblEmail=new Label("comes from the DB");
+		this.settingsIcon=new ImageView();
+		
+		
 		
 		this.lblName = new Label("name come from the DB");
 		this.lblUsername = new Label("user come from the DB");
@@ -76,7 +85,6 @@ public class HomePageScene extends Scene {
 		this.iconPath.add(new File("resources/images/icons/scrum_icon.png"));
 		this.iconPath.add(new File("resources/images/icons/envelope.png"));
 		this.iconPath.add(new File("resources/images/icons/friend_request.png"));
-
 		/*
 		 * 
 		 */
@@ -185,6 +193,11 @@ public class HomePageScene extends Scene {
 		this.vbLeftColumn.getStyleClass().add("vbox");
 		this.vbLeftColumn.setId("vbLeft");
 
+		this.lblNewProject= new Label("Começar um novo projeto");
+		
+		this.vbLeftColumn.getChildren().add(lblNewProject);
+		
+		
 		this.vbLeftColumn.setPrefWidth(250);
 		this.vbLeftColumn.setPrefHeight(700);
 
