@@ -16,9 +16,10 @@ public class Profile {
 	@Column(name="codProfile")
 	private long id;
 	@Column
-	private  String details;
+	private  String bio;
 	@Column 
 	private String name;
+	
 	
 //	@Column
 //	private Friend friends;
@@ -29,6 +30,6 @@ public class Profile {
 	public String getName(){ return name;}
 	public void setName(String name){this.name = name;}
 	
-	public String getDetails() {return details;}
-	public void setDetails(String details) {this.details = details;}
+	public String getBio() {return bio;}
+	public void setDetails(String details) {this.bio = details;}
 }

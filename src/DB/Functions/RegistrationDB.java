@@ -3,10 +3,9 @@ package DB.Functions;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import DB.Database;
-import DB.database.functions.definition.FunctionsRegistrationDatabase;
 import hibernatebook.annotations.UserRegistration;
 
-public class RegistrationDB extends FunctionsRegistrationDatabase {
+public class RegistrationDB{
 	private EntityManager manager;
 	public RegistrationDB() {
 		this.manager = Database.createEntityManager();
@@ -20,7 +19,6 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 	 * @param UserRegistration
 	 *            user
 	 */
-	@Override
 	public void insertUser(UserRegistration user) {
 		this.manager.getTransaction().begin();
 		this.manager.persist(user);
@@ -33,7 +31,6 @@ public class RegistrationDB extends FunctionsRegistrationDatabase {
 	 * @example boolean value = queryValidation(UserRegistration user);
 	 * @param UserRegistration user
 	 */
-	@Override
 	public boolean userExist(UserRegistration user) {
 		Query queryForExistentUserName = this.manager.createQuery("from UserRegistration where userName=:userName");
 		queryForExistentUserName.setParameter("userName", user.getUserName());

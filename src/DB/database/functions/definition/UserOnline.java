@@ -43,6 +43,7 @@ public class UserOnline {
 		Profile userProfile = new Profile();
 		Query getUser = manager.createQuery("from Profile where codProfile=:codProfile");
 		getUser.setParameter("codProfile", getUserLogged().getProfile().getId());
+		
 		if(!getUser.getResultList().isEmpty()) {
 			userProfile = (Profile) getUser.getResultList().get(0);
 			System.out.println(userProfile.getName());

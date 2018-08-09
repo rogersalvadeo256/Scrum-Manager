@@ -31,8 +31,7 @@ public class Login {
 	 */
 	public boolean doLogin(TextField userName, PasswordField password) {
 		if (!isFieldEmpty(userName, password)) {
-			Query queryForLogin = this.manager
-					.createQuery("from UserRegistration where userName=:userName and password=:password");
+			Query queryForLogin = this.manager.createQuery("from UserRegistration where userName=:userName and password=:password");
 			queryForLogin.setParameter("userName", userName.getText());
 			queryForLogin.setParameter("password", password.getText());
 
