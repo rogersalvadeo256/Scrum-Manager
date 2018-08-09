@@ -17,9 +17,7 @@ public class LoadHomePage {
 	}
 	public static ArrayList<HBox> bringFriends(Profile profile) {
 		return null;
-		
 	}
-	
 	
 	
 	

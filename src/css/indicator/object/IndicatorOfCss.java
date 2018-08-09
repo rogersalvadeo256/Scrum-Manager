@@ -9,7 +9,9 @@ public class IndicatorOfCss {
 
 	public IndicatorOfCss() {
 	}
-
+	/* 
+	 * when add a new file to the css package, put the name of he here
+	 */
 	public static enum cssFile {
 		LOGIN_SCENE, HOME_PAGE_SCENE, DIALOG_PANE;
 	};
