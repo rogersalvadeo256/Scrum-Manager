@@ -254,7 +254,13 @@ public class LoginScene extends Scene {
 			@Override
 			public void handle(KeyEvent event) {
 				if (event.getCode() == KeyCode.ENTER) {
-
+					LoginScene.this.messageLoginValidation.setText(new String());
+					try {
+						Window.mainStage.setScene(new HomePageScene());
+					} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					}
 				}
 		});
@@ -283,7 +289,6 @@ public class LoginScene extends Scene {
 		
 		this.setRoot(layout);
 	}
-
 	private void cancelPressed() {
 		LoginScene.this.imgIcon.setTranslateX(100);
 		LoginScene.this.imgIcon.setTranslateY(100);

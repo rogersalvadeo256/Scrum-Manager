@@ -1,11 +1,9 @@
 package DB.Functions;
-
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import DB.Database;
+import DB.database.functions.definition.UserOnline;
 import hibernatebook.annotations.UserRegistration;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -14,31 +12,33 @@ import validation.CheckEmptyFields;
 public class Login {
 	private EntityManager manager;
 	private CheckEmptyFields checkFields;
-	private List<UserRegistration> listOfUserForLogin;
 
 	public Login() {
 		this.manager = Database.createEntityManager();
 		this.checkFields = new CheckEmptyFields();
-		this.listOfUserForLogin = new ArrayList<UserRegistration>();
 	}
-	
+
 	/**
-	 * The function to check if the data for login informed are right,
-	 * return true = data is right
-	 * @param  TextField userName
-	 * @param  PasswordField password 
+	 * The function to check if the data for login informed are right, return true =
+	 * data is right
+	 * 
+	 * @param TextField
+	 *            userName
+	 * @param PasswordField
+	 *            password
 	 * @return boolean
 	 * @author jefter66
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean doLogin(TextField userName, PasswordField password) {
 		if (!isFieldEmpty(userName, password)) {
-			this.listOfUserForLogin.clear();
-			Query queryForLogin = this.manager.createQuery("from UserRegistration");
-			this.listOfUserForLogin = queryForLogin.getResultList();
-			for (UserRegistration user : this.listOfUserForLogin) {
-				if (user.getUserName().equals(userName.getText()) && user.getPassword().equals(password.getText()))
-					return true;
+			Query queryForLogin = this.manager
+					.createQuery("from UserRegistration where userName=:userName and password=:password");
+			queryForLogin.setParameter("userName", userName.getText());
+			queryForLogin.setParameter("password", password.getText());
+
+			if (!queryForLogin.getResultList().isEmpty()) {
+				UserOnline.setUserLogged((UserRegistration) queryForLogin.getResultList().get(0));
+				return true;
 			}
 		}
 		return false;

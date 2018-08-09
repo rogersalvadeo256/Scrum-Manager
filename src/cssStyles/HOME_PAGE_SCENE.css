@@ -9,15 +9,15 @@
 	-fx-background-color:#AEA2A2;
 	
 }
+.hbox#hbProjectArea{
+	-fx-background-color:black;
+}
 .hbox#menu{
 	-fx-background-color:green;
 	-fx-pref-height:50;
 }
 .vbox#vbLeft{
 	-fx-background-color:purple;
-}
-.vbox#vbMiddle{
-	-fx-background-color:pink;
 }
 .vbox#vbRight{ 
 	-fx-background-color:yellow;

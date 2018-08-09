@@ -17,13 +17,11 @@ public class UserRegistration {
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_registration")
-	private long id;
+	private long codUser;
 	@Column
 	private String userName;
 	@Column
 	private String email;
-
 	@Column(nullable = false)
 	private String password;
 
@@ -48,8 +46,8 @@ public class UserRegistration {
 	public String getEmail(){return email;}
 	public void setEmail(String email){this.email = email;}
 
-	public long getId(){ return id;}
-	public void setId(int id){this.id = id;}
+	public long getCodUser(){ return codUser;}
+	public void setId(int id){this.codUser = id;}
 
 }
 

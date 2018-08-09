@@ -9,7 +9,8 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import css.indicator.object.IndicatorOfCss;
+import DB.database.functions.definition.UserOnline;
+import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -32,14 +33,14 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private ImageView profileImg;
 
-	private Label lblName, lblUsername, lblNewProject, lblCurrentProject, lblProjectsDone, lblDescription;
+	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblDescription;
 	private Button btnEditBio;
 	private Label lblEmail;
 
 	private HBox hbHeader;
 	private TextField txtSearch;
 	private Button btnSearch;
-	private ImageView scrumIcon, messageIcon, friendRequestIcon, settingsIcon;
+	private ImageView scrumIcon; //, messageIcon, friendRequestIcon, settingsIcon;
 	private ArrayList<File> iconPath;
 	private ArrayList<FileInputStream> fis;
 	private VBox vbProfileInfo;
@@ -47,13 +48,12 @@ public class HomePageScene extends Scene {
 	private HBox hbMenu;
 	private Button btnProject, btnStartProject, btnfriends;
 
-	private HBox hbProjectsArea;
-	private VBox vbLeftColumn, vbMiddleColumn, vbRightColumn;
-
+	private HBox hbProjectArea;
+	private VBox vbLeftColumn, vbRightColumn;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
+//		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
 		
 		this.layout = new GridPane();
 		Window.mainStage.setTitle("Home");
@@ -65,14 +65,11 @@ public class HomePageScene extends Scene {
 
 		this.lblCurrentProject=new Label("Projetos Atuais");
 		this.lblProjectsDone=new Label("Projetos Concluidos");
-		this.lblEmail=new Label("comes from the DB");
-		this.settingsIcon=new ImageView();
+		this.lblEmail=new Label();
 		
 		
-		
-		this.lblName = new Label("name come from the DB");
-		this.lblUsername = new Label("user come from the DB");
-		this.lblNewProject = new Label("Começar um novo projeto");
+		this.lblName = new Label("nome"); //UserOnline.getProfile().getName());
+		this.lblUsername = new Label("usernome"); //UserOnline.getUserLogged().getUserName());
 		this.lblCurrentProject = new Label("Projetos em andamento");
 		this.lblProjectsDone = new Label("Projetos finalizados");
 		/*
@@ -102,17 +99,12 @@ public class HomePageScene extends Scene {
 		this.hbHeader.getStyleClass().add("hbox");
 
 		this.scrumIcon = new ImageView();
-		this.messageIcon = new ImageView();
-		this.friendRequestIcon = new ImageView();
 		this.setImage(scrumIcon, 0);
-		this.setImage(messageIcon, 1);
-		this.setImage(friendRequestIcon, 2);
 
 		this.hbHeader.setId("header");
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.txtSearch = new TextField();
-		this.btnSearch = new Button();
-		this.btnSearch.setPrefWidth(100);
+		this.btnSearch = new Button("Pesquisar");
 		this.hbHeader.setSpacing(20);
 		this.hbHeader.setAlignment(Pos.CENTER);
 		this.btnEditProfile = new Button("Editar Perfil");
@@ -126,16 +118,17 @@ public class HomePageScene extends Scene {
 		});
 		this.btnExit = new Button("Sair");
 		this.btnExit.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
+			ExitButtonListener exit = new ExitButtonListener() {};
 				/*
 				 * close the program and serialization
 				 */
-			}
-		});
-		this.hbHeader.getChildren().addAll(scrumIcon, txtSearch, btnSearch, messageIcon, friendRequestIcon,
-				btnEditProfile, btnExit);
+					@Override
+					public void handle(ActionEvent event) {
+						exit.handle(event);
+					}
+				});	
+	
+		this.hbHeader.getChildren().addAll(scrumIcon, txtSearch, btnSearch,	btnEditProfile, btnExit);
 
 		this.layout.add(hbHeader, 0, 0, 5, 1);
 
@@ -154,12 +147,25 @@ public class HomePageScene extends Scene {
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
 
-		this.btnEditBio = new Button("Editar Mensagem");
-		this.btnEditBio.setPrefWidth(200);
-		this.btnEditBio.setPrefHeight(80);
+		this.btnEditBio = new Button("Editar Bio");
 
 		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblDescription, btnEditBio);
 
+		this.btnEditBio.setOnAction(new EventHandler<ActionEvent>() {
+			
+			@Override
+			public void handle(ActionEvent event) {
+				TextField bio = new TextField();
+				HomePageScene.this.lblDescription.setVisible(false);
+				HomePageScene.this.btnEditBio.setVisible(false);
+				HomePageScene.this.vbProfileInfo.getChildren().add(bio);
+				bio.setTranslateY(-90);	
+				
+			
+			}
+		});
+			
+		
 		/*
 		 * database
 		 */
@@ -174,7 +180,6 @@ public class HomePageScene extends Scene {
 		this.hbMenu.getStyleClass().add("hbox");
 		this.hbMenu.setId("menu");
 		this.hbMenu.setSpacing(20);
-		this.hbMenu.setPrefWidth(800);
 
 		this.btnStartProject = new Button("Começar projeto");
 		this.btnProject = new Button("Meus Projetos");
@@ -183,46 +188,43 @@ public class HomePageScene extends Scene {
 		this.hbMenu.setSpacing(20);
 		this.hbMenu.getChildren().addAll(btnStartProject, btnProject, btnfriends);
 
-		Label a = new Label("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-		this.hbMenu.getChildren().add(a);
 		this.layout.add(hbMenu, 1, 1, 1, 1);
 
-		this.hbProjectsArea = new HBox();
+		this.hbProjectArea = new HBox();
 
 		this.vbLeftColumn = new VBox();
 		this.vbLeftColumn.getStyleClass().add("vbox");
 		this.vbLeftColumn.setId("vbLeft");
+		this.vbLeftColumn.getChildren().add(this.lblCurrentProject);
 
-		this.lblNewProject= new Label("Começar um novo projeto");
+		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
+		this.vbLeftColumn.setPrefWidth(400);
 		
-		this.vbLeftColumn.getChildren().add(lblNewProject);
-		
-		
-		this.vbLeftColumn.setPrefWidth(250);
-		this.vbLeftColumn.setPrefHeight(700);
-
-		this.vbMiddleColumn = new VBox();
-		this.vbMiddleColumn.getStyleClass().add("vbox");
-		this.vbMiddleColumn.setId("vbMiddle");
-
-		this.vbMiddleColumn.setPrefWidth(250);
-		this.vbMiddleColumn.setPrefHeight(700);
-
 		this.vbRightColumn = new VBox();
 		this.vbRightColumn.getStyleClass().add("vbox");
 		this.vbRightColumn.setId("vbRight");
+		this.vbRightColumn.getChildren().add(this.lblProjectsDone);
+		
+		this.vbRightColumn.setPrefWidth(400);
+		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);
+		
+		
+		this.hbProjectArea.setPrefWidth(Window.mainStage.getWidth());
+		this.hbProjectArea.setPrefHeight(Window.mainStage.getHeight());
+		
+		this.hbProjectArea.getStyleClass().add("hbox");
+		this.hbProjectArea.setId("hbProjectArea");
+		this.hbProjectArea.getChildren().addAll(vbLeftColumn, vbRightColumn);
 
-		this.vbRightColumn.setPrefWidth(250);
-		this.vbRightColumn.setPrefHeight(700);
-
-		this.hbProjectsArea.getChildren().addAll(vbLeftColumn, vbMiddleColumn, vbRightColumn);
-		this.layout.add(hbProjectsArea, 1, 2, 1, 1);
+		
+		this.layout.add(hbProjectArea, 1, 2, 1, 1);
 
 		/*
 		 * espaço horizontal e vertical entre os componentes
 		 */
+		
 		// this.layout.setHgap(15);
-		// this.layout.setVgap(20);
+		 this.layout.setVgap(20);
 
 		this.setRoot(layout);
 

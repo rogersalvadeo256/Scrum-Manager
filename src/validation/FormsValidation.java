@@ -73,7 +73,7 @@ public class FormsValidation {
 			}
 		}
 		if (!this.getPasswordField().isEmpty()) {
-			for (int i = 0; i < this.getPasswordField().size(); i++) {
+			for (int i = 1; i < this.getPasswordField().size(); i++) {
 				if (this.checkFields.isPasswordFieldEmpty(this.getPasswordField().get(i))) {
 					outputMessageContent.add("O campo senha não foi preenchido");
 				}

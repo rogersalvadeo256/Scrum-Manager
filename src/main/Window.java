@@ -17,25 +17,22 @@ import scenes.LoginScene;
 
 public class Window extends Stage {
 
-	public static EntityManager DB;
 	public static Stage mainStage;
-	FileOutputStream fis;
+	private FileOutputStream fis;
 	public  Window() throws ClassNotFoundException, SQLException, FileNotFoundException {
  		Window.mainStage = this;
+ 		
  		
 		FileInputStream fis = new FileInputStream(new File("resources/images/icons/scrum_icon.png"));
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
  		
- 		Window.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			
-			@Override
-			public void handle(WindowEvent event) {
-				Database.close();
-			}
-		});
- 		
- 		
+// 		Window.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+//			@Override
+//			public void handle(WindowEvent event) {
+//				Database.close();
+//			}
+//		});
  		mainStage.setScene(new HomePageScene());
 // 		mainStage.setScene(new LoginScene());
  		this.show();
