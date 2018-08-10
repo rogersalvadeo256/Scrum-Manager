@@ -15,8 +15,6 @@ public class Project {
 	private long codProject;
 	@Column(nullable = false)
 	private String nameProject;
-	;
-	
 	
 	
 	

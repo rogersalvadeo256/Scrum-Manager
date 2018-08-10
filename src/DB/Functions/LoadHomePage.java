@@ -1,23 +1,40 @@
 package DB.Functions;
 
 import java.util.ArrayList;
-
-import hibernatebook.annotations.Profile;
 import javafx.scene.layout.HBox;
 
 public class LoadHomePage {
-
+	public ArrayList<HBox> bringCurrentProject() {
 	
-	public static ArrayList<HBox> bringCurrentProject(Profile profile) {
-		return null; 
-	}
-	public static ArrayList<HBox> bringFinishedProject(Profile profile) {
-		return null; 
 		
+//		UserOnline.getProfile().getProjects
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return null; 
 	}
-	public static ArrayList<HBox> bringFriends(Profile profile) {
+	public ArrayList<HBox> bringFinishedProject() {
+		return null; 
+	}
+	public ArrayList<HBox> bringFriends() {
 		return null;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

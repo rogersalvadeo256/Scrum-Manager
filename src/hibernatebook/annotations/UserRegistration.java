@@ -29,7 +29,6 @@ public class UserRegistration {
 	@JoinColumn(name="Profile")
 	private Profile userProfile;
 	
-	
 	public Profile getProfile() {
 		return this.userProfile;
 	}

@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 import DB.Database;
+import DB.Functions.LoadHomePage;
 import DB.database.functions.definition.UserOnline;
+import css.indicator.object.IndicatorOfCss;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -37,9 +39,8 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private ImageView profileImg;
 
-	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblBio;
+	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblBiography,lblEmail;
 	private Button btnEditBio;
-	private Label lblEmail;
 
 	private HBox hbHeader;
 	private TextField txtSearch;
@@ -60,6 +61,9 @@ public class HomePageScene extends Scene {
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
+	
+	private LoadHomePage loadHomePage;
+	
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 //		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
@@ -74,7 +78,7 @@ public class HomePageScene extends Scene {
 
 		this.lblCurrentProject=new Label("Projetos Atuais");
 		this.lblProjectsDone=new Label("Projetos Concluidos");
-		this.lblEmail=new Label();
+		this.lblEmail= new Label();
 		
 		
 		this.lblName = new Label("nome"); //UserOnline.getProfile().getName());
@@ -150,7 +154,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setPrefWidth(300);
 
-		this.lblBio = new Label("SSSS");
+		this.lblBiography = new Label("SSSS");
 
 		this.profileImg = new ImageView();
 		this.profileImg.setFitHeight(200);
@@ -168,17 +172,17 @@ public class HomePageScene extends Scene {
 		this.txtBio = new TextArea();
 		this.txtBio.setPrefRowCount(5);
 		this.txtBio.setWrapText(true);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBio, btnEditBio, hbBntInteractWithBio);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBiography, btnEditBio, hbBntInteractWithBio, lblEmail);
 
 		this.btnEditBio.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				
 				HomePageScene.this.txtBio.setVisible(true);
-				HomePageScene.this.txtBio.setText(HomePageScene.this.lblBio.getText());
+				HomePageScene.this.txtBio.setText(HomePageScene.this.lblBiography.getText());
 				HomePageScene.this.txtBio.setTranslateY(-120);	
 				HomePageScene.this.hbBntInteractWithBio.setVisible(true);
-				HomePageScene.this.lblBio.setVisible(false);
+				HomePageScene.this.lblBiography.setVisible(false);
 				HomePageScene.this.btnEditBio.setVisible(false);
 				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(80);
@@ -191,7 +195,7 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.vbProfileInfo.getChildren().remove(txtBio);
 				HomePageScene.this.txtBio.setVisible(false);
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
-				HomePageScene.this.lblBio.setVisible(true);
+				HomePageScene.this.lblBiography.setVisible(true);
 				HomePageScene.this.btnEditBio.setVisible(true);
 			}
 		});
@@ -199,7 +203,7 @@ public class HomePageScene extends Scene {
 		this.btnOk.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				UserOnline.getProfile().setDetails(HomePageScene.this.txtBio.getText());
+				UserOnline.getProfile().setBiography(HomePageScene.this.txtBio.getText());
 				
 					
 			}
