@@ -14,16 +14,17 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import scenes.HomePageScene;
 import scenes.LoginScene;
+import scenes.newProjectScene;
 
 public class Window extends Stage {
 
 	public static Stage mainStage;
-	private FileOutputStream fis;
+	private FileInputStream fis;
 	public  Window() throws ClassNotFoundException, SQLException, FileNotFoundException {
  		Window.mainStage = this;
  		
  		
-		FileInputStream fis = new FileInputStream(new File("resources/images/icons/scrum_icon.png"));
+		this.fis = new FileInputStream(new File("resources/images/icons/scrum_icon.png"));
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
  		
@@ -33,6 +34,7 @@ public class Window extends Stage {
 //				Database.close();
 //			}
 //		});
+ 		
  		mainStage.setScene(new HomePageScene());
 // 		mainStage.setScene(new LoginScene());
  		this.show();

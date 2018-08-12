@@ -1,42 +1,120 @@
 .root{
-	-fx-background-color:#fffffd;
+	-fx-background-color:#2A363F;
 }
 .hbox#header{
-	-fx-background-color:blue;
-	-fx-pref-height:50;
+	-fx-background-color:transparent;
+	-fx-pref-height:50.0;
+	-fx-border-color: white;
+	-fx-border-width: 0.0 0.0 3.0 0.0;
 }
-.vbox#profile-info{
-	-fx-background-color:#AEA2A2;
-	
-}
-.hbox#hbProjectArea{
-	-fx-background-color:black;
-}
-.hbox#menu{
-	-fx-background-color:green;
-	-fx-pref-height:50;
-}
-.vbox#vbLeft{
-	-fx-background-color:purple;
-}
-.vbox#vbRight{ 
-	-fx-background-color:yellow;
-}
-.button{
-	-fx-text-fill:green;
+.header-buttons{ 
+	-fx-pref-height:50.0;
+	-fx-pref-width:100.0;
 	-fx-background-color:grey;
 }
-.button:hover{
-	-fx-text-fill:black;
-	-fx-background-color:black;
+.button#friend-request { 
 }
-.button {
+.button#project-invite { 
+	
+}
+.text-field{
+   -fx-font-size: 12.0pt;
+   -fx-border-width: 0.0 2.0 2.0 2.0 ;
+   -fx-border-color: black;
+    -fx-background-color: transparent;
+    -fx-background-insets: 0.0 -1.0 -1.0 -1.0, 0.0 0.0 0.0 0.0, 0.0 -1.0 3.0 -1.0;
+	-fx-text-fill: white;
+
 }
 
-#exitbtn:hover{
-	-fx-text-fill:black;
-	-fx-background-color:red;
-	-fx-effect: innershadow(gaussian,black,8.0,0.0,0.0,0.0);
+.vbox#profile-info{
+	-fx-background-color:transparent;
+}
+.label{
+    -fx-font-size: 11.0pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: white;
+    -fx-opacity: 6.0;
+}
+.label#lblName{ 
+    -fx-font-weight: bold;
+    -fx-fill-color:black;
+	-fx-text-aligment:center;
+}
+.label#userName{ 
+}
+.button#editBio{
+	-fx-fill-color:black;
+	-fx-text-aligment:center;
+	-fx-pref-width:500.0;
+	-fx-pref-height:40.0;
+	-fx-background-color:#e6f2f2;
+	-fx-border-radius: 4.0;
+    -fx-font-size: 12.0pt;
+    -fx-font-weight: bold;
+}
+.button#editBio:hover{ 
+	-fx-background-color:#020704;
+	-fx-text-fill: #d8d8d8;
+}
+.button#cancel{
+	-fx-pref-height:30.0;
+	-fx-pref-width:100.0;
+	-fx-fill-color:black;
+	-fx-background-color:#c5d8db;
+	-fx-background-radius: 5.0,4.0,3.0,5.0;
+    -fx-background-insets: 0.0,1.0,2.0,0.0;
+    -fx-font-size: 10.0pt;
+    -fx-font-weight: bold;
+}
+.button#cancel:hover{ 
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
+}
+.button#save{ 
+	-fx-background-color: #32c156;
+	-fx-text-fill:white;
+	-fx-font-weight: bold;
+	-fx-pref-height:30.0;
+	-fx-pref-width:80.0;
+	-fx-background-radius: 5.0,4.0,3.0,5.0;
+    -fx-background-insets: 0.0,1.0,2.0,0.0;
+    -fx-text-fill: white;
+}
+.button#save:hover{ 
+	-fx-background-color: #11a037;
+}
+.hbox#menu{
+	
+	-fx-background-color:transparent;
+	-fx-pref-height:50.0;
+}
+.button#menu{
+	-fx-pref-height:50.0;
+	-fx-pref-width:500.0;
+	-fx-background-color:transparent;
+	-fx-text-fill:#F5FFFA;
+	-fx-font-size: 16.0pt;
+	
+    }
+.button#menu:hover{ 
+	-fx-border-color: white;
+	 -fx-border-width: 0.0 0.0 3.0 0.0;
+}
+
+.vbox#vbLeft{
+	-fx-background-color:transparent;
+	-fx-border-color: white;
+	-fx-border-width: 0.0 3.0 0.0 0.0;
+	
+}
+.vbox#vbRight{ 
+	-fx-background-color:transparent;
+	-fx-border-color: white;
+	-fx-border-width: 0.0 0.0 0.0 3.0;
+}
+.hbox#hbProjectArea{
+	-fx-background-color:transparent;
 }
 
 

@@ -56,7 +56,6 @@ public class newProjectScene extends Scene {
 	private Label lblProjetcName;
 	private Label lblProjectDescription;
 	private Label lblSelectTeam;
-
 	private ArrayList<String> listMembers;
 	private ArrayList<HBoxWithTextFields> listHBmembers;
 

@@ -1,32 +1,51 @@
 package hibernatebook.annotations;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
 public class FriendRequest {
-	
 	@Id 
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long codFriendRequest;
+
+	/**
+	 * @author jefter66
+	 * values for the requestStatus: 
+	 * 0 - pending
+	 * 1 - accepted
+	 * 2 - declained
+	 */
 	@Column
-	private boolean friendRequest;
+	private int requestStatus;
 	@Column
 	@Temporal(TemporalType.DATE)
 	private java.util.Calendar calendarDate;
-	@Column(nullable=false)
+
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="Profile")
 	private Profile requestedBy;
-	@Column
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@JoinColumn(name="Profile")
 	private Profile requestTo;
 	
-	public boolean isFriendRequest() {return friendRequest;}
-	public void setFriendRequest(boolean friendRequest) {this.friendRequest = friendRequest;}
-
+	
+	public long getCodFriendRequest() {return codFriendRequest;}
+	public void setCodFriendRequest(long codFriendRequest) {this.codFriendRequest = codFriendRequest;}
+	
+	public int getRequestStatus() {return requestStatus;}
+	public void setRequestStatus(int requestStatus) {this.requestStatus = requestStatus;}
+	
 	public Profile getRequestedBy() {return requestedBy;}
 	public void setRequestedBy(Profile requestedBy) {this.requestedBy = requestedBy;}
 	

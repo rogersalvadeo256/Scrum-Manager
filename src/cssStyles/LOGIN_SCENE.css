@@ -1,7 +1,7 @@
 .hbox#rightSide{
 	-fx-padding: 10.0;
 	-fx-border-style: solid inside;
-    -fx-border-width: 0px, 0px, 1px, 0px;
+    -fx-border-width: 0.0px, 0.0px, 1.0px, 0.0px;
 }
 .root{
 	-fx-background-color:#2A363F;
