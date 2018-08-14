@@ -8,11 +8,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import main.Window;
 
-public class NewProject extends VBox {
+public class NewProject extends Scene {
 
 	private Label lblProjectName, lblDescProject, lblMember;
 	private TextField txtProjectName,txtMember;
@@ -20,11 +20,12 @@ public class NewProject extends VBox {
 	private TextArea txtDescProject;
 	private Button btnSalvar,btnCancelar,btnInvite;
 	private HBox hbxPN,hbxBTN,hbxMember;
+	private VBox vbxTela;
 	
-	
-	public  NewProject(){	
+	public NewProject(){	
+		super(new VBox());
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("Descri��o do Projeto");
+		this.lblDescProject = new Label("Descrição do Projeto");
 		this.lblMember = new Label("Membros:");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
@@ -33,9 +34,16 @@ public class NewProject extends VBox {
 		this.hbxBTN = new HBox();
 		this.hbxPN = new HBox();
 		this.hbxMember = new HBox();
+		this.vbxTela = new VBox();
+		
+		Window.mainStage.setWidth(800);
+		Window.mainStage.setHeight(600);
 		
 		this.txtProjectName.setMaxWidth(300);
 		this.txtDescProject.setMaxWidth(300);
+		this.txtDescProject.setPrefRowCount(10);
+		this.txtDescProject.setWrapText(true);
+		
 		this.txtMember.setMaxWidth(300);
 		this.txtProjectName.setAlignment(Pos.CENTER);
 		this.txtMember.setAlignment(Pos.CENTER);
@@ -45,19 +53,27 @@ public class NewProject extends VBox {
 		this.btnCancelar = new Button("Cancelar");
 
 		hbxPN.getChildren().addAll(lblProjectName,txtProjectName);
+		hbxPN.setSpacing(10);
+		hbxPN.setAlignment(Pos.CENTER);
+
 		
 		hbxBTN.getChildren().addAll(btnSalvar,btnCancelar);
+		hbxBTN.setSpacing(10);
+		hbxBTN.setAlignment(Pos.CENTER);
+				
 		hbxMember.getChildren().addAll(lblMember,txtMember,btnInvite);
 		
-		
-		this.getChildren().addAll(hbxPN,lblDescProject,txtDescProject,hbxMember,lblAddMember);
-		this.getChildren().addAll(hbxBTN);
-		this.setAlignment(Pos.CENTER);
-		this.setSpacing(5);
+		hbxMember.setSpacing(15);
+		hbxMember.setAlignment(Pos.CENTER);
 		
 		
+		vbxTela.getChildren().addAll(hbxPN,lblDescProject,txtDescProject,hbxMember,lblAddMember);
+		vbxTela.getChildren().addAll(hbxBTN);
+		vbxTela.setAlignment(Pos.CENTER);
+		
+		vbxTela.setSpacing(15);
 		
 		
-		
+		setRoot(vbxTela);
 	}
 }
