@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import main.Window;
 
-public class NewProject extends Scene {
+public class NewProjectScene extends Scene {
 
 	private Label lblProjectName, lblDescProject, lblMember;
 	private TextField txtProjectName,txtMember;
@@ -22,7 +22,7 @@ public class NewProject extends Scene {
 	private HBox hbxPN,hbxBTN,hbxMember;
 	private VBox vbxTela;
 	
-	public NewProject(){	
+	public NewProjectScene(){	
 		super(new VBox());
 		this.lblProjectName = new Label("Nome do Projeto");
 		this.lblDescProject = new Label("Descrição do Projeto");

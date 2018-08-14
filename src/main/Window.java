@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import scenes.HomePageScene;
 import scenes.LoginScene;
-import scenes.NewProject;
+import scenes.NewProjectScene;
 
 public class Window extends Stage {
 
@@ -35,7 +35,7 @@ public class Window extends Stage {
 //			}
 //		});
  		
- 		mainStage.setScene(new NewProject());
+ 		mainStage.setScene(new NewProjectScene());
 // 		mainStage.setScene(new HomePageScene());
 // 		mainStage.setScene(new LoginScene());
  		
