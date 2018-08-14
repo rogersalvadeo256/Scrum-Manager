@@ -4,7 +4,7 @@ import javax.persistence.Query;
 
 import DB.Database;
 import DB.database.functions.definition.UserOnline;
-import hibernatebook.annotations.UserRegistration;
+import POJOs.UserRegistration;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import validation.CheckEmptyFields;

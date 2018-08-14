@@ -1,4 +1,4 @@
-package hibernatebook.annotations;
+package POJOs;
 
 import java.util.ArrayList;
 import java.util.List;
