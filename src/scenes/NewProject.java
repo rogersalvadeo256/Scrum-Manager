@@ -2,11 +2,13 @@ package scenes;
 
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -20,9 +22,9 @@ public class NewProject extends VBox {
 	private HBox hbxPN,hbxBTN,hbxMember;
 	
 	
-	public NewProject(){	
+	public  NewProject(){	
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("Descrição do Projeto");
+		this.lblDescProject = new Label("Descriï¿½ï¿½o do Projeto");
 		this.lblMember = new Label("Membros:");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
@@ -52,5 +54,10 @@ public class NewProject extends VBox {
 		this.getChildren().addAll(hbxBTN);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
+		
+		
+		
+		
+		
 	}
 }
