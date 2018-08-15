@@ -28,16 +28,16 @@ public class Window extends Stage {
  		Window.mainStage.getIcons().add(new Image(fis)); 		
  		
  		
-// 		Window.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-//			@Override
-//			public void handle(WindowEvent event) {
-//				Database.close();
-//			}
-//		});
+ 		Window.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			@Override
+			public void handle(WindowEvent event) {
+				Database.close();
+			}
+		});
  		
- 		mainStage.setScene(new NewProjectScene());
+// 		mainStage.setScene(new NewProjectScene());
 // 		mainStage.setScene(new HomePageScene());
-// 		mainStage.setScene(new LoginScene());
+ 		mainStage.setScene(new LoginScene());
  		
  		this.show();
 	}
