@@ -71,8 +71,8 @@ public class HomePageScene extends Scene {
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
-
+		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
+		
 		this.layout = new GridPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
