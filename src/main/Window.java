@@ -34,8 +34,9 @@ public class Window extends Stage {
 //				Database.close();
 //			}
 //		});
-// 		mainStage.setScene(new HomePageScene());
- 		mainStage.setScene(new NewProjectScene());
+ 		
+ 		mainStage.setScene(new HomePageScene());
+// 		mainStage.setScene(new NewProjectScene());
 // 		mainStage.setScene(new LoginScene());
  		this.show();
 	}

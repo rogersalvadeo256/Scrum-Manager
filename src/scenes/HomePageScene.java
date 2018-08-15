@@ -29,6 +29,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -67,7 +68,6 @@ public class HomePageScene extends Scene {
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 
-	private LoadHomePage loadHomePage;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
@@ -85,10 +85,10 @@ public class HomePageScene extends Scene {
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
 
-		this.lblName = new Label( UserOnline.getProfile().getName()); // "nome"); 
+		this.lblName = new Label( "nome"); //  UserOnline.getProfile().getName());  
 		this.lblName.setId("lblName");
 
-		this.lblUsername = new Label(UserOnline.getUserLogged().getUserName()); // "usernome");
+		this.lblUsername = new Label( "usernome"); //  UserOnline.getUserLogged().getUserName()); 	
 		this.lblName.setId("userName");
 
 		this.lblCurrentProject = new Label("Projetos em andamento");
@@ -131,6 +131,7 @@ public class HomePageScene extends Scene {
 
 		this.vbTxtSearchAndSugestion = new VBox();
 		this.vbSugestions = new VBox();
+		
 		this.txtSearch = new TextField();
 		this.btnSearch = new Button();
 		this.txtSearch.setFocusTraversable(false);
@@ -139,6 +140,23 @@ public class HomePageScene extends Scene {
 		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch, vbSugestions);
 		this.vbTxtSearchAndSugestion.setAlignment(Pos.CENTER);
 
+
+		this.txtSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				
+				EntityManager em = Database.createEntityManager();
+				
+				
+				
+				
+				
+				
+			}
+			
+		});
+		
 		this.hbHeader.setSpacing(20);
 		this.hbHeader.setAlignment(Pos.CENTER);
 		this.btnEditProfile = new Button("Editar Perfil");
@@ -215,7 +233,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setPrefWidth(350);
 
-		 this.lblBiography =new Label(UserOnline.getProfile().getBiography());
+		 this.lblBiography =new Label();//  UserOnline.getProfile().getBiography();
 //		this.lblBiography = new Label("SSSS");
 		this.lblBiography.getStyleClass().add("label");
 
@@ -292,8 +310,8 @@ public class HomePageScene extends Scene {
 					p.setBiography(txtBio.getText());
 					em.merge(p);
 					em.getTransaction().commit();
-				
-//					em.close();
+					em.clear();
+					em.close();
 				}
 				
 				HomePageScene.this.lblBiography.setText(HomePageScene.this.txtBio.getText());
