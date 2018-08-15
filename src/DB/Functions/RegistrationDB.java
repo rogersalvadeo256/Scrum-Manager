@@ -3,7 +3,7 @@ package DB.Functions;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import DB.Database;
-import hibernatebook.annotations.UserRegistration;
+import POJOs.UserRegistration;
 
 public class RegistrationDB{
 	private EntityManager manager;

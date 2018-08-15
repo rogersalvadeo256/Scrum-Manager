@@ -2,8 +2,8 @@ package validation;
 import java.util.ArrayList;
 
 import DB.Functions.RegistrationDB;
+import POJOs.UserRegistration;
 import alert.message.CustomAlert;
-import hibernatebook.annotations.UserRegistration;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;

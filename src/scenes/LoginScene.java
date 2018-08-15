@@ -90,7 +90,6 @@ public class LoginScene extends Scene {
 		this.vbLogin = new VBox();
 		this.rightContainer = new HBox();
 
-
 		this.vbLogin.setAlignment(Pos.CENTER);
 		this.left.setAlignment(Pos.CENTER_LEFT);
 		this.left.setAlignment(Pos.CENTER);

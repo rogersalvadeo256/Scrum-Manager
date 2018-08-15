@@ -2,8 +2,8 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import hibernatebook.annotations.Profile;
-import hibernatebook.annotations.UserRegistration;
+import POJOs.Profile;
+import POJOs.UserRegistration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

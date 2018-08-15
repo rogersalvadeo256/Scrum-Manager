@@ -1,8 +1,7 @@
-package hibernatebook.annotations;
+package POJOs;
 
 import javax.persistence.Entity;
 
-@Entity
 public class ProjectInvite {
 
 	

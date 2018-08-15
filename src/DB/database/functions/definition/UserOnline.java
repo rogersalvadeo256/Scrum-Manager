@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import DB.Database;
-import hibernatebook.annotations.Profile;
-import hibernatebook.annotations.UserRegistration;
+import POJOs.Profile;
+import POJOs.UserRegistration;
 
 /*
  *  this class contain all the functions for load the informations about the user logged

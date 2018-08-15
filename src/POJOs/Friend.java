@@ -1,4 +1,4 @@
-package hibernatebook.annotations;
+package POJOs;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package hibernatebook.annotations;
+package POJOs;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Profile {
-	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 	
 	@Column(name="codProfile")
@@ -28,15 +27,15 @@ public class Profile {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codFriendRequest")
-	private List<FriendRequest> friendRequest;
+	private List<Profile> friendRequest;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codFriend")
-	private List<Friend> friend;
+	private List<Profile> friend;
 	
 	public Profile() { 
-		this.friend = new ArrayList<Friend>();
-		this.friendRequest = new ArrayList<FriendRequest>();
+		this.friend = new ArrayList<Profile>();
+		this.friendRequest = new ArrayList<Profile>();
 	}
 
 	public void setCod(long codProfile) {this.codProfile = codProfile;}
@@ -48,11 +47,11 @@ public class Profile {
 	public String getBiography() {return biography;}
 	public void setBiography(String biography) {this.biography = biography;}
 	
-	public List<FriendRequest> getFriendRequest() {return friendRequest;}
-	public void setFriendRequest(List<FriendRequest> friendRequest) {this.friendRequest = friendRequest;}
+	public List<Profile> getFriendRequest() {return friendRequest;}
+	public void setFriendRequest(List<Profile> friendRequest) {this.friendRequest = friendRequest;}
 	
-	public List<Friend> getFriend() {return friend;}
-	public void setFriend(List<Friend> friend) {this.friend = friend;}
+	public List<Profile> getFriend() {return friend;}
+	public void setFriend(List<Profile> friend) {this.friend = friend;}
 }
 
 
