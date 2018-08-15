@@ -260,8 +260,8 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.lblName.setTranslateY(40);
 				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(60);
+			
 				HomePageScene.this.profileImg.setTranslateY(60);
-
 			}
 		});
 
@@ -300,8 +300,8 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
 				HomePageScene.this.txtBio.setVisible(false);
 				HomePageScene.this.lblBiography.setVisible(true);
-
-			}
+				HomePageScene.this.btnEditBio.setVisible(true);
+			}	
 		});
 		/*
 		 * database
