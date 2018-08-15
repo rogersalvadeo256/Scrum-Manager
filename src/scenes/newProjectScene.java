@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import Database.Obsoleto.DbCreateProject;
 import auto.instance.objects.HBoxWithTextFields;
+import css.indicator.object.IndicatorOfCss;
 import events.ExitButtonListener;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -69,6 +70,8 @@ public class newProjectScene extends Scene {
 
 	public newProjectScene() {
 		super(new HBox());
+		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.NEW_PROJECT_SCENE);
+		
 		Window.mainStage.setWidth(900);
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("New Project");

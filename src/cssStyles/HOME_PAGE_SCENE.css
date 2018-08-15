@@ -1,9 +1,11 @@
 .root{
-	-fx-background-color:#fffffd;
+	-fx-background-color:#2A363F;
+	-fx-text-fill: #ffff;
 }
 .hbox#header{
-	-fx-background-color:blue;
+	-fx-background-color:#2A363F;
 	-fx-pref-height:50;
+	-fx-text-fill: #ffff;
 }
 .vbox#profile-info{
 	-fx-background-color:#AEA2A2;
