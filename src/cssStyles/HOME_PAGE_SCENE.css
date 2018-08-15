@@ -17,6 +17,10 @@
 .button#project-invite { 
 	
 }
+.vbox#vbSugestionsBox{ 
+	
+}
+
 .text-field{
    -fx-font-size: 12.0pt;
    -fx-border-width: 0.0 2.0 2.0 2.0 ;

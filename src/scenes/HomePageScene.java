@@ -24,6 +24,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -130,7 +131,10 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 
 		this.vbTxtSearchAndSugestion = new VBox();
+		
 		this.vbSugestions = new VBox();
+		this.vbSugestions.setId("vbSugestionsBox");
+		this.layout.add(vbSugestions, 2, 1, 1, 1);
 		
 		this.txtSearch = new TextField();
 		this.btnSearch = new Button();
@@ -147,6 +151,8 @@ public class HomePageScene extends Scene {
 			public void handle(KeyEvent event) {
 				
 				EntityManager em = Database.createEntityManager();
+				
+				
 				
 				
 				
