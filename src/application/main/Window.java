@@ -26,7 +26,8 @@ public class Window extends Stage {
  		
 		this.fis = new FileInputStream(new File("resources/images/icons/scrum_icon.png"));
  		Window.mainStage.getIcons().add(new Image(fis)); 		
- 		
+ 		Window.mainStage.setResizable(false);
+
  		
 // 		Window.mainStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 //			@Override

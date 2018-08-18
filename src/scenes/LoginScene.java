@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import DB.Functions.Login;
 import application.main.Window;
 import css.indicator.object.IndicatorOfCss;
-import events.ExitButtonListener;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -58,12 +57,13 @@ public class LoginScene extends Scene {
 
 	private ImageView imgIcon;
 	private FileInputStream fis;
+	private File iconPath;
+
 	private Line line;
 
 	private ArrayList<RegistrationFormScene> form;
 
 	private GridPane layout;
-	private File iconPath;
 	
 	private Login login;
 
@@ -190,6 +190,7 @@ public class LoginScene extends Scene {
 		this.fis = new FileInputStream(iconPath);
 		this.imgIcon.setImage(new Image(fis));
 
+		
 		this.imgIcon.setFitWidth(400);
 		this.imgIcon.setFitHeight(400);
 		

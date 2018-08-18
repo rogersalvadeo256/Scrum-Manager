@@ -1,7 +1,7 @@
 package scenes;
 
 /**
- * 		@author jefter66: jefter66
+ * 	@author jefter66: jefter66
  */
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,6 +16,7 @@ import DB.Database;
 import DB.database.functions.definition.UserOnline;
 import POJOs.Profile;
 import application.main.Window;
+import friendship.FriendRequest;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -75,7 +76,7 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-
+	
 		this.iconPath = new ArrayList<File>();
 		this.fis = new ArrayList<FileInputStream>();
 
@@ -185,7 +186,12 @@ public class HomePageScene extends Scene {
 		this.btnProjectInviteRequest = new Button();
 
 		this.btnFriendRequest.setOnAction(event -> {
-
+				try {
+					new FriendRequest(Window.mainStage.getScene().getWindow()).showAndWait();;
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		});
 
 		this.btnFriendRequest.setId("friend-request");
