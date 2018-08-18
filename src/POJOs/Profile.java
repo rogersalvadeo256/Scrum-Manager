@@ -36,7 +36,6 @@ public class Profile {
 		this.friend = new ArrayList<Profile>();
 		this.friendRequest = new ArrayList<Profile>();
 	}
-
 	public void setCod(long codProfile) {this.codProfile = codProfile;}
 	public long getCod() {return codProfile;}
 

@@ -13,28 +13,26 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import DB.Database;
-import DB.Functions.LoadHomePage;
 import DB.database.functions.definition.UserOnline;
 import POJOs.Profile;
-import css.indicator.object.IndicatorOfCss;
-import events.ExitButtonListener;
+import application.main.Window;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import main.Window;
 
 public class HomePageScene extends Scene {
 
@@ -69,11 +67,10 @@ public class HomePageScene extends Scene {
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 
-
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
-		
+		// IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
+
 		this.layout = new GridPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
@@ -86,10 +83,10 @@ public class HomePageScene extends Scene {
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
 
-		this.lblName = new Label( "nome"); //  UserOnline.getProfile().getName());  
+		this.lblName = new Label("nome"); // UserOnline.getProfile().getName());
 		this.lblName.setId("lblName");
 
-		this.lblUsername = new Label( "usernome"); //  UserOnline.getUserLogged().getUserName()); 	
+		this.lblUsername = new Label("usernome"); // UserOnline.getUserLogged().getUserName());
 		this.lblName.setId("userName");
 
 		this.lblCurrentProject = new Label("Projetos em andamento");
@@ -131,38 +128,42 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 
 		this.vbTxtSearchAndSugestion = new VBox();
-		
-		this.vbSugestions = new VBox();
-		this.vbSugestions.setId("vbSugestionsBox");
-		this.layout.add(vbSugestions, 2, 1, 1, 1);
-		
+
 		this.txtSearch = new TextField();
+		/*
+		 * tirar foco
+		 */
+		this.txtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {
+			@Override
+			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+			}
+		});
+
 		this.btnSearch = new Button();
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 
-		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch, vbSugestions);
+		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch);
 		this.vbTxtSearchAndSugestion.setAlignment(Pos.CENTER);
 
+		this.vbSugestions = new VBox();
+		this.vbSugestions.setVisible(false);
+		this.vbSugestions.setTranslateX(140);
+		this.vbSugestions.setTranslateY(30);
+		this.vbSugestions.getStyleClass().add("vbox");
+		this.vbSugestions.setId("vbSugestionsBox");
 
-		this.txtSearch.setOnKeyTyped(new EventHandler<KeyEvent>() {
+		this.layout.add(vbSugestions, 0, 0, 1, 5);
 
-			@Override
-			public void handle(KeyEvent event) {
-				
-				EntityManager em = Database.createEntityManager();
-				
-				
-				
-				
-				
-				
-				
-				
-			}
-			
+		this.txtSearch.setOnMouseClicked(event -> {
+			HomePageScene.this.vbSugestions.setVisible(true);
+			HomePageScene.this.vbSugestions.getChildren().add(new Label("ssssss"));
+
 		});
-		
+		this.txtSearch.setOnKeyTyped(event -> {
+
+		});
+
 		this.hbHeader.setSpacing(20);
 		this.hbHeader.setAlignment(Pos.CENTER);
 		this.btnEditProfile = new Button("Editar Perfil");
@@ -175,24 +176,17 @@ public class HomePageScene extends Scene {
 			}
 		});
 		this.btnExit = new Button("Sair");
-		this.btnExit.setOnAction(new EventHandler<ActionEvent>() {
-			ExitButtonListener exit = new ExitButtonListener() {
-			};
-
-			/*
-			 * close the program and serialization
-			 */
-			@Override
-			public void handle(ActionEvent event) {
-				exit.handle(event);
-			}
-		});
+		this.btnExit.setOnAction(event -> Platform.exit());
 
 		/*
 		 * load the name with the qtd of requests
 		 */
 		this.btnFriendRequest = new Button();
 		this.btnProjectInviteRequest = new Button();
+
+		this.btnFriendRequest.setOnAction(event -> {
+
+		});
 
 		this.btnFriendRequest.setId("friend-request");
 		this.btnProjectInviteRequest.setId("project-invite");
@@ -239,8 +233,8 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setPrefWidth(350);
 
-		 this.lblBiography =new Label();//  UserOnline.getProfile().getBiography();
-//		this.lblBiography = new Label("SSSS");
+		this.lblBiography = new Label();// UserOnline.getProfile().getBiography();
+		// this.lblBiography = new Label("SSSS");
 		this.lblBiography.getStyleClass().add("label");
 
 		this.profileImg = new ImageView();
@@ -284,11 +278,10 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.lblName.setTranslateY(40);
 				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(60);
-			
+
 				HomePageScene.this.profileImg.setTranslateY(60);
 			}
 		});
-
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -319,13 +312,13 @@ public class HomePageScene extends Scene {
 					em.clear();
 					em.close();
 				}
-				
+
 				HomePageScene.this.lblBiography.setText(HomePageScene.this.txtBio.getText());
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
 				HomePageScene.this.txtBio.setVisible(false);
 				HomePageScene.this.lblBiography.setVisible(true);
 				HomePageScene.this.btnEditBio.setVisible(true);
-			}	
+			}
 		});
 		/*
 		 * database

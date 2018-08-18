@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import DB.Functions.Login;
+import application.main.Window;
 import css.indicator.object.IndicatorOfCss;
 import events.ExitButtonListener;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -27,7 +29,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
-import main.Window;
 /*
  * LoginScreen.java
  * 
@@ -199,13 +200,8 @@ public class LoginScene extends Scene {
 		/*
 		 * buttons handler
 		 */
-		this.btnExit.setOnAction(new EventHandler<ActionEvent>() {
-			ExitButtonListener exit = new ExitButtonListener() {};
-			@Override
-			public void handle(ActionEvent event) {
-				exit.handle(event);
-			}
-		});
+		this.btnExit.setOnAction(ExitButtonListener -> Platform.exit());
+		
 		this.btnSignUp.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
