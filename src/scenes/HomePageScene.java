@@ -16,7 +16,6 @@ import DB.Database;
 import DB.database.functions.definition.UserOnline;
 import POJOs.Profile;
 import application.main.Window;
-import friendship.FriendRequest;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,6 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import popoups.scenes.FriendRequestPopOup;
 
 public class HomePageScene extends Scene {
 
@@ -187,7 +187,7 @@ public class HomePageScene extends Scene {
 
 		this.btnFriendRequest.setOnAction(event -> {
 				try {
-					new FriendRequest(Window.mainStage.getScene().getWindow()).showAndWait();;
+					new FriendRequestPopOup(Window.mainStage.getScene().getWindow()).showAndWait();;
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
