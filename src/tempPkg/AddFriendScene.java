@@ -77,8 +77,6 @@ public class AddFriendScene extends Stage {
 		user.setCellValueFactory(new PropertyValueFactory("user"));
 		status.setCellValueFactory(new PropertyValueFactory("status"));
 
-		// cod.setCellFactory(new EditorNmr());
-
 		this.layout.getChildren().addAll(hbxMyProfile, hbxAddFriend, tabela);
 		Scene cena = new Scene(layout);
 		cena.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
