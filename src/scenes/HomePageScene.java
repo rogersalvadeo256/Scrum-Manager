@@ -34,6 +34,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import popoups.scenes.FriendshipRequestPopOup;
+import widgets.HBProfileContent;
+import widgets.AddFriend;
 
 public class HomePageScene extends Scene {
 
@@ -62,11 +64,16 @@ public class HomePageScene extends Scene {
 
 	private HBox hbProjectArea;
 	private VBox vbLeftColumn, vbRightColumn;
-
+	
+	private VBox vbSugestions;
+	
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 
+	private ArrayList<HBProfileContent> list ;
+	private AddFriend add;
+	
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		// IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
@@ -127,14 +134,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setId("header");
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 		this.vbTxtSearchAndSugestion = new VBox();
 		
@@ -152,15 +152,27 @@ public class HomePageScene extends Scene {
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 
-		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch);
+		this.vbSugestions=new VBox();
+
+		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch,vbSugestions);
 		this.vbTxtSearchAndSugestion.setAlignment(Pos.CENTER);
 
-		
-		
-		this.txtSearch.setOnMouseClicked(event -> {
-				
-		});
+		this.list= new ArrayList<HBProfileContent>();
+		this.add = new AddFriend();
+//		
+//		this.txtSearch.setOnMouseClicked(event -> t
+//				
+//		});
 		this.txtSearch.setOnKeyTyped(event -> {
+		
+			HomePageScene.this.add.search(HomePageScene.this.txtSearch.getText());
+			HomePageScene.this.list =add.searchResults();
+			
+			for(int i=0;i<list.size();i++) { 
+				vbSugestions.getChildren().add(list.get(i));
+			}
+			
+			
 			
 		});
 

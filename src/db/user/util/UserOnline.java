@@ -39,7 +39,7 @@ public class UserOnline {
 	 * @author jefter66
 	 */
 	private static Profile userProfile() {
-		if(UserOnline.manager == null )UserOnline.manager = Database.createEntityManager();
+		if(UserOnline.manager == null ) UserOnline.manager = Database.createEntityManager();
 		Profile userProfile = new Profile();
 		Query getUser = manager.createQuery("from Profile where codProfile=:codProfile");
 		getUser.setParameter("codProfile", getUserLogged().getProfile().getCod());
