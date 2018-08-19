@@ -6,9 +6,9 @@ import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import DB.Functions.Login;
 import application.main.Window;
 import css.indicator.object.IndicatorOfCss;
+import db.functions.Login;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

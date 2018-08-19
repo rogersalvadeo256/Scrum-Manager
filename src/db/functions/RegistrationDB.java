@@ -1,9 +1,10 @@
-package DB.Functions;
+package db.functions;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import DB.Database;
+
 import POJOs.UserRegistration;
+import db.hibernate.factory.Database;
 
 public class RegistrationDB{
 	private EntityManager manager;

@@ -1,6 +1,6 @@
 package application.main;
 
-import DB.Database;
+import db.hibernate.factory.Database;
 /*
  * SCRUM MANAGER TCC PROJECT
  * 
@@ -19,7 +19,7 @@ public class Main extends Application {
 	}
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-//		Database.createEntityManager();
+		Database.createEntityManager();
 		new Window();
 	}
 }

@@ -1,10 +1,10 @@
-package DB.Functions;
+package db.functions;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import DB.Database;
-import DB.database.functions.definition.UserOnline;
 import POJOs.UserRegistration;
+import db.hibernate.factory.Database;
+import db.user.util.UserOnline;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import validation.CheckEmptyFields;

@@ -1,4 +1,4 @@
-package DB.database.functions.definition;
+package db.user.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import DB.Database;
 import POJOs.Profile;
 import POJOs.UserRegistration;
+import db.hibernate.factory.Database;
 
 /*
  *  this class contain all the functions for load the informations about the user logged
@@ -54,7 +54,6 @@ public class UserOnline {
 	 * Function that the class going to use to access the profile of the user
 	 * 
 	 * @return Profile
-	 * @author jefter66
 	 */
 	public static Profile getProfile() {
 		return userProfile();

@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import DB.Database;
-import DB.database.functions.definition.UserOnline;
 import POJOs.Profile;
 import application.main.Window;
+import db.hibernate.factory.Database;
+import db.user.util.UserOnline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -33,7 +33,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import popoups.scenes.FriendRequestPopOup;
+import popoups.scenes.FriendshipRequestPopOup;
 
 public class HomePageScene extends Scene {
 
@@ -46,7 +46,6 @@ public class HomePageScene extends Scene {
 	private Button btnEditBio;
 
 	private VBox vbTxtSearchAndSugestion;
-	private VBox vbSugestions;
 
 	private HBox hbHeader;
 	private TextField txtSearch;
@@ -128,8 +127,17 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setId("header");
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		this.vbTxtSearchAndSugestion = new VBox();
-
+		
 		this.txtSearch = new TextField();
 		/*
 		 * tirar foco
@@ -147,22 +155,13 @@ public class HomePageScene extends Scene {
 		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch);
 		this.vbTxtSearchAndSugestion.setAlignment(Pos.CENTER);
 
-		this.vbSugestions = new VBox();
-		this.vbSugestions.setVisible(false);
-		this.vbSugestions.setTranslateX(140);
-		this.vbSugestions.setTranslateY(30);
-		this.vbSugestions.getStyleClass().add("vbox");
-		this.vbSugestions.setId("vbSugestionsBox");
-
-		this.layout.add(vbSugestions, 0, 0, 1, 5);
-
+		
+		
 		this.txtSearch.setOnMouseClicked(event -> {
-			HomePageScene.this.vbSugestions.setVisible(true);
-			HomePageScene.this.vbSugestions.getChildren().add(new Label("ssssss"));
-
+				
 		});
 		this.txtSearch.setOnKeyTyped(event -> {
-
+			
 		});
 
 		this.hbHeader.setSpacing(20);
@@ -187,7 +186,7 @@ public class HomePageScene extends Scene {
 
 		this.btnFriendRequest.setOnAction(event -> {
 				try {
-					new FriendRequestPopOup(Window.mainStage.getScene().getWindow()).showAndWait();;
+					new FriendshipRequestPopOup(Window.mainStage.getScene().getWindow()).showAndWait();;
 				} catch (FileNotFoundException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -282,7 +281,7 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.btnEditBio.setVisible(false);
 				HomePageScene.this.lblUsername.setTranslateY(30);
 				HomePageScene.this.lblName.setTranslateY(40);
-				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
+//				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(60);
 
 				HomePageScene.this.profileImg.setTranslateY(60);

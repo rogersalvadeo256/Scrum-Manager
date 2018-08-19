@@ -1,4 +1,4 @@
-package DB.Functions;
+package db.functions;
 
 public class LoadHomePage {
 
