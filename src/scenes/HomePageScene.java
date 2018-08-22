@@ -8,14 +8,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
 import POJOs.Profile;
 import application.main.Window;
 import db.hibernate.factory.Database;
 import db.user.util.UserOnline;
+import friendship.SearchFriend;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -34,8 +33,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import popoups.scenes.FriendshipRequestPopOup;
-import widgets.HBProfileContent;
-import widgets.AddFriend;
 
 public class HomePageScene extends Scene {
 
@@ -64,16 +61,15 @@ public class HomePageScene extends Scene {
 
 	private HBox hbProjectArea;
 	private VBox vbLeftColumn, vbRightColumn;
-	
+
 	private VBox vbSugestions;
-	
+
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 
-	private ArrayList<HBProfileContent> list ;
-	private AddFriend add;
-	
+	private SearchFriend searchFriend;
+
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		// IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
@@ -82,7 +78,7 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-	
+
 		this.iconPath = new ArrayList<File>();
 		this.fis = new ArrayList<FileInputStream>();
 
@@ -134,10 +130,8 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setId("header");
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 
-	
-		
 		this.vbTxtSearchAndSugestion = new VBox();
-		
+
 		this.txtSearch = new TextField();
 		/*
 		 * tirar foco
@@ -152,30 +146,24 @@ public class HomePageScene extends Scene {
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 
-		this.vbSugestions=new VBox();
+		this.vbSugestions = new VBox();
 
-		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch,vbSugestions);
+		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch, vbSugestions);
 		this.vbTxtSearchAndSugestion.setAlignment(Pos.CENTER);
 
-		this.list= new ArrayList<HBProfileContent>();
-		this.add = new AddFriend();
-//		
-//		this.txtSearch.setOnMouseClicked(event -> t
-//				
-//		});
-		this.txtSearch.setOnKeyTyped(event -> {
-		
-			HomePageScene.this.add.search(HomePageScene.this.txtSearch.getText());
-			HomePageScene.this.list =add.searchResults();
-			
-			for(int i=0;i<list.size();i++) { 
-				vbSugestions.getChildren().add(list.get(i));
-			}
-			
-			
-			
-		});
+		this.searchFriend = new SearchFriend();
 
+		this.txtSearch.setOnKeyTyped(event -> {
+			HomePageScene.this.searchFriend.search(HomePageScene.this.txtSearch.getText());
+//			HomePageScene.this.add.search(text.add(HomePageScene.this.txtSearch.getText()));
+			
+			if (!searchFriend.searchResults().isEmpty()) {
+				
+				for (int i = 0; i < searchFriend.searchResults().size(); i++) {
+					vbSugestions.getChildren().add(searchFriend.searchResults().get(i));
+				}
+			}
+		});
 		this.hbHeader.setSpacing(20);
 		this.hbHeader.setAlignment(Pos.CENTER);
 		this.btnEditProfile = new Button("Editar Perfil");
@@ -197,12 +185,12 @@ public class HomePageScene extends Scene {
 		this.btnProjectInviteRequest = new Button();
 
 		this.btnFriendRequest.setOnAction(event -> {
-				try {
-					new FriendshipRequestPopOup(Window.mainStage.getScene().getWindow()).showAndWait();;
-				} catch (FileNotFoundException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+			try {
+				new FriendshipRequestPopOup(Window.mainStage.getScene().getWindow()).showAndWait();
+
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
 		});
 
 		this.btnFriendRequest.setId("friend-request");
@@ -237,7 +225,8 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
 
-		this.hbHeader.getChildren().addAll(scrumIcon, vbTxtSearchAndSugestion, btnSearch, btnFriendRequest, btnProjectInviteRequest, btnEditProfile, btnExit);
+		this.hbHeader.getChildren().addAll(scrumIcon, vbTxtSearchAndSugestion, btnSearch, btnFriendRequest,
+				btnProjectInviteRequest, btnEditProfile, btnExit);
 
 		this.layout.add(hbHeader, 0, 0, 5, 1);
 
@@ -279,7 +268,8 @@ public class HomePageScene extends Scene {
 		this.txtBio.setWrapText(true);
 		this.txtBio.setTranslateX(-5);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBiography, btnEditBio, hbBntInteractWithBio, lblEmail);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBiography, btnEditBio,
+				hbBntInteractWithBio, lblEmail);
 
 		this.btnEditBio.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -293,7 +283,7 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.btnEditBio.setVisible(false);
 				HomePageScene.this.lblUsername.setTranslateY(30);
 				HomePageScene.this.lblName.setTranslateY(40);
-//				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
+				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(60);
 
 				HomePageScene.this.profileImg.setTranslateY(60);
@@ -329,7 +319,6 @@ public class HomePageScene extends Scene {
 					em.clear();
 					em.close();
 				}
-
 				HomePageScene.this.lblBiography.setText(HomePageScene.this.txtBio.getText());
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
 				HomePageScene.this.txtBio.setVisible(false);

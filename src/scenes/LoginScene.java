@@ -70,7 +70,7 @@ public class LoginScene extends Scene {
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		
-		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.LOGIN_SCENE);
+//		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.LOGIN_SCENE);
 	
 		
 		this.layout = new GridPane();
