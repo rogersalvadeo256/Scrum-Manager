@@ -3,8 +3,13 @@
 	-fx-border-style: solid inside;
     -fx-border-width: 0.0px, 0.0px, 1.0px, 0.0px;
 }
+.right{ 
+	
+}
+.left{ 
+}
 .root{
-	-fx-background-color:#2A363F;
+	-fx-background-color:#e4ebff;
 }
 #exitbtn:hover{
 	-fx-text-fill:black;
@@ -13,6 +18,7 @@
 }
 .button#btnSingUp{ 
 	-fx-background-color:#6DD89F;
+	 -fx-pref-width: 200px;
 }
 .button#btnSingUp:hover{
 	-fx-text-fill:#2A363F;
@@ -42,9 +48,6 @@
 	-fx-input-width:100.0%;
 }
 
-.hyperlink{
--fx-text-fill:#babdbf;
-}
 .button {
     -fx-pref-width: 100.0px;
     -fx-pref-height: 50.0px;
@@ -65,7 +68,16 @@
     -fx-spacing: 15.0;
     -fx-height:300.0;
 }
-
+.label { 
+	-fx-font-size:13pt;
+	 -fx-font-weight: bold;
+	-fx-text-fill: #2f4f8f;
+}
+.title{ 
+	-fx-font-size:18pt;
+	 -fx-font-weight: bold;
+	-fx-text-fill: #2f4f8f;
+}
 
 
 

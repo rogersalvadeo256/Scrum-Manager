@@ -19,7 +19,7 @@ public class RegistrationFormScene extends VBox {
 	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
-	private Button btnRegister;
+	public Button btnRegister;
 	private ArrayList<TextField> field;
 	private ArrayList<PasswordField>passwordField;
 	private ArrayList<String> fieldName;
@@ -32,11 +32,11 @@ public class RegistrationFormScene extends VBox {
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
-		this.lblName = new Label("NAME");
-		this.lblUserName = new Label("USERNAME");
-		this.lblEmail = new Label("EMAIL");
-		this.lblPassword = new Label("PASSWORD");
-		this.lblConfirmPassword = new Label("CONFIRM PASSWORD");
+		this.lblName = new Label("Nome");
+		this.lblUserName = new Label("UserName");
+		this.lblEmail = new Label("Email");
+		this.lblPassword = new Label("Senha");
+		this.lblConfirmPassword = new Label("Confirmação de senha");
 		this.txtName = new TextField();
 		this.txtUserName = new TextField();
 		this.txtEmail = new TextField();
@@ -53,6 +53,7 @@ public class RegistrationFormScene extends VBox {
 		this.txtEmail.setAlignment(Pos.CENTER);
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
+	
 		this.btnRegister = new Button("OK");
 		
 		this.registration=new UserRegistration();
@@ -101,4 +102,6 @@ public class RegistrationFormScene extends VBox {
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}
+	
+	
 }

@@ -10,24 +10,22 @@ import application.main.Window;
 import css.indicator.object.IndicatorOfCss;
 import db.functions.Login;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
+
 /*
  * LoginScreen.java
  * 
@@ -39,116 +37,95 @@ public class LoginScene extends Scene {
 
 	private final Label messageLoginValidation;
 
-	private Label lblSignIn, lblPassword, lblWelcome, lblSignUp, lblUser;
+	private Label lblSignIn, lblPassword, lblWelcome, lblUser;
 
 	private TextField txtUser;
 	private PasswordField passwordField;
 
 	private Button btnLogin, btnExit;
-	private Button btnCancel, btnSignUp;
-
+	private Button btnSignUp;
+	private RadioButton btnStayConnected;
+	private Label lblStayConnected;
+	private HBox hbStayConnected;
+	
 	private Hyperlink forgotPassword;
 
-	private VBox left;
-	private VBox leftRegistration;
-	private HBox right;
-	private HBox rightContainer;
+	private VBox leftSide;
+	private VBox leftRegistrationForm;
+	private HBox rightSide;
 	private VBox vbLogin;
-
+	private AnchorPane layout;
 	private ImageView imgIcon;
 	private FileInputStream fis;
 	private File iconPath;
 
-	private Line line;
-
 	private ArrayList<RegistrationFormScene> form;
 
-	private GridPane layout;
-	
 	private Login login;
 
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		
-//		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.LOGIN_SCENE);
-	
-		
-		this.layout = new GridPane();
+
+		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.LOGIN_SCENE);
 
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("TCC");
 
-		this.login=new Login();
-		
+		this.layout = new AnchorPane();
+
+		this.vbLogin = new VBox();
+		this.rightSide = new HBox();
+
+		this.leftSide = new VBox();
+		this.leftRegistrationForm = new VBox();
+
+		this.login = new Login();
+
 		/*
 		 * layout
 		 */
-		this.left = new VBox();
-		this.leftRegistration = new VBox();
 		this.form = new ArrayList<RegistrationFormScene>();
-		this.right = new HBox();
-		this.vbLogin = new VBox();
-		this.rightContainer = new HBox();
 
-		this.vbLogin.setAlignment(Pos.CENTER);
-		this.left.setAlignment(Pos.CENTER_LEFT);
-		this.left.setAlignment(Pos.CENTER);
-		this.rightContainer.setAlignment(Pos.CENTER);
-		this.vbLogin.setSpacing(20);
-		
-		this.left.setPrefWidth(650);
-		this.left.setPrefHeight(600);
-		this.rightContainer.setPrefWidth(600);
-		this.right.setPrefHeight(00);
-		this.leftRegistration.setPrefWidth(150);
-		this.vbLogin.setPrefWidth(400);
+		this.leftSide.getStyleClass().add("left");
+		this.rightSide.getStyleClass().add("right");
 
-		this.layout.setMaxHeight(500);
-		this.layout.setMaxWidth(500);
-		this.layout.setMinWidth(500);
-		this.layout.setMinHeight(500);
-		this.left.setMaxWidth(800);
-
-		this.right.setTranslateX(0);
-		this.left.setTranslateY(100);
-	
 		/*
 		 * text fields
 		 */
 		this.txtUser = new TextField();
 		this.txtUser.setPromptText("Username");
-		this.passwordField = new PasswordField();
-		this.txtUser.setPromptText("Username");
-		this.passwordField.setPromptText("Digite sua senha");
-		
+		this.txtUser.setFocusTraversable(false);
 		this.txtUser.setAlignment(Pos.CENTER);
+		this.passwordField = new PasswordField();
+		this.passwordField.setFocusTraversable(false);
 		this.passwordField.setAlignment(Pos.CENTER);
 
-		
+		this.txtUser.setPromptText("Username");
+		this.passwordField.setPromptText("Digite sua senha");
+
 		/*
 		 * labels
 		 */
 		this.lblUser = new Label("Username");
 		this.lblPassword = new Label("Senha");
-		this.lblWelcome = new Label("Bem Vindo Ao \n Scrum Manager");
-		this.lblSignUp = new Label("Registre-se Agora");
-		this.lblSignIn = new Label("SIGN IN");
-		this.lblSignUp = new Label("Registre-se Agora");
-		this.lblSignIn = new Label("SIGN IN");
+
+		this.lblWelcome = new Label("Bem Vindo Ao  Scrum Manager");
+		this.lblSignIn = new Label("Entrar");
+
+		this.lblWelcome.getStyleClass().add("title");
+		this.lblSignIn.getStyleClass().add("title");
 
 		this.messageLoginValidation = new Label(new String());
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
-
-		this.lblWelcome.setTranslateX(-450);
-		this.lblSignUp.setTranslateY(-400);
-		this.lblSignUp.setTranslateX(400);
-
-		this.lblWelcome.setTranslateY(-200);
-		
 		/*
 		 */
+		
+		this.btnStayConnected=new  RadioButton();
+		this.lblStayConnected=new Label("Mantenha-me conentado");
+		this.hbStayConnected=new HBox();
+		this.hbStayConnected.getChildren().addAll(btnStayConnected,lblStayConnected);
 
 		/*
 		 * buttons
@@ -156,32 +133,14 @@ public class LoginScene extends Scene {
 
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");
-		this.btnExit.setId("exitbtn");
-		this.btnSignUp = new Button("SIGN UP");
-		this.btnSignUp.setId("btnSingUp");
-		this.btnCancel = new Button("CANCELAR");
-		this.btnCancel.setVisible(false);
+		this.btnSignUp = new Button("Cadastre-se");
 
-		this.btnSignUp.setTranslateY(-15);
-		this.btnCancel.setTranslateY(-15);
-		this.btnSignUp.setTranslateY(-400);
-		this.btnCancel.setTranslateY(-400);
-		this.btnCancel.setTranslateX(-30);
-		this.btnSignUp.setTranslateX(-30);
-		
-		this.btnCancel.setMaxSize(150, 100);
-		this.btnSignUp.setMaxSize(150, 100);
-		this.btnLogin.setMaxSize(200, 100);
-		this.btnSignUp.setMaxWidth(90);
-		this.btnCancel.setMaxWidth(100);
+		this.btnExit.setId("exitbtn");
+		this.btnSignUp.setId("btnSingUp");
 		/*
 		 * 
 		 */
 
-		this.line = new Line();
-		this.line.setEndX(0.0f);
-		this.line.setEndY(350.0f);
-		this.line.setStroke(Color.valueOf("#ffff"));
 		/*
 		 * image
 		 */
@@ -190,116 +149,123 @@ public class LoginScene extends Scene {
 		this.fis = new FileInputStream(iconPath);
 		this.imgIcon.setImage(new Image(fis));
 
-		
 		this.imgIcon.setFitWidth(400);
 		this.imgIcon.setFitHeight(400);
-		
-		this.imgIcon.setTranslateX(100);
-		this.imgIcon.setTranslateX(100);
-		this.imgIcon.setTranslateY(100);
-		this.imgIcon.setTranslateY(100);
+
 		/*
 		 * buttons handler
 		 */
 		this.btnExit.setOnAction(ExitButtonListener -> Platform.exit());
-		
-		this.btnSignUp.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				signUpPressed();
-				RegistrationFormScene t;
+
+		this.btnLogin.setOnAction(e -> {
+			if (LoginScene.this.login.doLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
+				LoginScene.this.messageLoginValidation.setText(new String());
 				try {
-					t = new RegistrationFormScene();
-					form.add(t);
-					if (!form.isEmpty()) {
-						LoginScene.this.leftRegistration.getChildren().clear();
-					}
-				} catch (ClassNotFoundException e) {
-					e.printStackTrace();
-				} catch (SQLException e) {
-					e.printStackTrace();
+					Window.mainStage.setScene(new HomePageScene());
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
 				}
-				LoginScene.this.leftRegistration.getChildren().add(form.get(0));
 			}
+			LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
 		});
-		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				LoginScene.this.leftRegistration.getChildren().clear();
-				LoginScene.this.btnCancel.setVisible(false);
-				LoginScene.this.form.clear();
-				cancelPressed();
-			}
-		});
-		this.btnLogin.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				if(LoginScene.this.login.doLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
-					try {
-						LoginScene.this.messageLoginValidation.setText(new String());
-						Window.mainStage.setScene(new HomePageScene());
-					} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+		this.passwordField.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.ENTER) {
+				LoginScene.this.messageLoginValidation.setText(new String());
+				try {
+					Window.mainStage.setScene(new HomePageScene());
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
 				}
-				LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
 			}
 		});
-		this.passwordField.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.ENTER) {
-					LoginScene.this.messageLoginValidation.setText(new String());
-					try {
-						Window.mainStage.setScene(new HomePageScene());
-					} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					}
-				}
+		this.forgotPassword.setOnAction(event -> {
+
 		});
-		this.forgotPassword.setOnAction(new EventHandler<ActionEvent>() {
-			
-			@Override
-			public void handle(ActionEvent event) {
-				
-			}
-		});
-		this.rightContainer.setSpacing(40);
+
 		this.imgIcon.setId("logoImage");
 
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField, messageLoginValidation, forgotPassword, btnLogin, btnExit);
-		this.right.getChildren().add(rightContainer);
-		this.rightContainer.getChildren().addAll(line, vbLogin);
-		this.left.getChildren().addAll(leftRegistration);
+		HBox.setHgrow(txtUser, Priority.ALWAYS);
+		HBox.setHgrow(passwordField, Priority.ALWAYS);
+		HBox.setHgrow(btnLogin, Priority.ALWAYS);
+		HBox.setHgrow(btnExit, Priority.ALWAYS);
+		this.txtUser.setMaxWidth(Double.MAX_VALUE);
+		this.passwordField.setMaxWidth(Double.MAX_VALUE);
+		this.btnExit.setMaxWidth(Double.MAX_VALUE);
+		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.layout.add(right, 1, 0, 1, 1);
-		this.layout.add(imgIcon, 0, 0, 1, 1);
-		this.layout.add(btnSignUp, 1, 1, 1, 1);
-		this.layout.add(btnCancel, 1, 1, 1, 1);
-		this.layout.add(lblWelcome, 1, 0, 1, 1);
-		this.layout.add(lblSignUp, 0, 1, 1, 1);
-		this.layout.add(left, 0, 0, 1, 1);
-		
+		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,
+				messageLoginValidation, forgotPassword, hbStayConnected,btnLogin, btnExit);
+
+		HBox.setHgrow(vbLogin, Priority.ALWAYS);
+		this.vbLogin.setMaxWidth(Double.MAX_VALUE);
+		this.vbLogin.setMaxHeight(Double.MAX_VALUE);
+		this.vbLogin.setAlignment(Pos.CENTER);
+		this.vbLogin.setSpacing(20);
+		this.rightSide.getChildren().add(vbLogin);
+
+		this.rightSide.setAlignment(Pos.CENTER);
+		AnchorPane.setTopAnchor(this.rightSide, 40.0);
+		AnchorPane.setLeftAnchor(this.rightSide, 800.0);
+		AnchorPane.setRightAnchor(this.rightSide, 50.0);
+		AnchorPane.setBottomAnchor(this.rightSide, 30.0);
+		this.layout.getChildren().add(rightSide);
+
+		settingLeftSideComponents();
+
+		this.btnSignUp.setOnAction(event -> {
+			this.form.clear();
+			this.leftSide.getChildren().clear();
+
+			RegistrationFormScene t;
+			try {
+				t = new RegistrationFormScene();
+				form.add(t);
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			if (form.size() == 1)
+				LoginScene.this.leftRegistrationForm.getChildren().add(form.get(0));
+
+			AnchorPane.setTopAnchor(this.leftRegistrationForm, 90.0);
+			AnchorPane.setLeftAnchor(this.leftRegistrationForm, 80.0);
+			AnchorPane.setRightAnchor(this.leftRegistrationForm, 600.0);
+			AnchorPane.setBottomAnchor(this.leftRegistrationForm, 30.0);
+			layout.getChildren().add(leftRegistrationForm);
+
+			if (form.size() == 1) {
+				form.get(0).btnRegister.setText("Cancelar");
+				form.get(0).btnRegister.setOnAction(e -> {
+					form.clear();
+					leftRegistrationForm.getChildren().clear();
+					;
+					layout.getChildren().remove(leftRegistrationForm);
+					LoginScene.this.form.clear();
+					LoginScene.this.settingLeftSideComponents();
+				});
+			}
+		});
+
 		this.setRoot(layout);
 	}
-	private void cancelPressed() {
-		LoginScene.this.imgIcon.setTranslateX(100);
-		LoginScene.this.imgIcon.setTranslateY(100);
-		LoginScene.this.imgIcon.setFitWidth(400);
-		LoginScene.this.imgIcon.setFitHeight(400);
+	private void settingLeftSideComponents() {
+		HBox.setHgrow(lblWelcome, Priority.ALWAYS);
+		HBox.setHgrow(btnSignUp, Priority.ALWAYS);
+		HBox.setHgrow(imgIcon, Priority.ALWAYS);
+		this.lblWelcome.setMaxWidth(Double.MAX_VALUE);
+		this.btnSignUp.setMaxWidth(Double.MAX_VALUE);
+		this.leftSide.getChildren().addAll(lblWelcome, btnSignUp, imgIcon);
+		
+		this.leftSide.setAlignment(Pos.CENTER);
+		HBox.setHgrow(leftSide, Priority.ALWAYS);
+		this.leftSide.setMaxWidth(Double.MAX_VALUE);
+		this.leftSide.setMaxHeight(Double.MAX_VALUE);
+
+		AnchorPane.setTopAnchor(this.leftSide, 40.0);
+		AnchorPane.setLeftAnchor(this.leftSide, 80.0);
+		AnchorPane.setRightAnchor(this.leftSide, 600.0);
+		AnchorPane.setBottomAnchor(this.leftSide, 30.0);
+		this.layout.getChildren().add(leftSide);
 	}
-
-	private void signUpPressed() {
-		LoginScene.this.form.clear();
-		LoginScene.this.btnCancel.setVisible(true);
-		LoginScene.this.imgIcon.setFitWidth(200);
-		LoginScene.this.imgIcon.setFitHeight(200);
-		LoginScene.this.imgIcon.setTranslateY(-180);
-		LoginScene.this.imgIcon.setTranslateX(-30);
-	}
-
-
 }
