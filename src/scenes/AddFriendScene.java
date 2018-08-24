@@ -1,7 +1,7 @@
-package tempPkg;
-import java.awt.Image;
+package scenes;
 import java.util.Random;
 
+import POJOs.FriendTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -15,7 +15,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Ellipse;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
@@ -24,6 +23,7 @@ public class AddFriendScene extends Stage {
 	private ObservableList<FriendTable> listaDeProduto;
 	private TableView<FriendTable> tabela;
 	private Button btnAddFriend;
+	private ImageView imgProfile;
 	private Label lblNome, lblStatus;
 	private HBox hbxMyProfile, hbxAddFriend;
 	private TextField txtFiltro;

@@ -1,4 +1,4 @@
-package tempPkg;
+package POJOs;
 import javafx.scene.image.ImageView;
 
 public class FriendTable {
