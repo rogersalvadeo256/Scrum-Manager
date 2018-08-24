@@ -70,7 +70,7 @@ public class LoginScene extends Scene {
 
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
-		Window.mainStage.setTitle("TCC");
+		Window.mainStage.setTitle("Tela Login");
 
 		this.layout = new AnchorPane();
 
@@ -193,8 +193,7 @@ public class LoginScene extends Scene {
 		this.btnExit.setMaxWidth(Double.MAX_VALUE);
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,
-				messageLoginValidation, forgotPassword, hbStayConnected,btnLogin, btnExit);
+		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,messageLoginValidation, forgotPassword, hbStayConnected,btnLogin, btnExit);
 
 		HBox.setHgrow(vbLogin, Priority.ALWAYS);
 		this.vbLogin.setMaxWidth(Double.MAX_VALUE);
@@ -211,7 +210,7 @@ public class LoginScene extends Scene {
 		this.layout.getChildren().add(rightSide);
 
 		settingLeftSideComponents();
-
+		
 		this.btnSignUp.setOnAction(event -> {
 			this.form.clear();
 			this.leftSide.getChildren().clear();
@@ -225,8 +224,7 @@ public class LoginScene extends Scene {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			if (form.size() == 1)
-				LoginScene.this.leftRegistrationForm.getChildren().add(form.get(0));
+			if (form.size() == 1) LoginScene.this.leftRegistrationForm.getChildren().add(form.get(0));
 
 			AnchorPane.setTopAnchor(this.leftRegistrationForm, 90.0);
 			AnchorPane.setLeftAnchor(this.leftRegistrationForm, 80.0);
@@ -246,7 +244,6 @@ public class LoginScene extends Scene {
 				});
 			}
 		});
-
 		this.setRoot(layout);
 	}
 	private void settingLeftSideComponents() {

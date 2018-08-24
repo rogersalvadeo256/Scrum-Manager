@@ -19,11 +19,9 @@ public class SearchFriend {
 	}
 
 	public void search(String strSearch) {
-
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
-
 		Query q = em.createQuery("from UserRegistration where userName like :userName");
 		q.setParameter("userName", "%" + strSearch.toString() + "%");
 
@@ -32,19 +30,29 @@ public class SearchFriend {
 
 		this.returnFromSearch.clear();
 
-		for (int i = 0; i < q.getResultList().size(); i++) {
-			UserRegistration u = (UserRegistration) q.getResultList().get(i);
-			this.returnFromSearch.add(new HBProfileContent(u));
-		}
+			Profile p = null;
+			UserRegistration u = null;
+			for (int i = 0; i < q.getResultList().size(); i++) {
+				u = (UserRegistration) q.getResultList().get(i);
+				this.returnFromSearch.add(new HBProfileContent(u));
 
-		for (int i = 0; i < q1.getResultList().size(); i++) {
-			Profile p = (Profile) q1.getResultList().get(i);
-			this.returnFromSearch.add(new HBProfileContent(p));
-		}
+			}
+			for (int i = 0; i < q1.getResultList().size(); i++) {
+				p = (Profile) q1.getResultList().get(i);
+				if(u.getProfile().getCod() != p.getCod()) {
+					this.returnFromSearch.add(new HBProfileContent(p));
+				}
+			}
+
+			
+			
+			
+			
+			
+			
 		em.clear();
 		em.close();
 		em = null;
-
 	}
 
 	public ArrayList<HBProfileContent> searchResults() {
