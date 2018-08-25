@@ -3,19 +3,11 @@ package application.main;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.sql.SQLException;
 
-import javax.persistence.EntityManager;
-
-import db.hibernate.factory.Database;
-import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import scenes.HomePageScene;
-import scenes.LoginScene;
-import scenes.NewProjectScene;
 
 public class Window extends Stage {
 
@@ -29,14 +21,16 @@ public class Window extends Stage {
 
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(false);
-
+//		
+//		Database.createEntityManager();
+//		
 // 		Window.mainStage.setOnCloseRequest(event -> { 
 // 			Database.close();
 // 		});
-
-		// mainStage.setScene(new HomePageScene());
+ 		
+		 mainStage.setScene(new HomePageScene());
 // 		mainStage.setScene(new NewProjectScene());
-		mainStage.setScene(new LoginScene());
+//		mainStage.setScene(new LoginScene());
 		this.show();
 	}
 

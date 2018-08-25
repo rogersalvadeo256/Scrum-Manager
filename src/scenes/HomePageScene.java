@@ -8,10 +8,13 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
 import POJOs.Profile;
 import application.main.Window;
+import css.indicator.object.IndicatorOfCss;
 import db.hibernate.factory.Database;
 import db.user.util.UserOnline;
 import friendship.SearchFriend;
@@ -29,14 +32,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import popoups.scenes.FriendshipRequestPopOup;
+import widgets.VBSearchFieldsSugestions;
 
 public class HomePageScene extends Scene {
 
-	private GridPane layout;
+	private AnchorPane layout;
 	private Button btnExit;
 	private Button btnEditProfile;
 	private ImageView profileImg;
@@ -44,7 +48,6 @@ public class HomePageScene extends Scene {
 	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblBiography, lblEmail;
 	private Button btnEditBio;
 
-	private VBox vbTxtSearchAndSugestion;
 
 	private HBox hbHeader;
 	private TextField txtSearch;
@@ -59,22 +62,19 @@ public class HomePageScene extends Scene {
 
 	private Button btnFriendRequest, btnProjectInviteRequest;
 
-	private HBox hbProjectArea;
 	private VBox vbLeftColumn, vbRightColumn;
-
-	private VBox vbSugestions;
-
+	VBSearchFieldsSugestions  vbSearchResult;
+	
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 
 	private SearchFriend searchFriend;
-
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		// IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
+		 IndicatorOfCss.referringScene(this,IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
 
-		this.layout = new GridPane();
+		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
@@ -121,16 +121,12 @@ public class HomePageScene extends Scene {
 		this.fis.add(new FileInputStream(iconPath.get(2)));
 		this.fis.add(new FileInputStream(iconPath.get(3)));
 
-		this.hbHeader = new HBox();
-		this.hbHeader.getStyleClass().add("hbox");
 
 		this.scrumIcon = new ImageView();
 		this.setImage(scrumIcon, 0);
 
-		this.hbHeader.setId("header");
-		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
+		
 
-		this.vbTxtSearchAndSugestion = new VBox();
 
 		this.txtSearch = new TextField();
 		/*
@@ -146,26 +142,31 @@ public class HomePageScene extends Scene {
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 
-		this.vbSugestions = new VBox();
-
-		this.vbTxtSearchAndSugestion.getChildren().addAll(txtSearch, vbSugestions);
-		this.vbTxtSearchAndSugestion.setAlignment(Pos.CENTER);
+		this.vbSearchResult =  new VBSearchFieldsSugestions();
+		vbSearchResult.getStyleClass().add("vbox");
+		vbSearchResult.setId("vbSugestions");
+		vbSearchResult.setVisible(false);
 
 		this.searchFriend = new SearchFriend();
 
 		this.txtSearch.setOnKeyTyped(event -> {
-			HomePageScene.this.searchFriend.search(HomePageScene.this.txtSearch.getText());
-//			HomePageScene.this.add.search(text.add(HomePageScene.this.txtSearch.getText()));
-			
+			HomePageScene.this.searchFriend.loadOptions();
 			if (!searchFriend.searchResults().isEmpty()) {
+				vbSearchResult.getChildren().clear();
 				
 				for (int i = 0; i < searchFriend.searchResults().size(); i++) {
-					vbSugestions.getChildren().add(searchFriend.searchResults().get(i));
+
+					/**
+					 * add the vbox here with the anchor pane
+					 */
+					
+					
+					vbSearchResult.getChildren().add(searchFriend.searchResults().get(i));
 				}
+				searchFriend.searchResults().clear();
 			}
 		});
-		this.hbHeader.setSpacing(20);
-		this.hbHeader.setAlignment(Pos.CENTER);
+		
 		this.btnEditProfile = new Button("Editar Perfil");
 		this.btnEditProfile.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -176,7 +177,9 @@ public class HomePageScene extends Scene {
 			}
 		});
 		this.btnExit = new Button("Sair");
-		this.btnExit.setOnAction(event -> Platform.exit());
+		this.btnExit.setOnAction(event -> { 
+//			Database.close();	
+			Platform.exit();});
 
 		/*
 		 * load the name with the qtd of requests
@@ -224,23 +227,21 @@ public class HomePageScene extends Scene {
 		this.btnProjectInviteRequest.getStyleClass().add("header-buttons");
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
-
-		this.hbHeader.getChildren().addAll(scrumIcon, vbTxtSearchAndSugestion, btnSearch, btnFriendRequest,
-				btnProjectInviteRequest, btnEditProfile, btnExit);
-
-		this.layout.add(hbHeader, 0, 0, 5, 1);
-
-		this.vbProfileInfo = new VBox();
-		this.vbProfileInfo.getStyleClass().add("vbox");
-		this.vbProfileInfo.setId("profile-info");
-
-		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
-		this.vbProfileInfo.setAlignment(Pos.TOP_CENTER);
-		this.vbProfileInfo.setSpacing(25);
-		this.vbProfileInfo.setPrefWidth(350);
+		this.btnEditProfile.setOnAction(e -> { 
+			// teste
+			
+			for(int i=0; i < 100; i++) { 
+				HBox a = new HBox();
+				a.getChildren().add(new Button("SSSSSSSSSS"));
+				vbSearchResult.setVisible(true);
+				vbSearchResult.getChildren().add(a);
+			}
+			
+		});
+		
 
 		this.lblBiography = new Label();// UserOnline.getProfile().getBiography();
-		// this.lblBiography = new Label("SSSS");
+		// this.lblBiography = new Label("SSSS"); // );
 		this.lblBiography.getStyleClass().add("label");
 
 		this.profileImg = new ImageView();
@@ -253,6 +254,7 @@ public class HomePageScene extends Scene {
 		this.btnEditBio.setId("editBio");
 		this.btnEditBio.setTranslateX(-5);
 
+		
 		this.hbBntInteractWithBio = new HBox();
 		this.btnOk = new Button("Salvar");
 		this.btnCancel = new Button("Cancelar");
@@ -267,10 +269,6 @@ public class HomePageScene extends Scene {
 		this.txtBio.setPrefRowCount(5);
 		this.txtBio.setWrapText(true);
 		this.txtBio.setTranslateX(-5);
-		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBiography, btnEditBio,
-				hbBntInteractWithBio, lblEmail);
-
 		this.btnEditBio.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -331,8 +329,6 @@ public class HomePageScene extends Scene {
 		 */
 		this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 
-		this.layout.add(vbProfileInfo, 0, 1, 1, 5);
-		this.vbProfileInfo.setPrefHeight(Window.mainStage.getMaxHeight());
 
 		this.hbMenu = new HBox();
 		this.hbMenu.getStyleClass().add("hbox");
@@ -349,10 +345,39 @@ public class HomePageScene extends Scene {
 		this.hbMenu.setSpacing(20);
 		this.hbMenu.getChildren().addAll(btnStartProject, btnfriends);
 
-		this.layout.add(hbMenu, 1, 1, 1, 1);
 
-		this.hbProjectArea = new HBox();
+	
+	
+		this.hbHeader = new HBox();
+		this.hbHeader.getStyleClass().add("hbox");
+		this.hbHeader.setId("header");
+		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
+		this.hbHeader.setSpacing(5);
+		this.hbHeader.setAlignment(Pos.CENTER);
+		this.hbHeader.getChildren().addAll(scrumIcon, txtSearch, btnSearch, btnFriendRequest,btnProjectInviteRequest, btnEditProfile, btnExit);
 
+		AnchorPane.setTopAnchor(hbHeader, 0.0);
+		AnchorPane.setBottomAnchor(hbHeader,Window.mainStage.getHeight()-100);
+		AnchorPane.setLeftAnchor(hbHeader, 0.0);
+		AnchorPane.setRightAnchor(hbHeader,0.0);
+		this.layout.getChildren().add(hbHeader);
+		
+		
+		this.vbProfileInfo = new VBox();
+		this.vbProfileInfo.getStyleClass().add("vbox");
+		this.vbProfileInfo.setId("profile-info");
+
+		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
+		this.vbProfileInfo.setSpacing(25);
+		this.vbProfileInfo.setAlignment(Pos.CENTER);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBiography, btnEditBio,	hbBntInteractWithBio, lblEmail);
+		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
+		AnchorPane.setBottomAnchor(vbProfileInfo,5.0);
+		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
+		AnchorPane.setRightAnchor(vbProfileInfo,750.0);
+		this.layout.getChildren().add(vbProfileInfo);
+		
+		
 		this.vbLeftColumn = new VBox();
 		this.vbLeftColumn.getStyleClass().add("vbox");
 		this.vbLeftColumn.setId("vbLeft");
@@ -369,22 +394,40 @@ public class HomePageScene extends Scene {
 		this.vbRightColumn.setPrefWidth(400);
 		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);
 
-		this.hbProjectArea.setPrefWidth(Window.mainStage.getWidth());
-		this.hbProjectArea.setPrefHeight(Window.mainStage.getHeight());
+	
+		AnchorPane.setTopAnchor(vbRightColumn, 70.0);
+		AnchorPane.setBottomAnchor(vbRightColumn,5.0);
+		AnchorPane.setLeftAnchor(vbRightColumn, 250.0);
+		AnchorPane.setRightAnchor(vbRightColumn,350.0);
+		this.layout.getChildren().add(vbRightColumn);
+		
+		AnchorPane.setTopAnchor(vbLeftColumn, 70.0);
+		AnchorPane.setBottomAnchor(vbLeftColumn,5.0);
+		AnchorPane.setLeftAnchor(vbLeftColumn,620.0);
+		AnchorPane.setRightAnchor(vbLeftColumn,0.0);
+		this.layout.getChildren().add(vbLeftColumn);
 
-		this.hbProjectArea.getStyleClass().add("hbox");
-		this.hbProjectArea.setId("hbProjectArea");
-		this.hbProjectArea.getChildren().addAll(vbLeftColumn, vbRightColumn);
+		AnchorPane apSearch = new AnchorPane();
 
-		this.layout.add(hbProjectArea, 1, 2, 1, 1);
-
-		/*
-		 * espaço horizontal e vertical entre os componentes
-		 */
-
-		// this.layout.setHgap(15);
-		this.layout.setVgap(20);
-
+		AnchorPane.setTopAnchor(vbSearchResult, 40.0);
+		AnchorPane.setBottomAnchor(vbSearchResult,Window.mainStage.getHeight());
+		AnchorPane.setLeftAnchor(vbSearchResult,20.0);
+		AnchorPane.setRightAnchor(vbSearchResult,20.0);
+		apSearch.getChildren().add(vbSearchResult);
+		
+		AnchorPane.setTopAnchor(apSearch, 15.0);
+		AnchorPane.setBottomAnchor(apSearch,5.0);
+		AnchorPane.setLeftAnchor(apSearch,150.0);
+		AnchorPane.setRightAnchor(apSearch,590.0);
+		this.layout.getChildren().add(apSearch);
+		
+		
+				
+		
+		
+		
+		
+		
 		this.setRoot(layout);
 
 	}

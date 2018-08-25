@@ -19,7 +19,7 @@ public class RegistrationFormScene extends VBox {
 	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
 	private TextField txtName, txtUserName, txtEmail;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
-	public Button btnRegister;
+	public Button btnRegister,btnCancel;
 	private ArrayList<TextField> field;
 	private ArrayList<PasswordField>passwordField;
 	private ArrayList<String> fieldName;
@@ -54,8 +54,8 @@ public class RegistrationFormScene extends VBox {
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
 	
-		this.btnRegister = new Button("OK");
-		
+		this.btnRegister = new Button("Cadastrar");
+		this.btnCancel = new Button();
 		this.registration=new UserRegistration();
 		this.profile=new Profile();
 		
@@ -98,7 +98,7 @@ public class RegistrationFormScene extends VBox {
 			}
 		});
 		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail);
-		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister);
+		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister,btnCancel);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}

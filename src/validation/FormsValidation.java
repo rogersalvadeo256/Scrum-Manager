@@ -119,7 +119,7 @@ public class FormsValidation {
 	 */
 	public String validationForPassword(boolean passwordToShort) {
 		if (passwordToShort) {
-			if (this.passwordField.get(0).getText().length() < 8)
+			if (this.passwordField.get(0).getText().length() < 1) //8)
 				this.passwordFieldValidationMessage.add("Senha muito curta");
 			StringBuilder builContent = new StringBuilder();
 			for (String msg : this.passwordFieldValidationMessage) {

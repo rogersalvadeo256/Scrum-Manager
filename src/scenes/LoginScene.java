@@ -95,10 +95,8 @@ public class LoginScene extends Scene {
 		 */
 		this.txtUser = new TextField();
 		this.txtUser.setPromptText("Username");
-		this.txtUser.setFocusTraversable(false);
 		this.txtUser.setAlignment(Pos.CENTER);
 		this.passwordField = new PasswordField();
-		this.passwordField.setFocusTraversable(false);
 		this.passwordField.setAlignment(Pos.CENTER);
 
 		this.txtUser.setPromptText("Username");
@@ -233,15 +231,15 @@ public class LoginScene extends Scene {
 			layout.getChildren().add(leftRegistrationForm);
 
 			if (form.size() == 1) {
-				form.get(0).btnRegister.setText("Cancelar");
-				form.get(0).btnRegister.setOnAction(e -> {
+				form.get(0).btnCancel.setText("Cancelar");
+				form.get(0).btnCancel.setOnAction(e -> { 
 					form.clear();
 					leftRegistrationForm.getChildren().clear();
 					;
 					layout.getChildren().remove(leftRegistrationForm);
 					LoginScene.this.form.clear();
 					LoginScene.this.settingLeftSideComponents();
-				});
+				}); 
 			}
 		});
 		this.setRoot(layout);

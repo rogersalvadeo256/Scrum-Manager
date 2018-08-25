@@ -1,8 +1,8 @@
 .root{
-	-fx-background-color:#2A363F;
+	-fx-background-color:#f2cced;
 }
 .hbox#header{
-	-fx-background-color:transparent;
+	-fx-background-color:#C13F10;
 	-fx-pref-height:50.0;
 	-fx-border-color: white;
 	-fx-border-width: 0.0 0.0 3.0 0.0;
@@ -17,8 +17,8 @@
 .button#project-invite { 
 	
 }
-.vbox#vbSugestionsBox{ 
-	-fx-background-color:grey;
+.vbox#vbSugestions{ 
+	-fx-background-color:#9be300;
 }
 
 .text-field{
@@ -32,7 +32,7 @@
 }
 
 .vbox#profile-info{
-	-fx-background-color:transparent;
+	-fx-background-color:#7ecced;
 }
 .label{
     -fx-font-size: 11.0pt;
@@ -107,13 +107,13 @@
 }
 
 .vbox#vbLeft{
-	-fx-background-color:transparent;
+	-fx-background-color:#c0bcb0;
 	-fx-border-color: white;
 	-fx-border-width: 0.0 3.0 0.0 0.0;
 	
 }
 .vbox#vbRight{ 
-	-fx-background-color:transparent;
+	-fx-background-color:#4563b0;
 	-fx-border-color: white;
 	-fx-border-width: 0.0 0.0 0.0 3.0;
 }
