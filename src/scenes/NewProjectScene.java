@@ -2,6 +2,7 @@ package scenes;
 
 
 import application.main.Window;
+import css.indicator.object.IndicatorOfCss;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -25,16 +26,19 @@ public class NewProjectScene extends Scene {
 	public NewProjectScene(){	
 		super(new VBox());
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("DescriÃ§Ã£o do Projeto");
+		this.lblDescProject = new Label("Descrição do Projeto");
 		this.lblMember = new Label("Membros:");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
+		this.txtDescProject.setId("txtDescProject");
 		this.txtMember = new TextField();
 		this.lblAddMember = new Hyperlink("Adicione mais um membro");
 		this.hbxBTN = new HBox();
 		this.hbxPN = new HBox();
 		this.hbxMember = new HBox();
 		this.vbxTela = new VBox();
+		
+		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.NEW_PROJECT);
 		
 		Window.mainStage.setWidth(800);
 		Window.mainStage.setHeight(600);
@@ -48,9 +52,12 @@ public class NewProjectScene extends Scene {
 		this.txtProjectName.setAlignment(Pos.CENTER);
 		this.txtMember.setAlignment(Pos.CENTER);
 		this.btnSalvar = new Button("Salvar");
+		this.btnSalvar.setId("btnSalve");
 		
 		this.btnInvite = new Button("Convidar");
+		this.btnInvite.setId("btnInvite");
 		this.btnCancelar = new Button("Cancelar");
+		this.btnCancelar.setId("btnCancel");
 
 		hbxPN.getChildren().addAll(lblProjectName,txtProjectName);
 		hbxPN.setSpacing(10);
