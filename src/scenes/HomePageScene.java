@@ -24,10 +24,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -36,7 +38,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import popoups.scenes.FriendshipRequestPopOup;
-import widgets.VBSearchFieldsSugestions;
 
 public class HomePageScene extends Scene {
 
@@ -62,8 +63,10 @@ public class HomePageScene extends Scene {
 
 	private Button btnFriendRequest, btnProjectInviteRequest;
 
+	private AnchorPane apSearch;
 	private VBox vbLeftColumn, vbRightColumn;
-	VBSearchFieldsSugestions  vbSearchResult;
+	private VBox vbSearchResult;
+	private ScrollBar sc;
 	
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
@@ -125,8 +128,27 @@ public class HomePageScene extends Scene {
 		this.scrumIcon = new ImageView();
 		this.setImage(scrumIcon, 0);
 
+		this.vbSearchResult = new VBox();
+		this.vbSearchResult.setLayoutX(5);
+		this.sc=new ScrollBar();
 		
-
+		this.vbSearchResult.getChildren().add(sc);
+		
+		
+		sc.setLayoutX(vbSearchResult.getWidth() - sc.getWidth());
+	        sc.setMin(0);
+	        sc.setOrientation(Orientation.VERTICAL);
+	        sc.setPrefHeight(360);
+	        sc.setMax(180 * 2);
+	        
+		
+	        sc.valueProperty().addListener(new ChangeListener<Number>() {
+	            public void changed(ObservableValue<? extends Number> ov,
+	                Number old_val, Number new_val) {
+	            	vbSearchResult.setLayoutY(-new_val.doubleValue());
+	            }
+	        });
+	 
 
 		this.txtSearch = new TextField();
 		/*
@@ -141,12 +163,9 @@ public class HomePageScene extends Scene {
 		this.btnSearch = new Button();
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
+		
 
-		this.vbSearchResult =  new VBSearchFieldsSugestions();
-		vbSearchResult.getStyleClass().add("vbox");
-		vbSearchResult.setId("vbSugestions");
-		vbSearchResult.setVisible(false);
-
+		
 		this.searchFriend = new SearchFriend();
 
 		this.txtSearch.setOnKeyTyped(event -> {
@@ -235,13 +254,13 @@ public class HomePageScene extends Scene {
 				a.getChildren().add(new Button("SSSSSSSSSS"));
 				vbSearchResult.setVisible(true);
 				vbSearchResult.getChildren().add(a);
+				apSearch.setId("sugestionsOn");
 			}
 			
 		});
 		
 
 		this.lblBiography = new Label();// UserOnline.getProfile().getBiography();
-		// this.lblBiography = new Label("SSSS"); // );
 		this.lblBiography.getStyleClass().add("label");
 
 		this.profileImg = new ImageView();
@@ -407,24 +426,21 @@ public class HomePageScene extends Scene {
 		AnchorPane.setRightAnchor(vbLeftColumn,0.0);
 		this.layout.getChildren().add(vbLeftColumn);
 
-		AnchorPane apSearch = new AnchorPane();
-
+		this.apSearch= new AnchorPane();
 		AnchorPane.setTopAnchor(vbSearchResult, 40.0);
 		AnchorPane.setBottomAnchor(vbSearchResult,Window.mainStage.getHeight());
 		AnchorPane.setLeftAnchor(vbSearchResult,20.0);
 		AnchorPane.setRightAnchor(vbSearchResult,20.0);
-		apSearch.getChildren().add(vbSearchResult);
+		apSearch.getChildren().addAll(vbSearchResult,sc);
 		
-		AnchorPane.setTopAnchor(apSearch, 15.0);
+		apSearch.getStyleClass().add("anchor-pane");
+		apSearch.setId("sugestionsOff");
+		
+		AnchorPane.setTopAnchor(apSearch, 45.0);
 		AnchorPane.setBottomAnchor(apSearch,5.0);
-		AnchorPane.setLeftAnchor(apSearch,150.0);
-		AnchorPane.setRightAnchor(apSearch,590.0);
+		AnchorPane.setLeftAnchor(apSearch,170.0);
+		AnchorPane.setRightAnchor(apSearch,610.0);
 		this.layout.getChildren().add(apSearch);
-		
-		
-				
-		
-		
 		
 		
 		
