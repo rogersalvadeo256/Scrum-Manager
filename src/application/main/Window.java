@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import scenes.HomePageScene;
+import scenes.LoginScene;
+import scenes.NewProjectScene;
 
 public class Window extends Stage {
 
@@ -28,8 +30,8 @@ public class Window extends Stage {
 // 			Database.close();
 // 		});
  		
-		 mainStage.setScene(new HomePageScene());
-// 		mainStage.setScene(new NewProjectScene());
+//		 mainStage.setScene(new HomePageScene());
+ 		mainStage.setScene(new NewProjectScene());
 //		mainStage.setScene(new LoginScene());
 		this.show();
 	}

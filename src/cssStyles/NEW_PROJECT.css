@@ -1,8 +1,54 @@
 .root{
-	-fx-background-color:#fffffd;
+	-fx-background-color:#e4ebff;
+}
+.button:hover{
+	-fx-text-fill:#2A363F;
+	-fx-background-color:#ffff;
 }
 
-
+.button{
+	-fx-text-fill:#2A363F;
+	-fx-background-color:#5Fb69C;
+	-fx-padding:10.0;
+}
+.button#btnSalve{ 
+	-fx-background-color:#6DD89F;
+	 -fx-pref-width: 90px;
+}
+.button#btnSalve:hover{
+	-fx-text-fill:#2A363F;
+	-fx-background-color:#ffff;
+}
+.hyperlink{
+	-fx-text-fill:green;
+}
+.button#btnCancel:hover{
+		-fx-text-fill:black;
+	-fx-background-color:red;
+	-fx-effect: innershadow(gaussian,black,8.0,0.0,0.0,0.0);	
+}
+.textfield{
+	-fx-border-color:#ffff;
+}
+/*.txtDescProject{
+	-fx-border-color:black;
+	-fx-border-top-left-radius: 2px;
+	-fx-border-top-right-radius: 2px;
+	-fx-border-bottom-right-radius: 500px;
+	-fx-border-bottom-left-radius: 1px;
+	-fx-border-style: groove;
+}
+*/
+.textfield{
+	-fx-font-size:18pt;
+	 -fx-font-weight: bold;
+	-fx-text-fill: #2f4f8f;
+}
+.label { 
+	-fx-font-size:13pt;
+	 -fx-font-weight: bold;
+	-fx-text-fill: #060b13;
+}
 
 
 
