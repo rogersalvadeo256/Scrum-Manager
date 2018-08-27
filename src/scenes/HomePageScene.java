@@ -419,7 +419,7 @@ public class HomePageScene extends Scene {
 		AnchorPane.setLeftAnchor(vbRightColumn, 250.0);
 		AnchorPane.setRightAnchor(vbRightColumn,350.0);
 		this.layout.getChildren().add(vbRightColumn);
-		
+		 
 		AnchorPane.setTopAnchor(vbLeftColumn, 70.0);
 		AnchorPane.setBottomAnchor(vbLeftColumn,5.0);
 		AnchorPane.setLeftAnchor(vbLeftColumn,620.0);

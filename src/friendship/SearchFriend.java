@@ -18,12 +18,15 @@ public class SearchFriend {
 		this.returnFromSearch = new ArrayList<HBProfileContent>();
 		this.listOptions=new ArrayList<Profile>();
 	}
-	public void loadOptions() {
+	public void loadOptions(String name) {
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
 		
-		Query q = em.createQuery("from Profile");
+		Query q = em.createQuery("from Profile where name like =:");
+		q.setParameter("name", "%" + name + "%");
+		
+		
 		
 		for(int i=0;i<q.getResultList().size();i++) {
 			this.listOptions.add((Profile) q.getResultList().get(i));
