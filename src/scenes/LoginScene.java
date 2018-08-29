@@ -25,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import listeners.Close;
 
 /*
  * LoginScreen.java
@@ -153,8 +154,8 @@ public class LoginScene extends Scene {
 		/*
 		 * buttons handler
 		 */
-		this.btnExit.setOnAction(ExitButtonListener -> Platform.exit());
-
+		this.btnExit.setOnAction(new Close(Window.mainStage));
+		
 		this.btnLogin.setOnAction(e -> {
 			if (LoginScene.this.login.doLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
 				LoginScene.this.messageLoginValidation.setText(new String());

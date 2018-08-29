@@ -7,9 +7,9 @@ import POJOs.UserRegistration;
 import db.hibernate.factory.Database;
 
 public class RegistrationDB{
-	private EntityManager manager;
+	private EntityManager em;
 	public RegistrationDB() {
-		this.manager = Database.createEntityManager();
+		this.em = Database.createEntityManager();
 	}
 	/**
 	 * make the persistense for registration
@@ -21,10 +21,19 @@ public class RegistrationDB{
 	 *            user
 	 */
 	public void insertUser(UserRegistration user) {
-		this.manager.getTransaction().begin();
-		this.manager.persist(user);
-		this.manager.getTransaction().commit();
-		this.manager.clear();
+		if (em == null) {
+			em = Database.createEntityManager();
+		}
+		
+		UserRegistration u = new UserRegistration();
+		u = user;
+
+		this.em.getTransaction().begin();
+		this.em.persist(u);
+		this.em.getTransaction().commit();
+		this.em.clear();
+		this.em.close();
+		this.em = null;
 	}
 	/**
 	 *  if the return value are false, so the user doesn't exist
@@ -33,7 +42,10 @@ public class RegistrationDB{
 	 * @param UserRegistration user
 	 */
 	public boolean userExist(UserRegistration user) {
-		Query queryForExistentUserName = this.manager.createQuery("from UserRegistration where userName=:userName");
+		if (em == null) {
+			em = Database.createEntityManager();
+		}
+		Query queryForExistentUserName = this.em.createQuery("from UserRegistration where userName=:userName");
 		queryForExistentUserName.setParameter("userName", user.getUserName());
 		if (!queryForExistentUserName.getResultList().isEmpty()) return true;
 		return false;

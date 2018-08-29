@@ -1,4 +1,5 @@
 package validation;
+
 import java.util.ArrayList;
 
 import POJOs.UserRegistration;
@@ -10,9 +11,10 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 /**
- * Make the validation of forms, functions for check if the fields are empty, 
- * password not equal, data informed already registered
- * and return of alert for the data.
+ * Make the validation of forms, functions for check if the fields are empty,
+ * password not equal, data informed already registered and return of alert for
+ * the data.
+ * 
  * @author jefter66
  */
 public class FormsValidation {
@@ -52,8 +54,6 @@ public class FormsValidation {
 
 		this.registration = new RegistrationDB();
 	}
-
-
 
 	/**
 	 * Use to check if the fields are empty going to pupulate a arraylist with a
@@ -119,7 +119,7 @@ public class FormsValidation {
 	 */
 	public String validationForPassword(boolean passwordToShort) {
 		if (passwordToShort) {
-			if (this.passwordField.get(0).getText().length() < 1) //8)
+			if (this.passwordField.get(0).getText().length() < 1) // 8)
 				this.passwordFieldValidationMessage.add("Senha muito curta");
 			StringBuilder builContent = new StringBuilder();
 			for (String msg : this.passwordFieldValidationMessage) {
@@ -139,6 +139,7 @@ public class FormsValidation {
 		}
 		return new String();
 	}
+
 	/**
 	 * For registration of new user. If the registration go's ok, then, the return
 	 * will be true, otherwise false
@@ -148,7 +149,8 @@ public class FormsValidation {
 	 * @return boolean
 	 */
 	public boolean validationForExistentData(UserRegistration registration) {
-		if (this.registration.userExist(registration))return false;
+		if (this.registration.userExist(registration))
+			return false;
 		return true;
 	}
 
@@ -159,6 +161,7 @@ public class FormsValidation {
 	/**
 	 * Make the registration of new user after do all the validations of empty
 	 * fields and data existent
+	 * 
 	 * @return Alert
 	 */
 	public Alert registrationOfNewUser() {
@@ -172,24 +175,26 @@ public class FormsValidation {
 			passwordFieldEmptyMessage = new String();
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", returnMessage);
 		}
-		String passwordErrorMessage= new String();
-		if(!validationForPassword(true).isEmpty()){
-			passwordErrorMessage=new String();
+		String passwordErrorMessage = new String();
+		if (!validationForPassword(true).isEmpty()) {
+			passwordErrorMessage = new String();
 			passwordErrorMessage = validationForPassword(true);
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordErrorMessage);
 		}
 		String passwordFieldErrorMessage = new String();
-		if(!validationForPassword(false).isEmpty()) {
-			passwordFieldEmptyMessage=new String();
+		if (!validationForPassword(false).isEmpty()) {
+			passwordFieldEmptyMessage = new String();
 			passwordFieldEmptyMessage = validationForPassword(false);
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage);
 		}
-		if(!validationForExistentData(this.getUserRegistration())) {
-			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", "Nome de usuario já está cadastrado");
+		if (!validationForExistentData(this.getUserRegistration())) {
+			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
+					"Nome de usuario já está cadastrado");
 		}
 		registration.insertUser(getUserRegistration());
 		return message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro realizado com sucesso", "Voce está cadastrado");
 	}
+
 	public void setConfirmationMessage(ArrayList<String> message) {
 		this.confirmationMessage.clear();
 		for (int i = 0; i < message.size(); i++) {
@@ -199,12 +204,15 @@ public class FormsValidation {
 			this.confirmationMessage.add(message.get(i));
 		}
 	}
+
 	public void setUserRegistration(UserRegistration registration) {
 		this.userRegistration = registration;
-	}	
+	}
+
 	private UserRegistration getUserRegistration() {
 		return this.userRegistration;
 	}
+
 	public void setFieldName(ArrayList<String> name) {
 		this.fieldName = name;
 	}
