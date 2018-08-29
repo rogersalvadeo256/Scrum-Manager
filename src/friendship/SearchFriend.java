@@ -31,27 +31,33 @@ public class SearchFriend {
 
 		Query q1 = em.createQuery("from UserRegistration where userName like :userName");
 		q1.setParameter("userName", "%" + str + "%");
+
+		
+		Query q2 = em.createQuery("from UserRegistration as u  inner join Profile as p  on u.codUser = p.codProfile where u.userName=:uName and p.name=:pName");
+		q2.setParameter("uName", "%" + str + "%");
+		q2.setParameter("pName", "%" + str + "%");
+	
+		q.getResultList();
 		
 		this.result.clear();
 		this.returnFromSearch.clear();
-		
-		if (!q.getResultList().isEmpty())
+
+		if (!q.getResultList().isEmpty()) {
 			for (int i = 0; i < q.getResultList().size(); i++) {
 				this.result.add((Profile) q.getResultList().get(i));
 			}
-		if (!q1.getResultList().isEmpty())
+		}
+		if (!q1.getResultList().isEmpty()) {
 			for (int i = 0; i < q1.getResultList().size(); i++) {
 				UserRegistration u = new UserRegistration();
 				u = (UserRegistration) q1.getResultList().get(i);
 				Profile p = new Profile();
 				p = u.getProfile();
-				if (!(p.getCod() == this.result.get(i).getCod())) {
-					this.result.add(p);
+				for (int j = 0; j < q1.getResultList().size(); j++) {
+//					if(!(this.result.get(j).getCod() ==  UserOnline.getUserLogged().getCodUser())) ;
+					if (!(this.result.get(j).getCod() == UserOnline.getProfile().getCod())) this.result.add(p);
 				}
 			}
-		for (int i = 0; i < this.result.size(); i++) {
-			if ((this.result.get(i).getCod() == UserOnline.getProfile().getCod()))
-				this.result.remove(i);
 		}
 		for (int i = 0; i < this.result.size(); i++) {
 			this.returnFromSearch.add(new HBProfileContent(result.get(i)));
@@ -64,5 +70,4 @@ public class SearchFriend {
 	public ArrayList<HBProfileContent> getResults() {
 		return this.returnFromSearch;
 	}
-
 }

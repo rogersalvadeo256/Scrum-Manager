@@ -28,7 +28,7 @@ public class IndicatorOfCss {
 	public static void referringScene(Scene scene, cssFile file) {
 		if (file.equals(cssFile.LOGIN_SCENE)) {
 			String realPath = path + cssFile.LOGIN_SCENE.toString() + extension;
-			scene.getStylesheets().add(	scene.getClass().getResource(realPath.trim()).toExternalForm());
+			scene.getStylesheets().add(scene.getClass().getResource(realPath.trim()).toExternalForm());
 		}
 		if (file.equals(cssFile.HOME_PAGE_SCENE)) {
 			String realPath = IndicatorOfCss.path + cssFile.HOME_PAGE_SCENE.toString() + extension;

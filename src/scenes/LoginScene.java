@@ -139,7 +139,6 @@ public class LoginScene extends Scene {
 		/*
 		 * 
 		 */
-
 		/*
 		 * image
 		 */

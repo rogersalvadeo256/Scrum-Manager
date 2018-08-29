@@ -166,17 +166,13 @@ public class HomePageScene extends Scene {
 		this.txtSearch.setOnKeyTyped(event -> {
 
 			if (!txtSearch.getText().isEmpty()) {
-
+				
 				HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
 				HomePageScene.this.vbSearchResult.getChildren().clear();
-
+				
 				if (!searchFriend.getResults().isEmpty()) {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {
-						
 						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
-					
-					
-					
 					}
 				}
 

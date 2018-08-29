@@ -41,10 +41,8 @@ public class UserOnline {
 		Query getUser = manager.createQuery("from Profile where codProfile=:codProfile");
 		getUser.setParameter("codProfile", getUserLogged().getProfile().getCod());
 		
-		if(!getUser.getResultList().isEmpty()) {
-			userProfile = (Profile) getUser.getResultList().get(0);
-			System.out.println(userProfile.getName());
-			}
+		if(!getUser.getResultList().isEmpty())userProfile = (Profile) getUser.getResultList().get(0);
+
 		return userProfile;
 	}
 	/**
@@ -56,6 +54,24 @@ public class UserOnline {
 		return userProfile();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

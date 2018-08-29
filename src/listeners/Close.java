@@ -10,7 +10,6 @@ public class Close implements  EventHandler<ActionEvent> {
 	private Stage parent;
 
 	public Close(Stage parent) {
-		this.parent = new Stage();
 		this.parent = parent;
 	}
 
