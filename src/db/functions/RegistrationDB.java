@@ -20,12 +20,11 @@ public class RegistrationDB{
 	 * @param UserRegistration
 	 *            user
 	 */
-	public void insertUser(UserRegistration user) {
+	public void insertUser(UserRegistration u) {
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
 		
-		UserRegistration u = user;
 
 		this.em.getTransaction().begin();
 		this.em.persist(u);
@@ -44,9 +43,9 @@ public class RegistrationDB{
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
-		Query queryForExistentUserName = this.em.createQuery("from UserRegistration where userName=:userName");
-		queryForExistentUserName.setParameter("userName", user.getUserName());
-		if (!queryForExistentUserName.getResultList().isEmpty()) return true;
+		Query q = this.em.createQuery("from UserRegistration where userName=:userName");
+		q.setParameter("userName", user.getUserName());
+		if (!q.getResultList().isEmpty()) return true;
 		return false;
 	}
 }

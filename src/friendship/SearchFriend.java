@@ -25,25 +25,19 @@ public class SearchFriend {
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
-
-		Query q = em.createQuery("from Profile where name like :pName");
-		q.setParameter("pName", "%" + str + "%");
-
 		this.result.clear();
 		this.returnFromSearch.clear();
 
-//		if (!q.getResultList().isEmpty()) {
-			for (int i = 0; i < q.getResultList().size(); i++) {
-				Profile p = SESSION.getProfileLogged();
-				if (!(p.getCod() == i)) {
-					this.result.add((Profile) q.getResultList().get(i));
-				}
-			}
-//		}
+		Query q = em.createQuery("from Profile where name like :pName and codProfile <> :codOnline");
+		q.setParameter("pName", "%" + str + "%");
+		q.setParameter("codOnline", SESSION.getProfileLogged().getCod());
+
+		this.result = (ArrayList<Profile>) q.getResultList();
+		
 		for (int i = 0; i < this.result.size(); i++) {
 			this.returnFromSearch.add(new HBProfileContent(result.get(i)));
 		}
-		
+
 		em.clear();
 		em.close();
 		em = null;
@@ -53,23 +47,3 @@ public class SearchFriend {
 		return this.returnFromSearch;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

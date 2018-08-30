@@ -18,7 +18,7 @@ public class Profile {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 	
 	@Column(name="codProfile")
-	private long codProfile;
+	private int codProfile;
 	@Column
 	private String biography;
 	@Column 
@@ -36,8 +36,8 @@ public class Profile {
 		this.friend = new ArrayList<Profile>();
 		this.friendRequest = new ArrayList<Profile>();
 	}
-	public void setCod(long codProfile) {this.codProfile = codProfile;}
-	public long getCod() {return codProfile;}
+	public void setCod(int codProfile) {this.codProfile = codProfile;}
+	public int getCod() {return codProfile;}
 
 	public String getName(){ return name;}
 	public void setName(String name){this.name = name;}

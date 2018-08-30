@@ -56,8 +56,6 @@ public class RegistrationFormScene extends VBox {
 	
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button();
-		this.registration=new UserRegistration();
-		this.profile=new Profile();
 		
 		this.field.add(txtName);
 		this.field.add(txtEmail);
@@ -84,6 +82,9 @@ public class RegistrationFormScene extends VBox {
 					/*
 					 * validação para campos vazios
 					 */
+					RegistrationFormScene.this.registration=new UserRegistration();
+					RegistrationFormScene.this.profile=new Profile();
+					
 					validation.setField(field);
 					validation.setPasswordField(passwordField);
 					validation.setFieldName(fieldName);

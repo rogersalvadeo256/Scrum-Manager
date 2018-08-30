@@ -165,14 +165,13 @@ public class HomePageScene extends Scene {
 
 		this.txtSearch.setOnKeyTyped(event -> {
 
-					
+				HomePageScene.this.vbSearchResult.getChildren().clear();
 				HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
 			
-				HomePageScene.this.vbSearchResult.getChildren().clear();
-				
 				if (!searchFriend.getResults().isEmpty()) {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {
-						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
+						HBProfileContent a = searchFriend.getResults().get(i);
+						HomePageScene.this.vbSearchResult.getChildren().add(a);
 					}
 				}
 		});

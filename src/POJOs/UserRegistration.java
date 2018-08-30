@@ -17,7 +17,7 @@ public class UserRegistration {
 	}
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long codUser;
+	private int codUser;
 	@Column
 	private String userName;
 	@Column
@@ -45,7 +45,7 @@ public class UserRegistration {
 	public String getEmail(){return email;}
 	public void setEmail(String email){this.email = email;}
 
-	public long getCodUser(){ return codUser;}
+	public int getCodUser(){ return codUser;}
 	public void setId(int id){this.codUser = id;}
 
 }
