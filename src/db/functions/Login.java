@@ -2,9 +2,10 @@ package db.functions;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import POJOs.Profile;
 import POJOs.UserRegistration;
 import db.hibernate.factory.Database;
-import db.user.util.UserOnline;
+import db.user.util.SESSION;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import validation.CheckEmptyFields;
@@ -31,12 +32,14 @@ public class Login {
 	 */
 	public boolean doLogin(TextField userName, PasswordField password) {
 		if (!isFieldEmpty(userName, password)) {
-			Query queryForLogin = this.manager.createQuery("from UserRegistration where userName=:userName and password=:password");
-			queryForLogin.setParameter("userName", userName.getText());
-			queryForLogin.setParameter("password", password.getText());
+			Query q = this.manager.createQuery("from UserRegistration where userName=:userName and password=:password");
+			q.setParameter("userName", userName.getText());
+			q.setParameter("password", password.getText());
 
-			if (!queryForLogin.getResultList().isEmpty()) {
-				UserOnline.setUserLogged((UserRegistration) queryForLogin.getResultList().get(0));
+			if (!q.getResultList().isEmpty()) {
+				UserRegistration u = new UserRegistration();
+				u = (UserRegistration) q.getResultList().get(0);
+				SESSION.START_SESSION(u);
 				return true;
 			}
 		}

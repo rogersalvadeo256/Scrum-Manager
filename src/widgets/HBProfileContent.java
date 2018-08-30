@@ -2,7 +2,7 @@ package widgets;
 
 import POJOs.Profile;
 import POJOs.UserRegistration;
-import db.user.util.UserOnline;
+import db.user.util.SESSION;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -41,6 +41,6 @@ public class HBProfileContent extends HBox {
 		this.getChildren().addAll(vbUsrIMG, vbUsrLABEL, vbUsrBUTTON);
 	}
 	private void AddFriend(Profile p) {
-		UserOnline.getProfile().getFriend().add(p);
+		SESSION.getProfileLogged().getFriend().add(p);
 	}
 }

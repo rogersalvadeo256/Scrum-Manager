@@ -30,8 +30,7 @@ import listeners.Close;
 /*
  * LoginScreen.java
  * 
- * Created on: 28 jun de 2018
- * 		Autor: jefter66
+ * Created on: 28 jun de 2018 Autor: jefter66
  * 
  */
 public class LoginScene extends Scene {
@@ -48,7 +47,7 @@ public class LoginScene extends Scene {
 	private RadioButton btnStayConnected;
 	private Label lblStayConnected;
 	private HBox hbStayConnected;
-	
+
 	private Hyperlink forgotPassword;
 
 	private VBox leftSide;
@@ -120,11 +119,11 @@ public class LoginScene extends Scene {
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
 		/*
 		 */
-		
-		this.btnStayConnected=new  RadioButton();
-		this.lblStayConnected=new Label("Mantenha-me conentado");
-		this.hbStayConnected=new HBox();
-		this.hbStayConnected.getChildren().addAll(btnStayConnected,lblStayConnected);
+
+		this.btnStayConnected = new RadioButton();
+		this.lblStayConnected = new Label("Mantenha-me conentado");
+		this.hbStayConnected = new HBox();
+		this.hbStayConnected.getChildren().addAll(btnStayConnected, lblStayConnected);
 
 		/*
 		 * buttons
@@ -143,7 +142,7 @@ public class LoginScene extends Scene {
 		 * image
 		 */
 		this.imgIcon = new ImageView();
-		this.iconPath = new File("/home/jefter66/java-workspace/TCC/resources/images/icons/scrum_icon.png");
+		this.iconPath = new File("resources/images/icons/scrum_icon.png");
 		this.fis = new FileInputStream(iconPath);
 		this.imgIcon.setImage(new Image(fis));
 
@@ -154,7 +153,7 @@ public class LoginScene extends Scene {
 		 * buttons handler
 		 */
 		this.btnExit.setOnAction(new Close(Window.mainStage));
-		
+
 		this.btnLogin.setOnAction(e -> {
 			if (LoginScene.this.login.doLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
 				LoginScene.this.messageLoginValidation.setText(new String());
@@ -168,13 +167,16 @@ public class LoginScene extends Scene {
 		});
 		this.passwordField.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER) {
-				LoginScene.this.messageLoginValidation.setText(new String());
-				try {
-					Window.mainStage.setScene(new HomePageScene());
-				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
-					e1.printStackTrace();
+				if (LoginScene.this.login.doLogin(LoginScene.this.txtUser, LoginScene.this.passwordField)) {
+					LoginScene.this.messageLoginValidation.setText(new String());
+					try {
+						Window.mainStage.setScene(new HomePageScene());
+					} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
+			LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
 		});
 		this.forgotPassword.setOnAction(event -> {
 
@@ -191,7 +193,8 @@ public class LoginScene extends Scene {
 		this.btnExit.setMaxWidth(Double.MAX_VALUE);
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,messageLoginValidation, forgotPassword, hbStayConnected,btnLogin, btnExit);
+		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtUser, lblPassword, passwordField,
+				messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit);
 
 		HBox.setHgrow(vbLogin, Priority.ALWAYS);
 		this.vbLogin.setMaxWidth(Double.MAX_VALUE);
@@ -208,7 +211,7 @@ public class LoginScene extends Scene {
 		this.layout.getChildren().add(rightSide);
 
 		settingLeftSideComponents();
-		
+
 		this.btnSignUp.setOnAction(event -> {
 			this.form.clear();
 			this.leftSide.getChildren().clear();
@@ -222,7 +225,8 @@ public class LoginScene extends Scene {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
-			if (form.size() == 1) LoginScene.this.leftRegistrationForm.getChildren().add(form.get(0));
+			if (form.size() == 1)
+				LoginScene.this.leftRegistrationForm.getChildren().add(form.get(0));
 
 			AnchorPane.setTopAnchor(this.leftRegistrationForm, 90.0);
 			AnchorPane.setLeftAnchor(this.leftRegistrationForm, 80.0);
@@ -232,18 +236,19 @@ public class LoginScene extends Scene {
 
 			if (form.size() == 1) {
 				form.get(0).btnCancel.setText("Cancelar");
-				form.get(0).btnCancel.setOnAction(e -> { 
+				form.get(0).btnCancel.setOnAction(e -> {
 					form.clear();
 					leftRegistrationForm.getChildren().clear();
 					;
 					layout.getChildren().remove(leftRegistrationForm);
 					LoginScene.this.form.clear();
 					LoginScene.this.settingLeftSideComponents();
-				}); 
+				});
 			}
 		});
 		this.setRoot(layout);
 	}
+
 	private void settingLeftSideComponents() {
 		HBox.setHgrow(lblWelcome, Priority.ALWAYS);
 		HBox.setHgrow(btnSignUp, Priority.ALWAYS);
@@ -251,7 +256,7 @@ public class LoginScene extends Scene {
 		this.lblWelcome.setMaxWidth(Double.MAX_VALUE);
 		this.btnSignUp.setMaxWidth(Double.MAX_VALUE);
 		this.leftSide.getChildren().addAll(lblWelcome, btnSignUp, imgIcon);
-		
+
 		this.leftSide.setAlignment(Pos.CENTER);
 		HBox.setHgrow(leftSide, Priority.ALWAYS);
 		this.leftSide.setMaxWidth(Double.MAX_VALUE);

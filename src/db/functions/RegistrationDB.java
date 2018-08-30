@@ -25,8 +25,7 @@ public class RegistrationDB{
 			em = Database.createEntityManager();
 		}
 		
-		UserRegistration u = new UserRegistration();
-		u = user;
+		UserRegistration u = user;
 
 		this.em.getTransaction().begin();
 		this.em.persist(u);

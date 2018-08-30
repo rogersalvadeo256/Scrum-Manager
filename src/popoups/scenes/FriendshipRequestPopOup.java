@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import POJOs.Profile;
-import db.user.util.UserOnline;
+import db.user.util.SESSION;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -65,8 +65,8 @@ public class FriendshipRequestPopOup extends Stage {
 		this.listFriendRequest.clear();
 		this.hbFriendRequest.clear();
 
-		for (int i = 0; i < UserOnline.getProfile().getFriendRequest().size(); i++) {
-			this.listFriendRequest.add(UserOnline.getProfile().getFriendRequest().get(i));
+		for (int i = 0; i < SESSION.getProfileLogged().getFriendRequest().size(); i++) {
+			this.listFriendRequest.add(SESSION.getProfileLogged().getFriendRequest().get(i));
 		}
 		if (!this.listFriendRequest.isEmpty()) {
 			for (int i = 0; i < this.listFriendRequest.size(); i++) {

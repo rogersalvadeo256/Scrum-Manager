@@ -16,7 +16,7 @@ import POJOs.Profile;
 import application.main.Window;
 import css.indicator.object.IndicatorOfCss;
 import db.hibernate.factory.Database;
-import db.user.util.UserOnline;
+import db.user.util.SESSION;
 import friendship.SearchFriend;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -165,9 +165,9 @@ public class HomePageScene extends Scene {
 
 		this.txtSearch.setOnKeyTyped(event -> {
 
-			if (!txtSearch.getText().isEmpty()) {
-				
+					
 				HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
+			
 				HomePageScene.this.vbSearchResult.getChildren().clear();
 				
 				if (!searchFriend.getResults().isEmpty()) {
@@ -175,9 +175,6 @@ public class HomePageScene extends Scene {
 						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
 					}
 				}
-
-			}
-
 		});
 		
 		
@@ -250,13 +247,6 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.setOnAction(e -> {
 			// teste
 
-			for (int i = 0; i < 100; i++) {
-				HBox a = new HBox();
-				a.getChildren().add(new Button("SSSSSSSSSS"));
-				vbSearchResult.setVisible(true);
-				vbSearchResult.getChildren().add(a);
-				apSearch.setId("sugestionsOn");
-			}
 
 		});
 
@@ -324,7 +314,7 @@ public class HomePageScene extends Scene {
 			public void handle(ActionEvent event) {
 				EntityManager em = Database.createEntityManager();
 				Query q = em.createQuery("from Profile where codProfile=:codProfile");
-				q.setParameter("codProfile", UserOnline.getProfile().getCod());
+//				q.setParameter("codProfile", SESSION.getProfile().getCod());
 				if (q.getResultList().size() > 0) {
 
 					Profile p = (Profile) q.getResultList().get(0);
