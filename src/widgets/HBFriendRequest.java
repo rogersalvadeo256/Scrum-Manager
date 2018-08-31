@@ -32,8 +32,6 @@ public class HBFriendRequest extends HBox {
 		this.lblBio = new Label(p.getBiography());
 		
 		
-//		this.lblName = new Label("Nome");
-//		this.lblBio = new Label("DESCRICAO");
 		
 		
 		this.btnAccept = new Button("Aceitar");

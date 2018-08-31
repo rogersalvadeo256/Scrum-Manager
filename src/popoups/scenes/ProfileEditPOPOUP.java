@@ -1,57 +1,172 @@
 package popoups.scenes;
 
-import javafx.scene.control.TextArea;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import POJOs.Profile;
+import POJOs.UserRegistration;
+import db.hibernate.factory.Database;
+import db.user.util.SESSION;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
+import validation.CheckEmptyFields;
 
 public class ProfileEditPOPOUP extends Stage {
 
-	VBox layout = new VBox();
-	HBox hbxNm = new HBox(), hbxB = new HBox(), hbxP = new HBox();
+	VBox layout;
+	HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio, hbButtons;
 	ImageView imgProfile;
-	Label lblName, lblBio, lblPass;
+	Label lblName, lblBio, lblCurrentPassword, lblNewP;
 	TextField txtName;
 	TextArea txtBio;
-	PasswordField txtPass;
-	Button btnSave;
+	PasswordField txtNewPassword, txtCurrentPassword;
+	Button btnSave, btnBack;
 
-	public ProfileEditPOPOUP() {
+	public ProfileEditPOPOUP(Window parent) throws FileNotFoundException {
 
 		imgProfile = new ImageView();
 
-		lblName = new Label("Nome");
-		lblBio = new Label("Bio:");
-		lblPass = new Label("Senha");
+		this.imgProfile.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+		this.imgProfile.setFitWidth(200);
+		this.imgProfile.setFitHeight(200);
 
-		txtName = new TextField();
-		txtName.setPrefWidth(150);
-		txtBio = new TextArea();
-		txtBio.setPrefWidth(300);
-		txtBio.setPrefHeight(100);
-		txtPass = new PasswordField();
-		txtPass.setPrefWidth(150);
+		this.lblName = new Label("Nome: ");
+		this.lblBio = new Label("Bio: ");
+		this.lblCurrentPassword = new Label("Senha atual: ");
+		this.lblNewP = new Label("Nova Senha: ");
 
-		btnSave = new Button("Slavar");
+		this.txtName = new TextField();
+		this.txtName.setPrefColumnCount(15);
+		this.txtBio = new TextArea();
+		this.txtBio.setWrapText(true);
+		this.txtBio.setPrefRowCount(5);
+		this.txtBio.setPrefColumnCount(15);
 
-		hbxNm.getChildren().addAll(lblName, txtName);
-		hbxNm.setSpacing(15);
-		hbxB.getChildren().addAll(lblBio, txtBio);
-		hbxB.setSpacing(15);
-		hbxP.getChildren().addAll(lblPass, txtPass);
-		hbxP.setSpacing(15);
+		this.txtCurrentPassword = new PasswordField();
+		this.txtNewPassword = new PasswordField();
 
-		layout.getChildren().addAll(imgProfile, hbxNm, hbxB, hbxP, btnSave);
+		this.layout = new VBox();
+
+		this.hbNameContent = new HBox();
+		this.hbNameContent.getChildren().addAll(this.lblName, this.txtName);
+		this.hbNameContent.setAlignment(Pos.CENTER);
+
+		this.hbBio = new HBox();
+		this.hbBio.getChildren().addAll(this.lblBio, this.txtBio);
+		this.hbBio.setAlignment(Pos.CENTER);
+
+		this.hbCurrentPasswordContent = new HBox();
+		this.hbCurrentPasswordContent.getChildren().addAll(this.lblCurrentPassword, this.txtCurrentPassword);
+		this.hbCurrentPasswordContent.setAlignment(Pos.CENTER);
+
+		this.hbNewPasswordContent = new HBox();
+		this.hbNewPasswordContent.getChildren().addAll(this.lblNewP, this.txtNewPassword);
+		this.hbNewPasswordContent.setAlignment(Pos.CENTER);
+
+		this.hbButtons = new HBox();
+
+		this.btnBack = new Button("Voltar");
+		this.btnSave = new Button("Salvar");
+
+		this.btnSave.setOnAction(e -> {
+
+			CheckEmptyFields c = new CheckEmptyFields();
+			EntityManager em = Database.createEntityManager();
+
+			if (!c.isPasswordFieldEmpty(txtCurrentPassword) && !c.isPasswordFieldEmpty(txtNewPassword)) {
+				if (txtCurrentPassword.getText().equals(SESSION.getUserLogged().getPassword())) {
+					String np = txtNewPassword.getText();
+					if (em == null)
+						em = Database.createEntityManager();
+					Query q = em.createQuery("from UserRegistration where codUser =:cod");
+					q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+					if (q.getResultList().size() > 0) {
+						UserRegistration u = (UserRegistration) q.getResultList().get(0);
+						em.getTransaction().begin();
+						u.setPassword(np);
+						em.merge(u);
+						em.getTransaction().commit();
+						em.clear();
+						em.close();
+						em = null;
+					}
+				}
+			}
+			if (!c.isTextFieldEmpty(txtName)) {
+				String nn = txtName.getText();
+				if (em == null)
+					em = Database.createEntityManager();
+				Query q = em.createQuery("from Profile where codProfile =:cod");
+				q.setParameter("cod", SESSION.getProfileLogged().getCod());
+				if (q.getResultList().size() > 0) {
+					Profile p = (Profile) q.getResultList().get(0);
+					em.getTransaction().begin();
+					p.setName(nn);
+					em.merge(p);
+					em.getTransaction().commit();
+					em.clear();
+					em.close();
+					em = null;
+				}
+			}
+			if (!c.isTextAreaEmpty(txtBio)) {
+				if (em == null)
+					em = Database.createEntityManager();
+				Query q = em.createQuery("from Profile where codProfile=:codProfile");
+				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
+				if (q.getResultList().size() > 0) {
+					Profile p = (Profile) q.getResultList().get(0);
+					em.getTransaction().begin();
+					p.setBiography(txtBio.getText());
+					em.merge(p);
+					em.getTransaction().commit();
+					em.clear();
+					em.close();
+					em = null;
+				}
+			}
+
+		});
+
+		this.btnBack.setOnAction(e -> {
+			this.close();
+		});
+		this.hbButtons.getChildren().addAll(this.btnSave, this.btnBack);
+		this.hbButtons.setSpacing(50);
+		this.hbButtons.setAlignment(Pos.CENTER);
+
+		this.layout.setSpacing(10);
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.getChildren().addAll(imgProfile, this.hbNameContent, this.hbBio, this.hbCurrentPasswordContent,
+				this.hbNewPasswordContent, this.hbButtons);
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.setSpacing(10);
+
 		Scene cena = new Scene(layout);
 		this.setScene(cena);
-		this.show();
+
+		this.initOwner(parent);
+		this.initModality(Modality.WINDOW_MODAL);
+		this.setWidth(400);
+		this.setHeight(600);
+		this.setResizable(false);
+
 	}
 
 }

@@ -23,8 +23,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 	private final ScrollBar sc;
 
 	/**
-	 * This scene will contain the friendship requests of the user the scene have
-	 * he's own stage, this because are a popoup window
+	 * This scene will contain the friendship requests of the user the scene have he's own stage, this because are a popoup window
 	 * 
 	 * @author jefter66
 	 * 
@@ -32,8 +31,6 @@ public class FriendshipRequestPOPOUP extends Stage {
 	public FriendshipRequestPOPOUP(Window parent) throws FileNotFoundException {
 		this.layout = new VBox();
 
-		// this.listFriendRequest = (ArrayList<Profile>)
-		// UserOnline.getProfile().getFriendRequest();
 		this.listFriendRequest = new ArrayList<Profile>();
 		this.hbFriendRequest = new ArrayList<HBFriendRequest>();
 
@@ -53,9 +50,10 @@ public class FriendshipRequestPOPOUP extends Stage {
 		this.setHeight(500);
 		this.setResizable(false);
 	}
+
 	/**
-	 * This method are for bring the requests of the database and put on a
-	 * HBFriendshipRequest and show for the user, according to the amount of
+	 * This method are for bring the friendship requests of the database and put on a component with the requestor informations
+	 *  HBFriendshipRequest and show for the user, according to the amount of
 	 * registers in the database the hbox's will be drawn on the scene
 	 * 
 	 * @throws FileNotFoundException
@@ -80,6 +78,10 @@ public class FriendshipRequestPOPOUP extends Stage {
 		this.layout.getChildren().add(new Label("Nenhum pedido de amizade"));
 	}
 }
+
+
+
+
 
 
 

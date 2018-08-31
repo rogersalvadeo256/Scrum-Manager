@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -19,7 +18,6 @@ import css.indicator.object.IndicatorOfCss;
 import db.hibernate.factory.Database;
 import db.user.util.SESSION;
 import friendship.SearchFriend;
-import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -40,7 +38,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import listeners.Close;
 import popoups.scenes.FriendshipRequestPOPOUP;
-import widgets.HBProfileContent;
+import popoups.scenes.ProfileEditPOPOUP;
 
 public class HomePageScene extends Scene {
 
@@ -193,7 +191,7 @@ public class HomePageScene extends Scene {
 
 		this.btnFriendRequest.setOnAction(event -> {
 			try {
-				new FriendshipRequestPOPOUP(Window.mainStage.getScene().getWindow()).showAndWait();
+				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -224,7 +222,6 @@ public class HomePageScene extends Scene {
 		ImageView icon_u = new ImageView();
 		icon_u.setFitHeight(40);
 		icon_u.setFitWidth(40);
-		// icon_u.setImage(new Image(this.fis.get(4)));
 
 		this.btnSearch.getStyleClass().add("header-buttons");
 		this.btnFriendRequest.getStyleClass().add("header-buttons");
@@ -232,8 +229,12 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
 		this.btnEditProfile.setOnAction(e -> {
-			// teste
-
+				try {
+					new ProfileEditPOPOUP(Window.mainStage).showAndWait();
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 		});
 
 		this.lblBiography = new Label();  // SESSION.getProfileLogged().getBiography());
