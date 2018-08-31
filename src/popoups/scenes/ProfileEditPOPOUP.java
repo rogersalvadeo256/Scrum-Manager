@@ -1,4 +1,4 @@
-package scenes;
+package popoups.scenes;
 
 import javafx.scene.control.TextArea;
 import javafx.geometry.Pos;
@@ -12,7 +12,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class Profile_Edit extends Stage {
+public class ProfileEditPOPOUP extends Stage {
 
 	VBox layout = new VBox();
 	HBox hbxNm = new HBox(), hbxB = new HBox(), hbxP = new HBox();
@@ -23,7 +23,7 @@ public class Profile_Edit extends Stage {
 	PasswordField txtPass;
 	Button btnSave;
 
-	public Profile_Edit() {
+	public ProfileEditPOPOUP() {
 
 		imgProfile = new ImageView();
 

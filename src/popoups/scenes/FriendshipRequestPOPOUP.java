@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import widgets.HBFriendRequest;
 
-public class FriendshipRequestPopOup extends Stage {
+public class FriendshipRequestPOPOUP extends Stage {
 
 	private ArrayList<HBFriendRequest> hbFriendRequest;
 	private ArrayList<Profile> listFriendRequest;
@@ -29,7 +29,7 @@ public class FriendshipRequestPopOup extends Stage {
 	 * @author jefter66
 	 * 
 	 */
-	public FriendshipRequestPopOup(Window parent) throws FileNotFoundException {
+	public FriendshipRequestPOPOUP(Window parent) throws FileNotFoundException {
 		this.layout = new VBox();
 
 		// this.listFriendRequest = (ArrayList<Profile>)

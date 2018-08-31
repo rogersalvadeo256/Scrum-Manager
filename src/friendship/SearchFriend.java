@@ -21,6 +21,7 @@ public class SearchFriend {
 		this.result = new ArrayList<Profile>();
 	}
 
+	@SuppressWarnings("unchecked")
 	public void loadOptions(String str) {
 		if (em == null) {
 			em = Database.createEntityManager();
@@ -29,7 +30,7 @@ public class SearchFriend {
 		this.returnFromSearch.clear();
 
 		Query q = em.createQuery("from Profile where name like :pName and codProfile <> :codOnline");
-		q.setParameter("pName", "%" + str + "%");
+		q.setParameter("pName", str + "%" );
 		q.setParameter("codOnline", SESSION.getProfileLogged().getCod());
 
 		this.result = (ArrayList<Profile>) q.getResultList();
@@ -47,3 +48,33 @@ public class SearchFriend {
 		return this.returnFromSearch;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

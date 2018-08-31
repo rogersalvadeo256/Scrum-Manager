@@ -1,13 +1,14 @@
 package scenes;
 
 /**
- * 	@author jefter66: jefter66
+ * @author jefter66: jefter66
  */
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -38,7 +39,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import listeners.Close;
-import popoups.scenes.FriendshipRequestPopOup;
+import popoups.scenes.FriendshipRequestPOPOUP;
 import widgets.HBProfileContent;
 
 public class HomePageScene extends Scene {
@@ -74,6 +75,7 @@ public class HomePageScene extends Scene {
 	private TextArea txtBio;
 
 	private SearchFriend searchFriend;
+	private int i = 0;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
@@ -148,14 +150,6 @@ public class HomePageScene extends Scene {
 		});
 
 		this.txtSearch = new TextField();
-		/*
-		 * tirar foco
-		 */
-		this.txtSearch.focusedProperty().addListener(new ChangeListener<Boolean>() {
-			@Override
-			public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-			}
-		});
 
 		this.btnSearch = new Button();
 		this.txtSearch.setFocusTraversable(false);
@@ -164,24 +158,19 @@ public class HomePageScene extends Scene {
 		this.searchFriend = new SearchFriend();
 
 		this.txtSearch.setOnKeyTyped(event -> {
+			HomePageScene.this.vbSearchResult.getChildren().clear();
 
-				HomePageScene.this.vbSearchResult.getChildren().clear();
+			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
 				HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
-			
 				if (!searchFriend.getResults().isEmpty()) {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {
-						HBProfileContent a = searchFriend.getResults().get(i);
-						HomePageScene.this.vbSearchResult.getChildren().add(a);
+						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
 					}
+					return;
 				}
+			}
+			vbSearchResult.getChildren().clear();
 		});
-		
-		
-		
-		
-		
-		
-		
 
 		this.btnEditProfile = new Button("Editar Perfil");
 		this.btnEditProfile.setOnAction(new EventHandler<ActionEvent>() {
@@ -195,8 +184,7 @@ public class HomePageScene extends Scene {
 		});
 		this.btnExit = new Button("Sair");
 		this.btnExit.setOnAction(new Close(Window.mainStage));
-			
-		
+
 		/*
 		 * load the name with the qtd of requests
 		 */
@@ -205,7 +193,7 @@ public class HomePageScene extends Scene {
 
 		this.btnFriendRequest.setOnAction(event -> {
 			try {
-				new FriendshipRequestPopOup(Window.mainStage.getScene().getWindow()).showAndWait();
+				new FriendshipRequestPOPOUP(Window.mainStage.getScene().getWindow()).showAndWait();
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -246,10 +234,9 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.setOnAction(e -> {
 			// teste
 
-
 		});
 
-		this.lblBiography = new Label();// UserOnline.getProfile().getBiography();
+		this.lblBiography = new Label();  // SESSION.getProfileLogged().getBiography());
 		this.lblBiography.getStyleClass().add("label");
 
 		this.profileImg = new ImageView();
@@ -313,7 +300,7 @@ public class HomePageScene extends Scene {
 			public void handle(ActionEvent event) {
 				EntityManager em = Database.createEntityManager();
 				Query q = em.createQuery("from Profile where codProfile=:codProfile");
-//				q.setParameter("codProfile", SESSION.getProfile().getCod());
+				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
 				if (q.getResultList().size() > 0) {
 
 					Profile p = (Profile) q.getResultList().get(0);
