@@ -3,16 +3,20 @@ package popoups.scenes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import POJOs.Profile;
 import POJOs.UserRegistration;
+import alert.message.CustomAlert;
 import db.hibernate.factory.Database;
 import db.user.util.SESSION;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -37,6 +41,12 @@ public class ProfileEditPOPOUP extends Stage {
 	TextArea txtBio;
 	PasswordField txtNewPassword, txtCurrentPassword;
 	Button btnSave, btnBack;
+
+	private enum updates {
+		NAME, PASSWORD, BIO
+	};
+
+	private ArrayList<updates> message;
 
 	public ProfileEditPOPOUP(Window parent) throws FileNotFoundException {
 
@@ -84,11 +94,13 @@ public class ProfileEditPOPOUP extends Stage {
 		this.btnBack = new Button("Voltar");
 		this.btnSave = new Button("Salvar");
 
+		this.message = new ArrayList<updates>();
+
 		this.btnSave.setOnAction(e -> {
 
+			this.message.clear();
 			CheckEmptyFields c = new CheckEmptyFields();
 			EntityManager em = Database.createEntityManager();
-
 			if (!c.isPasswordFieldEmpty(txtCurrentPassword) && !c.isPasswordFieldEmpty(txtNewPassword)) {
 				if (txtCurrentPassword.getText().equals(SESSION.getUserLogged().getPassword())) {
 					String np = txtNewPassword.getText();
@@ -105,6 +117,7 @@ public class ProfileEditPOPOUP extends Stage {
 						em.clear();
 						em.close();
 						em = null;
+						this.message.add(updates.PASSWORD);
 					}
 				}
 			}
@@ -123,6 +136,7 @@ public class ProfileEditPOPOUP extends Stage {
 					em.clear();
 					em.close();
 					em = null;
+					this.message.add(updates.NAME);
 				}
 			}
 			if (!c.isTextAreaEmpty(txtBio)) {
@@ -139,12 +153,45 @@ public class ProfileEditPOPOUP extends Stage {
 					em.clear();
 					em.close();
 					em = null;
+					this.message.add(updates.BIO);
 				}
 			}
+			if (!this.message.isEmpty()) {
+				ArrayList<String> message = new ArrayList<String>();
 
+				for (int i = 0; i < this.message.size(); i++) {
+					if (this.message.get(i).equals(updates.NAME)) {
+						message.add("nome");
+					}
+					if (this.message.get(i).equals(updates.BIO)) {
+						message.add("biografia");
+					}
+					if (this.message.get(i).equals(updates.PASSWORD)) {
+						message.add("senha");
+					}
+				}
+				StringBuilder stb = new StringBuilder();
+				for (int i = 0; i < this.message.size(); i++) {
+
+					stb.append(message.get(i).toString());
+
+					if (i != message.size() - 1) {
+						stb.append(", ");
+					}
+					if (i == message.size() - 1) {
+						stb.append(".");
+					}
+				}
+
+				new CustomAlert(AlertType.CONFIRMATION, "Sucesso", "Mudanças adicionadas",
+						"Informações alteradas: " + stb.toString());
+				message.clear();
+				this.message.clear();
+				return;
+			}
 		});
-
 		this.btnBack.setOnAction(e -> {
+
 			this.close();
 		});
 		this.hbButtons.getChildren().addAll(this.btnSave, this.btnBack);
@@ -166,7 +213,5 @@ public class ProfileEditPOPOUP extends Stage {
 		this.setWidth(400);
 		this.setHeight(600);
 		this.setResizable(false);
-
 	}
-
 }

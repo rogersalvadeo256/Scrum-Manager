@@ -91,10 +91,13 @@ public class HomePageScene extends Scene {
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
 
-		this.lblName = new Label("nome"); // UserOnline.getProfile().getName());
+//		this.lblName = new Label("nome"); 
+		this.lblName = new Label(SESSION.getProfileLogged().getName());
 		this.lblName.setId("lblName");
+		
 
-		this.lblUsername = new Label("usernome"); // UserOnline.getUserLogged().getUserName());
+		this.lblUsername = new Label("usernome");
+		this.lblUsername =new Label(SESSION.getUserLogged().getUserName());
 		this.lblName.setId("userName");
 
 		this.lblCurrentProject = new Label("Projetos em andamento");
@@ -237,7 +240,8 @@ public class HomePageScene extends Scene {
 				}
 		});
 
-		this.lblBiography = new Label();  // SESSION.getProfileLogged().getBiography());
+//		this.lblBiography = new Label(); 
+		this.lblBiography = new Label(SESSION.getProfileLogged().getBiography());
 		this.lblBiography.getStyleClass().add("label");
 
 		this.profileImg = new ImageView();
