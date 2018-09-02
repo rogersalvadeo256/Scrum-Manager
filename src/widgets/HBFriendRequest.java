@@ -32,8 +32,6 @@ public class HBFriendRequest extends HBox {
 		this.lblBio = new Label(p.getBiography());
 		
 		
-		
-		
 		this.btnAccept = new Button("Aceitar");
 		this.btnAccept.setOnAction(e -> { 
 			
@@ -50,7 +48,7 @@ public class HBFriendRequest extends HBox {
 		
 		this.image.setFitHeight(100);
 		this.image.setFitWidth(100)	 ;
-		this.path = new File("/home/jefter66/java-workspace/TCC/src/tempPkg/image.jpg");
+		this.path = new File("resources/images/icons/scrum_icon.png");
 		this.fis = new FileInputStream(path);
 		
 		this.image.setImage(new Image(fis));

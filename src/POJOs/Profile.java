@@ -52,8 +52,7 @@ public class Profile {
 	public void setFriend(List<Profile> friend) {this.friend = friend;}
 }
 
-
-
+	
 
 
 

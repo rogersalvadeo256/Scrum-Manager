@@ -34,7 +34,7 @@ public class RegistrationDB{
 		this.em = null;
 	}
 	/**
-	 *  if the return value are false, so the user doesn't exist
+	 *  if the return value are false, the user doesn't exist
 	 * @author jefter66
 	 * @example boolean value = queryValidation(UserRegistration user);
 	 * @param UserRegistration user

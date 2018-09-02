@@ -73,12 +73,15 @@ public class HomePageScene extends Scene {
 	private TextArea txtBio;
 
 	private SearchFriend searchFriend;
-	private int i = 0;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
-
+		
+		
+//		System.out.println(SESSION.getProfileLogged().getFriendRequest().size());
+		
+		
 		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
@@ -136,8 +139,10 @@ public class HomePageScene extends Scene {
 		this.vbSearchResult.setLayoutX(5);
 		this.sc = new ScrollBar();
 
-		this.vbSearchResult.getChildren().add(sc);
-
+//		this.vbSearchResult.getChildren().add(sc);
+		
+		this.vbSearchResult.prefWidth(400);
+		
 		sc.setLayoutX(vbSearchResult.getWidth() - sc.getWidth());
 		sc.setMin(0);
 		sc.setOrientation(Orientation.VERTICAL);
@@ -162,11 +167,17 @@ public class HomePageScene extends Scene {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
 
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
-				HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
+				try {
+					HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				if (!searchFriend.getResults().isEmpty()) {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {
 						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
 					}
+					apSearch.setId("sugestionsOn");
 					return;
 				}
 			}
@@ -235,7 +246,6 @@ public class HomePageScene extends Scene {
 				try {
 					new ProfileEditPOPOUP(Window.mainStage).showAndWait();
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		});
@@ -410,7 +420,7 @@ public class HomePageScene extends Scene {
 
 		apSearch.getStyleClass().add("anchor-pane");
 		apSearch.setId("sugestionsOff");
-
+		
 		AnchorPane.setTopAnchor(apSearch, 45.0);
 		AnchorPane.setBottomAnchor(apSearch, 5.0);
 		AnchorPane.setLeftAnchor(apSearch, 170.0);

@@ -66,6 +66,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 		for (int i = 0; i < SESSION.getProfileLogged().getFriendRequest().size(); i++) {
 			this.listFriendRequest.add(SESSION.getProfileLogged().getFriendRequest().get(i));
 		}
+		
 		if (!this.listFriendRequest.isEmpty()) {
 			for (int i = 0; i < this.listFriendRequest.size(); i++) {
 				HBFriendRequest f = new HBFriendRequest(this.listFriendRequest.get(i));

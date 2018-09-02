@@ -1,5 +1,6 @@
 package friendship;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
@@ -22,7 +23,7 @@ public class SearchFriend {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void loadOptions(String str) {
+	public void loadOptions(String str) throws FileNotFoundException {
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
