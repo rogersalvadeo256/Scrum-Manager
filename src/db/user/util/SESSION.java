@@ -40,22 +40,22 @@ public class SESSION {
 		if (em == null)
 			em = Database.createEntityManager();
 
-		Query q = em.createQuery("from Profile where codProfile=:codProfile");
+		Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
 		q.setParameter("codProfile", SESSION.p.getCod());
-
-		if (q.getResultList().size() > 0)
-		{
 			em.clear();
 			em = null;
 			Profile pReturn = (Profile) q.getResultList().get(0); 
 			return pReturn;
-		}
-			return null;
 	}
 	public static void START_SESSION(UserRegistration u) {
 		SESSION.u = u;
 		SESSION.p = u.getProfile();
 	}
+	public static void UPDATE_SESSION(Profile p) { 
+		SESSION.p = p;
+	}
+	
+	
 }
 
 

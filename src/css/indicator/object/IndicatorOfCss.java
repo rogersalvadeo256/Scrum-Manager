@@ -1,7 +1,7 @@
 package css.indicator.object;
 
-import alert.message.MessageDialog;
 import javafx.scene.Scene;
+import widget.alertMessage.MessageDialog;
 
 public class IndicatorOfCss {
 	private static String path = "/cssStyles/";

@@ -29,7 +29,16 @@ public class Window extends Stage {
 	//		 mainStage.setScene(new HomePageScene());
 // 		mainStage.setScene(new NewProjectScene());
 		mainStage.setScene(new LoginScene());
+
+//		mainStage.setScene(new ProjectScene());
+	
+		
 		this.show();
 	}
 
 }
+
+
+
+
+

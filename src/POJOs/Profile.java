@@ -26,15 +26,17 @@ public class Profile {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codFriendRequest")
-	private List<Profile> friendRequest;
+	private List<Profile> friendshipRequest;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codFriend")
 	private List<Profile> friend;
 	
+	
+	
 	public Profile() { 
 		this.friend = new ArrayList<Profile>();
-		this.friendRequest = new ArrayList<Profile>();
+		this.friendshipRequest = new ArrayList<Profile>();
 	}
 	public void setCod(int codProfile) {this.codProfile = codProfile;}
 	public int getCod() {return codProfile;}
@@ -45,43 +47,9 @@ public class Profile {
 	public String getBiography() {return biography;}
 	public void setBiography(String biography) {this.biography = biography;}
 	
-	public List<Profile> getFriendRequest() {return friendRequest;}
-	public void setFriendRequest(List<Profile> friendRequest) {this.friendRequest = friendRequest;}
+	public List<Profile> getFriendshipRequest() {return friendshipRequest;}
+
 	
 	public List<Profile> getFriend() {return friend;}
 	public void setFriend(List<Profile> friend) {this.friend = friend;}
 }
-
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

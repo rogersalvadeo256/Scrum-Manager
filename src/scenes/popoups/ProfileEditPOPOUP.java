@@ -1,4 +1,4 @@
-package popoups.scenes;
+package scenes.popoups;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,6 @@ import javax.persistence.Query;
 
 import POJOs.Profile;
 import POJOs.UserRegistration;
-import alert.message.CustomAlert;
 import db.hibernate.factory.Database;
 import db.user.util.SESSION;
 import javafx.geometry.Pos;
@@ -30,6 +29,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import validation.CheckEmptyFields;
+import widget.alertMessage.CustomAlert;
 
 public class ProfileEditPOPOUP extends Stage {
 

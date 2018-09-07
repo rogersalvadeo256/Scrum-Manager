@@ -12,6 +12,7 @@ import java.util.List;
 
 import POJOs.Integrantes;
 import POJOs.Quadro;
+import application.main.Window;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -22,7 +23,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class ProjectScene extends Stage {
+public class ProjectScene extends Scene {
 
 	private AnchorPane layout = new AnchorPane();
 	private ObservableList<Integrantes> listaInteg;
@@ -36,6 +37,7 @@ public class ProjectScene extends Stage {
 	private HBox hbxBtns;
 
 	public ProjectScene() {
+		super(new AnchorPane());
 		integrantes = new TableView<Integrantes>();
 		quadro = new TableView<Quadro>();
 		this.listaInteg = FXCollections.observableArrayList();
@@ -52,6 +54,11 @@ public class ProjectScene extends Stage {
 		vbxLbl = new VBox();
 		vbxParty = new VBox();
 		hbxBtns = new HBox();
+		
+		Window.mainStage.setWidth(1200);
+		Window.mainStage.setHeight(700);
+		
+		
 
 		hbxBtns.getChildren().addAll(btnSla, btnCommit);
 		hbxBtns.setSpacing(20);
@@ -69,7 +76,7 @@ public class ProjectScene extends Stage {
 
 		TableColumn<Integrantes, Integer> foto = new TableColumn<Integrantes, Integer>();
 		TableColumn<Integrantes, String> namee = new TableColumn<Integrantes, String>("Nome");
-		TableColumn<Integrantes, String> funcao = new TableColumn<Integrantes, String>("Função");
+		TableColumn<Integrantes, String> funcao = new TableColumn<Integrantes, String>("Funï¿½ï¿½o");
 
 		this.integrantes.getColumns().addAll(foto, namee, funcao);
 
@@ -124,7 +131,6 @@ public class ProjectScene extends Stage {
 
 		// foi
 		
-		this.setTitle("Gerenciador");
 
 		layout.getChildren().addAll(vbxLbl, vbxParty, quadro, hbxBtns);
 		AnchorPane.setTopAnchor(vbxLbl, 15d);
@@ -139,13 +145,10 @@ public class ProjectScene extends Stage {
 
 		AnchorPane.setBottomAnchor(hbxBtns, 20d);
 		AnchorPane.setRightAnchor(hbxBtns, 300d);
-
-		Scene cena = new Scene(layout, 1000, 700);
-		this.setResizable(false);
-		this.setScene(cena);
-
-		this.show();
-
+		
+		
+		this.setRoot(layout);
+		
 	}
 
 }

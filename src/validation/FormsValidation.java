@@ -3,10 +3,10 @@ package validation;
 import java.util.ArrayList;
 
 import POJOs.UserRegistration;
-import alert.message.CustomAlert;
 import db.functions.RegistrationDB;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import widget.alertMessage.CustomAlert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 

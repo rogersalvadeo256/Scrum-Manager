@@ -37,8 +37,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import listeners.Close;
-import popoups.scenes.FriendshipRequestPOPOUP;
-import popoups.scenes.ProfileEditPOPOUP;
+import scenes.popoups.FriendshipRequestPOPOUP;
+import scenes.popoups.ProfileEditPOPOUP;
 
 public class HomePageScene extends Scene {
 
@@ -79,14 +79,11 @@ public class HomePageScene extends Scene {
 		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
 		
 		
-//		System.out.println(SESSION.getProfileLogged().getFriendRequest().size());
-		
 		
 		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-
 		this.iconPath = new ArrayList<File>();
 		this.fis = new ArrayList<FileInputStream>();
 
@@ -115,9 +112,10 @@ public class HomePageScene extends Scene {
 		/*
 		 * images for the scene
 		 */
-		this.iconPath.add(new File("resources/images/icons/scrum_icon.png"));
-		this.iconPath.add(new File("resources/images/icons/envelope.png"));
-		this.iconPath.add(new File("resources/images/icons/friend_request.png"));
+		
+		this.iconPath.add(new File(("resources/images//icons/scrum_icon.png")));
+		this.iconPath.add(new File(("resources/images/icons/envelope.png")));
+		this.iconPath.add((new File(("resources/images/icons/friend_request.png"))));
 		/*
 		 * 
 		 */
@@ -127,6 +125,7 @@ public class HomePageScene extends Scene {
 		/*
 		 * 
 		 */
+		
 		this.fis.add(new FileInputStream(iconPath.get(0)));
 		this.fis.add(new FileInputStream(iconPath.get(1)));
 		this.fis.add(new FileInputStream(iconPath.get(2)));
@@ -206,7 +205,7 @@ public class HomePageScene extends Scene {
 		this.btnFriendRequest.setOnAction(event -> {
 			try {
 				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
-
+				
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -226,7 +225,11 @@ public class HomePageScene extends Scene {
 		icon_f.setFitHeight(40);
 		icon_f.setFitWidth(40);
 		this.btnFriendRequest.setGraphic(icon_f);
-
+		if(SESSION.getProfileLogged().getFriendshipRequest().size()> 0) {
+			this.btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequest().size()));
+		}
+		
+		
 		ImageView icon_s = new ImageView();
 		icon_s.setFitHeight(40);
 		icon_s.setFitWidth(40);

@@ -1,4 +1,4 @@
-package alert.message;
+package widget.alertMessage;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;

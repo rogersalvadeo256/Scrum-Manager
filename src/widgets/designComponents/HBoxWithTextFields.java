@@ -1,4 +1,4 @@
-package widgets;
+package widgets.designComponents;
 
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;

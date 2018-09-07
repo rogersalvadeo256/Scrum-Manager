@@ -10,7 +10,7 @@ import POJOs.Profile;
 import POJOs.UserRegistration;
 import db.hibernate.factory.Database;
 import db.user.util.SESSION;
-import widgets.HBProfileContent;
+import widgets.designComponents.HBProfileContent;
 
 public class SearchFriend {
 	private EntityManager em;
