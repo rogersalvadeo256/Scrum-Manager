@@ -3,7 +3,6 @@ package scenes.popoups;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
@@ -11,6 +10,7 @@ import javax.persistence.Query;
 
 import POJOs.Profile;
 import POJOs.UserRegistration;
+import css.indicator.object.IndicatorOfCss;
 import db.hibernate.factory.Database;
 import db.user.util.SESSION;
 import javafx.geometry.Pos;
@@ -33,14 +33,15 @@ import widget.alertMessage.CustomAlert;
 
 public class ProfileEditPOPOUP extends Stage {
 
-	VBox layout;
-	HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio, hbButtons;
-	ImageView imgProfile;
-	Label lblName, lblBio, lblCurrentPassword, lblNewP;
-	TextField txtName;
-	TextArea txtBio;
-	PasswordField txtNewPassword, txtCurrentPassword;
-	Button btnSave, btnBack;
+	private VBox layout;
+	private	HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio, hbButtons;
+	private	ImageView imgProfile;
+	private	Label lblName, lblBio, lblCurrentPassword, lblNewP;
+	private	TextField txtName;
+	private	TextArea txtBio;
+	private	PasswordField txtNewPassword, txtCurrentPassword;
+	private	Button btnSave, btnBack;
+	private	Scene scene;
 
 	private enum updates {
 		NAME, PASSWORD, BIO
@@ -50,12 +51,23 @@ public class ProfileEditPOPOUP extends Stage {
 
 	public ProfileEditPOPOUP(Window parent) throws FileNotFoundException {
 
+		this.layout = new VBox();
+		this.scene= new Scene(layout);
+		this.setScene(scene);
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/cssStyles/EDIT_PROFILE.css").toExternalForm());
+		
+		
+		
+		
+		
+		
 		imgProfile = new ImageView();
 
 		this.imgProfile.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 		this.imgProfile.setFitWidth(200);
 		this.imgProfile.setFitHeight(200);
 
+		
 		this.lblName = new Label("Nome: ");
 		this.lblBio = new Label("Bio: ");
 		this.lblCurrentPassword = new Label("Senha atual: ");
@@ -71,7 +83,6 @@ public class ProfileEditPOPOUP extends Stage {
 		this.txtCurrentPassword = new PasswordField();
 		this.txtNewPassword = new PasswordField();
 
-		this.layout = new VBox();
 
 		this.hbNameContent = new HBox();
 		this.hbNameContent.getChildren().addAll(this.lblName, this.txtName);
@@ -92,8 +103,10 @@ public class ProfileEditPOPOUP extends Stage {
 		this.hbButtons = new HBox();
 
 		this.btnBack = new Button("Voltar");
+		this.btnBack.setId("back");
 		this.btnSave = new Button("Salvar");
-
+		this.btnSave.setId("save");
+		
 		this.message = new ArrayList<updates>();
 
 		this.btnSave.setOnAction(e -> {
@@ -204,9 +217,6 @@ public class ProfileEditPOPOUP extends Stage {
 				this.hbNewPasswordContent, this.hbButtons);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
-
-		Scene cena = new Scene(layout);
-		this.setScene(cena);
 
 		this.initOwner(parent);
 		this.initModality(Modality.WINDOW_MODAL);

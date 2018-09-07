@@ -1,0 +1,39 @@
+.root{
+	-fx-background-color:#ccccff;
+}
+.text-input:focused{
+	 -fx-background-color: #ffffff;
+	-fx-text-fill:#00001a;
+	-fx-padding: 5.0px;
+}
+.text-input{
+	 -fx-background-color: #ffffff;
+	-fx-text-fill:#00001a;
+}
+.button {
+ 	  -fx-pref-height:50.0;
+	-fx-pref-width:100.0;
+	-fx-fill-color:#ffffff;
+	-fx-font-weight: bold;
+	-fx-text-fill:#ffffff;
+	-fx-background-color:#6600ff;
+}
+.button#back:hover{ 
+	-fx-background-color:#ff0000;
+}
+.button#save:hover{ 
+	-fx-background-color: #33cc00;
+}
+.vbox {
+    -fx-background-color: #2f4f4f;
+    -fx-spacing: 15.0;
+    -fx-height:300.0;
+}
+.label { 
+	-fx-font-size:13.0pt;
+	 -fx-font-weight: bold;
+	-fx-text-fill: #2f4f8f;
+}
+
+
+
