@@ -136,12 +136,12 @@ public class ProfileEditPOPOUP extends Stage {
 			
 			this.message.clear();
 			CheckEmptyFields c = new CheckEmptyFields();
-			EntityManager em = Database.createEntityManager();
+			EntityManager em = Database.createEntityManager_JEFTER();
 			if (!c.isPasswordFieldEmpty(txtCurrentPassword) && !c.isPasswordFieldEmpty(txtNewPassword)) {
 				if (txtCurrentPassword.getText().equals(SESSION.getUserLogged().getPassword())) {
 					String np = txtNewPassword.getText();
 					if (em == null)
-						em = Database.createEntityManager();
+						em = Database.createEntityManager_JEFTER();
 					Query q = em.createQuery("from UserRegistration where codUser =:cod");
 					q.setParameter("cod", SESSION.getUserLogged().getCodUser());
 					if (q.getResultList().size() > 0) {
@@ -160,7 +160,7 @@ public class ProfileEditPOPOUP extends Stage {
 			if (!c.isTextFieldEmpty(txtName)) {
 				String nn = txtName.getText();
 				if (em == null)
-					em = Database.createEntityManager();
+					em = Database.createEntityManager_JEFTER();
 				Query q = em.createQuery("from Profile where codProfile =:cod");
 				q.setParameter("cod", SESSION.getProfileLogged().getCod());
 				if (q.getResultList().size() > 0) {
@@ -177,7 +177,7 @@ public class ProfileEditPOPOUP extends Stage {
 			}
 			if (!c.isTextAreaEmpty(txtBio)) {
 				if (em == null)
-					em = Database.createEntityManager();
+					em = Database.createEntityManager_JEFTER();
 				Query q = em.createQuery("from Profile where codProfile=:codProfile");
 				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
 				if (q.getResultList().size() > 0) {

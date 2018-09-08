@@ -19,7 +19,7 @@ public class FriendshipRequest {
 	 * @param Profile 
 	 */
 	public void sendFriendshipRequest(Profile p) {
-		if (this.em == null)	em = Database.createEntityManager();
+		if (this.em == null)	em = Database.createEntityManager_JEFTER();
 		
 		Query q = em.createQuery("from Profile where codProfile =: COD");
 		q.setParameter("COD", p.getCod());

@@ -15,7 +15,7 @@ public class Login {
 	private CheckEmptyFields checkFields;
 
 	public Login() {
-		this.manager = Database.createEntityManager();
+		this.manager = Database.createEntityManager_JEFTER();
 		this.checkFields = new CheckEmptyFields();
 	}
 

@@ -45,7 +45,7 @@ public class ProfileImg {
 		
 		if (img.length < 52428800) {
 			if (em == null) {
-				em = Database.createEntityManager();
+				em = Database.createEntityManager_JEFTER();
 			}
 			Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
 			q.setParameter("codProfile", SESSION.getProfileLogged().getCod());

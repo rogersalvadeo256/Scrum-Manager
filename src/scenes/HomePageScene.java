@@ -326,7 +326,7 @@ public class HomePageScene extends Scene {
 		this.btnOk.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				EntityManager em = Database.createEntityManager();
+				EntityManager em = Database.createEntityManager_JEFTER();
 				Query q = em.createQuery("from Profile where codProfile=:codProfile");
 				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
 				if (q.getResultList().size() > 0) {

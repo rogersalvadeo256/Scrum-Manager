@@ -25,7 +25,7 @@ public class SearchFriend {
 	@SuppressWarnings("unchecked")
 	public void loadOptions(String str) throws FileNotFoundException {
 		if (em == null) {
-			em = Database.createEntityManager();
+			em = Database.createEntityManager_JEFTER();
 		}
 		this.result.clear();
 		this.returnFromSearch.clear();

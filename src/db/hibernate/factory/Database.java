@@ -19,11 +19,11 @@ public class Database {
 	}
 	
 	
-	public static EntityManager createEntityManager() {
+	public static EntityManager createEntityManager_JEFTER() {
 		return FACTORY_JEFTER.createEntityManager();
 	}
 
-	public static void close() {
+	public static void close_JEFTER() {
 		Database.FACTORY_JEFTER.close();
 	}
 }

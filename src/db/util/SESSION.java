@@ -23,7 +23,7 @@ public class SESSION {
 	 * @author jefter66
 	 */
 	public static UserRegistration getUserLogged() {
-		if(em == null ) em = Database.createEntityManager();
+		if(em == null ) em = Database.createEntityManager_JEFTER();
 		
 		Query q = em.createQuery("from UserRegistration where codUser=:codUser");
 		q.setParameter("codUser", SESSION.u.getCodUser());
@@ -38,7 +38,7 @@ public class SESSION {
 	}
 	public static Profile getProfileLogged() {
 		if (em == null)
-			em = Database.createEntityManager();
+			em = Database.createEntityManager_JEFTER();
 
 		Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
 		q.setParameter("codProfile", SESSION.p.getCod());
