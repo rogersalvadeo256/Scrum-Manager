@@ -21,11 +21,7 @@ import widgets.alertMessage.CustomAlert;
 
 public class ProfileImg {
 	private EntityManager em;
-	
-	public ProfileImg() {
-		
-	}
-	
+	public ProfileImg() {}
 	/**
 	 * Update the profile image of the user in the database
 	 * 
@@ -42,15 +38,9 @@ public class ProfileImg {
 		FileInputStream fis = new FileInputStream(f);
 		fis.read(img);
 		fis.close();
-		
 		if (img.length < 52428800) {
-			if (em == null) {
-				em = Database.createEntityManager_JEFTER();
-			}
-			Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
-			q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
-			Profile p = (Profile) q.getResultList().get(0);
-			
+			if (em == null) {em = Database.createEntityManager();	}
+			Profile p = SESSION.getProfileLogged();
 			this.em.getTransaction().begin();
 			p.setPhoto(img);
 			this.em.merge(p);
@@ -63,7 +53,6 @@ public class ProfileImg {
 		new CustomAlert(AlertType.INFORMATION, "Erro", "Arquivo muito grande", "Foto deve ser menor que 50 mb");
 		return;
 	}
-	
 	/**
 	 * Return the profile image of the user online
 	 * 

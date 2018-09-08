@@ -15,7 +15,7 @@ public class Close implements  EventHandler<ActionEvent> {
 
 	@Override
 	public void handle(ActionEvent event) {
-		Database.close_JEFTER();
+		Database.close();
 		this.parent.close();
 	}
 

@@ -10,6 +10,16 @@ public class CustomAlert extends Alert{
 
 	public CustomAlert(AlertType alert, String title, String header, String contentText) {
 		super(alert);
+		init(alert,  title,  header,  contentText);
+	}
+	public  CustomAlert(AlertType alert, String title, String header, String contentText, boolean btnCancel)  {
+		super(alert);
+		init(alert,  title,  header,  contentText);
+		this.getButtonTypes().add(ButtonType.CANCEL);
+	}
+	
+	public void init(AlertType alert, String title, String header, String contentText) {
+		
 		dialogPane=new MessageDialog();
 		this.setDialogPane(dialogPane);
 		this.setTitle(title);
@@ -18,4 +28,6 @@ public class CustomAlert extends Alert{
 		this.getButtonTypes().add(ButtonType.OK);
 		this.show();
 	}
+	
+	
 }

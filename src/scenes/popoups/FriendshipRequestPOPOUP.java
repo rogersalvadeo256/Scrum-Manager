@@ -41,8 +41,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 		
 		 drawHbox();
 		this.scene = new Scene(layout);
-		this.scene.getStylesheets()
-				.add(this.getClass().getResource("/css/cssStyles/FRIEND_REQUEST.css").toExternalForm());
+//		this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
 		
 		this.setScene(scene);
 		
@@ -70,34 +69,36 @@ public class FriendshipRequestPOPOUP extends Stage {
 	 */
 	private void drawHbox() throws FileNotFoundException {
 		this.hbFriendRequest.clear();
-		for(int i=0;i<10;i++) {
-			Profile p = new Profile();
-			p.setName("GENERIC");
-			p.setBiography("JAAJAAJAJ");
-			
-			HBFriendRequest f = new HBFriendRequest(p);
-			this.hbFriendRequest.add(f);
-			this.layout.getChildren().add(this.hbFriendRequest.get(i));
-		}
-		/*
+//		for(int i=0;i<10;i++) {
+//			Profile p = new Profile();
+//			p.setName("GENERIC");
+//			p.setBiography("JAAJAAJAJ");
+//			
+//			HBFriendRequest f = new HBFriendRequest(p);
+//			this.hbFriendRequest.add(f);
+//			this.layout.getChildren().add(this.hbFriendRequest.get(i));
+//		}
+		
 		EntityManager em = Database.createEntityManager();
 		
 		ArrayList<Profile> r = new ArrayList<Profile>();
 		
 		
+		r.clear();
 		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequest().size(); i++) {
 			
 			Profile p = (Profile) SESSION.getProfileLogged().getFriendshipRequest().get(i);
-			
-			Query q1 = em.createQuery("from Profile where codProfile =:cod");
-			q1.setParameter("cod", p.getCod());
-			
-			if (!q1.getResultList().isEmpty()) {
-				for (int j = 0; j < q1.getResultList().size(); j++) {
-					r.add((Profile) q1.getResultList().get(j));
-				}
-				q1.getResultList().clear();
-			}
+				
+			r.add((Profile) p);
+//			Query q1 = em.createQuery("from Profile where codProfile =:cod");
+//			q1.setParameter("cod", p.getCod());
+//			
+//			if (!q1.getResultList().isEmpty()) {
+//				for (int j = 0; j < q1.getResultList().size(); j++) {
+//					r.add((Profile) q1.getResultList().get(j));
+//				}
+//				q1.getResultList().clear();
+//			}
 		}
 		if (!r.isEmpty()) {
 			for (int i = 0; i < r.size(); i++) {
@@ -108,6 +109,18 @@ public class FriendshipRequestPOPOUP extends Stage {
 		}
 		return;
 	}
-	**/
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,22 +1,18 @@
 package scenes.popoups;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
+import db.util.LoadHomePage;
 import db.util.ProfileImg;
 import db.util.SESSION;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
@@ -39,20 +35,19 @@ public class ProfileEditPOPOUP extends Stage {
 	
 	private VBox layout;
 	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio, hbButtons;
-	private ImageView graphicButton;
+	private ImageView imgProfile;
 	private Label lblName, lblBio, lblCurrentPassword, lblNewP;
 	private TextField txtName;
 	private TextArea txtBio;
 	private PasswordField txtNewPassword, txtCurrentPassword;
 	private Button btnSave, btnBack;
 	private Scene scene;
-	private Button btnImg;
-	private ProfileImg pi ;
-	private enum updates {
-		NAME, PASSWORD, BIO
-	};
+	private ProfileImg pi;
 	
-	private ArrayList<updates> message;
+	// private enum updates {
+	// NAME, PASSWORD, BIO,PHOTO
+	// };
+	// private ArrayList<updates> message;
 	
 	public ProfileEditPOPOUP(Window parent) throws IOException {
 		
@@ -60,32 +55,25 @@ public class ProfileEditPOPOUP extends Stage {
 		this.scene = new Scene(layout);
 		this.setScene(scene);
 		this.pi = new ProfileImg();
+
+		//		this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
 		
-		this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
+		this.imgProfile = new ImageView();
 		
-		this.graphicButton = new ImageView();
-		
-		if (SESSION.getProfileLogged().getPhoto().length == 0) {
-			this.graphicButton.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+		if (SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
+			this.imgProfile.setImage(
+					new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+		} else {
+			this.imgProfile.setImage(ProfileImg.loadImage());
 		}
-		else { 	
-			this.graphicButton.setImage(ProfileImg.loadImage());
-		}
-		this.graphicButton.setFitWidth(200);
-		this.graphicButton.setFitHeight(200);
+		this.imgProfile.setFitWidth(200);
+		this.imgProfile.setFitHeight(200);
 		
-		this.btnImg = new Button();
-		this.btnImg.setGraphic(graphicButton);
 		
-		this.btnImg.setPrefHeight(200);
-		this.btnImg.setPrefWidth(200);
-		
-		this.btnImg.setOnAction(e -> {
-		
-			
+		this.imgProfile.setOnMouseClicked(e ->{
 			try {
 				pi.setImage(application.main.Window.mainStage);
-				
+				this.imgProfile.setImage(pi.loadImage());
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -130,18 +118,18 @@ public class ProfileEditPOPOUP extends Stage {
 		this.btnSave = new Button("Salvar");
 		this.btnSave.setId("save");
 		
-		this.message = new ArrayList<updates>();
+		// this.message = new ArrayList<updates>();
 		
 		this.btnSave.setOnAction(e -> {
 			
-			this.message.clear();
+			// this.message.clear();
 			CheckEmptyFields c = new CheckEmptyFields();
-			EntityManager em = Database.createEntityManager_JEFTER();
+			EntityManager em = Database.createEntityManager();
 			if (!c.isPasswordFieldEmpty(txtCurrentPassword) && !c.isPasswordFieldEmpty(txtNewPassword)) {
 				if (txtCurrentPassword.getText().equals(SESSION.getUserLogged().getPassword())) {
 					String np = txtNewPassword.getText();
 					if (em == null)
-						em = Database.createEntityManager_JEFTER();
+						em = Database.createEntityManager();
 					Query q = em.createQuery("from UserRegistration where codUser =:cod");
 					q.setParameter("cod", SESSION.getUserLogged().getCodUser());
 					if (q.getResultList().size() > 0) {
@@ -153,14 +141,14 @@ public class ProfileEditPOPOUP extends Stage {
 						em.clear();
 						em.close();
 						em = null;
-						this.message.add(updates.PASSWORD);
+						// this.message.add(updates.PASSWORD);
 					}
 				}
 			}
 			if (!c.isTextFieldEmpty(txtName)) {
 				String nn = txtName.getText();
 				if (em == null)
-					em = Database.createEntityManager_JEFTER();
+					em = Database.createEntityManager();
 				Query q = em.createQuery("from Profile where codProfile =:cod");
 				q.setParameter("cod", SESSION.getProfileLogged().getCod());
 				if (q.getResultList().size() > 0) {
@@ -172,12 +160,12 @@ public class ProfileEditPOPOUP extends Stage {
 					em.clear();
 					em.close();
 					em = null;
-					this.message.add(updates.NAME);
+					// this.message.add(updates.NAME);
 				}
 			}
 			if (!c.isTextAreaEmpty(txtBio)) {
 				if (em == null)
-					em = Database.createEntityManager_JEFTER();
+					em = Database.createEntityManager();
 				Query q = em.createQuery("from Profile where codProfile=:codProfile");
 				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
 				if (q.getResultList().size() > 0) {
@@ -189,45 +177,60 @@ public class ProfileEditPOPOUP extends Stage {
 					em.clear();
 					em.close();
 					em = null;
-					this.message.add(updates.BIO);
+					// this.message.add(updates.BIO);
 				}
 			}
-			if (!this.message.isEmpty()) {
-				ArrayList<String> message = new ArrayList<String>();
-				
-				for (int i = 0; i < this.message.size(); i++) {
-					if (this.message.get(i).equals(updates.NAME)) {
-						message.add("nome");
-					}
-					if (this.message.get(i).equals(updates.BIO)) {
-						message.add("biografia");
-					}
-					if (this.message.get(i).equals(updates.PASSWORD)) {
-						message.add("senha");
-					}
-				}
-				StringBuilder stb = new StringBuilder();
-				for (int i = 0; i < this.message.size(); i++) {
-					
-					stb.append(message.get(i).toString());
-					
-					if (i != message.size() - 1) {
-						stb.append(", ");
-					}
-					if (i == message.size() - 1) {
-						stb.append(".");
-					}
-				}
-				
-				new CustomAlert(AlertType.CONFIRMATION, "Sucesso", "Mudanças adicionadas",
-						"Informações alteradas: " + stb.toString());
-				message.clear();
-				this.message.clear();
-				return;
+			/*
+			 * building the return message
+			 */
+			// if (!this.message.isEmpty()) {
+			// ArrayList<String> message = new ArrayList<String>();
+			//
+			// for (int i = 0; i < this.message.size(); i++) {
+			// if (this.message.get(i).equals(updates.NAME)) {
+			// message.add("nome");
+			// }
+			// if (this.message.get(i).equals(updates.BIO)) {
+			// message.add("biografia");
+			// }
+			// if (this.message.get(i).equals(updates.PASSWORD)) {
+			// message.add("senha");
+			// }
+			// }
+			// StringBuilder stb = new StringBuilder();
+			// for (int i = 0; i < this.message.size(); i++) {
+			//
+			// stb.append(message.get(i).toString());
+			//
+			// if (i != message.size() - 1) {
+			// stb.append(", ");
+			// }
+			// if (i == message.size() - 1) {
+			// stb.append(".");
+			// }
+			// }
+			if (em == null)
+				em = Database.createEntityManager();
+			Query q = em.createQuery("from Profile where codProfile =: cod");
+			q.setParameter("cod", SESSION.getProfileLogged().getCod());
+			SESSION.UPDATE_SESSION((Profile) q.getResultList().get(0));
+			
+			try {
+				LoadHomePage.updateComponents();
+			} catch (IOException e1) {
+				e1.printStackTrace();
 			}
+			// new CustomAlert(AlertType.CONFIRMATION, "Sucesso", "Mudanças adicionadas",
+			// "Informações alteradas: " + stb.toString());
+			// message.clear();
+			// this.message.clear();
+			return;
+			// }				
 		});
 		this.btnBack.setOnAction(e -> {
-			
+			if(!this.txtBio.getText().isEmpty()|| !this.txtName.getText().isEmpty() || !this.txtCurrentPassword.getText().isEmpty() || !this.txtNewPassword.getText().isEmpty()) { 
+				new CustomAlert(AlertType.WARNING, "Saindo no meio da edição", "certeza que quer sair?", "se sair agora as modificações vao ser perdidas",true);
+			}
 			this.close();
 		});
 		this.hbButtons.getChildren().addAll(this.btnSave, this.btnBack);
@@ -236,11 +239,10 @@ public class ProfileEditPOPOUP extends Stage {
 		
 		this.layout.setSpacing(10);
 		this.layout.setAlignment(Pos.CENTER);
-		this.layout.getChildren().addAll(this.btnImg, this.hbNameContent, this.hbBio,
+		this.layout.getChildren().addAll(this.imgProfile, this.hbNameContent, this.hbBio,
 				this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbButtons);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
-		
 		
 		this.initOwner(parent);
 		this.initModality(Modality.WINDOW_MODAL);

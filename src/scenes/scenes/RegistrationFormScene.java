@@ -1,4 +1,4 @@
-package scenes;
+package scenes.scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

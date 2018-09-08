@@ -29,7 +29,6 @@ public class HBProfileContent extends HBox {
 	public HBProfileContent(Profile p) throws FileNotFoundException {
 		this.lblName = new Label(p.getName());
 		this.lblBio = new Label(p.getBiography());
-		
 		init(p);
 	}
 	

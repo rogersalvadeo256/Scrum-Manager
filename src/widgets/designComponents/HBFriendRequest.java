@@ -30,12 +30,10 @@ public class HBFriendRequest extends HBox {
 		this.lblName = new Label(p.getName());
 		this.lblBio = new Label(p.getBiography());
 		
-		
 		this.btnAccept = new Button("Aceitar");
 		this.btnAccept.setOnAction(e -> { 
 			
 		});
-		
 		this.btnRefuse = new Button("Recusar");
 		this.btnRefuse.setOnAction(e -> { 
 			
@@ -73,7 +71,5 @@ public class HBFriendRequest extends HBox {
 		this.setSpacing(10);
 		this.getChildren().add(layout);
 
-		
-		
 	}
 }

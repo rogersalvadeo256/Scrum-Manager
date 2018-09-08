@@ -1,4 +1,4 @@
-package scenes;
+package scenes.scenes;
 
 
 import application.main.Window;

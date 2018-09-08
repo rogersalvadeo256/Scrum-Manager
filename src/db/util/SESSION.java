@@ -23,29 +23,31 @@ public class SESSION {
 	 * @author jefter66
 	 */
 	public static UserRegistration getUserLogged() {
-		if(em == null ) em = Database.createEntityManager_JEFTER();
-		
-		Query q = em.createQuery("from UserRegistration where codUser=:codUser");
-		q.setParameter("codUser", SESSION.u.getCodUser());
-		
-		if(q.getResultList().size() > 0) {
-			em.clear();
-			em = null;
-			UserRegistration uReturn = (UserRegistration) q.getResultList().get(0);
-			return uReturn; 
-		}
-		return null;
+		return u;
+//		if(em == null ) em = Database.createEntityManager();
+//		
+//		Query q = em.createQuery("from UserRegistration where codUser=:codUser");
+//		q.setParameter("codUser", SESSION.u.getCodUser());
+//		
+//		if(q.getResultList().size() > 0) {
+//			em.clear();
+//			em = null;
+//			UserRegistration uReturn = (UserRegistration) q.getResultList().get(0);
+//			return uReturn; 
+//		}
+//		return null;
 	}
 	public static Profile getProfileLogged() {
-		if (em == null)
-			em = Database.createEntityManager_JEFTER();
-
-		Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
-		q.setParameter("codProfile", SESSION.p.getCod());
-			em.clear();
-			em = null;
-			Profile pReturn = (Profile) q.getResultList().get(0); 
-			return pReturn;
+		return p;
+//		if (em == null)
+//			em = Database.createEntityManager();
+//
+//		Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
+//		q.setParameter("codProfile", SESSION.p.getCod());
+//			em.clear();
+//			em = null;
+//			Profile pReturn = (Profile) q.getResultList().get(0); 
+//			return pReturn;
 	}
 	public static void START_SESSION(UserRegistration u) {
 		SESSION.u = u;
@@ -54,8 +56,6 @@ public class SESSION {
 	public static void UPDATE_SESSION(Profile p) { 
 		SESSION.p = p;
 	}
-	
-	
 }
 
 

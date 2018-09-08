@@ -5,7 +5,7 @@ package application.main;
  * 
  * 	CREATED ON: 18 JUN  2018
  * 
- * AUTHORS: ANDRÉ LOPES,IGOR MANOEL, 
+ * AUTHORS: ANDRÉ LOPES, 
  * 			JEFTER SANTIAGO, ROGER FERRARO 
  * 
  */

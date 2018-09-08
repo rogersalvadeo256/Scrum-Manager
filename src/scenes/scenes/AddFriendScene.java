@@ -1,4 +1,4 @@
-package scenes;
+package scenes.scenes;
 import java.util.Random;
 
 import db.pojos.FriendTable;

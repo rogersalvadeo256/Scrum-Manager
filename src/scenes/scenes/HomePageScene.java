@@ -1,4 +1,4 @@
-package scenes;
+package scenes.scenes;
 
 /**
  * @author jefter66: jefter66
@@ -16,20 +16,17 @@ import javax.persistence.Query;
 import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
+import db.util.LoadHomePage;
 import db.util.ProfileImg;
 import db.util.SESSION;
 import friendship.SearchFriend;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -48,7 +45,7 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private ImageView profileImg;
 	
-	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblBiography, lblEmail;
+	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblBio, lblEmail;
 	private Button btnEditBio;
 	
 	private HBox hbHeader;
@@ -72,13 +69,11 @@ public class HomePageScene extends Scene {
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
-	
 	private SearchFriend searchFriend;
 	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
-		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
-		
+//		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
 		
 		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
@@ -91,14 +86,22 @@ public class HomePageScene extends Scene {
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
 
-//		this.lblName = new Label("nome"); 
-		this.lblName = new Label(SESSION.getProfileLogged().getName());
-		this.lblName.setId("lblName");
 		
-
-		this.lblUsername = new Label("usernome");
-		this.lblUsername =new Label(SESSION.getUserLogged().getUserName());
+		this.lblName = new Label(); 
+		this.lblUsername = new Label();
+		this.lblBio = new Label(); 
+		this.profileImg = new ImageView();
+		
+		
+		/*
+		 * in this class the components are treated
+		 */
+		LoadHomePage.setComponents(lblName,lblUsername,lblBio,profileImg);
+		LoadHomePage.loadComponents();
+		
+		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
+		this.lblBio.getStyleClass().add("label");
 
 		this.lblCurrentProject = new Label("Projetos em andamento");
 		this.lblName.setId("lblProject");
@@ -169,7 +172,6 @@ public class HomePageScene extends Scene {
 				try {
 					HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
 				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				if (!searchFriend.getResults().isEmpty()) {
@@ -182,7 +184,7 @@ public class HomePageScene extends Scene {
 			}
 			vbSearchResult.getChildren().clear();
 		});
-
+		
 		this.btnEditProfile = new Button("Editar Perfil");
 		this.btnEditProfile.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -255,18 +257,6 @@ public class HomePageScene extends Scene {
 					e1.printStackTrace();
 				}
 		});
-
-//		this.lblBiography = new Label(); 
-		this.lblBiography = new Label(SESSION.getProfileLogged().getBiography());
-		this.lblBiography.getStyleClass().add("label");
-
-		this.profileImg = new ImageView();
-		if(SESSION.getProfileLogged().getPhoto().length == 0) {
-			this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
-		}
-		else { 
-			this.profileImg.setImage(ProfileImg.loadImage());
-		}
 		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
@@ -296,10 +286,10 @@ public class HomePageScene extends Scene {
 			public void handle(ActionEvent event) {
 
 				HomePageScene.this.txtBio.setVisible(true);
-				HomePageScene.this.txtBio.setText(HomePageScene.this.lblBiography.getText());
+				HomePageScene.this.txtBio.setText(HomePageScene.this.lblBio.getText());
 				HomePageScene.this.txtBio.setTranslateY(-150);
 				HomePageScene.this.hbBntInteractWithBio.setVisible(true);
-				HomePageScene.this.lblBiography.setVisible(false);
+				HomePageScene.this.lblBio.setVisible(false);
 				HomePageScene.this.btnEditBio.setVisible(false);
 				HomePageScene.this.lblUsername.setTranslateY(30);
 				HomePageScene.this.lblName.setTranslateY(40);
@@ -315,7 +305,7 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.vbProfileInfo.getChildren().remove(txtBio);
 				HomePageScene.this.txtBio.setVisible(false);
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
-				HomePageScene.this.lblBiography.setVisible(true);
+				HomePageScene.this.lblBio.setVisible(true);
 				HomePageScene.this.lblName.setTranslateY(0);
 				HomePageScene.this.lblUsername.setTranslateY(0);
 				HomePageScene.this.btnEditBio.setVisible(true);
@@ -326,23 +316,20 @@ public class HomePageScene extends Scene {
 		this.btnOk.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				EntityManager em = Database.createEntityManager_JEFTER();
-				Query q = em.createQuery("from Profile where codProfile=:codProfile");
-				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
-				if (q.getResultList().size() > 0) {
-
-					Profile p = (Profile) q.getResultList().get(0);
+				EntityManager em = Database.createEntityManager();
+				Profile p = (Profile) SESSION.getProfileLogged();
 					em.getTransaction().begin();
 					p.setBiography(txtBio.getText());
 					em.merge(p);
 					em.getTransaction().commit();
 					em.clear();
 					em.close();
-				}
-				HomePageScene.this.lblBiography.setText(HomePageScene.this.txtBio.getText());
+			
+					
+					HomePageScene.this.lblBio.setText(HomePageScene.this.txtBio.getText());
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
 				HomePageScene.this.txtBio.setVisible(false);
-				HomePageScene.this.lblBiography.setVisible(true);
+				HomePageScene.this.lblBio.setVisible(true);
 				HomePageScene.this.btnEditBio.setVisible(true);
 			}
 		});
@@ -387,7 +374,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBiography, btnEditBio,
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBio, btnEditBio,
 				hbBntInteractWithBio, lblEmail);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
@@ -428,7 +415,7 @@ public class HomePageScene extends Scene {
 		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
 		AnchorPane.setLeftAnchor(vbSearchResult, 20.0);
 		AnchorPane.setRightAnchor(vbSearchResult, 20.0);
-//		apSearch.getChildren().addAll(vbSearchResult, sc);
+		apSearch.getChildren().addAll(vbSearchResult);
 
 		apSearch.getStyleClass().add("anchor-pane");
 		apSearch.setId("sugestionsOff");

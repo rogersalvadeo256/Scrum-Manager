@@ -9,7 +9,7 @@ import db.pojos.UserRegistration;
 public class RegistrationDB{
 	private EntityManager em;
 	public RegistrationDB() {
-		this.em = Database.createEntityManager_JEFTER();
+		this.em = Database.createEntityManager();
 	}
 	/**
 	 * make the persistense for registration
@@ -22,7 +22,7 @@ public class RegistrationDB{
 	 */
 	public void insertUser(UserRegistration u) {
 		if (em == null) {
-			em = Database.createEntityManager_JEFTER();
+			em = Database.createEntityManager();
 		}
 		
 
@@ -41,7 +41,7 @@ public class RegistrationDB{
 	 */
 	public boolean userExist(UserRegistration user) {
 		if (em == null) {
-			em = Database.createEntityManager_JEFTER();
+			em = Database.createEntityManager();
 		}
 		Query q = this.em.createQuery("from UserRegistration where userName=:userName");
 		q.setParameter("userName", user.getUserName());
