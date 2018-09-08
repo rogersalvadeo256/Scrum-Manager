@@ -65,7 +65,7 @@ public class LoginScene extends Scene {
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 
-		this.getStylesheets().add(this.getClass().getResource("/css/LOGIN_SCENE.css").toExternalForm());
+//		this.getStylesheets().add(this.getClass().getResource("/css/LOGIN_SCENE.css").toExternalForm());
 		
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
@@ -244,7 +244,7 @@ public class LoginScene extends Scene {
 				form.get(0).btnCancel.setOnAction(e -> {
 					form.clear();
 					leftRegistrationForm.getChildren().clear();
-					;
+					
 					layout.getChildren().remove(leftRegistrationForm);
 					LoginScene.this.form.clear();
 					LoginScene.this.settingLeftSideComponents();
