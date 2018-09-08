@@ -3,6 +3,7 @@ package scenes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -159,6 +160,9 @@ public class LoginScene extends Scene {
 					Window.mainStage.setScene(new HomePageScene());
 				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 			LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
@@ -170,6 +174,9 @@ public class LoginScene extends Scene {
 					try {
 						Window.mainStage.setScene(new HomePageScene());
 					} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}

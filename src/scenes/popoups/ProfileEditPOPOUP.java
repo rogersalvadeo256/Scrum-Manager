@@ -69,11 +69,8 @@ public class ProfileEditPOPOUP extends Stage {
 			this.graphicButton.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 		}
 		else { 	
-		
-			this.graphicButton.setImage(img);
-//			this.pi.loadImage();
+			this.graphicButton.setImage(ProfileImg.loadImage());
 		}
-		
 		this.graphicButton.setFitWidth(200);
 		this.graphicButton.setFitHeight(200);
 		
@@ -243,6 +240,7 @@ public class ProfileEditPOPOUP extends Stage {
 				this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbButtons);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
+		
 		
 		this.initOwner(parent);
 		this.initModality(Modality.WINDOW_MODAL);

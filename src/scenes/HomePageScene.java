@@ -16,6 +16,7 @@ import javax.persistence.Query;
 import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
+import db.util.ProfileImg;
 import db.util.SESSION;
 import friendship.SearchFriend;
 import javafx.beans.value.ChangeListener;
@@ -41,15 +42,15 @@ import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
 
 public class HomePageScene extends Scene {
-
+	
 	private AnchorPane layout;
 	private Button btnExit;
 	private Button btnEditProfile;
 	private ImageView profileImg;
-
+	
 	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblBiography, lblEmail;
 	private Button btnEditBio;
-
+	
 	private HBox hbHeader;
 	private TextField txtSearch;
 	private Button btnSearch;
@@ -57,24 +58,24 @@ public class HomePageScene extends Scene {
 	private ArrayList<File> iconPath;
 	private ArrayList<FileInputStream> fis;
 	private VBox vbProfileInfo;
-
+	
 	private HBox hbMenu;
 	private Button btnStartProject, btnfriends;
-
+	
 	private Button btnFriendRequest, btnProjectInviteRequest;
-
+	
 	private AnchorPane apSearch;
 	private VBox vbLeftColumn, vbRightColumn;
 	private VBox vbSearchResult;
-	private ScrollBar sc;
-
+//	private ScrollBar sc;
+	
 	private HBox hbBntInteractWithBio;
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
-
+	
 	private SearchFriend searchFriend;
-
-	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
+	
+	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
 		
@@ -135,23 +136,23 @@ public class HomePageScene extends Scene {
 
 		this.vbSearchResult = new VBox();
 		this.vbSearchResult.setLayoutX(5);
-		this.sc = new ScrollBar();
+//		this.sc = new ScrollBar();
 
 //		this.vbSearchResult.getChildren().add(sc);
 		
 		this.vbSearchResult.prefWidth(400);
 		
-		sc.setLayoutX(vbSearchResult.getWidth() - sc.getWidth());
-		sc.setMin(0);
-		sc.setOrientation(Orientation.VERTICAL);
-		sc.setPrefHeight(360);
-		sc.setMax(180 * 2);
-
-		sc.valueProperty().addListener(new ChangeListener<Number>() {
-			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
-				vbSearchResult.setLayoutY(-new_val.doubleValue());
-			}
-		});
+//		sc.setLayoutX(vbSearchResult.getWidth() - sc.getWidth());
+//		sc.setMin(0);
+//		sc.setOrientation(Orientation.VERTICAL);
+//		sc.setPrefHeight(360);
+//		sc.setMax(180 * 2);
+//
+//		sc.valueProperty().addListener(new ChangeListener<Number>() {
+//			public void changed(ObservableValue<? extends Number> ov, Number old_val, Number new_val) {
+//				vbSearchResult.setLayoutY(-new_val.doubleValue());
+//			}
+//		});
 
 		this.txtSearch = new TextField();
 
@@ -260,6 +261,13 @@ public class HomePageScene extends Scene {
 		this.lblBiography.getStyleClass().add("label");
 
 		this.profileImg = new ImageView();
+		if(SESSION.getProfileLogged().getPhoto().length == 0) {
+			this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
+		}
+		else { 
+			this.profileImg.setImage(ProfileImg.loadImage());
+		}
+		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
 		this.profileImg.setTranslateX(15);
@@ -341,7 +349,6 @@ public class HomePageScene extends Scene {
 		/*
 		 * database
 		 */
-		this.profileImg.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 
 		this.hbMenu = new HBox();
 		this.hbMenu.getStyleClass().add("hbox");
@@ -421,7 +428,7 @@ public class HomePageScene extends Scene {
 		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
 		AnchorPane.setLeftAnchor(vbSearchResult, 20.0);
 		AnchorPane.setRightAnchor(vbSearchResult, 20.0);
-		apSearch.getChildren().addAll(vbSearchResult, sc);
+//		apSearch.getChildren().addAll(vbSearchResult, sc);
 
 		apSearch.getStyleClass().add("anchor-pane");
 		apSearch.setId("sugestionsOff");
@@ -435,11 +442,11 @@ public class HomePageScene extends Scene {
 		this.setRoot(layout);
 
 	}
-
+	
 	private void setImage(ImageView image, int fis) {
 		image.setFitHeight(80);
 		image.setFitWidth(80);
 		image.setImage(new Image(this.fis.get(fis)));
 	}
-
+	
 }

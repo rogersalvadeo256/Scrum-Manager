@@ -26,6 +26,13 @@ public class ProfileImg {
 		
 	}
 	
+	/**
+	 * Update the profile image of the user in the database
+	 * 
+	 * @param  Stage
+	 * @throws IOException
+	 * @author             jefter66
+	 */
 	public void setImage(Stage owner) throws IOException {
 		FileChooser fc = new FileChooser();
 		File f = fc.showOpenDialog(owner);
@@ -40,7 +47,6 @@ public class ProfileImg {
 			if (em == null) {
 				em = Database.createEntityManager();
 			}
-			
 			Query q = em.createQuery("from Profile where CODPROFILE=:codProfile");
 			q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
 			Profile p = (Profile) q.getResultList().get(0);
@@ -58,29 +64,16 @@ public class ProfileImg {
 		return;
 	}
 	
-	public Image loadImage() throws IOException {
+	/**
+	 * Return the profile image of the user online
+	 * 
+	 * @return             Image
+	 * @throws IOException
+	 * @author             jefter66
+	 */
+	public static Image loadImage() throws IOException {
 		BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(SESSION.getProfileLogged().getPhoto()));
 		Image img = SwingFXUtils.toFXImage(bfi, null);
 		return img;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

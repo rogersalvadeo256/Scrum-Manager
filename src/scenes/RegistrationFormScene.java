@@ -2,6 +2,8 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.fasterxml.classmate.util.ResolvedTypeCache.Key;
+
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
 import javafx.event.ActionEvent;
@@ -11,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import validation.FormsValidation;
 
@@ -62,7 +65,8 @@ public class RegistrationFormScene extends VBox {
 		this.field.add(txtUserName);
 		this.passwordField.add(txtPasswordField);
 		this.passwordField.add(txtPasswordConfirmation);
-
+		
+		
 		this.fieldName.add("nome");
 		this.fieldName.add("email");
 		this.fieldName.add("nome de usuario");
@@ -75,34 +79,33 @@ public class RegistrationFormScene extends VBox {
 		
 		this.validation=new FormsValidation(field, fieldName, passwordField);
 		this.validation.setConfirmationMessage(confirmationMessage);
-
-		this.btnRegister.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-					/*
-					 * validação para campos vazios
-					 */
-					RegistrationFormScene.this.registration=new UserRegistration();
-					RegistrationFormScene.this.profile=new Profile();
-					
-					validation.setField(field);
-					validation.setPasswordField(passwordField);
-					validation.setFieldName(fieldName);
-
-					profile.setName(RegistrationFormScene.this.txtName.getText());
-					registration.setEmail(RegistrationFormScene.this.txtEmail.getText());
-					registration.setUserName(RegistrationFormScene.this.txtUserName.getText());
-					registration.setPassword(RegistrationFormScene.this.txtPasswordConfirmation.getText());
-					registration.setProfile(profile);
-					validation.setUserRegistration(RegistrationFormScene.this.registration);
-					validation.registrationOfNewUser();
-			}
+		
+		this.txtPasswordConfirmation.setOnKeyPressed(e ->{ 
+			if(e.getCode() == KeyCode.ENTER) validationAndRegistration();
 		});
+		this.btnRegister.setOnAction(e ->{	validationAndRegistration();});
+		
+		
 		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail);
 		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister,btnCancel);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}
-	
+	private void validationAndRegistration() { 
+		RegistrationFormScene.this.registration=new UserRegistration();
+		RegistrationFormScene.this.profile=new Profile();
+		
+		validation.setField(field);
+		validation.setPasswordField(passwordField);
+		validation.setFieldName(fieldName);
+
+		profile.setName(RegistrationFormScene.this.txtName.getText());
+		registration.setEmail(RegistrationFormScene.this.txtEmail.getText());
+		registration.setUserName(RegistrationFormScene.this.txtUserName.getText());
+		registration.setPassword(RegistrationFormScene.this.txtPasswordConfirmation.getText());
+		registration.setProfile(profile);
+		validation.setUserRegistration(RegistrationFormScene.this.registration);
+		validation.registrationOfNewUser();
+	}
 	
 }
