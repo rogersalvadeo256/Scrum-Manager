@@ -43,7 +43,7 @@ public class ProfileEditPOPOUP extends Stage {
 	private Button btnSave, btnBack;
 	private Scene scene;
 	private ProfileImg pi;
-	
+	private EntityManager em;
 	// private enum updates {
 	// NAME, PASSWORD, BIO,PHOTO
 	// };
@@ -55,8 +55,8 @@ public class ProfileEditPOPOUP extends Stage {
 		this.scene = new Scene(layout);
 		this.setScene(scene);
 		this.pi = new ProfileImg();
-
-		//		this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
+		
+		// this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
 		
 		this.imgProfile = new ImageView();
 		
@@ -69,13 +69,11 @@ public class ProfileEditPOPOUP extends Stage {
 		this.imgProfile.setFitWidth(200);
 		this.imgProfile.setFitHeight(200);
 		
-		
-		this.imgProfile.setOnMouseClicked(e ->{
+		this.imgProfile.setOnMouseClicked(e -> {
 			try {
 				pi.setImage(application.main.Window.mainStage);
 				this.imgProfile.setImage(pi.loadImage());
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		});
@@ -124,61 +122,46 @@ public class ProfileEditPOPOUP extends Stage {
 			
 			// this.message.clear();
 			CheckEmptyFields c = new CheckEmptyFields();
-			EntityManager em = Database.createEntityManager();
+			
+			UserRegistration u = SESSION.getUserLogged();
+			Profile p = SESSION.getProfileLogged();
+			
+			if (em == null)
+				em = Database.createEntityManager();
+			
 			if (!c.isPasswordFieldEmpty(txtCurrentPassword) && !c.isPasswordFieldEmpty(txtNewPassword)) {
 				if (txtCurrentPassword.getText().equals(SESSION.getUserLogged().getPassword())) {
-					String np = txtNewPassword.getText();
-					if (em == null)
-						em = Database.createEntityManager();
-					Query q = em.createQuery("from UserRegistration where codUser =:cod");
-					q.setParameter("cod", SESSION.getUserLogged().getCodUser());
-					if (q.getResultList().size() > 0) {
-						UserRegistration u = (UserRegistration) q.getResultList().get(0);
+					if (txtNewPassword.getText().length() >= 8) {
+						String np = txtNewPassword.getText();
 						em.getTransaction().begin();
 						u.setPassword(np);
 						em.merge(u);
 						em.getTransaction().commit();
 						em.clear();
-						em.close();
-						em = null;
 						// this.message.add(updates.PASSWORD);
+					} else {
+						new CustomAlert(AlertType.ERROR, "Erro", "Senha muito curta",
+								"A senha deve conter no minimo 8 caracteres");
+						return;
 					}
 				}
 			}
 			if (!c.isTextFieldEmpty(txtName)) {
 				String nn = txtName.getText();
-				if (em == null)
-					em = Database.createEntityManager();
-				Query q = em.createQuery("from Profile where codProfile =:cod");
-				q.setParameter("cod", SESSION.getProfileLogged().getCod());
-				if (q.getResultList().size() > 0) {
-					Profile p = (Profile) q.getResultList().get(0);
-					em.getTransaction().begin();
-					p.setName(nn);
-					em.merge(p);
-					em.getTransaction().commit();
-					em.clear();
-					em.close();
-					em = null;
-					// this.message.add(updates.NAME);
-				}
+				em.getTransaction().begin();
+				p.setName(nn);
+				em.merge(p);
+				em.getTransaction().commit();
+				em.clear();
+				// this.message.add(updates.NAME);
 			}
 			if (!c.isTextAreaEmpty(txtBio)) {
-				if (em == null)
-					em = Database.createEntityManager();
-				Query q = em.createQuery("from Profile where codProfile=:codProfile");
-				q.setParameter("codProfile", SESSION.getProfileLogged().getCod());
-				if (q.getResultList().size() > 0) {
-					Profile p = (Profile) q.getResultList().get(0);
-					em.getTransaction().begin();
-					p.setBiography(txtBio.getText());
-					em.merge(p);
-					em.getTransaction().commit();
-					em.clear();
-					em.close();
-					em = null;
-					// this.message.add(updates.BIO);
-				}
+				em.getTransaction().begin();
+				p.setBiography(txtBio.getText());
+				em.merge(p);
+				em.getTransaction().commit();
+				em.clear();
+				// this.message.add(updates.BIO);
 			}
 			/*
 			 * building the return message
@@ -209,12 +192,15 @@ public class ProfileEditPOPOUP extends Stage {
 			// stb.append(".");
 			// }
 			// }
-			if (em == null)
-				em = Database.createEntityManager();
+			
 			Query q = em.createQuery("from Profile where codProfile =: cod");
 			q.setParameter("cod", SESSION.getProfileLogged().getCod());
-			SESSION.UPDATE_SESSION((Profile) q.getResultList().get(0));
-			
+			Query q1 = em.createQuery("from UserRegistration where codUser =:cod");
+			q1.setParameter("cod", SESSION.getUserLogged().getCodUser());
+			SESSION.UPDATE_SESSION((Profile) q.getResultList().get(0),
+					(UserRegistration) q1.getResultList().get(0));
+			em.clear();
+			em.close();
 			try {
 				LoadHomePage.updateComponents();
 			} catch (IOException e1) {
@@ -225,11 +211,14 @@ public class ProfileEditPOPOUP extends Stage {
 			// message.clear();
 			// this.message.clear();
 			return;
-			// }				
+			// }
 		});
 		this.btnBack.setOnAction(e -> {
-			if(!this.txtBio.getText().isEmpty()|| !this.txtName.getText().isEmpty() || !this.txtCurrentPassword.getText().isEmpty() || !this.txtNewPassword.getText().isEmpty()) { 
-				new CustomAlert(AlertType.WARNING, "Saindo no meio da edição", "certeza que quer sair?", "se sair agora as modificações vao ser perdidas",true);
+			if (!this.txtBio.getText().isEmpty() || !this.txtName.getText().isEmpty()
+					|| !this.txtCurrentPassword.getText().isEmpty()
+					|| !this.txtNewPassword.getText().isEmpty()) {
+				new CustomAlert(AlertType.WARNING, "Saindo no meio da edição", "certeza que quer sair?",
+						"se sair agora as modificações vao ser perdidas", true);
 			}
 			this.close();
 		});

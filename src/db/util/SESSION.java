@@ -56,6 +56,12 @@ public class SESSION {
 	public static void UPDATE_SESSION(Profile p) { 
 		SESSION.p = p;
 	}
+	public static void UPDATE_SESSION(Profile p, UserRegistration u) { 
+		SESSION.p = p;
+		SESSION.u = u;
+	}
+	
+	
 }
 
 
