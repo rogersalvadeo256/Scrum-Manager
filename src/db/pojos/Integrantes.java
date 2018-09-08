@@ -1,4 +1,4 @@
-package POJOs;
+package db.pojos;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;

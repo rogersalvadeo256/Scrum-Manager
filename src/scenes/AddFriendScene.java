@@ -1,7 +1,7 @@
 package scenes;
 import java.util.Random;
 
-import POJOs.FriendTable;
+import db.pojos.FriendTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;

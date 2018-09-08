@@ -7,9 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import application.main.Window;
-import css.indicator.object.IndicatorOfCss;
 import db.functions.Login;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -66,8 +64,8 @@ public class LoginScene extends Scene {
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 
-		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.LOGIN_SCENE);
-
+		this.getStylesheets().add(this.getClass().getResource("/css/LOGIN_SCENE.css").toExternalForm());
+		
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("Tela Login");

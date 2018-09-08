@@ -2,13 +2,12 @@ package scenes;
 
 
 import application.main.Window;
-import css.indicator.object.IndicatorOfCss;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -26,7 +25,7 @@ public class NewProjectScene extends Scene {
 	public NewProjectScene(){	
 		super(new VBox());
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("Descrição do Projeto");
+		this.lblDescProject = new Label("Descriï¿½ï¿½o do Projeto");
 		this.lblMember = new Label("Membros:");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
@@ -38,7 +37,7 @@ public class NewProjectScene extends Scene {
 		this.hbxMember = new HBox();
 		this.vbxTela = new VBox();
 		
-		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.NEW_PROJECT);
+		this.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
 		
 		Window.mainStage.setWidth(800);
 		Window.mainStage.setHeight(600);

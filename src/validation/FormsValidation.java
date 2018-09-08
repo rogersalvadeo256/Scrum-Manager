@@ -2,11 +2,11 @@ package validation;
 
 import java.util.ArrayList;
 
-import POJOs.UserRegistration;
 import db.functions.RegistrationDB;
+import db.pojos.UserRegistration;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import widget.alertMessage.CustomAlert;
+import widgets.alertMessage.CustomAlert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 

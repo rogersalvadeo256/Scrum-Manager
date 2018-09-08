@@ -1,4 +1,4 @@
-package POJOs;
+package db.pojos;
 
 public class Quadro {
 

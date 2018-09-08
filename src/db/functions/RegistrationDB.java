@@ -3,8 +3,8 @@ package db.functions;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.UserRegistration;
 import db.hibernate.factory.Database;
+import db.pojos.UserRegistration;
 
 public class RegistrationDB{
 	private EntityManager em;

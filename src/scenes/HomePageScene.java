@@ -6,17 +6,17 @@ package scenes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.Profile;
 import application.main.Window;
-import css.indicator.object.IndicatorOfCss;
 import db.hibernate.factory.Database;
-import db.user.util.SESSION;
+import db.pojos.Profile;
+import db.util.SESSION;
 import friendship.SearchFriend;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -76,8 +76,7 @@ public class HomePageScene extends Scene {
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
-		IndicatorOfCss.referringScene(this, IndicatorOfCss.cssFile.HOME_PAGE_SCENE);
-		
+		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
 		
 		
 		this.layout = new AnchorPane();
@@ -249,6 +248,9 @@ public class HomePageScene extends Scene {
 				try {
 					new ProfileEditPOPOUP(Window.mainStage).showAndWait();
 				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		});

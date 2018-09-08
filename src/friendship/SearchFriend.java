@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.Profile;
-import POJOs.UserRegistration;
 import db.hibernate.factory.Database;
-import db.user.util.SESSION;
+import db.pojos.Profile;
+import db.pojos.UserRegistration;
+import db.util.SESSION;
 import widgets.designComponents.HBProfileContent;
 
 public class SearchFriend {

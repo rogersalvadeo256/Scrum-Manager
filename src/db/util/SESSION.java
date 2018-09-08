@@ -1,11 +1,11 @@
-package db.user.util;
+package db.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.Profile;
-import POJOs.UserRegistration;
 import db.hibernate.factory.Database;
+import db.pojos.Profile;
+import db.pojos.UserRegistration;
 
 /*
  *  this class contain all the functions for load the informations about the user logged

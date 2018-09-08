@@ -9,6 +9,7 @@ import db.hibernate.factory.Database;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import scenes.LoginScene;
+import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
 
 public class Window extends Stage {
@@ -29,11 +30,12 @@ public class Window extends Stage {
 		
 	//		 mainStage.setScene(new HomePageScene());
 // 		mainStage.setScene(new NewProjectScene());
-//		mainStage.setScene(new LoginScene());
+		mainStage.setScene(new LoginScene());
 		
-		ProfileEditPOPOUP tests = new  ProfileEditPOPOUP(this);
-		tests.show();
-		
+//		ProfileEditPOPOUP tests = new  ProfileEditPOPOUP(this);
+//		tests.show();
+//		FriendshipRequestPOPOUP test  = new FriendshipRequestPOPOUP(this);
+//		test.show();
 		
 //		mainStage.setScene(new ProjectScene());
 	

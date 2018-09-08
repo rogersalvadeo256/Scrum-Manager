@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.Profile;
 import db.hibernate.factory.Database;
-import db.user.util.SESSION;
+import db.pojos.Profile;
+import db.util.SESSION;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollBar;
@@ -23,6 +23,8 @@ public class FriendshipRequestPOPOUP extends Stage {
 	private ArrayList<HBFriendRequest> hbFriendRequest;
 	private VBox layout;
 	private final ScrollBar sc;
+	private Scene scene;
+	private Window parent;
 	
 	/**
 	 * This scene will contain the friendship requests of the user the scene have
@@ -35,8 +37,13 @@ public class FriendshipRequestPOPOUP extends Stage {
 		
 		this.hbFriendRequest = new ArrayList<HBFriendRequest>();
 		
-		drawHbox();
-		Scene scene = new Scene(layout);
+		this.parent= parent;
+		
+		 drawHbox();
+		this.scene = new Scene(layout);
+		this.scene.getStylesheets()
+				.add(this.getClass().getResource("/css/cssStyles/FRIEND_REQUEST.css").toExternalForm());
+		
 		this.setScene(scene);
 		
 		this.sc = new ScrollBar();
@@ -47,7 +54,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 		
 		this.initOwner(parent);
 		this.initModality(Modality.WINDOW_MODAL);
-		this.setWidth(400);
+		this.setWidth(600);
 		this.setHeight(500);
 		this.setResizable(false);
 	}
@@ -63,10 +70,20 @@ public class FriendshipRequestPOPOUP extends Stage {
 	 */
 	private void drawHbox() throws FileNotFoundException {
 		this.hbFriendRequest.clear();
-		
+		for(int i=0;i<10;i++) {
+			Profile p = new Profile();
+			p.setName("GENERIC");
+			p.setBiography("JAAJAAJAJ");
+			
+			HBFriendRequest f = new HBFriendRequest(p);
+			this.hbFriendRequest.add(f);
+			this.layout.getChildren().add(this.hbFriendRequest.get(i));
+		}
+		/*
 		EntityManager em = Database.createEntityManager();
 		
 		ArrayList<Profile> r = new ArrayList<Profile>();
+		
 		
 		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequest().size(); i++) {
 			
@@ -91,4 +108,6 @@ public class FriendshipRequestPOPOUP extends Stage {
 		}
 		return;
 	}
+	**/
+}
 }

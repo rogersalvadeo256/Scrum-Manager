@@ -2,8 +2,8 @@ package scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import POJOs.Profile;
-import POJOs.UserRegistration;
+import db.pojos.Profile;
+import db.pojos.UserRegistration;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

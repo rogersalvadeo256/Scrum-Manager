@@ -3,9 +3,9 @@ package friendship;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.Profile;
 import db.hibernate.factory.Database;
-import db.user.util.SESSION;
+import db.pojos.Profile;
+import db.util.SESSION;
 
 public class FriendshipRequest {
 	

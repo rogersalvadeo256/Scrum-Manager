@@ -10,9 +10,9 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.List;
 
-import POJOs.Integrantes;
-import POJOs.Quadro;
 import application.main.Window;
+import db.pojos.Integrantes;
+import db.pojos.Quadro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;

@@ -3,10 +3,8 @@ package widgets.designComponents;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
-import POJOs.Profile;
-import db.user.util.SESSION;
+import db.pojos.Profile;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Window;
 
 public class HBFriendRequest extends HBox {
 	private Label lblName, lblBio;
@@ -66,7 +65,7 @@ public class HBFriendRequest extends HBox {
 		
 		this.layout = new HBox();
 		
-		this.layout.setSpacing(20);
+		this.layout.setSpacing(50);
 
 		this.layout.getChildren().addAll(vbAlignItemsLeft, vbAlignItemsMiddle);
 		this.layout.getChildren().addAll(btnAccept, btnRefuse);

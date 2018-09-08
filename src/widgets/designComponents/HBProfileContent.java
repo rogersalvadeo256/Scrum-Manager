@@ -6,10 +6,12 @@ import java.io.FileNotFoundException;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import POJOs.Profile;
+import application.main.Window;
 import db.hibernate.factory.Database;
-import db.user.util.SESSION;
+import db.pojos.Profile;
+import db.util.SESSION;
 import friendship.FriendshipRequest;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -56,8 +58,7 @@ public class HBProfileContent extends HBox {
 		this.vbUsrBUTTON.getChildren().add(btnAdd);
 		this.vbUsrLABEL.getChildren().addAll(this.lblName, this.lblBio);
 		
-		this.prefHeight(200);
-		this.prefWidth(800);
+
 		this.getChildren().addAll(vbUsrIMG, vbUsrLABEL, vbUsrBUTTON);
 	}
 	

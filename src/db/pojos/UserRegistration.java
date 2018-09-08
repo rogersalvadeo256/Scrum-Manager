@@ -1,4 +1,4 @@
-package POJOs;
+package db.pojos;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
