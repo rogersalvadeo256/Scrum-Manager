@@ -53,6 +53,13 @@ public class ProfileImg {
 		new CustomAlert(AlertType.INFORMATION, "Erro", "Arquivo muito grande", "Foto deve ser menor que 50 mb");
 		return;
 	}
+	
+	
+	public static  Image getImage(Profile p ) throws IOException {
+		BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(p.getPhoto()));
+		Image img = SwingFXUtils.toFXImage(bfi, null);
+		return img;
+	}
 	/**
 	 * Return the profile image of the user online
 	 * 
@@ -66,3 +73,16 @@ public class ProfileImg {
 		return img;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -24,8 +24,6 @@ public class RegistrationDB{
 		if (em == null) {
 			em = Database.createEntityManager();
 		}
-		
-
 		this.em.getTransaction().begin();
 		this.em.persist(u);
 		this.em.getTransaction().commit();
@@ -40,12 +38,25 @@ public class RegistrationDB{
 	 * @param UserRegistration user
 	 */
 	public boolean userExist(UserRegistration user) {
-		if (em == null) {
-			em = Database.createEntityManager();
-		}
+		if (em == null) em = Database.createEntityManager();
+		
 		Query q = this.em.createQuery("from UserRegistration where userName=:userName");
 		q.setParameter("userName", user.getUserName());
 		if (!q.getResultList().isEmpty()) return true;
+		return false;
+	}
+	/** 
+	 * if the return are false, the email are not registered
+	 * @author jefter66
+	 * @param UserRegistration user
+	 */
+	public boolean emailExist(UserRegistration user) { 
+		if(em == null) em  = Database.createEntityManager();
+		
+		Query q = this.em.createQuery("from UserRegistration where email =:email");
+		q.setParameter("email",user.getEmail());
+
+		if(!q.getResultList().isEmpty()) return true;
 		return false;
 	}
 }

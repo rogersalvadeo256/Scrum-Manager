@@ -145,12 +145,24 @@ public class FormsValidation {
 	 * will be true, otherwise false
 	 * 
 	 * @author jefter66
-	 * @param registration
+	 * @param UserRegistration
 	 * @return boolean
 	 */
-	public boolean validationForExistentData(UserRegistration registration) {
+	public boolean validationForExistentUserName(UserRegistration registration) {
 		if (this.registration.userExist(registration))
 			return false;
+		return true;
+	}
+	/**
+	 * For registration of new user. If the registration go's ok, then, the return
+	 * will be true, otherwise false
+	 * 
+	 * @author jefter66
+	 * @param UserRegistration
+	 * @return boolean
+	 */
+	public boolean validationForExistentEmail(UserRegistration registration) {
+		if (this.registration.emailExist(registration))return false;
 		return true;
 	}
 
@@ -187,9 +199,13 @@ public class FormsValidation {
 			passwordFieldEmptyMessage = validationForPassword(false);
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage);
 		}
-		if (!validationForExistentData(this.getUserRegistration())) {
+		if (!validationForExistentUserName(this.getUserRegistration())) {
 			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
 					"Nome de usuario já está cadastrado");
+		}
+		if (!validationForExistentEmail(this.getUserRegistration())) {
+			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
+					"Email já está cadastrado");
 		}
 		registration.insertUser(getUserRegistration());
 		return message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro realizado com sucesso", "Voce está cadastrado");
@@ -212,7 +228,6 @@ public class FormsValidation {
 	private UserRegistration getUserRegistration() {
 		return this.userRegistration;
 	}
-
 	public void setFieldName(ArrayList<String> name) {
 		this.fieldName = name;
 	}

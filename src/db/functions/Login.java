@@ -30,12 +30,13 @@ public class Login {
 	 * @return boolean
 	 * @author jefter66
 	 */
-	public boolean doLogin(TextField userName, PasswordField password) {
-		if (!isFieldEmpty(userName, password)) {
-			Query q = this.manager.createQuery("from UserRegistration where userName=:userName and password=:password");
-			q.setParameter("userName", userName.getText());
+	public boolean doLogin(TextField userNameOrEmail, PasswordField password) {
+		if (!isFieldEmpty(userNameOrEmail, password)) {
+			Query q = this.manager.createQuery("from UserRegistration where userName=:userName or email=:email and password=:password");
+			q.setParameter("userName", userNameOrEmail.getText());
+			q.setParameter("email", userNameOrEmail.getText());
 			q.setParameter("password", password.getText());
-
+			
 			if (!q.getResultList().isEmpty()) {
 				UserRegistration u = new UserRegistration();
 				u = (UserRegistration) q.getResultList().get(0);

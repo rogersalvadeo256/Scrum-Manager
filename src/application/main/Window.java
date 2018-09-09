@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import db.hibernate.factory.Database;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import scenes.popoups.ForgotPasswordPOPOUP;
 import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
 import scenes.scenes.LoginScene;
@@ -29,6 +30,9 @@ public class Window extends Stage {
 		// mainStage.setScene(new HomePageScene());
 		// mainStage.setScene(new NewProjectScene());
 		mainStage.setScene(new LoginScene());
+		
+//		ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
+//		test.show();
 		
 		// ProfileEditPOPOUP tests = new ProfileEditPOPOUP(this);
 		// tests.show();

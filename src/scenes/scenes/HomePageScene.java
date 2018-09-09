@@ -173,6 +173,9 @@ public class HomePageScene extends Scene {
 					HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 				if (!searchFriend.getResults().isEmpty()) {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {

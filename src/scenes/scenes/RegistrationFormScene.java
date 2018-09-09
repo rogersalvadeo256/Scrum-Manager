@@ -65,6 +65,7 @@ public class RegistrationFormScene extends VBox {
 		this.field.add(txtUserName);
 		this.passwordField.add(txtPasswordField);
 		this.passwordField.add(txtPasswordConfirmation);
+	
 		
 		
 		this.fieldName.add("nome");
@@ -84,8 +85,6 @@ public class RegistrationFormScene extends VBox {
 			if(e.getCode() == KeyCode.ENTER) validationAndRegistration();
 		});
 		this.btnRegister.setOnAction(e ->{	validationAndRegistration();});
-		
-		
 		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail);
 		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister,btnCancel);
 		this.setAlignment(Pos.CENTER);
