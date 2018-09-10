@@ -244,13 +244,16 @@ public class ForgotPasswordPOPOUP extends Stage {
 	}
 	
 	/**
-	 * I don't know why i did this shit like this im sorry if you had to read this
+	 *
+	 * I don't know why i use this shitty logic, 
+	 *	im sorry if you had to read this
 	 * code
-	 * 
-	 * @param  email
-	 * @param  password
-	 * @param  passwordConfirmation
-	 * @param  needEmail
+	 * good luck trying to understand
+	 * @param  String email
+	 * @param  String password
+	 * @param  String passwordConfirmation
+	 * @param boolean needEmail
+	 * @author jefter66
 	 * @return
 	 */
 	private boolean changePassword(String email, String password, String passwordConfirmation, boolean needEmail) {
