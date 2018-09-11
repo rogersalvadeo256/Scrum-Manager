@@ -26,13 +26,13 @@ public class HBProfileContent extends HBox {
 	
 	public HBProfileContent(Profile p) throws IOException {
 		this.lblName = new Label(p.getName());
-		this.lblBio = new Label(p.getBiography());
+		this.lblBio = new Label(p.getBio());
 		init(p);
 	}
 	
 	public HBProfileContent(UserRegistration u) throws IOException {
 		this.lblName = new Label(u.getProfile().getName());
-		this.lblBio = new Label(u.getProfile().getBiography());
+		this.lblBio = new Label(u.getProfile().getBio());
 		init(u.getProfile());
 	}
 	

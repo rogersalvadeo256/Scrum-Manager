@@ -259,7 +259,7 @@ public class HomePageScene extends Scene {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-		});
+		});	
 		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
@@ -322,7 +322,7 @@ public class HomePageScene extends Scene {
 				EntityManager em = Database.createEntityManager();
 				Profile p = (Profile) SESSION.getProfileLogged();
 					em.getTransaction().begin();
-					p.setBiography(txtBio.getText());
+					p.setBio(txtBio.getText());
 					em.merge(p);
 					em.getTransaction().commit();
 					em.clear();

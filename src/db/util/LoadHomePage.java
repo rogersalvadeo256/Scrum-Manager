@@ -1,12 +1,8 @@
 package db.util;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
-
-import db.hibernate.factory.Database;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,14 +24,14 @@ public class LoadHomePage {
 		
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
-		lblBio.setText(SESSION.getProfileLogged().getBiography());
+		lblBio.setText(SESSION.getProfileLogged().getBio());
 		imgProfile.setImage(ProfileImg.loadImage());
 	
 	}
 	public static void loadComponents() throws IOException { 
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
-		lblBio.setText(SESSION.getProfileLogged().getBiography());
+		lblBio.setText(SESSION.getProfileLogged().getBio());
 		
 		if(SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
 			imgProfile.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));

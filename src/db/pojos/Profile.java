@@ -20,7 +20,7 @@ public class Profile {
 	@Column(name="codProfile")
 	private int codProfile;
 	@Column
-	private String biography;
+	private String bio;
 	@Column 
 	private String name;
 	
@@ -33,10 +33,10 @@ public class Profile {
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
 	@JoinColumn(name="codFriend")
-	private List<Profile> friend;
+	private List<Profile> friendList;
 	
 	public Profile() { 
-		this.friend = new ArrayList<Profile>();
+		this.friendList = new ArrayList<Profile>();
 		this.friendshipRequest = new ArrayList<Profile>();
 	}
 	
@@ -49,14 +49,14 @@ public class Profile {
 	public String getName(){ return name;}
 	public void setName(String name){this.name = name;}
 	
-	public String getBiography() {return biography;}
-	public void setBiography(String biography) {this.biography = biography;}
+	public String getBio() {return bio;}
+	public void setBio(String biography) {this.bio = biography;}
 	
 	public List<Profile> getFriendshipRequest() {return friendshipRequest;}
 
 	
-	public List<Profile> getFriend() {return friend;}
-	public void setFriend(List<Profile> friend) {this.friend = friend;}
+	public List<Profile> getFriendList() {return friendList;}
+	public void setFriendList(List<Profile> friend) {this.friendList = friend;}
 }
 
 

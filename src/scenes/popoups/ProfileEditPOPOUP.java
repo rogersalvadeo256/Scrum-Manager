@@ -157,7 +157,7 @@ public class ProfileEditPOPOUP extends Stage {
 			}
 			if (!c.isTextAreaEmpty(txtBio)) {
 				em.getTransaction().begin();
-				p.setBiography(txtBio.getText());
+				p.setBio(txtBio.getText());
 				em.merge(p);
 				em.getTransaction().commit();
 				em.clear();
@@ -193,14 +193,8 @@ public class ProfileEditPOPOUP extends Stage {
 			// }
 			// }
 			
-			Query q = em.createQuery("from Profile where codProfile =: cod");
-			q.setParameter("cod", SESSION.getProfileLogged().getCod());
-			Query q1 = em.createQuery("from UserRegistration where codUser =:cod");
-			q1.setParameter("cod", SESSION.getUserLogged().getCodUser());
-			SESSION.UPDATE_SESSION((Profile) q.getResultList().get(0),
-					(UserRegistration) q1.getResultList().get(0));
-			em.clear();
-			em.close();
+			SESSION.UPDATE_SESSION();
+			
 			try {
 				LoadHomePage.updateComponents();
 			} catch (IOException e1) {

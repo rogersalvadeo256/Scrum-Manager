@@ -34,5 +34,73 @@ public class FriendshipRequest {
 		em.close();
 		em = null;
 	}
+	
+	public void answerFriendshipRequest(Profile pRequest) { 
+		
+		if(this.em == null ) this.em = Database.createEntityManager();
+		
+		Profile p = SESSION.getProfileLogged();
+		
+		this.em.getTransaction().begin();
+		p.getFriendList().add(pRequest);
+		this.em.merge(p);
+		this.em.getTransaction().commit();
+		this.em.clear();
+		this.em.close();
+		this.em = null;
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

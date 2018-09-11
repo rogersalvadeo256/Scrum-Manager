@@ -32,7 +32,7 @@ public class ProfileImg {
 	public void setImage(Stage owner) throws IOException {
 		FileChooser fc = new FileChooser();
 		File f = fc.showOpenDialog(owner);
-		
+			
 		byte[] img = new byte[(int) f.length()];
 		
 		FileInputStream fis = new FileInputStream(f);

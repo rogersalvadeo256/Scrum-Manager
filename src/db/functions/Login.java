@@ -38,9 +38,7 @@ public class Login {
 			q.setParameter("password", password.getText());
 			
 			if (!q.getResultList().isEmpty()) {
-				UserRegistration u = new UserRegistration();
-				u = (UserRegistration) q.getResultList().get(0);
-				SESSION.START_SESSION(u);
+				SESSION.START_SESSION((UserRegistration) q.getResultList().get(0));
 				return true;
 			}
 		}
