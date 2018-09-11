@@ -193,7 +193,15 @@ public class ProfileEditPOPOUP extends Stage {
 			// }
 			// }
 			
-			SESSION.UPDATE_SESSION();
+			
+			Query q = em.createQuery("from UserRegistration where codUser  =: cod");
+			q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+			
+			UserRegistration u1 = (UserRegistration) q.getResultList().get(0);
+			Profile p1 = u1.getProfile();
+			
+			SESSION.UPDATE_SESSION(p1, u1);
+//			SESSION.UPDATE_SESSION();
 			
 			try {
 				LoadHomePage.updateComponents();

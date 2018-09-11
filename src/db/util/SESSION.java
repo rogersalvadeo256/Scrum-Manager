@@ -25,46 +25,45 @@ public class SESSION {
 	 */
 	public static UserRegistration getUserLogged() {
 		return u;
-		// if(em == null ) em = Database.createEntityManager();
-		//
-		// Query q = em.createQuery("from UserRegistration where codUser=:codUser");
-		// q.setParameter("codUser", SESSION.u.getCodUser());
-		//
-		// if(q.getResultList().size() > 0) {
-		// em.clear();
-		// em = null;
-		// UserRegistration uReturn = (UserRegistration) q.getResultList().get(0);
-		// return uReturn;
-		// }
-		// return null;
 	}
 	
 	public static Profile getProfileLogged() {
 		return p;
 	}
-	
-	public static void START_SESSION(UserRegistration u) {
-		SESSION.u = u;
-		SESSION.p = u.getProfile();
+	private static void setProfile() {
+		if (em == null)
+			em = Database.createEntityManager();
+		Query q1 = em.createQuery("from Profile where codProfile =: cod");
+		q1.setParameter("cod", SESSION.getUserLogged().getProfile().getCod());
+		Profile p = (Profile) q1.getResultList().get(0);
+		SESSION.p = p;
 	}
-	
+	private static void setUser(UserRegistration u) {
+		SESSION.u = u;
+	}
+	public static void START_SESSION(UserRegistration u) {
+		SESSION.setUser(u);
+		SESSION.setProfile();
+	}
 	private static void UPDATE_SESSION(Profile p) {
 		SESSION.p = p;
 	}
-	
-	private static void UPDATE_SESSION(Profile p, UserRegistration u) {
+	public static void UPDATE_SESSION(Profile p, UserRegistration u) {
 		SESSION.p = p;
 		SESSION.u = u;
 	}
-	
+	public static void UPDATE_SESSION(UserRegistration u ) { 
+		SESSION.u = u;
+	}
 	public static void UPDATE_SESSION() {
-		if (em == null)	em = Database.createEntityManager();
+		if (em == null)
+			em = Database.createEntityManager();
 		Query q = em.createQuery("from UserRegistration where codUser=: cod");
 		q.setParameter("cod", SESSION.getUserLogged().getCodUser());
 		UserRegistration u = (UserRegistration) q.getResultList().get(0);
-
+		
 		Query q1 = em.createQuery("from Profile where codProfile =: cod");
-		q1.setParameter("cod",SESSION.getUserLogged().getProfile().getCod());
+		q1.setParameter("cod", SESSION.getUserLogged().getProfile().getCod());
 		Profile p = (Profile) q1.getResultList().get(0);
 		
 		SESSION.UPDATE_SESSION(p, u);
@@ -73,6 +72,23 @@ public class SESSION {
 		em = null;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
