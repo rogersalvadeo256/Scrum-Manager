@@ -1,7 +1,6 @@
 package widgets.designComponents;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import db.pojos.Profile;
@@ -14,7 +13,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import validation.CheckEmptyFields;
 
 public class HBProfileContent extends HBox {
 	private VBox vbUsrIMG, vbUsrLABEL, vbUsrBUTTON;
@@ -22,8 +20,6 @@ public class HBProfileContent extends HBox {
 	private Label lblName, lblBio;
 	private Button btnAdd;
 	private FriendshipRequest fRequest;
-	private ProfileImg profileImage;
-	
 	public HBProfileContent(Profile p) throws IOException {
 		this.lblName = new Label(p.getName());
 		this.lblBio = new Label(p.getBio());
@@ -46,12 +42,11 @@ public class HBProfileContent extends HBox {
 		this.btnAdd.setOnAction(e -> {
 			fRequest.sendFriendshipRequest(p);
 		});
-		this.profileImage = new ProfileImg();
 		
 		if(p.getPhoto() == null || p.getPhoto().length == 0){ 
 				this.usrImage.setImage(new Image(new FileInputStream("resources/images/icons/scrum_icon.png")));
 		}else { 
-				this.usrImage.setImage(this.profileImage.getImage(p));
+				this.usrImage.setImage(ProfileImg.getImage(p));
 		}
 		this.usrImage.setFitWidth(100);
 		this.usrImage.setFitHeight(100);

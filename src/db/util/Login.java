@@ -1,11 +1,10 @@
-package db.functions;
+package db.util;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
-import db.util.SESSION;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import validation.CheckEmptyFields;

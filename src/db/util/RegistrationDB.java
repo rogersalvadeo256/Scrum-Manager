@@ -1,4 +1,4 @@
-package db.functions;
+package db.util;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

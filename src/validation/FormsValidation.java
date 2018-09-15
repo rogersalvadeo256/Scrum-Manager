@@ -2,8 +2,8 @@ package validation;
 
 import java.util.ArrayList;
 
-import db.functions.RegistrationDB;
 import db.pojos.UserRegistration;
+import db.util.RegistrationDB;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import widgets.alertMessage.CustomAlert;

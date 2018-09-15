@@ -45,9 +45,6 @@ public class SESSION {
 		SESSION.setUser(u);
 		SESSION.setProfile();
 	}
-	private static void UPDATE_SESSION(Profile p) {
-		SESSION.p = p;
-	}
 	public static void UPDATE_SESSION(Profile p, UserRegistration u) {
 		SESSION.p = p;
 		SESSION.u = u;
@@ -56,8 +53,7 @@ public class SESSION {
 		SESSION.u = u;
 	}
 	public static void UPDATE_SESSION() {
-		if (em == null)
-			em = Database.createEntityManager();
+		if (em == null)em = Database.createEntityManager();
 		Query q = em.createQuery("from UserRegistration where codUser=: cod");
 		q.setParameter("cod", SESSION.getUserLogged().getCodUser());
 		UserRegistration u = (UserRegistration) q.getResultList().get(0);

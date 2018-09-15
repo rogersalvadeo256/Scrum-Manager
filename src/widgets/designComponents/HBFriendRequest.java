@@ -11,7 +11,8 @@ import javax.persistence.Query;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.util.SESSION;
-import friendship.FriendshipRequest;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,6 +25,7 @@ public class HBFriendRequest extends HBox {
 	private Label lblName, lblBio;
 	private VBox vbAlignItemsLeft, vbAlignItemsMiddle, vbAlignItemsRight;
 
+	
 	private ImageView image;
 	private File path;
 	private FileInputStream fis;
@@ -31,42 +33,16 @@ public class HBFriendRequest extends HBox {
 	private HBox layout;
 	private Button btnAccept, btnRefuse;
 	
-	private Profile p;
-	private EntityManager em;
-	
-	private boolean requesAnswered;
 	
 	public HBFriendRequest(Profile p) throws FileNotFoundException {
 		this.image = new ImageView();
-		
-		this.p = p;
 		
 		this.lblName = new Label(p.getName());
 		this.lblBio = new Label(p.getBio());
 		
 		this.btnAccept = new Button("Aceitar");
-		this.btnAccept.setOnAction(e -> {
-			FriendshipRequest friendshipRequest = new FriendshipRequest();
-			friendshipRequest.answerFriendshipRequest(HBFriendRequest.this.p);
-			this.setRequesAnswered(true);
-		});
 		this.btnRefuse = new Button("Recusar");
-		this.btnRefuse.setOnAction(e -> {
-			Profile profile = (Profile) SESSION.getProfileLogged();
-			List<Profile> requestList = (List<Profile>) profile.getFriendshipRequests();
-			for (int i = 0; i < profile.getFriendshipRequests().size(); i++) {
-				if (profile.getFriendshipRequests().get(i).getCod() == HBFriendRequest.this.p.getCod()) {
-					requestList.remove(i);
-					if(em == null) em = Database.createEntityManager() ;
-					em.getTransaction().begin();
-					em.merge(profile);
-					em.getTransaction().commit();
-					em.clear();
-					em.close();
-					this.setRequesAnswered(true);
-				}
-			}
-		});
+	
 		this.vbAlignItemsLeft = new VBox();
 		this.vbAlignItemsMiddle = new VBox();
 		this.vbAlignItemsRight = new VBox();
@@ -98,13 +74,52 @@ public class HBFriendRequest extends HBox {
 		this.getChildren().add(layout);
 	}
 	
-	public boolean isRequesAnswered() {
-		return requesAnswered;
-	}
-	public void setRequesAnswered(boolean requesAnswered) {
-		this.requesAnswered = requesAnswered;
-	}
+	public void setEventAccept(EventHandler<ActionEvent> e) { 
+		this.btnAccept.setOnAction(e);
+	};
+	public void setEventRefuse(EventHandler<ActionEvent> e) { 
+		this.btnRefuse.setOnAction(e);
+	};
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

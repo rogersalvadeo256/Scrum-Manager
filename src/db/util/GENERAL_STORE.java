@@ -44,21 +44,6 @@ public class GENERAL_STORE {
 		}
 	}
 	
-	/*
-	 * friendship request scene
-	 */
-	private static ArrayList<HBFriendRequest> components;
-	
-	public static void setComponentsFRIENDSHIP_REQUEST(ArrayList<HBFriendRequest> components) {
-		GENERAL_STORE.components = components;
-	}
-	
-	public static void updateComponentsFRIENDSHIP_REQUEST() {
-		
-		
-		
-	}
-	
 }
 
 

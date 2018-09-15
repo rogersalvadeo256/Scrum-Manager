@@ -4,12 +4,11 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.util.GENERAL_STORE;
 import db.util.SESSION;
+import friendship.FriendshipRequest;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
@@ -29,7 +28,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 	private final ScrollBar sc;
 	private Scene scene;
 	private Window parent;
-
+	int count = 0;
 	/**
 	 * This scene will contain the friendship requests of the user the scene have
 	 * he's own stage, this because are a popoup window
@@ -39,28 +38,18 @@ public class FriendshipRequestPOPOUP extends Stage {
 	public FriendshipRequestPOPOUP(Window parent) throws FileNotFoundException {
 		this.layout = new VBox();
 		
-		GENERAL_STORE.setComponentsFRIENDSHIP_REQUEST(this.hbFriendRequest);
-		
 		
 		this.parent= parent;
 		
+		this.hbFriendRequest = new  ArrayList<HBFriendRequest>();
+		
 		 this.drawHbox();
-		 
-			
-			Componente c = new Componente();
-			
-		 
-			c.setEventHandler(e -> { 
-					
-			});
-			
-		 
-		 
 		 
 		this.scene = new Scene(layout);
 //		this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
 		
 		this.setScene(scene);
+		
 		
 		this.sc = new ScrollBar();
 		this.sc.setLayoutX(scene.getWidth() - sc.getWidth());
@@ -86,10 +75,9 @@ public class FriendshipRequestPOPOUP extends Stage {
 	private void drawHbox() throws FileNotFoundException {
 		this.hbFriendRequest.clear();
 		
-		EntityManager em = Database.createEntityManager();
-		
 		ArrayList<Profile> r = new ArrayList<Profile>();
 		r.clear();
+		SESSION.UPDATE_SESSION();
 		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequests().size(); i++) {
 			
 			Profile p = (Profile) SESSION.getProfileLogged().getFriendshipRequests().get(i);
@@ -97,14 +85,21 @@ public class FriendshipRequestPOPOUP extends Stage {
 		}
 		if (!r.isEmpty()) {
 			for (int i = 0; i < r.size(); i++) {
+				count = i;
 				HBFriendRequest f = new HBFriendRequest(r.get(i));
+				FriendshipRequest fr = new FriendshipRequest();
 				this.hbFriendRequest.add(f);
+				this.hbFriendRequest.get(i).setEventAccept(e ->{ 
+					fr.acceptRequest(r.get(FriendshipRequestPOPOUP.this.count));
+				});
+				this.hbFriendRequest.get(i).setEventRefuse(e ->{ 
+					fr.refuseRequest(r.get(FriendshipRequestPOPOUP.this.count));
+				});
 				this.layout.getChildren().add(this.hbFriendRequest.get(i));
 			}
 		}
 		return;
 	}
-	
 }
 class Componente extends VBox {
 	

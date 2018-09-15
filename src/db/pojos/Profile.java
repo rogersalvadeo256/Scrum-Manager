@@ -27,11 +27,11 @@ public class Profile {
 	@Column(columnDefinition = "LONGBLOB")
 	private byte[] photo;
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="codFriendRequest")
 	private List<Profile> friendshipRequest;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="codFriend")
 	private List<Profile> friendList;
 	
@@ -56,7 +56,7 @@ public class Profile {
 	public void setFriendshipRequestList(List<Profile> friendshipRequestList) { 
 		this.friendshipRequest = friendshipRequestList;
 	}
-	public List<Profile> getFriendList() {return friendList;}
+	public List<Profile> getFriendsList() {return friendList;}
 	public void setFriendList(List<Profile> friend) {this.friendList = friend;}
 }
 
