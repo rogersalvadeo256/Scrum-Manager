@@ -3,6 +3,7 @@ package widgets.designComponents;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -22,7 +23,7 @@ import javafx.scene.layout.VBox;
 public class HBFriendRequest extends HBox {
 	private Label lblName, lblBio;
 	private VBox vbAlignItemsLeft, vbAlignItemsMiddle, vbAlignItemsRight;
-	
+
 	private ImageView image;
 	private File path;
 	private FileInputStream fis;
@@ -32,6 +33,8 @@ public class HBFriendRequest extends HBox {
 	
 	private Profile p;
 	private EntityManager em;
+	
+	private boolean requesAnswered;
 	
 	public HBFriendRequest(Profile p) throws FileNotFoundException {
 		this.image = new ImageView();
@@ -45,17 +48,25 @@ public class HBFriendRequest extends HBox {
 		this.btnAccept.setOnAction(e -> {
 			FriendshipRequest friendshipRequest = new FriendshipRequest();
 			friendshipRequest.answerFriendshipRequest(HBFriendRequest.this.p);
-			
+			this.setRequesAnswered(true);
 		});
 		this.btnRefuse = new Button("Recusar");
 		this.btnRefuse.setOnAction(e -> {
-			for (int i = 0; i < SESSION.getProfileLogged().getFriendList().size(); i++) {
-				if (SESSION.getProfileLogged().getFriendList().get(i) == this.p) {
-					SESSION.getProfileLogged().getFriendList().remove(i);
+			Profile profile = (Profile) SESSION.getProfileLogged();
+			List<Profile> requestList = (List<Profile>) profile.getFriendshipRequests();
+			for (int i = 0; i < profile.getFriendshipRequests().size(); i++) {
+				if (profile.getFriendshipRequests().get(i).getCod() == HBFriendRequest.this.p.getCod()) {
+					requestList.remove(i);
+					if(em == null) em = Database.createEntityManager() ;
+					em.getTransaction().begin();
+					em.merge(profile);
+					em.getTransaction().commit();
+					em.clear();
+					em.close();
+					this.setRequesAnswered(true);
 				}
 			}
 		});
-		
 		this.vbAlignItemsLeft = new VBox();
 		this.vbAlignItemsMiddle = new VBox();
 		this.vbAlignItemsRight = new VBox();
@@ -85,6 +96,40 @@ public class HBFriendRequest extends HBox {
 		
 		this.setSpacing(10);
 		this.getChildren().add(layout);
-		
+	}
+	
+	public boolean isRequesAnswered() {
+		return requesAnswered;
+	}
+	public void setRequesAnswered(boolean requesAnswered) {
+		this.requesAnswered = requesAnswered;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

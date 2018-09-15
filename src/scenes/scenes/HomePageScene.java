@@ -11,13 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.util.LoadHomePage;
-import db.util.ProfileImg;
+import db.util.GENERAL_STORE;
 import db.util.SESSION;
 import friendship.SearchFriend;
 import javafx.event.ActionEvent;
@@ -73,6 +71,7 @@ public class HomePageScene extends Scene {
 	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
+	
 //		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
 		
 		this.layout = new AnchorPane();
@@ -96,8 +95,8 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		LoadHomePage.setComponents(lblName,lblUsername,lblBio,profileImg);
-		LoadHomePage.loadComponents();
+		GENERAL_STORE.setComponentsHOME(lblName,lblUsername,lblBio,profileImg);
+		GENERAL_STORE.loadComponentsHOME();
 		
 		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
@@ -230,8 +229,8 @@ public class HomePageScene extends Scene {
 		icon_f.setFitHeight(40);
 		icon_f.setFitWidth(40);
 		this.btnFriendRequest.setGraphic(icon_f);
-		if(SESSION.getProfileLogged().getFriendshipRequest().size()> 0) {
-			this.btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequest().size()));
+		if(SESSION.getProfileLogged().getFriendshipRequests().size()> 0) {
+			this.btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()));
 		}
 		
 		

@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
-import db.util.LoadHomePage;
+import db.util.GENERAL_STORE;
 import db.util.ProfileImg;
 import db.util.SESSION;
 import javafx.geometry.Pos;
@@ -204,7 +204,7 @@ public class ProfileEditPOPOUP extends Stage {
 //			SESSION.UPDATE_SESSION();
 			
 			try {
-				LoadHomePage.updateComponents();
+				GENERAL_STORE.updateComponentsHOME();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

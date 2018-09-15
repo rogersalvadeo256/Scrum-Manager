@@ -52,9 +52,10 @@ public class Profile {
 	public String getBio() {return bio;}
 	public void setBio(String biography) {this.bio = biography;}
 	
-	public List<Profile> getFriendshipRequest() {return friendshipRequest;}
-
-	
+	public List<Profile> getFriendshipRequests() {return friendshipRequest;}
+	public void setFriendshipRequestList(List<Profile> friendshipRequestList) { 
+		this.friendshipRequest = friendshipRequestList;
+	}
 	public List<Profile> getFriendList() {return friendList;}
 	public void setFriendList(List<Profile> friend) {this.friendList = friend;}
 }

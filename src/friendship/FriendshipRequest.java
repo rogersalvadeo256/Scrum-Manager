@@ -20,23 +20,24 @@ public class FriendshipRequest {
 	 */
 	public void sendFriendshipRequest(Profile p) {
 		if (this.em == null)	em = Database.createEntityManager();
-		
+
 		Query q = em.createQuery("from Profile where codProfile =: COD");
 		q.setParameter("COD", p.getCod());
 
 		Profile updateP = (Profile) q.getResultList().get(0);
 		
-		updateP.getFriendshipRequest().add(SESSION.getProfileLogged());
+		updateP.getFriendshipRequests().add(SESSION.getProfileLogged());
+		
+		
 		em.getTransaction().begin();
-		em.merge(updateP);
+		em.merge(updateP);	
 		em.getTransaction().commit();
-		em.clear();
+		em.clear();	
 		em.close();
 		em = null;
 	}
 	
 	public void answerFriendshipRequest(Profile pRequest) { 
-		
 		if(this.em == null ) this.em = Database.createEntityManager();
 		
 		Profile p = SESSION.getProfileLogged();
@@ -48,6 +49,8 @@ public class FriendshipRequest {
 		this.em.clear();
 		this.em.close();
 		this.em = null;
+		
+		
 	}	
 	
 	

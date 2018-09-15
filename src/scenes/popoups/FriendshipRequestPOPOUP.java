@@ -8,9 +8,13 @@ import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
+import db.util.GENERAL_STORE;
 import db.util.SESSION;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -25,7 +29,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 	private final ScrollBar sc;
 	private Scene scene;
 	private Window parent;
-	
+
 	/**
 	 * This scene will contain the friendship requests of the user the scene have
 	 * he's own stage, this because are a popoup window
@@ -35,11 +39,24 @@ public class FriendshipRequestPOPOUP extends Stage {
 	public FriendshipRequestPOPOUP(Window parent) throws FileNotFoundException {
 		this.layout = new VBox();
 		
-		this.hbFriendRequest = new ArrayList<HBFriendRequest>();
+		GENERAL_STORE.setComponentsFRIENDSHIP_REQUEST(this.hbFriendRequest);
+		
 		
 		this.parent= parent;
 		
-		 drawHbox();
+		 this.drawHbox();
+		 
+			
+			Componente c = new Componente();
+			
+		 
+			c.setEventHandler(e -> { 
+					
+			});
+			
+		 
+		 
+		 
 		this.scene = new Scene(layout);
 //		this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
 		
@@ -57,7 +74,6 @@ public class FriendshipRequestPOPOUP extends Stage {
 		this.setHeight(500);
 		this.setResizable(false);
 	}
-	
 	/**
 	 * This method are for bring the friendship requests of the database and put on
 	 * a component with the sender informations HBFriendshipRequest and show for
@@ -69,36 +85,15 @@ public class FriendshipRequestPOPOUP extends Stage {
 	 */
 	private void drawHbox() throws FileNotFoundException {
 		this.hbFriendRequest.clear();
-//		for(int i=0;i<10;i++) {
-//			Profile p = new Profile();
-//			p.setName("GENERIC");
-//			p.setBiography("JAAJAAJAJ");
-//			
-//			HBFriendRequest f = new HBFriendRequest(p);
-//			this.hbFriendRequest.add(f);
-//			this.layout.getChildren().add(this.hbFriendRequest.get(i));
-//		}
 		
 		EntityManager em = Database.createEntityManager();
 		
 		ArrayList<Profile> r = new ArrayList<Profile>();
-		
-		
 		r.clear();
-		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequest().size(); i++) {
+		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequests().size(); i++) {
 			
-			Profile p = (Profile) SESSION.getProfileLogged().getFriendshipRequest().get(i);
-				
+			Profile p = (Profile) SESSION.getProfileLogged().getFriendshipRequests().get(i);
 			r.add((Profile) p);
-//			Query q1 = em.createQuery("from Profile where codProfile =:cod");
-//			q1.setParameter("cod", p.getCod());
-//			
-//			if (!q1.getResultList().isEmpty()) {
-//				for (int j = 0; j < q1.getResultList().size(); j++) {
-//					r.add((Profile) q1.getResultList().get(j));
-//				}
-//				q1.getResultList().clear();
-//			}
 		}
 		if (!r.isEmpty()) {
 			for (int i = 0; i < r.size(); i++) {
@@ -109,7 +104,23 @@ public class FriendshipRequestPOPOUP extends Stage {
 		}
 		return;
 	}
+	
 }
+class Componente extends VBox {
+	
+	private Button btn;
+
+	public Componente() {
+		this.btn = new Button("ewewe");
+		this.getChildren().add(btn);
+	}
+	
+	public void setEventHandler(EventHandler<ActionEvent> e) {
+		this.btn.setOnAction(e);
+	}
+}
+
+
 
 
 
