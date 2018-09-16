@@ -72,7 +72,7 @@ public class ProfileEditPOPOUP extends Stage {
 		this.imgProfile.setOnMouseClicked(e -> {
 			try {
 				pi.setImage(application.main.Window.mainStage);
-				this.imgProfile.setImage(pi.loadImage());
+				this.imgProfile.setImage(ProfileImg.loadImage());
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

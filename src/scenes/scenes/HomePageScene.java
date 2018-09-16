@@ -72,7 +72,7 @@ public class HomePageScene extends Scene {
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 	
-//		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
+		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
 		
 		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
@@ -101,6 +101,7 @@ public class HomePageScene extends Scene {
 		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
 		this.lblBio.getStyleClass().add("label");
+		this.lblBio.setId("bio");
 
 		this.lblCurrentProject = new Label("Projetos em andamento");
 		this.lblName.setId("lblProject");

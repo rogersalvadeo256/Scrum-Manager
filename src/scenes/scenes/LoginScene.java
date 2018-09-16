@@ -117,17 +117,13 @@ public class LoginScene extends Scene {
 		this.messageLoginValidation = new Label(new String());
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
+	
 		this.forgotPassword.setOnMouseClicked(e -> {
-			if(!LoginScene.this.txtLogin.getText().isEmpty()) { 
-				try {
-					new ForgotPasswordPOPOUP(Window.mainStage, LoginScene.this.txtLogin).showAndWait();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			}
-			if(LoginScene.this.txtLogin.getText().isEmpty()) { 
-				new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
-			}
+					try {
+						new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 		});
 		/*
 		 */
