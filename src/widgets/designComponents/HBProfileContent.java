@@ -38,9 +38,9 @@ public class HBProfileContent extends HBox {
 		this.vbUsrBUTTON = new VBox();
 		this.usrImage = new ImageView();
 		this.btnAdd = new Button("Adicionar");
-		this.fRequest = new FriendshipRequest();
+		this.fRequest = new FriendshipRequest(p);
 		this.btnAdd.setOnAction(e -> {
-			fRequest.sendFriendshipRequest(p);
+			fRequest.sendFriendshipRequest();
 		});
 		
 		if(p.getPhoto() == null || p.getPhoto().length == 0){ 

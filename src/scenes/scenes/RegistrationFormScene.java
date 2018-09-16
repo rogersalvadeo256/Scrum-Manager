@@ -2,25 +2,22 @@ package scenes.scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import com.fasterxml.classmate.util.ResolvedTypeCache.Key;
-
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
 
-	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword;
-	private TextField txtName, txtUserName, txtEmail;
+	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword, lblQuestion,lblAnswer;
+	private TextField txtName, txtUserName, txtEmail,txtQuestion,txtAnswer;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
 	public Button btnRegister,btnCancel;
 	private ArrayList<TextField> field;
@@ -30,22 +27,30 @@ public class RegistrationFormScene extends VBox {
 	private FormsValidation validation;
 	private UserRegistration registration;
 	private Profile profile;
+	private HBox hbButtons;
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {	
 		
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
+		
 		this.lblName = new Label("Nome");
 		this.lblUserName = new Label("UserName");
 		this.lblEmail = new Label("Email");
+		this.lblQuestion = new Label("Escreva uma pergunta de segurança");
+		this.lblAnswer = new Label("Resposta da pergunta");
 		this.lblPassword = new Label("Senha");
 		this.lblConfirmPassword = new Label("Confirmação de senha");
+
 		this.txtName = new TextField();
 		this.txtUserName = new TextField();
 		this.txtEmail = new TextField();
+		this.txtQuestion=new TextField();
+		this.txtAnswer = new TextField();
 		this.txtPasswordField = new PasswordField();
 		this.txtPasswordConfirmation = new PasswordField();
 
+																						
 		this.txtName.setMaxWidth(300);
 		this.txtUserName.setMaxWidth(300);
 		this.txtEmail.setMaxWidth(300);
@@ -56,13 +61,19 @@ public class RegistrationFormScene extends VBox {
 		this.txtEmail.setAlignment(Pos.CENTER);
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
-	
+		
+		this.hbButtons = new HBox(10);
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button();
+		
+		this.hbButtons.getChildren().addAll(btnCancel,btnRegister);
+		this.hbButtons.setAlignment(Pos.CENTER);
 		
 		this.field.add(txtName);
 		this.field.add(txtEmail);
 		this.field.add(txtUserName);
+		this.field.add(txtQuestion);
+		this.field.add(txtAnswer);
 		this.passwordField.add(txtPasswordField);
 		this.passwordField.add(txtPasswordConfirmation);
 	
@@ -71,6 +82,8 @@ public class RegistrationFormScene extends VBox {
 		this.fieldName.add("nome");
 		this.fieldName.add("email");
 		this.fieldName.add("nome de usuario");
+		this.fieldName.add(" pergunta de segurança");
+		this.fieldName.add(" resposta de segurança");
 		
 		this.confirmationMessage = new ArrayList<String>();
 		
@@ -85,8 +98,8 @@ public class RegistrationFormScene extends VBox {
 			if(e.getCode() == KeyCode.ENTER) validationAndRegistration();
 		});
 		this.btnRegister.setOnAction(e ->{	validationAndRegistration();});
-		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail);
-		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, btnRegister,btnCancel);
+		this.getChildren().addAll(lblName,txtName,lblUserName,txtUserName,lblEmail,txtEmail, lblQuestion, txtQuestion,lblAnswer,txtAnswer);
+		this.getChildren().addAll(lblPassword,txtPasswordField,lblConfirmPassword,txtPasswordConfirmation, hbButtons);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}
@@ -98,12 +111,14 @@ public class RegistrationFormScene extends VBox {
 		validation.setPasswordField(passwordField);
 		validation.setFieldName(fieldName);
 
-		profile.setName(RegistrationFormScene.this.txtName.getText());
-		registration.setEmail(RegistrationFormScene.this.txtEmail.getText());
-		registration.setUserName(RegistrationFormScene.this.txtUserName.getText());
-		registration.setPassword(RegistrationFormScene.this.txtPasswordConfirmation.getText());
+		profile.setName(this.txtName.getText());
+		registration.setEmail(this.txtEmail.getText());
+		registration.setUserName(this.txtUserName.getText());
+		registration.setPassword(this.txtPasswordConfirmation.getText());
+		registration.setSecurityQuestion(this.txtQuestion.getText());
+		registration.setSecurityQuestionAnswer(this.txtAnswer.getText());
 		registration.setProfile(profile);
-		validation.setUserRegistration(RegistrationFormScene.this.registration);
+		validation.setUserRegistration(this.registration);
 		validation.registrationOfNewUser();
 	}
 	
