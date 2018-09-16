@@ -90,12 +90,12 @@ public class HomePageScene extends Scene {
 		this.lblUsername = new Label();
 		this.lblBio = new Label(); 
 		this.profileImg = new ImageView();
-		
+		this.btnFriendRequest = new Button();
 		
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName,lblUsername,lblBio,profileImg);
+		GENERAL_STORE.setComponentsHOME(lblName,lblUsername,lblBio,profileImg,btnFriendRequest);
 		GENERAL_STORE.loadComponentsHOME();
 		
 		this.lblName.setId("lblName");
@@ -203,7 +203,6 @@ public class HomePageScene extends Scene {
 		/*
 		 * load the name with the qtd of requests
 		 */
-		this.btnFriendRequest = new Button();
 		this.btnProjectInviteRequest = new Button();
 
 		this.btnFriendRequest.setOnAction(event -> {
@@ -229,9 +228,7 @@ public class HomePageScene extends Scene {
 		icon_f.setFitHeight(40);
 		icon_f.setFitWidth(40);
 		this.btnFriendRequest.setGraphic(icon_f);
-		if(SESSION.getProfileLogged().getFriendshipRequests().size()> 0) {
-			this.btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()));
-		}
+	
 		
 		
 		ImageView icon_s = new ImageView();

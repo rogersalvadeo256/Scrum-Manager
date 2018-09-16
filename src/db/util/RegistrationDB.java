@@ -21,8 +21,7 @@ public class RegistrationDB{
 	 *            user
 	 */
 	public void insertUser(UserRegistration u) {
-		if (em == null) {
-			em = Database.createEntityManager();
+		if (em == null) {em = Database.createEntityManager();
 		}
 		this.em.getTransaction().begin();
 		this.em.persist(u);
