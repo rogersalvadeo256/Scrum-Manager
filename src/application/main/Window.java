@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import scenes.popoups.ForgotPasswordPOPOUP;
 import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
+import scenes.scenes.HomePageScene;
 import scenes.scenes.LoginScene;
 
 public class Window extends Stage {
