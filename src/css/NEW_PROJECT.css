@@ -1,0 +1,40 @@
+.root{
+	-fx-background-color:#e4ebff;
+}
+.text-field{
+	-fx-border-radius:15px;
+	-fx-text-fill: black;
+	-fx-text-size:20.0pt;
+}
+.text-field#descProject{
+	-fx-border-radius:0px 95px 9px 24px;
+	-fx-fill-color:black;
+	-fx-font-size: 20.0pt;
+}
+.label{
+	 -fx-font-family: "Segoe UI Semibold";
+	 -fx-font-size: 10.0pt;
+	 -fx-font-color: black;
+}
+.buttons{
+	-fx-background-color:#5fb69c;
+	-fx-width:192dp;
+	-fx-height:70dp;
+	-fx-text-aligment:center;
+	-fx-fill-color:black;
+}
+.buttons:hover{
+	-fx-background-color:#020704;
+	-fx-text-fill: #d8d8d8;
+}
+.buttons#btncancel:hover{
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
+}
+.hyperlink{
+	-fx-text-fill:#5eb5b5;
+}
+.buttons:hover{
+	-fx-background-color:#020704;
+	-fx-text-fill: #d8d8d8;
+}
