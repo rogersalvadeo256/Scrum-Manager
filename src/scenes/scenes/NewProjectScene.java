@@ -25,10 +25,11 @@ public class NewProjectScene extends Scene {
 	public NewProjectScene(){	
 		super(new VBox());
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("Descriï¿½ï¿½o do Projeto");
+		this.lblDescProject = new Label("Descrição do Projeto");
 		this.lblMember = new Label("Membros:");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
+		this.txtDescProject.setId("descProject");
 		this.txtDescProject.setId("txtDescProject");
 		this.txtMember = new TextField();
 		this.lblAddMember = new Hyperlink("Adicione mais um membro");
