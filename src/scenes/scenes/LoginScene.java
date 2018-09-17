@@ -30,27 +30,21 @@ import scenes.popoups.ForgotPasswordPOPOUP;
 
 /*
  * LoginScreen.java
- * 
- * Created on: 28 jun de 2018 Autor: jefter66
+ * Created on: 28 jun de 2018 Autor: jefter66 and changed a million times after be created ( 16 september) 
  * 
  */
 public class LoginScene extends Scene {
 	
 	private final Label messageLoginValidation;
-	
 	private Label lblSignIn, lblPassword, lblWelcome, lblUser;
-	
 	private TextField txtLogin;
 	private PasswordField passwordField;
-	
 	private Button btnLogin, btnExit;
 	private Button btnSignUp;
 	private RadioButton btnStayConnected;
 	private Label lblStayConnected;
 	private HBox hbStayConnected;
-	
 	private Hyperlink forgotPassword;
-	
 	private VBox leftSide;
 	private VBox leftRegistrationForm;
 	private HBox rightSide;
@@ -64,8 +58,6 @@ public class LoginScene extends Scene {
 	
 	private ArrayList<RegistrationFormScene> form;
 	
-	private Login login;
-	
 	public LoginScene() throws ClassNotFoundException, SQLException, FileNotFoundException {
 		super(new HBox());
 		
@@ -76,19 +68,11 @@ public class LoginScene extends Scene {
 		Window.mainStage.setTitle("Tela Login");
 		
 		this.log = new LoginSceneAPI();
-		
-		
-		
-		
 		this.layout = new AnchorPane();
-		
 		this.vbLogin = new VBox();
 		this.rightSide = new HBox();
-		
 		this.leftSide = new VBox();
 		this.leftRegistrationForm = new VBox();
-		
-		this.login = new Login();
 		
 		/*
 		 * layout
@@ -110,9 +94,6 @@ public class LoginScene extends Scene {
 		this.txtLogin.setPromptText("Username");
 		this.passwordField.setPromptText("Digite sua senha");
 		
-		/*
-		 * labels
-		 */
 		this.lblUser = new Label("Username");
 		this.lblPassword = new Label("Senha");
 		
@@ -122,40 +103,22 @@ public class LoginScene extends Scene {
 		this.lblWelcome.getStyleClass().add("title");
 		this.lblSignIn.getStyleClass().add("title");
 		
-		this.messageLoginValidation = new Label(new String());
+		this.messageLoginValidation = new Label("Login ou senha incorretos");
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
 	
-		this.forgotPassword.setOnMouseClicked(e -> {
-					try {
-						new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
-					} catch (IOException e1) {
-						e1.printStackTrace();
-					}
-		});
-		/*
-		 */
 		this.btnStayConnected = new RadioButton();
 		this.lblStayConnected = new Label("Mantenha-me conentado");
 		this.hbStayConnected = new HBox();
 		this.hbStayConnected.getChildren().addAll(btnStayConnected, lblStayConnected);
-		
-		/*
-		 * buttons
-		 */
-		
+
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");
 		this.btnSignUp = new Button("Cadastre-se");
 		
 		this.btnExit.setId("exitbtn");
 		this.btnSignUp.setId("btnSingUp");
-		/*
-		 * 
-		 */
-		/*
-		 * image
-		 */
+
 		this.imgIcon = new ImageView();
 		this.iconPath = new File("resources/images/icons/scrum_icon.png");
 		this.fis = new FileInputStream(iconPath);
@@ -164,20 +127,36 @@ public class LoginScene extends Scene {
 		this.imgIcon.setFitWidth(400);
 		this.imgIcon.setFitHeight(400);
 		
+		this.txtLogin.setOnMouseClicked(e->{
+			this.messageLoginValidation.setVisible(false);
+		});
+		this.passwordField.setOnMouseClicked(e->{
+			this.messageLoginValidation.setVisible(false);
+		});
 		this.btnLogin.setOnAction(e->{
 				this.log.setEventBtnLogin(e, txtLogin, passwordField);
 				if(this.log.isInvalidLogin()) { 
-					this.messageLoginValidation.setText("Login ou senha incorretos");
+					this.messageLoginValidation.setVisible(true);
 				}
  			}
 		);
 		this.passwordField.setOnKeyPressed(e -> {
 			this.log.setEventPasswordField(e, txtLogin, passwordField);
+			if(this.log.isInvalidLogin()) { 
+				this.messageLoginValidation.setVisible(true);
+			}
 		});
-		this.forgotPassword.setOnAction(event -> {
-			
+		this.forgotPassword.setOnMouseClicked(e -> {
+			try {
+					new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 		});
+		
 		this.btnExit.setOnAction(new Close(Window.mainStage));
+		
+		
 		this.imgIcon.setId("logoImage");
 		
 		HBox.setHgrow(txtLogin, Priority.ALWAYS);

@@ -16,14 +16,16 @@ import scenes.scenes.HomePageScene;
 public class LoginSceneAPI {
 
 	private Login login;
+	/**
+	 * this variable is just for update the message of wrog login on the page
+	 */
 	private boolean invalidLogin = false;
+
 	public LoginSceneAPI() {
-		this.login=new Login();
+		this.login = new Login();
 	}
-	
-	
-	public void setEventBtnLogin(ActionEvent e, TextField txtLogin,PasswordField txtPassword) { 
-		if(this.login.valideLogin(txtLogin,txtPassword)) {
+	public void setEventBtnLogin(ActionEvent e, TextField txtLogin, PasswordField txtPassword) {
+		if (this.login.valideLogin(txtLogin, txtPassword)) {
 			try {
 				Window.mainStage.setScene(new HomePageScene());
 				return;
@@ -36,7 +38,8 @@ public class LoginSceneAPI {
 		this.setInvalidLogin(true);
 		return;
 	}
-	public void setEventPasswordField(KeyEvent e, TextField txtLogin,PasswordField txtPassword) { 
+
+	public void setEventPasswordField(KeyEvent e, TextField txtLogin, PasswordField txtPassword) {
 		if (e.getCode() == KeyCode.ENTER) {
 			if (this.login.valideLogin(txtLogin, txtPassword)) {
 				try {
@@ -52,92 +55,12 @@ public class LoginSceneAPI {
 		}
 	}
 	
-	
-	
-	
-	
 	public boolean isInvalidLogin() {
 		return invalidLogin;
 	}
+
 	public void setInvalidLogin(boolean invalidLogin) {
 		this.invalidLogin = invalidLogin;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
