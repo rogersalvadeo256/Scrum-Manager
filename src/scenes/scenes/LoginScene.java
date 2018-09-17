@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import api.LoginSceneAPI;
 import application.main.Window;
-import db.util.Login;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +19,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -54,7 +52,7 @@ public class LoginScene extends Scene {
 	private FileInputStream fis;
 	private File iconPath;
 	
-	private LoginSceneAPI log;
+	private LoginSceneAPI controller;
 	
 	private ArrayList<RegistrationFormScene> form;
 	
@@ -67,7 +65,7 @@ public class LoginScene extends Scene {
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("Tela Login");
 		
-		this.log = new LoginSceneAPI();
+		this.controller = new LoginSceneAPI();
 		this.layout = new AnchorPane();
 		this.vbLogin = new VBox();
 		this.rightSide = new HBox();
@@ -134,28 +132,22 @@ public class LoginScene extends Scene {
 			this.messageLoginValidation.setVisible(false);
 		});
 		this.btnLogin.setOnAction(e->{
-				this.log.setEventBtnLogin(e, txtLogin, passwordField);
-				if(this.log.isInvalidLogin()) { 
+				this.controller.setEventBtnLogin(e, txtLogin, passwordField);
+				if(this.controller.isInvalidLogin()) { 
 					this.messageLoginValidation.setVisible(true);
 				}
  			}
 		);
 		this.passwordField.setOnKeyPressed(e -> {
-			this.log.setEventPasswordField(e, txtLogin, passwordField);
-			if(this.log.isInvalidLogin()) { 
+			this.controller.setEventPasswordField(e, txtLogin, passwordField);
+			if(this.controller.isInvalidLogin()) { 
 				this.messageLoginValidation.setVisible(true);
 			}
 		});
 		this.forgotPassword.setOnMouseClicked(e -> {
-			try {
-					new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
+			new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
 		});
-		
 		this.btnExit.setOnAction(new Close(Window.mainStage));
-		
 		
 		this.imgIcon.setId("logoImage");
 		
@@ -169,7 +161,7 @@ public class LoginScene extends Scene {
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 		
 		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtLogin, lblPassword, passwordField,
-				messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit);
+				messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit,btnSignUp);
 		
 		HBox.setHgrow(vbLogin, Priority.ALWAYS);
 		this.vbLogin.setMaxWidth(Double.MAX_VALUE);
@@ -229,7 +221,7 @@ public class LoginScene extends Scene {
 		HBox.setHgrow(imgIcon, Priority.ALWAYS);
 		this.lblWelcome.setMaxWidth(Double.MAX_VALUE);
 		this.btnSignUp.setMaxWidth(Double.MAX_VALUE);
-		this.leftSide.getChildren().addAll(lblWelcome, btnSignUp, imgIcon);
+		this.leftSide.getChildren().addAll(lblWelcome, imgIcon);
 		
 		this.leftSide.setAlignment(Pos.CENTER);
 		HBox.setHgrow(leftSide, Priority.ALWAYS);

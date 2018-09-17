@@ -25,15 +25,18 @@ public class Window extends Stage {
 		// mainStage.setScene(new HomePageScene());
 //		 mainStage.setScene(new NewProjectScene());
 		mainStage.setScene(new LoginScene());	
-		
+		this.show();
+//		 
+//		InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
+//		i.showAndWait();
 //		Profile p = new Profile();
 //		p.setName("jefter");
 //		p.setBio("aaakakakkaakaka afçasfçalfafçasklçfls \n sllslslsls asfafasçfafjsçakfçakf   \n");
 //		HBFriendContent tests = new HBFriendContent(p);
 //		Scene sc = new Scene(tests);
 //		this.setScene(sc);
-		this.show();
-		
+//		this.show();
+//		
 		
 //		ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
 //		test.show();

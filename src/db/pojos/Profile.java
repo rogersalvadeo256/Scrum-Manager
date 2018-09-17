@@ -16,73 +16,82 @@ import javax.persistence.OneToMany;
 @Entity
 public class Profile {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY) 	
-	@Column(name="codProfile")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "codProfile")
 	private int codProfile;
 	@Column
 	private String bio;
-	@Column 
+	@Column
 	private String name;
-	
+
+	/*
+	 * REMEMBER TO ADD DISPONIBILITY/ STATUS
+	 * IF THE STATUS ARE "BUSY" AND NOT SHOW ALLOWED TO INVITE FOR PROJECTS
+	 * 
+	 * 	USING ENUM????
+	 */
+
 	@Column(columnDefinition = "LONGBLOB")
 	private byte[] photo;
 
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="codFriendRequest")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "codFriendRequest")
 	private List<Profile> friendshipRequest;
-	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="codFriend")
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "codFriend")
 	private List<Profile> friendList;
-	
-	public Profile() { 
+
+	public Profile() {
 		this.friendList = new ArrayList<Profile>();
 		this.friendshipRequest = new ArrayList<Profile>();
 	}
-	
-	public byte[] getPhoto() {return photo;}
-	public void setPhoto(byte[] photo) {this.photo = photo;}
-	
-	public void setCod(int codProfile) {this.codProfile = codProfile;}
-	public int getCod() {return codProfile;}
 
-	public String getName(){ return name;}
-	public void setName(String name){this.name = name;}
-	
-	public String getBio() {return bio;}
-	public void setBio(String biography) {this.bio = biography;}
-	
-	public List<Profile> getFriendshipRequests() {return friendshipRequest;}
-	public void setFriendshipRequestList(List<Profile> friendshipRequestList) { 
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public void setCod(int codProfile) {
+		this.codProfile = codProfile;
+	}
+
+	public int getCod() {
+		return codProfile;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getBio() {
+		return bio;
+	}
+
+	public void setBio(String biography) {
+		this.bio = biography;
+	}
+
+	public List<Profile> getFriendshipRequests() {
+		return friendshipRequest;
+	}
+
+	public void setFriendshipRequestList(List<Profile> friendshipRequestList) {
 		this.friendshipRequest = friendshipRequestList;
 	}
-	public List<Profile> getFriendsList() {return friendList;}
-	public void setFriendList(List<Profile> friend) {this.friendList = friend;}
+
+	public List<Profile> getFriendsList() {
+		return friendList;
+	}
+
+	public void setFriendList(List<Profile> friend) {
+		this.friendList = friend;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

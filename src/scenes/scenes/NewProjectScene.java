@@ -2,10 +2,11 @@ package scenes.scenes;
 
 
 import application.main.Window;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -14,27 +15,23 @@ import javafx.scene.layout.VBox;
 
 public class NewProjectScene extends Scene {
 
-	private Label lblProjectName, lblDescProject, lblMember;
-	private TextField txtProjectName,txtMember;
-	private Hyperlink lblAddMember;
+	private Label lblProjectName, lblDescProject;
+	private TextField txtProjectName;
 	private TextArea txtDescProject;
 	private Button btnSalvar,btnCancelar,btnInvite;
-	private HBox hbxPN,hbxBTN,hbxMember;
-	private VBox vbxTela;
+	private HBox hbxBTN,hbxMember;
+	private VBox hbxPN,vbxTela;
 	
 	public NewProjectScene(){	
 		super(new VBox());
 		this.lblProjectName = new Label("Nome do Projeto");
-		this.lblDescProject = new Label("Descrição do Projeto");
-		this.lblMember = new Label("Membros:");
+		this.lblDescProject = new Label("DescriÃ§Ã£o do Projeto");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
 		this.txtDescProject.setId("descProject");
 		this.txtDescProject.setId("txtDescProject");
-		this.txtMember = new TextField();
-		this.lblAddMember = new Hyperlink("Adicione mais um membro");
 		this.hbxBTN = new HBox();
-		this.hbxPN = new HBox();
+		this.hbxPN = new VBox();
 		this.hbxMember = new HBox();
 		this.vbxTela = new VBox();
 		
@@ -48,13 +45,11 @@ public class NewProjectScene extends Scene {
 		this.txtDescProject.setPrefRowCount(10);
 		this.txtDescProject.setWrapText(true);
 		
-		this.txtMember.setMaxWidth(300);
 		this.txtProjectName.setAlignment(Pos.CENTER);
-		this.txtMember.setAlignment(Pos.CENTER);
 		this.btnSalvar = new Button("Salvar");
 		this.btnSalvar.setId("btnSalve");
 		
-		this.btnInvite = new Button("Convidar");
+		this.btnInvite = new Button("Convidar amigos");
 		this.btnInvite.setId("btnInvite");
 		this.btnCancelar = new Button("Cancelar");
 		this.btnCancelar.setId("btnCancel");
@@ -68,13 +63,13 @@ public class NewProjectScene extends Scene {
 		hbxBTN.setSpacing(10);
 		hbxBTN.setAlignment(Pos.CENTER);
 				
-		hbxMember.getChildren().addAll(lblMember,txtMember,btnInvite);
+		hbxMember.getChildren().addAll(btnInvite);
 		
 		hbxMember.setSpacing(15);
 		hbxMember.setAlignment(Pos.CENTER);
 		
 		
-		vbxTela.getChildren().addAll(hbxPN,lblDescProject,txtDescProject,hbxMember,lblAddMember);
+		vbxTela.getChildren().addAll(hbxPN,lblDescProject,txtDescProject,hbxMember);
 		vbxTela.getChildren().addAll(hbxBTN);
 		vbxTela.setAlignment(Pos.CENTER);
 		
@@ -83,4 +78,10 @@ public class NewProjectScene extends Scene {
 		
 		setRoot(vbxTela);
 	}
+	
+	public void setEventInvite(EventHandler<ActionEvent> e) { 
+		this.btnInvite.setOnAction(e);
+	}
+	
+	
 }

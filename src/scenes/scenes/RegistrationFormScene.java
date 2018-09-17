@@ -28,7 +28,7 @@ public class RegistrationFormScene extends VBox {
 	private ArrayList<String> fieldName;
 	private ArrayList<String> confirmationMessage;
 	private HBox hbButtons;
-	private RegistrationFromSceneAPI registration;
+	private RegistrationFromSceneAPI controller;
 
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {
 
@@ -90,15 +90,15 @@ public class RegistrationFormScene extends VBox {
 		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
-		this.registration = new RegistrationFromSceneAPI();
+		this.controller = new RegistrationFromSceneAPI();
 
 		this.btnRegister.setOnAction(e -> {
-			this.registration.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+			this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 		});
 		
 		this.txtPasswordConfirmation.setOnKeyPressed(e ->{ 
 			if(e.getCode()  == KeyCode.ENTER) {
-			this.registration.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+			this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 			}
 		});
 		
@@ -107,11 +107,7 @@ public class RegistrationFormScene extends VBox {
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}
-
 }
-
-
-
 
 
 

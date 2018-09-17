@@ -17,6 +17,7 @@ import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.util.GENERAL_STORE;
+import db.util.ProfileImg;
 import db.util.SESSION;
 import friendship.SearchFriend;
 import javafx.event.ActionEvent;
@@ -36,6 +37,7 @@ import javafx.scene.layout.VBox;
 import listeners.Close;
 import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
+import widgets.designComponents.ShowImage;
 
 public class HomePageScene extends Scene {
 	
@@ -93,6 +95,21 @@ public class HomePageScene extends Scene {
 		 */
 		GENERAL_STORE.setComponentsHOME(lblName,lblUsername,lblBio,profileImg,btnFriendRequest);
 		GENERAL_STORE.loadComponentsHOME();
+		
+		
+		this.profileImg.setOnMouseClicked(e->{ 
+			try {
+				ShowImage show = new ShowImage(ProfileImg.loadImage(), Window.mainStage);
+				show.showAndWait();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+				
+		});
+		
+		
+		
+		
 		
 		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
@@ -156,21 +173,20 @@ public class HomePageScene extends Scene {
 		});
 		
 		this.btnEditProfile = new Button();
-		this.btnEditProfile.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent event) {
-				/*
-				 * open new window with the profile informations and options to edit
-				 */
-
-			}
-		});
+		this.btnEditProfile.setOnAction(e -> {
+				try {
+					new ProfileEditPOPOUP(Window.mainStage).showAndWait();
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+		});	
+		
+		
 		this.btnExit = new Button();
 		this.btnExit.setOnAction(new Close(Window.mainStage));
 
-		/*
-		 * load the name with the qtd of requests
-		 */
 		this.btnFriends = new Button();
 	
 		
@@ -238,15 +254,7 @@ public class HomePageScene extends Scene {
 		this.btnFriends.getStyleClass().add("header-buttons");
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
-		this.btnEditProfile.setOnAction(e -> {
-				try {
-					new ProfileEditPOPOUP(Window.mainStage).showAndWait();
-				} catch (FileNotFoundException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-		});	
+
 		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
@@ -374,8 +382,8 @@ public class HomePageScene extends Scene {
 		this.vbLeftColumn.setId("vbLeft");
 		this.vbLeftColumn.getChildren().add(this.lblCurrentProject);
 
-		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
 		this.vbLeftColumn.setPrefWidth(400);
+		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
 
 		this.vbRightColumn = new VBox();
 		this.vbRightColumn.getStyleClass().add("vbox");

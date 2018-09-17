@@ -2,6 +2,7 @@ package scenes.popoups;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.persistence.EntityManager;
@@ -31,9 +32,8 @@ import javafx.stage.Window;
 import validation.CheckEmptyFields;
 import widgets.alertMessage.CustomAlert;
 
-public class ProfileEditPOPOUP extends Stage {
+public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	
-	private VBox layout;
 	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio, hbButtons;
 	private ImageView imgProfile;
 	private Label lblName, lblBio, lblCurrentPassword, lblNewP;
@@ -41,13 +41,12 @@ public class ProfileEditPOPOUP extends Stage {
 	private TextArea txtBio;
 	private PasswordField txtNewPassword, txtCurrentPassword;
 	private Button btnSave, btnBack;
-	private Scene scene;
 	private ProfileImg pi;
 	private EntityManager em;
 
-	public ProfileEditPOPOUP(Window parent) throws IOException {
+	public ProfileEditPOPOUP(Window owner) throws IOException {
+		super(owner);
 		
-		this.layout = new VBox();
 		this.scene = new Scene(layout);
 		this.setScene(scene);
 		this.pi = new ProfileImg();
@@ -191,10 +190,5 @@ public class ProfileEditPOPOUP extends Stage {
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
 		
-		this.initOwner(parent);
-		this.initModality(Modality.WINDOW_MODAL);
-		this.setWidth(400);
-		this.setHeight(600);
-		this.setResizable(false);
 	}
 }

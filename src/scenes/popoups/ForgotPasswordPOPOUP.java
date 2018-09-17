@@ -33,15 +33,13 @@ import listeners.Close;
 import validation.CheckEmptyFields;
 import widgets.designComponents.HBProfileContentForgotPassword;
 
-public class ForgotPasswordPOPOUP extends Stage {
+public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 
 	private Label lblQuestion, lblEmailOrUsername, lblNewPasswrd, lblConfirmPassword;
 	private TextField txtEmailUserName, txtAnswer;
 	private PasswordField newPassword, passwordConfirmation;
 	private EntityManager em;
 	private Query q;
-	private VBox layout;
-	private Scene scene;
 	private Button btnOk, btnCancel, btnEmail, btnAnswer, btnPasswords;
 	private HBox hbButtons;
 	private ToggleButton tbYes, tbNot;
@@ -50,8 +48,9 @@ public class ForgotPasswordPOPOUP extends Stage {
 	private CheckEmptyFields checkFields;
 	private Profile p;
 	private UserRegistration u;
-
-	public ForgotPasswordPOPOUP(Window owner) throws IOException {
+	
+	public ForgotPasswordPOPOUP(Window owner) {
+		super(owner);
 		init(owner);
 	}
 
@@ -99,19 +98,10 @@ public class ForgotPasswordPOPOUP extends Stage {
 		this.btnEmail = new Button("Enviar");
 		valideEmail();
 
-		btnEmail.setOnAction(e -> {
-			findUser();
-		});
+		btnEmail.setOnAction(e -> {findUser();});
 
 		this.layout.setAlignment(Pos.CENTER);
 
-		this.setScene(scene);
-
-		this.initOwner(owner);
-		this.initModality(Modality.WINDOW_MODAL);
-		this.setWidth(400);
-		this.setHeight(550);
-		this.setResizable(false);
 	}
 
 	public void valideEmail() {

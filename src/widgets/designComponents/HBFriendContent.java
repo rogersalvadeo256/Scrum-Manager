@@ -9,9 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 
 public class HBFriendContent extends HBProfileContent{
-
-	Button btnDelete, btnInvite;
-	HBox hbButtons;
+	
+	protected Button btnDelete, btnInvite;
+	private HBox hbButtons;
+	private Profile p;
 	public HBFriendContent(Profile p) throws IOException {
 		super(p);
 		this.getChildren().clear();
@@ -25,6 +26,8 @@ public class HBFriendContent extends HBProfileContent{
 		
 		this.vbUsrLABEL.getChildren().add(hbButtons);
 		this.vbUsrLABEL.setSpacing(5);
+	
+		this.p = p;
 	}
 	public void setEventDelete(EventHandler<ActionEvent> e) {
 		this.btnDelete.setOnAction(e);
@@ -32,6 +35,9 @@ public class HBFriendContent extends HBProfileContent{
 	public void setEventInvite(EventHandler<ActionEvent> e) {
 		this.btnInvite.setOnAction(e);
 	}
+
+	public Profile getP() {return p;}
+	public void setP(Profile p) {this.p = p;}
 	
 	
 		

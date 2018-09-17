@@ -41,23 +41,21 @@ public class FriendshipRequestPOPOUP extends Stage {
 		this.requestList = new ArrayList<HBFriendRequest>();
 
 		this.scene = new Scene(layout);
-		// this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
+		 this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
 
 		this.setScene(scene);
 
 		drawRequests();
 
+		/* 
+		 * make this work
+		 */
 		this.sc = new ScrollBar();
 		this.sc.setLayoutX(scene.getWidth() - sc.getWidth());
 		this.sc.setMin(0);
 		this.sc.setOrientation(Orientation.VERTICAL);
 		this.sc.prefHeight(this.getHeight());
 
-		this.initOwner(parent);
-		this.initModality(Modality.WINDOW_MODAL);
-		this.setWidth(600);
-		this.setHeight(500);
-		this.setResizable(false);
 	}
 
 	/**
@@ -82,10 +80,10 @@ public class FriendshipRequestPOPOUP extends Stage {
 				/*
 				 * how to remove the component????????????????????
 				 */
-				FriendshipRequest f = new FriendshipRequest(r.get(i));
+				FriendshipRequest answerRequest = new FriendshipRequest(r.get(i));
 				HBFriendRequest request = new HBFriendRequest(r.get(i));
 				request.setEventAccept(e -> {
-					f.acceptRequest();
+					answerRequest.acceptRequest();
 					SESSION.UPDATE_SESSION();
 					try {
 						GENERAL_STORE.updateComponentsHOME();
@@ -94,7 +92,7 @@ public class FriendshipRequestPOPOUP extends Stage {
 					}
 				});
 				request.setEventRefuse(e -> {
-					f.refuseRequest();
+					answerRequest.refuseRequest();
 					SESSION.UPDATE_SESSION();
 					try {
 						GENERAL_STORE.updateComponentsHOME();

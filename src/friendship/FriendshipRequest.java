@@ -27,7 +27,7 @@ public class FriendshipRequest {
 		if (this.em == null)
 			em = Database.createEntityManager();
 		this.p.getFriendshipRequests().add(SESSION.getProfileLogged());
-		 SESSION.getProfileLogged().getFriendshipRequests().add(this.p);
+//		SESSION.getProfileLogged().getFriendshipRequests().add(this.p);
 		SESSION.UPDATE_SESSION();
 		em.getTransaction().begin();
 		em.merge(this.p);
