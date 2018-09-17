@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import api.LoginSceneAPI;
 import application.main.Window;
 import db.util.Login;
 import javafx.geometry.Pos;
@@ -59,6 +60,8 @@ public class LoginScene extends Scene {
 	private FileInputStream fis;
 	private File iconPath;
 	
+	private LoginSceneAPI log;
+	
 	private ArrayList<RegistrationFormScene> form;
 	
 	private Login login;
@@ -71,6 +74,11 @@ public class LoginScene extends Scene {
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("Tela Login");
+		
+		this.log = new LoginSceneAPI();
+		
+		
+		
 		
 		this.layout = new AnchorPane();
 		
@@ -156,44 +164,20 @@ public class LoginScene extends Scene {
 		this.imgIcon.setFitWidth(400);
 		this.imgIcon.setFitHeight(400);
 		
-		/*
-		 * buttons handler
-		 */
-		this.btnExit.setOnAction(new Close(Window.mainStage));
-		
-		this.btnLogin.setOnAction(e -> {
-			if (LoginScene.this.login.doLogin(LoginScene.this.txtLogin, LoginScene.this.passwordField)) {
-				LoginScene.this.messageLoginValidation.setText(new String());
-				try {
-					Window.mainStage.setScene(new HomePageScene());
-				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					e1.printStackTrace();
+		this.btnLogin.setOnAction(e->{
+				this.log.setEventBtnLogin(e, txtLogin, passwordField);
+				if(this.log.isInvalidLogin()) { 
+					this.messageLoginValidation.setText("Login ou senha incorretos");
 				}
-			}
-			LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
-		});
+ 			}
+		);
 		this.passwordField.setOnKeyPressed(e -> {
-			if (e.getCode() == KeyCode.ENTER) {
-				if (LoginScene.this.login.doLogin(LoginScene.this.txtLogin, LoginScene.this.passwordField)) {
-					LoginScene.this.messageLoginValidation.setText(new String());
-					try {
-						Window.mainStage.setScene(new HomePageScene());
-					} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-				}
-			}
-			LoginScene.this.messageLoginValidation.setText("Nome de usuario ou senha errado");
+			this.log.setEventPasswordField(e, txtLogin, passwordField);
 		});
 		this.forgotPassword.setOnAction(event -> {
 			
 		});
-		
+		this.btnExit.setOnAction(new Close(Window.mainStage));
 		this.imgIcon.setId("logoImage");
 		
 		HBox.setHgrow(txtLogin, Priority.ALWAYS);
@@ -260,7 +244,6 @@ public class LoginScene extends Scene {
 		});
 		this.setRoot(layout);
 	}
-	
 	private void settingLeftSideComponents() {
 		HBox.setHgrow(lblWelcome, Priority.ALWAYS);
 		HBox.setHgrow(btnSignUp, Priority.ALWAYS);
@@ -280,4 +263,22 @@ public class LoginScene extends Scene {
 		AnchorPane.setBottomAnchor(this.leftSide, 30.0);
 		this.layout.getChildren().add(leftSide);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

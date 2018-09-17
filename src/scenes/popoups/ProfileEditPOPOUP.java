@@ -44,11 +44,7 @@ public class ProfileEditPOPOUP extends Stage {
 	private Scene scene;
 	private ProfileImg pi;
 	private EntityManager em;
-	// private enum updates {
-	// NAME, PASSWORD, BIO,PHOTO
-	// };
-	// private ArrayList<updates> message;
-	
+
 	public ProfileEditPOPOUP(Window parent) throws IOException {
 		
 		this.layout = new VBox();
@@ -61,8 +57,7 @@ public class ProfileEditPOPOUP extends Stage {
 		this.imgProfile = new ImageView();
 		
 		if (SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
-			this.imgProfile.setImage(
-					new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+			this.imgProfile.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 		} else {
 			this.imgProfile.setImage(ProfileImg.loadImage());
 		}
@@ -116,11 +111,9 @@ public class ProfileEditPOPOUP extends Stage {
 		this.btnSave = new Button("Salvar");
 		this.btnSave.setId("save");
 		
-		// this.message = new ArrayList<updates>();
 		
 		this.btnSave.setOnAction(e -> {
 			
-			// this.message.clear();
 			CheckEmptyFields c = new CheckEmptyFields();
 			
 			UserRegistration u = SESSION.getUserLogged();
@@ -153,7 +146,6 @@ public class ProfileEditPOPOUP extends Stage {
 				em.merge(p);
 				em.getTransaction().commit();
 				em.clear();
-				// this.message.add(updates.NAME);
 			}
 			if (!c.isTextAreaEmpty(txtBio)) {
 				em.getTransaction().begin();
@@ -161,59 +153,23 @@ public class ProfileEditPOPOUP extends Stage {
 				em.merge(p);
 				em.getTransaction().commit();
 				em.clear();
-				// this.message.add(updates.BIO);
 			}
-			/*
-			 * building the return message
-			 */
-			// if (!this.message.isEmpty()) {
-			// ArrayList<String> message = new ArrayList<String>();
-			//
-			// for (int i = 0; i < this.message.size(); i++) {
-			// if (this.message.get(i).equals(updates.NAME)) {
-			// message.add("nome");
-			// }
-			// if (this.message.get(i).equals(updates.BIO)) {
-			// message.add("biografia");
-			// }
-			// if (this.message.get(i).equals(updates.PASSWORD)) {
-			// message.add("senha");
-			// }
-			// }
-			// StringBuilder stb = new StringBuilder();
-			// for (int i = 0; i < this.message.size(); i++) {
-			//
-			// stb.append(message.get(i).toString());
-			//
-			// if (i != message.size() - 1) {
-			// stb.append(", ");
-			// }
-			// if (i == message.size() - 1) {
-			// stb.append(".");
-			// }
-			// }
 			
 			
-			Query q = em.createQuery("from UserRegistration where codUser  =: cod");
-			q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+//			Query q = em.createQuery("from UserRegistration where codUser  =: cod");
+//			q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+//			UserRegistration u1 = (UserRegistration) q.getResultList().get(0);
+//			Profile p1 = u1.getProfile();
 			
-			UserRegistration u1 = (UserRegistration) q.getResultList().get(0);
-			Profile p1 = u1.getProfile();
-			
-			SESSION.UPDATE_SESSION(p1, u1);
-//			SESSION.UPDATE_SESSION();
+//			SESSION.UPDATE_SESSION(p1, u1);
+			SESSION.UPDATE_SESSION();
 			
 			try {
 				GENERAL_STORE.updateComponentsHOME();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			// new CustomAlert(AlertType.CONFIRMATION, "Sucesso", "Mudanças adicionadas",
-			// "Informações alteradas: " + stb.toString());
-			// message.clear();
-			// this.message.clear();
 			return;
-			// }
 		});
 		this.btnBack.setOnAction(e -> {
 			if (!this.txtBio.getText().isEmpty() || !this.txtName.getText().isEmpty()

@@ -2,13 +2,11 @@ package application.main;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import scenes.popoups.ForgotPasswordPOPOUP;
 import scenes.scenes.LoginScene;
 public class Window extends Stage {
 	
@@ -28,6 +26,14 @@ public class Window extends Stage {
 //		 mainStage.setScene(new NewProjectScene());
 		mainStage.setScene(new LoginScene());	
 		
+//		Profile p = new Profile();
+//		p.setName("jefter");
+//		p.setBio("aaakakakkaakaka afçasfçalfafçasklçfls \n sllslslsls asfafasçfafjsçakfçakf   \n");
+//		HBFriendContent tests = new HBFriendContent(p);
+//		Scene sc = new Scene(tests);
+//		this.setScene(sc);
+		this.show();
+		
 		
 //		ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
 //		test.show();
@@ -37,9 +43,9 @@ public class Window extends Stage {
 		// FriendshipRequestPOPOUP test = new FriendshipRequestPOPOUP(this);
 		// test.show();
 		
-		// mainStage.setScene(new ProjectScene());
+//		 mainStage.setScene(new NewProjectScene());
 		
-		this.show();
+//		this.show();
 	}
 	
 }

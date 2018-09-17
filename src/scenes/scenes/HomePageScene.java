@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -48,16 +49,13 @@ public class HomePageScene extends Scene {
 	
 	private HBox hbHeader;
 	private TextField txtSearch;
-	private Button btnSearch;
-	private ImageView scrumIcon; // , messageIcon, friendRequestIcon, settingsIcon;
-	private ArrayList<File> iconPath;
-	private ArrayList<FileInputStream> fis;
+	private Button btnSearch, btnHome;
 	private VBox vbProfileInfo;
 	
 	private HBox hbMenu;
 	private Button btnStartProject, btnfriends;
 	
-	private Button btnFriendRequest, btnProjectInviteRequest;
+	private Button btnFriendRequest, btnFriends;
 	
 	private AnchorPane apSearch;
 	private VBox vbLeftColumn, vbRightColumn;
@@ -78,8 +76,6 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-		this.iconPath = new ArrayList<File>();
-		this.fis = new ArrayList<FileInputStream>();
 
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
@@ -108,35 +104,7 @@ public class HomePageScene extends Scene {
 		this.lblProjectsDone = new Label("Projetos finalizados");
 		this.lblName.setId("lblProject");
 
-		/*
-		 * the user can edit this
-		 */
-
-		/*
-		 * images for the scene
-		 */
 		
-		this.iconPath.add(new File(("resources/images//icons/scrum_icon.png")));
-		this.iconPath.add(new File(("resources/images/icons/envelope.png")));
-		this.iconPath.add((new File(("resources/images/icons/friend_request.png"))));
-		/*
-		 * 
-		 */
-
-		this.iconPath.add(new File("resources/images/icons/search.png"));
-
-		/*
-		 * 
-		 */
-		
-		this.fis.add(new FileInputStream(iconPath.get(0)));
-		this.fis.add(new FileInputStream(iconPath.get(1)));
-		this.fis.add(new FileInputStream(iconPath.get(2)));
-		this.fis.add(new FileInputStream(iconPath.get(3)));
-
-		this.scrumIcon = new ImageView();
-		this.setImage(scrumIcon, 0);
-
 		this.vbSearchResult = new VBox();
 		this.vbSearchResult.setLayoutX(5);
 //		this.sc = new ScrollBar();
@@ -174,7 +142,6 @@ public class HomePageScene extends Scene {
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 				if (!searchFriend.getResults().isEmpty()) {
@@ -188,7 +155,7 @@ public class HomePageScene extends Scene {
 			vbSearchResult.getChildren().clear();
 		});
 		
-		this.btnEditProfile = new Button("Editar Perfil");
+		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -198,14 +165,15 @@ public class HomePageScene extends Scene {
 
 			}
 		});
-		this.btnExit = new Button("Sair");
+		this.btnExit = new Button();
 		this.btnExit.setOnAction(new Close(Window.mainStage));
 
 		/*
 		 * load the name with the qtd of requests
 		 */
-		this.btnProjectInviteRequest = new Button();
-
+		this.btnFriends = new Button();
+	
+		
 		this.btnFriendRequest.setOnAction(event -> {
 			try {
 				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
@@ -216,35 +184,58 @@ public class HomePageScene extends Scene {
 		});
 
 		this.btnFriendRequest.setId("friend-request");
-		this.btnProjectInviteRequest.setId("project-invite");
 
+		this.btnHome=new Button();
+		
+		final int SIZE = 50; 
 		ImageView icon_p = new ImageView();
-		icon_p.setImage(new Image(this.fis.get(1)));
-		icon_p.setFitHeight(40);
-		icon_p.setFitWidth(40);
-		this.btnProjectInviteRequest.setGraphic(icon_p);
+		icon_p.setImage(new Image(new FileInputStream(new File("resources/images/icons/friends.png"))));
+		icon_p.setFitHeight(SIZE);
+		icon_p.setFitWidth(SIZE);
+		this.btnFriends.setGraphic(icon_p);
 
 		ImageView icon_f = new ImageView();
-		icon_f.setImage(new Image(this.fis.get(2)));
-		icon_f.setFitHeight(40);
-		icon_f.setFitWidth(40);
+		icon_f.setImage(new Image(new FileInputStream(new File("resources/images/icons/friend_request.png"))));
+		icon_f.setFitHeight(SIZE);
+		icon_f.setFitWidth(SIZE);
 		this.btnFriendRequest.setGraphic(icon_f);
 	
 		
 		
 		ImageView icon_s = new ImageView();
-		icon_s.setFitHeight(40);
-		icon_s.setFitWidth(40);
-		icon_s.setImage(new Image(this.fis.get(3)));
+		icon_s.setFitHeight(SIZE);
+		icon_s.setFitWidth(SIZE);
+		icon_s.setImage(new Image(new FileInputStream(new File("resources/images/icons/search.png"))));
 		this.btnSearch.setGraphic(icon_s);
 
 		ImageView icon_u = new ImageView();
-		icon_u.setFitHeight(40);
-		icon_u.setFitWidth(40);
+		icon_u.setFitHeight(SIZE);
+		icon_u.setFitWidth(SIZE);
 
+		ImageView icon_edit_profile=new ImageView();
+		icon_edit_profile.setImage(new Image(new FileInputStream(new File("resources/images/icons/edit_profile.png"))));
+		icon_edit_profile.setFitHeight(SIZE);
+		icon_edit_profile.setFitWidth(SIZE);
+		this.btnEditProfile.setGraphic(icon_edit_profile);	
+		
+		
+		ImageView icon_exit = new ImageView();
+		icon_exit.setImage(new Image(new FileInputStream(new File("resources/images/icons/exit.png"))));
+		icon_exit.setFitHeight(SIZE);
+		icon_exit.setFitWidth(SIZE);
+		this.btnExit.setGraphic(icon_exit);
+		
+		
+		ImageView icon_scrum = new ImageView();
+		icon_scrum.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+		icon_scrum.setFitHeight(SIZE);
+		icon_scrum.setFitWidth(SIZE);
+		this.btnHome.setGraphic(icon_scrum);
+		
+		this.btnHome.getStyleClass().add("header-buttons");
 		this.btnSearch.getStyleClass().add("header-buttons");
 		this.btnFriendRequest.getStyleClass().add("header-buttons");
-		this.btnProjectInviteRequest.getStyleClass().add("header-buttons");
+		this.btnFriends.getStyleClass().add("header-buttons");
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
 		this.btnEditProfile.setOnAction(e -> {
@@ -253,15 +244,15 @@ public class HomePageScene extends Scene {
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 		});	
 		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
-		this.profileImg.setTranslateX(15);
-
+		this.profileImg.setTranslateX(-10);
+		this.profileImg.setTranslateY(20);
+		
 		this.btnEditBio = new Button("Editar Bio");
 		this.btnEditBio.getStyleClass().add("button");
 		this.btnEditBio.setId("editBio");
@@ -278,7 +269,7 @@ public class HomePageScene extends Scene {
 		this.hbBntInteractWithBio.setVisible(false);
 		this.hbBntInteractWithBio.setSpacing(5);
 		this.txtBio = new TextArea();
-		this.txtBio.setPrefRowCount(5);
+		this.txtBio.setPrefRowCount(15);
 		this.txtBio.setWrapText(true);
 		this.txtBio.setTranslateX(-5);
 		this.btnEditBio.setOnAction(new EventHandler<ActionEvent>() {
@@ -296,7 +287,7 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(60);
 
-				HomePageScene.this.profileImg.setTranslateY(60);
+				HomePageScene.this.profileImg.setTranslateY(50);
 			}
 		});
 		this.btnCancel.setOnAction(new EventHandler<ActionEvent>() {
@@ -325,18 +316,13 @@ public class HomePageScene extends Scene {
 					em.clear();
 					em.close();
 			
-					
-					HomePageScene.this.lblBio.setText(HomePageScene.this.txtBio.getText());
+				HomePageScene.this.lblBio.setText(HomePageScene.this.txtBio.getText());
 				HomePageScene.this.hbBntInteractWithBio.setVisible(false);
 				HomePageScene.this.txtBio.setVisible(false);
 				HomePageScene.this.lblBio.setVisible(true);
 				HomePageScene.this.btnEditBio.setVisible(true);
 			}
 		});
-		/*
-		 * database
-		 */
-
 		this.hbMenu = new HBox();
 		this.hbMenu.getStyleClass().add("hbox");
 		this.hbMenu.setId("menu");
@@ -345,6 +331,7 @@ public class HomePageScene extends Scene {
 		this.btnStartProject = new Button("Começar projeto");
 		this.btnStartProject.getStyleClass().add("button");
 		this.btnStartProject.setId("menu");
+	
 		this.btnfriends = new Button("Amigos");
 		this.btnfriends.getStyleClass().add("button");
 		this.btnfriends.setId("menu");
@@ -358,7 +345,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(scrumIcon, txtSearch, btnSearch, btnFriendRequest, btnProjectInviteRequest,
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends,
 				btnEditProfile, btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
@@ -428,12 +415,6 @@ public class HomePageScene extends Scene {
 
 		this.setRoot(layout);
 
-	}
-	
-	private void setImage(ImageView image, int fis) {
-		image.setFitHeight(80);
-		image.setFitWidth(80);
-		image.setImage(new Image(this.fis.get(fis)));
 	}
 	
 }

@@ -15,7 +15,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class HBProfileContent extends HBox {
-	private VBox vbUsrIMG, vbUsrLABEL, vbUsrBUTTON;
+	protected VBox vbUsrIMG, vbUsrLABEL, vbUsrBUTTON;
 	private ImageView usrImage;
 	private Label lblName, lblBio;
 	private Button btnAdd;
@@ -64,6 +64,4 @@ public class HBProfileContent extends HBox {
 	public void setBtnAdd(Button btnAdd) {
 		this.btnAdd = btnAdd;
 	}
-
-	
 }
