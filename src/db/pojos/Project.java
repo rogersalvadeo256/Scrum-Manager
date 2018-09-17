@@ -65,13 +65,13 @@ public class Project {
 	public void setListMembers(List<Profile> listMembers) {
 		this.listMembers = listMembers;
 	}
-	public Profile getProjectCreator() {
-		return projectCreator;
-	}
-
-	public void setProjectCreator(Profile projectCreator) {
-		this.projectCreator = projectCreator;
-	}
+//	public Profile getProjectCreator() {
+//		return projectCreator;
+//	}
+//
+//	public void setProjectCreator(Profile projectCreator) {
+//		this.projectCreator = projectCreator;
+//	}
 	public String getProjectDescription() {
 		return projectDescription;
 	}

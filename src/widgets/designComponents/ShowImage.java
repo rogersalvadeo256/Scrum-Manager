@@ -20,7 +20,6 @@ public class ShowImage extends Stage{
 		this.image.prefHeight(image.getHeight());
 		this.image.prefWidth(image.getWidth());
 		
-		
 		this.container.getChildren().add(this.image);
 		this.scene = new Scene(container);
 		
@@ -30,7 +29,6 @@ public class ShowImage extends Stage{
 		this.initModality(Modality.WINDOW_MODAL);
 		this.setResizable(false);
 	}
-	
 	
 	
 	

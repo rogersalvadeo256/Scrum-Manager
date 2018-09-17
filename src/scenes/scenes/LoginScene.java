@@ -72,17 +72,11 @@ public class LoginScene extends Scene {
 		this.leftSide = new VBox();
 		this.leftRegistrationForm = new VBox();
 		
-		/*
-		 * layout
-		 */
 		this.form = new ArrayList<RegistrationFormScene>();
 		
 		this.leftSide.getStyleClass().add("left");
 		this.rightSide.getStyleClass().add("right");
 		
-		/*
-		 * text fields
-		 */
 		this.txtLogin = new TextField();
 		this.txtLogin.setPromptText("Username");
 		this.txtLogin.setAlignment(Pos.CENTER);
@@ -102,6 +96,7 @@ public class LoginScene extends Scene {
 		this.lblSignIn.getStyleClass().add("title");
 		
 		this.messageLoginValidation = new Label("Login ou senha incorretos");
+		this.messageLoginValidation.setVisible(false);
 		this.messageLoginValidation.setId("messageWrongData");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
 	

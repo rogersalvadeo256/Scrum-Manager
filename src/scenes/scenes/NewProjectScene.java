@@ -68,7 +68,6 @@ public class NewProjectScene extends Scene {
 		hbxMember.setSpacing(15);
 		hbxMember.setAlignment(Pos.CENTER);
 		
-		
 		vbxTela.getChildren().addAll(hbxPN,lblDescProject,txtDescProject,hbxMember);
 		vbxTela.getChildren().addAll(hbxBTN);
 		vbxTela.setAlignment(Pos.CENTER);

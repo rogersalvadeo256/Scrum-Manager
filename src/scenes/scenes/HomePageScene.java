@@ -95,8 +95,6 @@ public class HomePageScene extends Scene {
 		 */
 		GENERAL_STORE.setComponentsHOME(lblName,lblUsername,lblBio,profileImg,btnFriendRequest);
 		GENERAL_STORE.loadComponentsHOME();
-		
-		
 		this.profileImg.setOnMouseClicked(e->{ 
 			try {
 				ShowImage show = new ShowImage(ProfileImg.loadImage(), Window.mainStage);
@@ -104,10 +102,7 @@ public class HomePageScene extends Scene {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-				
 		});
-		
-		
 		
 		
 		

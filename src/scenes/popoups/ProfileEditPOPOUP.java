@@ -46,9 +46,6 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 
 	public ProfileEditPOPOUP(Window owner) throws IOException {
 		super(owner);
-		
-		this.scene = new Scene(layout);
-		this.setScene(scene);
 		this.pi = new ProfileImg();
 		
 		// this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
@@ -60,8 +57,8 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		} else {
 			this.imgProfile.setImage(ProfileImg.loadImage());
 		}
-		this.imgProfile.setFitWidth(200);
-		this.imgProfile.setFitHeight(200);
+		this.imgProfile.setFitWidth(300);
+		this.imgProfile.setFitHeight(300);
 		
 		this.imgProfile.setOnMouseClicked(e -> {
 			try {
@@ -183,12 +180,32 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.hbButtons.setSpacing(50);
 		this.hbButtons.setAlignment(Pos.CENTER);
 		
+		this.layout.getChildren().clear();
+		
 		this.layout.setSpacing(10);
 		this.layout.setAlignment(Pos.CENTER);
-		this.layout.getChildren().addAll(this.imgProfile, this.hbNameContent, this.hbBio,
-				this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbButtons);
+		this.layout.getChildren().addAll(this.imgProfile, this.hbNameContent, this.hbBio,this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbButtons);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
 		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
