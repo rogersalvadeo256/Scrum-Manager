@@ -17,7 +17,6 @@ public class CustomAlert extends Alert{
 		init(alert,  title,  header,  contentText);
 		this.getButtonTypes().add(ButtonType.CANCEL);
 		
-		
 	}
 	
 	

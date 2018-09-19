@@ -78,9 +78,6 @@ public class HBFriendRequest extends HBox {
 	};
 	public void setEventRefuse(EventHandler<ActionEvent> e) { 
 		this.btnRefuse.setOnAction(e);
-	
-		
-		
 	};
 }
 

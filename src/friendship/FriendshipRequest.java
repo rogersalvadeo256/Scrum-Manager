@@ -36,7 +36,6 @@ public class FriendshipRequest {
 		em.close();
 		em = null;
 	}
-
 	/**
 	 * The parameter is the profile of who send the request, this profile is
 	 * removed of the list of friendship requests and moved to the friends list
@@ -46,16 +45,15 @@ public class FriendshipRequest {
 	 * @param Profile
 	 *            pRequest
 	 */
-	public void acceptRequest(){ //Profile pRequest) {
+	public void acceptRequest() { // Profile pRequest) {
 
 		this.p.getFriendsList().add(SESSION.getProfileLogged());
 		this.p.getFriendshipRequests().remove(SESSION.getProfileLogged());
 
-		// SESSION.getProfileLogged().getFriendshipRequests().remove(pRequest);
+		SESSION.getProfileLogged().getFriendshipRequests().remove(this.p);
 		SESSION.getProfileLogged().getFriendsList().add(this.p);
 
-		if (this.em == null)
-			this.em = Database.createEntityManager();
+		if (this.em == null)this.em = Database.createEntityManager();
 
 		this.em.getTransaction().begin();
 		this.em.merge(this.p);
