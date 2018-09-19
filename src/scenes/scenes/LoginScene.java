@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import api.LoginSceneAPI;
+import application.controllers.LoginSceneController;
 import application.main.Window;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -52,7 +52,7 @@ public class LoginScene extends Scene {
 	private FileInputStream fis;
 	private File iconPath;
 	
-	private LoginSceneAPI controller;
+	private LoginSceneController controller;
 	
 	private ArrayList<RegistrationFormScene> form;
 	
@@ -64,8 +64,8 @@ public class LoginScene extends Scene {
 		Window.mainStage.setWidth(1200);
 		Window.mainStage.setHeight(600);
 		Window.mainStage.setTitle("Tela Login");
-		
-		this.controller = new LoginSceneAPI();
+
+		this.controller = new LoginSceneController();
 		this.layout = new AnchorPane();
 		this.vbLogin = new VBox();
 		this.rightSide = new HBox();

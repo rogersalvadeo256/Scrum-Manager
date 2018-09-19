@@ -1,4 +1,4 @@
-package api;
+package application.controllers;
 
 import java.util.ArrayList;
 
@@ -10,7 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import validation.FormsValidation;
 
-public class RegistrationFromSceneAPI {
+public class RegistrationFromSceneController {
 	private FormsValidation validation;
 
 	public void setEventBtnLogin(ActionEvent e, ArrayList<TextField> field, ArrayList<String> fieldName,

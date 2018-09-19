@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import scenes.scenes.NewProjectScene;
+import scenes.scenes.LoginScene;
 public class Window extends Stage {
 	
 	public static Stage mainStage;
@@ -23,8 +23,8 @@ public class Window extends Stage {
 
 // mainStage.setScene(new HomePageScene());
 //		 mainStage.setScene(new NewProjectScene());
-//		mainStage.setScene(new LoginScene());	
-		new NewProjectScene(this);
+		mainStage.setScene(new LoginScene());	
+//		new NewProjectScene(this);
 		this.show();
 //		 
 //		InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);

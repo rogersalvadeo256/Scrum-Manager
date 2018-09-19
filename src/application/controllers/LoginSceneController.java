@@ -1,4 +1,4 @@
-package api;
+package application.controllers;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,7 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import scenes.scenes.HomePageScene;
 
-public class LoginSceneAPI {
+public class LoginSceneController {
 
 	private Login login;
 	/**
@@ -21,7 +21,7 @@ public class LoginSceneAPI {
 	 */
 	private boolean invalidLogin = false;
 
-	public LoginSceneAPI() {
+	public LoginSceneController() {
 		this.login = new Login();
 	}
 	public void setEventBtnLogin(ActionEvent e, TextField txtLogin, PasswordField txtPassword) {

@@ -2,7 +2,7 @@ package scenes.popoups;
 
 import java.io.IOException;
 
-import api.FriendsComponentAPI;
+import application.controllers.FriendsComponentController;
 import db.util.SESSION;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -11,11 +11,11 @@ import widgets.designComponents.HBFriendContent;
 
 public class FriendListPOPOUP extends StandartLayoutPOPOUP {
 	
-	private FriendsComponentAPI controller;
+	private FriendsComponentController controller;
 	public FriendListPOPOUP(Window owner) throws IOException {
 		super(owner);
 		this.layout.setAlignment(Pos.CENTER);
-		this.controller=new FriendsComponentAPI();
+		this.controller=new FriendsComponentController();
 		drawComponents();
 	}
 	private void drawComponents() throws IOException {

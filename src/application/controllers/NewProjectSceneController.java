@@ -1,6 +1,6 @@
-package api;
+package application.controllers;
 
-public class NewProjectSceneAPI {
+public class NewProjectSceneController {
 
 	public void actionCancel() { 
 		

@@ -1,4 +1,4 @@
-package api;
+package application.controllers;
 
 import javax.persistence.EntityManager;
 
@@ -6,9 +6,9 @@ import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.util.SESSION;
 
-public class FriendsComponentAPI {
+public class FriendsComponentController {
 	private EntityManager em;
-	public FriendsComponentAPI() {
+	public FriendsComponentController() {
 	}
 
 	

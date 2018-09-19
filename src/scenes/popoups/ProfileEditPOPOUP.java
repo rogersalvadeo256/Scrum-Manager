@@ -2,21 +2,12 @@ package scenes.popoups;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import db.hibernate.factory.Database;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
-import db.util.GENERAL_STORE;
+import application.controllers.EditProfileController;
 import db.util.ProfileImg;
 import db.util.SESSION;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -25,30 +16,44 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-import validation.CheckEmptyFields;
-import widgets.alertMessage.CustomAlert;
 
 public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	
-	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio, hbButtons;
+	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio;
 	private ImageView imgProfile;
-	private Label lblName, lblBio, lblCurrentPassword, lblNewP;
-	private TextField txtName;
+	private ProfileImg pi;
+	private Label lblName, lblBio, lblCurrentPassword, lblNewPassword;
+	private TextField txtName, txtAnswer,txtQuestion;
 	private TextArea txtBio;
 	private PasswordField txtNewPassword, txtCurrentPassword;
-	private Button btnSave, btnBack;
-	private ProfileImg pi;
-	private EntityManager em;
-
+	private Button  btnAdvanced,btnDelete;
+	private HBox hbChangeQuestion,hbChangeAnswer,hbAdvancedStuff;
+	private Button btnChangeQuestion, btnChangeAnswer;
+	private EditProfileController controller;
+	
+	private Button btnBack, btnFinish;
+	private HBox hbSteadyButtons;
+	
+	private void a() { 
+	}
+	
+	
+	
 	public ProfileEditPOPOUP(Window owner) throws IOException {
 		super(owner);
 		this.pi = new ProfileImg();
 		
-		 this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
+		this.hbAdvancedStuff = new HBox();
+		this.btnAdvanced=new Button("Avançado");
+		
+		this.hbAdvancedStuff.setAlignment(Pos.CENTER);
+		this.hbAdvancedStuff.getChildren().add(this.btnAdvanced);
+		
+		this.hbSteadyButtons = new HBox();
+	
+		
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
 		
 		this.imgProfile = new ImageView();
 		
@@ -68,11 +73,10 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 				e1.printStackTrace();
 			}
 		});
-		
 		this.lblName = new Label("Nome: ");
 		this.lblBio = new Label("Bio: ");
 		this.lblCurrentPassword = new Label("Senha atual: ");
-		this.lblNewP = new Label("Nova Senha: ");
+		this.lblNewPassword = new Label("Nova Senha: ");
 		
 		this.txtName = new TextField();
 		this.txtName.setPrefColumnCount(15);
@@ -80,6 +84,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.txtBio.setWrapText(true);
 		this.txtBio.setPrefRowCount(5);
 		this.txtBio.setPrefColumnCount(15);
+		
 		
 		this.txtCurrentPassword = new PasswordField();
 		this.txtNewPassword = new PasswordField();
@@ -97,99 +102,82 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.hbCurrentPasswordContent.setAlignment(Pos.CENTER);
 		
 		this.hbNewPasswordContent = new HBox();
-		this.hbNewPasswordContent.getChildren().addAll(this.lblNewP, this.txtNewPassword);
+		this.hbNewPasswordContent.getChildren().addAll(this.lblNewPassword, this.txtNewPassword);
 		this.hbNewPasswordContent.setAlignment(Pos.CENTER);
 		
-		this.hbButtons = new HBox();
 		
 		this.btnBack = new Button("Voltar");
 		this.btnBack.setId("back");
-		this.btnSave = new Button("Salvar");
-		this.btnSave.setId("save");
+		this.btnFinish = new Button("Salvar");
+		this.btnFinish.setId("save");
+		
+		this.txtAnswer = new TextField();
+		this.txtQuestion = new TextField();
+		
+		this.btnDelete=new Button("Deletar conta");
+		this.controller = new EditProfileController();
 		
 		
-		this.btnSave.setOnAction(e -> {
-			
-			CheckEmptyFields c = new CheckEmptyFields();
-			
-			UserRegistration u = SESSION.getUserLogged();
-			Profile p = SESSION.getProfileLogged();
-			
-			if (em == null)
-				em = Database.createEntityManager();
-			
-			if (!c.isPasswordFieldEmpty(txtCurrentPassword) && !c.isPasswordFieldEmpty(txtNewPassword)) {
-				if (txtCurrentPassword.getText().equals(SESSION.getUserLogged().getPassword())) {
-					if (txtNewPassword.getText().length() >= 8) {
-						String np = txtNewPassword.getText();
-						em.getTransaction().begin();
-						u.setPassword(np);
-						em.merge(u);
-						em.getTransaction().commit();
-						em.clear();
-						// this.message.add(updates.PASSWORD);
-					} else {
-						new CustomAlert(AlertType.ERROR, "Erro", "Senha muito curta",
-								"A senha deve conter no minimo 8 caracteres");
-						return;
-					}
-				}
-			}
-			if (!c.isTextFieldEmpty(txtName)) {
-				String nn = txtName.getText();
-				em.getTransaction().begin();
-				p.setName(nn);
-				em.merge(p);
-				em.getTransaction().commit();
-				em.clear();
-			}
-			if (!c.isTextAreaEmpty(txtBio)) {
-				em.getTransaction().begin();
-				p.setBio(txtBio.getText());
-				em.merge(p);
-				em.getTransaction().commit();
-				em.clear();
-			}
-			
-			
-//			Query q = em.createQuery("from UserRegistration where codUser  =: cod");
-//			q.setParameter("cod", SESSION.getUserLogged().getCodUser());
-//			UserRegistration u1 = (UserRegistration) q.getResultList().get(0);
-//			Profile p1 = u1.getProfile();
-			
-//			SESSION.UPDATE_SESSION(p1, u1);
-			SESSION.UPDATE_SESSION();
-			
-			try {
-				GENERAL_STORE.updateComponentsHOME();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			return;
+		this.btnChangeQuestion = new Button("Mudar");
+		this.hbChangeQuestion = new HBox();
+		this.hbChangeQuestion.setAlignment(Pos.CENTER);
+		
+		this.hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString(), this.btnChangeQuestion));
+		this.btnChangeQuestion.setOnAction(e->{
+			controller.setEventChangeSecurity(e,ProfileEditPOPOUP.this, this.hbChangeQuestion, this.txtQuestion,this.btnChangeQuestion, this.btnBack, true);
 		});
+		this.btnChangeAnswer = new Button("Mudar");
+		this.hbChangeAnswer = new HBox();
+		this.hbChangeAnswer.setAlignment(Pos.CENTER);
+		this.hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString(), this.btnChangeAnswer));
+		
+		this.btnChangeAnswer.setOnAction(e->{
+			controller.setEventChangeSecurity(e, ProfileEditPOPOUP.this,this.hbChangeAnswer, this.txtAnswer,this.btnChangeAnswer, this.btnBack, false);
+		});
+		this.btnAdvanced.setOnAction(e->{
+			controller.setEventFinish(e, txtName, txtBio, txtCurrentPassword, txtNewPassword);
+			controller.setEventAdvancedOptions(e, ProfileEditPOPOUP.this, this.layout,this.hbChangeAnswer,this.hbChangeQuestion,this.hbSteadyButtons,this.btnBack);
+		});
+		this.btnFinish.setOnAction(e -> {
+			controller.setEventFinish(e, txtName, txtBio, txtCurrentPassword, txtNewPassword);
+		});
+		
 		this.btnBack.setOnAction(e -> {
-			if (!this.txtBio.getText().isEmpty() || !this.txtName.getText().isEmpty()
-					|| !this.txtCurrentPassword.getText().isEmpty()
-					|| !this.txtNewPassword.getText().isEmpty()) {
-				new CustomAlert(AlertType.WARNING, "Saindo no meio da edição", "certeza que quer sair?",
-						"se sair agora as modificações vao ser perdidas", true);
-			}
-			this.close();
+			controller.setEventBack(e, ProfileEditPOPOUP.this);
 		});
-		this.hbButtons.getChildren().addAll(this.btnSave, this.btnBack);
-		this.hbButtons.setSpacing(50);
-		this.hbButtons.setAlignment(Pos.CENTER);
 		
-		this.layout.getChildren().clear();
-		
-		this.layout.setSpacing(10);
-		this.layout.setAlignment(Pos.CENTER);
-		this.layout.getChildren().addAll(this.imgProfile, this.hbNameContent, this.hbBio,this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbButtons);
-		this.layout.setAlignment(Pos.CENTER);
-		this.layout.setSpacing(10);
-		
+		this.init();
 	}
+	
+	public void init() {
+		
+		this.hbSteadyButtons.getChildren().clear();
+		this.hbSteadyButtons.getChildren().addAll(this.btnBack,this.btnFinish);
+		this.layout.getChildren().clear();
+		this.layout.setSpacing(10);
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.getChildren().addAll(this.imgProfile, this.hbNameContent, this.hbBio,this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbAdvancedStuff, this.hbSteadyButtons);
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.setSpacing(10);
+	}
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
 
 
 

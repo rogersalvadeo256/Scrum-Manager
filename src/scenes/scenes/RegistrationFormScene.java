@@ -3,7 +3,7 @@ package scenes.scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import api.RegistrationFromSceneAPI;
+import application.controllers.RegistrationFromSceneController;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
 import javafx.geometry.Pos;
@@ -28,7 +28,7 @@ public class RegistrationFormScene extends VBox {
 	private ArrayList<String> fieldName;
 	private ArrayList<String> confirmationMessage;
 	private HBox hbButtons;
-	private RegistrationFromSceneAPI controller;
+	private RegistrationFromSceneController controller;
 
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {
 
@@ -90,7 +90,7 @@ public class RegistrationFormScene extends VBox {
 		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
-		this.controller = new RegistrationFromSceneAPI();
+		this.controller = new RegistrationFromSceneController();
 
 		this.btnRegister.setOnAction(e -> {
 			this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
