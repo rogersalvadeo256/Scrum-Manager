@@ -21,7 +21,7 @@ public class Window extends Stage {
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(false);
 
-// mainStage.setScene(new HomePageScene());
+//mainStage.setScene(new HomePageScene());
 //		 mainStage.setScene(new NewProjectScene());
 //		mainStage.setScene(new LoginScene());	
 		new NewProjectScene(this);

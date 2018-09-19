@@ -43,7 +43,7 @@ public class NewProjectScene extends StandartLayoutPOPOUP {
 		this.txtDescProject.setId("txtDescProject");
 		this.hbButtons = new HBox();
 		
-		this.scene.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm()); 
 		
 		this.txtProjectName.setMaxWidth(300);
 		this.txtDescProject.setMaxWidth(300);

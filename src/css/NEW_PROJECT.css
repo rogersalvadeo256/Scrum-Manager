@@ -18,14 +18,10 @@
 }
 .buttons{
 	-fx-background-color:#5fb69c;
-	-fx-width:192dp;
-	-fx-height:70dp;
+	-fx-width:192px;
+	-fx-height:70px;
 	-fx-text-aligment:center;
 	-fx-fill-color:black;
-}
-.buttons:hover{
-	-fx-background-color:#020704;
-	-fx-text-fill: #d8d8d8;
 }
 .buttons#btncancel:hover{
 	-fx-text-fill:white;
@@ -33,6 +29,10 @@
 }
 .hyperlink{
 	-fx-text-fill:#5eb5b5;
+}
+.buttons:hover{
+	-fx-background-color:#020704;
+	-fx-text-fill: #d8d8d8;
 }
 .buttons:hover{
 	-fx-background-color:#020704;
