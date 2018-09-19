@@ -1,6 +1,5 @@
 package friendship;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -9,7 +8,6 @@ import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.pojos.UserRegistration;
 import db.util.SESSION;
 import widgets.designComponents.HBProfileContent;
 

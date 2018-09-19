@@ -165,12 +165,17 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	private void securityQuestion() {
 		this.layout.getChildren().clear();
 		this.lblQuestion.setText(this.u.getSecurityQuestion());
-
-		this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer, this.btnAnswer);
+		
+		this.hbButtons.getChildren().clear();
+		this.hbButtons.getChildren().addAll( this.btnCancel, this.btnAnswer);
+		
+		this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer,this.hbButtons);
 		this.txtAnswer.setOnMouseClicked(e -> {
 			this.layout.getChildren().clear();
+			this.hbButtons.getChildren().clear();
+			this.hbButtons.getChildren().addAll( this.btnCancel, this.btnAnswer);
 			this.lblQuestion.setText(this.u.getSecurityQuestion());
-			this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer, this.btnAnswer);
+			this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer,this.btnCancel, this.btnAnswer);
 
 		});
 
@@ -179,7 +184,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 				if (checkFields.isTextFieldEmpty(this.txtAnswer)) {
 					this.layout.getChildren().clear();
 					this.lblQuestion.setText(this.u.getSecurityQuestion());
-					this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer, this.btnAnswer);
+					this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer,this.btnCancel, this.btnAnswer);
 					this.layout.getChildren().add(new Label("Digite a resposta"));
 					return;
 				}

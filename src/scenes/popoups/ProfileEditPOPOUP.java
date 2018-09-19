@@ -48,12 +48,12 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		super(owner);
 		this.pi = new ProfileImg();
 		
-		// this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
+		 this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
 		
 		this.imgProfile = new ImageView();
 		
 		if (SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
-			this.imgProfile.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+			this.imgProfile.setImage(new Image(new FileInputStream(new File("resources/images/icons/profile_picture.png"))));
 		} else {
 			this.imgProfile.setImage(ProfileImg.loadImage());
 		}

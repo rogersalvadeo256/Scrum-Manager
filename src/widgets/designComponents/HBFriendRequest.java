@@ -65,7 +65,6 @@ public class HBFriendRequest extends HBox {
 		
 		this.layout = new HBox();
 		
-		this.layout.setSpacing(50);
 		
 		this.layout.getChildren().addAll(vbAlignItemsLeft, vbAlignItemsMiddle);
 		this.layout.getChildren().addAll(btnAccept, btnRefuse);
@@ -79,5 +78,26 @@ public class HBFriendRequest extends HBox {
 	};
 	public void setEventRefuse(EventHandler<ActionEvent> e) { 
 		this.btnRefuse.setOnAction(e);
+	
+		
+		
 	};
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

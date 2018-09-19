@@ -1,6 +1,10 @@
 package scenes.scenes;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import application.main.Window;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,72 +14,78 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import scenes.popoups.StandartLayoutPOPOUP;
 
-public class NewProjectScene extends Scene {
-
+public class NewProjectScene extends StandartLayoutPOPOUP {
 	private Label lblProjectName, lblDescProject;
 	private TextField txtProjectName;
 	private TextArea txtDescProject;
-	private Button btnSalvar,btnCancelar,btnInvite;
-	private HBox hbxBTN,hbxMember;
-	private VBox hbxPN,vbxTela;
+	/*
+	 * btnCancel - close the window and delete everthing
+	 * btnGoBack - serialization of the defined things - if the user try to create another project, show a message
+	 */
+	private Button btnFinish,btnCancel,btnInvite,btnGoBack;
+	private HBox hbButtons;
+	private HBox hbHeader;
 	
-	public NewProjectScene(){	
-		super(new VBox());
+	public NewProjectScene(javafx.stage.Window owner) throws FileNotFoundException {
+		super(owner);
+		
 		this.lblProjectName = new Label("Nome do Projeto");
 		this.lblDescProject = new Label("Descrição do Projeto");
 		this.txtProjectName = new TextField();
 		this.txtDescProject = new TextArea();
 		this.txtDescProject.setId("descProject");
 		this.txtDescProject.setId("txtDescProject");
-		this.hbxBTN = new HBox();
-		this.hbxPN = new VBox();
-		this.hbxMember = new HBox();
-		this.vbxTela = new VBox();
+		this.hbButtons = new HBox();
 		
-		this.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
-		
-		Window.mainStage.setWidth(800);
-		Window.mainStage.setHeight(600);
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
 		
 		this.txtProjectName.setMaxWidth(300);
 		this.txtDescProject.setMaxWidth(300);
 		this.txtDescProject.setPrefRowCount(10);
 		this.txtDescProject.setWrapText(true);
 		
+		int SIZE  = 30;
+		ImageView buttonImage = new  ImageView(new Image(new FileInputStream(new File("resources/images/icons/back_arrow_icon.png"))));
+		buttonImage.setFitWidth(SIZE);
+		buttonImage.setFitHeight(SIZE);
+		
+		this.btnGoBack = new Button();
+		this.btnGoBack.setGraphic(buttonImage);
+		this.btnGoBack.setMaxWidth(100);
+		this.btnGoBack.setMaxHeight(100);
+		this.hbHeader = new  HBox();
+		this.hbHeader.getChildren().add(this.btnGoBack);
+		this.hbHeader.prefWidth(this.getWidth());
+		this.hbHeader.setAlignment(Pos.CENTER_LEFT);
+		
 		this.txtProjectName.setAlignment(Pos.CENTER);
-		this.btnSalvar = new Button("Salvar");
-		this.btnSalvar.setId("btnSalve");
+		this.btnFinish = new Button("Salvar");
+		this.btnFinish.setId("btnSalve");
 		
 		this.btnInvite = new Button("Convidar amigos");
 		this.btnInvite.setId("btnInvite");
-		this.btnCancelar = new Button("Cancelar");
-		this.btnCancelar.setId("btnCancel");
-
-		hbxPN.getChildren().addAll(lblProjectName,txtProjectName);
-		hbxPN.setSpacing(10);
-		hbxPN.setAlignment(Pos.CENTER);
-
+		this.btnCancel = new Button("Cancelar");
+		this.btnCancel.setId("btnCancel");
 		
-		hbxBTN.getChildren().addAll(btnSalvar,btnCancelar);
-		hbxBTN.setSpacing(10);
-		hbxBTN.setAlignment(Pos.CENTER);
+		hbButtons.getChildren().addAll(btnFinish,btnCancel);
+		hbButtons.setSpacing(10);
+		hbButtons.setAlignment(Pos.CENTER);
 				
-		hbxMember.getChildren().addAll(btnInvite);
 		
-		hbxMember.setSpacing(15);
-		hbxMember.setAlignment(Pos.CENTER);
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.setSpacing(10);
 		
-		vbxTela.getChildren().addAll(hbxPN,lblDescProject,txtDescProject,hbxMember);
-		vbxTela.getChildren().addAll(hbxBTN);
-		vbxTela.setAlignment(Pos.CENTER);
-		
-		vbxTela.setSpacing(15);
-		
-		
-		setRoot(vbxTela);
+		this.layout.getChildren().addAll(this.hbHeader);
+		this.layout.getChildren().addAll(this.lblProjectName, this.txtProjectName);
+		this.layout.getChildren().addAll(this.lblDescProject, this.txtDescProject);
+		this.layout.getChildren().addAll(this.btnInvite);
+		this.layout.getChildren().addAll(this.hbButtons);
 	}
 	
 	public void setEventInvite(EventHandler<ActionEvent> e) { 
@@ -83,4 +93,26 @@ public class NewProjectScene extends Scene {
 	}
 	
 	
+	
+	
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

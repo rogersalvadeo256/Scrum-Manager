@@ -31,9 +31,23 @@
 	-fx-text-fill: black;
 
 }
+.hbox#project{ 
+     -fx-background-color:#eb41f4;
+    
+}
+.vbox#collumns{ 
+       -fx-background-color:#41f4d3;
+}
+
+.vbox#rightColumn{ 
+   -fx-border-width: 0.0 4.0 0.0 0.0 ;
+   -fx-border-color: white;
+        
+    
+}
 
 .vbox#profile-info{
-	-fx-background-color:#a9bdf7;
+	-fx-background-color:#4f41f4;
 	-fx-font-size:12.0pt;
 	 -fx-font-weight: bold;
 	-fx-text-fill: #2f4f8f;
@@ -46,7 +60,7 @@
 	-fx-border-bottom-left-radius: 10px;
 }
 .label{
-    -fx-font-size: 25.0pt;
+    -fx-font-size: 15.0pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: black;
     -fx-opacity: 6.0;

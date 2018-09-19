@@ -15,18 +15,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import widgets.designComponents.HBFriendRequest;
 
-public class FriendshipRequestPOPOUP extends Stage {
+public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
 
-	private ArrayList<HBFriendRequest> hbFriendRequestList;
-	private VBox layout;
 	private final ScrollBar sc;
-	private Scene scene;
-	private Window parent;
 	private ArrayList<HBFriendRequest> requestList;
 
 	/**
@@ -34,10 +28,14 @@ public class FriendshipRequestPOPOUP extends Stage {
 	 * he's own stage, this because are a popoup window
 	 * 
 	 * @author jefter66
+	 * @throws FileNotFoundException 
 	 */
-	public FriendshipRequestPOPOUP(Window parent) throws FileNotFoundException {
+
+
+	public FriendshipRequestPOPOUP(Window owner) throws FileNotFoundException {
+		super(owner);
+
 		this.layout = new VBox();
-		this.parent = parent;
 		this.requestList = new ArrayList<HBFriendRequest>();
 
 		this.scene = new Scene(layout);
@@ -85,6 +83,14 @@ public class FriendshipRequestPOPOUP extends Stage {
 				request.setEventAccept(e -> {
 					answerRequest.acceptRequest();
 					SESSION.UPDATE_SESSION();
+					this.layout.getChildren().clear();
+					try {
+						drawRequests();
+					} catch (FileNotFoundException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}
+				
 					try {
 						GENERAL_STORE.updateComponentsHOME();
 					} catch (IOException e1) {
@@ -94,6 +100,12 @@ public class FriendshipRequestPOPOUP extends Stage {
 				request.setEventRefuse(e -> {
 					answerRequest.refuseRequest();
 					SESSION.UPDATE_SESSION();
+					this.layout.getChildren().clear();
+					try {
+						drawRequests();
+					} catch (FileNotFoundException e2) {
+						e2.printStackTrace();
+					}
 					try {
 						GENERAL_STORE.updateComponentsHOME();
 					} catch (IOException e1) {

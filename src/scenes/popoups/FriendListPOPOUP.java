@@ -1,44 +1,34 @@
 package scenes.popoups;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import api.FriendsComponentAPI;
 import db.util.SESSION;
-import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.stage.Window;
 import widgets.designComponents.HBFriendContent;
 
 public class FriendListPOPOUP extends StandartLayoutPOPOUP {
 	
 	private FriendsComponentAPI controller;
-	private ArrayList<HBFriendContent> friendContent;
-
 	public FriendListPOPOUP(Window owner) throws IOException {
 		super(owner);
-		this.friendContent = new ArrayList<>();
-
+		this.layout.setAlignment(Pos.CENTER);
+		this.controller=new FriendsComponentAPI();
 		drawComponents();
-
-		this.initOwner(owner);
-		this.initModality(Modality.WINDOW_MODAL);
-		this.setWidth(600);
-		this.setHeight(500);
-		this.setResizable(false);
 	}
-
 	private void drawComponents() throws IOException {
 
+		if(SESSION.getProfileLogged().getFriendsList().isEmpty()) {
+		/* just for test*/	this.layout.getChildren().add(new Label("you have no friends"));
+		}
 		for (int i = 0; i < SESSION.getProfileLogged().getFriendsList().size(); i++) {
 
 			HBFriendContent component = new HBFriendContent(SESSION.getProfileLogged().getFriendsList().get(i));
 
 			component.setEventDelete(e -> { 
 				controller.deleteFriend(component.getP());
-				layout.getChildren().clear();
 				try {
 					drawComponents();
 				} catch (IOException e1) {
@@ -49,3 +39,18 @@ public class FriendListPOPOUP extends StandartLayoutPOPOUP {
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

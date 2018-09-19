@@ -44,7 +44,7 @@ public class HBProfileContent extends HBox {
 		});
 		
 		if(p.getPhoto() == null || p.getPhoto().length == 0){ 
-				this.usrImage.setImage(new Image(new FileInputStream("resources/images/icons/scrum_icon.png")));
+				this.usrImage.setImage(new Image(new FileInputStream("resources/images/icons/profile_icon.png")));
 		}else { 
 				this.usrImage.setImage(ProfileImg.getImage(p));
 		}
@@ -65,3 +65,6 @@ public class HBProfileContent extends HBox {
 		this.btnAdd = btnAdd;
 	}
 }
+
+
+
