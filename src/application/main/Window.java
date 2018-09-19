@@ -22,7 +22,6 @@ public class Window extends Stage {
 		Window.mainStage.setResizable(false);
 
 // mainStage.setScene(new HomePageScene());
-//		 mainStage.setScene(new NewProjectScene());
 		mainStage.setScene(new LoginScene());	
 //		new NewProjectScene(this);
 		this.show();

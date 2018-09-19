@@ -1,15 +1,20 @@
 package application.controllers;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
+import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
 import db.util.GENERAL_STORE;
 import db.util.SESSION;
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +23,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import scenes.popoups.ProfileEditPOPOUP;
+import scenes.scenes.LoginScene;
 import validation.CheckEmptyFields;
 import widgets.alertMessage.CustomAlert;
 
@@ -26,20 +33,132 @@ public class EditProfileController {
 
 	private EntityManager em;
 	private CheckEmptyFields check;
+	private Button btnChangeQuestion, btnChangeAnswer;
+	private Button btnDeleteAccount;
 
 	public EditProfileController() {
 		this.check = new CheckEmptyFields();
+		this.btnChangeAnswer = new Button("Alterar");
+		this.btnChangeQuestion = new Button("Alterar");
+		this.btnDeleteAccount = new Button("Deletar conta");
 	}
+
+	/*
+	 * this code is huge and redundant, but was the best way that i find to do this
+	 * and understand later
+	 */
 	public void setEventAdvancedOptions(ActionEvent e, ProfileEditPOPOUP screen, VBox layout,
+																					Stage stage,
 																					HBox hbChangeAnswer,
 																					HBox hbChangeQuestion,
 																					HBox hbButtons,
 																					Button btnBack) {
+
 		layout.getChildren().clear();
-		layout.getChildren().add(hbChangeQuestion);
-		layout.getChildren().add(hbChangeAnswer);
+		hbChangeAnswer.getChildren().clear();
+		hbChangeQuestion.getChildren().clear();
+
+		hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
+		hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString()));
+
+		hbChangeQuestion.getChildren().add(this.btnChangeQuestion);
+		hbChangeAnswer.getChildren().add(this.btnChangeAnswer);
+
+		hbChangeAnswer.setAlignment(Pos.CENTER);
+		hbChangeQuestion.setAlignment(Pos.CENTER);
+
+		hbChangeAnswer.setSpacing(20);
+		hbChangeQuestion.setSpacing(20);
+
+		layout.getChildren().addAll(hbChangeQuestion);
+		layout.getChildren().addAll(hbChangeAnswer);
+		layout.getChildren().add(this.btnDeleteAccount);
 		layout.getChildren().add(hbButtons);
-		
+		layout.setSpacing(20);
+
+		this.btnChangeQuestion.setOnAction(e1 -> {
+
+			hbChangeQuestion.getChildren().clear();
+
+			TextField txtQuestion = new TextField();
+			Button btnCancel = new Button("Cancelar");
+			Button btnChange = new Button("Alterar");
+
+			txtQuestion.setPromptText(SESSION.getUserLogged().getSecurityQuestion().toString());
+
+			hbChangeQuestion.getChildren().addAll(txtQuestion, btnChange, btnCancel);
+
+			btnChange.setOnAction(e2 -> {
+				if (em == null)
+					em = Database.createEntityManager();
+				UserRegistration u = SESSION.getUserLogged();
+				if (!check.isTextFieldEmpty(txtQuestion)) {
+
+					u.setSecurityQuestion(txtQuestion.getText());
+					em.getTransaction().begin();
+					em.merge(u);
+					em.getTransaction().commit();
+					em.clear();
+					em.close();
+					em = null;
+					SESSION.UPDATE_SESSION();
+					hbChangeQuestion.getChildren().clear();
+
+					hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
+					hbChangeQuestion.getChildren().add(btnChangeQuestion);
+				}
+			});
+			btnCancel.setOnAction(e3 -> {
+				hbChangeQuestion.getChildren().clear();
+				hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
+				hbChangeQuestion.getChildren().add(btnChangeQuestion);
+			});
+
+		});
+		this.btnChangeAnswer.setOnAction(e1 -> {
+
+			hbChangeAnswer.getChildren().clear();
+			TextField txtAnswer = new TextField();
+			Button btnCancel = new Button("Cancelar");
+			Button btnChange = new Button("Alterar");
+
+			txtAnswer.setPromptText(SESSION.getUserLogged().getSecurityQuestionAnswer().toString());
+
+			hbChangeAnswer.getChildren().addAll(txtAnswer, btnChange, btnCancel);
+
+			btnChange.setOnAction(e2 -> {
+				if (em == null)
+					em = Database.createEntityManager();
+				UserRegistration u = SESSION.getUserLogged();
+				if (!check.isTextFieldEmpty(txtAnswer)) {
+					u.setSecurityQuestionAnswer(txtAnswer.getText());
+					em.getTransaction().begin();
+					em.merge(u);
+					em.getTransaction().commit();
+					em.clear();
+					em.close();
+					em = null;
+					SESSION.UPDATE_SESSION();
+					hbChangeAnswer.getChildren().clear();
+					hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString()));
+					hbChangeAnswer.getChildren().add(btnChangeAnswer);
+				}
+			});
+			btnCancel.setOnAction(e3 -> {
+				hbChangeAnswer.getChildren().clear();
+				hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString()));
+				hbChangeAnswer.getChildren().add(btnChangeAnswer);
+			});
+		});
+
+		this.btnDeleteAccount.setOnAction(e4 -> {
+			try {
+				deleteAccount(e4, stage);
+			} catch (ClassNotFoundException | FileNotFoundException | SQLException e2) {
+				e2.printStackTrace();
+			}
+		});
+
 		backToNormalOptions(e, btnBack, screen);
 
 	}
@@ -60,7 +179,6 @@ public class EditProfileController {
 					em.merge(u);
 					em.getTransaction().commit();
 					em.clear();
-					// this.message.add(updates.PASSWORD);
 				} else {
 					new CustomAlert(AlertType.ERROR, "Erro", "Senha muito curta", "A senha deve conter no minimo 8 caracteres");
 					return;
@@ -98,80 +216,47 @@ public class EditProfileController {
 		screen.close();
 	}
 
-	/**
-	 * the boolean param stands for if the update most be done in the question or in
-	 * the answare, if true = question
-	 * 
-	 * @param e
-	 * @param content
-	 * @param txtNewSecutiry
-	 * @param btnChange
-	 * @param btnChangeQuestion 
-	 * @param question
-	 */
-	public void setEventChangeSecurity(ActionEvent e,ProfileEditPOPOUP screen, HBox content, TextField txtNewSecutiry,
-																					Button btnChange,
-																					Button btnBack, boolean question) {
-		Button btnCancel = new Button("Cancelar");
-		content.getChildren().clear();
-		content.getChildren().addAll(txtNewSecutiry, btnChange);
-		btnChange.setText("Finalizar");
-		
-		// btnChange.setOnAction(); /* update the database where */
-	
-		content.getChildren().add(btnCancel);
-		
-		if(question)txtNewSecutiry.setPromptText(SESSION.getUserLogged().getSecurityQuestion().toString());
-		else txtNewSecutiry.setPromptText(SESSION.getUserLogged().getSecurityQuestionAnswer().toString());
-		
-		btnCancel.setOnAction(e1 ->{
-			content.getChildren().clear();
-			if(question)content.getChildren().addAll(new Label(SESSION.getUserLogged().getSecurityQuestion().toString(), btnChange));
-			else content.getChildren().addAll(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString(), btnChange));
-			btnChange.setText("Mudar");
-		});
-		backToNormalOptions(e,btnBack,screen);
-	}
-	private void backToNormalOptions(ActionEvent e ,Button btnBack, ProfileEditPOPOUP screen) { 
+	private void backToNormalOptions(ActionEvent e, Button btnBack, ProfileEditPOPOUP screen) {
 		btnBack.setOnAction(e1 -> {
 			screen.init();
 			/*
 			 * GAMBIARRA A GENTE ACEITA
 			 */
-			btnBack.setOnAction(e2-> { this.setEventBack(e, screen);});
+			btnBack.setOnAction(e2 -> {
+				this.setEventBack(e2, screen);
+			});
 		});
 	}
+
+	private void deleteAccount(ActionEvent e, Stage stage) throws ClassNotFoundException,
+																					FileNotFoundException,
+																					SQLException {
+
+		if (this.em == null)
+			this.em = Database.createEntityManager();
+
+		Query q = this.em.createQuery("from UserRegistration where codUser =: cod");
+		q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+
+		UserRegistration u = (UserRegistration) q.getResultList().get(0);
+
+		Profile p = u.getProfile();
+
+		this.em.getTransaction().begin();
+		this.em.remove(p);
+		this.em.remove(u);
+		this.em.getTransaction().commit();
+		this.em.clear();
+		this.em.close();
+		this.em = null;
+
+		SESSION.RESET();
+		stage.close();
+		Window.mainStage.setScene(new LoginScene());
+
+	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

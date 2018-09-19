@@ -18,5 +18,6 @@ public class StandartLayoutPOPOUP extends Stage{
 		this.layout = new VBox();
 		this.scene = new Scene(layout);
 		this.setScene(scene);
+//		this.show();
 	}
 }

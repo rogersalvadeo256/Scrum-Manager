@@ -16,7 +16,12 @@ public class CustomAlert extends Alert{
 		super(alert);
 		init(alert,  title,  header,  contentText);
 		this.getButtonTypes().add(ButtonType.CANCEL);
+		
+		
 	}
+	
+	
+	
 	
 	public void init(AlertType alert, String title, String header, String contentText) {
 		

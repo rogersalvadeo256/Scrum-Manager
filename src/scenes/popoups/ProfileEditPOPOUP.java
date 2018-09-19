@@ -7,6 +7,7 @@ import java.io.IOException;
 import application.controllers.EditProfileController;
 import db.util.ProfileImg;
 import db.util.SESSION;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,21 +25,15 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	private ImageView imgProfile;
 	private ProfileImg pi;
 	private Label lblName, lblBio, lblCurrentPassword, lblNewPassword;
-	private TextField txtName, txtAnswer,txtQuestion;
+	private TextField txtName;
 	private TextArea txtBio;
 	private PasswordField txtNewPassword, txtCurrentPassword;
-	private Button  btnAdvanced,btnDelete;
+	private Button  btnAdvanced;
 	private HBox hbChangeQuestion,hbChangeAnswer,hbAdvancedStuff;
-	private Button btnChangeQuestion, btnChangeAnswer;
 	private EditProfileController controller;
 	
 	private Button btnBack, btnFinish;
 	private HBox hbSteadyButtons;
-	
-	private void a() { 
-	}
-	
-	
 	
 	public ProfileEditPOPOUP(Window owner) throws IOException {
 		super(owner);
@@ -47,11 +42,9 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.hbAdvancedStuff = new HBox();
 		this.btnAdvanced=new Button("Avançado");
 		
-		this.hbAdvancedStuff.setAlignment(Pos.CENTER);
-		this.hbAdvancedStuff.getChildren().add(this.btnAdvanced);
 		
 		this.hbSteadyButtons = new HBox();
-	
+		this.hbSteadyButtons.setAlignment(Pos.CENTER);
 		
 		this.scene.getStylesheets().add(this.getClass().getResource("/css/EDIT_PROFILE.css").toExternalForm());
 		
@@ -111,46 +104,32 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.btnFinish = new Button("Salvar");
 		this.btnFinish.setId("save");
 		
-		this.txtAnswer = new TextField();
-		this.txtQuestion = new TextField();
+		this.hbAdvancedStuff.setAlignment(Pos.CENTER);
+		this.hbAdvancedStuff.getChildren().addAll(this.btnAdvanced);
 		
-		this.btnDelete=new Button("Deletar conta");
 		this.controller = new EditProfileController();
 		
-		
-		this.btnChangeQuestion = new Button("Mudar");
 		this.hbChangeQuestion = new HBox();
 		this.hbChangeQuestion.setAlignment(Pos.CENTER);
 		
-		this.hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString(), this.btnChangeQuestion));
-		this.btnChangeQuestion.setOnAction(e->{
-			controller.setEventChangeSecurity(e,ProfileEditPOPOUP.this, this.hbChangeQuestion, this.txtQuestion,this.btnChangeQuestion, this.btnBack, true);
-		});
-		this.btnChangeAnswer = new Button("Mudar");
+		
 		this.hbChangeAnswer = new HBox();
 		this.hbChangeAnswer.setAlignment(Pos.CENTER);
-		this.hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString(), this.btnChangeAnswer));
 		
-		this.btnChangeAnswer.setOnAction(e->{
-			controller.setEventChangeSecurity(e, ProfileEditPOPOUP.this,this.hbChangeAnswer, this.txtAnswer,this.btnChangeAnswer, this.btnBack, false);
-		});
 		this.btnAdvanced.setOnAction(e->{
 			controller.setEventFinish(e, txtName, txtBio, txtCurrentPassword, txtNewPassword);
-			controller.setEventAdvancedOptions(e, ProfileEditPOPOUP.this, this.layout,this.hbChangeAnswer,this.hbChangeQuestion,this.hbSteadyButtons,this.btnBack);
+			controller.setEventAdvancedOptions(e, ProfileEditPOPOUP.this, this.layout,this,this.hbChangeAnswer,this.hbChangeQuestion,this.hbSteadyButtons,this.btnBack);
 		});
 		this.btnFinish.setOnAction(e -> {
 			controller.setEventFinish(e, txtName, txtBio, txtCurrentPassword, txtNewPassword);
 		});
-		
 		this.btnBack.setOnAction(e -> {
 			controller.setEventBack(e, ProfileEditPOPOUP.this);
 		});
-		
 		this.init();
 	}
 	
 	public void init() {
-		
 		this.hbSteadyButtons.getChildren().clear();
 		this.hbSteadyButtons.getChildren().addAll(this.btnBack,this.btnFinish);
 		this.layout.getChildren().clear();
