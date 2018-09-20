@@ -24,6 +24,7 @@ public class LoginSceneController {
 	public LoginSceneController() {
 		this.login = new Login();
 	}
+
 	public void setEventBtnLogin(ActionEvent e, TextField txtLogin, PasswordField txtPassword) {
 		if (this.login.valideLogin(txtLogin, txtPassword)) {
 			try {
@@ -54,7 +55,7 @@ public class LoginSceneController {
 			this.setInvalidLogin(true);
 		}
 	}
-	
+
 	public boolean isInvalidLogin() {
 		return invalidLogin;
 	}

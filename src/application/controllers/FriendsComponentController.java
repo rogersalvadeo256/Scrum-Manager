@@ -28,17 +28,4 @@ public class FriendsComponentController {
 		em.close();
 		em=null;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

@@ -50,7 +50,6 @@ public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
 	}
 }
 
-
 /**
  * 
  * @author ensismoebius

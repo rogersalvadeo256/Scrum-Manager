@@ -86,25 +86,3 @@ public class ProfileImg {
 		return img;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

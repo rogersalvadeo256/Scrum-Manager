@@ -20,18 +20,19 @@ public class HBProfileContent extends HBox {
 	private Label lblName, lblBio;
 	private Button btnAdd;
 	private FriendshipRequest fRequest;
+
 	public HBProfileContent(Profile p) throws IOException {
 		this.lblName = new Label(p.getName());
 		this.lblBio = new Label(p.getBio());
 		init(p);
 	}
-	
+
 	public HBProfileContent(UserRegistration u) throws IOException {
 		this.lblName = new Label(u.getProfile().getName());
 		this.lblBio = new Label(u.getProfile().getBio());
 		init(u.getProfile());
 	}
-	
+
 	private void init(Profile p) throws IOException {
 		this.vbUsrIMG = new VBox();
 		this.vbUsrLABEL = new VBox();
@@ -42,21 +43,22 @@ public class HBProfileContent extends HBox {
 		this.btnAdd.setOnAction(e -> {
 			fRequest.sendFriendshipRequest();
 		});
-		
-		if(p.getPhoto() == null || p.getPhoto().length == 0){ 
-				this.usrImage.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
-		}else { 
-				this.usrImage.setImage(ProfileImg.getImage(p));
+
+		if (p.getPhoto() == null || p.getPhoto().length == 0) {
+			this.usrImage.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
+		} else {
+			this.usrImage.setImage(ProfileImg.getImage(p));
 		}
 		this.usrImage.setFitWidth(100);
 		this.usrImage.setFitHeight(100);
-		
+
 		this.vbUsrIMG.getChildren().addAll(this.usrImage);
 		this.vbUsrBUTTON.getChildren().add(btnAdd);
 		this.vbUsrLABEL.getChildren().addAll(this.lblName, this.lblBio);
-		
+
 		this.getChildren().addAll(vbUsrIMG, vbUsrLABEL, vbUsrBUTTON);
 	}
+
 	public Button getBtnAdd() {
 		return btnAdd;
 	}
@@ -65,6 +67,3 @@ public class HBProfileContent extends HBox {
 		this.btnAdd = btnAdd;
 	}
 }
-
-
-

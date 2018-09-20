@@ -23,12 +23,9 @@ public class HBoxPhotoDecoration extends VBox {
 		this.image = image;
 		init();
 	}
+
 	private void init() {
 		this.hbContainer = new HBox();
-
-		this.setAlignment(Pos.CENTER);
-		this.prefWidth(this.image.getFitWidth());
-		this.prefHeight(this.image.getFitHeight());
 
 		this.hbContainer.setAlignment(Pos.CENTER);
 
@@ -52,6 +49,6 @@ public class HBoxPhotoDecoration extends VBox {
 
 	public HBox changePhoto() {
 		return this.hbContainer;
-	}
 
+	}
 }

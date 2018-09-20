@@ -26,34 +26,35 @@ public class Window extends Stage {
 
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(true);
-		
+
 		// mainStage.setScene(new HomePageScene());
 		mainStage.setScene(new LoginScene());
-//		new NewProjectScene(this);
+		// new NewProjectScene(this);
 		this.show();
-//		 
-//		InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
-//		i.showAndWait();
-//		Profile p = new Profile();
-//		p.setName("jefter");
-//		p.setBio("aaakakakkaakaka afçasfçalfafçasklçfls \n sllslslsls asfafasçfafjsçakfçakf   \n");
-//		HBFriendContent tests = new HBFriendContent(p);
-//		Scene sc = new Scene(tests);
-//		this.setScene(sc);
-//		this.show();
-//		
+		//
+		// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
+		// i.showAndWait();
+		// Profile p = new Profile();
+		// p.setName("jefter");
+		// p.setBio("aaakakakkaakaka afçasfçalfafçasklçfls \n sllslslsls
+		// asfafasçfafjsçakfçakf \n");
+		// HBFriendContent tests = new HBFriendContent(p);
+		// Scene sc = new Scene(tests);
+		// this.setScene(sc);
+		// this.show();
+		//
 
-//		ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
-//		test.show();
+		// ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
+		// test.show();
 
 		// ProfileEditPOPOUP tests = new ProfileEditPOPOUP(this);
 		// tests.show();
 		// FriendshipRequestPOPOUP test = new FriendshipRequestPOPOUP(this);
 		// test.show();
 
-//		 mainStage.setScene(new NewProjectScene());
+		// mainStage.setScene(new NewProjectScene());
 
-//		this.show();
+		// this.show();
 
 		this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			@Override
