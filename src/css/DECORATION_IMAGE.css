@@ -1,0 +1,19 @@
+.hbox{
+    -fx-background-color: #5fb69c;
+    -fx-opacity: 0.50;
+    -fx-padding: 10;
+    -fx-spacing: 15;
+    -fx-width: 260px;
+
+}
+.hbox:hover{
+    -fx-background-color: #5fb69c;
+     -fx-opacity: 1.0;
+     
+}
+
+.label{
+    -fx-text-fill: #ffffff;
+    -fx-text-font-weight:bold;
+}
+

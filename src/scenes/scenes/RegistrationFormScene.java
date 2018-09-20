@@ -3,7 +3,7 @@ package scenes.scenes;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import api.RegistrationFromSceneAPI;
+import application.controllers.RegistrationFromSceneController;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
 import javafx.geometry.Pos;
@@ -18,8 +18,7 @@ import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
 
-	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword, lblQuestion,
-																					lblAnswer;
+	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword, lblQuestion, lblAnswer;
 	private TextField txtName, txtUserName, txtEmail, txtQuestion, txtAnswer;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
 	public Button btnRegister, btnCancel;
@@ -28,7 +27,7 @@ public class RegistrationFormScene extends VBox {
 	private ArrayList<String> fieldName;
 	private ArrayList<String> confirmationMessage;
 	private HBox hbButtons;
-	private RegistrationFromSceneAPI controller;
+	private RegistrationFromSceneController controller;
 
 	public RegistrationFormScene() throws ClassNotFoundException, SQLException {
 
@@ -90,39 +89,25 @@ public class RegistrationFormScene extends VBox {
 		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
-		this.controller = new RegistrationFromSceneAPI();
+		this.controller = new RegistrationFromSceneController();
 
 		this.btnRegister.setOnAction(e -> {
-			this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+			this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
+					txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 		});
-		
-		this.txtPasswordConfirmation.setOnKeyPressed(e ->{ 
-			if(e.getCode()  == KeyCode.ENTER) {
-			this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+
+		this.txtPasswordConfirmation.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.ENTER) {
+				this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage,
+						txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 			}
 		});
-		
-		this.getChildren().addAll(lblName, txtName, lblUserName, txtUserName, lblEmail, txtEmail, lblQuestion, txtQuestion, lblAnswer, txtAnswer);
-		this.getChildren().addAll(lblPassword, txtPasswordField, lblConfirmPassword, txtPasswordConfirmation, hbButtons);
+
+		this.getChildren().addAll(lblName, txtName, lblUserName, txtUserName, lblEmail, txtEmail, lblQuestion,
+				txtQuestion, lblAnswer, txtAnswer);
+		this.getChildren().addAll(lblPassword, txtPasswordField, lblConfirmPassword, txtPasswordConfirmation,
+				hbButtons);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

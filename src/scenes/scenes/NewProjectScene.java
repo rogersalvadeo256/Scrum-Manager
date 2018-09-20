@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import scenes.popoups.StandartLayoutPOPOUP;
 
 public class NewProjectScene extends StandartLayoutPOPOUP {
@@ -32,8 +33,8 @@ public class NewProjectScene extends StandartLayoutPOPOUP {
 	private HBox hbButtons;
 	private HBox hbHeader;
 	
-	public NewProjectScene(javafx.stage.Window owner) throws FileNotFoundException {
-		super(owner);
+	public NewProjectScene(Stage mainStage) throws FileNotFoundException {
+		super(mainStage);
 		
 		this.lblProjectName = new Label("Nome do Projeto");
 		this.lblDescProject = new Label("Descrição do Projeto");

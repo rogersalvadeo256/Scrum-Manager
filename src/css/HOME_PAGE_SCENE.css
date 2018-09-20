@@ -115,7 +115,6 @@
 }
 .hbox#menu{
 	
-	-fx-background-color:transparent;
 	-fx-pref-height:50.0;
 }
 .button#menu{

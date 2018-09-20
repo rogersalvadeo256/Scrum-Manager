@@ -36,6 +36,7 @@ import listeners.Close;
 import scenes.popoups.FriendListPOPOUP;
 import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
+import widgets.designComponents.HBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
 
 public class HomePageScene extends Scene {
@@ -61,6 +62,7 @@ public class HomePageScene extends Scene {
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 	private SearchFriend searchFriend;
+	private HBoxPhotoDecoration imageContent;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
@@ -156,7 +158,7 @@ public class HomePageScene extends Scene {
 		this.btnExit.setOnAction(new Close(Window.mainStage));
 
 		this.btnFriends = new Button();
-		this.btnFriends.setOnAction(e ->{
+		this.btnFriends.setOnAction(e -> {
 			try {
 				new FriendListPOPOUP(Window.mainStage).showAndWait();
 			} catch (IOException e1) {
@@ -164,7 +166,7 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-		
+
 		this.btnFriendRequest.setOnAction(event -> {
 			try {
 				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
@@ -228,8 +230,8 @@ public class HomePageScene extends Scene {
 
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
-//		this.profileImg.setTranslateX(-10);
-//		this.profileImg.setTranslateY(20);
+		// this.profileImg.setTranslateX(-10);
+		// this.profileImg.setTranslateY(20);
 
 		this.btnEditBio = new Button("Editar Bio");
 		this.btnEditBio.getStyleClass().add("button");
@@ -244,7 +246,6 @@ public class HomePageScene extends Scene {
 
 		this.hbBntInteractWithBio.getChildren().addAll(btnOk, btnCancel);
 
-		
 		this.hbBntInteractWithBio.setVisible(false);
 		this.hbBntInteractWithBio.setSpacing(5);
 		this.txtBio = new TextArea();
@@ -309,7 +310,8 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile, btnExit);
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,
+				btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -324,7 +326,8 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBio, btnEditBio, hbBntInteractWithBio, lblEmail);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBio, btnEditBio,
+				hbBntInteractWithBio, lblEmail);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
@@ -349,16 +352,15 @@ public class HomePageScene extends Scene {
 		this.hbStartProject.getStyleClass().add("hbox");
 		this.hbStartProject.setId("project");
 
-		
-		this.hbStartProject.setOnMouseClicked(e ->{ 
+		this.hbStartProject.setOnMouseClicked(e -> {
 			try {
-				 new NewProjectScene(Window.mainStage).showAndWait();;
+				new NewProjectScene(Window.mainStage).showAndWait();
+				;
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}
 		});
-		
-		
+
 		this.vbRightColumn.setPrefWidth(400);
 		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);
 
