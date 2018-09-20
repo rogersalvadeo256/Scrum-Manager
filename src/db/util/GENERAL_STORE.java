@@ -14,80 +14,42 @@ import javafx.scene.layout.VBox;
 import widgets.designComponents.HBFriendRequest;
 
 public class GENERAL_STORE {
-	
+
 	/*
 	 * home page stuffs
 	 */
 	private static Label lblName, lblUserName, lblBio;
 	private static ImageView imgProfile;
 	private static Button btnFriendRequest;
-	
-	public static void setComponentsHOME(Label lblName, Label lblUserName, Label lblBio, ImageView imgProfile,Button btnFriendRequest) {
+
+	public static void setComponentsHOME(Label lblName, Label lblUserName, Label lblBio,
+																					ImageView imgProfile,
+																					Button btnFriendRequest) {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
 		GENERAL_STORE.lblBio = lblBio;
 		GENERAL_STORE.imgProfile = imgProfile;
-		GENERAL_STORE.btnFriendRequest= btnFriendRequest;
+		GENERAL_STORE.btnFriendRequest = btnFriendRequest;
 	}
-	
+
 	public static void updateComponentsHOME() throws IOException {
-		
+
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
 		lblBio.setText(SESSION.getProfileLogged().getBio());
-		if (SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
-			imgProfile.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
-		} else {
-			imgProfile.setImage(ProfileImg.loadImage());
-		}
-		if(SESSION.getProfileLogged().getFriendshipRequests().size()> 0) {
-			btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()));
-		} else { 
-			btnFriendRequest.setText(String.valueOf(""));
-		}
+		imgProfile.setImage(ProfileImg.loadImage());
+
+		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
+
 	}
-	
+
 	public static void loadComponentsHOME() throws IOException {
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
 		lblBio.setText(SESSION.getProfileLogged().getBio());
-		
-			imgProfile.setImage(ProfileImg.loadImage());
-			
-		if(SESSION.getProfileLogged().getFriendshipRequests().size()> 0) {
-			btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()));
-		}else { 
-			btnFriendRequest.setText(String.valueOf(""));
-		}
+
+		imgProfile.setImage(ProfileImg.loadImage());
+
+		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

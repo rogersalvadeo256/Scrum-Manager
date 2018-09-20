@@ -3,6 +3,7 @@ package friendship;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
@@ -13,6 +14,14 @@ public class FriendshipRequest {
 	private EntityManager em;
 	private Profile p;
 
+	/**
+	 * The parameter is the profile of who send the request, this profile is removed
+	 * of the list of friendship requests and moved to the friends list in the two
+	 * profiles ( sender and receiver )
+	 * 
+	 * @author jefter66
+	 * @param Profile pRequest
+	 */
 	public FriendshipRequest(Profile p) {
 		this.em = null;
 		this.p = p;
@@ -26,26 +35,24 @@ public class FriendshipRequest {
 	public void sendFriendshipRequest() {// Profile p) {
 		if (this.em == null)
 			em = Database.createEntityManager();
-		this.p.getFriendshipRequests().add(SESSION.getProfileLogged());
-		// SESSION.getProfileLogged().getFriendshipRequests().add(this.p);
-		SESSION.UPDATE_SESSION();
+		/*
+		 * the list will be atached to the object profile
+		 */
+		List<Profile> sendToUser = this.p.getFriendshipRequests();
+		sendToUser.add(SESSION.getProfileLogged());
+
+		// List<Profile> logged = SESSION.getProfileLogged().getFriendshipRequests();
+		// logged.add(this.p);
+
 		em.getTransaction().begin();
 		em.merge(this.p);
+//		em.merge(SESSION.getProfileLogged());
 		em.getTransaction().commit();
 		em.clear();
 		em.close();
 		em = null;
 	}
 
-	/**
-	 * The parameter is the profile of who send the request, this profile is removed
-	 * of the list of friendship requests and moved to the friends list in the two
-	 * profiles ( sender and receiver )
-	 * 
-	 * @author jefter66
-	 * @param Profile
-	 *            pRequest
-	 */
 	public void acceptRequest() { // Profile pRequest) {
 
 		this.p.getFriendsList().add(SESSION.getProfileLogged());
@@ -53,9 +60,9 @@ public class FriendshipRequest {
 
 		SESSION.getProfileLogged().getFriendshipRequests().remove(this.p);
 		SESSION.getProfileLogged().getFriendsList().add(this.p);
-
-		if (this.em == null)
-			this.em = Database.createEntityManager();
+		
+		
+		if (this.em == null)this.em = Database.createEntityManager();
 
 		this.em.getTransaction().begin();
 		this.em.merge(this.p);

@@ -18,10 +18,6 @@
 .header-buttons#btnCancel:hover{
 	-fx-background-color: red;
 }
-.vbox#vbSugestions{ 
-	-fx-background-color:#9be300;
-}
-
 .text-field{
    -fx-font-size: 10.0pt;
    -fx-border-width: 0.0 2.0 2.0 2.0 ;
@@ -29,23 +25,19 @@
     -fx-background-color: transparent;
     -fx-background-insets: 0.0 -1.0 -1.0 -1.0, 0.0 0.0 0.0 0.0, 0.0 -1.0 3.0 -1.0;
 	-fx-text-fill: black;
-
-}
-.hbox#project{ 
-     -fx-background-color:#eb41f4;
-    
 }
 .vbox#collumns{ 
        -fx-background-color:#41f4d3;
 }
-
+.vbox#profile-info{
+    -fx-border-width: 0.0 2.0 0.0 0.0 ;
+    -fx-border-color: white;
+    
+}
 .vbox#rightColumn{ 
    -fx-border-width: 0.0 4.0 0.0 0.0 ;
    -fx-border-color: white;
-        
-    
 }
-
 .label#bio{
 	-fx-font-size:12.0pt;
 	-fx-padding:63px;
@@ -115,8 +107,40 @@
 	-fx-background-color:transparent;
 	-fx-text-fill:#F5FFFA;
 	-fx-font-size: 10.0pt;
-	
     }
 .button#menu:hover{ 
 	-fx-border-color: white;
 }
+.hbox#hSugestions { 
+    -fx-background-color:#993366;
+         -fx-opacity:0.5;
+        
+}
+.hbox#hSugestions:hover { 
+    -fx-background-color:#993366;
+    -fx-opacity:1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

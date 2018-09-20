@@ -1,29 +1,16 @@
 package scenes.popoups;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import application.controllers.FriendshipRequestsController;
-import db.pojos.Profile;
-import db.util.GENERAL_STORE;
-import db.util.SESSION;
-import friendship.FriendshipRequest;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.layout.VBox;
 import javafx.stage.Window;
-import widgets.designComponents.HBFriendRequest;
 
 public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
 
 	private final ScrollBar sc;
 	private FriendshipRequestsController controller;
-
 	/**
 	 * This scene will contain the friendship requests of the user the scene have
 	 * he's own stage, this because are a popoup window
@@ -38,7 +25,7 @@ public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
 
 		this.setScene(scene);
 
-		controller.init(this, this.layout);
+		controller.init(this.layout, this);
 		/*
 		 * make this work
 		 */
@@ -55,6 +42,7 @@ public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
  * @author ensismoebius
  *
  */
+/*
 class Componente extends VBox {
 
 	private Button btn;
@@ -63,8 +51,7 @@ class Componente extends VBox {
 		this.btn = new Button("ewewe");
 		this.getChildren().add(btn);
 	}
-
 	public void setEventHandler(EventHandler<ActionEvent> e) {
 		this.btn.setOnAction(e);
-	}
-}
+		}
+*/

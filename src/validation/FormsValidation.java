@@ -176,7 +176,7 @@ public class FormsValidation {
 	 * 
 	 * @return Alert
 	 */
-	public Alert registrationOfNewUser() {
+	public void registrationOfNewUser() {
 		String fieldEmptyMessage = checkingForEmptyField();
 		String passwordFieldEmptyMessage = checkingForEmptyPasswordField();
 		String returnMessage;
@@ -185,30 +185,36 @@ public class FormsValidation {
 			returnMessage = fieldEmptyMessage + "\n" + passwordFieldEmptyMessage;
 			fieldEmptyMessage = new String();
 			passwordFieldEmptyMessage = new String();
-			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", returnMessage);
+			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", returnMessage).show();
+			 return;
 		}
 		String passwordErrorMessage = new String();
 		if (!validationForPassword(true).isEmpty()) {
 			passwordErrorMessage = new String();
 			passwordErrorMessage = validationForPassword(true);
-			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordErrorMessage);
+			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordErrorMessage).show();
+			 return;
 		}
 		String passwordFieldErrorMessage = new String();
 		if (!validationForPassword(false).isEmpty()) {
 			passwordFieldEmptyMessage = new String();
 			passwordFieldEmptyMessage = validationForPassword(false);
-			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage);
+			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage).show();;
+			 return;
 		}
 		if (!validationForExistentUserName(this.getUserRegistration())) {
-			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
-					"Nome de usuario já está cadastrado");
+			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
+					"Nome de usuario já está cadastrado").show();;
+					 return;
 		}
 		if (!validationForExistentEmail(this.getUserRegistration())) {
-			return message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
-					"Email já está cadastrado");
+			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
+					"Email já está cadastrado").show();
+			 return;
 		}
 		registration.insertUser(getUserRegistration());
-		return message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro realizado com sucesso", "Voce está cadastrado");
+		 message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro realizado com sucesso", "Voce está cadastrado").show();
+		 return;
 	}
 
 	public void setConfirmationMessage(ArrayList<String> message) {

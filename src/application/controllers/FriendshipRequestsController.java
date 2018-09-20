@@ -1,9 +1,11 @@
 package application.controllers;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import db.pojos.Profile;
+import db.util.GENERAL_STORE;
 import db.util.SESSION;
 import friendship.FriendshipRequest;
 import javafx.scene.layout.VBox;
@@ -17,8 +19,8 @@ public class FriendshipRequestsController {
 		this.requestsList = new ArrayList<>();
 	}
 	
-	public void init(FriendshipRequestPOPOUP stage, VBox layout) throws FileNotFoundException {
-		drawRequests(stage, layout);
+	public void init(VBox layout, FriendshipRequestPOPOUP screen) throws FileNotFoundException {
+		drawRequests(layout,screen);
 		this.requestsList = new ArrayList<Profile>();
 	}
 
@@ -31,9 +33,10 @@ public class FriendshipRequestsController {
 	 * @throws FileNotFoundException
 	 * @author jefter66
 	 */
-	public void drawRequests(FriendshipRequestPOPOUP stage, VBox layout) throws FileNotFoundException {
+	public void drawRequests(VBox layout, FriendshipRequestPOPOUP screen) throws FileNotFoundException {
 		loadRequests();
 		layout.getChildren().clear();
+		if(this.requestsList.isEmpty()) screen.close() ;
 		for (int i = 0; i < requestsList.size(); i++) {
 
 			HBFriendRequest component = new HBFriendRequest(this.requestsList.get(i));
@@ -46,8 +49,11 @@ public class FriendshipRequestsController {
 				SESSION.UPDATE_SESSION();
 				this.loadRequests();
 				try {
-					drawRequests(stage, layout);
+					drawRequests(layout,screen);
+					GENERAL_STORE.updateComponentsHOME();
 				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			});
@@ -57,21 +63,23 @@ public class FriendshipRequestsController {
 				SESSION.UPDATE_SESSION();
 				this.loadRequests();
 				try {
-					drawRequests(stage, layout);
+					drawRequests(layout,screen);
+					GENERAL_STORE.updateComponentsHOME();
 				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			});
 		}
 		return;
 	}
-
+		
 	private void loadRequests() {
 		requestsList.clear();
 		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequests().size(); i++) {
 			requestsList.add((Profile) SESSION.getProfileLogged().getFriendshipRequests().get(i));
 		}
 	}
-
 }
 

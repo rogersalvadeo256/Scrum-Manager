@@ -38,12 +38,14 @@ import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.NewProjectPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
 import widgets.designComponents.HBoxPhotoDecoration;
+import widgets.designComponents.SearchBar;
 import widgets.designComponents.ShowImage;
+import widgets.toaster.Toast;
 
 public class HomePageScene extends Scene {
 
 	private AnchorPane layout;
-	private Button btnExit,btnLogOut;
+	private Button btnExit, btnLogOut;
 	private Button btnEditProfile;
 	private ImageView profileImg;
 
@@ -55,7 +57,6 @@ public class HomePageScene extends Scene {
 	private Button btnSearch, btnHome;
 	private VBox vbProfileInfo;
 	private Button btnFriendRequest, btnFriends;
-	private AnchorPane apSearch;
 	private VBox vbLeftColumn, vbRightColumn;
 	private VBox vbSearchResult;
 	private HBox hbBntInteractWithBio;
@@ -63,8 +64,9 @@ public class HomePageScene extends Scene {
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 	private SearchFriend searchFriend;
-	private HBoxPhotoDecoration imageContent;
-
+//	private HBoxPhotoDecoration imageContent;
+	private Toast toast,toast2;
+	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 
@@ -78,17 +80,16 @@ public class HomePageScene extends Scene {
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
-		
-		
+
 		this.lblName = new Label();
 		this.lblUsername = new Label();
 		this.lblBio = new Label();
 		this.profileImg = new ImageView();
 		this.btnFriendRequest = new Button();
-		this.btnLogOut=new Button();
-		
-		this.imageContent=new HBoxPhotoDecoration(this.profileImg);
-		
+		this.btnLogOut = new Button();
+
+//		this.imageContent = new HBoxPhotoDecoration(this.profileImg);
+
 		/*
 		 * in this class the components are treated
 		 */
@@ -116,19 +117,24 @@ public class HomePageScene extends Scene {
 		this.lblName.setId("lblProject");
 
 		this.vbSearchResult = new VBox();
-		this.vbSearchResult.setLayoutX(5);
-
+//		this.vbSearchResult.setLayoutX(5);
+		this.vbSearchResult.getStyleClass().add("vbox");
+		this.vbSearchResult.setId("sugestions");
+		
 		this.txtSearch = new TextField();
 
 		this.btnSearch = new Button();
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
+		this.txtSearch.setId("search");
 
 		this.searchFriend = new SearchFriend();
 
+//		this.test = new SearchBar();
+		
+		
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
-
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
 				try {
 					HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
@@ -139,9 +145,11 @@ public class HomePageScene extends Scene {
 				}
 				if (!searchFriend.getResults().isEmpty()) {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {
+						searchFriend.getResults().get(i).getStyleClass().add("hbox");
+						searchFriend.getResults().get(i).setId("hSugestions");
 						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
 					}
-					apSearch.setId("sugestionsOn");
+//					apSearch.setId("sugestionsOn");
 					return;
 				}
 			}
@@ -164,20 +172,35 @@ public class HomePageScene extends Scene {
 
 		this.btnFriends = new Button();
 		this.btnFriends.setOnAction(e -> {
+		if(SESSION.getProfileLogged().getFriendsList().size() > 0) {
 			try {
 				new FriendListPOPOUP(Window.mainStage).showAndWait();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+		} else { 
+			this.toast2 = new Toast(Window.mainStage, "Voce não tem amigos");
+			this.setOnMouseMoved(e1 -> { 
+				this.toast2.close();
+			});
+		}
 		});
 
 		this.btnFriendRequest.setOnAction(event -> {
-			try {
-				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
 
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+			if (SESSION.getProfileLogged().getFriendshipRequests().size() > 0) {
+				try {
+					new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
+
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				}
+			} else { 
+				this.toast = new Toast(Window.mainStage, "Não há solicitações de amizade");
+				this.setOnMouseMoved(e ->{
+					this.toast.close();
+				});
+				
 			}
 		});
 
@@ -231,7 +254,7 @@ public class HomePageScene extends Scene {
 		icon_logout.setFitHeight(SIZE);
 		icon_logout.setFitWidth(SIZE);
 		this.btnLogOut.setGraphic(icon_logout);
-		
+
 		this.btnHome.getStyleClass().add("header-buttons");
 		this.btnSearch.getStyleClass().add("header-buttons");
 		this.btnFriendRequest.getStyleClass().add("header-buttons");
@@ -239,21 +262,19 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
 		this.btnLogOut.getStyleClass().add("header-buttons");
-		
-		this.btnLogOut.setOnAction(e -> { 
-				SESSION.RESET();
-				try {
-					Window.mainStage.setScene(new LoginScene());
-				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
-					e1.printStackTrace();
-				}
+
+		this.btnLogOut.setOnAction(e -> {
+			SESSION.RESET();
+			try {
+				Window.mainStage.setScene(new LoginScene());
+			} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+				e1.printStackTrace();
+			}
 		});
-		
-		
-		
+
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
- 
+
 		this.btnEditBio = new Button("Editar Bio");
 		this.btnEditBio.getStyleClass().add("button");
 		this.btnEditBio.setId("editBio");
@@ -332,8 +353,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,btnLogOut,
-				btnExit);
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch , btnSearch, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -348,8 +368,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBio, btnEditBio,
-				hbBntInteractWithBio, lblEmail);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblBio, btnEditBio, hbBntInteractWithBio, lblEmail);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
@@ -400,24 +419,51 @@ public class HomePageScene extends Scene {
 		AnchorPane.setRightAnchor(vbLeftColumn, 0.0);
 		this.layout.getChildren().add(vbLeftColumn);
 
-		this.apSearch = new AnchorPane();
-		AnchorPane.setTopAnchor(vbSearchResult, 40.0);
+		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
 		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
-		AnchorPane.setLeftAnchor(vbSearchResult, 20.0);
-		AnchorPane.setRightAnchor(vbSearchResult, 20.0);
-		apSearch.getChildren().addAll(vbSearchResult);
+		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
+		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
+		this.layout.getChildren().add(vbSearchResult);
 
-		apSearch.getStyleClass().add("anchor-pane");
-		apSearch.setId("sugestionsOff");
-
-		AnchorPane.setTopAnchor(apSearch, 45.0);
-		AnchorPane.setBottomAnchor(apSearch, 5.0);
-		AnchorPane.setLeftAnchor(apSearch, 170.0);
-		AnchorPane.setRightAnchor(apSearch, 610.0);
-		this.layout.getChildren().add(apSearch);
-
+		
+		
+		
 		this.setRoot(layout);
 
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

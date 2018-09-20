@@ -1,5 +1,6 @@
 package widgets.designComponents;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
@@ -7,11 +8,13 @@ import db.pojos.Profile;
 import db.pojos.UserRegistration;
 import db.util.ProfileImg;
 import friendship.FriendshipRequest;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 public class HBProfileContent extends HBox {
@@ -38,7 +41,7 @@ public class HBProfileContent extends HBox {
 		this.vbUsrLABEL = new VBox();
 		this.vbUsrBUTTON = new VBox();
 		this.usrImage = new ImageView();
-		this.btnAdd = new Button("Adicionar");
+		this.btnAdd = new Button();
 		this.fRequest = new FriendshipRequest(p);
 		this.btnAdd.setOnAction(e -> {
 			fRequest.sendFriendshipRequest();
@@ -55,7 +58,23 @@ public class HBProfileContent extends HBox {
 		this.vbUsrIMG.getChildren().addAll(this.usrImage);
 		this.vbUsrBUTTON.getChildren().add(btnAdd);
 		this.vbUsrLABEL.getChildren().addAll(this.lblName, this.lblBio);
+		this.vbUsrLABEL.setAlignment(Pos.CENTER);
 
+		this.setAlignment(Pos.CENTER);
+		this.vbUsrBUTTON.setAlignment(Pos.CENTER);
+		
+		try {
+		ImageView icon_add = new ImageView();
+		icon_add.setImage(new Image(new FileInputStream(new File("resources/images/icons/add.png"))));
+		icon_add.setFitHeight(100);
+		icon_add.setFitWidth(50);
+		this.btnAdd.setGraphic(icon_add);
+		this.btnAdd.prefHeight(this.getHeight());
+		}catch(IllegalArgumentException e) {
+			e.printStackTrace();
+		}
+		HBox.setHgrow(vbUsrLABEL, Priority.ALWAYS);
+		
 		this.getChildren().addAll(vbUsrIMG, vbUsrLABEL, vbUsrBUTTON);
 	}
 
@@ -67,3 +86,29 @@ public class HBProfileContent extends HBox {
 		this.btnAdd = btnAdd;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

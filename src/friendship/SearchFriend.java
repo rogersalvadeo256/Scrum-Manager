@@ -42,7 +42,6 @@ public class SearchFriend {
 		em.close();
 		em = null;
 	}
-
 	public ArrayList<HBProfileContent> getResults() {
 		return this.returnFromSearch;
 	}
