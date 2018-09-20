@@ -3,7 +3,6 @@ package scenes.scenes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -23,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.StageStyle;
 import listeners.Close;
 import scenes.popoups.ForgotPasswordPOPOUP;
 
@@ -71,6 +71,7 @@ public class LoginScene extends Scene {
 		this.rightSide = new HBox();
 		this.leftSide = new VBox();
 		this.leftRegistrationForm = new VBox();
+		
 		
 		this.form = new ArrayList<RegistrationFormScene>();
 		

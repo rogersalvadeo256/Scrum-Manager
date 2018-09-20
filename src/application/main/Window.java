@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import listeners.Close;
 import scenes.scenes.LoginScene;
 
@@ -24,9 +25,9 @@ public class Window extends Stage {
 		this.fis = new FileInputStream(new File("resources/images/icons/scrum_icon.png"));
 
 		Window.mainStage.getIcons().add(new Image(fis));
-		Window.mainStage.setResizable(false);
-
-// mainStage.setScene(new HomePageScene());
+		Window.mainStage.setResizable(true);
+		
+		// mainStage.setScene(new HomePageScene());
 		mainStage.setScene(new LoginScene());
 //		new NewProjectScene(this);
 		this.show();

@@ -36,6 +36,7 @@ import listeners.Close;
 import scenes.popoups.FriendListPOPOUP;
 import scenes.popoups.FriendshipRequestPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
+import widgets.designComponents.HBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
 
 public class HomePageScene extends Scene {
@@ -61,7 +62,8 @@ public class HomePageScene extends Scene {
 	private Button btnOk, btnCancel;
 	private TextArea txtBio;
 	private SearchFriend searchFriend;
-
+	private HBoxPhotoDecoration imageContent;
+	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 
