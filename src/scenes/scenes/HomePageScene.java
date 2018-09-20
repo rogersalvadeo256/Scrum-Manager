@@ -42,7 +42,7 @@ import widgets.designComponents.ShowImage;
 public class HomePageScene extends Scene {
 
 	private AnchorPane layout;
-	private Button btnExit;
+	private Button btnExit,btnLogOut;
 	private Button btnEditProfile;
 	private ImageView profileImg;
 
@@ -77,13 +77,17 @@ public class HomePageScene extends Scene {
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
-
+		
+		
 		this.lblName = new Label();
 		this.lblUsername = new Label();
 		this.lblBio = new Label();
 		this.profileImg = new ImageView();
 		this.btnFriendRequest = new Button();
-
+		this.btnLogOut=new Button();
+		
+		this.imageContent=new HBoxPhotoDecoration(this.profileImg);
+		
 		/*
 		 * in this class the components are treated
 		 */

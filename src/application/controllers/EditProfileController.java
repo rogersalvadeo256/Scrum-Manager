@@ -186,7 +186,6 @@ public class EditProfileController {
 			}
 		}
 
-		if (!check.isTextAreaEmpty(txtBio) || check.isTextFieldEmpty(txtName)) {
 			if (!check.isTextFieldEmpty(txtName)) {
 				String nn = txtName.getText();
 				em.getTransaction().begin();
@@ -203,8 +202,8 @@ public class EditProfileController {
 				em.clear();
 			}
 			SESSION.UPDATE_SESSION();
-		}
-		try {
+
+			try {
 			GENERAL_STORE.updateComponentsHOME();
 		} catch (IOException e1) {
 			e1.printStackTrace();

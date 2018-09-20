@@ -7,10 +7,12 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
-public class StandartLayoutPOPOUP extends Stage{
+public class StandartLayoutPOPOUP extends Stage {
 	protected Scene scene;
 	protected VBox layout;
 	public StandartLayoutPOPOUP(Window owner) {
+//		this.scene.getStylesheets().add(this.getClass().getResource("/css/STANDART_LAYOUT.css").toExternalForm());
+
 		this.initOwner(owner);
 		this.initModality(Modality.WINDOW_MODAL);
 		this.setWidth(400);
@@ -20,6 +22,6 @@ public class StandartLayoutPOPOUP extends Stage{
 		this.scene = new Scene(layout);
 		this.setScene(scene);
 		this.initStyle(StageStyle.UNDECORATED);
-//		this.show();
+
 	}
 }

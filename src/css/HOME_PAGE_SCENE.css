@@ -46,13 +46,6 @@
     
 }
 
-.vbox#profile-info{
-	-fx-background-color:#4f41f4;
-	-fx-font-size:12.0pt;
-	 -fx-font-weight: bold;
-	-fx-text-fill: #2f4f8f;
-	
-}
 .label#bio{
 	-fx-font-size:12.0pt;
 	-fx-padding:63px;
@@ -62,15 +55,14 @@
 .label{
     -fx-font-size: 15.0pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: black;
+    -fx-text-fill: white;
+    -fx-font-weight:bold;
     -fx-opacity: 6.0;
 }
 .label#lblName{ 
     -fx-font-weight: bold;
     -fx-fill-color:black;
 	-fx-text-aligment:center;
-}
-.label#userName{ 
 }
 .button#editBio{
 	-fx-fill-color:black;

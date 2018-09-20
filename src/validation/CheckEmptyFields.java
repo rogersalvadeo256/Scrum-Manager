@@ -7,21 +7,18 @@ import javafx.scene.control.TextField;
 public class CheckEmptyFields {
 
 	/**
-	 * If the return are false, the field isn't empty
-	 * 
+	 * return true field are empty 
 	 * @param TextField tfield
 	 * @return boolean
 	 * @author jefter66
 	 */
 	public boolean isTextFieldEmpty(TextField f) {
-		if (f.getText().trim().isEmpty())
-			return true;
+		if (f.getText().trim().isEmpty())return true;
 		return false;
 	}
 
 	/**
-	 * If the return are false, the field isn't empty
-	 * 
+	 * if the return are true the field are empty 
 	 * @param PasswordField pfield
 	 * @return boolean
 	 * @author jefter66
@@ -33,8 +30,7 @@ public class CheckEmptyFields {
 	}
 
 	public boolean isTextAreaEmpty(TextArea t) {
-		if (t.getText().isEmpty())
-			return true;
+		if (t.getText().isEmpty())return true;
 		return false;
 	}
 

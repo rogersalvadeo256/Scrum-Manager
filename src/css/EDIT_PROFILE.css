@@ -1,0 +1,9 @@
+.hbox{
+    -fx-background-color: #5fb69c;
+    -fx-opacity:0.50;
+    -fx-font-weight:bold;
+}
+.hbox:hover{
+    -fx-background-color: #5fb69c;
+    -fx-opacity: 1.0;
+}

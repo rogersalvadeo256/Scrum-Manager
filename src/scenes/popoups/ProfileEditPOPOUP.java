@@ -149,7 +149,8 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.layout.getChildren().clear();
 		this.layout.setSpacing(10);
 		this.layout.setAlignment(Pos.CENTER);
-		this.layout.getChildren().addAll(this.imageContent, this.hbNameContent, this.hbBio, this.hbCurrentPasswordContent, this.hbNewPasswordContent, this.hbAdvancedStuff, this.hbSteadyButtons);
+		this.layout.getChildren().addAll(this.imageContent, this.hbNameContent, this.hbBio, this.hbCurrentPasswordContent);
+		this.layout.getChildren().addAll(this.hbNewPasswordContent, this.hbAdvancedStuff, this.hbSteadyButtons);
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
 	}
