@@ -3,6 +3,7 @@ package application.controllers;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -17,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
@@ -186,24 +188,24 @@ public class EditProfileController {
 			}
 		}
 
-			if (!check.isTextFieldEmpty(txtName)) {
-				String nn = txtName.getText();
-				em.getTransaction().begin();
-				p.setName(nn);
-				em.merge(p);
-				em.getTransaction().commit();
-				em.clear();
-			}
-			if (!check.isTextAreaEmpty(txtBio)) {
-				em.getTransaction().begin();
-				p.setBio(txtBio.getText());
-				em.merge(p);
-				em.getTransaction().commit();
-				em.clear();
-			}
-			SESSION.UPDATE_SESSION();
+		if (!check.isTextFieldEmpty(txtName)) {
+			String nn = txtName.getText();
+			em.getTransaction().begin();
+			p.setName(nn);
+			em.merge(p);
+			em.getTransaction().commit();
+			em.clear();
+		}
+		if (!check.isTextAreaEmpty(txtBio)) {
+			em.getTransaction().begin();
+			p.setBio(txtBio.getText());
+			em.merge(p);
+			em.getTransaction().commit();
+			em.clear();
+		}
+		SESSION.UPDATE_SESSION();
 
-			try {
+		try {
 			GENERAL_STORE.updateComponentsHOME();
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -234,60 +236,29 @@ public class EditProfileController {
 		if (this.em == null)
 			this.em = Database.createEntityManager();
 
-		Query q = this.em.createQuery("from UserRegistration where codUser =: cod");
-		q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+		Optional<ButtonType> result = new CustomAlert(AlertType.WARNING, "Apagar conta", "Sua conta será apagada", "Todos os seus dados serão apagados").showAndWait();
 
-		UserRegistration u = (UserRegistration) q.getResultList().get(0);
+		if (result.get() == ButtonType.OK) {
 
-		Profile p = u.getProfile();
+			Query q = this.em.createQuery("from UserRegistration where codUser =: cod");
+			q.setParameter("cod", SESSION.getUserLogged().getCodUser());
 
-		this.em.getTransaction().begin();
-		this.em.remove(p);
-		this.em.remove(u);
-		this.em.getTransaction().commit();
-		this.em.clear();
-		this.em.close();
-		this.em = null;
+			UserRegistration u = (UserRegistration) q.getResultList().get(0);
 
-		SESSION.RESET();
-		stage.close();
-		Window.mainStage.setScene(new LoginScene());
+			Profile p = u.getProfile();
 
+			this.em.getTransaction().begin();
+			this.em.remove(p);
+			this.em.remove(u);
+			this.em.getTransaction().commit();
+			this.em.clear();
+			this.em.close();
+			this.em = null;
+
+			SESSION.RESET();
+			stage.close();
+			Window.mainStage.setScene(new LoginScene());
+		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

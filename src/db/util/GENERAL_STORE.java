@@ -52,11 +52,8 @@ public class GENERAL_STORE {
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
 		lblBio.setText(SESSION.getProfileLogged().getBio());
 		
-		if (SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
-			imgProfile.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
-		} else {
 			imgProfile.setImage(ProfileImg.loadImage());
-		}
+			
 		if(SESSION.getProfileLogged().getFriendshipRequests().size()> 0) {
 			btnFriendRequest.setText(String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()));
 		}else { 

@@ -19,7 +19,7 @@ public class HBoxPhotoDecoration extends VBox {
 	}
 
 	public HBoxPhotoDecoration(ImageView image) {
-		this.getStylesheets().add(this.getClass().getResource("/css/DECORATION_IMAGE.css").toExternalForm());
+//		this.getStylesheets().add(this.getClass().getResource("/css/DECORATION_IMAGE.css").toExternalForm());
 		this.image = image;
 		init();
 	}
@@ -27,6 +27,8 @@ public class HBoxPhotoDecoration extends VBox {
 	private void init() {
 		this.hbContainer = new HBox();
 
+		this.setAlignment(Pos.CENTER);
+		
 		this.hbContainer.setAlignment(Pos.CENTER);
 
 		this.hbContainer.setPrefHeight(500);
@@ -52,3 +54,11 @@ public class HBoxPhotoDecoration extends VBox {
 
 	}
 }
+
+
+
+
+
+
+
+

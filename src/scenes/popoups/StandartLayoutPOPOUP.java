@@ -11,6 +11,8 @@ public class StandartLayoutPOPOUP extends Stage {
 	protected Scene scene;
 	protected VBox layout;
 	public StandartLayoutPOPOUP(Window owner) {
+		
+		
 //		this.scene.getStylesheets().add(this.getClass().getResource("/css/STANDART_LAYOUT.css").toExternalForm());
 
 		this.initOwner(owner);

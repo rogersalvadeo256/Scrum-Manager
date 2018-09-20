@@ -67,7 +67,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		}
 		this.imgProfile.setFitWidth(300);
 		this.imgProfile.setFitHeight(300);
-		this.imageContent = new HBoxPhotoDecoration(imgProfile, null);
+		this.imageContent = new HBoxPhotoDecoration(imgProfile, "Alterar imagem");
 
 		this.imageContent.changePhoto().setOnMouseClicked(e -> {
 			try {

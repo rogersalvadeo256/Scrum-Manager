@@ -35,6 +35,7 @@ import javafx.scene.layout.VBox;
 import listeners.Close;
 import scenes.popoups.FriendListPOPOUP;
 import scenes.popoups.FriendshipRequestPOPOUP;
+import scenes.popoups.NewProjectPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
 import widgets.designComponents.HBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
@@ -225,18 +226,34 @@ public class HomePageScene extends Scene {
 		icon_scrum.setFitWidth(SIZE);
 		this.btnHome.setGraphic(icon_scrum);
 
+		ImageView icon_logout = new ImageView();
+		icon_logout.setImage(new Image(new FileInputStream(new File("resources/images/icons/logout.png"))));
+		icon_logout.setFitHeight(SIZE);
+		icon_logout.setFitWidth(SIZE);
+		this.btnLogOut.setGraphic(icon_logout);
+		
 		this.btnHome.getStyleClass().add("header-buttons");
 		this.btnSearch.getStyleClass().add("header-buttons");
 		this.btnFriendRequest.getStyleClass().add("header-buttons");
 		this.btnFriends.getStyleClass().add("header-buttons");
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
-
+		this.btnLogOut.getStyleClass().add("header-buttons");
+		
+		this.btnLogOut.setOnAction(e -> { 
+				SESSION.RESET();
+				try {
+					Window.mainStage.setScene(new LoginScene());
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+		});
+		
+		
+		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
-		// this.profileImg.setTranslateX(-10);
-		// this.profileImg.setTranslateY(20);
-
+ 
 		this.btnEditBio = new Button("Editar Bio");
 		this.btnEditBio.getStyleClass().add("button");
 		this.btnEditBio.setId("editBio");
@@ -268,6 +285,7 @@ public class HomePageScene extends Scene {
 				HomePageScene.this.btnEditBio.setVisible(false);
 				HomePageScene.this.lblUsername.setTranslateY(30);
 				HomePageScene.this.lblName.setTranslateY(40);
+				vbProfileInfo.getChildren().remove(txtBio);
 				HomePageScene.this.vbProfileInfo.getChildren().add(txtBio);
 				HomePageScene.this.hbBntInteractWithBio.setTranslateY(60);
 
@@ -314,7 +332,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,btnLogOut,
 				btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
@@ -358,8 +376,7 @@ public class HomePageScene extends Scene {
 
 		this.hbStartProject.setOnMouseClicked(e -> {
 			try {
-				new NewProjectScene(Window.mainStage).showAndWait();
-				;
+				new NewProjectPOPOUP(Window.mainStage).showAndWait();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			}

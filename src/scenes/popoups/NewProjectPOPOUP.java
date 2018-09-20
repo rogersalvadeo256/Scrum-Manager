@@ -1,15 +1,13 @@
-package scenes.scenes;
+package scenes.popoups;
 
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import application.main.Window;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -17,11 +15,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import scenes.popoups.StandartLayoutPOPOUP;
 
-public class NewProjectScene extends StandartLayoutPOPOUP {
+public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 	private Label lblProjectName, lblDescProject;
 	private TextField txtProjectName;
 	private TextArea txtDescProject;
@@ -33,7 +29,7 @@ public class NewProjectScene extends StandartLayoutPOPOUP {
 	private HBox hbButtons;
 	private HBox hbHeader;
 	
-	public NewProjectScene(Stage mainStage) throws FileNotFoundException {
+	public NewProjectPOPOUP(Stage mainStage) throws FileNotFoundException {
 		super(mainStage);
 		
 		this.lblProjectName = new Label("Nome do Projeto");
@@ -69,6 +65,8 @@ public class NewProjectScene extends StandartLayoutPOPOUP {
 		this.btnFinish = new Button("Salvar");
 		this.btnFinish.setId("btnSalve");
 		
+		
+		
 		this.btnInvite = new Button("Convidar amigos");
 		this.btnInvite.setId("btnInvite");
 		this.btnCancel = new Button("Cancelar");
@@ -77,7 +75,6 @@ public class NewProjectScene extends StandartLayoutPOPOUP {
 		hbButtons.getChildren().addAll(btnFinish,btnCancel);
 		hbButtons.setSpacing(10);
 		hbButtons.setAlignment(Pos.CENTER);
-				
 		
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
