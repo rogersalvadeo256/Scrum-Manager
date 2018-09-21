@@ -53,6 +53,7 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		buttonImage.setFitHeight(SIZE);
 		
 		this.btnGoBack = new Button();
+		this.btnGoBack.setId("back");
 		this.btnGoBack.setGraphic(buttonImage);
 		this.btnGoBack.setMaxWidth(100);
 		this.btnGoBack.setMaxHeight(100);

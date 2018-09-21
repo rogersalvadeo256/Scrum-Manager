@@ -97,7 +97,7 @@ public class LoginScene extends Scene {
 
 		this.messageLoginValidation = new Label("Login ou senha incorretos");
 		this.messageLoginValidation.setVisible(false);
-		this.messageLoginValidation.setId("messageWrongData");
+		this.messageLoginValidation.setId("messageWrong");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
 
 		this.btnStayConnected = new RadioButton();
@@ -105,6 +105,7 @@ public class LoginScene extends Scene {
 		this.hbStayConnected = new HBox();
 		this.hbStayConnected.getChildren().addAll(btnStayConnected, lblStayConnected);
 
+		
 		this.btnLogin = new Button("LOGIN");
 		this.btnExit = new Button("SAIR");
 		this.btnSignUp = new Button("Cadastre-se");
@@ -231,3 +232,8 @@ public class LoginScene extends Scene {
 	}
 
 }
+
+/* 
+
+
+*/

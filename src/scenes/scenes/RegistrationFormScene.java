@@ -4,21 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import application.controllers.RegistrationFromSceneController;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
 
-	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword, lblQuestion, lblAnswer;
 	private TextField txtName, txtUserName, txtEmail, txtQuestion, txtAnswer;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
 	public Button btnRegister, btnCancel;
@@ -34,22 +29,22 @@ public class RegistrationFormScene extends VBox {
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
-
-		this.lblName = new Label("Nome");
-		this.lblUserName = new Label("UserName");
-		this.lblEmail = new Label("Email");
-		this.lblQuestion = new Label("Escreva uma pergunta de segurança");
-		this.lblAnswer = new Label("Resposta da pergunta");
-		this.lblPassword = new Label("Senha");
-		this.lblConfirmPassword = new Label("Confirmação de senha");
-
+		
+		
 		this.txtName = new TextField();
+		this.txtName.setPromptText("Name");
 		this.txtUserName = new TextField();
+		this.txtUserName.setPromptText("UserName");
 		this.txtEmail = new TextField();
+		this.txtEmail.setPromptText("Email");
 		this.txtQuestion = new TextField();
+		this.txtQuestion.setPromptText("Pergunta de segurança");
 		this.txtAnswer = new TextField();
+		this.txtAnswer.setPromptText("Resposta");
 		this.txtPasswordField = new PasswordField();
+		this.txtPasswordField.setPromptText("Senha");
 		this.txtPasswordConfirmation = new PasswordField();
+		this.txtPasswordConfirmation.setPromptText("Confirmação da senha");
 
 		this.txtName.setMaxWidth(300);
 		this.txtUserName.setMaxWidth(300);
@@ -61,10 +56,13 @@ public class RegistrationFormScene extends VBox {
 		this.txtEmail.setAlignment(Pos.CENTER);
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
+		this.txtAnswer.setAlignment(Pos.CENTER);
+		this.txtQuestion.setAlignment(Pos.CENTER);
 
 		this.hbButtons = new HBox(10);
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button();
+		this.btnCancel.setId("btnCancel");
 
 		this.hbButtons.getChildren().addAll(btnCancel, btnRegister);
 		this.hbButtons.setAlignment(Pos.CENTER);
@@ -103,9 +101,9 @@ public class RegistrationFormScene extends VBox {
 			}
 		});
 
-		this.getChildren().addAll(lblName, txtName, lblUserName, txtUserName, lblEmail, txtEmail, lblQuestion,
-				txtQuestion, lblAnswer, txtAnswer);
-		this.getChildren().addAll(lblPassword, txtPasswordField, lblConfirmPassword, txtPasswordConfirmation,
+		this.getChildren().addAll(txtName,txtUserName, txtEmail,
+				txtQuestion,txtAnswer);
+		this.getChildren().addAll(txtPasswordField,txtPasswordConfirmation,
 				hbButtons);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(5);
