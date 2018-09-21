@@ -7,16 +7,30 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+/**
+ * Functions for serialization of the objects
+ * 
+ * @author jefter66
+ */
 public class SERIALIZATION {
-	
+
 	private static String path = "/tmp/scrum/";
-	public SERIALIZATION() throws IOException {}
-	
-	public static enum FileType { 
+
+	public SERIALIZATION() throws IOException {
+	}
+
+	/*
+	 * used to set the kinds of files (or better, class)
+	 */
+	public static enum FileType {
 		SESSION
 	}
-	
-	private static String getFileName (FileType type) {
+
+	/*
+	 * for each enum FileType addition the name of the file had to be put in other
+	 * case here, this way, the serialization going to work for the class
+	 */
+	private static String getFileName(FileType type) {
 		switch (type) {
 		case SESSION:
 			return "session.ser";
@@ -25,14 +39,31 @@ public class SERIALIZATION {
 		}
 		return null;
 	}
-	
+
+	/**
+	 * Used on the initialization of the program for check if the file are already
+	 * in the tmp folder
+	 * 
+	 * @param FileType
+	 * @return
+	 * @author jefter66
+	 */
+	public static boolean fileExists(FileType type) {
+		return new File(path + getFileName(type)).exists() ? true : false;
+	}
+
+	/**
+	 * @author jefter66
+	 * @author André Furlan
+	 * 
+	 */
 	public static void doSerialization(Object object, FileType type) throws IOException {
 
-		if (!(new File("/tmp/scrum").exists()))	new File("/tmp/scrum").mkdir();
+		if (!(new File("/tmp/scrum").exists()))
+			new File("/tmp/scrum").mkdir();
 
-		
 		FileOutputStream fileOut = new FileOutputStream(path + getFileName(type));
-		
+
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		try {
 			out.writeObject(object);
@@ -44,6 +75,11 @@ public class SERIALIZATION {
 		fileOut.close();
 	}
 
+	/**
+	 * 
+	 * @author jefter66
+	 * @author André Furlan
+	 */
 	public static Object undoSerialization(FileType type) {
 		Object o = null;
 		try {
@@ -52,9 +88,7 @@ public class SERIALIZATION {
 			o = (Object) in.readObject();
 			in.close();
 			fileIn.close();
-
 			System.out.println(" its work men");
-
 			return o;
 		} catch (IOException i) {
 			i.printStackTrace();
@@ -65,32 +99,9 @@ public class SERIALIZATION {
 			return null;
 		}
 	}
-	public static void deleteFileSerialization(FileType type) { 
+	public static void deleteFileSerialization(FileType type) {
 		File f = new File(path + getFileName(type));
 		f.delete();
 	}
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -5,13 +5,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import db.pojos.UserRegistration;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import scenes.scenes.HomePageScene;
 import scenes.scenes.LoginScene;
 import statics.SERIALIZATION;
+import statics.SERIALIZATION.FileType;
+import statics.SESSION;
 
 public class Window extends Stage {
 
@@ -25,20 +29,22 @@ public class Window extends Stage {
 
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(true);
-		
+
 		// mainStage.setScene(new HomePageScene());
-		
-		
+		if (SERIALIZATION.fileExists(FileType.SESSION)) {
+			UserRegistration u = (UserRegistration) SERIALIZATION.undoSerialization(FileType.SESSION);
+			if (u != null) {
+				SESSION.START_SESSION(u);
+				mainStage.setScene(new HomePageScene());
+				this.show();
+				return;
+			}
+		}
 		mainStage.setScene(new LoginScene());
-		
-		
-		
-		// new NewProjectScene(this);
-	
-		
-		
-		
 		this.show();
+
+		// new NewProjectScene(this);
+
 		//
 		// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
 		// i.showAndWait();

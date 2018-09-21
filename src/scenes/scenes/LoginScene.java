@@ -199,8 +199,8 @@ public class LoginScene extends Scene {
 				LoginScene.this.leftRegistrationForm.getChildren().add(form.get(0));
 
 			AnchorPane.setTopAnchor(this.leftRegistrationForm, 90.0);
-			AnchorPane.setLeftAnchor(this.leftRegistrationForm, 80.0);
-			AnchorPane.setRightAnchor(this.leftRegistrationForm, 500.0);
+			AnchorPane.setLeftAnchor(this.leftRegistrationForm, 0.0);
+			AnchorPane.setRightAnchor(this.leftRegistrationForm, 600.0);
 			AnchorPane.setBottomAnchor(this.leftRegistrationForm, 30.0);
 			layout.getChildren().add(leftRegistrationForm);
 
@@ -218,7 +218,6 @@ public class LoginScene extends Scene {
 		});
 		this.setRoot(layout);
 	}
-
 	private void settingLeftSideComponents() {
 		HBox.setHgrow(lblWelcome, Priority.ALWAYS);
 		HBox.setHgrow(btnSignUp, Priority.ALWAYS);
@@ -233,8 +232,8 @@ public class LoginScene extends Scene {
 		this.leftSide.setMaxHeight(Double.MAX_VALUE);
 
 		AnchorPane.setTopAnchor(this.leftSide, 40.0);
-		AnchorPane.setLeftAnchor(this.leftSide, 200.0);
-		AnchorPane.setRightAnchor(this.leftSide, 200.0);
+		AnchorPane.setLeftAnchor(this.leftSide, 0.0);
+		AnchorPane.setRightAnchor(this.leftSide, 600.0);
 		AnchorPane.setBottomAnchor(this.leftSide, 30.0);
 		this.layout.getChildren().add(leftSide);
 	}

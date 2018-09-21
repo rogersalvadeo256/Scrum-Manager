@@ -36,7 +36,9 @@ import scenes.popoups.NewProjectPOPOUP;
 import scenes.popoups.ProfileEditPOPOUP;
 import statics.GENERAL_STORE;
 import statics.ProfileImg;
+import statics.SERIALIZATION;
 import statics.SESSION;
+import statics.SERIALIZATION.FileType;
 import widgets.designComponents.HBoxPhotoDecoration;
 import widgets.designComponents.SearchBar;
 import widgets.designComponents.ShowImage;
@@ -266,6 +268,7 @@ public class HomePageScene extends Scene {
 		this.btnLogOut.setOnAction(e -> {
 			SESSION.RESET();
 			try {
+				SERIALIZATION.deleteFileSerialization(FileType.SESSION);
 				Window.mainStage.setScene(new LoginScene());
 			} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 				e1.printStackTrace();
