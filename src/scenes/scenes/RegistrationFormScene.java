@@ -4,21 +4,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import application.controllers.RegistrationFromSceneController;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import validation.FormsValidation;
 
 public class RegistrationFormScene extends VBox {
 
-	private Label lblName, lblUserName, lblEmail, lblPassword, lblConfirmPassword, lblQuestion, lblAnswer;
 	private TextField txtName, txtUserName, txtEmail, txtQuestion, txtAnswer;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
 	public Button btnRegister, btnCancel;
@@ -34,15 +29,8 @@ public class RegistrationFormScene extends VBox {
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
-
-		this.lblName = new Label("Nome");
-		this.lblUserName = new Label("UserName");
-		this.lblEmail = new Label("Email");
-		this.lblQuestion = new Label("Escreva uma pergunta de segurança");
-		this.lblAnswer = new Label("Resposta da pergunta");
-		this.lblPassword = new Label("Senha");
-		this.lblConfirmPassword = new Label("Confirmação de senha");
-
+		
+		
 		this.txtName = new TextField();
 		this.txtName.setPromptText("Name");
 		this.txtUserName = new TextField();
@@ -76,6 +64,7 @@ public class RegistrationFormScene extends VBox {
 		this.hbButtons = new HBox(10);
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button();
+		this.btnCancel.setId("btnCancel");
 
 		this.hbButtons.getChildren().addAll(btnCancel, btnRegister);
 		this.hbButtons.setAlignment(Pos.CENTER);
