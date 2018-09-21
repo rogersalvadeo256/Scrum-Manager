@@ -1,5 +1,6 @@
 package db.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,9 +13,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
+@SuppressWarnings("serial")
 @Entity
-public class Profile {
+public class Profile implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "codProfile")
@@ -24,6 +25,7 @@ public class Profile {
 	@Column
 	private String name;
 
+
 	/*
 	 * REMEMBER TO ADD DISPONIBILITY/ STATUS
 	 * IF THE STATUS ARE "BUSY" AND NOT SHOW ALLOWED TO INVITE FOR PROJECTS
@@ -31,6 +33,8 @@ public class Profile {
 	 * 	USING ENUM????
 	 */
 
+	
+	
 	@Column(columnDefinition = "LONGBLOB")
 	private byte[] photo;
 

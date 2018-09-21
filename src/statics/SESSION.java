@@ -1,4 +1,4 @@
-package db.util;
+package statics;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;

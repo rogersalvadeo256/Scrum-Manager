@@ -5,11 +5,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import db.pojos.Profile;
-import db.util.GENERAL_STORE;
-import db.util.SESSION;
 import friendship.FriendshipRequest;
 import javafx.scene.layout.VBox;
 import scenes.popoups.FriendshipRequestPOPOUP;
+import statics.GENERAL_STORE;
+import statics.SESSION;
 import widgets.designComponents.HBFriendRequest;
 
 public class FriendshipRequestsController {

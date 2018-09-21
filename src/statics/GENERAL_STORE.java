@@ -1,4 +1,4 @@
-package db.util;
+package statics;
 
 import java.io.FileInputStream;
 import java.io.IOException;

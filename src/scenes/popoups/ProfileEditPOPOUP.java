@@ -5,8 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import application.controllers.EditProfileController;
-import db.util.ProfileImg;
-import db.util.SESSION;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,6 +16,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Window;
+import statics.ProfileImg;
+import statics.SESSION;
 import widgets.designComponents.HBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
 

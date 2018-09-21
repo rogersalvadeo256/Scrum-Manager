@@ -5,13 +5,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import application.main.Window;
+import db.pojos.UserRegistration;
 import db.util.Login;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import scenes.scenes.HomePageScene;
+import statics.SERIALIZATION;
 
 public class LoginSceneController {
 
@@ -25,10 +28,13 @@ public class LoginSceneController {
 		this.login = new Login();
 	}
 
-	public void setEventBtnLogin(ActionEvent e, TextField txtLogin, PasswordField txtPassword) {
-		if (this.login.valideLogin(txtLogin, txtPassword)) {
+	public void setEventBtnLogin(ActionEvent e, TextField txtLogin, PasswordField txtPassword,
+																					RadioButton btnStayConnected)
+																					throws IOException {
+		if (this.login.valideLogin(txtLogin, txtPassword, btnStayConnected)) {
 			try {
 				Window.mainStage.setScene(new HomePageScene());
+
 				return;
 			} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 				e1.printStackTrace();
@@ -40,9 +46,10 @@ public class LoginSceneController {
 		return;
 	}
 
-	public void setEventPasswordField(KeyEvent e, TextField txtLogin, PasswordField txtPassword) {
+	public void setEventPasswordField(KeyEvent e, TextField txtLogin, PasswordField txtPassword,
+																					RadioButton btnStayConnected) throws IOException {
 		if (e.getCode() == KeyCode.ENTER) {
-			if (this.login.valideLogin(txtLogin, txtPassword)) {
+			if (this.login.valideLogin(txtLogin, txtPassword, btnStayConnected)) {
 				try {
 					Window.mainStage.setScene(new HomePageScene());
 					return;
@@ -62,6 +69,10 @@ public class LoginSceneController {
 
 	public void setInvalidLogin(boolean invalidLogin) {
 		this.invalidLogin = invalidLogin;
+	}
+
+	private void serialization() {
+
 	}
 
 }

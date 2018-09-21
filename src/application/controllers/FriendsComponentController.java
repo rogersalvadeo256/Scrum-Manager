@@ -7,11 +7,11 @@ import javax.persistence.EntityManager;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.util.SESSION;
 import friendship.FriendshipFunctions;
 import javafx.scene.layout.VBox;
 import scenes.popoups.FriendListPOPOUP;
 import scenes.popoups.FriendshipRequestPOPOUP;
+import statics.SESSION;
 import widgets.designComponents.HBFriendContent;
 
 public class FriendsComponentController {

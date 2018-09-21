@@ -12,54 +12,44 @@ public class TableEditor implements Callback<TableColumn<Profile, ImageView>, Ta
 	public TableCell<Profile, ImageView> call(TableColumn<Profile, ImageView> param) {
 		return new InviteFriend();
 	}
-	
-	
-	class InviteFriend extends TableCell<Profile, ImageView>{ 
-		
-		
+
+	class InviteFriend extends TableCell<Profile, ImageView> {
+
+		private ImageView image;
+
 		public InviteFriend() {
-			
-			if(this.isSelected()) { 
-				
-				
-			}
-			
-			
-			
+			this.image = new ImageView();
 		}
-		
+
+		@Override
+		public void startEdit() {
+			super.startEdit();
+			setGraphic(this.image);
+
+			this.image.setImage(this.getItem().getImage());
+
+			setText(null);
+		}
+
+		@Override
+		protected void updateItem(ImageView item, boolean empty) {
+			super.updateItem(item, empty);
+
+			if (empty) {
+				this.setText(null);
+				this.setGraphic(null);
+			} else {
+				this.setText(null);
+				this.setGraphic(this.image);
+			}
+		}
+
+		@Override
+		public void cancelEdit() {
+			super.cancelEdit();
+			this.setGraphic(this.image);
+		}
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,8 +12,6 @@ import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
-import db.util.GENERAL_STORE;
-import db.util.SESSION;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
@@ -28,6 +26,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import scenes.popoups.ProfileEditPOPOUP;
 import scenes.scenes.LoginScene;
+import statics.GENERAL_STORE;
+import statics.SESSION;
 import validation.CheckEmptyFields;
 import widgets.alertMessage.CustomAlert;
 

@@ -10,9 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import listeners.Close;
 import scenes.scenes.LoginScene;
+import statics.SERIALIZATION;
 
 public class Window extends Stage {
 
@@ -26,10 +25,20 @@ public class Window extends Stage {
 
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(true);
-
+		
+		
 		// mainStage.setScene(new HomePageScene());
+		
+		
 		mainStage.setScene(new LoginScene());
+		
+		
+		
 		// new NewProjectScene(this);
+	
+		
+		
+		
 		this.show();
 		//
 		// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);

@@ -6,7 +6,6 @@ import java.io.IOException;
 
 import db.pojos.Profile;
 import db.pojos.UserRegistration;
-import db.util.ProfileImg;
 import friendship.FriendshipRequest;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -16,6 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import statics.ProfileImg;
 
 public class HBProfileContent extends HBox {
 	protected VBox vbUsrIMG, vbUsrLABEL, vbUsrBUTTON;

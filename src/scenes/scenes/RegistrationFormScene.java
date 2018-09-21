@@ -44,12 +44,19 @@ public class RegistrationFormScene extends VBox {
 		this.lblConfirmPassword = new Label("Confirmação de senha");
 
 		this.txtName = new TextField();
+		this.txtName.setPromptText("Name");
 		this.txtUserName = new TextField();
+		this.txtUserName.setPromptText("UserName");
 		this.txtEmail = new TextField();
+		this.txtEmail.setPromptText("Email");
 		this.txtQuestion = new TextField();
+		this.txtQuestion.setPromptText("Pergunta de segurança");
 		this.txtAnswer = new TextField();
+		this.txtAnswer.setPromptText("Resposta");
 		this.txtPasswordField = new PasswordField();
+		this.txtPasswordField.setPromptText("Senha");
 		this.txtPasswordConfirmation = new PasswordField();
+		this.txtPasswordConfirmation.setPromptText("Confirmação da senha");
 
 		this.txtName.setMaxWidth(300);
 		this.txtUserName.setMaxWidth(300);
@@ -61,7 +68,11 @@ public class RegistrationFormScene extends VBox {
 		this.txtEmail.setAlignment(Pos.CENTER);
 		this.txtPasswordField.setAlignment(Pos.CENTER);
 		this.txtPasswordConfirmation.setAlignment(Pos.CENTER);
+		this.txtAnswer.setAlignment(Pos.CENTER);
+		this.txtQuestion.setAlignment(Pos.CENTER);
 
+		
+		
 		this.hbButtons = new HBox(10);
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button();
@@ -103,11 +114,11 @@ public class RegistrationFormScene extends VBox {
 			}
 		});
 
-		this.getChildren().addAll(lblName, txtName, lblUserName, txtUserName, lblEmail, txtEmail, lblQuestion,
-				txtQuestion, lblAnswer, txtAnswer);
-		this.getChildren().addAll(lblPassword, txtPasswordField, lblConfirmPassword, txtPasswordConfirmation,
+		this.getChildren().addAll(txtName,txtUserName, txtEmail,
+				txtQuestion,txtAnswer);
+		this.getChildren().addAll(txtPasswordField,txtPasswordConfirmation,
 				hbButtons);
 		this.setAlignment(Pos.CENTER);
-		this.setSpacing(5);
+		this.setSpacing(25	);
 	}
 }

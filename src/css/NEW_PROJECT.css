@@ -6,7 +6,7 @@
 	-fx-text-fill: black;
 	-fx-text-size:20.0pt;
 }
-.text-field#descProject{
+.text-area#descProject .content{
 	-fx-border-radius:0px 95px 9px 24px;
 	-fx-fill-color:black;
 	-fx-font-size: 20.0pt;
@@ -16,25 +16,25 @@
 	 -fx-font-size: 10.0pt;
 	 -fx-font-color: black;
 }
-.buttons{
+.button{
 	-fx-background-color:#5fb69c;
 	-fx-width:192px;
 	-fx-height:70px;
 	-fx-text-aligment:center;
 	-fx-fill-color:black;
 }
-.buttons#btncancel:hover{
+.button#btncancel:hover{
 	-fx-text-fill:white;
 	-fx-background-color:#cc2a2a;
 }
 .hyperlink{
 	-fx-text-fill:#5eb5b5;
 }
-.buttons:hover{
+.button:hover{
 	-fx-background-color:#020704;
 	-fx-text-fill: #d8d8d8;
 }
-.buttons:hover{
+.buttons#back:hover{
 	-fx-background-color:#020704;
 	-fx-text-fill: #d8d8d8;
 }

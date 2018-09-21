@@ -3,6 +3,7 @@ package scenes.scenes;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -71,6 +72,7 @@ public class LoginScene extends Scene {
 		this.rightSide = new HBox();
 		this.leftSide = new VBox();
 		this.leftRegistrationForm = new VBox();
+		this.leftRegistrationForm.setAlignment(Pos.CENTER);
 
 		this.form = new ArrayList<RegistrationFormScene>();
 
@@ -127,13 +129,21 @@ public class LoginScene extends Scene {
 			this.messageLoginValidation.setVisible(false);
 		});
 		this.btnLogin.setOnAction(e -> {
-			this.controller.setEventBtnLogin(e, txtLogin, passwordField);
+			try {
+				this.controller.setEventBtnLogin(e, txtLogin, passwordField, btnStayConnected);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			if (this.controller.isInvalidLogin()) {
 				this.messageLoginValidation.setVisible(true);
 			}
 		});
 		this.passwordField.setOnKeyPressed(e -> {
-			this.controller.setEventPasswordField(e, txtLogin, passwordField);
+			try {
+				this.controller.setEventPasswordField(e, txtLogin, passwordField, btnStayConnected);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 			if (this.controller.isInvalidLogin()) {
 				this.messageLoginValidation.setVisible(true);
 			}
@@ -154,8 +164,7 @@ public class LoginScene extends Scene {
 		this.btnExit.setMaxWidth(Double.MAX_VALUE);
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtLogin, lblPassword, passwordField,
-				messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit, btnSignUp);
+		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtLogin, lblPassword, passwordField, messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit, btnSignUp);
 
 		HBox.setHgrow(vbLogin, Priority.ALWAYS);
 		this.vbLogin.setMaxWidth(Double.MAX_VALUE);
@@ -191,7 +200,7 @@ public class LoginScene extends Scene {
 
 			AnchorPane.setTopAnchor(this.leftRegistrationForm, 90.0);
 			AnchorPane.setLeftAnchor(this.leftRegistrationForm, 80.0);
-			AnchorPane.setRightAnchor(this.leftRegistrationForm, 600.0);
+			AnchorPane.setRightAnchor(this.leftRegistrationForm, 500.0);
 			AnchorPane.setBottomAnchor(this.leftRegistrationForm, 30.0);
 			layout.getChildren().add(leftRegistrationForm);
 
@@ -224,10 +233,15 @@ public class LoginScene extends Scene {
 		this.leftSide.setMaxHeight(Double.MAX_VALUE);
 
 		AnchorPane.setTopAnchor(this.leftSide, 40.0);
-		AnchorPane.setLeftAnchor(this.leftSide, 80.0);
-		AnchorPane.setRightAnchor(this.leftSide, 600.0);
+		AnchorPane.setLeftAnchor(this.leftSide, 200.0);
+		AnchorPane.setRightAnchor(this.leftSide, 200.0);
 		AnchorPane.setBottomAnchor(this.leftSide, 30.0);
 		this.layout.getChildren().add(leftSide);
 	}
 
 }
+
+/* 
+
+
+*/

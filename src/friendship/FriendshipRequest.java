@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.util.SESSION;
+import statics.SESSION;
 
 public class FriendshipRequest {
 

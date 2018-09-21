@@ -1,7 +1,6 @@
 package table.util.friendInvite;
 
 import db.pojos.Profile;
-import db.util.SESSION;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -9,12 +8,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Window;
 import scenes.popoups.StandartLayoutPOPOUP;
+import statics.SESSION;
 
 public class InviteFriendsTableGraphic extends StandartLayoutPOPOUP {
 
 	private ObservableList<Profile> friendsList;
 	private TableView<Profile> table;
-
 	
 	public InviteFriendsTableGraphic(Window owner) {
 		super(owner);

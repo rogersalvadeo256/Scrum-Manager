@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.util.SESSION;
+import statics.SESSION;
 
 public class FriendshipFunctions {
 

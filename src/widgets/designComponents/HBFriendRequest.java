@@ -10,7 +10,6 @@ import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.Profile;
-import db.util.SESSION;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -20,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import statics.SESSION;
 
 public class HBFriendRequest extends HBox {
 	private Label lblName, lblBio;
