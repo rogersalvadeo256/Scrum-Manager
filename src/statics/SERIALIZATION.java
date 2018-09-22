@@ -53,14 +53,13 @@ public class SERIALIZATION {
 	}
 
 	/**
+	 * Create a file on the tmp folder 
 	 * @author jefter66
 	 * @author André Furlan
-	 * 
 	 */
-	public static void doSerialization(Object object, FileType type) throws IOException {
+	public static void serialization(Object object, FileType type) throws IOException {
 
-		if (!(new File("/tmp/scrum").exists()))
-			new File("/tmp/scrum").mkdir();
+		if (!(new File("/tmp/scrum").exists()))	new File("/tmp/scrum").mkdir();
 
 		FileOutputStream fileOut = new FileOutputStream(path + getFileName(type));
 

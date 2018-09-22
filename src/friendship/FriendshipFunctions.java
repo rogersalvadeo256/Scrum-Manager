@@ -5,28 +5,28 @@ import java.util.List;
 import javax.persistence.EntityManager;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import statics.SESSION;
 
 public class FriendshipFunctions {
 
 	private EntityManager em;
-	private Profile p;;
+	private USER_PROFILE p;;
 
-	public FriendshipFunctions(Profile p) {
+	public FriendshipFunctions(USER_PROFILE p) {
 		this.p = p;
 	}
 
 	public void deleteFriend() {
 
-		List<Profile> loggedUser = SESSION.getProfileLogged().getFriendsList();
+//		List<USER_PROFILE> loggedUser = SESSION.getProfileLogged().getFriendsList();
 
-		List<Profile> senderUser = this.p.getFriendsList();
+//		List<USER_PROFILE> senderUser = this.p.getFriendsList();
 
-		senderUser.remove(SESSION.getProfileLogged());
-		loggedUser.remove(this.p);
+//		senderUser.remove(SESSION.getProfileLogged());
+//		loggedUser.remove(this.p);
 
-		Profile update = SESSION.getProfileLogged();
+		USER_PROFILE update = SESSION.getProfileLogged();
 
 		if (this.em == null)
 			this.em = Database.createEntityManager();

@@ -2,8 +2,8 @@ package application.controllers;
 
 import java.util.ArrayList;
 
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
+import db.pojos.USER_PROFILE;
+import db.pojos.USER_REGISTRATION;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -24,8 +24,8 @@ public class RegistrationFromSceneController {
 																					PasswordField txtPasswordField,
 																					PasswordField txtPasswordConfirmation) {
 
-		Profile p = new Profile();
-		UserRegistration u = new UserRegistration();
+		USER_PROFILE p = new USER_PROFILE();
+		USER_REGISTRATION u = new USER_REGISTRATION();
 
 		this.validation = new FormsValidation(field, fieldName, passwordField);
 		this.validation.setConfirmationMessage(confirmationMessage);
@@ -38,7 +38,7 @@ public class RegistrationFromSceneController {
 		u.setUserName(txtUserName.getText());
 		u.setPassword(txtPasswordConfirmation.getText());
 		u.setSecurityQuestion(txtQuestion.getText());
-		u.setSecurityQuestionAnswer(txtAnswer.getText());
+		u.setSecurityAnswer(txtAnswer.getText());
 		u.setProfile(p);
 		validation.setUserRegistration(u);
 		validation.registrationOfNewUser();
@@ -55,8 +55,8 @@ public class RegistrationFromSceneController {
 																					PasswordField txtPasswordField,
 																					PasswordField txtPasswordConfirmation) {
 
-			Profile p = new Profile();
-			UserRegistration u = new UserRegistration();
+			USER_PROFILE p = new USER_PROFILE();
+			USER_REGISTRATION u = new USER_REGISTRATION();
 
 			this.validation = new FormsValidation(field, fieldName, passwordField);
 			this.validation.setConfirmationMessage(confirmationMessage);
@@ -69,7 +69,7 @@ public class RegistrationFromSceneController {
 			u.setUserName(txtUserName.getText());
 			u.setPassword(txtPasswordConfirmation.getText());
 			u.setSecurityQuestion(txtQuestion.getText());
-			u.setSecurityQuestionAnswer(txtAnswer.getText());
+			u.setSecurityAnswer(txtAnswer.getText());
 			u.setProfile(p);
 			validation.setUserRegistration(u);
 			validation.registrationOfNewUser();

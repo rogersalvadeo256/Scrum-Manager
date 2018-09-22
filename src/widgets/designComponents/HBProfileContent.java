@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
+import db.pojos.USER_PROFILE;
+import db.pojos.USER_REGISTRATION;
 import friendship.FriendshipRequest;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -24,19 +24,17 @@ public class HBProfileContent extends HBox {
 	private Button btnAdd;
 	private FriendshipRequest fRequest;
 
-	public HBProfileContent(Profile p) throws IOException {
+	public HBProfileContent(USER_PROFILE p) throws IOException {
 		this.lblName = new Label(p.getName());
-		this.lblBio = new Label(p.getBio());
 		init(p);
 	}
 
-	public HBProfileContent(UserRegistration u) throws IOException {
+	public HBProfileContent(USER_REGISTRATION u) throws IOException {
 		this.lblName = new Label(u.getProfile().getName());
-		this.lblBio = new Label(u.getProfile().getBio());
 		init(u.getProfile());
 	}
 
-	private void init(Profile p) throws IOException {
+	private void init(USER_PROFILE p) throws IOException {
 		this.vbUsrIMG = new VBox();
 		this.vbUsrLABEL = new VBox();
 		this.vbUsrBUTTON = new VBox();

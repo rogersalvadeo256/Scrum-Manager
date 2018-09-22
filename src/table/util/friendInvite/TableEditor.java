@@ -1,19 +1,19 @@
 package table.util.friendInvite;
 
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.util.Callback;
 
-public class TableEditor implements Callback<TableColumn<Profile, ImageView>, TableCell<Profile, ImageView>> {
+public class TableEditor implements Callback<TableColumn<USER_PROFILE, ImageView>, TableCell<USER_PROFILE, ImageView>> {
 
 	@Override
-	public TableCell<Profile, ImageView> call(TableColumn<Profile, ImageView> param) {
+	public TableCell<USER_PROFILE, ImageView> call(TableColumn<USER_PROFILE, ImageView> param) {
 		return new InviteFriend();
 	}
 
-	class InviteFriend extends TableCell<Profile, ImageView> {
+	class InviteFriend extends TableCell<USER_PROFILE, ImageView> {
 
 		private ImageView image;
 

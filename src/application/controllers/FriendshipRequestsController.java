@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import friendship.FriendshipRequest;
 import javafx.scene.layout.VBox;
 import scenes.popoups.FriendshipRequestPOPOUP;
@@ -13,7 +13,7 @@ import statics.SESSION;
 import widgets.designComponents.HBFriendRequest;
 
 public class FriendshipRequestsController {
-	private ArrayList<Profile> requestsList;
+	private ArrayList<USER_PROFILE> requestsList;
 
 	public FriendshipRequestsController() {
 		this.requestsList = new ArrayList<>();
@@ -21,7 +21,7 @@ public class FriendshipRequestsController {
 	
 	public void init(VBox layout, FriendshipRequestPOPOUP screen) throws FileNotFoundException {
 		drawRequests(layout,screen);
-		this.requestsList = new ArrayList<Profile>();
+		this.requestsList = new ArrayList<USER_PROFILE>();
 	}
 
 	/**
@@ -77,9 +77,9 @@ public class FriendshipRequestsController {
 		
 	private void loadRequests() {
 		requestsList.clear();
-		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequests().size(); i++) {
-			requestsList.add((Profile) SESSION.getProfileLogged().getFriendshipRequests().get(i));
-		}
+//		for (int i = 0; i < SESSION.getProfileLogged().getFriendshipRequests().size(); i++) {
+//			requestsList.add((USER_PROFILE) SESSION.getProfileLogged().getFriendshipRequests().get(i));
+//		}
 	}
 }
 

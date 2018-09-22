@@ -4,7 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import friendship.FriendshipRequest;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,16 +18,15 @@ public class GENERAL_STORE {
 	/*
 	 * home page stuffs
 	 */
-	private static Label lblName, lblUserName, lblBio;
+	private static Label lblName, lblUserName;
 	private static ImageView imgProfile;
 	private static Button btnFriendRequest;
 
-	public static void setComponentsHOME(Label lblName, Label lblUserName, Label lblBio,
+	public static void setComponentsHOME(Label lblName, Label lblUserName,
 																					ImageView imgProfile,
 																					Button btnFriendRequest) {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
-		GENERAL_STORE.lblBio = lblBio;
 		GENERAL_STORE.imgProfile = imgProfile;
 		GENERAL_STORE.btnFriendRequest = btnFriendRequest;
 	}
@@ -36,20 +35,27 @@ public class GENERAL_STORE {
 
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
-		lblBio.setText(SESSION.getProfileLogged().getBio());
 		imgProfile.setImage(ProfileImg.loadImage());
 
-		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
+//		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
 
 	}
 
 	public static void loadComponentsHOME() throws IOException {
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
-		lblBio.setText(SESSION.getProfileLogged().getBio());
 
 		imgProfile.setImage(ProfileImg.loadImage());
 
-		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
+//		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
 	}
 }
+
+
+
+
+
+
+
+
+

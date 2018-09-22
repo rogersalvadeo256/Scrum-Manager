@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import javax.persistence.EntityManager;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import friendship.FriendshipFunctions;
 import javafx.scene.layout.VBox;
 import scenes.popoups.FriendListPOPOUP;
@@ -15,7 +15,7 @@ import statics.SESSION;
 import widgets.designComponents.HBFriendContent;
 
 public class FriendsComponentController {
-	private ArrayList<Profile> friendsList;
+	private ArrayList<USER_PROFILE> friendsList;
 
 	public FriendsComponentController() throws IOException {
 		this.friendsList = new ArrayList<>();
@@ -51,9 +51,9 @@ public class FriendsComponentController {
 
 	private void loadFriendsList() {
 		this.friendsList.clear();
-		for (int i = 0; i < SESSION.getProfileLogged().getFriendsList().size(); i++) {
-			this.friendsList.add(SESSION.getProfileLogged().getFriendsList().get(i));
-		}
+//		for (int i = 0; i < SESSION.getProfileLogged().getFriendsList().size(); i++) {
+//			this.friendsList.add(SESSION.getProfileLogged().getFriendsList().get(i));
+//		}
 	}
 
 }

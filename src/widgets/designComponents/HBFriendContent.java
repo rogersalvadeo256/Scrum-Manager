@@ -2,7 +2,7 @@ package widgets.designComponents;
 
 import java.io.IOException;
 
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -12,8 +12,8 @@ public class HBFriendContent extends HBProfileContent{
 	
 	protected Button btnDelete, btnInvite;
 	private HBox hbButtons;
-	private Profile p;
-	public HBFriendContent(Profile p) throws IOException {
+	private USER_PROFILE p;
+	public HBFriendContent(USER_PROFILE p) throws IOException {
 		super(p);
 		this.getChildren().clear();
 		this.getChildren().addAll(vbUsrIMG,vbUsrLABEL);
@@ -36,8 +36,8 @@ public class HBFriendContent extends HBProfileContent{
 		this.btnInvite.setOnAction(e);
 	}
 
-	public Profile getP() {return p;}
-	public void setP(Profile p) {this.p = p;}
+	public USER_PROFILE getP() {return p;}
+	public void setP(USER_PROFILE p) {this.p = p;}
 	
 	
 		

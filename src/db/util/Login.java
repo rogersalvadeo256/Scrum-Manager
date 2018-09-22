@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
+import db.pojos.USER_PROFILE;
+import db.pojos.USER_REGISTRATION;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -39,18 +39,18 @@ public class Login {
 		if (!isFieldEmpty(userNameOrEmail, password)) {
 			if (em == null)
 				this.em = Database.createEntityManager();
-			Query q = this.em.createQuery("from UserRegistration where userName=:userName  and password=:password");
-			q.setParameter("userName", userNameOrEmail.getText());
-			q.setParameter("password", password.getText());
+			Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME AND USER_PASSWORD=:USER_PASSWORD");
+			q.setParameter("USER_NAME", userNameOrEmail.getText());
+			q.setParameter("USER_PASSWORD", password.getText());
 
 			if (!q.getResultList().isEmpty()) {
-				SESSION.START_SESSION((UserRegistration) q.getResultList().get(0));
+				SESSION.START_SESSION((USER_REGISTRATION) q.getResultList().get(0));
 				if (btnStayConnected.isSelected())
 					
 					System.out.println("bug");
 					
-					SERIALIZATION.doSerialization(SESSION.getUserLogged(), FileType.SESSION);
-					UserRegistration u = (UserRegistration) SERIALIZATION.undoSerialization(FileType.SESSION);
+					SERIALIZATION.serialization(SESSION.getUserLogged(), FileType.SESSION);
+					USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
 //				
 //					System.out.println(u.getCodUser() +  u.getEmail() +  u.getUserName());
 					

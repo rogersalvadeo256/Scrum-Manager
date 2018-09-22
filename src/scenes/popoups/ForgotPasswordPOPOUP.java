@@ -6,8 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
+import db.pojos.USER_PROFILE;
+import db.pojos.USER_REGISTRATION;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -31,14 +31,14 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	private PasswordField newPassword, passwordConfirmation;
 	private EntityManager em;
 	private Query q;
-	private Button  btnCancel, btnEmail, btnAnswer, btnPasswords;
+	private Button btnCancel, btnEmail, btnAnswer, btnPasswords;
 	private HBox hbButtons;
 	private ToggleButton tbYes, tbNot;
 	private HBProfileContentForgotPassword hbp;
 	private ToggleGroup tbGroup;
 	private CheckEmptyFields checkFields;
-	private Profile p;
-	private UserRegistration u;
+	private USER_PROFILE p;
+	private USER_REGISTRATION u;
 
 	public ForgotPasswordPOPOUP(Window owner) {
 		super(owner);
@@ -138,7 +138,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 		if (!this.q.getResultList().isEmpty()) {
 			this.layout.getChildren().clear();
 
-			this.u = (UserRegistration) this.q.getResultList().get(0);
+			this.u = (USER_REGISTRATION) this.q.getResultList().get(0);
 			this.p = u.getProfile();
 			try {
 				this.hbp = new HBProfileContentForgotPassword(p);
@@ -165,17 +165,17 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	private void securityQuestion() {
 		this.layout.getChildren().clear();
 		this.lblQuestion.setText(this.u.getSecurityQuestion());
-		
+
 		this.hbButtons.getChildren().clear();
-		this.hbButtons.getChildren().addAll( this.btnCancel, this.btnAnswer);
-		
-		this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer,this.hbButtons);
+		this.hbButtons.getChildren().addAll(this.btnCancel, this.btnAnswer);
+
+		this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer, this.hbButtons);
 		this.txtAnswer.setOnMouseClicked(e -> {
 			this.layout.getChildren().clear();
 			this.hbButtons.getChildren().clear();
-			this.hbButtons.getChildren().addAll( this.btnCancel, this.btnAnswer);
+			this.hbButtons.getChildren().addAll(this.btnCancel, this.btnAnswer);
 			this.lblQuestion.setText(this.u.getSecurityQuestion());
-			this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer,this.btnCancel, this.btnAnswer);
+			this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer, this.btnCancel, this.btnAnswer);
 
 		});
 
@@ -184,7 +184,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 				if (checkFields.isTextFieldEmpty(this.txtAnswer)) {
 					this.layout.getChildren().clear();
 					this.lblQuestion.setText(this.u.getSecurityQuestion());
-					this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer,this.btnCancel, this.btnAnswer);
+					this.layout.getChildren().addAll(this.hbp, this.lblQuestion, this.txtAnswer, this.btnCancel, this.btnAnswer);
 					this.layout.getChildren().add(new Label("Digite a resposta"));
 					return;
 				}
@@ -214,7 +214,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	}
 
 	private boolean valideAnswer() {
-		if (this.txtAnswer.getText().equals(this.u.getSecurityQuestionAnswer().toString()))
+		if (this.txtAnswer.getText().equals(this.u.getSecurityAnswer().toString()))
 			return true;
 		return false;
 
@@ -237,7 +237,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 				this.layout.getChildren().add(new Label("A senha deve ter no minimo 8 caracteres"));
 				return;
 			}
-			UserRegistration update = this.u;
+			USER_REGISTRATION update = this.u;
 
 			update.setPassword(newPassword.getText());
 

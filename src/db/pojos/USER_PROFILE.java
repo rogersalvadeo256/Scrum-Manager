@@ -14,18 +14,31 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 @SuppressWarnings("serial")
-@Entity
-public class Profile implements Serializable{
+@Entity(name="USER_PROFILE")
+public class USER_PROFILE implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "codProfile")
+	@Column(name = "PROF_COD")
 	private int codProfile;
-	@Column
-	private String bio;
-	@Column
+	
+	/*
+	 * THIS SHIT WILL BECAME THE STATUS
+	 */
+	@Column(name="PROF_NAME")
 	private String name;
 
-
+	@Column(name="PROF_AVAILABILITY")
+	private int availability;
+	
+	private enum AVAILABILITY { 
+		AVAILABLE, NOT_AVAILABLE, BUSY
+	}
+	
+	public USER_PROFILE() {
+//		this.friendList = new ArrayList<USER_PROFILE>();
+//		this.friendshipRequest = new ArrayList<USER_PROFILE>();
+	}
+	
 	/*
 	 * REMEMBER TO ADD DISPONIBILITY/ STATUS
 	 * IF THE STATUS ARE "BUSY" AND NOT SHOW ALLOWED TO INVITE FOR PROJECTS
@@ -35,21 +48,28 @@ public class Profile implements Serializable{
 
 	
 	
-	@Column(columnDefinition = "LONGBLOB")
+	@Column(columnDefinition = "LONGBLOB", name="PROF_PHOTO")
 	private byte[] photo;
 
+	public void setAvailability(AVAILABILITY status) {
+		this.availability = Integer.parseInt(String.valueOf(status));
+	}
+	public int getAvailability() {
+		return this.availability;
+	}
+	/*
+	 * kk
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "codFriendRequest")
-	private List<Profile> friendshipRequest;
+	private List<USER_PROFILE> friendshipRequest;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "codFriend")
-	private List<Profile> friendList;
-
-	public Profile() {
-		this.friendList = new ArrayList<Profile>();
-		this.friendshipRequest = new ArrayList<Profile>();
-	}
+	private List<USER_PROFILE> friendList;
+	 * 
+	 */
+	
 
 	public byte[] getPhoto() {
 		return photo;
@@ -75,27 +95,19 @@ public class Profile implements Serializable{
 		this.name = name;
 	}
 
-	public String getBio() {
-		return bio;
-	}
-
-	public void setBio(String biography) {
-		this.bio = biography;
-	}
-
-	public List<Profile> getFriendshipRequests() {
-		return friendshipRequest;
-	}
-
-	public void setFriendshipRequestList(List<Profile> friendshipRequestList) {
-		this.friendshipRequest = friendshipRequestList;
-	}
-
-	public List<Profile> getFriendsList() {
-		return friendList;
-	}
-
-	public void setFriendList(List<Profile> friend) {
-		this.friendList = friend;
-	}
+//	public List<USER_PROFILE> getFriendshipRequests() {
+//		return friendshipRequest;
+//	}
+//
+//	public void setFriendshipRequestList(List<USER_PROFILE> friendshipRequestList) {
+//		this.friendshipRequest = friendshipRequestList;
+//	}
+//
+//	public List<USER_PROFILE> getFriendsList() {
+//		return friendList;
+//	}
+//
+//	public void setFriendList(List<USER_PROFILE> friend) {
+//		this.friendList = friend;
+//	}
 }

@@ -4,16 +4,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
+import db.pojos.USER_PROFILE;
+import db.pojos.USER_REGISTRATION;
 
 /*
  * this class contain all the functions for load the informations about the user
  * logged
  */
 public class SESSION {
-	private static UserRegistration u;
-	private static Profile p;
+	private static USER_REGISTRATION u;
+	private static USER_PROFILE p;
 	private static EntityManager em;
 
 	/**
@@ -23,51 +23,51 @@ public class SESSION {
 	 * @return UserRegistration
 	 * @author jefter66
 	 */
-	public static UserRegistration getUserLogged() {
+	public static USER_REGISTRATION getUserLogged() {
 		return u;
 	}
 
-	public static Profile getProfileLogged() {
+	public static USER_PROFILE getProfileLogged() {
 		return p;
 	}
 
 	private static void setProfile() {
 		if (em == null)
 			em = Database.createEntityManager();
-		Query q1 = em.createQuery("from Profile where codProfile =: cod");
-		q1.setParameter("cod", SESSION.getUserLogged().getProfile().getCod());
-		Profile p = (Profile) q1.getResultList().get(0);
+		Query q1 = em.createQuery("FROM USER_PROFILE WHERE PROF_COD =: PROF_COD");
+		q1.setParameter("PROF_COD", SESSION.getUserLogged().getProfile().getCod());
+		USER_PROFILE p = (USER_PROFILE) q1.getResultList().get(0);
 		SESSION.p = p;
 	}
 
-	private static void setUser(UserRegistration u) {
+	private static void setUser(USER_REGISTRATION u) {
 		SESSION.u = u;
 	}
 
-	public static void START_SESSION(UserRegistration u) {
+	public static void START_SESSION(USER_REGISTRATION u) {
 		SESSION.setUser(u);
 		SESSION.setProfile();
 	}
 
-	public static void UPDATE_SESSION(Profile p, UserRegistration u) {
+	public static void UPDATE_SESSION(USER_PROFILE p, USER_REGISTRATION u) {
 		SESSION.p = p;
 		SESSION.u = u;
 	}
 
-	public static void UPDATE_SESSION(UserRegistration u) {
+	public static void UPDATE_SESSION(USER_REGISTRATION u) {
 		SESSION.u = u;
 	}
 
 	public static void UPDATE_SESSION() {
 		if (em == null)
 			em = Database.createEntityManager();
-		Query q = em.createQuery("from UserRegistration where codUser=: cod");
-		q.setParameter("cod", SESSION.getUserLogged().getCodUser());
-		UserRegistration u = (UserRegistration) q.getResultList().get(0);
+		Query q = em.createQuery("FROM USER_REGISTRATION WHERE USER_COD=:USER_COD");
+		q.setParameter("USER_COD", SESSION.getUserLogged().getCodUser());
+		USER_REGISTRATION u = (USER_REGISTRATION) q.getResultList().get(0);
 
-		Query q1 = em.createQuery("from Profile where codProfile =: cod");
+		Query q1 = em.createQuery("FROM USER_PROFILE WHERE PROF_COD =: PROF_COD");
 		q1.setParameter("cod", SESSION.getUserLogged().getProfile().getCod());
-		Profile p = (Profile) q1.getResultList().get(0);
+		USER_PROFILE p = (USER_PROFILE) q1.getResultList().get(0);
 
 		SESSION.UPDATE_SESSION(p, u);
 		em.clear();

@@ -9,7 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -32,7 +32,7 @@ public class HBFriendRequest extends HBox {
 	private HBox layout;
 	private Button btnAccept, btnRefuse;
 
-	public HBFriendRequest(Profile p) throws FileNotFoundException {
+	public HBFriendRequest(USER_PROFILE p) throws FileNotFoundException {
 		this.image = new ImageView();
 
 		this.lblName = new Label(p.getName());

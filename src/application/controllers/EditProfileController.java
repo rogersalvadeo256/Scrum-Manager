@@ -10,8 +10,8 @@ import javax.persistence.Query;
 
 import application.main.Window;
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
-import db.pojos.UserRegistration;
+import db.pojos.USER_PROFILE;
+import db.pojos.USER_REGISTRATION;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
@@ -61,7 +61,7 @@ public class EditProfileController {
 		hbChangeQuestion.getChildren().clear();
 
 		hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
-		hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString()));
+		hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
 
 		hbChangeQuestion.getChildren().add(this.btnChangeQuestion);
 		hbChangeAnswer.getChildren().add(this.btnChangeAnswer);
@@ -93,7 +93,7 @@ public class EditProfileController {
 			btnChange.setOnAction(e2 -> {
 				if (em == null)
 					em = Database.createEntityManager();
-				UserRegistration u = SESSION.getUserLogged();
+				USER_REGISTRATION u = SESSION.getUserLogged();
 				if (!check.isTextFieldEmpty(txtQuestion)) {
 
 					u.setSecurityQuestion(txtQuestion.getText());
@@ -124,16 +124,16 @@ public class EditProfileController {
 			Button btnCancel = new Button("Cancelar");
 			Button btnChange = new Button("Alterar");
 
-			txtAnswer.setPromptText(SESSION.getUserLogged().getSecurityQuestionAnswer().toString());
+			txtAnswer.setPromptText(SESSION.getUserLogged().getSecurityAnswer().toString());
 
 			hbChangeAnswer.getChildren().addAll(txtAnswer, btnChange, btnCancel);
 
 			btnChange.setOnAction(e2 -> {
 				if (em == null)
 					em = Database.createEntityManager();
-				UserRegistration u = SESSION.getUserLogged();
+				USER_REGISTRATION u = SESSION.getUserLogged();
 				if (!check.isTextFieldEmpty(txtAnswer)) {
-					u.setSecurityQuestionAnswer(txtAnswer.getText());
+					u.setSecurityAnswer(txtAnswer.getText());
 					em.getTransaction().begin();
 					em.merge(u);
 					em.getTransaction().commit();
@@ -142,13 +142,13 @@ public class EditProfileController {
 					em = null;
 					SESSION.UPDATE_SESSION();
 					hbChangeAnswer.getChildren().clear();
-					hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString()));
+					hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
 					hbChangeAnswer.getChildren().add(btnChangeAnswer);
 				}
 			});
 			btnCancel.setOnAction(e3 -> {
 				hbChangeAnswer.getChildren().clear();
-				hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestionAnswer().toString()));
+				hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
 				hbChangeAnswer.getChildren().add(btnChangeAnswer);
 			});
 		});
@@ -167,8 +167,8 @@ public class EditProfileController {
 
 	public void setEventFinish(ActionEvent e, TextField txtName, TextArea txtBio, PasswordField txtCurrentPassword,
 																					PasswordField txtNewPassword) {
-		UserRegistration u = SESSION.getUserLogged();
-		Profile p = SESSION.getProfileLogged();
+		USER_REGISTRATION u = SESSION.getUserLogged();
+		USER_PROFILE p = SESSION.getProfileLogged();
 		if (em == null)
 			em = Database.createEntityManager();
 
@@ -192,13 +192,6 @@ public class EditProfileController {
 			String nn = txtName.getText();
 			em.getTransaction().begin();
 			p.setName(nn);
-			em.merge(p);
-			em.getTransaction().commit();
-			em.clear();
-		}
-		if (!check.isTextAreaEmpty(txtBio)) {
-			em.getTransaction().begin();
-			p.setBio(txtBio.getText());
 			em.merge(p);
 			em.getTransaction().commit();
 			em.clear();
@@ -240,12 +233,12 @@ public class EditProfileController {
 
 		if (result.get() == ButtonType.OK) {
 
-			Query q = this.em.createQuery("from UserRegistration where codUser =: cod");
-			q.setParameter("cod", SESSION.getUserLogged().getCodUser());
+			Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_COD =: USER_COD");
+			q.setParameter("USER_COD", SESSION.getUserLogged().getCodUser());
 
-			UserRegistration u = (UserRegistration) q.getResultList().get(0);
+			USER_REGISTRATION u = (USER_REGISTRATION) q.getResultList().get(0);
 
-			Profile p = u.getProfile();
+			USER_PROFILE p = u.getProfile();
 
 			this.em.getTransaction().begin();
 			this.em.remove(p);

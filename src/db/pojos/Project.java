@@ -30,7 +30,7 @@ public class Project {
 	@Column(name = "members")
 	@ElementCollection(fetch = FetchType.LAZY)
 	@Fetch(FetchMode.SUBSELECT)
-	private List<Profile> listMembers;
+	private List<USER_PROFILE> listMembers;
 
 	
 //	@Column(name = "creator")
@@ -39,7 +39,7 @@ public class Project {
 	
 	
 	public Project() {
-		this.listMembers = new ArrayList<Profile>();
+		this.listMembers = new ArrayList<USER_PROFILE>();
 	}
 
 	public int getCodProject() {
@@ -58,11 +58,11 @@ public class Project {
 		this.projectName = nameProject;
 	}
 
-	public List<Profile> getListMembers() {
+	public List<USER_PROFILE> getListMembers() {
 		return listMembers;
 	}
 
-	public void setListMembers(List<Profile> listMembers) {
+	public void setListMembers(List<USER_PROFILE> listMembers) {
 		this.listMembers = listMembers;
 	}
 //	public Profile getProjectCreator() {

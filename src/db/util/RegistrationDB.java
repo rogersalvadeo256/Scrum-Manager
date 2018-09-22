@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.UserRegistration;
+import db.pojos.USER_REGISTRATION;
 
 public class RegistrationDB{
 	private EntityManager em;
@@ -17,12 +17,12 @@ public class RegistrationDB{
 	 * 
 	 * @author jefter66
 	 * @example boolean value = insertUser(user);
-	 * @param UserRegistration
+	 * @param USER_REGISTRATION
 	 *            user
 	 */
-	public void insertUser(UserRegistration u) {
-		if (em == null) {em = Database.createEntityManager();
-		}
+	public void insertUser(USER_REGISTRATION u) {
+		if (em == null) em = Database.createEntityManager();
+		u.setuStatus(true);
 		this.em.getTransaction().begin();
 		this.em.persist(u);
 		this.em.getTransaction().commit();
@@ -34,26 +34,26 @@ public class RegistrationDB{
 	 *  if the return value are false, the user doesn't exist
 	 * @author jefter66
 	 * @example boolean value = queryValidation(UserRegistration user);
-	 * @param UserRegistration user
+	 * @param USER_REGISTRATION user
 	 */
-	public boolean userExist(UserRegistration user) {
+	public boolean userExist(USER_REGISTRATION user) {
 		if (em == null) em = Database.createEntityManager();
 		
-		Query q = this.em.createQuery("from UserRegistration where userName=:userName");
-		q.setParameter("userName", user.getUserName());
+		Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME");
+		q.setParameter("USER_NAME", user.getUserName());
 		if (!q.getResultList().isEmpty()) return true;
 		return false;
 	}
 	/** 
 	 * if the return are false, the email are not registered
 	 * @author jefter66
-	 * @param UserRegistration user
+	 * @param USER_REGISTRATION user
 	 */
-	public boolean emailExist(UserRegistration user) { 
+	public boolean emailExist(USER_REGISTRATION user) { 
 		if(em == null) em  = Database.createEntityManager();
 		
-		Query q = this.em.createQuery("from UserRegistration where email =:email");
-		q.setParameter("email",user.getEmail());
+		Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_EMAIL =:USER_EMAIL");
+		q.setParameter("USER_EMAIL",user.getEmail());
 
 		if(!q.getResultList().isEmpty()) return true;
 		return false;

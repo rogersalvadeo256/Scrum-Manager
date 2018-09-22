@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import db.pojos.UserRegistration;
+import db.pojos.USER_REGISTRATION;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -32,7 +32,7 @@ public class Window extends Stage {
 
 		// mainStage.setScene(new HomePageScene());
 		if (SERIALIZATION.fileExists(FileType.SESSION)) {
-			UserRegistration u = (UserRegistration) SERIALIZATION.undoSerialization(FileType.SESSION);
+			USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
 			if (u != null) {
 				SESSION.START_SESSION(u);
 				mainStage.setScene(new HomePageScene());

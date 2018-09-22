@@ -2,7 +2,7 @@ package validation;
 
 import java.util.ArrayList;
 
-import db.pojos.UserRegistration;
+import db.pojos.USER_REGISTRATION;
 import db.util.RegistrationDB;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -29,7 +29,7 @@ public class FormsValidation {
 	private ArrayList<TextField> txtField;
 	private ArrayList<PasswordField> passwordField;
 	private CheckEmptyFields checkFields;
-	private UserRegistration userRegistration;
+	private USER_REGISTRATION userRegistration;
 	private RegistrationDB registration;
 
 	public FormsValidation(ArrayList<TextField> field, ArrayList<String> fieldName,
@@ -50,7 +50,7 @@ public class FormsValidation {
 
 		this.checkFields = new CheckEmptyFields();
 
-		this.userRegistration = new UserRegistration();
+		this.userRegistration = new USER_REGISTRATION();
 
 		this.registration = new RegistrationDB();
 	}
@@ -145,10 +145,10 @@ public class FormsValidation {
 	 * will be true, otherwise false
 	 * 
 	 * @author jefter66
-	 * @param UserRegistration
+	 * @param USER_REGISTRATION
 	 * @return boolean
 	 */
-	public boolean validationForExistentUserName(UserRegistration registration) {
+	public boolean validationForExistentUserName(USER_REGISTRATION registration) {
 		if (this.registration.userExist(registration))
 			return false;
 		return true;
@@ -158,10 +158,10 @@ public class FormsValidation {
 	 * will be true, otherwise false
 	 * 
 	 * @author jefter66
-	 * @param UserRegistration
+	 * @param USER_REGISTRATION
 	 * @return boolean
 	 */
-	public boolean validationForExistentEmail(UserRegistration registration) {
+	public boolean validationForExistentEmail(USER_REGISTRATION registration) {
 		if (this.registration.emailExist(registration))return false;
 		return true;
 	}
@@ -227,11 +227,11 @@ public class FormsValidation {
 		}
 	}
 
-	public void setUserRegistration(UserRegistration registration) {
+	public void setUserRegistration(USER_REGISTRATION registration) {
 		this.userRegistration = registration;
 	}
 
-	private UserRegistration getUserRegistration() {
+	private USER_REGISTRATION getUserRegistration() {
 		return this.userRegistration;
 	}
 	public void setFieldName(ArrayList<String> name) {

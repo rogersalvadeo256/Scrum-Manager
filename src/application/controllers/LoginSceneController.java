@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import application.main.Window;
-import db.pojos.UserRegistration;
+import db.pojos.USER_REGISTRATION;
 import db.util.Login;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
@@ -70,9 +70,4 @@ public class LoginSceneController {
 	public void setInvalidLogin(boolean invalidLogin) {
 		this.invalidLogin = invalidLogin;
 	}
-
-	private void serialization() {
-
-	}
-
 }

@@ -7,18 +7,18 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import statics.SESSION;
 import widgets.designComponents.HBProfileContent;
 
 public class SearchFriend {
 	private EntityManager em;
 	private ArrayList<HBProfileContent> returnFromSearch;
-	private ArrayList<Profile> result;
+	private ArrayList<USER_PROFILE> result;
 
 	public SearchFriend() {
 		this.returnFromSearch = new ArrayList<HBProfileContent>();
-		this.result = new ArrayList<Profile>();
+		this.result = new ArrayList<USER_PROFILE>();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -28,11 +28,11 @@ public class SearchFriend {
 		this.result.clear();
 		this.returnFromSearch.clear();
 
-		Query q = em.createQuery("from Profile where name like :pName and codProfile <> :codOnline");
-		q.setParameter("pName", str + "%" );
-		q.setParameter("codOnline", SESSION.getProfileLogged().getCod());
+		Query q = em.createQuery("FROM USER_PROFILE WHERE PROF_NAME LIKE :PROF_NAME AND COD_PROFILE <> : LOGGED_USER_PROF_COD");
+		q.setParameter("PROF_NAME", str + "%" );
+		q.setParameter("LOGGED_USER_PROF_COD", SESSION.getProfileLogged().getCod());
 
-		this.result = (ArrayList<Profile>) q.getResultList();
+		this.result = (ArrayList<USER_PROFILE>) q.getResultList();
 		
 		for (int i = 0; i < this.result.size(); i++) {
 			this.returnFromSearch.add(new HBProfileContent(result.get(i)));

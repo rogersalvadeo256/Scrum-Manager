@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.Profile;
+import db.pojos.USER_PROFILE;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
@@ -47,7 +47,7 @@ public class ProfileImg {
 				if (em == null) {
 					em = Database.createEntityManager();
 				}
-				Profile p = SESSION.getProfileLogged();
+				USER_PROFILE p = SESSION.getProfileLogged();
 				this.em.getTransaction().begin();
 				p.setPhoto(img);
 				this.em.merge(p);
@@ -62,7 +62,7 @@ public class ProfileImg {
 		}
 	}
 
-	public static Image getImage(Profile p) throws IOException {
+	public static Image getImage(USER_PROFILE p) throws IOException {
 		BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(p.getPhoto()));
 		Image img = SwingFXUtils.toFXImage(bfi, null);
 		return img;
