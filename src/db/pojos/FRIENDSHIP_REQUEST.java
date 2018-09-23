@@ -2,13 +2,19 @@ package db.pojos;
 
 import java.util.Calendar;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import friendship.FriendshipRequest.REQUEST_STATUS;
 
 @Entity(name="FRIENDSHIP_REQUEST")
 public class FRIENDSHIP_REQUEST { 
@@ -18,11 +24,12 @@ public class FRIENDSHIP_REQUEST {
 	@Column(name = "FRQ_REQUEST_ID")
 	private int friendshipRequestId;
 	
-	@Column(nullable = false, name="FRQ_PROF_REQUESTED_BY" )
-	private USER_PROFILE requestedBy;
+	@Column(nullable = false, name="FRQ_COD_PROF_REQUESTED_BY" )
+	private int requestedBy;
 	
-	@Column(nullable = false, name="FRQ_PROF_RECEIVER")
-	private USER_PROFILE receiver;
+	
+	@Column(nullable = false, name="FRQ_COD_PROF_RECEIVER")
+	private int receiver;
 
 	@Column(name="FRQ_REQUEST_STATUS") 
 	private int status;
@@ -37,33 +44,43 @@ public class FRIENDSHIP_REQUEST {
 	public void setSendDate() {
 		this.sendDate = Calendar.getInstance().getTime();
 	}
-
-	private enum REQUEST_STATUS { 
-		ACCEPTED, REFUSED, ON_HOLD
-	}
+	
 	
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(REQUEST_STATUS status) {
-		this.status = Integer.parseInt(String.valueOf(status));
+		
+		switch (status) {
+		case ON_HOLD:
+			this.status = 0;
+			break;
+		case ACCEPTED:
+			this.status = 1;
+			break;
+		case REFUSED:
+			this.status = 2;
+			break;
+		default:
+			break;
+		}
 	}
 
 	
-	public USER_PROFILE getRequestedBy() {
+	public int getRequestedBy() {
 		return requestedBy;
 	}
 
-	public void setRequestedBy(USER_PROFILE requestedBy) {
-		this.requestedBy = requestedBy;
+	public void setRequestedBy(int requestedByCod) {
+		this.requestedBy = requestedByCod;
 	}
 
-	public USER_PROFILE getReceiver() {
+	public int getReceiver() {
 		return receiver;
 	}
 
-	public void setReceiver(USER_PROFILE receiver) {
-		this.receiver = receiver;
+	public void setReceiver(int profileCod) {
+		this.receiver = profileCod;
 	}
 	public int getFriendshipRequestId() {
 		return friendshipRequestId;

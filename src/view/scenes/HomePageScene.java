@@ -1,4 +1,4 @@
-package scenes.scenes;
+package view.scenes;
 
 /**
  * @author jefter66: jefter66
@@ -30,15 +30,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import listeners.Close;
-import scenes.popoups.FriendListPOPOUP;
-import scenes.popoups.FriendshipRequestPOPOUP;
-import scenes.popoups.NewProjectPOPOUP;
-import scenes.popoups.ProfileEditPOPOUP;
 import statics.GENERAL_STORE;
 import statics.ProfileImg;
 import statics.SERIALIZATION;
 import statics.SESSION;
 import statics.SERIALIZATION.FileType;
+import view.popoups.FriendListPOPOUP;
+import view.popoups.FriendshipRequestPOPOUP;
+import view.popoups.NewProjectPOPOUP;
+import view.popoups.ProfileEditPOPOUP;
 import widgets.designComponents.HBoxPhotoDecoration;
 import widgets.designComponents.SearchBar;
 import widgets.designComponents.ShowImage;
@@ -140,9 +140,8 @@ public class HomePageScene extends Scene {
 					for (int i = 0; i < searchFriend.getResults().size(); i++) {
 						searchFriend.getResults().get(i).getStyleClass().add("hbox");
 						searchFriend.getResults().get(i).setId("hSugestions");
-						HomePageScene.this.vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
+						vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
 					}
-//					apSearch.setId("sugestionsOn");
 					return;
 				}
 			}

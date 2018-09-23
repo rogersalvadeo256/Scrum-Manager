@@ -13,8 +13,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import scenes.scenes.HomePageScene;
 import statics.SERIALIZATION;
+import view.scenes.HomePageScene;
 
 public class LoginSceneController {
 

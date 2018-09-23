@@ -1,14 +1,19 @@
 package validation;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Optional;
 
+import application.main.Window;
 import db.pojos.USER_REGISTRATION;
 import db.util.RegistrationDB;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import widgets.alertMessage.CustomAlert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import view.scenes.LoginScene;
+import widgets.alertMessage.CustomAlert;
 
 /**
  * Make the validation of forms, functions for check if the fields are empty,
@@ -32,8 +37,7 @@ public class FormsValidation {
 	private USER_REGISTRATION userRegistration;
 	private RegistrationDB registration;
 
-	public FormsValidation(ArrayList<TextField> field, ArrayList<String> fieldName,
-			ArrayList<PasswordField> passwordField) {
+	public FormsValidation(ArrayList<TextField> field, ArrayList<String> fieldName, ArrayList<PasswordField> passwordField) {
 
 		this.errorFieldMessage = new ArrayList<String>();
 		this.passwordFieldValidationMessage = new ArrayList<String>();
@@ -153,6 +157,7 @@ public class FormsValidation {
 			return false;
 		return true;
 	}
+
 	/**
 	 * For registration of new user. If the registration go's ok, then, the return
 	 * will be true, otherwise false
@@ -162,7 +167,8 @@ public class FormsValidation {
 	 * @return boolean
 	 */
 	public boolean validationForExistentEmail(USER_REGISTRATION registration) {
-		if (this.registration.emailExist(registration))return false;
+		if (this.registration.emailExist(registration))
+			return false;
 		return true;
 	}
 
@@ -175,8 +181,12 @@ public class FormsValidation {
 	 * fields and data existent
 	 * 
 	 * @return Alert
+	 * @throws SQLException
+	 * @throws FileNotFoundException
+	 * @throws ClassNotFoundException
 	 */
-	public void registrationOfNewUser() {
+	public void registrationOfNewUser() throws ClassNotFoundException, FileNotFoundException,
+																					SQLException {
 		String fieldEmptyMessage = checkingForEmptyField();
 		String passwordFieldEmptyMessage = checkingForEmptyPasswordField();
 		String returnMessage;
@@ -185,36 +195,39 @@ public class FormsValidation {
 			returnMessage = fieldEmptyMessage + "\n" + passwordFieldEmptyMessage;
 			fieldEmptyMessage = new String();
 			passwordFieldEmptyMessage = new String();
-			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", returnMessage).show();
-			 return;
+			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", returnMessage).show();
+			return;
 		}
 		String passwordErrorMessage = new String();
 		if (!validationForPassword(true).isEmpty()) {
 			passwordErrorMessage = new String();
 			passwordErrorMessage = validationForPassword(true);
-			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordErrorMessage).show();
-			 return;
+			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordErrorMessage).show();
+			return;
 		}
 		String passwordFieldErrorMessage = new String();
 		if (!validationForPassword(false).isEmpty()) {
 			passwordFieldEmptyMessage = new String();
 			passwordFieldEmptyMessage = validationForPassword(false);
-			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage).show();;
-			 return;
+			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage).show();
+			;
+			return;
 		}
 		if (!validationForExistentUserName(this.getUserRegistration())) {
-			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
-					"Nome de usuario já está cadastrado").show();;
-					 return;
+			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", "Nome de usuario já está cadastrado").show();
+			return;
 		}
 		if (!validationForExistentEmail(this.getUserRegistration())) {
-			 message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar",
-					"Email já está cadastrado").show();
-			 return;
+			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", "Email já está cadastrado").show();
+			return;
 		}
 		registration.insertUser(getUserRegistration());
-		 message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro realizado com sucesso", "Voce está cadastrado").show();
-		 return;
+		Optional<ButtonType> result = message(AlertType.CONFIRMATION, "Cadastrado", "Cadastro relizado com sucesso", "Deseja fazer o login? ").showAndWait();
+		if (result.get() == ButtonType.OK) {
+			Window.mainStage.setScene(new LoginScene());
+			return;
+		}
+		return;
 	}
 
 	public void setConfirmationMessage(ArrayList<String> message) {
@@ -234,6 +247,7 @@ public class FormsValidation {
 	private USER_REGISTRATION getUserRegistration() {
 		return this.userRegistration;
 	}
+
 	public void setFieldName(ArrayList<String> name) {
 		this.fieldName = name;
 	}

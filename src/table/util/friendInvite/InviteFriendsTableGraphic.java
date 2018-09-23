@@ -7,8 +7,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.stage.Window;
-import scenes.popoups.StandartLayoutPOPOUP;
 import statics.SESSION;
+import view.popoups.StandartLayoutPOPOUP;
 
 public class InviteFriendsTableGraphic extends StandartLayoutPOPOUP {
 

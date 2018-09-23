@@ -24,11 +24,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import scenes.popoups.ProfileEditPOPOUP;
-import scenes.scenes.LoginScene;
 import statics.GENERAL_STORE;
 import statics.SESSION;
 import validation.CheckEmptyFields;
+import view.popoups.ProfileEditPOPOUP;
+import view.scenes.LoginScene;
 import widgets.alertMessage.CustomAlert;
 
 public class EditProfileController {

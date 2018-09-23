@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import db.pojos.USER_PROFILE;
 import friendship.FriendshipRequest;
 import javafx.scene.layout.VBox;
-import scenes.popoups.FriendshipRequestPOPOUP;
 import statics.GENERAL_STORE;
 import statics.SESSION;
+import view.popoups.FriendshipRequestPOPOUP;
 import widgets.designComponents.HBFriendRequest;
 
 public class FriendshipRequestsController {

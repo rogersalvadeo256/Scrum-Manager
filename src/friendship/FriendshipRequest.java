@@ -1,11 +1,9 @@
 package friendship;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
+import db.pojos.FRIENDSHIP_REQUEST;
 import db.pojos.USER_PROFILE;
 import statics.SESSION;
 
@@ -14,6 +12,10 @@ public class FriendshipRequest {
 	private EntityManager em;
 	private USER_PROFILE p;
 
+	public static enum REQUEST_STATUS { 
+		ACCEPTED, REFUSED, ON_HOLD
+	}
+	
 	/**
 	 * The parameter is the profile of who send the request, this profile is removed
 	 * of the list of friendship requests and moved to the friends list in the two
@@ -35,18 +37,17 @@ public class FriendshipRequest {
 	public void sendFriendshipRequest() {// Profile p) {
 		if (this.em == null)
 			em = Database.createEntityManager();
-		/*
-		 * the list will be atached to the object profile
-		 */
-//		List<USER_PROFILE> sendToUser = this.p.getFriendshipRequests();
-//		sendToUser.add(SESSION.getProfileLogged());
 
-		// List<Profile> logged = SESSION.getProfileLogged().getFriendshipRequests();
-		// logged.add(this.p);
-
+		FRIENDSHIP_REQUEST friendshipRequest = new FRIENDSHIP_REQUEST();
+		
+		friendshipRequest.setRequestedBy(SESSION.getProfileLogged().getCod());
+		friendshipRequest.setReceiver(this.p.getCod());
+		friendshipRequest.setSendDate();
+		friendshipRequest.setStatus(REQUEST_STATUS.ON_HOLD);
+		
+		
 		em.getTransaction().begin();
-		em.merge(this.p);
-//		em.merge(SESSION.getProfileLogged());
+		em.persist(friendshipRequest);
 		em.getTransaction().commit();
 		em.clear();
 		em.close();

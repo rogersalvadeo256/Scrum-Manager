@@ -20,7 +20,7 @@ import statics.ProfileImg;
 public class HBProfileContent extends HBox {
 	protected VBox vbUsrIMG, vbUsrLABEL, vbUsrBUTTON;
 	private ImageView usrImage;
-	private Label lblName, lblBio;
+	private Label lblName;
 	private Button btnAdd;
 	private FriendshipRequest fRequest;
 
@@ -55,7 +55,7 @@ public class HBProfileContent extends HBox {
 
 		this.vbUsrIMG.getChildren().addAll(this.usrImage);
 		this.vbUsrBUTTON.getChildren().add(btnAdd);
-		this.vbUsrLABEL.getChildren().addAll(this.lblName, this.lblBio);
+		this.vbUsrLABEL.getChildren().addAll(this.lblName);
 		this.vbUsrLABEL.setAlignment(Pos.CENTER);
 
 		this.setAlignment(Pos.CENTER);

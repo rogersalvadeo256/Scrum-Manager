@@ -1,3 +1,4 @@
+package view.scenes;
 //package scenes.scenes;
 //import java.util.Random;
 //

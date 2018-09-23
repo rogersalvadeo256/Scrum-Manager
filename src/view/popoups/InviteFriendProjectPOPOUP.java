@@ -1,4 +1,4 @@
-package scenes.popoups;
+package view.popoups;
 
 import java.io.IOException;
 

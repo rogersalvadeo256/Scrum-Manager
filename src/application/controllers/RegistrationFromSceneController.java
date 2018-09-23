@@ -1,10 +1,13 @@
 package application.controllers;
 
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import db.pojos.USER_PROFILE;
 import db.pojos.USER_REGISTRATION;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -22,7 +25,7 @@ public class RegistrationFromSceneController {
 																					TextField txtQuestion,
 																					TextField txtAnswer,
 																					PasswordField txtPasswordField,
-																					PasswordField txtPasswordConfirmation) {
+																					PasswordField txtPasswordConfirmation) throws ClassNotFoundException, FileNotFoundException, SQLException {
 
 		USER_PROFILE p = new USER_PROFILE();
 		USER_REGISTRATION u = new USER_REGISTRATION();
@@ -53,7 +56,7 @@ public class RegistrationFromSceneController {
 																					TextField txtQuestion,
 																					TextField txtAnswer,
 																					PasswordField txtPasswordField,
-																					PasswordField txtPasswordConfirmation) {
+																					PasswordField txtPasswordConfirmation) throws ClassNotFoundException, FileNotFoundException, SQLException {
 
 			USER_PROFILE p = new USER_PROFILE();
 			USER_REGISTRATION u = new USER_REGISTRATION();

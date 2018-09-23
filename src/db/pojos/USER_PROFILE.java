@@ -1,18 +1,12 @@
 package db.pojos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 @SuppressWarnings("serial")
 @Entity(name="USER_PROFILE")
 public class USER_PROFILE implements Serializable{
@@ -86,7 +80,6 @@ public class USER_PROFILE implements Serializable{
 	public int getCod() {
 		return codProfile;
 	}
-
 	public String getName() {
 		return name;
 	}
@@ -100,7 +93,7 @@ public class USER_PROFILE implements Serializable{
 //	}
 //
 //	public void setFriendshipRequestList(List<USER_PROFILE> friendshipRequestList) {
-//		this.friendshipRequest = friendshipRequestList;
+//		t	his.friendshipRequest = friendshipRequestList;
 //	}
 //
 //	public List<USER_PROFILE> getFriendsList() {

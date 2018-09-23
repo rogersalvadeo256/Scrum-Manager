@@ -1,18 +1,22 @@
-package scenes.scenes;
+package view.scenes;
 
+import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import application.controllers.RegistrationFromSceneController;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class RegistrationFormScene extends VBox {
+public class RegistrationFormComponent extends VBox {
 
 	private TextField txtName, txtUserName, txtEmail, txtQuestion, txtAnswer;
 	private PasswordField txtPasswordField, txtPasswordConfirmation;
@@ -24,7 +28,7 @@ public class RegistrationFormScene extends VBox {
 	private HBox hbButtons;
 	private RegistrationFromSceneController controller;
 
-	public RegistrationFormScene() throws ClassNotFoundException, SQLException {
+	public RegistrationFormComponent() throws ClassNotFoundException, SQLException {
 
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
@@ -92,22 +96,65 @@ public class RegistrationFormScene extends VBox {
 		this.controller = new RegistrationFromSceneController();
 
 		this.btnRegister.setOnAction(e -> {
-			this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
-					txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+			try {
+				this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
+						txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+			} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+				e1.printStackTrace();
+			}
 		});
 
 		this.txtPasswordConfirmation.setOnKeyPressed(e -> {
 			if (e.getCode() == KeyCode.ENTER) {
-				this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage,
-						txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+				try {
+					this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage,
+							txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
 			}
 		});
 
-		this.getChildren().addAll(txtName,txtUserName, txtEmail,
+		this.getChildren().addAll(new Label("Cadastro"),txtName,txtUserName, txtEmail,
 				txtQuestion,txtAnswer);
 		this.getChildren().addAll(txtPasswordField,txtPasswordConfirmation,
 				hbButtons);
 		this.setAlignment(Pos.CENTER);
 		this.setSpacing(25	);
 	}
+	public void setEventCancel (EventHandler<ActionEvent> e) {
+		this.btnCancel.setOnAction(e);
+	}
+
+
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

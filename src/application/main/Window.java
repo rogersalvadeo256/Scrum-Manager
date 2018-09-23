@@ -11,10 +11,10 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import scenes.scenes.HomePageScene;
-import scenes.scenes.LoginScene;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
+import view.scenes.HomePageScene;
+import view.scenes.LoginScene;
 import statics.SESSION;
 
 public class Window extends Stage {

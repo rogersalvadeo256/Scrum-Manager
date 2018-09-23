@@ -9,9 +9,9 @@ import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import friendship.FriendshipFunctions;
 import javafx.scene.layout.VBox;
-import scenes.popoups.FriendListPOPOUP;
-import scenes.popoups.FriendshipRequestPOPOUP;
 import statics.SESSION;
+import view.popoups.FriendListPOPOUP;
+import view.popoups.FriendshipRequestPOPOUP;
 import widgets.designComponents.HBFriendContent;
 
 public class FriendsComponentController {

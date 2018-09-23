@@ -36,7 +36,6 @@ public class HBFriendRequest extends HBox {
 		this.image = new ImageView();
 
 		this.lblName = new Label(p.getName());
-		this.lblBio = new Label(p.getBio());
 
 		this.btnAccept = new Button("Aceitar");
 		this.btnRefuse = new Button("Recusar");
