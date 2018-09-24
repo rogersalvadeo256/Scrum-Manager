@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import statics.IMPORTANT_ENUMS.FRIEND_STATE;
+import statics.ENUMS.FRIEND_STATE;
 
 @Entity(name = "FRIENDSHIP")
 public class FRIENDSHIP {
@@ -36,7 +36,6 @@ public class FRIENDSHIP {
 	public int getFriendshipRequestId() {
 		return friendshipRequestId;
 	}
-
 	public void setFriendshipRequestId(int friendshipRequestId) {
 		this.friendshipRequestId = friendshipRequestId;
 	}

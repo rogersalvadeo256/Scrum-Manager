@@ -32,6 +32,7 @@ import statics.ProfileImg;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
 import statics.SESSION;
+import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
@@ -156,21 +157,17 @@ public class HomePageScene extends Scene {
 		this.btnExit.setOnAction(new Close(Window.mainStage));
 
 		this.btnFriends = new Button();
-//		this.btnFriends.setOnAction(e -> {
-//		if(SESSION.getProfileLogged().getFriendsList().size() > 0) {
-//			try {
-//				new FriendListPOPOUP(Window.mainStage).showAndWait();
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//		} else { 
-//			this.toast2 = new Toast(Window.mainStage, "Voce não tem amigos");
-//			this.setOnMouseMoved(e1 -> { 
-//				this.toast2.close();
-//			});
-//		}
-//		});
-
+		this.btnFriends.setOnAction(e -> {
+			try {
+				new FriendListPOPOUP(Window.mainStage).showAndWait();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			this.toast2 = new Toast(Window.mainStage, "Voce não tem amigos");
+			this.setOnMouseMoved(e1 -> {
+				this.toast2.close();
+			});
+		});
 		this.btnFriendRequest.setOnAction(event -> {
 			try {
 				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();

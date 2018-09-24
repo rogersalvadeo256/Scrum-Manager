@@ -17,6 +17,37 @@ public class FriendListPOPOUP extends StandartLayoutPOPOUP {
 		this.controller = new FriendsComponentController();
 		
 		controller.init(layout, this);
-		
 	}
 }
+
+
+
+ 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

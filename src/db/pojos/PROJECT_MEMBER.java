@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity
+@Entity(name="PROJECT_MEMBER")
 public class PROJECT_MEMBER {
 
 	@Id

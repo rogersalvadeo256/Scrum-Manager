@@ -4,14 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import javafx.scene.layout.VBox;
-import statics.IMPORTANT_ENUMS;
 import statics.SESSION;
 import view.popoups.FriendListPOPOUP;
-import view.popoups.FriendshipRequestPOPOUP;
 import widgets.designComponents.HBFriendContent;
 
 public class FriendsComponentController {
@@ -21,39 +20,56 @@ public class FriendsComponentController {
 		this.friendsList = new ArrayList<>();
 	}
 
+	/**
+	 * Draw the components with friends information on the scene
+	 * 
+	 * @param layout
+	 * @param screen
+	 * @throws IOException
+	 */
 	public void init(VBox layout, FriendListPOPOUP screen) throws IOException {
 
 		layout.getChildren().clear();
-
 		loadFriendsList();
 
 		if (this.friendsList.isEmpty())
 			screen.close();
 
-//		for (int i = 0; i < this.friendsList.size(); i++) {
-//			HBFriendContent fComponent = new HBFriendContent(this.friendsList.get(i));
-//			IMPORTANT_ENUMS fFunctions = new IMPORTANT_ENUMS(this.friendsList.get(i));
-//			layout.getChildren().add(fComponent);
-//
-//			fComponent.setEventDelete(e -> {
-//				fFunctions.deleteFriend();
-//				loadFriendsList();
-//				SESSION.UPDATE_SESSION();
-//				try {
-//					init(layout, screen);
-//				} catch (IOException e1) {
-//					e1.printStackTrace();
-//				}
-//			});
-//		}
-//		return;
+		for (int i = 0; i < this.friendsList.size(); i++) {
+
+			HBFriendContent fc = new HBFriendContent(this.friendsList.get(i));
+			layout.getChildren().add(fc);
+		}
 	}
 
 	private void loadFriendsList() {
 		this.friendsList.clear();
-//		for (int i = 0; i < SESSION.getProfileLogged().getFriendsList().size(); i++) {
-//			this.friendsList.add(SESSION.getProfileLogged().getFriendsList().get(i));
-//		}
-	}
 
+		EntityManager em = Database.createEntityManager();
+		Query q = em.createQuery("FROM PROF_COD FROM USER_PROFILE AS PR INNER JOIN FRIENDSHIP AS FR ON FR.FR_PROF_1 AND FR.FR_PROF_2 WHERE FR.FR_PROF_1 OR FR.FR_PROF_2 =: PROF_COD AND FR.FR_PROF_1 AND FR.FR_PROF_2 <> =:PROF_COD");
+		q.setParameter("PROF_COD", SESSION.getProfileLogged().getCod());
+
+		if (!q.getResultList().isEmpty()) {
+			for (int i = 0; i < q.getResultList().size(); i++) {
+				this.friendsList.add((USER_PROFILE) q.getResultList().get(i));
+			}
+		}
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

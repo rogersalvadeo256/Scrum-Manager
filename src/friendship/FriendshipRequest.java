@@ -10,8 +10,9 @@ import db.pojos.FRIENDSHIP;
 import db.pojos.FRIENDSHIP_REQUEST;
 import db.pojos.USER_PROFILE;
 import statics.SESSION;
-import statics.IMPORTANT_ENUMS.FRIEND_STATE;
-import statics.IMPORTANT_ENUMS.REQUEST_STATUS;
+import statics.ENUMS;
+import statics.ENUMS.FRIEND_STATE;
+import statics.ENUMS.REQUEST_STATUS;
 
 public class FriendshipRequest {
 
@@ -99,7 +100,11 @@ public class FriendshipRequest {
 
 		SESSION.UPDATE_SESSION();
 	}
-
+	
+	
+	/*
+	 * create a register in the table friends 
+	 */
 	private void friendshipBegin() {
 		if (this.em == null)
 			this.em = Database.createEntityManager();
@@ -107,7 +112,7 @@ public class FriendshipRequest {
 		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER AND FRQ_REQUEST_STATUS =: STATUS");
 		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
 		q.setParameter("COD_PROF_SENDER", this.p.getCod());
-		q.setParameter("STATUS", REQUEST_STATUS.ACCEPTED);
+		q.setParameter("STATUS", ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ACCEPTED) );
 
 		if (!q.getResultList().isEmpty()) {
 			FRIENDSHIP fr = new FRIENDSHIP();
@@ -126,3 +131,17 @@ public class FriendshipRequest {
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
