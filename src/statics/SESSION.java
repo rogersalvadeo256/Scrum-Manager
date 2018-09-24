@@ -66,7 +66,7 @@ public class SESSION {
 		USER_REGISTRATION u = (USER_REGISTRATION) q.getResultList().get(0);
 
 		Query q1 = em.createQuery("FROM USER_PROFILE WHERE PROF_COD =: PROF_COD");
-		q1.setParameter("cod", SESSION.getUserLogged().getProfile().getCod());
+		q1.setParameter("PROF_COD", SESSION.getUserLogged().getProfile().getCod());
 		USER_PROFILE p = (USER_PROFILE) q1.getResultList().get(0);
 
 		SESSION.UPDATE_SESSION(p, u);

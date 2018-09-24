@@ -2,7 +2,7 @@ package db.pojos;
 
 import javax.persistence.Entity;
 
-public class ProjectInvite {
+public class PROJECT_INVITE {
 
 	
 	

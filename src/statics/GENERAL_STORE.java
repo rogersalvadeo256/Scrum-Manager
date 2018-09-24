@@ -4,6 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import friendship.FriendshipRequest;
 import javafx.scene.control.Button;
@@ -21,9 +25,9 @@ public class GENERAL_STORE {
 	private static Label lblName, lblUserName;
 	private static ImageView imgProfile;
 	private static Button btnFriendRequest;
+	private static EntityManager em;
 
-	public static void setComponentsHOME(Label lblName, Label lblUserName,
-																					ImageView imgProfile,
+	public static void setComponentsHOME(Label lblName, Label lblUserName, ImageView imgProfile,
 																					Button btnFriendRequest) {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
@@ -37,8 +41,13 @@ public class GENERAL_STORE {
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
 		imgProfile.setImage(ProfileImg.loadImage());
 
-//		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
-
+		if (em == null)
+			em = Database.createEntityManager();
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 0");
+		q.setParameter("COD", SESSION.getProfileLogged().getCod());
+		
+		if(q.getResultList().isEmpty()) btnFriendRequest.setText(new String());	
+		if(!q.getResultList().isEmpty()) btnFriendRequest.setText(String.valueOf(q.getResultList().size()));
 	}
 
 	public static void loadComponentsHOME() throws IOException {
@@ -47,9 +56,30 @@ public class GENERAL_STORE {
 
 		imgProfile.setImage(ProfileImg.loadImage());
 
-//		btnFriendRequest.setText((SESSION.getProfileLogged().getFriendshipRequests().size() > 0 ? String.valueOf(SESSION.getProfileLogged().getFriendshipRequests().size()) : new String()));
+		if (em == null)
+			em = Database.createEntityManager();
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 0 ");
+		q.setParameter("COD", SESSION.getProfileLogged().getCod());
+		
+		if(q.getResultList().isEmpty()) btnFriendRequest.setText(new String());	
+		if(!q.getResultList().isEmpty()) btnFriendRequest.setText(String.valueOf(q.getResultList().size()));
+		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -18,10 +18,10 @@ public class FRIENDSHIP {
 	private int friendshipRequestId;
 	
 	@Column(name="FR_PROF_1")
-	private USER_PROFILE p1;
+	private int p1;
 	
 	@Column(name="FR_PROF_2")
-	private USER_PROFILE p2;
+	private int p2;
 	
 	
 	@Temporal(TemporalType.DATE)
@@ -29,8 +29,58 @@ public class FRIENDSHIP {
 	private java.util.Date dateBegin;
 	
 	
-	
-	
+	@Column(name="FR_STATUS")
+	private int status;
+
+
+	public int getFriendshipRequestId() {
+		return friendshipRequestId;
+	}
+
+
+	public void setFriendshipRequestId(int friendshipRequestId) {
+		this.friendshipRequestId = friendshipRequestId;
+	}
+
+
+	public int getP1() {
+		return p1;
+	}
+
+
+	public void setP1(int p1) {
+		this.p1 = p1;
+	}
+
+
+	public int getP2() {
+		return p2;
+	}
+
+
+	public void setP2(int p2) {
+		this.p2 = p2;
+	}
+
+
+	public java.util.Date getDateBegin() {
+		return dateBegin;
+	}
+
+
+	public void setDateBegin(java.util.Date dateBegin) {
+		this.dateBegin = dateBegin;
+	}
+
+
+	public int getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	
 	
 	

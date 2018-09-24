@@ -1,6 +1,7 @@
 package friendship;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.FRIENDSHIP_REQUEST;
@@ -14,6 +15,9 @@ public class FriendshipRequest {
 
 	public static enum REQUEST_STATUS { 
 		ACCEPTED, REFUSED, ON_HOLD
+	}
+	public static enum FRIENDSHIP_STATE{ 
+		
 	}
 	
 	/**
@@ -54,19 +58,20 @@ public class FriendshipRequest {
 		em = null;
 	}
 
-	public void acceptRequest() { // Profile pRequest) {
-
-//		this.p.getFriendsList().add(SESSION.getProfileLogged());
-//		this.p.getFriendshipRequests().remove(SESSION.getProfileLogged());
-
-//		SESSION.getProfileLogged().getFriendshipRequests().remove(this.p);
-//		SESSION.getProfileLogged().getFriendsList().add(this.p);
-
-		
+	public void acceptRequest() { 
 		if (this.em == null)this.em = Database.createEntityManager();
 
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
+		q.setParameter("COD_PROF_RECEIVER",SESSION.getProfileLogged().getCod());
+		q.setParameter("COD_PROF_SENDER", this.p.getCod());
+		
+		
+		FRIENDSHIP_REQUEST fr = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
+		
+		fr.setStatus(REQUEST_STATUS.ACCEPTED);
+		
 		this.em.getTransaction().begin();
-		this.em.merge(this.p);
+		this.em.merge(fr);
 		this.em.getTransaction().commit();
 		this.em.clear();
 		this.em.close();
@@ -74,29 +79,35 @@ public class FriendshipRequest {
 		SESSION.UPDATE_SESSION();
 	}
 
-	public void refuseRequest() { // Profile p) {
+	public void refuseRequest() { 
+		if (this.em == null)this.em = Database.createEntityManager();
 
-//		List<USER_PROFILE> loggedUser = SESSION.getProfileLogged().getFriendshipRequests();
-
-//		List<USER_PROFILE> senderUser = this.p.getFriendshipRequests();
-
-//		senderUser.remove(SESSION.getProfileLogged());
-//		loggedUser.remove(this.p);
-
-		USER_PROFILE update = SESSION.getProfileLogged();
-
-		if (this.em == null)
-			this.em = Database.createEntityManager();
-
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
+		q.setParameter("COD_PROF_RECEIVER",SESSION.getProfileLogged().getCod());
+		q.setParameter("COD_PROF_SENDER", this.p.getCod());
+		
+		
+		FRIENDSHIP_REQUEST fr = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
+		
+		fr.setStatus(REQUEST_STATUS.REFUSED);
+		
 		this.em.getTransaction().begin();
-		this.em.merge(this.p);
-		this.em.merge(update);
+		this.em.merge(fr);
 		this.em.getTransaction().commit();
 		this.em.clear();
 		this.em.close();
 		this.em = null;
-
+	
 		SESSION.UPDATE_SESSION();
 
 	}
 }
+
+
+
+
+
+
+
+
+

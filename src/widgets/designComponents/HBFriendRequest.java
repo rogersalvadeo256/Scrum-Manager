@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
 import statics.SESSION;
 
 public class HBFriendRequest extends HBox {
-	private Label lblName, lblBio;
+	private Label lblName;
 	private VBox vbAlignItemsLeft, vbAlignItemsMiddle, vbAlignItemsRight;
 
 	private ImageView image;
@@ -53,7 +53,7 @@ public class HBFriendRequest extends HBox {
 
 		this.vbAlignItemsLeft.getChildren().add(image);
 
-		this.vbAlignItemsMiddle.getChildren().addAll(lblName, lblBio);
+		this.vbAlignItemsMiddle.getChildren().addAll(lblName);
 		this.vbAlignItemsMiddle.setSpacing(10);
 		this.vbAlignItemsMiddle.setAlignment(Pos.CENTER);
 

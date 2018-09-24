@@ -10,19 +10,16 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import application.main.Window;
 import db.hibernate.factory.Database;
-import db.pojos.USER_PROFILE;
 import friendship.SearchFriend;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,14 +30,11 @@ import listeners.Close;
 import statics.GENERAL_STORE;
 import statics.ProfileImg;
 import statics.SERIALIZATION;
-import statics.SESSION;
 import statics.SERIALIZATION.FileType;
-import view.popoups.FriendListPOPOUP;
+import statics.SESSION;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
-import widgets.designComponents.HBoxPhotoDecoration;
-import widgets.designComponents.SearchBar;
 import widgets.designComponents.ShowImage;
 import widgets.toaster.Toast;
 
@@ -50,7 +44,7 @@ public class HomePageScene extends Scene {
 	private Button btnExit, btnLogOut;
 	private Button btnEditProfile;
 	private ImageView profileImg;
-	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone,lblEmail;
+	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblEmail;
 	private HBox hbHeader;
 	private TextField txtSearch;
 	private Button btnSearch, btnHome;
@@ -61,8 +55,8 @@ public class HomePageScene extends Scene {
 	private HBox hbStartProject;
 	private SearchFriend searchFriend;
 //	private HBoxPhotoDecoration imageContent;
-	private Toast toast,toast2;
-	
+	private Toast toast, toast2;
+
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 
@@ -113,7 +107,7 @@ public class HomePageScene extends Scene {
 //		this.vbSearchResult.setLayoutX(5);
 		this.vbSearchResult.getStyleClass().add("vbox");
 		this.vbSearchResult.setId("sugestions");
-		
+
 		this.txtSearch = new TextField();
 
 		this.btnSearch = new Button();
@@ -124,8 +118,7 @@ public class HomePageScene extends Scene {
 		this.searchFriend = new SearchFriend();
 
 //		this.test = new SearchBar();
-		
-		
+
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
@@ -178,23 +171,13 @@ public class HomePageScene extends Scene {
 //		}
 //		});
 
-//		this.btnFriendRequest.setOnAction(event -> {
-//
-//			if (SESSION.getProfileLogged().getFriendshipRequests().size() > 0) {
-//				try {
-//					new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
-//
-//				} catch (FileNotFoundException e) {
-//					e.printStackTrace();
-//				}
-//			} else { 
-//				this.toast = new Toast(Window.mainStage, "Não há solicitações de amizade");
-//				this.setOnMouseMoved(e ->{
-//					this.toast.close();
-//				});
-//				
-//			}
-//		});
+		this.btnFriendRequest.setOnAction(event -> {
+			try {
+				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			}
+		});
 
 		this.btnFriendRequest.setId("friend-request");
 
@@ -274,7 +257,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch , btnSearch, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -346,45 +329,7 @@ public class HomePageScene extends Scene {
 		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
 		this.layout.getChildren().add(vbSearchResult);
 
-		
-		
-		
 		this.setRoot(layout);
 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

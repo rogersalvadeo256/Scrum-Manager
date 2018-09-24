@@ -43,7 +43,7 @@ public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
  *
  */
 /*
-class Componente extends VBox {
+	class Componente extends VBox {
 
 	private Button btn;
 

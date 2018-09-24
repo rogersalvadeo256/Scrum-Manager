@@ -44,13 +44,10 @@ public class FRIENDSHIP_REQUEST {
 	public void setSendDate() {
 		this.sendDate = Calendar.getInstance().getTime();
 	}
-	
-	
 	public int getStatus() {
 		return status;
 	}
 	public void setStatus(REQUEST_STATUS status) {
-		
 		switch (status) {
 		case ON_HOLD:
 			this.status = 0;
@@ -65,8 +62,6 @@ public class FRIENDSHIP_REQUEST {
 			break;
 		}
 	}
-
-	
 	public int getRequestedBy() {
 		return requestedBy;
 	}
