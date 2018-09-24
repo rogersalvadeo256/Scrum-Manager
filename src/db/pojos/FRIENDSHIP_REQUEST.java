@@ -2,19 +2,15 @@ package db.pojos;
 
 import java.util.Calendar;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import friendship.FriendshipRequest.REQUEST_STATUS;
+import statics.IMPORTANT_ENUMS.REQUEST_STATUS;
 
 @Entity(name="FRIENDSHIP_REQUEST")
 public class FRIENDSHIP_REQUEST { 
@@ -38,6 +34,11 @@ public class FRIENDSHIP_REQUEST {
 	@Column(nullable=false, name="FRQ_DATE_REQUEST_SENDED")
 	private java.util.Date sendDate;
 
+	@Temporal(TemporalType.DATE)
+	@Column(name="FRQ_DATE_REQUEST_ANSWERED")
+	private java.util.Date answredDate;
+	
+	
 	public java.util.Date getSendDate() {
 		return sendDate;
 	}
@@ -83,6 +84,12 @@ public class FRIENDSHIP_REQUEST {
 
 	public void setFriendshipRequestId(int friendshipRequestId) {
 		this.friendshipRequestId = friendshipRequestId;
+	}
+	public java.util.Date getAnswredDate() {
+		return answredDate;
+	}
+	public void setAnswredDate(java.util.Date answredDate) {
+		this.answredDate = answredDate;
 	}
 
 	

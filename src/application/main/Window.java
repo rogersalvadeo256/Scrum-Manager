@@ -5,6 +5,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import db.hibernate.factory.Database;
 import db.pojos.USER_REGISTRATION;
 import javafx.event.EventHandler;
 import javafx.scene.image.Image;
@@ -13,9 +17,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
+import statics.SESSION;
 import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
-import statics.SESSION;
 
 public class Window extends Stage {
 
@@ -30,16 +34,24 @@ public class Window extends Stage {
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(true);
 
-		// mainStage.setScene(new HomePageScene());
 		if (SERIALIZATION.fileExists(FileType.SESSION)) {
-			USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
-			if (u != null) {
-				SESSION.START_SESSION(u);
+			EntityManager em = Database.createEntityManager();
+			Query q = em.createQuery("FROM USER_REGISTRATION");
+			if (!q.getResultList().isEmpty()) {
+				USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
+
+				for (int i = 0; i < q.getResultList().size(); i++) {
+					USER_REGISTRATION r = (USER_REGISTRATION) q.getResultList().get(i);
+					if (u.getCodUser() == r.getCodUser()) {
+						SESSION.START_SESSION(u);
+					}
+				}
 				mainStage.setScene(new HomePageScene());
 				this.show();
 				return;
 			}
 		}
+
 		mainStage.setScene(new LoginScene());
 		this.show();
 

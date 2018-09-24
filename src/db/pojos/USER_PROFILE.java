@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import statics.IMPORTANT_ENUMS.AVAILABILITY;
 @SuppressWarnings("serial")
 @Entity(name="USER_PROFILE")
 public class USER_PROFILE implements Serializable{
@@ -24,10 +26,7 @@ public class USER_PROFILE implements Serializable{
 	@Column(name="PROF_AVAILABILITY")
 	private int availability;
 	
-	private enum AVAILABILITY { 
-		AVAILABLE, NOT_AVAILABLE, BUSY
-	}
-	
+
 	public USER_PROFILE() {
 //		this.friendList = new ArrayList<USER_PROFILE>();
 //		this.friendshipRequest = new ArrayList<USER_PROFILE>();

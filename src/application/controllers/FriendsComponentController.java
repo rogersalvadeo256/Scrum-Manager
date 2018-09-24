@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 
 import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
-import friendship.FriendshipFunctions;
 import javafx.scene.layout.VBox;
+import statics.IMPORTANT_ENUMS;
 import statics.SESSION;
 import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
@@ -30,23 +30,23 @@ public class FriendsComponentController {
 		if (this.friendsList.isEmpty())
 			screen.close();
 
-		for (int i = 0; i < this.friendsList.size(); i++) {
-			HBFriendContent fComponent = new HBFriendContent(this.friendsList.get(i));
-			FriendshipFunctions fFunctions = new FriendshipFunctions(this.friendsList.get(i));
-			layout.getChildren().add(fComponent);
-
-			fComponent.setEventDelete(e -> {
-				fFunctions.deleteFriend();
-				loadFriendsList();
-				SESSION.UPDATE_SESSION();
-				try {
-					init(layout, screen);
-				} catch (IOException e1) {
-					e1.printStackTrace();
-				}
-			});
-		}
-		return;
+//		for (int i = 0; i < this.friendsList.size(); i++) {
+//			HBFriendContent fComponent = new HBFriendContent(this.friendsList.get(i));
+//			IMPORTANT_ENUMS fFunctions = new IMPORTANT_ENUMS(this.friendsList.get(i));
+//			layout.getChildren().add(fComponent);
+//
+//			fComponent.setEventDelete(e -> {
+//				fFunctions.deleteFriend();
+//				loadFriendsList();
+//				SESSION.UPDATE_SESSION();
+//				try {
+//					init(layout, screen);
+//				} catch (IOException e1) {
+//					e1.printStackTrace();
+//				}
+//			});
+//		}
+//		return;
 	}
 
 	private void loadFriendsList() {
