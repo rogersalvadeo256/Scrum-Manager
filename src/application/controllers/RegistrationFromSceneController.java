@@ -3,6 +3,8 @@ package application.controllers;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import db.pojos.USER_PROFILE;
 import db.pojos.USER_REGISTRATION;
@@ -15,7 +17,8 @@ import validation.FormsValidation;
 
 public class RegistrationFromSceneController {
 	private FormsValidation validation;
-
+	private String email;
+	
 	public void setEventBtnLogin(ActionEvent e, ArrayList<TextField> field, ArrayList<String> fieldName,
 																					ArrayList<PasswordField> passwordField,
 																					TextField txtName,
@@ -64,6 +67,9 @@ public class RegistrationFromSceneController {
 			this.validation = new FormsValidation(field, fieldName, passwordField);
 			this.validation.setConfirmationMessage(confirmationMessage);
 
+			
+			
+			
 			validation.setField(field);
 			validation.setPasswordField(passwordField);
 			validation.setFieldName(fieldName);
@@ -77,4 +83,7 @@ public class RegistrationFromSceneController {
 			validation.setUserRegistration(u);
 			validation.registrationOfNewUser();
 	}
+	
+	
+	
 }
