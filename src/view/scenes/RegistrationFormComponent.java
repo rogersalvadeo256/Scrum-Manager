@@ -3,11 +3,15 @@ package view.scenes;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import application.controllers.RegistrationFromSceneController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -27,14 +31,14 @@ public class RegistrationFormComponent extends VBox {
 	private ArrayList<String> confirmationMessage;
 	private HBox hbButtons;
 	private RegistrationFromSceneController controller;
+	private String email;
 
 	public RegistrationFormComponent() throws ClassNotFoundException, SQLException {
 
 		this.fieldName = new ArrayList<String>();
 		this.field = new ArrayList<TextField>();
 		this.passwordField = new ArrayList<PasswordField>();
-		
-		
+
 		this.txtName = new TextField();
 		this.txtName.setPromptText("Name");
 		this.txtUserName = new TextField();
@@ -63,8 +67,6 @@ public class RegistrationFormComponent extends VBox {
 		this.txtAnswer.setAlignment(Pos.CENTER);
 		this.txtQuestion.setAlignment(Pos.CENTER);
 
-		
-		
 		this.hbButtons = new HBox(10);
 		this.btnRegister = new Button("Cadastrar");
 		this.btnCancel = new Button();
@@ -93,21 +95,22 @@ public class RegistrationFormComponent extends VBox {
 		this.confirmationMessage.add("Voce estÃ¡ cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
+		Alert emailError = new Alert(AlertType.ERROR);
+		emailError.setTitle("Error");
+		emailError.setHeaderText("Erro no campo de email.");
+		emailError.setContentText("O Campo de Email não é um email válido, por favor arrume.");
+
 		this.controller = new RegistrationFromSceneController();
 
 		this.btnRegister.setOnAction(e -> {
-			try {
-				this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
-						txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
-			} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
-				e1.printStackTrace();
-			}
-		});
+			email = txtEmail.getText();
 
-		this.txtPasswordConfirmation.setOnKeyPressed(e -> {
-			if (e.getCode() == KeyCode.ENTER) {
+			if (validar(email) == false) {
+				emailError.showAndWait();
+			} else {
+
 				try {
-					this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName, confirmationMessage,
+					this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
 							txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 					e1.printStackTrace();
@@ -115,46 +118,39 @@ public class RegistrationFormComponent extends VBox {
 			}
 		});
 
-		this.getChildren().addAll(new Label("Cadastro"),txtName,txtUserName, txtEmail,
-				txtQuestion,txtAnswer);
-		this.getChildren().addAll(txtPasswordField,txtPasswordConfirmation,
-				hbButtons);
+		this.txtPasswordConfirmation.setOnKeyPressed(e -> {
+			if (e.getCode() == KeyCode.ENTER) {
+				try {
+					this.controller.setEventPasswordField(e, field, fieldName, passwordField, txtName,
+							confirmationMessage, txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField,
+							txtPasswordConfirmation);
+				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+
+		this.getChildren().addAll(new Label("Cadastro"), txtName, txtUserName, txtEmail, txtQuestion, txtAnswer);
+		this.getChildren().addAll(txtPasswordField, txtPasswordConfirmation, hbButtons);
 		this.setAlignment(Pos.CENTER);
-		this.setSpacing(25	);
+		this.setSpacing(25);
 	}
-	public void setEventCancel (EventHandler<ActionEvent> e) {
+
+	public void setEventCancel(EventHandler<ActionEvent> e) {
 		this.btnCancel.setOnAction(e);
 	}
 
+	public static boolean validar(String email) {
+		boolean isEmailIdValid = false;
+		if (email != null && email.length() > 0) {
+			String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+			Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+			Matcher matcher = pattern.matcher(email);
+			if (matcher.matches()) {
+				isEmailIdValid = true;
+			}
+		}
+		return isEmailIdValid;
+	}
 
-	
-	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
