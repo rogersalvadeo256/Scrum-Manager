@@ -53,6 +53,8 @@ public class FriendsComponentController {
 			for (int i = 0; i < q.getResultList().size(); i++) {
 				this.friendsList.add((USER_PROFILE) q.getResultList().get(i));
 			}
+			
+			
 		}
 	}
 }

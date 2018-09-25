@@ -31,7 +31,7 @@ public class FRIENDSHIP {
 	private java.util.Date dateBegin;
 
 	@Column(name = "FR_STATUS")
-	private int status;
+	private String status;
 
 	public int getFriendshipRequestId() {
 		return friendshipRequestId;
@@ -63,36 +63,32 @@ public class FRIENDSHIP {
 		this.dateBegin = Calendar.getInstance().getTime();
 	}
 
-	public FRIEND_STATE getStatus() {
-		switch (this.status) {
-		case 0:
-			return FRIEND_STATE.NORMAL;
-		case 1:
-			return FRIEND_STATE.BLOCK_FRIEND;
-		case 2:
-			return FRIEND_STATE.DELETE_FRIEND;
-		default:
-			break;
-		}
-		return null;
+	public String getStatus() {
+		return this.status;
 	}
 
-	public void setStatus(FRIEND_STATE status) {
-
-		switch (status) {
-		case NORMAL:
-			this.status = 0;
-			break;
-		case BLOCK_FRIEND:
-			this.status = 1;
-			break;
-		case DELETE_FRIEND:
-			this.status = 2;
-			break;
-		default:
-			break;
-		}
-
+	public void setStatus(String status) {
+		this.status = status;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

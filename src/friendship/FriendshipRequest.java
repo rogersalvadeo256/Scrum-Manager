@@ -9,10 +9,10 @@ import db.hibernate.factory.Database;
 import db.pojos.FRIENDSHIP;
 import db.pojos.FRIENDSHIP_REQUEST;
 import db.pojos.USER_PROFILE;
-import statics.SESSION;
 import statics.ENUMS;
 import statics.ENUMS.FRIEND_STATE;
 import statics.ENUMS.REQUEST_STATUS;
+import statics.SESSION;
 
 public class FriendshipRequest {
 
@@ -46,7 +46,7 @@ public class FriendshipRequest {
 		friendshipRequest.setRequestedBy(SESSION.getProfileLogged().getCod());
 		friendshipRequest.setReceiver(this.p.getCod());
 		friendshipRequest.setSendDate();
-		friendshipRequest.setStatus(REQUEST_STATUS.ON_HOLD);
+		friendshipRequest.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ON_HOLD));
 
 		em.getTransaction().begin();
 		em.persist(friendshipRequest);
@@ -66,7 +66,7 @@ public class FriendshipRequest {
 
 		FRIENDSHIP_REQUEST frq = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
-		frq.setStatus(REQUEST_STATUS.ACCEPTED);
+		frq.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ACCEPTED));
 
 		this.em.getTransaction().begin();
 		this.em.merge(frq);
@@ -88,7 +88,7 @@ public class FriendshipRequest {
 
 		FRIENDSHIP_REQUEST fr = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
-		fr.setStatus(REQUEST_STATUS.REFUSED);
+		fr.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.REFUSED));
 		fr.setAnswredDate(Calendar.getInstance().getTime());
 
 		this.em.getTransaction().begin();
@@ -112,14 +112,14 @@ public class FriendshipRequest {
 		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER AND FRQ_REQUEST_STATUS =: STATUS");
 		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
 		q.setParameter("COD_PROF_SENDER", this.p.getCod());
-		q.setParameter("STATUS", ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ACCEPTED) );
+		q.setParameter("STATUS",ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ACCEPTED).toString() );
 
 		if (!q.getResultList().isEmpty()) {
 			FRIENDSHIP fr = new FRIENDSHIP();
 			fr.setDateBegin();
 			fr.setCodProf1(SESSION.getProfileLogged().getCod());
 			fr.setCodProf2(this.p.getCod());
-			fr.setStatus(FRIEND_STATE.NORMAL);
+			fr.setStatus(ENUMS.GET_FRIEND_STATE(FRIEND_STATE.NORMAL));
 
 			this.em.getTransaction().begin();
 			this.em.persist(fr);

@@ -43,7 +43,7 @@ public class GENERAL_STORE {
 
 		if (em == null)
 			em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 0");
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
 		q.setParameter("COD", SESSION.getProfileLogged().getCod());
 		
 		if(q.getResultList().isEmpty()) btnFriendRequest.setText(new String());	
@@ -58,7 +58,7 @@ public class GENERAL_STORE {
 
 		if (em == null)
 			em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 0 ");
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
 		q.setParameter("COD", SESSION.getProfileLogged().getCod());
 		
 		if(q.getResultList().isEmpty()) btnFriendRequest.setText(new String());	

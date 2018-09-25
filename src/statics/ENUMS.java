@@ -44,13 +44,13 @@ public class ENUMS {
 
 	public static String GET_REQUEST_STATUS(REQUEST_STATUS value) {
 		switch (value) {
-		case ON_HOLD:
-			return "ON_HOLD";
 		case ACCEPTED:
 			return "ACCEPTED";
 		case REFUSED:
 			return "REFUSED";
-		default:
+		case ON_HOLD:
+			return "ON_HOLD";
+		default:	
 			break;
 		}
 		return new String();

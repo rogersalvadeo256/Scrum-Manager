@@ -49,17 +49,9 @@ public class FRIENDSHIP_REQUEST {
 		return status;
 	}
 
-	public void setStatus(REQUEST_STATUS status) {
-		switch (status) {
-		case ON_HOLD:
-			this.status = "ON_HOLD";
-		case ACCEPTED:
-			this.status = "ACCEPTED";
-		case REFUSED:
-			this.status = "REFUSED";
-		default:
-			break;
-		}
+	public void setStatus(String status) {
+		this.status = status;
+
 	}
 
 	public int getRequestedBy() {

@@ -91,7 +91,7 @@ public class FriendshipRequestsController {
 	private void loadRequests() {
 		this.requestsList.clear();
 		EntityManager em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 0");
+		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
 		q.setParameter("COD", SESSION.getProfileLogged().getCod());
 		for (int i = 0; i < q.getResultList().size(); i++) {
 			Query q1 = em.createQuery("FROM USER_PROFILE WHERE PROF_COD =:COD");
