@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
  */
 public class SERIALIZATION {
 
-	private static String path = "/tmp/scrum/";
+	private static String path = System.getProperty("java.io.tmpdir");
 
 	public SERIALIZATION() throws IOException {
 	}
@@ -49,7 +49,7 @@ public class SERIALIZATION {
 	 * @author jefter66
 	 */
 	public static boolean fileExists(FileType type) {
-		return new File(path + getFileName(type)).exists() ? true : false;
+		return new File(path + "/" +  getFileName(type)).exists() ? true : false;
 	}
 
 	/**
@@ -61,7 +61,7 @@ public class SERIALIZATION {
 
 		if (!(new File("/tmp/scrum").exists()))	new File("/tmp/scrum").mkdir();
 
-		FileOutputStream fileOut = new FileOutputStream(path + getFileName(type));
+		FileOutputStream fileOut = new FileOutputStream(path + "/" + getFileName(type));
 
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		try {
@@ -82,7 +82,7 @@ public class SERIALIZATION {
 	public static Object undoSerialization(FileType type) {
 		Object o = null;
 		try {
-			FileInputStream fileIn = new FileInputStream(path + getFileName(type));
+			FileInputStream fileIn = new FileInputStream(path + "/" + getFileName(type));
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			o = (Object) in.readObject();
 			in.close();

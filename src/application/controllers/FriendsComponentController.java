@@ -46,7 +46,7 @@ public class FriendsComponentController {
 		this.friendsList.clear();
 
 		EntityManager em = Database.createEntityManager();
-		Query q = em.createQuery("FROM PROF_COD FROM USER_PROFILE AS PR INNER JOIN FRIENDSHIP AS FR ON FR.FR_PROF_1 AND FR.FR_PROF_2 WHERE FR.FR_PROF_1 OR FR.FR_PROF_2 =: PROF_COD AND FR.FR_PROF_1 AND FR.FR_PROF_2 <> =:PROF_COD");
+		Query q = em.createQuery("FROM PROF_COD FROM USER_PROFILE  PR INNER JOIN FRIENDSHIP  FR ON FR.FR_PROF_1 AND FR.FR_PROF_2 WHERE FR.FR_PROF_1 OR FR.FR_PROF_2 = :PROF_COD AND FR.FR_PROF_1 AND FR.FR_PROF_2 <>  :PROF_COD");
 		q.setParameter("PROF_COD", SESSION.getProfileLogged().getCod());
 
 		if (!q.getResultList().isEmpty()) {

@@ -47,12 +47,11 @@ public class Login {
 				SESSION.START_SESSION((USER_REGISTRATION) q.getResultList().get(0));
 				if (btnStayConnected.isSelected())
 					
-					System.out.println("bug");
 					
 					SERIALIZATION.serialization(SESSION.getUserLogged(), FileType.SESSION);
+					
 					USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
 //				
-//					System.out.println(u.getCodUser() +  u.getEmail() +  u.getUserName());
 					
 						
 					
