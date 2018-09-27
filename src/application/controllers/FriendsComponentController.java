@@ -10,6 +10,8 @@ import javax.persistence.Query;
 import db.hibernate.factory.Database;
 import db.pojos.FRIENDSHIP_REQUEST;
 import db.pojos.USER_PROFILE;
+import db.querys.QUERYs_FRIENDSHIP;
+import friendship.FriendshipActions;
 import javafx.scene.layout.VBox;
 import statics.SESSION;
 import view.popoups.FriendListPOPOUP;
@@ -32,36 +34,28 @@ public class FriendsComponentController {
 	public void init(VBox layout, FriendListPOPOUP screen) throws IOException {
 
 		layout.getChildren().clear();
-		loadFriendsList();
-
+		this.loadFriendsList();
 		if (this.friendsList.isEmpty())
 			screen.close();
-
 		for (int i = 0; i < this.friendsList.size(); i++) {
-
 			HBFriendContent fc = new HBFriendContent(this.friendsList.get(i));
+			FriendshipActions fr = new FriendshipActions(this.friendsList.get(i));
+
+			fc.setEventDelete(e -> {
+				fr.removeFriend();
+				loadFriendsList();
+				try {
+					init(layout, screen);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			});
+
 			layout.getChildren().add(fc);
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	private void loadFriendsList() {
-		this.friendsList.clear();
-
-		EntityManager em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER = :COD OR FRQ_COD_PROF_REQUESTED_BY = :COD AND FRQ_REQUEST_STATUS = 'ACCEPTED' ");
-		q.setParameter("COD", SESSION.getProfileLogged().getCod());
-
-		for (FRIENDSHIP_REQUEST rq : (List<FRIENDSHIP_REQUEST>) q.getResultList()) {
-
-			Query q1 = em.createQuery("FROM USER_PROFILE WHERE PROF_COD = :COD OR PROF_COD = :COD2 AND PROF_COD <> :USER_ONLINE");
-			q1.setParameter("COD", rq.getRequestedBy());
-			q1.setParameter("COD2", rq.getReceiver());
-			q1.setParameter("USER_ONLINE", SESSION.getProfileLogged().getCod());
-
-			for (USER_PROFILE up : (List<USER_PROFILE>) q1.getResultList()) {
-				this.friendsList.add(up);
-			}
-		}
+		this.friendsList = (ArrayList<USER_PROFILE>) QUERYs_FRIENDSHIP.friendsList();
 	}
 }

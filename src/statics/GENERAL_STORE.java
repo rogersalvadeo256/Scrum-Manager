@@ -9,7 +9,8 @@ import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
-import friendship.FriendshipRequest;
+import db.querys.QUERYs_FRIENDSHIP;
+import friendship.FriendshipActions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -24,30 +25,27 @@ public class GENERAL_STORE {
 	 */
 	private static Label lblName, lblUserName;
 	private static ImageView imgProfile;
-	private static Button btnFriendRequest;
-	private static EntityManager em;
+	private static Button btnFriendRequest, btnFriendsList;
 
 	public static void setComponentsHOME(Label lblName, Label lblUserName, ImageView imgProfile,
-																					Button btnFriendRequest) {
+																					Button btnFriendRequest,
+																					Button btnFriendsList) {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
 		GENERAL_STORE.imgProfile = imgProfile;
 		GENERAL_STORE.btnFriendRequest = btnFriendRequest;
+		GENERAL_STORE.btnFriendsList = btnFriendsList;
 	}
 
 	public static void updateComponentsHOME() throws IOException {
 
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
+
+		btnFriendRequest.setText(String.valueOf(QUERYs_FRIENDSHIP.friendshipRequestsList().size()));
+		btnFriendsList.setText(String.valueOf(QUERYs_FRIENDSHIP.friendsList().size()));
 		imgProfile.setImage(ProfileImg.loadImage());
 
-		if (em == null)
-			em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
-		q.setParameter("COD", SESSION.getProfileLogged().getCod());
-		
-		if(q.getResultList().isEmpty()) btnFriendRequest.setText(new String());	
-		if(!q.getResultList().isEmpty()) btnFriendRequest.setText(String.valueOf(q.getResultList().size()));
 	}
 
 	public static void loadComponentsHOME() throws IOException {
@@ -56,36 +54,8 @@ public class GENERAL_STORE {
 
 		imgProfile.setImage(ProfileImg.loadImage());
 
-		if (em == null)
-			em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
-		q.setParameter("COD", SESSION.getProfileLogged().getCod());
-		
-		if(q.getResultList().isEmpty()) btnFriendRequest.setText(new String());	
-		if(!q.getResultList().isEmpty()) btnFriendRequest.setText(String.valueOf(q.getResultList().size()));
-		
+		btnFriendRequest.setText(String.valueOf(QUERYs_FRIENDSHIP.friendshipRequestsList().size()));
+		btnFriendsList.setText(String.valueOf(QUERYs_FRIENDSHIP.friendsList().size()));
+
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

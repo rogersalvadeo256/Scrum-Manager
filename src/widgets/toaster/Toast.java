@@ -1,6 +1,5 @@
 package widgets.toaster;
 
-import javafx.concurrent.Task;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -20,20 +19,6 @@ public class Toast extends Stage {
 		this.initStyle(StageStyle.UNDECORATED);
 		this.show();
 		
-//		Task task = new Task<Void>() {
-//			@Override
-//			protected Void call() throws Exception {
-//				while (true) {
-////					System.out.println("Olá!!!");
-//					Toast.this.show();
-//					Thread.sleep(2000);
-//				}
-//			}
-//		};
-//
-//		Thread thr = new Thread(task);
-//		thr.setDaemon(false);
-//		thr.start();
 
 		
 		

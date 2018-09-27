@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import db.pojos.USER_PROFILE;
 import db.pojos.USER_REGISTRATION;
-import friendship.FriendshipRequest;
+import friendship.FriendshipActions;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,7 +22,7 @@ public class HBProfileContent extends HBox {
 	private ImageView usrImage;
 	private Label lblName;
 	private Button btnAdd;
-	private FriendshipRequest fRequest;
+	private FriendshipActions fRequest;
 
 	public HBProfileContent(USER_PROFILE p) throws IOException {
 		this.lblName = new Label(p.getName());
@@ -40,7 +40,7 @@ public class HBProfileContent extends HBox {
 		this.vbUsrBUTTON = new VBox();
 		this.usrImage = new ImageView();
 		this.btnAdd = new Button();
-		this.fRequest = new FriendshipRequest(p);
+		this.fRequest = new FriendshipActions(p);
 		this.btnAdd.setOnAction(e -> {
 			fRequest.sendFriendshipRequest();
 		});

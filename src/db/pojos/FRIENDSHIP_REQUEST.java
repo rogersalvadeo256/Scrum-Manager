@@ -33,10 +33,6 @@ public class FRIENDSHIP_REQUEST {
 	@Column(nullable = false, name = "FRQ_DATE_REQUEST_SENDED")
 	private java.util.Date sendDate;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name = "FRQ_DATE_REQUEST_ANSWERED")
-	private java.util.Date answredDate;
-
 	public java.util.Date getSendDate() {
 		return sendDate;
 	}
@@ -51,7 +47,6 @@ public class FRIENDSHIP_REQUEST {
 
 	public void setStatus(String status) {
 		this.status = status;
-
 	}
 
 	public int getRequestedBy() {
@@ -76,14 +71,6 @@ public class FRIENDSHIP_REQUEST {
 
 	public void setFriendshipRequestId(int friendshipRequestId) {
 		this.friendshipRequestId = friendshipRequestId;
-	}
-
-	public java.util.Date getAnswredDate() {
-		return answredDate;
-	}
-
-	public void setAnswredDate(java.util.Date answredDate) {
-		this.answredDate = answredDate;
 	}
 
 }

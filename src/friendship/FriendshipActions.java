@@ -1,20 +1,20 @@
 package friendship;
 
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.FRIENDSHIP;
 import db.pojos.FRIENDSHIP_REQUEST;
 import db.pojos.USER_PROFILE;
+import db.querys.QUERYs_FRIENDSHIP;
 import statics.ENUMS;
-import statics.ENUMS.FRIEND_STATE;
 import statics.ENUMS.REQUEST_STATUS;
 import statics.SESSION;
 
-public class FriendshipRequest {
+public class FriendshipActions {
 
 	private EntityManager em;
 	private USER_PROFILE p;
@@ -27,7 +27,7 @@ public class FriendshipRequest {
 	 * @author jefter66
 	 * @param USER_PROFILE pRequest
 	 */
-	public FriendshipRequest(USER_PROFILE p) {
+	public FriendshipActions(USER_PROFILE p) {
 		this.em = null;
 		this.p = p;
 	}
@@ -75,8 +75,6 @@ public class FriendshipRequest {
 		this.em.close();
 		this.em = null;
 		SESSION.UPDATE_SESSION();
-		
-//		friendshipBegin();
 	}
 
 	public void refuseRequest() {
@@ -90,7 +88,6 @@ public class FriendshipRequest {
 		FRIENDSHIP_REQUEST fr = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
 		fr.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.REFUSED));
-		fr.setAnswredDate(Calendar.getInstance().getTime());
 
 		this.em.getTransaction().begin();
 		this.em.merge(fr);
@@ -101,48 +98,29 @@ public class FriendshipRequest {
 
 		SESSION.UPDATE_SESSION();
 	}
-	
-	
-	/*
-	 * create a register in the table friends 
-	 */
-	private void friendshipBegin() {
+
+	public void removeFriend() {
+
 		if (this.em == null)
 			this.em = Database.createEntityManager();
 
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER AND FRQ_REQUEST_STATUS =: STATUS");
-		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
-		q.setParameter("COD_PROF_SENDER", this.p.getCod());
-		q.setParameter("STATUS",ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ACCEPTED).toString() );
+		for (FRIENDSHIP_REQUEST r : (List<FRIENDSHIP_REQUEST>) QUERYs_FRIENDSHIP.friendshipList()) {
 
-		if (!q.getResultList().isEmpty()) {
-			FRIENDSHIP fr = new FRIENDSHIP();
-			fr.setDateBegin();
-			fr.setCodProf1(SESSION.getProfileLogged().getCod());
-			fr.setCodProf2(this.p.getCod());
-			fr.setStatus(ENUMS.GET_FRIEND_STATE(FRIEND_STATE.NORMAL));
+			if (r.getReceiver() == this.p.getCod() || r.getRequestedBy() == this.p.getCod()) {
+				r.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.REMOVED));
+				FRIENDSHIP_REQUEST fr = r;
+				this.em.getTransaction().begin();
+				this.em.merge(fr);
+				this.em.getTransaction().commit();
+				this.em.clear();
+				this.em.close();
+				this.em = null;
+				SESSION.UPDATE_SESSION();
+				return;
+			}
 
-			this.em.getTransaction().begin();
-			this.em.persist(fr);
-			this.em.getTransaction().commit();
-			this.em.clear();
-			this.em.close();
-			this.em = null;
 		}
+
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

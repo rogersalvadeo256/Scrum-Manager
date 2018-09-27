@@ -14,6 +14,7 @@ import javax.persistence.Query;
 
 import application.main.Window;
 import db.hibernate.factory.Database;
+import db.querys.QUERYs_FRIENDSHIP;
 import friendship.SearchFriend;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -77,13 +78,13 @@ public class HomePageScene extends Scene {
 		this.profileImg = new ImageView();
 		this.btnFriendRequest = new Button();
 		this.btnLogOut = new Button();
-
+		this.btnFriends = new Button();
 //		this.imageContent = new HBoxPhotoDecoration(this.profileImg);
 
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest);
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends);
 		GENERAL_STORE.loadComponentsHOME();
 
 		this.profileImg.setOnMouseClicked(e -> {
@@ -156,12 +157,14 @@ public class HomePageScene extends Scene {
 		this.btnExit = new Button();
 		this.btnExit.setOnAction(new Close(Window.mainStage));
 
-		this.btnFriends = new Button();
 		this.btnFriends.setOnAction(e -> {
-			try {
-				new FriendListPOPOUP(Window.mainStage).showAndWait();
-			} catch (IOException e1) {
-				e1.printStackTrace();
+			if (!QUERYs_FRIENDSHIP.friendsList().isEmpty()) {
+				try {
+					new FriendListPOPOUP(Window.mainStage).showAndWait();
+					return;
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
 			}
 			this.toast2 = new Toast(Window.mainStage, "Voce não tem amigos");
 			this.setOnMouseMoved(e1 -> {
@@ -169,15 +172,21 @@ public class HomePageScene extends Scene {
 			});
 		});
 		this.btnFriendRequest.setOnAction(event -> {
-			try {
-				new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
+			if (!QUERYs_FRIENDSHIP.friendshipRequestsList().isEmpty()) {
+				try {
+					new FriendshipRequestPOPOUP(Window.mainStage).showAndWait();
+					return;
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}
 			}
+			this.toast = new Toast(Window.mainStage, "Voce não tem solicitações de amizade");
+			this.setOnMouseMoved(e2 -> {
+				this.toast.close();
+			});
 		});
 
 		this.btnFriendRequest.setId("friend-request");
-
 		this.btnHome = new Button();
 
 		final int SIZE = 50;

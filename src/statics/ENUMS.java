@@ -3,29 +3,10 @@ package statics;
 public class ENUMS {
 
 	public static enum REQUEST_STATUS {
-		ON_HOLD, ACCEPTED, REFUSED
+		ON_HOLD, ACCEPTED, REFUSED, REMOVED
 	}
-	public static enum FRIEND_STATE {
-		NORMAL, BLOCK_FRIEND,
-		DELETE_FRIEND
-	}
-
 	public static enum DISPONIBILITY_FOR_PROJECT {
 		AVAILABLE, NOT_AVAILABLE, BUSY
-	}
-
-	public static String GET_FRIEND_STATE(FRIEND_STATE value) {
-		switch (value) {
-		case NORMAL:
-			return "FRIENDS";
-		case BLOCK_FRIEND:
-			return "FRIEND_BLOCKED";
-		case DELETE_FRIEND:
-			return "FRIEND_DELETED";
-		default:
-			break;
-		}
-		return new String();
 	}
 
 	public static String GET_DISPONIBILITY_FOR_PROJECT(DISPONIBILITY_FOR_PROJECT value) {
@@ -50,6 +31,8 @@ public class ENUMS {
 			return "REFUSED";
 		case ON_HOLD:
 			return "ON_HOLD";
+		case REMOVED:
+			return "REMOVED";
 		default:	
 			break;
 		}
