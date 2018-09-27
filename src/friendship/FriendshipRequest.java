@@ -75,7 +75,8 @@ public class FriendshipRequest {
 		this.em.close();
 		this.em = null;
 		SESSION.UPDATE_SESSION();
-		friendshipBegin();
+		
+//		friendshipBegin();
 	}
 
 	public void refuseRequest() {
