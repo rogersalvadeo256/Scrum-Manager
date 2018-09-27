@@ -19,19 +19,21 @@ public class HBStatusBar extends HBox {
 		this.getStylesheets().add(this.getClass().getResource("/css/TOGGER.css").toExternalForm());
 
 		this.tbBusy = new ToggleButton("Ocupado");
-		tbBusy.getStyleClass().add("toggle-button");
 		this.tbBusy.setId("btnBusy");
 		
 		this.tbAvailable = new ToggleButton("Disponivel");
 		this.tbAvailable.setId("btnAvalible");
-
+		
+		
+		
+		
 		this.toggleGroup = new ToggleGroup();
 
 		this.tbBusy.setToggleGroup(toggleGroup);
 		this.tbAvailable.setToggleGroup(toggleGroup);
 
-		this.toggleGroup.getSelectedToggle();
-
+		
+		
 		
 		
 		System.out.println(ENUMS.GET_DISPONIBILITY_FOR_PROJECT(DISPONIBILITY_FOR_PROJECT.AVAILABLE).toString());

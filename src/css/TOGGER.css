@@ -1,23 +1,39 @@
-
 .toggle-button {
      -fx-border-color: transparent;
-     -fx-border-width: 4;
+     -fx-border-width: 5;
      -fx-base-color: transparent;
      -fx-text-fill: white;
-     -fx-border-radius: 5 0 0 5;
-     -fx-background-radius: 5 0 0 5;
+     -fx-border-radius:12px;
+     -fx-background-radius:12px; 
+     -fx-min-height: 50.0px;
+	 -fx-min-width: 50.0px;
 }
 .toggle-button:selected {
      -fx-border-color: transparent;
-     -fx-border-width: 4;
+     -fx-border-width: 5;
      -fx-base-color: white;
      -fx-text-fill: black;
-     -fx-border-radius: 0 5 5 0;
-     -fx-background-radius: 0 5 5 0;
+     -fx-border-radius: 5 5 5 5;
+     -fx-background-radius: 5 5 5 5;
+
 }
 .toggle-button#btnBusy:selected{
 	-fx-base:#cc2a2a;
+	-fx-border-radius: 12px; 
+	-fx-background-radius:12px;
 }
 .toggle-button#btnAvalible:selected{
 	-fx-base:#66cc66;
+	-fx-border-radius: 12px;
+	-fx-background-radius: 12px;
 }
+
+
+
+
+
+
+
+
+
+
