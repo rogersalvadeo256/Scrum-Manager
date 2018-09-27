@@ -98,7 +98,7 @@ public class RegistrationFormComponent extends VBox {
 		Alert emailError = new Alert(AlertType.ERROR);
 		emailError.setTitle("Error");
 		emailError.setHeaderText("Erro no campo de email.");
-		emailError.setContentText("O Campo de Email n„o È um email v·lido, por favor arrume.");
+		emailError.setContentText("O Campo de Email nao √© um email v√°lido, por favor arrume.");
 
 		this.controller = new RegistrationFromSceneController();
 

@@ -18,7 +18,7 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Window;
 import statics.ProfileImg;
 import statics.SESSION;
-import widgets.designComponents.HBoxPhotoDecoration;
+import widgets.designComponents.VBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
 
 public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
@@ -34,7 +34,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	private HBox hbChangeQuestion, hbChangeAnswer, hbAdvancedStuff;
 	private EditProfileController controller;
 
-	private HBoxPhotoDecoration imageContent;
+	private VBoxPhotoDecoration imageContent;
 
 	private Button btnBack, btnFinish;
 	private HBox hbSteadyButtons;
@@ -67,7 +67,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		}
 		this.imgProfile.setFitWidth(300);
 		this.imgProfile.setFitHeight(300);
-		this.imageContent = new HBoxPhotoDecoration(imgProfile, "Alterar imagem");
+		this.imageContent = new VBoxPhotoDecoration(imgProfile, "Alterar imagem");
 
 		this.imageContent.changePhoto().setOnMouseClicked(e -> {
 			try {

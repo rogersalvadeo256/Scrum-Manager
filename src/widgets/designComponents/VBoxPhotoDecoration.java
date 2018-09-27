@@ -6,26 +6,26 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-public class HBoxPhotoDecoration extends VBox {
+public class VBoxPhotoDecoration extends VBox {
 
-	private HBox hbContainer;
+	private VBox hbContainer;
 	private ImageView image;
 
-	public HBoxPhotoDecoration(ImageView image, String label) {
+	public VBoxPhotoDecoration(ImageView image, String label) {
 		this.image = image;
 		init();
 		this.getChildren().addAll(this.image, hbContainer);
 		this.hbContainer.getChildren().add(new Label(label));
 	}
 
-	public HBoxPhotoDecoration(ImageView image) {
+	public VBoxPhotoDecoration(ImageView image) {
 //		this.getStylesheets().add(this.getClass().getResource("/css/DECORATION_IMAGE.css").toExternalForm());
 		this.image = image;
 		init();
 	}
 
 	private void init() {
-		this.hbContainer = new HBox();
+		this.hbContainer = new VBox();
 
 		this.setAlignment(Pos.CENTER);
 		
@@ -44,12 +44,11 @@ public class HBoxPhotoDecoration extends VBox {
 
 		});
 		this.setOnMouseExited(e -> {
-
 			this.hbContainer.setVisible(false);
 		});
 	}
 
-	public HBox changePhoto() {
+	public VBox changePhoto() {
 		return this.hbContainer;
 
 	}

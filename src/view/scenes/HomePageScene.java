@@ -9,11 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import application.main.Window;
-import db.hibernate.factory.Database;
 import db.querys.QUERYs_FRIENDSHIP;
 import friendship.SearchFriend;
 import javafx.geometry.Insets;
@@ -37,6 +33,7 @@ import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
+import widgets.designComponents.HBStatusBar;
 import widgets.designComponents.ShowImage;
 import widgets.toaster.Toast;
 
@@ -56,8 +53,8 @@ public class HomePageScene extends Scene {
 	private VBox vbSearchResult;
 	private HBox hbStartProject;
 	private SearchFriend searchFriend;
-//	private HBoxPhotoDecoration imageContent;
 	private Toast toast, toast2;
+	private HBStatusBar statusBar;
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
@@ -79,8 +76,9 @@ public class HomePageScene extends Scene {
 		this.btnFriendRequest = new Button();
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
-//		this.imageContent = new HBoxPhotoDecoration(this.profileImg);
 
+		this.statusBar=new HBStatusBar();
+		
 		/*
 		 * in this class the components are treated
 		 */
@@ -278,7 +276,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername,statusBar, lblEmail);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);

@@ -1,22 +1,11 @@
 package statics;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import db.hibernate.factory.Database;
-import db.pojos.USER_PROFILE;
 import db.querys.QUERYs_FRIENDSHIP;
-import friendship.FriendshipActions;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import widgets.designComponents.HBFriendRequest;
 
 public class GENERAL_STORE {
 

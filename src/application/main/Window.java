@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
 import statics.SESSION;
+import view.popoups.NewProjectPOPOUP;
 import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
 
@@ -54,8 +55,6 @@ public class Window extends Stage {
 
 		mainStage.setScene(new LoginScene());
 		this.show();
-
-		// new NewProjectScene(this);
 
 		//
 		// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
