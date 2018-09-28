@@ -27,17 +27,8 @@ public class USER_PROFILE implements Serializable{
 	@Column(columnDefinition = "LONGBLOB", name="PROF_PHOTO")
 	private byte[] photo;
 
-	public void setAvailability(DISPONIBILITY_FOR_PROJECT status) {
-		switch (status) {
-		case AVAILABLE:
-			this.status = "AVAILABLE";
-		case NOT_AVAILABLE:
-			this.status = "NOT_AVAILABLE";
-		case BUSY:
-			this.status = "BUSY";
-		default:
-			break;
-		}
+	public void setAvailability(String value) {
+		this.status = value;
 	}
 	public String getStatus() {
 		return this.status;

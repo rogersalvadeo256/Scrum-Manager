@@ -49,17 +49,15 @@ public class SERIALIZATION {
 	 * @author jefter66
 	 */
 	public static boolean fileExists(FileType type) {
-		return new File(path + "/" +  getFileName(type)).exists() ? true : false;
+		return new File(path + "/" + getFileName(type)).exists() ? true : false;
 	}
 
 	/**
-	 * Create a file on the tmp folder 
+	 * Create a file on the tmp folder
 	 * @author jefter66
 	 * @author André Furlan
 	 */
 	public static void serialization(Object object, FileType type) throws IOException {
-
-		if (!(new File("/tmp/scrum").exists()))	new File("/tmp/scrum").mkdir();
 
 		FileOutputStream fileOut = new FileOutputStream(path + "/" + getFileName(type));
 
@@ -75,7 +73,6 @@ public class SERIALIZATION {
 	}
 
 	/**
-	 * 
 	 * @author jefter66
 	 * @author André Furlan
 	 */
@@ -98,6 +95,7 @@ public class SERIALIZATION {
 			return null;
 		}
 	}
+
 	public static void deleteFileSerialization(FileType type) {
 		File f = new File(path + getFileName(type));
 		f.delete();

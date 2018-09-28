@@ -13,6 +13,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
+import statics.ENUMS;
+import statics.ENUMS.DISPONIBILITY_FOR_PROJECT;
 import validation.FormsValidation;
 
 public class RegistrationFromSceneController {
@@ -40,6 +42,7 @@ public class RegistrationFromSceneController {
 		validation.setPasswordField(passwordField);
 		validation.setFieldName(fieldName);
 		p.setName(txtName.getText());
+		p.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
 		u.setEmail(txtEmail.getText());
 		u.setUserName(txtUserName.getText());
 		u.setPassword(txtPasswordConfirmation.getText());
@@ -74,6 +77,7 @@ public class RegistrationFromSceneController {
 			validation.setPasswordField(passwordField);
 			validation.setFieldName(fieldName);
 			p.setName(txtName.getText());
+			p.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
 			u.setEmail(txtEmail.getText());
 			u.setUserName(txtUserName.getText());
 			u.setPassword(txtPasswordConfirmation.getText());

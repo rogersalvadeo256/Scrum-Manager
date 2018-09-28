@@ -3,59 +3,65 @@ package statics;
 public class ENUMS {
 
 	public static enum REQUEST_STATUS {
-		ON_HOLD, ACCEPTED, REFUSED, REMOVED
+		ON_HOLD("ON_HOLD"),
+		ACCEPTED("ACCEPTED"),
+		REFUSED("REFUSED"),
+		REMOVED("REMOVED");
+
+		private String value;
+
+		private REQUEST_STATUS(String value) {
+			this.value = value;
+		}
+
+		public String getValor() {
+			return value;
+		}
+
 	}
+
+	/*
+	 * example
+	 */
+	public void a() {
+
+		String a = "REFUSED";
+		REQUEST_STATUS.REFUSED.getValor().equals(a);
+
+	}
+
 	public static enum DISPONIBILITY_FOR_PROJECT {
-		AVAILABLE, NOT_AVAILABLE, BUSY
+		AVAILABLE("AVAILABLE"),
+		BUSY("BUSY");
+
+		private String value;
+
+		private DISPONIBILITY_FOR_PROJECT(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
 	}
 
-	public static String GET_DISPONIBILITY_FOR_PROJECT(DISPONIBILITY_FOR_PROJECT value) {
-		switch (value) {
-		case AVAILABLE:
-			return "AVAILABLE";
-		case NOT_AVAILABLE:
-			return "NOT_AVAILABLE";
-		case BUSY:
-			return "BUSY";
-		default:
-			break;
+	public static enum ACCOUNT_STATUS {
+		ACTIVE("ACTIVE"),
+		INACTIVE("INACTIVE");
+
+		private String value;
+
+		private ACCOUNT_STATUS(String value) {
+			this.value = value;
 		}
-		return new String();
+
+		public String getValue() {
+			return value;
+		}
+
 	}
 
-	public static String GET_REQUEST_STATUS(REQUEST_STATUS value) {
-		switch (value) {
-		case ACCEPTED:
-			return "ACCEPTED";
-		case REFUSED:
-			return "REFUSED";
-		case ON_HOLD:
-			return "ON_HOLD";
-		case REMOVED:
-			return "REMOVED";
-		default:	
-			break;
-		}
-		return new String();
-	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

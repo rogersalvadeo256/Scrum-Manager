@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
 import statics.SESSION;
+import view.popoups.NewProjectPOPOUP;
 import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
 
@@ -35,9 +36,11 @@ public class Window extends Stage {
 		Window.mainStage.setResizable(true);
 
 		if (SERIALIZATION.fileExists(FileType.SESSION)) {
+	
 			EntityManager em = Database.createEntityManager();
 			Query q = em.createQuery("FROM USER_REGISTRATION");
 			if (!q.getResultList().isEmpty()) {
+			
 				USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
 
 				for (int i = 0; i < q.getResultList().size(); i++) {
@@ -54,8 +57,6 @@ public class Window extends Stage {
 
 		mainStage.setScene(new LoginScene());
 		this.show();
-
-		// new NewProjectScene(this);
 
 		//
 		// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);

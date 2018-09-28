@@ -46,15 +46,7 @@ public class Login {
 			if (!q.getResultList().isEmpty()) {
 				SESSION.START_SESSION((USER_REGISTRATION) q.getResultList().get(0));
 				if (btnStayConnected.isSelected())
-					
-					
 					SERIALIZATION.serialization(SESSION.getUserLogged(), FileType.SESSION);
-					
-					USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
-//				
-					
-						
-					
 				return true;
 			}
 		}
@@ -68,23 +60,3 @@ public class Login {
 		return false;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

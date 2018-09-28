@@ -33,23 +33,20 @@ public class USER_REGISTRATION implements Serializable {
 	private String uSecurityQuestion;
 	@Column(nullable = false, name = "USER_SECURITY_ANSWER")
 	private String uSecurityAnswer;
-
+	
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_PROFILE")
 	private USER_PROFILE userProfile;
+	
+	@Column(nullable = false, name = "USER_ACCOUNT_STATUS")
+	private String status;
 
-	/*
-	 * if the user want to "delete" his account
-	 */
-	@Column(nullable = false, name = "USER_STATUS")
-	private boolean uStatus;
-
-	public boolean getStatus() {
-		return uStatus;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setuStatus(boolean uStatus) {
-		this.uStatus = uStatus;
+	public void setuStatus(String value) {
+		this.status = value;
 	}
 
 	public String getSecurityQuestion() {

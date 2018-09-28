@@ -46,7 +46,7 @@ public class FriendshipActions {
 		friendshipRequest.setRequestedBy(SESSION.getProfileLogged().getCod());
 		friendshipRequest.setReceiver(this.p.getCod());
 		friendshipRequest.setSendDate();
-		friendshipRequest.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ON_HOLD));
+		friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValor());
 
 		em.getTransaction().begin();
 		em.persist(friendshipRequest);
@@ -66,7 +66,7 @@ public class FriendshipActions {
 
 		FRIENDSHIP_REQUEST frq = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
-		frq.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.ACCEPTED));
+		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValor());
 
 		this.em.getTransaction().begin();
 		this.em.merge(frq);
@@ -87,7 +87,7 @@ public class FriendshipActions {
 
 		FRIENDSHIP_REQUEST fr = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
-		fr.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.REFUSED));
+		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValor());
 
 		this.em.getTransaction().begin();
 		this.em.merge(fr);
@@ -107,7 +107,7 @@ public class FriendshipActions {
 		for (FRIENDSHIP_REQUEST r : (List<FRIENDSHIP_REQUEST>) QUERYs_FRIENDSHIP.friendshipList()) {
 
 			if (r.getReceiver() == this.p.getCod() || r.getRequestedBy() == this.p.getCod()) {
-				r.setStatus(ENUMS.GET_REQUEST_STATUS(REQUEST_STATUS.REMOVED));
+				r.setStatus(ENUMS.REQUEST_STATUS.REMOVED.getValor());
 				FRIENDSHIP_REQUEST fr = r;
 				this.em.getTransaction().begin();
 				this.em.merge(fr);

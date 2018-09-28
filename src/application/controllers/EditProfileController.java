@@ -30,19 +30,22 @@ import validation.CheckEmptyFields;
 import view.popoups.ProfileEditPOPOUP;
 import view.scenes.LoginScene;
 import widgets.alertMessage.CustomAlert;
+import widgets.designComponents.HBStatusBar;
 
 public class EditProfileController {
 
 	private EntityManager em;
 	private CheckEmptyFields check;
 	private Button btnChangeQuestion, btnChangeAnswer;
-	private Button btnDeleteAccount;
-
+//	private Button btnDeleteAccount;
+	private HBStatusBar hbDeleteAccount;
+	
 	public EditProfileController() {
 		this.check = new CheckEmptyFields();
 		this.btnChangeAnswer = new Button("Alterar");
 		this.btnChangeQuestion = new Button("Alterar");
-		this.btnDeleteAccount = new Button("Deletar conta");
+		this.hbDeleteAccount = new HBStatusBar("Conta Ativa", "Desativar Conta");
+//		this.btnDeleteAccount = new Button("Deletar conta");
 	}
 
 	/*
@@ -74,7 +77,7 @@ public class EditProfileController {
 
 		layout.getChildren().addAll(hbChangeQuestion);
 		layout.getChildren().addAll(hbChangeAnswer);
-		layout.getChildren().add(this.btnDeleteAccount);
+//		layout.getChildren().add(this.btnDeleteAccount);
 		layout.getChildren().add(hbButtons);
 		layout.setSpacing(20);
 
@@ -153,13 +156,13 @@ public class EditProfileController {
 			});
 		});
 
-		this.btnDeleteAccount.setOnAction(e4 -> {
-			try {
-				deleteAccount(e4, stage);
-			} catch (ClassNotFoundException | FileNotFoundException | SQLException e2) {
-				e2.printStackTrace();
-			}
-		});
+//		this.btnDeleteAccount.setOnAction(e4 -> {
+//			try {
+//				deleteAccount(e4, stage);
+//			} catch (ClassNotFoundException | FileNotFoundException | SQLException e2) {
+//				e2.printStackTrace();
+//			}
+//		});
 
 		backToNormalOptions(e, btnBack, screen);
 
