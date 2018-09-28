@@ -10,23 +10,13 @@ public class ENUMS {
 
 		private String value;
 
+		private String getValue() {
+			return this.value;
+		}
+
 		private REQUEST_STATUS(String value) {
 			this.value = value;
 		}
-
-		public String getValor() {
-			return value;
-		}
-
-	}
-
-	/*
-	 * example
-	 */
-	public void a() {
-
-		String a = "REFUSED";
-		REQUEST_STATUS.REFUSED.getValor().equals(a);
 
 	}
 
@@ -62,6 +52,3 @@ public class ENUMS {
 	}
 
 }
-
-
-

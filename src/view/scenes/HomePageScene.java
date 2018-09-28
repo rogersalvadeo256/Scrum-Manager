@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 
 import application.main.Window;
@@ -122,7 +121,7 @@ public class HomePageScene extends Scene {
 				}
 			}
 		});
-
+		
 		/*
 		 * in this class the components are treated
 		 */
@@ -320,7 +319,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, statusBar, lblEmail);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername,statusBar, lblEmail);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);

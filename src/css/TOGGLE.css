@@ -1,0 +1,8 @@
+.jfx-toggle-button {
+     -jfx-toggle-color: #009688;
+     -jfx-untoggle-color: #FAFAFA;
+     -jfx-toggle-line-color: #77C2BB;
+     -jfx-untoggle-line-color: #999999;
+     -jfx-size: 10.0;
+     -jfx-disable-visual-focus: false;
+}

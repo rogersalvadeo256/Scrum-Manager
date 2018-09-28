@@ -1,7 +1,7 @@
 package widgets.designComponents;
 
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
@@ -16,7 +16,6 @@ public class HBStatusBar extends HBox {
 	ToggleGroup toggleGroup;
 
 	public HBStatusBar(String leftButtonText, String rightButtonText) {
-
 		init();
 		this.tbBusy.setText(leftButtonText);
 		this.tbAvailable.setText(rightButtonText);
@@ -34,11 +33,10 @@ public class HBStatusBar extends HBox {
 
 	public HBStatusBar() {
 		init();
-		
-		
 	}
 
 	private void init() {
+		this.getStylesheets().add(this.getClass().getResource("/css/TOGGLE.css").toExternalForm());
 
 		this.tbBusy = new ToggleButton();
 		this.tbAvailable = new ToggleButton();
@@ -47,6 +45,9 @@ public class HBStatusBar extends HBox {
 
 		this.tbBusy.setToggleGroup(toggleGroup);
 		this.tbAvailable.setToggleGroup(toggleGroup);
+		
+		this.setAlignment(Pos.CENTER);
+	
 	}
 
 	public void setGroupEvent(ChangeListener<Toggle> a) {
