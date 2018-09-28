@@ -1,10 +1,15 @@
 package view.scenes;
 
 import java.io.FileNotFoundException;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import antlr.ByteBuffer;
+
+import java.security.MessageDigest;
 
 import application.controllers.RegistrationFromSceneController;
 import javafx.event.ActionEvent;
@@ -95,6 +100,8 @@ public class RegistrationFormComponent extends VBox {
 		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
+			
+		
 		Alert emailError = new Alert(AlertType.ERROR);
 		emailError.setTitle("Error");
 		emailError.setHeaderText("Erro no campo de email.");
