@@ -103,8 +103,8 @@ public class LoginScene extends Scene {
 		this.imgIcon = new ImageView();
 		this.imgIcon.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 
-		this.imgIcon.setFitWidth(400);
-		this.imgIcon.setFitHeight(400);
+		this.imgIcon.setFitWidth(200);
+		this.imgIcon.setFitHeight(200);
 
 		this.txtLogin.setOnMouseClicked(e -> {
 			this.messageLoginValidation.setVisible(false);
@@ -159,7 +159,7 @@ public class LoginScene extends Scene {
 		this.btnExit.setMaxWidth(Double.MAX_VALUE);
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.vbLogin.getChildren().addAll(lblSignIn, lblUser, txtLogin, lblPassword);
+		this.vbLogin.getChildren().addAll(imgIcon, lblUser, txtLogin, lblPassword);
 		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit, btnSignUp);
 
 		VBox.setVgrow(vbLogin, Priority.ALWAYS);
