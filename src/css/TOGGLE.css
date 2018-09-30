@@ -1,9 +1,9 @@
 .toggle-button {
     -fx-focus-color: transparent;
     -fx-border-color: grey;
-    -fx-border-height: 30.0px;
-    -fx-min-height: 80.0px;
-    -fx-min-width: 80.0px;
+    -fx-border-height: 20.0px;
+    -fx-min-height: 40.0px;
+    -fx-min-width: 40.0px;
     -fx-border-radius: 100.0px;
     -fx-background-radius:100.0px;
 }
