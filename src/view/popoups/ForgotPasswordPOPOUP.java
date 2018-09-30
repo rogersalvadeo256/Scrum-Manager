@@ -43,6 +43,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	public ForgotPasswordPOPOUP(Window owner) {
 		super(owner);
 		init(owner);
+		return;
 	}
 
 	public void init(Window owner) {

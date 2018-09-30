@@ -29,12 +29,6 @@ public class ActivateAccount extends StandartLayoutPOPOUP {
 		this.txtUserNameOrEmail.setPromptText("Informe seu login ou email");
 		this.btnQuery = new Button("Enviar");
 		this.btnCancel= new Button("Cancelar");
-		/*
-		 * 
-		 * 
-		 * 
-		 * account already active
-		 */
 
 		this.layout.getChildren().addAll(lblInformation,txtUserNameOrEmail, btnQuery,btnCancel);
 		this.layout.setAlignment(Pos.CENTER);
@@ -60,16 +54,8 @@ public class ActivateAccount extends StandartLayoutPOPOUP {
 
 
 		this.btnCancel.setOnAction(e ->{
-			
-			
 			ActivateAccount.this.close();
-			
-			
 		});
-		
-		
-		
-
 	}
 
 
