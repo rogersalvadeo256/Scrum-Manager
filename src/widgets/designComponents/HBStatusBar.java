@@ -11,37 +11,50 @@ import statics.SESSION;
 
 public class HBStatusBar extends HBox {
 
-	ToggleButton tbBusy;
-	ToggleButton tbAvailable;
+	/*
+	 * positive for available or active
+	 */
+	ToggleButton tbPositive;
+	/*
+	 * negative for busy or inactive
+	 */
+	ToggleButton tbNegative;
 	ToggleGroup toggleGroup;
 
-	public HBStatusBar() {
+	public HBStatusBar(boolean availability) {
 		init();
-		if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue()))
-			tbAvailable.setSelected(true);
-		if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue()))
-			tbBusy.setSelected(true);
 
+		if (availability) {
+			if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue()))
+				tbPositive.setSelected(true);
+			if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue()))
+				tbNegative.setSelected(true);
+			return;
+		}
+
+		if (SESSION.getUserLogged().getStatus().equals(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue()))
+			tbPositive.setSelected(true);
+		return;
 	}
 
 	private void init() {
 		this.getStylesheets().add(this.getClass().getResource("/css/TOGGLE.css").toExternalForm());
 
 		this.getStyleClass().add("hbox");
-		
-		this.tbBusy = new ToggleButton();
-		this.tbAvailable = new ToggleButton();
+
+		this.tbNegative = new ToggleButton();
+		this.tbPositive = new ToggleButton();
 
 		this.toggleGroup = new ToggleGroup();
 
-		this.tbBusy.setToggleGroup(toggleGroup);
-		this.tbAvailable.setToggleGroup(toggleGroup);
-		
-		this.tbAvailable.setId("btnAvailable");
-		this.tbBusy.setId("btnBusy");
-		
-		
-		this.getChildren().addAll(this.tbBusy, this.tbAvailable);
+		this.tbNegative.setToggleGroup(toggleGroup);
+		this.tbPositive.setToggleGroup(toggleGroup);
+
+		this.tbPositive.setId("btnAvailable");
+		this.tbNegative.setId("btnBusy");
+
+
+		this.getChildren().addAll(this.tbNegative, this.tbPositive);
 		this.setSpacing(20);
 		this.setAlignment(Pos.CENTER);
 	}
@@ -49,3 +62,4 @@ public class HBStatusBar extends HBox {
 		this.toggleGroup.selectedToggleProperty().addListener(a);
 	}
 }
+

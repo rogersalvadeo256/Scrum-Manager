@@ -9,21 +9,29 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+
 import application.main.Window;
+import db.hibernate.factory.Database;
+import db.pojos.USER_PROFILE;
 import db.querys.QUERYs_FRIENDSHIP;
 import friendship.SearchFriend;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import listeners.Close;
+import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.ProfileImg;
 import statics.SERIALIZATION;
@@ -33,6 +41,7 @@ import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
+import widgets.designComponents.HBStatusBar;
 import widgets.designComponents.ShowImage;
 import widgets.toaster.Toast;
 
@@ -53,8 +62,8 @@ public class HomePageScene extends Scene {
 	private HBox hbStartProject;
 	private SearchFriend searchFriend;
 	private Toast toast, toast2;
+	private HBStatusBar statusBar;
 
-	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 
@@ -76,8 +85,45 @@ public class HomePageScene extends Scene {
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
 
-																			
-
+		
+		this.statusBar = new HBStatusBar(true);
+		
+		this.statusBar.setGroupEvent(new ChangeListener<Toggle>() {
+		
+			@Override
+			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+		
+				if (newValue.isSelected()) {
+					EntityManager em = null;
+		
+					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
+					
+						if (em == null)	em = Database.createEntityManager();
+		
+						USER_PROFILE up = SESSION.getProfileLogged();
+						em.getTransaction().begin();
+						up.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue());
+						em.merge(up);
+						em.getTransaction().commit();
+						em.clear();
+						em = null;
+						return;
+					}
+					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue())) {
+						if (em == null)
+							em = Database.createEntityManager();
+						USER_PROFILE up = SESSION.getProfileLogged();
+						em.getTransaction().begin();
+						up.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
+						em.merge(up);
+						em.getTransaction().commit();
+						em.clear();
+						em = null;
+						return;
+					}
+				}
+			}
+		});
 		/*
 		 * in this class the components are treated
 		 */
@@ -260,7 +306,8 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,
+				btnLogOut, btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -271,16 +318,16 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo = new VBox();
 		this.vbProfileInfo.getStyleClass().add("vbox");
 		this.vbProfileInfo.setId("profile-info");
-//
-//		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
-//		this.vbProfileInfo.setSpacing(25);
-//		this.vbProfileInfo.setAlignment(Pos.CENTER);
-//		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail);
-//		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
-//		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
-//		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
-//		AnchorPane.setRightAnchor(vbProfileInfo, 750.0);
-//		this.layout.getChildren().add(vbProfileInfo);
+
+		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
+		this.vbProfileInfo.setSpacing(25);
+		this.vbProfileInfo.setAlignment(Pos.CENTER);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail,statusBar);
+		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
+		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
+		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
+		AnchorPane.setRightAnchor(vbProfileInfo, 750.0);
+		this.layout.getChildren().add(vbProfileInfo);
 
 		this.vbLeftColumn = new VBox();
 		this.vbLeftColumn.getStyleClass().add("vbox");

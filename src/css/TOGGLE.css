@@ -1,11 +1,11 @@
 .toggle-button {
     -fx-focus-color: transparent;
     -fx-border-color: grey;
-    -fx-border-height: 30px;
+    -fx-border-height: 30.0px;
     -fx-min-height: 80.0px;
     -fx-min-width: 80.0px;
-    -fx-border-radius: 100px;
-    -fx-background-radius:100px;
+    -fx-border-radius: 100.0px;
+    -fx-background-radius:100.0px;
 }
 
 .toggle-button:selected {
@@ -33,10 +33,10 @@
 
 .hbox{ 
     -fx-background:transparent;
-    -fx-background-radius:50px;
-    -fx-border-width: 1px;
+    -fx-background-radius:50.0px;
+    -fx-border-width: 1.0px;
     -fx-border-color:grey;
-    -fx-border-radius:50px;
+    -fx-border-radius:50.0px;
     
     
 }

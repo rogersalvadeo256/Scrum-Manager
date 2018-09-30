@@ -12,6 +12,8 @@ import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import db.pojos.USER_REGISTRATION;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert.AlertType;
@@ -21,9 +23,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
 import validation.CheckEmptyFields;
@@ -37,28 +41,64 @@ public class EditProfileController {
 	private EntityManager em;
 	private CheckEmptyFields check;
 	private Button btnChangeQuestion, btnChangeAnswer;
-//	private Button btnDeleteAccount;
 	private HBStatusBar hbDeleteAccount;
+	private ProfileEditPOPOUP screen;
 	
 	public EditProfileController() {
 		this.check = new CheckEmptyFields();
 		this.btnChangeAnswer = new Button("Alterar");
 		this.btnChangeQuestion = new Button("Alterar");
-		this.hbDeleteAccount = new HBStatusBar("Conta Ativa", "Desativar Conta");
-//		this.btnDeleteAccount = new Button("Deletar conta");
+		this.hbDeleteAccount = new HBStatusBar(false);
+
+		// this.btnDeleteAccount = new Button("Deletar conta");
+
+		this.hbDeleteAccount.setGroupEvent(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
+				if (newValue.isSelected()) {
+
+					Optional<ButtonType> result = new CustomAlert(AlertType.WARNING, "Apagar conta", "Sua conta ficará inativa", "Para reativar sua conta vá até a opção na tela de login").showAndWait();
+
+					if (result.get() == ButtonType.OK) {
+						newValue.setSelected(true);
+						EntityManager em = Database.createEntityManager();
+
+						USER_REGISTRATION u = SESSION.getUserLogged();
+
+						u.setuStatus(ENUMS.ACCOUNT_STATUS.INACTIVE.getValue());
+
+						em.getTransaction().begin();
+						em.merge(u);
+						em.getTransaction().commit();
+						em.clear();
+
+						SESSION.RESET();
+						EditProfileController.this.screen.close();
+						try {
+							Window.mainStage.setScene(new LoginScene());
+						} catch (ClassNotFoundException | FileNotFoundException | SQLException e) {
+							e.printStackTrace();
+						}
+						return;
+					}
+					newValue.setSelected(true);
+				}
+			}
+		});
+
 	}
 
-	/*
-	 * this code is huge and redundant, but was the best way that i find to do this
-	 * and understand later
-	 */
-	public void setEventAdvancedOptions(ActionEvent e, ProfileEditPOPOUP screen, VBox layout,
-																					Stage stage,
-																					HBox hbChangeAnswer,
-																					HBox hbChangeQuestion,
-																					HBox hbButtons,
-																					Button btnBack) {
 
+	/*
+	 * this code is huge and redundant, but was the best way that i find to do this and
+	 * understand later
+	 */
+	public void setEventAdvancedOptions(ActionEvent e, ProfileEditPOPOUP screen, VBox layout, Stage stage, HBox hbChangeAnswer, HBox hbChangeQuestion, HBox hbButtons, Button btnBack) {
+		
+		this.screen= screen;
+		
 		layout.getChildren().clear();
 		hbChangeAnswer.getChildren().clear();
 		hbChangeQuestion.getChildren().clear();
@@ -77,7 +117,7 @@ public class EditProfileController {
 
 		layout.getChildren().addAll(hbChangeQuestion);
 		layout.getChildren().addAll(hbChangeAnswer);
-//		layout.getChildren().add(this.btnDeleteAccount);
+		 layout.getChildren().add(hbDeleteAccount);
 		layout.getChildren().add(hbButtons);
 		layout.setSpacing(20);
 
@@ -156,20 +196,20 @@ public class EditProfileController {
 			});
 		});
 
-//		this.btnDeleteAccount.setOnAction(e4 -> {
-//			try {
-//				deleteAccount(e4, stage);
-//			} catch (ClassNotFoundException | FileNotFoundException | SQLException e2) {
-//				e2.printStackTrace();
-//			}
-//		});
+		// this.btnDeleteAccount.setOnAction(e4 -> {
+		// try {
+		// deleteAccount(e4, stage);
+		// } catch (ClassNotFoundException | FileNotFoundException |
+		// SQLException e2) {
+		// e2.printStackTrace();
+		// }
+		// });
 
 		backToNormalOptions(e, btnBack, screen);
 
 	}
 
-	public void setEventFinish(ActionEvent e, TextField txtName, TextArea txtBio, PasswordField txtCurrentPassword,
-																					PasswordField txtNewPassword) {
+	public void setEventFinish(ActionEvent e, TextField txtName, TextArea txtBio, PasswordField txtCurrentPassword, PasswordField txtNewPassword) {
 		USER_REGISTRATION u = SESSION.getUserLogged();
 		USER_PROFILE p = SESSION.getProfileLogged();
 		if (em == null)
@@ -190,7 +230,6 @@ public class EditProfileController {
 				}
 			}
 		}
-
 		if (!check.isTextFieldEmpty(txtName)) {
 			String nn = txtName.getText();
 			em.getTransaction().begin();
@@ -225,9 +264,7 @@ public class EditProfileController {
 		});
 	}
 
-	private void deleteAccount(ActionEvent e, Stage stage) throws ClassNotFoundException,
-																					FileNotFoundException,
-																					SQLException {
+	private void deleteAccount(ActionEvent e, Stage stage) throws ClassNotFoundException, FileNotFoundException, SQLException {
 
 		if (this.em == null)
 			this.em = Database.createEntityManager();

@@ -27,10 +27,5 @@
 	<classpathentry kind="lib" path="lib/required/javax.activation-api-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/required/jandex-2.0.5.Final.jar"/>
 	<classpathentry kind="lib" path="lib/required/hibernate-core-5.3.2.Final.jar"/>
-	<classpathentry kind="lib" path="lib/jfoenix-9.0.6/com/jfoenix/controls/JFXButton$StyleableProperties.class"/>
-	<classpathentry kind="lib" path="lib/jfoenix-9.0.6/com/jfoenix/controls/JFXButton$StyleableProperties$2.class"/>
-	<classpathentry kind="lib" path="lib/jfoenix-9.0.6/com/jfoenix/controls/JFXButton$StyleableProperties$1.class"/>
-	<classpathentry kind="lib" path="lib/jfoenix-9.0.6/com/jfoenix/controls/JFXButton.class"/>
-	<classpathentry kind="lib" path="lib/jfoenix-9.0.6/com/jfoenix/skins/JFXButtonSkin$1.class"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

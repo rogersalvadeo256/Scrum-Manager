@@ -49,7 +49,7 @@ public class Window extends Stage {
 						SESSION.START_SESSION(u);
 					}
 				}
-				mainStacheguei lá e tava fechado ege.setScene(new HomePageScene());
+				setScene(new HomePageScene());
 				this.show();
 				return;
 			}
