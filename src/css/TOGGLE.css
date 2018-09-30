@@ -1,8 +1,69 @@
-.jfx-toggle-button {
-     -jfx-toggle-color: #009688;
-     -jfx-untoggle-color: #FAFAFA;
-     -jfx-toggle-line-color: #77C2BB;
-     -jfx-untoggle-line-color: #999999;
-     -jfx-size: 10.0;
-     -jfx-disable-visual-focus: false;
+.toggle-button {
+    -fx-focus-color: transparent;
+    -fx-border-color: grey;
+    -fx-border-height: 30px;
+    -fx-min-height: 80.0px;
+    -fx-min-width: 80.0px;
+    -fx-border-radius: 100px;
+    -fx-background-radius:100px;
 }
+
+.toggle-button:selected {
+    -fx-text-fill: black;
+    -fx-base: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+   
+}
+.toggle-button#btnBusy:selected{ 
+      -fx-base:#ff3333;
+}
+.toggle-button#btnBusy{ 
+    -fx-background: transparent;
+}
+.toggle-button#btnAvailable:selected{
+    -fx-base:#66ff66;
+}
+.toggle-button#btnAvailable{
+    -fx-base:transparent;
+}
+
+
+
+
+.hbox{ 
+    -fx-background:transparent;
+    -fx-background-radius:50px;
+    -fx-border-width: 1px;
+    -fx-border-color:grey;
+    -fx-border-radius:50px;
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

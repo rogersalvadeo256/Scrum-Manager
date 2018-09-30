@@ -10,7 +10,7 @@ public class ENUMS {
 
 		private String value;
 
-		private String getValue() {
+		public String getValue() {
 			return this.value;
 		}
 

@@ -1,6 +1,5 @@
 package friendship;
 
-import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +10,6 @@ import db.pojos.FRIENDSHIP_REQUEST;
 import db.pojos.USER_PROFILE;
 import db.querys.QUERYs_FRIENDSHIP;
 import statics.ENUMS;
-import statics.ENUMS.REQUEST_STATUS;
 import statics.SESSION;
 
 public class FriendshipActions {
@@ -46,7 +44,7 @@ public class FriendshipActions {
 		friendshipRequest.setRequestedBy(SESSION.getProfileLogged().getCod());
 		friendshipRequest.setReceiver(this.p.getCod());
 		friendshipRequest.setSendDate();
-		friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValor());
+		friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
 
 		em.getTransaction().begin();
 		em.persist(friendshipRequest);
@@ -66,7 +64,7 @@ public class FriendshipActions {
 
 		FRIENDSHIP_REQUEST frq = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
-		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValor());
+		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
 
 		this.em.getTransaction().begin();
 		this.em.merge(frq);
@@ -87,7 +85,7 @@ public class FriendshipActions {
 
 		FRIENDSHIP_REQUEST fr = (FRIENDSHIP_REQUEST) q.getResultList().get(0);
 
-		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValor());
+		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
 
 		this.em.getTransaction().begin();
 		this.em.merge(fr);
@@ -107,7 +105,7 @@ public class FriendshipActions {
 		for (FRIENDSHIP_REQUEST r : (List<FRIENDSHIP_REQUEST>) QUERYs_FRIENDSHIP.friendshipList()) {
 
 			if (r.getReceiver() == this.p.getCod() || r.getRequestedBy() == this.p.getCod()) {
-				r.setStatus(ENUMS.REQUEST_STATUS.REMOVED.getValor());
+				r.setStatus(ENUMS.REQUEST_STATUS.REMOVED.getValue());
 				FRIENDSHIP_REQUEST fr = r;
 				this.em.getTransaction().begin();
 				this.em.merge(fr);

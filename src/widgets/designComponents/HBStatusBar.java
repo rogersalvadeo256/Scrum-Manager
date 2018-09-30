@@ -15,29 +15,20 @@ public class HBStatusBar extends HBox {
 	ToggleButton tbAvailable;
 	ToggleGroup toggleGroup;
 
-	public HBStatusBar(String leftButtonText, String rightButtonText) {
+	public HBStatusBar() {
 		init();
-		this.tbBusy.setText(leftButtonText);
-		this.tbAvailable.setText(rightButtonText);
-
 		if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue()))
 			tbAvailable.setSelected(true);
 		if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue()))
 			tbBusy.setSelected(true);
 
-		this.getChildren().addAll(this.tbBusy, this.tbAvailable);
-
-	}
-	
-	
-
-	public HBStatusBar() {
-		init();
 	}
 
 	private void init() {
 		this.getStylesheets().add(this.getClass().getResource("/css/TOGGLE.css").toExternalForm());
 
+		this.getStyleClass().add("hbox");
+		
 		this.tbBusy = new ToggleButton();
 		this.tbAvailable = new ToggleButton();
 
@@ -46,12 +37,15 @@ public class HBStatusBar extends HBox {
 		this.tbBusy.setToggleGroup(toggleGroup);
 		this.tbAvailable.setToggleGroup(toggleGroup);
 		
+		this.tbAvailable.setId("btnAvailable");
+		this.tbBusy.setId("btnBusy");
+		
+		
+		this.getChildren().addAll(this.tbBusy, this.tbAvailable);
+		this.setSpacing(20);
 		this.setAlignment(Pos.CENTER);
-	
 	}
-
 	public void setGroupEvent(ChangeListener<Toggle> a) {
 		this.toggleGroup.selectedToggleProperty().addListener(a);
 	}
-
 }
