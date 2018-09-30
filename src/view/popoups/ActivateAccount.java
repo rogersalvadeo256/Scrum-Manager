@@ -56,8 +56,8 @@ public class ActivateAccount extends StandartLayoutPOPOUP {
 		this.btnCancel.setOnAction(e ->{
 			ActivateAccount.this.close();
 		});
+		return;
 	}
-
 
 }
 

@@ -1,20 +1,27 @@
 package db.util;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import db.pojos.USER_REGISTRATION;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import statics.ENUMS;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
 import statics.SESSION;
 import validation.CheckEmptyFields;
+import view.popoups.ActivateAccount;
+import widgets.alertMessage.CustomAlert;
 
 public class Login {
 	private EntityManager em;
@@ -25,23 +32,35 @@ public class Login {
 	}
 
 	/**
-	 * The function to check if the data for login informed are right, return true =
-	 * data is right
+	 * The function to check if the data for login informed are right, return true = data
+	 * is right
 	 * 
-	 * @param TextField     userName
-	 * @param PasswordField password
+	 * @param TextField
+	 *            userName
+	 * @param PasswordField
+	 *            password
 	 * @return boolean
 	 * @author jefter66
 	 * @throws IOException
 	 */
-	public boolean valideLogin(TextField userNameOrEmail, PasswordField password, RadioButton btnStayConnected)
-																					throws IOException {
+	public boolean valideLogin(TextField userNameOrEmail, PasswordField password, RadioButton btnStayConnected) throws IOException {
 		if (!isFieldEmpty(userNameOrEmail, password)) {
 			if (em == null)
 				this.em = Database.createEntityManager();
 			Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME AND USER_PASSWORD=:USER_PASSWORD");
 			q.setParameter("USER_NAME", userNameOrEmail.getText());
 			q.setParameter("USER_PASSWORD", password.getText());
+
+			USER_REGISTRATION u = (USER_REGISTRATION) q.getResultList().get(0);
+
+			if (u.getStatus().toString().equals(ENUMS.ACCOUNT_STATUS.INACTIVE.getValue().toString())) {
+
+				Optional<ButtonType> result = new CustomAlert(AlertType.ERROR, "Usuario Inativo", "O usuario informado esta inativo", "Clique em OK para reativar a sua conta").showAndWait();
+				if (result.get() == ButtonType.OK) {
+					new ActivateAccount(Window.mainStage).showAndWait();
+				}
+			}
+
 
 			if (!q.getResultList().isEmpty()) {
 				SESSION.START_SESSION((USER_REGISTRATION) q.getResultList().get(0));
@@ -60,3 +79,4 @@ public class Login {
 		return false;
 	}
 }
+
