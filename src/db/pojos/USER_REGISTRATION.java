@@ -45,7 +45,7 @@ public class USER_REGISTRATION implements Serializable {
 		return status;
 	}
 
-	public void setuStatus(String value) {
+	public void setStatus(String value) {
 		this.status = value;
 	}
 

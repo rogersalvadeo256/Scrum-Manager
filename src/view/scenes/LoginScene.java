@@ -23,6 +23,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import listeners.Close;
+import view.popoups.ActivateAccount;
 import view.popoups.ForgotPasswordPOPOUP;
 
 /*
@@ -41,7 +42,7 @@ public class LoginScene extends Scene {
 	private RadioButton btnStayConnected;
 	private Label lblStayConnected;
 	private HBox layoutContent, hbStayConnected;
-	private Hyperlink forgotPassword;
+	private Hyperlink forgotPassword, reactivateAccount;
 	private VBox vbLogin;
 	private AnchorPane layout;
 	private ImageView imgIcon;
@@ -87,7 +88,8 @@ public class LoginScene extends Scene {
 		this.messageLoginValidation.setVisible(false);
 		this.messageLoginValidation.setId("messageWrong");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
-
+		this.reactivateAccount = new Hyperlink("Reativar conta");
+		
 		this.btnStayConnected = new RadioButton();
 		this.lblStayConnected = new Label("Mantenha-me conentado");
 		this.hbStayConnected = new HBox();
@@ -135,6 +137,13 @@ public class LoginScene extends Scene {
 		this.forgotPassword.setOnMouseClicked(e -> {
 			new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
 		});
+		this.reactivateAccount.setOnMouseClicked(e->{
+			try {
+				new ActivateAccount(Window.mainStage).showAndWait();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 
 		this.btnSignUp.setOnAction(e -> {
 			this.layoutContent.getChildren().clear();
@@ -160,7 +169,7 @@ public class LoginScene extends Scene {
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
 		this.vbLogin.getChildren().addAll(imgIcon, lblUser, txtLogin, lblPassword);
-		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword, hbStayConnected, btnLogin, btnExit, btnSignUp);
+		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword,reactivateAccount, hbStayConnected, btnLogin, btnExit, btnSignUp);
 
 		VBox.setVgrow(vbLogin, Priority.ALWAYS);
 		this.vbLogin.setMaxWidth(Double.MAX_VALUE);
@@ -172,7 +181,7 @@ public class LoginScene extends Scene {
 		this.vbRegistration.setMaxHeight(Double.MAX_VALUE);
 		this.vbRegistration.setAlignment(Pos.CENTER);
 
-		this.vbLogin.setSpacing(30);
+		this.vbLogin.setSpacing(20);
 		this.vbRegistration.setSpacing(30);
 
 		this.layoutContent.setAlignment(Pos.CENTER);

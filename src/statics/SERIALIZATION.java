@@ -97,8 +97,20 @@ public class SERIALIZATION {
 	}
 
 	public static void deleteFileSerialization(FileType type) {
-		File f = new File(path + getFileName(type));
+		File f = new File(path + "/" + getFileName(type));
 		f.delete();
 	}
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

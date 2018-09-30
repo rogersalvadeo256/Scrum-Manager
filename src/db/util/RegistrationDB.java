@@ -25,7 +25,7 @@ public class RegistrationDB {
 	public void insertUser(USER_REGISTRATION u) {
 		if (em == null)
 			em = Database.createEntityManager();
-		u.setuStatus(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue());
+		u.setStatus(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue());
 
 		this.em.getTransaction().begin();
 		this.em.persist(u);

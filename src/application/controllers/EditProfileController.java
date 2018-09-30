@@ -67,7 +67,7 @@ public class EditProfileController {
 
 						USER_REGISTRATION u = SESSION.getUserLogged();
 
-						u.setuStatus(ENUMS.ACCOUNT_STATUS.INACTIVE.getValue());
+						u.setStatus(ENUMS.ACCOUNT_STATUS.INACTIVE.getValue());
 
 						em.getTransaction().begin();
 						em.merge(u);
