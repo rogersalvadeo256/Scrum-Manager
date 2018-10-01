@@ -5,6 +5,7 @@ import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.USER_REGISTRATION;
+import statics.DB_OPERATION;
 import statics.ENUMS;
 
 public class RegistrationDB {
@@ -23,16 +24,11 @@ public class RegistrationDB {
 	 * @param USER_REGISTRATION user
 	 */
 	public void insertUser(USER_REGISTRATION u) {
-		if (em == null)
-			em = Database.createEntityManager();
+	
 		u.setStatus(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue());
 
-		this.em.getTransaction().begin();
-		this.em.persist(u);
-		this.em.getTransaction().commit();
-		this.em.clear();
-		this.em.close();
-		this.em = null;
+		DB_OPERATION.PERSIST(this.em, u);
+		
 	}
 
 	/**

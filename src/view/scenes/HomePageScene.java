@@ -60,7 +60,7 @@ public class HomePageScene extends Scene {
 	private VBox vbLeftColumn, vbRightColumn;
 	private VBox vbSearchResult;
 	private HBox hbStartProject;
-	private SearchFriend searchFriend;
+	private SearchFriend searchUser;
 	private Toast toast, toast2;
 	private HBStatusBar statusBar;
 
@@ -160,25 +160,25 @@ public class HomePageScene extends Scene {
 		this.txtSearch.getStyleClass().add("text-field");
 		this.txtSearch.setId("search");
 
-		this.searchFriend = new SearchFriend();
-
-//		this.test = new SearchBar();
-
+		this.searchUser = new SearchFriend();
+		
+		
+		txtSearch.setPromptText("Encontre outros usuarios");
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
 				try {
-					HomePageScene.this.searchFriend.loadOptions(txtSearch.getText());
+					HomePageScene.this.searchUser.loadOptions(txtSearch.getText());
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
-				if (!searchFriend.getResults().isEmpty()) {
-					for (int i = 0; i < searchFriend.getResults().size(); i++) {
-						searchFriend.getResults().get(i).getStyleClass().add("hbox");
-						searchFriend.getResults().get(i).setId("hSugestions");
-						vbSearchResult.getChildren().add(searchFriend.getResults().get(i));
+				if (!searchUser.getResults().isEmpty()) {
+					for (int i = 0; i < searchUser.getResults().size(); i++) {
+						searchUser.getResults().get(i).getStyleClass().add("hbox");
+						searchUser.getResults().get(i).setId("hSugestions");
+						vbSearchResult.getChildren().add(searchUser.getResults().get(i));
 					}
 					return;
 				}
@@ -186,6 +186,7 @@ public class HomePageScene extends Scene {
 			vbSearchResult.getChildren().clear();
 		});
 
+		
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
 			try {
