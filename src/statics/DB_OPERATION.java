@@ -11,8 +11,7 @@ public class DB_OPERATION {
 
 
 	public static void PERSIST(EntityManager em, Object o) {
-		if (em == null)
-			Database.createEntityManager();
+		if (em == null)	Database.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(o);
 		em.getTransaction().commit();
@@ -56,9 +55,8 @@ public class DB_OPERATION {
 	}
 
 	@SuppressWarnings("unchecked")
-	public static List<Object> QUERYs(EntityManager em, String query, List<String>param,List<Object> paramArgs) {
-		if (em == null)
-			Database.createEntityManager();
+	public static List<Object> QUERY(EntityManager em, String query, List<String>param,List<Object> paramArgs) {
+		if (em == null)	Database.createEntityManager();
 
 		Query q = em.createQuery(query);
 

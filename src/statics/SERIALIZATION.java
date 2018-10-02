@@ -64,7 +64,7 @@ public class SERIALIZATION {
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
 		try {
 			out.writeObject(object);
-			System.out.println("work");
+//			System.out.println("work");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -84,7 +84,7 @@ public class SERIALIZATION {
 			o = (Object) in.readObject();
 			in.close();
 			fileIn.close();
-			System.out.println(" its work men");
+//			System.out.println(" its work men");
 			return o;
 		} catch (IOException i) {
 			i.printStackTrace();

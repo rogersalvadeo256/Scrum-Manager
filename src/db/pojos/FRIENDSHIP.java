@@ -12,8 +12,8 @@ import javax.persistence.TemporalType;
 
 import statics.ENUMS.REQUEST_STATUS;
 
-@Entity(name = "FRIENDSHIP_REQUEST")
-public class FRIENDSHIP_REQUEST {
+@Entity(name = "FRIENDSHIP")
+public class FRIENDSHIP {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

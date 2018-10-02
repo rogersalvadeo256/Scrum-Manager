@@ -16,9 +16,8 @@ import view.scenes.LoginScene;
 import widgets.alertMessage.CustomAlert;
 
 /**
- * Make the validation of forms, functions for check if the fields are empty,
- * password not equal, data informed already registered and return of alert for
- * the data.
+ * Make the validation of forms, functions for check if the fields are empty, password not
+ * equal, data informed already registered and return of alert for the data.
  * 
  * @author jefter66
  */
@@ -60,8 +59,8 @@ public class FormsValidation {
 	}
 
 	/**
-	 * Use to check if the fields are empty going to pupulate a arraylist with a
-	 * message if the fields checked are empty
+	 * Use to check if the fields are empty going to pupulate a arraylist with a message
+	 * if the fields checked are empty
 	 * 
 	 * @author jefter66
 	 */
@@ -93,8 +92,8 @@ public class FormsValidation {
 	}
 
 	/**
-	 * check if the passwordfields on the form is empty and also if the passwords
-	 * are equal
+	 * check if the passwordfields on the form is empty and also if the passwords are
+	 * equal
 	 * 
 	 * @author jefter66
 	 */
@@ -114,9 +113,9 @@ public class FormsValidation {
 	}
 
 	/**
-	 * Check all the PasswordFields on the form and add a error message for the
-	 * fields that are empty, if the passwordfield contents are different, going to
-	 * add a message for fixed this
+	 * Check all the PasswordFields on the form and add a error message for the fields
+	 * that are empty, if the passwordfield contents are different, going to add a message
+	 * for fixed this
 	 * 
 	 * @return String buildContent
 	 * @author jefter66
@@ -145,8 +144,8 @@ public class FormsValidation {
 	}
 
 	/**
-	 * For registration of new user. If the registration go's ok, then, the return
-	 * will be true, otherwise false
+	 * For registration of new user. If the registration go's ok, then, the return will be
+	 * true, otherwise false
 	 * 
 	 * @author jefter66
 	 * @param USER_REGISTRATION
@@ -159,8 +158,8 @@ public class FormsValidation {
 	}
 
 	/**
-	 * For registration of new user. If the registration go's ok, then, the return
-	 * will be true, otherwise false
+	 * For registration of new user. If the registration go's ok, then, the return will be
+	 * true, otherwise false
 	 * 
 	 * @author jefter66
 	 * @param USER_REGISTRATION
@@ -170,6 +169,8 @@ public class FormsValidation {
 		if (this.registration.emailExist(registration))
 			return false;
 		return true;
+
+
 	}
 
 	public CustomAlert message(AlertType alert, String title, String header, String contentText) {
@@ -177,16 +178,15 @@ public class FormsValidation {
 	}
 
 	/**
-	 * Make the registration of new user after do all the validations of empty
-	 * fields and data existent
+	 * Make the registration of new user after do all the validations of empty fields and
+	 * data existent
 	 * 
 	 * @return Alert
 	 * @throws SQLException
 	 * @throws FileNotFoundException
 	 * @throws ClassNotFoundException
 	 */
-	public void registrationOfNewUser() throws ClassNotFoundException, FileNotFoundException,
-																					SQLException {
+	public void registrationOfNewUser() throws ClassNotFoundException, FileNotFoundException, SQLException {
 		String fieldEmptyMessage = checkingForEmptyField();
 		String passwordFieldEmptyMessage = checkingForEmptyPasswordField();
 		String returnMessage;
@@ -209,8 +209,7 @@ public class FormsValidation {
 		if (!validationForPassword(false).isEmpty()) {
 			passwordFieldEmptyMessage = new String();
 			passwordFieldEmptyMessage = validationForPassword(false);
-			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage).show();
-			;
+			message(AlertType.ERROR, "Algo está errado", "Erro ao tentar cadastrar", passwordFieldErrorMessage).show();;
 			return;
 		}
 		if (!validationForExistentUserName(this.getUserRegistration())) {

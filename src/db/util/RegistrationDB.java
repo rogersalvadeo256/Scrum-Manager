@@ -1,7 +1,6 @@
 package db.util;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
 import db.pojos.USER_REGISTRATION;
@@ -14,7 +13,6 @@ public class RegistrationDB {
 	public RegistrationDB() {
 		this.em = Database.createEntityManager();
 	}
-
 	/**
 	 * make the persistense for registration use after do the query for existent
 	 * user and validations
@@ -24,13 +22,9 @@ public class RegistrationDB {
 	 * @param USER_REGISTRATION user
 	 */
 	public void insertUser(USER_REGISTRATION u) {
-	
 		u.setStatus(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue());
-
 		DB_OPERATION.PERSIST(this.em, u);
-		
 	}
-
 	/**
 	 * if the return value are false, the user doesn't exist
 	 * 
@@ -39,16 +33,8 @@ public class RegistrationDB {
 	 * @param USER_REGISTRATION user
 	 */
 	public boolean userExist(USER_REGISTRATION user) {
-		if (em == null)
-			em = Database.createEntityManager();
-
-		Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME");
-		q.setParameter("USER_NAME", user.getUserName());
-		if (!q.getResultList().isEmpty())
-			return true;
-		return false;
+		return (DB_OPERATION.QUERY(this.em, "FROM USER_REGISTRATION WHERE USER_NAME=:USER_NAME" , "USER_NAME", user.getUserName()).isEmpty()) ? false :true ;
 	}
-
 	/**
 	 * if the return are false, the email are not registered
 	 * 
@@ -56,14 +42,34 @@ public class RegistrationDB {
 	 * @param USER_REGISTRATION user
 	 */
 	public boolean emailExist(USER_REGISTRATION user) {
-		if (em == null)
-			em = Database.createEntityManager();
-
-		Query q = this.em.createQuery("FROM USER_REGISTRATION WHERE USER_EMAIL =:USER_EMAIL");
-		q.setParameter("USER_EMAIL", user.getEmail());
-
-		if (!q.getResultList().isEmpty())
-			return true;
-		return false;
+		return (DB_OPERATION.QUERY(this.em, "FROM USER_REGISTRATION WHERE USER_EMAIL =:USER_EMAIL", "USER_EMAIL", user.getEmail()).isEmpty()) ? true : false;  
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

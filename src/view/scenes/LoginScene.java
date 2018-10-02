@@ -135,11 +135,11 @@ public class LoginScene extends Scene {
 			}
 		});
 		this.forgotPassword.setOnMouseClicked(e -> {
-			new ForgotPasswordPOPOUP(Window.mainStage).showAndWait();
+			new ForgotPasswordPOPOUP(Window.mainStage).show();
 		});
 		this.reactivateAccount.setOnMouseClicked(e->{
 			try {
-				new ActivateAccount(Window.mainStage).showAndWait();
+				new ActivateAccount(Window.mainStage).show();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

@@ -42,11 +42,10 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 
 	public ForgotPasswordPOPOUP(Window owner) {
 		super(owner);
-		init(owner);
-		return;
+		init();
 	}
 
-	public void init(Window owner) {
+	public void init() {
 
 		this.checkFields = new CheckEmptyFields();
 

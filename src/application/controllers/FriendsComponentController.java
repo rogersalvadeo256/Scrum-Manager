@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import db.hibernate.factory.Database;
-import db.pojos.FRIENDSHIP_REQUEST;
+import db.pojos.FRIENDSHIP;
 import db.pojos.USER_PROFILE;
 import db.querys.QUERYs_FRIENDSHIP;
 import friendship.FriendshipActions;
