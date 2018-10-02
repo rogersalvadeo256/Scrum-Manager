@@ -42,8 +42,8 @@ public class HBStatusBar extends HBox {
 
 		this.getStyleClass().add("hbox");
 
-		this.tbNegative = new ToggleButton();
-		this.tbPositive = new ToggleButton();
+		this.tbNegative = new ToggleButton("Ocupado");
+		this.tbPositive = new ToggleButton("Disponivel");
 
 		this.toggleGroup = new ToggleGroup();
 

@@ -47,7 +47,7 @@
 .label{
     -fx-font-size: 15.0pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: white;
+    -fx-text-fill: black;
     -fx-font-weight:bold;
     -fx-opacity: 6.0;
 }
