@@ -23,7 +23,7 @@ public class QUERYs_FRIENDSHIP {
 	public static List<USER_PROFILE> friendshipRequestsList() {
 		List<USER_PROFILE> listReturn = new ArrayList<USER_PROFILE>();
 		EntityManager em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
+		Query q = em.createQuery("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =: COD AND FRQ_REQUEST_STATUS = 'ON_HOLD'");
 		q.setParameter("COD", SESSION.getProfileLogged().getCod());
 
 		for (FRIENDSHIP request : (List<FRIENDSHIP>) q.getResultList()) {
@@ -44,7 +44,7 @@ public class QUERYs_FRIENDSHIP {
 	public static List<USER_PROFILE> friendsList() {
 		EntityManager em = Database.createEntityManager();
 		List<USER_PROFILE> listReturn = new ArrayList<USER_PROFILE>();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER = :COD AND FRQ_REQUEST_STATUS= 'ACCEPTED' OR FRQ_COD_PROF_REQUESTED_BY = :COD AND FRQ_REQUEST_STATUS = 'ACCEPTED'");
+		Query q = em.createQuery("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD AND FRQ_REQUEST_STATUS= 'ACCEPTED' OR FRQ_COD_PROF_REQUESTED_BY = :COD AND FRQ_REQUEST_STATUS = 'ACCEPTED'");
 		q.setParameter("COD", SESSION.getProfileLogged().getCod());
 
 		for (FRIENDSHIP rq : (List<FRIENDSHIP>) q.getResultList()) {
@@ -65,7 +65,7 @@ public class QUERYs_FRIENDSHIP {
 	public static List<FRIENDSHIP> friendshipList() {
 
 		EntityManager em = Database.createEntityManager();
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER = :COD OR FRQ_COD_PROF_REQUESTED_BY = :COD AND FRQ_REQUEST_STATUS = 'ACCEPTED' ");
+		Query q = em.createQuery("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD OR FRQ_COD_PROF_REQUESTED_BY = :COD AND FRQ_REQUEST_STATUS = 'ACCEPTED' ");
 		q.setParameter("COD", SESSION.getProfileLogged().getCod());
 
 		return q.getResultList();

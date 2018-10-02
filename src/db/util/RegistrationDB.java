@@ -42,7 +42,7 @@ public class RegistrationDB {
 	 * @param USER_REGISTRATION user
 	 */
 	public boolean emailExist(USER_REGISTRATION user) {
-		return (DB_OPERATION.QUERY(this.em, "FROM USER_REGISTRATION WHERE USER_EMAIL =:USER_EMAIL", "USER_EMAIL", user.getEmail()).isEmpty()) ? true : false;  
+		return (DB_OPERATION.QUERY(this.em, "FROM USER_REGISTRATION WHERE USER_EMAIL =:USER_EMAIL", "USER_EMAIL", user.getEmail()).isEmpty()) ? false : true;  
 	}
 }
 

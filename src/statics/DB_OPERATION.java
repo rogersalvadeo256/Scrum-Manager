@@ -20,8 +20,8 @@ public class DB_OPERATION {
 		em = null;
 	}
 	public static void MERGE(EntityManager em, Object o) {
-		if (em == null)
-			Database.createEntityManager();
+		if (em == null) em =	Database.createEntityManager();
+		
 		em.getTransaction().begin();
 		em.merge(o);
 		em.getTransaction().commit();
@@ -61,12 +61,25 @@ public class DB_OPERATION {
 		Query q = em.createQuery(query);
 
 		for(int i=0; i < param.size(); i++) { 
-			q.setParameter(param.get(i), paramArgs.get(i));
+			q.setParameter(param.get(i),paramArgs.get(i) ) ;
 		}
-		
-		
 		return q.getResultList();
 
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<Object> QUERY(EntityManager em, String query, String[] strings, int[] paramArgs) {
+
+		if(em == null)em = Database.createEntityManager();
+		
+		Query q = em.createQuery(query);
+		
+		for(int i = 0; i < strings.length; i++ ) { 
+			q.setParameter(strings[i], paramArgs[i]);
+		}
+		return q.getResultList();
+		
+		
 	}
 
 

@@ -5,8 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import application.controllers.NewProjectSceneController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -21,6 +20,10 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 	private Label lblProjectName, lblDescProject;
 	private TextField txtProjectName;
 	private TextArea txtDescProject;
+	
+	private NewProjectSceneController controller;
+	
+	
 	/*
 	 * btnCancel - close the window and delete everthing
 	 * btnGoBack - serialization of the defined things - if the user try to create another project, show a message
@@ -85,10 +88,6 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.layout.getChildren().addAll(this.lblDescProject, this.txtDescProject);
 		this.layout.getChildren().addAll(this.btnInvite);
 		this.layout.getChildren().addAll(this.hbButtons);
-	}
-	
-	public void setEventInvite(EventHandler<ActionEvent> e) { 
-		this.btnInvite.setOnAction(e);
 	}
 	
 	

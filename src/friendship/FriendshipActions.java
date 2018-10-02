@@ -56,28 +56,25 @@ public class FriendshipActions {
 	}
 
 	public void acceptRequest() {
-		if (this.em == null)
-			this.em = Database.createEntityManager();
 
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
-		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
-		q.setParameter("COD_PROF_SENDER", this.p.getCod());
+//		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
+//		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
+//		q.setParameter("COD_PROF_SENDER", this.p.getCod());
+//
+//		FRIENDSHIP frq = (FRIENDSHIP) q.getResultList().get(0);
 
-		FRIENDSHIP frq = (FRIENDSHIP) q.getResultList().get(0);
-
+		
 		
 //		DB_OPERATION.QUERY(this.em,"FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER", new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new Object[]{SESSION.getProfileLogged().getCod(), this.p.getCod()});
 		
+		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY(this.em,"FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER", new String[] {"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[] {SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
 		
 		
 		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
 
-		this.em.getTransaction().begin();
-		this.em.merge(frq);
-		this.em.getTransaction().commit();
-		this.em.clear();
-		this.em.close();
-		this.em = null;
+		
+		DB_OPERATION.MERGE(this.em,  frq);
+		
 		SESSION.UPDATE_SESSION();
 	}
 
@@ -85,7 +82,7 @@ public class FriendshipActions {
 		if (this.em == null)
 			this.em = Database.createEntityManager();
 
-		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
+		Query q = em.createQuery("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
 		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
 		q.setParameter("COD_PROF_SENDER", this.p.getCod());
 
