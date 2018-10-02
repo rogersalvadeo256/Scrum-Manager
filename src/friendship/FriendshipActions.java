@@ -19,12 +19,13 @@ public class FriendshipActions {
 	private USER_PROFILE p;
 
 	/**
-	 * The parameter is the profile of who send the request, this profile is removed
-	 * of the list of friendship requests and moved to the friends list in the two
-	 * profiles ( sender and receiver )
+	 * The parameter is the profile of who send the request, this profile is removed of
+	 * the list of friendship requests and moved to the friends list in the two profiles (
+	 * sender and receiver )
 	 * 
 	 * @author jefter66
-	 * @param USER_PROFILE pRequest
+	 * @param USER_PROFILE
+	 *            pRequest
 	 */
 	public FriendshipActions(USER_PROFILE p) {
 		this.em = null;
@@ -37,8 +38,6 @@ public class FriendshipActions {
 	 * @param USER_PROFILE
 	 */
 	public void sendFriendshipRequest() {// Profile p) {
-		if (this.em == null)
-			em = Database.createEntityManager();
 
 		FRIENDSHIP friendshipRequest = new FRIENDSHIP();
 
@@ -47,75 +46,48 @@ public class FriendshipActions {
 		friendshipRequest.setSendDate();
 		friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
 
-		em.getTransaction().begin();
-		em.persist(friendshipRequest);
-		em.getTransaction().commit();
-		em.clear();
-		em.close();
-		em = null;
+		DB_OPERATION.PERSIST(this.em, friendshipRequest);
+
+
 	}
 
 	public void acceptRequest() {
 
-//		Query q = em.createQuery("FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
-//		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
-//		q.setParameter("COD_PROF_SENDER", this.p.getCod());
-//
-//		FRIENDSHIP frq = (FRIENDSHIP) q.getResultList().get(0);
+		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY(this.em, "FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER",
+				new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
 
-		
-		
-//		DB_OPERATION.QUERY(this.em,"FROM FRIENDSHIP_REQUEST WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER", new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new Object[]{SESSION.getProfileLogged().getCod(), this.p.getCod()});
-		
-		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY(this.em,"FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER", new String[] {"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[] {SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
-		
-		
 		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
 
-		
-		DB_OPERATION.MERGE(this.em,  frq);
-		
+
+		DB_OPERATION.MERGE(this.em, frq);
+
 		SESSION.UPDATE_SESSION();
 	}
 
 	public void refuseRequest() {
-		if (this.em == null)
-			this.em = Database.createEntityManager();
 
-		Query q = em.createQuery("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER");
-		q.setParameter("COD_PROF_RECEIVER", SESSION.getProfileLogged().getCod());
-		q.setParameter("COD_PROF_SENDER", this.p.getCod());
+		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY(this.em, "FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER",
+				new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
 
-		FRIENDSHIP fr = (FRIENDSHIP) q.getResultList().get(0);
 
 		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
 
-		this.em.getTransaction().begin();
-		this.em.merge(fr);
-		this.em.getTransaction().commit();
-		this.em.clear();
-		this.em.close();
-		this.em = null;
+		DB_OPERATION.MERGE(this.em, fr);
+
 
 		SESSION.UPDATE_SESSION();
 	}
 
 	public void removeFriend() {
 
-		if (this.em == null)
-			this.em = Database.createEntityManager();
-
 		for (FRIENDSHIP r : (List<FRIENDSHIP>) QUERYs_FRIENDSHIP.friendshipList()) {
 
 			if (r.getReceiver() == this.p.getCod() || r.getRequestedBy() == this.p.getCod()) {
 				r.setStatus(ENUMS.REQUEST_STATUS.REMOVED.getValue());
 				FRIENDSHIP fr = r;
-				this.em.getTransaction().begin();
-				this.em.merge(fr);
-				this.em.getTransaction().commit();
-				this.em.clear();
-				this.em.close();
-				this.em = null;
+
+				DB_OPERATION.MERGE(this.em, fr);
+
 				SESSION.UPDATE_SESSION();
 				return;
 			}
