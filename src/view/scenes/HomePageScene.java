@@ -164,6 +164,7 @@ public class HomePageScene extends Scene {
 		
 		
 		txtSearch.setPromptText("Encontre outros usuarios");
+		txtSearch.setId("lblsearch");
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
