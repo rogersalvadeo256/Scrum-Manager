@@ -13,7 +13,6 @@ public class StandartLayoutPOPOUP extends Stage {
 	public StandartLayoutPOPOUP(Window owner) {
 		
 		
-//		this.scene.getStylesheets().add(this.getClass().getResource("/css/STANDART_LAYOUT.css").toExternalForm());
 
 		this.initOwner(owner);
 		this.initModality(Modality.WINDOW_MODAL);
@@ -25,5 +24,6 @@ public class StandartLayoutPOPOUP extends Stage {
 		this.setScene(scene);
 		this.initStyle(StageStyle.UNDECORATED);
 
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/STANDART_LAYOUT.css").toExternalForm());
 	}
 }

@@ -10,7 +10,7 @@
 .vbox {
     -fx-background-color: #2f4f4f;
     -fx-spacing: 15.0;
-    -fx-height:300.0;
+    -fx-height:100.0;
 }
 .label { 
 	-fx-font-size:1pt;

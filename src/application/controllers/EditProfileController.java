@@ -21,7 +21,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.layout.HBox;
@@ -209,7 +208,7 @@ public class EditProfileController {
 
 	}
 
-	public void setEventFinish(ActionEvent e, TextField txtName, TextArea txtBio, PasswordField txtCurrentPassword, PasswordField txtNewPassword) {
+	public void setEventFinish(ActionEvent e, TextField txtName, PasswordField txtCurrentPassword, PasswordField txtNewPassword) {
 		USER_REGISTRATION u = SESSION.getUserLogged();
 		USER_PROFILE p = SESSION.getProfileLogged();
 		if (em == null)

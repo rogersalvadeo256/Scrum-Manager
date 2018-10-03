@@ -1,0 +1,54 @@
+.root{
+	-fx-background-color:#e4ebff;
+}
+.label{
+	 -fx-font-family: "Segoe UI Semibold";
+	 -fx-font-size: 10.0pt;
+	 -fx-font-color: black;
+}
+.text-field{
+	-fx-border-radius:15px;
+	-fx-text-fill: black;
+	-fx-text-size:20.0pt;
+}
+.button{
+	-fx-background-color:#5fb69c;
+	-fx-width:195px;
+	-fx-height:80px;
+	-fx-text-aligment:center;
+	-fx-fill-color:black;
+}
+.button#back:hover{
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
+}
+.hyperlink{
+	-fx-text-fill:#5eb5b5;
+}
+.button:hover{
+	-fx-background-color:#020704;
+	-fx-text-fill: #d8d8d8;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

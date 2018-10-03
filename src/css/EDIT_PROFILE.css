@@ -1,9 +1,41 @@
+.root{
+	-fx-background-color:#e4ebff;
+}
+.text-field{
+	-fx-border-radius:15px;
+	-fx-text-fill: black;
+	-fx-text-size:20.0pt;
+}
+.text-field:onclick{
+	-fx-border-radius-color:yellow;
+}
 .hbox{
     -fx-background-color: #5fb69c;
     -fx-opacity:0.50;
     -fx-font-weight:bold;
+
 }
 .hbox:hover{
     -fx-background-color: #5fb69c;
     -fx-opacity: 1.0;
+}
+.label{
+	 -fx-font-family: "Segoe UI Semibold";
+	 -fx-font-size: 10.0pt;
+	 -fx-font-color: black;
+}
+.button{
+	-fx-background-color:#5fb69c;
+	-fx-width:195px;
+	-fx-height:80px;
+	-fx-text-aligment:center;
+	-fx-fill-color:black;
+}
+.button#back:hover{
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
+}
+.button:hover{
+	-fx-background-color:#020704;
+	-fx-text-fill: #d8d8d8;
 }
