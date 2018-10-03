@@ -31,13 +31,12 @@ public class GENERAL_STORE {
 		GENERAL_STORE.vbFinishedProjects = vbFinishedProjects;
 	}
 	public static void updateComponentsHOME() throws IOException {
-
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
 
 		btnFriendRequest.setText(String.valueOf(QUERYs_FRIENDSHIP.friendshipRequestsList().size()));
 		btnFriendsList.setText(String.valueOf(QUERYs_FRIENDSHIP.friendsList().size()));
-		imgProfile.setImage(ProfileImg.loadImage());
+		imgProfile.setImage(PROFILE_IMG.loadImage());
 
 	}
 
@@ -45,10 +44,42 @@ public class GENERAL_STORE {
 		lblName.setText(SESSION.getProfileLogged().getName());
 		lblUserName.setText(SESSION.getUserLogged().getUserName());
 
-		imgProfile.setImage(ProfileImg.loadImage());
+		imgProfile.setImage(PROFILE_IMG.loadImage());
 
 		btnFriendRequest.setText(String.valueOf(QUERYs_FRIENDSHIP.friendshipRequestsList().size()));
 		btnFriendsList.setText(String.valueOf(QUERYs_FRIENDSHIP.friendsList().size()));
-
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

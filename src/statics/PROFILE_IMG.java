@@ -19,10 +19,10 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import widgets.alertMessage.CustomAlert;
 
-public class ProfileImg {
+public class PROFILE_IMG {
 	private EntityManager em;
 
-	public ProfileImg() {
+	public PROFILE_IMG() {
 	}
 
 	/**

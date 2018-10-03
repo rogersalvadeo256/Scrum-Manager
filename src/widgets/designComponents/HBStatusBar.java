@@ -47,13 +47,10 @@ public class HBStatusBar extends HBox {
 		this.toggleGroup = new ToggleGroup();
 
 		this.toggleGroup.getToggles().addAll(tbNegative, tbPositive);
-		
-//		this.tbNegative.setToggleGroup(toggleGroup);
-//		this.tbPositive.setToggleGroup(toggleGroup);
+
 
 		this.tbPositive.setId("btnAvailable");
 		this.tbNegative.setId("btnBusy");
-
 
 		this.getChildren().addAll(this.tbNegative, this.tbPositive);
 		this.setSpacing(20);

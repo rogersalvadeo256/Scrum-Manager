@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import statics.ProfileImg;
+import statics.PROFILE_IMG;
 
 public class HBProfileContent extends HBox {
 	protected VBox vbUsrIMG, vbUsrLABEL, vbUsrBUTTON;
@@ -48,7 +48,7 @@ public class HBProfileContent extends HBox {
 		if (p.getPhoto() == null || p.getPhoto().length == 0) {
 			this.usrImage.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 		} else {
-			this.usrImage.setImage(ProfileImg.getImage(p));
+			this.usrImage.setImage(PROFILE_IMG.getImage(p));
 		}
 		this.usrImage.setFitWidth(100);
 		this.usrImage.setFitHeight(100);

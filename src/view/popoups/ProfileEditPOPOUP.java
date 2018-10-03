@@ -16,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Window;
-import statics.ProfileImg;
+import statics.PROFILE_IMG;
 import statics.SESSION;
 import widgets.designComponents.VBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
@@ -25,7 +25,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 
 	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio;
 	private ImageView imgProfile;
-	private ProfileImg profileImage;
+	private PROFILE_IMG profileImage;
 	private Label lblName, lblBio, lblCurrentPassword, lblNewPassword;
 	private TextField txtName;
 	private TextArea txtBio;
@@ -41,7 +41,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 
 	public ProfileEditPOPOUP(Window owner) throws IOException {
 		super(owner);
-		this.profileImage = new ProfileImg();
+		this.profileImage = new PROFILE_IMG();
 
 		this.btnBack = new Button("Voltar");
 		this.btnBack.setId("back");
@@ -63,7 +63,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		if (SESSION.getProfileLogged().getPhoto() == null || SESSION.getProfileLogged().getPhoto().length == 0) {
 			this.imgProfile.setImage(new Image(new FileInputStream(new File("resources/images/icons/profile_picture.png"))));
 		} else {
-			this.imgProfile.setImage(ProfileImg.loadImage());
+			this.imgProfile.setImage(PROFILE_IMG.loadImage());
 		}
 		this.imgProfile.setFitWidth(300);
 		this.imgProfile.setFitHeight(300);
@@ -72,7 +72,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.imageContent.changePhoto().setOnMouseClicked(e -> {
 			try {
 				profileImage.setImage(application.main.Window.mainStage);
-				if(profileImage != null) this.imgProfile.setImage(ProfileImg.loadImage());
+				if(profileImage != null) this.imgProfile.setImage(PROFILE_IMG.loadImage());
 				} catch (IOException e1) {
 				e1.printStackTrace();
 			}
@@ -80,7 +80,7 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.imgProfile.setOnMouseClicked(e -> {
 			ShowImage show;
 			try {
-				show = new ShowImage(ProfileImg.loadImage(), this);
+				show = new ShowImage(PROFILE_IMG.loadImage(), this);
 				show.showAndWait();
 			} catch (IOException e1) {
 				e1.printStackTrace();

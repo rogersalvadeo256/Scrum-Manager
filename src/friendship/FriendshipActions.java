@@ -1,14 +1,14 @@
 package friendship;
 
+import java.io.IOException;
 import java.util.List;
-
-import javax.persistence.EntityManager;
 
 import db.pojos.FRIENDSHIP;
 import db.pojos.USER_PROFILE;
 import db.querys.QUERYs_FRIENDSHIP;
 import statics.DB_OPERATION;
 import statics.ENUMS;
+import statics.GENERAL_STORE;
 import statics.SESSION;
 
 public class FriendshipActions {
@@ -49,7 +49,7 @@ public class FriendshipActions {
 	public void acceptRequest() {
 
 		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER"
-				,new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()});
+				,new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
 
 		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
 
@@ -61,9 +61,8 @@ public class FriendshipActions {
 
 	public void refuseRequest() {
 
-
 		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY = :COD_PROF_SENDER"
-				,new String[] {"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()});
+				,new String[] {"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
 		
 		
 		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
@@ -73,7 +72,7 @@ public class FriendshipActions {
 		SESSION.UPDATE_SESSION();
 	}
 
-	public void removeFriend() {
+	public void removeFriend() throws IOException {
 
 		for (FRIENDSHIP r : (List<FRIENDSHIP>) QUERYs_FRIENDSHIP.friendshipList()) {
 
@@ -82,11 +81,10 @@ public class FriendshipActions {
 				FRIENDSHIP fr = r;
 
 				DB_OPERATION.MERGE(fr);
-
 				SESSION.UPDATE_SESSION();
+				GENERAL_STORE.updateComponentsHOME();
 				return;
 			}
 		}
 	}
-
 }
