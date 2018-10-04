@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package friendship;
 
 import java.io.IOException;
@@ -88,3 +89,4 @@ public class FriendshipActions {
 		}
 	}
 }
+

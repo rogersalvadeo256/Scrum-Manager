@@ -1,4 +1,4 @@
-.hbox{
+.vbox{
     -fx-background-color: #5fb69c;
     -fx-opacity: 0.50;
     -fx-padding: 10;
@@ -6,9 +6,12 @@
     -fx-width: 260px;
 
 }
-.hbox:hover{
+.vbox:hover{
     -fx-background-color: #5fb69c;
      -fx-opacity: 1.0;
+     
+         -fx-border-width:2 2 2 2;
+    -fx-border-color:yellow;
      
 }
 

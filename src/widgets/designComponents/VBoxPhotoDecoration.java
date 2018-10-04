@@ -8,48 +8,48 @@ import javafx.scene.layout.VBox;
 
 public class VBoxPhotoDecoration extends VBox {
 
-	private VBox hbContainer;
+	private VBox vbContainer;
 	private ImageView image;
 
 	public VBoxPhotoDecoration(ImageView image, String label) {
 		this.image = image;
 		init();
-		this.getChildren().addAll(this.image, hbContainer);
-		this.hbContainer.getChildren().add(new Label(label));
+		this.getChildren().addAll(this.image, vbContainer);
+		this.vbContainer.getChildren().add(new Label(label));
 	}
 
 	public VBoxPhotoDecoration(ImageView image) {
-//		this.getStylesheets().add(this.getClass().getResource("/css/DECORATION_IMAGE.css").toExternalForm());
+		this.getStylesheets().add(this.getClass().getResource("/css/DECORATION_IMAGE.css").toExternalForm());
 		this.image = image;
 		init();
 	}
 
 	private void init() {
-		this.hbContainer = new VBox();
+		this.vbContainer = new VBox();
 
 		this.setAlignment(Pos.CENTER);
 		
-		this.hbContainer.setAlignment(Pos.CENTER);
+		this.vbContainer.setAlignment(Pos.CENTER);
 
-		this.hbContainer.setPrefHeight(500);
+		this.vbContainer.setPrefHeight(500);
 
-		this.hbContainer.setTranslateY(-20);
+		this.vbContainer.setTranslateY(-20);
 
-		this.hbContainer.getStyleClass().add("hbox");
+		this.vbContainer.getStyleClass().add("hbox");
 
-		this.hbContainer.setVisible(false);
+		this.vbContainer.setVisible(false);
 
 		this.setOnMouseMoved(e -> {
-			this.hbContainer.setVisible(true);
+			this.vbContainer.setVisible(true);
 
 		});
 		this.setOnMouseExited(e -> {
-			this.hbContainer.setVisible(false);
+			this.vbContainer.setVisible(false);
 		});
 	}
 
 	public VBox changePhoto() {
-		return this.hbContainer;
+		return this.vbContainer;
 
 	}
 }

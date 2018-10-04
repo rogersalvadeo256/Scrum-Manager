@@ -9,26 +9,28 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 import javafx.stage.Window;
 import statics.PROFILE_IMG;
 import statics.SESSION;
-import widgets.designComponents.VBoxPhotoDecoration;
 import widgets.designComponents.ShowImage;
+import widgets.designComponents.VBoxPhotoDecoration;
 
 public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 
 	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio;
 	private ImageView imgProfile;
+<<<<<<< HEAD
 	private PROFILE_IMG profileImage;
 	private Label lblName, lblBio, lblCurrentPassword, lblNewPassword;
+=======
+	private ProfileImg profileImage;
+	private Label lblName, lblCurrentPassword, lblNewPassword;
+>>>>>>> 08facde7dedf4a0f82fbbfbbc17601f1dbde8d7b
 	private TextField txtName;
-	private TextArea txtBio;
 	private PasswordField txtNewPassword, txtCurrentPassword;
 	private Button btnAdvanced;
 	private HBox hbChangeQuestion, hbChangeAnswer, hbAdvancedStuff;
@@ -40,11 +42,16 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	private HBox hbSteadyButtons;
 
 	public ProfileEditPOPOUP(Window owner) throws IOException {
+		
 		super(owner);
 		this.profileImage = new PROFILE_IMG();
 
+
 		this.btnBack = new Button("Voltar");
 		this.btnBack.setId("back");
+		this.btnBack.setOnAction(e -> {
+			this.close();
+		});
 		this.btnFinish = new Button("Salvar");
 		this.btnFinish.setId("save");
 		
@@ -87,16 +94,11 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 			}
 		});
 		this.lblName = new Label("Nome: ");
-		this.lblBio = new Label("Bio: ");
 		this.lblCurrentPassword = new Label("Senha atual: ");
 		this.lblNewPassword = new Label("Nova Senha: ");
 
 		this.txtName = new TextField();
 		this.txtName.setPrefColumnCount(15);
-		this.txtBio = new TextArea();
-		this.txtBio.setWrapText(true);
-		this.txtBio.setPrefRowCount(5);
-		this.txtBio.setPrefColumnCount(15);
 		
 		this.txtCurrentPassword = new PasswordField();
 		this.txtNewPassword = new PasswordField();
@@ -106,7 +108,6 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.hbNameContent.setAlignment(Pos.CENTER);
 
 		this.hbBio = new HBox();
-		this.hbBio.getChildren().addAll(this.lblBio, this.txtBio);
 		this.hbBio.setAlignment(Pos.CENTER);
 
 		this.hbCurrentPasswordContent = new HBox();
@@ -131,11 +132,11 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.hbChangeAnswer.setAlignment(Pos.CENTER);
 
 		this.btnAdvanced.setOnAction(e -> {
-			controller.setEventFinish(e, txtName, txtBio, txtCurrentPassword, txtNewPassword);
+			controller.setEventFinish(e, txtName, txtCurrentPassword, txtNewPassword);
 			controller.setEventAdvancedOptions(e, ProfileEditPOPOUP.this, this.layout, this, this.hbChangeAnswer, this.hbChangeQuestion, this.hbSteadyButtons, this.btnBack);
 		});
 		this.btnFinish.setOnAction(e -> {
-			controller.setEventFinish(e, txtName, txtBio, txtCurrentPassword, txtNewPassword);
+			controller.setEventFinish(e, txtName, txtCurrentPassword, txtNewPassword);
 		});
 		this.btnBack.setOnAction(e -> {
 			controller.setEventBack(e, ProfileEditPOPOUP.this);

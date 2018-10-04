@@ -1,6 +1,7 @@
 package view.popoups;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -11,6 +12,7 @@ import db.pojos.USER_REGISTRATION;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -67,6 +69,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 		this.tbYes = new ToggleButton("Sim");
 
 		this.btnCancel = new Button("Cancelar");
+		this.btnCancel.setId("back");
 		this.btnCancel.setOnAction(e -> {
 			this.close();
 		});
@@ -77,7 +80,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 
 		this.btnPasswords = new Button("Enviar");
 		this.btnAnswer = new Button("Enviar");
-		this.btnEmail = new Button("Enviar");
+		this.btnEmail = new Button("Enviar");	
 
 		btnEmail.setOnAction(e -> {
 			findUser();

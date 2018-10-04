@@ -19,8 +19,8 @@ public class SearchBar extends HBox{
 	 public SearchBar() throws FileNotFoundException {
 		 	ImageView icon_search = new ImageView();
 			icon_search.setImage(new Image(new FileInputStream(new File("resources/images/icons/add.png"))));
-			icon_search.setFitHeight(100);
-			icon_search.setFitWidth(50);	
+			icon_search.setFitHeight(50);
+			icon_search.setFitWidth(100);	
 			this.btnSearch = new Button();
 			this.btnSearch.setGraphic(icon_search);
 	 

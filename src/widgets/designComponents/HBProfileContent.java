@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package widgets.designComponents;
 
 import java.io.File;
@@ -84,29 +85,3 @@ public class HBProfileContent extends HBox {
 		this.btnAdd = btnAdd;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

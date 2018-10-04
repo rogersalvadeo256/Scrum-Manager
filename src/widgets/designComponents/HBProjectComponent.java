@@ -32,11 +32,7 @@ public class HBProjectComponent extends HBox{
 		this.getChildren().add(layout);
 		this.getChildren().addAll(lblCreator, lblCreatorName);
 		
-		
-		
-		
-	}
-	
+	}	
 	
 	
 	

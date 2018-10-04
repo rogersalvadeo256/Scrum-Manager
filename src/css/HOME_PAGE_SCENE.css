@@ -112,16 +112,21 @@
 	-fx-border-color: white;
 }
 .hbox#hSugestions { 
-    -fx-background-color:#993366;
-         -fx-opacity:0.5;
+    -fx-background-color:#e4ebff;
+    -fx-text-fill:#000;
+    -fx-background-color:#e6f2f2;
+	-fx-border-radius: 4.0;
+	-fx-border-style: solid;
         
 }
 .hbox#hSugestions:hover { 
-    -fx-background-color:#993366;
+    -fx-background-color:#32c156;
     -fx-opacity:1;
 }
 
-
+#lblSearch{
+	-fx-text-fill:#000;
+}
 
 
 

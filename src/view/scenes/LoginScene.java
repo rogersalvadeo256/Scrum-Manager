@@ -89,7 +89,7 @@ public class LoginScene extends Scene {
 		this.messageLoginValidation.setId("messageWrong");
 		this.forgotPassword = new Hyperlink("Esqueci minha senha");
 		this.reactivateAccount = new Hyperlink("Reativar conta");
-		
+
 		this.btnStayConnected = new RadioButton();
 		this.lblStayConnected = new Label("Mantenha-me conentado");
 		this.hbStayConnected = new HBox();
@@ -137,7 +137,7 @@ public class LoginScene extends Scene {
 		this.forgotPassword.setOnMouseClicked(e -> {
 			new ForgotPasswordPOPOUP(Window.mainStage).show();
 		});
-		this.reactivateAccount.setOnMouseClicked(e->{
+		this.reactivateAccount.setOnMouseClicked(e -> {
 			try {
 				new ActivateAccount(Window.mainStage).show();
 			} catch (IOException e1) {
@@ -169,7 +169,8 @@ public class LoginScene extends Scene {
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
 		this.vbLogin.getChildren().addAll(imgIcon, lblUser, txtLogin, lblPassword);
-		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword,reactivateAccount, hbStayConnected, btnLogin, btnExit, btnSignUp);
+		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword, reactivateAccount,
+				hbStayConnected, btnLogin, btnExit, btnSignUp);
 
 		VBox.setVgrow(vbLogin, Priority.ALWAYS);
 		this.vbLogin.setMaxWidth(Double.MAX_VALUE);

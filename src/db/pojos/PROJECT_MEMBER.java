@@ -23,6 +23,9 @@ public class PROJECT_MEMBER {
 	private String mbrFunction;
 
 
+	@Column(name = "MDR_PROJECT") 
+	private int mbrProject;
+	
 	public int getMbrId() {
 		return mbrId;
 	}

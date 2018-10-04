@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package statics;
 
 import java.util.List;
@@ -137,3 +138,173 @@ public class DB_OPERATION {
 
 
 
+=======
+package statics;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import db.hibernate.factory.Database;
+
+/**
+ * 
+ * 
+ * Static functions for hibernate operations
+ * 
+ * The Object parameters had to be mapped objects (pojos) to the methods can work
+ * 
+ * @author jefter66
+ *
+ */
+public class DB_OPERATION {
+
+
+	/**
+	 * 
+	 * The parameter EntityManager can be null, in the function he will be instantiated
+	 * 
+	 * The Object parameter had to be an mapped object to this work
+	 * 
+	 * 
+	 * @param EntityManager
+	 * @param Object
+	 * 
+	 */
+	public static void PERSIST(EntityManager em, Object o) {
+		if (em == null)
+			Database.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(o);
+		em.getTransaction().commit();
+		em.clear();
+		em.close();
+		em = null;
+	}
+
+
+	public static void MERGE(EntityManager em, Object o) {
+		if (em == null)
+			em = Database.createEntityManager();
+
+		em.getTransaction().begin();
+		em.merge(o);
+		em.getTransaction().commit();
+		em.clear();
+		em.close();
+		em = null;
+	}
+
+
+	@SuppressWarnings("unchecked")
+	public static List<Object> QUERY(EntityManager em, String query) {
+
+		if (em == null)
+			Database.createEntityManager();
+
+		Query q = em.createQuery(query);
+
+		return q.getResultList();
+
+	}
+	@SuppressWarnings("unchecked")
+	public static List<Object> QUERY(EntityManager em, String query, String param, Object paramArgs) {
+		if (em == null)
+			Database.createEntityManager();
+
+		Query q = em.createQuery(query);
+		q.setParameter(param, paramArgs);
+
+		return q.getResultList();
+
+	}
+
+
+	/**
+	 * For querys with more than one parameter
+	 * the parameters has to be int numbers
+	 * 
+	 * 
+	 * * @example List<Object> = (Object) QUERY(em, "FROM MY_TABLE WHERE MY_COLUMN = :PARAM1 AND MY_COLUMN2 = :PARAM2", new String[]{'PARAM1','PARAM2'}, new int[] { 1,2});
+	 * 
+	 * @param em
+	 * @param query
+	 * @param strings
+	 * @param paramArgs
+	 * @return List
+	 * @author jefter66
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Object> QUERY(EntityManager em, String query, String[] strings, int[] paramArgs) {
+		if (em == null)
+			em = Database.createEntityManager();
+		Query q = em.createQuery(query);
+
+		for (int i = 0; i < strings.length; i++) {
+			q.setParameter(strings[i], paramArgs[i]);
+		}
+		return q.getResultList();
+	}
+	
+	/**
+	 * @example List<Object> = (Object) QUERY(em, "FROM MY_TABLE WHERE MY_COLUMN = :PARAM1 AND MY_COLUMN2 = :PARAM2", new String[]{'PARAM1','PARAM2'}, new String[] { 'NAME 1','NAME 2'});
+	 * @param em
+	 * @param query
+	 * @param strings
+	 * @param paramArgs
+	 * @return
+	 * @author jefter66
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Object> QUERY(EntityManager em, String query, String[] strings, String[] paramArgs) {
+		if (em == null)
+			em = Database.createEntityManager();
+		Query q = em.createQuery(query);
+
+		for (int i = 0; i < strings.length; i++) {
+			q.setParameter(strings[i], paramArgs[i]);
+		}
+		return q.getResultList();
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 08facde7dedf4a0f82fbbfbbc17601f1dbde8d7b
