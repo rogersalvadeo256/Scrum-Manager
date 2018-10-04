@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package widgets.designComponents;
 
 import javafx.beans.value.ChangeListener;
@@ -22,70 +21,11 @@ public class HBStatusBar extends HBox {
 	ToggleButton tbNegative;
 	ToggleGroup toggleGroup;
 
-	public HBStatusBar(boolean availability) {
-		init();
+	public HBStatusBar(boolean availability, String strNegative, String strPositive) {
 
-		if (availability) {
-			if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue()))
-				tbPositive.setSelected(true);
-			if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue()))
-				tbNegative.setSelected(true);
-			return;
-		}
-
-		if (SESSION.getUserLogged().getStatus().equals(ENUMS.ACCOUNT_STATUS.ACTIVE.getValue()))
-			tbPositive.setSelected(true);
-		return;
-	}
-	private void init() {
-		this.getStylesheets().add(this.getClass().getResource("/css/TOGGLE.css").toExternalForm());
-
-		this.getStyleClass().add("hbox");
-
-		this.tbNegative = new ToggleButton("Ocupado");
-		this.tbPositive = new ToggleButton("Disponivel");
-
-		this.toggleGroup = new ToggleGroup();
-
-		this.toggleGroup.getToggles().addAll(tbNegative, tbPositive);
-
-
-		this.tbPositive.setId("btnAvailable");
-		this.tbNegative.setId("btnBusy");
-
-		this.getChildren().addAll(this.tbNegative, this.tbPositive);
-		this.setSpacing(20);
-		this.setAlignment(Pos.CENTER);
-	}
-	public void setGroupEvent(ChangeListener<Toggle> a) {
-		this.toggleGroup.selectedToggleProperty().addListener(a);
-	}
-}
-=======
-package widgets.designComponents;
-
-import javafx.beans.value.ChangeListener;
-import javafx.geometry.Pos;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.HBox;
-import statics.ENUMS;
-import statics.SESSION;
-
-public class HBStatusBar extends HBox {
-
-	/*
-	 * positive for available or active
-	 */
-	ToggleButton tbPositive;
-	/*
-	 * negative for busy or inactive
-	 */
-	ToggleButton tbNegative;
-	ToggleGroup toggleGroup;
-
-	public HBStatusBar(boolean availability) {
+		this.tbNegative = new ToggleButton(strNegative);
+		this.tbPositive = new ToggleButton(strPositive);
+		
 		init();
 
 		if (availability) {
@@ -105,10 +45,6 @@ public class HBStatusBar extends HBox {
 		this.getStylesheets().add(this.getClass().getResource("/css/TOGGLE.css").toExternalForm());
 
 		this.getStyleClass().add("hbox");
-
-		this.tbNegative = new ToggleButton("Ocupado");
-		this.tbPositive = new ToggleButton("Disponivel");
-
 		this.toggleGroup = new ToggleGroup();
 
 		this.tbNegative.setToggleGroup(toggleGroup);
@@ -126,5 +62,3 @@ public class HBStatusBar extends HBox {
 		this.toggleGroup.selectedToggleProperty().addListener(a);
 	}
 }
-
->>>>>>> 08facde7dedf4a0f82fbbfbbc17601f1dbde8d7b

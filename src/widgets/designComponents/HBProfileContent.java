@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package widgets.designComponents;
 
 import java.io.File;

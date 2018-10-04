@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package friendship;
 
 import java.io.IOException;

@@ -23,13 +23,8 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 
 	private HBox hbCurrentPasswordContent, hbNewPasswordContent, hbNameContent, hbBio;
 	private ImageView imgProfile;
-<<<<<<< HEAD
 	private PROFILE_IMG profileImage;
-	private Label lblName, lblBio, lblCurrentPassword, lblNewPassword;
-=======
-	private ProfileImg profileImage;
 	private Label lblName, lblCurrentPassword, lblNewPassword;
->>>>>>> 08facde7dedf4a0f82fbbfbbc17601f1dbde8d7b
 	private TextField txtName;
 	private PasswordField txtNewPassword, txtCurrentPassword;
 	private Button btnAdvanced;

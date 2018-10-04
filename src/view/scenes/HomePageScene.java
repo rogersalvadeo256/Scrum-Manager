@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package view.scenes;
 
 /**
@@ -85,7 +84,7 @@ public class HomePageScene extends Scene {
 		this.btnFriends = new Button();
 
 
-		this.statusBar = new HBStatusBar(true);
+		this.statusBar = new HBStatusBar(true, "Ocupado", "Disponivel");
 
 		this.statusBar.setGroupEvent(new ChangeListener<Toggle>() {
 			@Override

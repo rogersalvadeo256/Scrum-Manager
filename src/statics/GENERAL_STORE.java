@@ -66,7 +66,6 @@ public class GENERAL_STORE {
 		
 		
 		
-		
 	}
 	
 	
