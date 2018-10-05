@@ -21,7 +21,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import statics.SESSION;
 
-public class HBFriendRequest extends HBox {
+public class HBFriendRequests extends HBox {
 	private Label lblName;
 	private VBox vbAlignItemsLeft, vbAlignItemsMiddle, vbAlignItemsRight;
 
@@ -32,7 +32,7 @@ public class HBFriendRequest extends HBox {
 	private HBox layout;
 	private Button btnAccept, btnRefuse;
 
-	public HBFriendRequest(USER_PROFILE p) throws FileNotFoundException {
+	public HBFriendRequests(USER_PROFILE p) throws FileNotFoundException {
 		this.image = new ImageView();
 
 		this.lblName = new Label(p.getName());

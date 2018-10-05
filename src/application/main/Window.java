@@ -36,11 +36,10 @@ public class Window extends Stage {
 		Window.mainStage.setResizable(true);
 
 		if (SERIALIZATION.fileExists(FileType.SESSION)) {
-	
 			EntityManager em = Database.createEntityManager();
 			Query q = em.createQuery("FROM USER_REGISTRATION");
 			if (!q.getResultList().isEmpty()) {
-			
+
 				USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
 
 				for (int i = 0; i < q.getResultList().size(); i++) {
@@ -55,45 +54,44 @@ public class Window extends Stage {
 			}
 		}
 
-		mainStage.setScene(new LoginScene());
-		this.show();
-
-		//
-		// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
-		// i.showAndWait();
-		// Profile p = new Profile();
-		// p.setName("jefter");
-		// p.setBio("aaakakakkaakaka afçasfçalfafçasklçfls \n sllslslsls
-		// asfafasçfafjsçakfçakf \n");
-		// HBFriendContent tests = new HBFriendContent(p);
-		// Scene sc = new Scene(tests);
-		// this.setScene(sc);
-		// this.show();
-		//
-
-		// ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
-		// test.show();
-
-		// ProfileEditPOPOUP tests = new ProfileEditPOPOUP(this);
-		// tests.show();
-		// FriendshipRequestPOPOUP test = new FriendshipRequestPOPOUP(this);
-		// test.show();
-
-		// mainStage.setScene(new NewProjectScene());
-
-		// this.show();
-
 		this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent e) {
 
 				if (e.isControlDown() && e.getCode() == KeyCode.W) {
+
 				}
 
 			}
 
 		});
+		mainStage.setScene(new LoginScene());
+		this.show();
 
 	}
-
 }
+
+//
+// InviteFriendProjectPOPOUP i = new InviteFriendProjectPOPOUP(this);
+// i.showAndWait();
+// Profile p = new Profile();
+// p.setName("jefter");
+// p.setBio("aaakakakkaakaka afçasfçalfafçasklçfls \n sllslslsls
+// asfafasçfafjsçakfçakf \n");
+// HBFriendContent tests = new HBFriendContent(p);
+// Scene sc = new Scene(tests);
+// this.setScene(sc);
+// this.show();
+//
+
+// ForgotPasswordPOPOUP test = new ForgotPasswordPOPOUP(this);
+// test.show();
+
+// ProfileEditPOPOUP tests = new ProfileEditPOPOUP(this);
+// tests.show();
+// FriendshipRequestPOPOUP test = new FriendshipRequestPOPOUP(this);
+// test.show();
+
+// mainStage.setScene(new NewProjectScene());
+
+// this.show();

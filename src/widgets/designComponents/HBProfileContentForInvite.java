@@ -15,6 +15,9 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
 		
 		this.getChildren().clear();
 
+		this.getChildren().add(layout);
+		
+
 		this.layout.getChildren().addAll(image,lblName);
 		
 		

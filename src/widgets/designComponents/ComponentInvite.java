@@ -10,74 +10,63 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class ComponentInvite extends HBox {
-	
-	private List<HBProfileContentForInvite> listComponents;
-	private VBox leftColumn, rightColumn;
-	
-	public ComponentInvite() {
-		
-		this.leftColumn = new VBox();
-		this.rightColumn = new VBox();
-		
-		this.getChildren().add(leftColumn);
-		this.getChildren().add(rightColumn);
-		
-	}
-	
-	private void loadComponents() {
 
-		
-		
-		
+	private List<HBProfileContentForInvite> listComponents;
+
+	private VBox vbLeft;
+	private VBox vbRight;
+
+	public ComponentInvite() throws IOException {
+
+		this.vbLeft = new VBox();
+		this.vbRight = new VBox();
+
+		loadFriendContent();
+
 	}
-	
-	
+	public void loadFriendContent() throws IOException {
+
+		populateList();
+		int value = this.listComponents.size() / 2;
+
+		this.vbRight.getChildren().clear();
+		this.vbLeft.getChildren().clear();
+
+		for (int i = 0; i < value; i++) {
+			this.vbLeft.getChildren().add(this.listComponents.get(i));
+		}
+		for (int i = value; i < value * 2; i++) {
+			this.vbRight.getChildren().add(this.listComponents.get(i));
+		}
+
+		if (this.listComponents.size() % 2 > 0) {
+
+			for (HBProfileContentForInvite var : this.listComponents) {
+
+				if (this.vbRight.getChildren().size() < this.vbLeft.getChildren().size()) {
+					this.vbRight.getChildren().add(var);
+					break;
+				}
+				this.vbLeft.getChildren().add(var);
+			}
+
+		}
+
+		this.getChildren().addAll(vbLeft,vbRight);
+
+	}
+
 	private void populateList() throws IOException {
-		
-		
+
 		if (this.listComponents == null)
 			this.listComponents = new ArrayList<HBProfileContentForInvite>();
-		
+
+		this.listComponents.clear();
+
 		for (USER_PROFILE p : QUERYs_FRIENDSHIP.friendsList()) {
-			
+
 			HBProfileContentForInvite component = new HBProfileContentForInvite(p);
 			this.listComponents.add(component);
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

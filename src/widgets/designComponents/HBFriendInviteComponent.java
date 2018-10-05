@@ -11,8 +11,6 @@ public class HBFriendInviteComponent extends HBFriendContent{
 		this.getChildren().removeAll(this.btnDelete,this.btnInvite);
 		this.getChildren().add(this.btnInvite);
 		
-		
-		
 	}
 
 	

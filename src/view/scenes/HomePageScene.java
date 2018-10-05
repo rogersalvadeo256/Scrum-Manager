@@ -1,7 +1,7 @@
 package view.scenes;
 
 /**
- * @author jefter66: jefter66
+ * @author jefter66
  */
 import java.io.File;
 import java.io.FileInputStream;
@@ -71,9 +71,9 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-		
+
 		Window.mainStage.setResizable(true);
-		
+
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
@@ -84,7 +84,7 @@ public class HomePageScene extends Scene {
 		this.btnFriendRequest = new Button();
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
-		
+
 		Window.mainStage.setResizable(false);
 
 		this.statusBar = new HBStatusBar(true, "Ocupado", "Disponivel");
@@ -94,11 +94,12 @@ public class HomePageScene extends Scene {
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 
 				newValue = newValue == null ? oldValue : newValue;
-				newValue.setSelected(true);
+				newValue.setSelected(true);						
 
 				if (newValue.isSelected()) {
 
-					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
+					if (SESSION.getProfileLogged().getStatus()
+							.equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
 						USER_PROFILE up = SESSION.getProfileLogged();
 						DB_OPERATION.MERGE(up);
 					}
@@ -113,7 +114,8 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, vbLeftColumn, vbRightColumn);
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, vbLeftColumn,
+				vbRightColumn);
 		GENERAL_STORE.loadComponentsHOME();
 
 		this.profileImg.setOnMouseClicked(e -> {
@@ -148,7 +150,6 @@ public class HomePageScene extends Scene {
 
 		this.searchUser = new SearchFriend();
 
-
 		txtSearch.setPromptText("Encontre outros usuarios");
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
@@ -171,7 +172,6 @@ public class HomePageScene extends Scene {
 			}
 			vbSearchResult.getChildren().clear();
 		});
-
 
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
@@ -293,7 +293,8 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,
+				btnLogOut, btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -304,7 +305,6 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo = new VBox();
 		this.vbProfileInfo.getStyleClass().add("vbox");
 		this.vbProfileInfo.setId("profile-info");
-
 
 		this.hbStartProject = new HBox();
 		this.hbStartProject.getChildren().add(new Label("Começar projeto"));
@@ -319,7 +319,6 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-
 
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
@@ -342,7 +341,6 @@ public class HomePageScene extends Scene {
 		this.vbRightColumn.getStyleClass().add("vbox");
 		this.vbRightColumn.setId("rightColumn");
 		this.vbRightColumn.getChildren().add(this.lblCurrentProject);
-
 
 		this.vbRightColumn.setPrefWidth(400);
 		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);

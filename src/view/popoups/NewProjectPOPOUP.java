@@ -17,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import validation.CheckEmptyFields;
+import widgets.designComponents.ComponentInvite;
+import widgets.designComponents.HBFriendInviteComponent;
 
 public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 	private Label lblProjectName, lblAboutTheProject;
@@ -114,8 +116,14 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 
 		if (isTheVBOX) {
 			layoutForInviteComponents.getChildren().add(layout);
-			this.scene.setRoot(layoutForInviteComponents);
+			this.scene.setRoot(layoutForInviteComponents);	
 			this.btnInvite.setText("Cancelar");
+
+			ComponentInvite component = new ComponentInvite();
+
+			this.layoutForInviteComponents.getChildren().add(component);
+
+
 			return;
 		}
 		boolean isTheHBOX = this.scene.getRoot() == layoutForInviteComponents ? true : false;

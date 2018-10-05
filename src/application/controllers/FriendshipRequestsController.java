@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import statics.GENERAL_STORE;
 import statics.SESSION;
 import view.popoups.FriendshipRequestPOPOUP;
-import widgets.designComponents.HBFriendRequest;
+import widgets.designComponents.HBFriendRequests;
 import widgets.toaster.Toast;
 
 public class FriendshipRequestsController {
@@ -55,7 +55,7 @@ public class FriendshipRequestsController {
 
 		if (!this.requestsList.isEmpty()) {
 			for (int i = 0; i < this.requestsList.size(); i++) {
-				HBFriendRequest component = new HBFriendRequest(this.requestsList.get(i));
+				HBFriendRequests component = new HBFriendRequests(this.requestsList.get(i));
 				FriendshipActions controllerRequest = new FriendshipActions(this.requestsList.get(i));
 
 				layout.getChildren().add(component);

@@ -10,32 +10,36 @@ import javax.persistence.Id;
 
 import statics.ENUMS.DISPONIBILITY_FOR_PROJECT;
 import statics.ENUMS.REQUEST_STATUS;
+
 @SuppressWarnings("serial")
-@Entity(name="USER_PROFILE")
-public class USER_PROFILE implements Serializable{
+@Entity(name = "USER_PROFILE")
+public class USER_PROFILE implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "PROF_COD")
 	private int codProfile;
-	
-	@Column(name="PROF_NAME")
+
+	@Column(name = "PROF_NAME")
 	private String name;
 
-	@Column(name="PROF_AVAILABILITY")
+	@Column(name = "PROF_AVAILABILITY")
 	private String status;
-	
-	@Column(columnDefinition = "LONGBLOB", name="PROF_PHOTO")
+
+	@Column(columnDefinition = "LONGBLOB", name = "PROF_PHOTO")
 	private byte[] photo;
 
 	public void setAvailability(String value) {
 		this.status = value;
 	}
+
 	public String getStatus() {
 		return this.status;
 	}
+
 	public byte[] getPhoto() {
 		return photo;
 	}
+
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
 	}
@@ -47,6 +51,7 @@ public class USER_PROFILE implements Serializable{
 	public int getCod() {
 		return codProfile;
 	}
+
 	public String getName() {
 		return name;
 	}
@@ -55,40 +60,3 @@ public class USER_PROFILE implements Serializable{
 		this.name = name;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
