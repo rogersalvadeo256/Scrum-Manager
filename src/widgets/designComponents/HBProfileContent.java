@@ -84,4 +84,30 @@ public class HBProfileContent extends HBox {
 	public void setBtnAdd(Button btnAdd) {
 		this.btnAdd = btnAdd;
 	}
+
+	public ImageView getImage() {
+		return image;
+	}
+
+	public Label getLblName() {
+		return lblName;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+

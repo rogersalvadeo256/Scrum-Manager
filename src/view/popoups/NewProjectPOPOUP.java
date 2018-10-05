@@ -4,6 +4,7 @@ package view.popoups;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import application.controllers.NewProjectSceneController;
 import javafx.geometry.Pos;
@@ -15,7 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import table.util.friendInvite.TableInviteFriends;
 import validation.CheckEmptyFields;
 
 public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
@@ -95,13 +95,17 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		});
 
 		this.btnInvite.setOnAction(e -> {
-			inviteFriend();
+			try {
+				inviteFriendLayoutState();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		});
 
 		initialLayout();
 	}
 
-	private void inviteFriend() {
+	private void inviteFriendLayoutState() throws IOException {
 		boolean t = layoutForInviteComponents == null ? true : false;
 
 		if (t)	layoutForInviteComponents = new HBox();
@@ -112,11 +116,6 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 			layoutForInviteComponents.getChildren().add(layout);
 			this.scene.setRoot(layoutForInviteComponents);
 			this.btnInvite.setText("Cancelar");
-			
-			TableInviteFriends tableFriends = new TableInviteFriends();
-			
-			this.layoutForInviteComponents.getChildren().add(tableFriends);
-			
 			return;
 		}
 		boolean isTheHBOX = this.scene.getRoot() == layoutForInviteComponents ? true : false;

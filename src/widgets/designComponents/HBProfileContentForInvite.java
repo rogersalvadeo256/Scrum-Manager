@@ -5,10 +5,10 @@ import java.io.IOException;
 import db.pojos.USER_PROFILE;
 import javafx.scene.layout.VBox;
 
-public class HBProfileContentForTable extends HBProfileContentForgotPassword{
+public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
 	
 	private VBox layout ;
-	public HBProfileContentForTable(USER_PROFILE p) throws IOException {
+	public HBProfileContentForInvite(USER_PROFILE p) throws IOException {
 		super(p);
 		
 		this.layout= new VBox() ;

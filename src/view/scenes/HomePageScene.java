@@ -84,7 +84,8 @@ public class HomePageScene extends Scene {
 		this.btnFriendRequest = new Button();
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
-
+		
+		Window.mainStage.setResizable(false);
 
 		this.statusBar = new HBStatusBar(true, "Ocupado", "Disponivel");
 
