@@ -24,17 +24,19 @@ public class HBProfileContent extends HBox {
 	protected Label lblName;
 	protected Button btnAdd;
 	protected FriendshipActions fRequest;
-
+	protected USER_PROFILE profile;
+	
+	
 	public HBProfileContent(USER_PROFILE p) throws IOException {
 		this.lblName = new Label(p.getName());
+		this.profile = p;
 		init(p);
 	}
-
 	public HBProfileContent(USER_REGISTRATION u) throws IOException {
 		this.lblName = new Label(u.getProfile().getName());
 		init(u.getProfile());
 	}
-
+	
 	private void init(USER_PROFILE p) throws IOException {
 		this.vbUsrIMG = new VBox();
 		this.vbUsrLABEL = new VBox();
@@ -45,7 +47,7 @@ public class HBProfileContent extends HBox {
 		this.btnAdd.setOnAction(e -> {
 			fRequest.sendFriendshipRequest();
 		});
-
+		
 		if (p.getPhoto() == null || p.getPhoto().length == 0) {
 			this.image.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 		} else {
@@ -53,61 +55,48 @@ public class HBProfileContent extends HBox {
 		}
 		this.image.setFitWidth(100);
 		this.image.setFitHeight(100);
-
+		
 		this.vbUsrIMG.getChildren().addAll(this.image);
 		this.vbUsrBUTTON.getChildren().add(btnAdd);
 		this.vbUsrLABEL.getChildren().addAll(this.lblName);
 		this.vbUsrLABEL.setAlignment(Pos.CENTER);
-
+		
 		this.setAlignment(Pos.CENTER);
 		this.vbUsrBUTTON.setAlignment(Pos.CENTER);
 		
 		try {
-		ImageView icon_add = new ImageView();
-		icon_add.setImage(new Image(new FileInputStream(new File("resources/images/icons/add.png"))));
-		icon_add.setFitHeight(100);
-		icon_add.setFitWidth(50);
-		this.btnAdd.setGraphic(icon_add);
-		this.btnAdd.prefHeight(this.getHeight());
-		}catch(IllegalArgumentException e) {
+			ImageView icon_add = new ImageView();
+			icon_add.setImage(new Image(new FileInputStream(new File("resources/images/icons/add.png"))));
+			icon_add.setFitHeight(100);
+			icon_add.setFitWidth(50);
+			this.btnAdd.setGraphic(icon_add);
+			this.btnAdd.prefHeight(this.getHeight());
+		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
 		HBox.setHgrow(vbUsrLABEL, Priority.ALWAYS);
 		
 		this.getChildren().addAll(vbUsrIMG, vbUsrLABEL, vbUsrBUTTON);
 	}
-
+	
 	public Button getBtnAdd() {
 		return btnAdd;
 	}
-
+	
 	public void setBtnAdd(Button btnAdd) {
 		this.btnAdd = btnAdd;
 	}
-
+	
 	public ImageView getImage() {
 		return image;
 	}
-
+	
 	public Label getLblName() {
 		return lblName;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+	
+	public USER_PROFILE getProfile() {
+		return profile;
+	}
 }
-

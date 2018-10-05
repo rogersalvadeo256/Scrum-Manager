@@ -126,8 +126,6 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 			this.setWidth(300);
 			this.setHeight(500);
 			this.btnInvite.setText("Convidar amigos");
-			
-			
 			return;
 		}
 	}

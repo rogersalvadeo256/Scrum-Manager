@@ -35,22 +35,6 @@ public class NewProjectSceneController {
 			
 			if(!memberFunction.isEmpty()) member.setMbrFunction(memberFunction);			
 			
-
-				
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
 			
 			
 			
@@ -98,6 +82,41 @@ public class NewProjectSceneController {
 		 * friend and send a invite
 		 */
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
 
