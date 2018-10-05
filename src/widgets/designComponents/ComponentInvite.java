@@ -41,13 +41,14 @@ public class ComponentInvite extends HBox {
 
 		if (this.listComponents.size() % 2 > 0) {
 
-			for (HBProfileContentForInvite var : this.listComponents) {
+			for(int i = value * 2; i < this.listComponents.size(); i++) { 
 
-				if (this.vbRight.getChildren().size() < this.vbLeft.getChildren().size()) {
-					this.vbRight.getChildren().add(var);
+				if(this.vbRight.getChildren().size() < this.vbLeft.getChildren().size()) { 
+					this.vbRight.getChildren().add(this.listComponents.get(i));
 					break;
 				}
-				this.vbLeft.getChildren().add(var);
+				this.vbLeft.getChildren().add(this.listComponents.get(i));
+
 			}
 
 		}
