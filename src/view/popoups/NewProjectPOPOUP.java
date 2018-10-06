@@ -1,12 +1,12 @@
 package view.popoups;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.controllers.NewProjectSceneController;
+import friendship.QUERYs_FRIENDSHIP;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,21 +18,19 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import validation.CheckEmptyFields;
 import widgets.designComponents.ComponentInvite;
-import widgets.designComponents.HBFriendInviteComponent;
+import widgets.toaster.Toast;
 
 public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 	private Label lblProjectName, lblAboutTheProject;
 	private TextField txtProjectName;
 	private TextArea txtAboutTheProject;
 
-
 	private NewProjectSceneController controller;
 
 	private Button btnFinish, btnInvite, btnGoBack, btnAboutTheProject;
-	private HBox hbButtons;
 
 	private HBox layoutForInviteComponents;
-
+	private Toast toast;
 
 	public NewProjectPOPOUP(Stage mainStage) throws FileNotFoundException {
 		super(mainStage);
@@ -48,7 +46,6 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.txtAboutTheProject = new TextArea();
 		this.txtAboutTheProject.setId("descProject");
 		this.txtAboutTheProject.setId("txtDescProject");
-		this.hbButtons = new HBox();
 
 		this.scene.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
 
@@ -65,7 +62,8 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.btnInvite.setId("btnInvite");
 
 		int SIZE = 30;
-		ImageView buttonImage = new ImageView(new Image(new FileInputStream(new File("resources/images/icons/back_arrow_icon.png"))));
+		ImageView buttonImage = new ImageView(
+				new Image(new FileInputStream(new File("resources/images/icons/back_arrow_icon.png"))));
 		buttonImage.setFitWidth(SIZE);
 		buttonImage.setFitHeight(SIZE);
 
@@ -74,13 +72,8 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.btnGoBack.setGraphic(buttonImage);
 		this.btnGoBack.setMaxWidth(100);
 		this.btnGoBack.setMaxHeight(100);
-		// this.hbHeader = new HBox();
-		// this.hbHeader.getChildren().add(this.btnGoBack);
-		// this.hbHeader.prefWidth(this.getWidth());
-		// this.hbHeader.setAlignment(Pos.CENTER_LEFT);
 
 		this.txtProjectName.setAlignment(Pos.CENTER);
-
 
 		this.btnGoBack.setOnAction(e -> {
 			controller.actionBack(NewProjectPOPOUP.this);
@@ -90,34 +83,41 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 
 			CheckEmptyFields cef = new CheckEmptyFields();
 
-			if (!cef.isTextFieldEmpty(txtProjectName) && !cef.isTextAreaEmpty(txtAboutTheProject)) {
-				// controller.actionFinish(txtProjectName.getText(),
-				// txtDescProject.getText());
+			if (!cef.isTextFieldEmpty(txtProjectName)) {
+				this.controller.actionFinish(txtProjectName.getText(), txtAboutTheProject.getText());
 			}
 		});
-
 		this.btnInvite.setOnAction(e -> {
+
+			if (QUERYs_FRIENDSHIP.friendsList().isEmpty()) {
+				this.toast = new Toast(this, "Voce não tem amigos");
+				this.scene.setOnMouseMoved(e1 -> {
+					toast.close();
+					return;
+				});
+				return;
+			}
 			try {
 				inviteFriendLayoutState();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		});
-
 		initialLayout();
 	}
 
 	private void inviteFriendLayoutState() throws IOException {
 		boolean t = layoutForInviteComponents == null ? true : false;
 
-		if (t)	layoutForInviteComponents = new HBox();
+		if (t)
+			layoutForInviteComponents = new HBox();
 
 		boolean isTheVBOX = this.scene.getRoot() == layout ? true : false;
 
 		if (isTheVBOX) {
 			layoutForInviteComponents.getChildren().add(layout);
-			this.scene.setRoot(layoutForInviteComponents);	
-			this.btnInvite.setText("Cancelar");
+			this.scene.setRoot(layoutForInviteComponents);
+			this.btnInvite.setText("Finalizar");
 
 			ComponentInvite component = new ComponentInvite();
 
@@ -174,11 +174,5 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.layout.setAlignment(Pos.CENTER);
 		this.layout.setSpacing(10);
 	}
-	
-	
-	
-	
-
 
 }
-

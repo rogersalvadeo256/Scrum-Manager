@@ -6,9 +6,10 @@ import java.util.List;
 
 import db.pojos.USER_PROFILE;
 import friendship.QUERYs_FRIENDSHIP;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import project.TEMP_STORE_INVITATIONS;
+import project.invitation.TEMP_STORE_INVITATIONS;
 
 public class ComponentInvite extends HBox {
 
@@ -16,6 +17,7 @@ public class ComponentInvite extends HBox {
 
 	private VBox vbLeft;
 	private VBox vbRight;
+	private ScrollBar sc;
 
 	public ComponentInvite() throws IOException {
 
@@ -41,7 +43,6 @@ public class ComponentInvite extends HBox {
 		this.vbLeft.getChildren().clear();
 
 		for (int i = 0; i < value; i++) {
-			// this.listComponents.get(i).setClickedEvent( );
 			this.vbLeft.getChildren().add(this.listComponents.get(i));
 		}
 		for (int i = value; i < value * 2; i++) {
@@ -60,7 +61,6 @@ public class ComponentInvite extends HBox {
 		}
 		this.getChildren().addAll(vbLeft, vbRight);
 	}
-
 	/**
 	 * 
 	 * Loads the friendlist, set friends informations into one component, this

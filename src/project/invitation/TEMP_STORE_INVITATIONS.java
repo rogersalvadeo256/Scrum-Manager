@@ -1,4 +1,4 @@
-package project;
+package project.invitation;
 
 import java.util.ArrayList;
 
@@ -15,5 +15,4 @@ public class TEMP_STORE_INVITATIONS {
    public static void REMOVE_FROM_LIST(USER_PROFILE p) {
       LIST_INVITES.remove(p);
    }
-   
 }

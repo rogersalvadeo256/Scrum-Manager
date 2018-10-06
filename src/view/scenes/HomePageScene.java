@@ -52,7 +52,7 @@ public class HomePageScene extends Scene {
 	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblEmail;
 	private HBox hbHeader;
 	private TextField txtSearch;
-	private Button btnSearch, btnHome;
+	private Button btnProjectInvitation, btnHome;
 	private VBox vbProfileInfo;
 	private Button btnFriendRequest, btnFriends;
 	private VBox vbLeftColumn, vbRightColumn;
@@ -143,7 +143,7 @@ public class HomePageScene extends Scene {
 
 		this.txtSearch = new TextField();
 
-		this.btnSearch = new Button();
+		this.btnProjectInvitation = new Button();
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 		this.txtSearch.setId("search");
@@ -232,11 +232,11 @@ public class HomePageScene extends Scene {
 		icon_f.setFitWidth(SIZE);
 		this.btnFriendRequest.setGraphic(icon_f);
 
-		ImageView icon_s = new ImageView();
-		icon_s.setFitHeight(SIZE);
-		icon_s.setFitWidth(SIZE);
-		icon_s.setImage(new Image(new FileInputStream(new File("resources/images/icons/search.png"))));
-		this.btnSearch.setGraphic(icon_s);
+		ImageView icon_invitation = new ImageView();
+		icon_invitation.setFitHeight(SIZE);
+		icon_invitation.setFitWidth(SIZE);
+		icon_invitation.setImage(new Image(new FileInputStream(new File("resources/images/icons/project_invitation.png"))));
+		this.btnProjectInvitation.setGraphic(icon_invitation);
 
 		ImageView icon_u = new ImageView();
 		icon_u.setFitHeight(SIZE);
@@ -267,7 +267,7 @@ public class HomePageScene extends Scene {
 		this.btnLogOut.setGraphic(icon_logout);
 
 		this.btnHome.getStyleClass().add("header-buttons");
-		this.btnSearch.getStyleClass().add("header-buttons");
+		this.btnProjectInvitation.getStyleClass().add("header-buttons");
 		this.btnFriendRequest.getStyleClass().add("header-buttons");
 		this.btnFriends.getStyleClass().add("header-buttons");
 		this.btnEditProfile.getStyleClass().add("header-buttons");
@@ -293,7 +293,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnSearch, btnFriendRequest, btnFriends, btnEditProfile,
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile,
 				btnLogOut, btnExit);
 
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
