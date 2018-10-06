@@ -9,8 +9,9 @@ import statics.ENUMS;
 import statics.SESSION;
 
 public class ProjectInvitation  { 
-      public ProjectInvitation ()  { 
-            }
+      public ProjectInvitation ()  {
+            
+      }
 
       public void invite (USER_PROFILE invited) { 
             PROJECT_INVITATION invite=new PROJECT_INVITATION();

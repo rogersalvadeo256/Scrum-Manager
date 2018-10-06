@@ -22,11 +22,12 @@ public class ComponentInvite extends HBox {
 		loadFriendContent();
 
 	}
+
 	/**
-	 * populate the two vbox on the layout
-	 * simple logic to make the two vbox had the same amount of components 
-	 * if the number of components are odd, will be setted one component for the vbox that have 
-	 * the smaller amount of components
+	 * populate the two vbox on the layout simple logic to make the two vbox had the
+	 * same amount of components if the number of components are odd, will be setted
+	 * one component for the vbox that have the smaller amount of components
+	 * 
 	 * @author jefter66
 	 * @throws IOException
 	 */
@@ -58,15 +59,14 @@ public class ComponentInvite extends HBox {
 			}
 		}
 		this.getChildren().addAll(vbLeft, vbRight);
-	}	
-
+	}
 
 	/**
-	 * 	
-	 * Loads the friendlist, set friends informations into one component, this component is
-	 * setted to dispare a event when clicked.
-	 * When the component is clicked, the friend is added into a list, for later he can be invited for 
-	 * the project
+	 * 
+	 * Loads the friendlist, set friends informations into one component, this
+	 * component is setted to dispare a event when clicked. When the component is
+	 * clicked, the friend is added into a list, for later he can be invited for the
+	 * project
 	 * 
 	 * @author jefter66
 	 * @throws IOException
@@ -79,21 +79,20 @@ public class ComponentInvite extends HBox {
 		this.listComponents.clear();
 
 		for (USER_PROFILE p : QUERYs_FRIENDSHIP.friendsList()) {
-
 			HBProfileContentForInvite component = new HBProfileContentForInvite(p);
-
 			component.setClickedEvent(e -> {
-				for (USER_PROFILE var : TEMP_STORE_INVITATIONS.LIST_INVITATION()) {
 
-					if (var == component.getProfile()) {
-						TEMP_STORE_INVITATIONS.REMOVE_FROM_LIST(var);
-						return;
+				if (!TEMP_STORE_INVITATIONS.LIST_INVITATION().isEmpty()) {
+					for (USER_PROFILE var : TEMP_STORE_INVITATIONS.LIST_INVITATION()) {
+						if (var == component.getProfile()) {
+							TEMP_STORE_INVITATIONS.REMOVE_FROM_LIST(var);
+							return;
+						}
 					}
 				}
 				TEMP_STORE_INVITATIONS.LIST_INVITATION().add(component.getProfile());
 				return;
 			});
-
 			this.listComponents.add(component);
 		}
 	}

@@ -12,11 +12,8 @@ public class TEMP_STORE_INVITATIONS {
       TEMP_STORE_INVITATIONS.LIST_INVITES = LIST_INVITES == null ? new ArrayList<USER_PROFILE>() : LIST_INVITES;
       return TEMP_STORE_INVITATIONS.LIST_INVITES;
    }
-
-   public static void REMOVE_FROM_LIST(USER_PROFILE p ) {
-      for (USER_PROFILE up : LIST_INVITES)   {
-            if(up.getCod() == p.getCod())  LIST_INVITES.remove(p);
-      }
-   }  
-
+   public static void REMOVE_FROM_LIST(USER_PROFILE p) {
+      LIST_INVITES.remove(p);
+   }
+   
 }
