@@ -19,7 +19,11 @@ public class PROJECT_INVITATION {
 	private int projInviteCod;
 
 	@Column(name="PR_INV_PROF_COD")
-	private int profCod;
+	private int profCodInvited;
+
+	@Column(name="PR_INV_PRF_WHO_INVITED")
+	private int profCodWhoInvited;
+
 
 	@Column(name="PR_INV_STATUS")
 	private String status;
@@ -32,7 +36,20 @@ public class PROJECT_INVITATION {
 	 * @return the profCod
 	 */
 	public int getProfCod() {
-		return profCod;
+		return profCodInvited;
+	}
+
+	/**
+	 * @param profCodInvited the profCod to set
+	 */
+	public void setProfCodInvited(int profCodInvited) {
+		this.profCodInvited = profCodInvited;
+	}
+	/**
+	 * @param profCodWhoInvited the profCreator to set
+	 */
+	public void setInvitedBy(int profCodWhoInvited) {
+		this.profCodWhoInvited = profCodWhoInvited;
 	}
 
 	/**
@@ -42,12 +59,6 @@ public class PROJECT_INVITATION {
 		return projInviteCod;
 	}
 
-	/**
-	 * @param profCod the profCod to set
-	 */
-	public void setProfCod(int profCod) {
-		this.profCod = profCod;
-	}
 	/**
 	 * @param status the status to set
 	 */

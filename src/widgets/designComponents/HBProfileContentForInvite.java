@@ -14,6 +14,7 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
 	public HBProfileContentForInvite(USER_PROFILE p) throws IOException {
 		super(p);
 		
+
 		this.layout= new VBox() ;
 		
 		this.getChildren().clear();
@@ -22,8 +23,7 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
 		
 
 		this.layout.getChildren().addAll(image,lblName);
-	
-		
+
 
 		int size = 50;
 		this.image.setFitHeight(size);
@@ -33,10 +33,16 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
 	
 	}
 	
-	public void teste (EventHandler<MouseEvent> e) { 
+	public void  setClickedEvent (EventHandler<MouseEvent> e) { 
 		this.setOnMouseClicked(e);
 	}
 
+
+
+	@Override
+	public USER_PROFILE getProfile() {
+		return super.getProfile();
+	}
 
 
 
