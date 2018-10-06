@@ -38,7 +38,6 @@ public class ComponentInvite extends HBox {
 		for (int i = value; i < value * 2; i++) {
 			this.vbRight.getChildren().add(this.listComponents.get(i));
 		}
-
 		if (this.listComponents.size() % 2 > 0) {
 
 			for(int i = value * 2; i < this.listComponents.size(); i++) { 
@@ -48,11 +47,8 @@ public class ComponentInvite extends HBox {
 					break;
 				}
 				this.vbLeft.getChildren().add(this.listComponents.get(i));
-
 			}
-
 		}
-
 		this.getChildren().addAll(vbLeft,vbRight);
 
 	}
@@ -70,4 +66,8 @@ public class ComponentInvite extends HBox {
 			this.listComponents.add(component);
 		}
 	}
+
+
+
+	
 }

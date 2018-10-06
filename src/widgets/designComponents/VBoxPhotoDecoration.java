@@ -1,5 +1,6 @@
 package widgets.designComponents;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -46,6 +47,8 @@ public class VBoxPhotoDecoration extends VBox {
 		this.setOnMouseExited(e -> {
 			this.vbContainer.setVisible(false);
 		});
+
+		
 	}
 
 	public VBox changePhoto() {

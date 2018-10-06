@@ -123,7 +123,6 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 
 			this.layoutForInviteComponents.getChildren().add(component);
 
-
 			return;
 		}
 		boolean isTheHBOX = this.scene.getRoot() == layoutForInviteComponents ? true : false;

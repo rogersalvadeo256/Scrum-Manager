@@ -3,6 +3,9 @@ package widgets.designComponents;
 import java.io.IOException;
 
 import db.pojos.USER_PROFILE;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 
 public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
@@ -19,16 +22,20 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword{
 		
 
 		this.layout.getChildren().addAll(image,lblName);
+	
 		
-		
+
 		int size = 50;
 		this.image.setFitHeight(size);
 		this.image.setFitWidth(size);
 		
-	
-	}
 
 	
+	}
+	
+	public void teste (EventHandler<MouseEvent> e) { 
+		this.setOnMouseClicked(e);
+	}
 
 
 
