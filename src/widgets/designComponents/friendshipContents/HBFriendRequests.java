@@ -1,14 +1,9 @@
-package widgets.designComponents;
+package widgets.designComponents.friendshipContents;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -19,7 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import statics.SESSION;
 
 public class HBFriendRequests extends HBox {
 	private Label lblName;

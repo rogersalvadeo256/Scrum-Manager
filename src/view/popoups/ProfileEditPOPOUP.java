@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Window;
 import statics.PROFILE_IMG;
 import statics.SESSION;
-import widgets.designComponents.ShowImage;
-import widgets.designComponents.VBoxPhotoDecoration;
+import widgets.designComponents.photoContent.ShowImage;
+import widgets.designComponents.photoContent.VBoxPhotoDecoration;
 
 public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 

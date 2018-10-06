@@ -33,7 +33,7 @@ import validation.CheckEmptyFields;
 import view.popoups.ProfileEditPOPOUP;
 import view.scenes.LoginScene;
 import widgets.alertMessage.CustomAlert;
-import widgets.designComponents.HBStatusBar;
+import widgets.designComponents.profileContents.HBStatusBar;
 
 public class EditProfileController {
 

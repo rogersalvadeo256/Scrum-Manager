@@ -1,4 +1,4 @@
-package widgets.designComponents;
+package widgets.designComponents.projectContents;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import project.invitation.TEMP_STORE_INVITATIONS;
+import widgets.designComponents.profileContents.HBProfileContentForInvite;
 
 public class ComponentInvite extends HBox {
 

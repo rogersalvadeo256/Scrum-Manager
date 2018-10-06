@@ -1,4 +1,4 @@
-package widgets.designComponents;
+package widgets.designComponents.profileContents;
 
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Pos;

@@ -1,4 +1,5 @@
-package widgets.designComponents;
+package widgets.designComponents.profileContents;
+
 
 import java.io.IOException;
 

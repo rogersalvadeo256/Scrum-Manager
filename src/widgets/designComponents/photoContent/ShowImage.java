@@ -1,4 +1,4 @@
-package widgets.designComponents;
+package widgets.designComponents.photoContent;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;

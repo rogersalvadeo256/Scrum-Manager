@@ -1,4 +1,5 @@
-package widgets.designComponents;
+package widgets.designComponents.friendshipContents;
+
 
 import java.io.IOException;
 
@@ -7,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import widgets.designComponents.profileContents.HBProfileContent;
 
 public class HBFriendContent extends HBProfileContent{
 	

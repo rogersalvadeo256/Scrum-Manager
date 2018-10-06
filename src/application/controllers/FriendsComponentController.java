@@ -8,7 +8,7 @@ import friendship.FriendshipActions;
 import friendship.QUERYs_FRIENDSHIP;
 import javafx.scene.layout.VBox;
 import view.popoups.FriendListPOPOUP;
-import widgets.designComponents.HBFriendContent;
+import widgets.designComponents.friendshipContents.HBFriendContent;
 
 public class FriendsComponentController {
 	private ArrayList<USER_PROFILE> friendsList;

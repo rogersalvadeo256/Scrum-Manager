@@ -1,4 +1,5 @@
-package widgets.designComponents;
+package widgets.designComponents.friendshipContents;
+
 
 import java.io.IOException;
 

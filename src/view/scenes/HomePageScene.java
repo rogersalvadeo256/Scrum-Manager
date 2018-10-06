@@ -39,8 +39,8 @@ import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
-import widgets.designComponents.HBStatusBar;
-import widgets.designComponents.ShowImage;
+import widgets.designComponents.photoContent.ShowImage;
+import widgets.designComponents.profileContents.HBStatusBar;
 import widgets.toaster.Toast;
 
 public class HomePageScene extends Scene {
@@ -84,6 +84,7 @@ public class HomePageScene extends Scene {
 		this.btnFriendRequest = new Button();
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
+		this.btnProjectInvitation = new Button();
 
 		Window.mainStage.setResizable(false);
 
@@ -114,7 +115,7 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, vbLeftColumn,
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation, vbLeftColumn,
 				vbRightColumn);
 		GENERAL_STORE.loadComponentsHOME();
 
@@ -143,7 +144,6 @@ public class HomePageScene extends Scene {
 
 		this.txtSearch = new TextField();
 
-		this.btnProjectInvitation = new Button();
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 		this.txtSearch.setId("search");
@@ -317,7 +317,10 @@ public class HomePageScene extends Scene {
 				new NewProjectPOPOUP(Window.mainStage).showAndWait();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
+			} catch  ( IOException e2) { 
+				e2.printStackTrace();
 			}
+		
 		});
 
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));

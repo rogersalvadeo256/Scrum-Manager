@@ -1,4 +1,4 @@
-package widgets.designComponents;
+package widgets.designComponents.friendshipContents;
 
 import java.io.File;
 import java.io.FileInputStream;

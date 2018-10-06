@@ -80,8 +80,6 @@ public class DB_OPERATION {
 		return q.getResultList();
 
 	}
-
-
 	/**
 	 * For querys with more than one parameter the parameters has to be int numbers
 	 * 
@@ -126,7 +124,20 @@ public class DB_OPERATION {
 			q.setParameter(strings[i], paramArgs[i]);
 		}
 		return q.getResultList();
+	}
+	
+	/** 
+	 * Any parameters
+	 */
+	@SuppressWarnings("unchecked")	
+	public static List<Object> QUERY(String query, String[] strings, Object[] paramArgs) {
+		EntityManager em = Database.createEntityManager();
+		Query q = em.createQuery(query);
 
+		for (int i = 0; i < strings.length; i++) {
+			q.setParameter(strings[i], paramArgs[i]);
+		}
+		return q.getResultList();
 	}
 }
 

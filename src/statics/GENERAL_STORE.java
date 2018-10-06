@@ -15,18 +15,19 @@ public class GENERAL_STORE {
 	 */
 	private static Label lblName, lblUserName;
 	private static ImageView imgProfile;
-	private static Button btnFriendRequest, btnFriendsList;
+	private static Button btnFriendRequest, btnFriendsList, btnProjectInvitation;
 	private static VBox vbCurrentProjects, vbFinishedProjects;
 	
 
 	public static void setComponentsHOME(Label lblName, Label lblUserName, ImageView imgProfile,
 																					Button btnFriendRequest,
-																					Button btnFriendsList,VBox vbCurrentProjects,VBox vbFinishedProjects) {
+																					Button btnFriendsList, Button btnProjectInvitation,VBox vbCurrentProjects,VBox vbFinishedProjects) {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
 		GENERAL_STORE.imgProfile = imgProfile;
 		GENERAL_STORE.btnFriendRequest = btnFriendRequest;
 		GENERAL_STORE.btnFriendsList = btnFriendsList;
+		GENERAL_STORE.btnProjectInvitation = btnProjectInvitation;
 		GENERAL_STORE.vbCurrentProjects = vbCurrentProjects;
 		GENERAL_STORE.vbFinishedProjects = vbFinishedProjects;
 	}
@@ -36,6 +37,8 @@ public class GENERAL_STORE {
 
 		btnFriendRequest.setText(String.valueOf(QUERYs_FRIENDSHIP.friendshipRequestsList().size()));
 		btnFriendsList.setText(String.valueOf(QUERYs_FRIENDSHIP.friendsList().size()));
+		
+	
 		imgProfile.setImage(PROFILE_IMG.loadImage());
 
 	}

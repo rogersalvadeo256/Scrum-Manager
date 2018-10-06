@@ -2,7 +2,6 @@ package view.popoups;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import application.controllers.NewProjectSceneController;
@@ -17,7 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import validation.CheckEmptyFields;
-import widgets.designComponents.ComponentInvite;
+import widgets.designComponents.projectContents.ComponentInvite;
 import widgets.toaster.Toast;
 
 public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
@@ -32,13 +31,13 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 	private HBox layoutForInviteComponents;
 	private Toast toast;
 
-	public NewProjectPOPOUP(Stage mainStage) throws FileNotFoundException {
+	public NewProjectPOPOUP(Stage mainStage) throws IOException {
 		super(mainStage);
 
 		this.setWidth(300);
 		this.setHeight(500);
 
-		this.controller = new NewProjectSceneController();
+		this.controller = new NewProjectSceneController(this);
 
 		this.lblProjectName = new Label("Nome do Projeto");
 		this.lblAboutTheProject = new Label("Descrição do Projeto");
@@ -76,7 +75,7 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.txtProjectName.setAlignment(Pos.CENTER);
 
 		this.btnGoBack.setOnAction(e -> {
-			controller.actionBack(NewProjectPOPOUP.this);
+			controller.actionBack();
 		});
 
 		this.btnFinish.setOnAction(e -> {

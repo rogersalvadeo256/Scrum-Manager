@@ -4,21 +4,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import application.main.Window;
-import db.hibernate.factory.Database;
-import db.pojos.FRIENDSHIP;
 import db.pojos.USER_PROFILE;
 import friendship.FriendshipActions;
 import friendship.QUERYs_FRIENDSHIP;
 import javafx.scene.layout.VBox;
+import statics.ENUMS.REQUEST_STATUS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
 import view.popoups.FriendshipRequestPOPOUP;
-import widgets.designComponents.HBFriendRequests;
-import widgets.toaster.Toast;
+import widgets.designComponents.friendshipContents.HBFriendRequests;
 
 public class FriendshipRequestsController {
 	private ArrayList<USER_PROFILE> requestsList;
@@ -60,7 +54,7 @@ public class FriendshipRequestsController {
 
 				layout.getChildren().add(component);
 				component.setEventAccept(e -> {
-					controllerRequest.acceptRequest();
+					controllerRequest.answerRequest(REQUEST_STATUS.ACCEPTED);
 					SESSION.UPDATE_SESSION();
 					this.loadRequests();
 					try {
@@ -73,7 +67,7 @@ public class FriendshipRequestsController {
 					}
 				});
 				component.setEventRefuse(e -> {
-					controllerRequest.refuseRequest();
+					controllerRequest.answerRequest(REQUEST_STATUS.REFUSED);
 					SESSION.UPDATE_SESSION();
 					loadRequests();
 					try {

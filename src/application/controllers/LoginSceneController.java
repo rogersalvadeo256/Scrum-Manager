@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import application.main.Window;
-import db.pojos.USER_REGISTRATION;
 import db.util.Login;
 import javafx.event.ActionEvent;
 import javafx.scene.control.PasswordField;
@@ -13,7 +12,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import statics.SERIALIZATION;
 import view.scenes.HomePageScene;
 
 public class LoginSceneController {

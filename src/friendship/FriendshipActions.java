@@ -9,23 +9,24 @@ import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
+import statics.ENUMS.REQUEST_STATUS;
 
 public class FriendshipActions {
 
 	private USER_PROFILE p;
 
 	/**
-	 * The parameter is the profile of who send the request, this profile is removed of
-	 * the list of friendship requests and moved to the friends list in the two profiles (
-	 * sender and receiver )
+	 * The parameter is the profile of who send the request, this profile is removed
+	 * of the list of friendship requests and moved to the friends list in the two
+	 * profiles ( sender and receiver )
 	 * 
 	 * @author jefter66
-	 * @param USER_PROFILE
-	 *            pRequest
+	 * @param USER_PROFILE pRequest
 	 */
 	public FriendshipActions(USER_PROFILE p) {
 		this.p = p;
 	}
+
 	/**
 	 * The parameter are the user that going to receive the friendship request
 	 * 
@@ -43,31 +44,24 @@ public class FriendshipActions {
 		DB_OPERATION.PERSIST(friendshipRequest);
 
 	}
+	public void answerRequest(REQUEST_STATUS type) {
 
-	public void acceptRequest() {
+		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY(
+				"FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY = :COD_PROF_SENDER",
+				new String[] { "COD_PROF_RECEIVER", "COD_PROF_SENDER" },
+				new int[] { SESSION.getProfileLogged().getCod(), this.p.getCod() }).get(0);
 
-		FRIENDSHIP frq = (FRIENDSHIP) DB_OPERATION.QUERY("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER =:COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY =:COD_PROF_SENDER"
-				,new String[]{"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
-
-		frq.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
-
-
-		DB_OPERATION.MERGE(frq);
-
-		SESSION.UPDATE_SESSION();
-	}
-
-	public void refuseRequest() {
-
-		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY("FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY = :COD_PROF_SENDER"
-				,new String[] {"COD_PROF_RECEIVER", "COD_PROF_SENDER"}, new int[]{SESSION.getProfileLogged().getCod(), this.p.getCod()}).get(0);
-		
-		
-		fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
-
+		switch (type) {
+		case REFUSED:
+			fr.setStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
+			break;
+		case ACCEPTED:
+			fr.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+			break;
+		}
 		DB_OPERATION.MERGE(fr);
-
 		SESSION.UPDATE_SESSION();
+
 	}
 
 	public void removeFriend() throws IOException {
@@ -86,4 +80,3 @@ public class FriendshipActions {
 		}
 	}
 }
-

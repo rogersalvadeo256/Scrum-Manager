@@ -9,7 +9,7 @@ import javax.persistence.Query;
 import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import statics.SESSION;
-import widgets.designComponents.HBProfileContent;
+import widgets.designComponents.profileContents.HBProfileContent;
 
 public class SearchFriend {
 	private EntityManager em;

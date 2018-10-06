@@ -1,7 +1,6 @@
 package view.popoups;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -12,7 +11,6 @@ import db.pojos.USER_REGISTRATION;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -24,7 +22,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Window;
 import validation.CheckEmptyFields;
-import widgets.designComponents.HBProfileContentForgotPassword;
+import widgets.designComponents.profileContents.HBProfileContentForgotPassword;
 
 public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 

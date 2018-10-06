@@ -7,25 +7,18 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.persistence.EntityManager;
 
-import db.hibernate.factory.Database;
 import db.pojos.USER_PROFILE;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TableColumn;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import widgets.alertMessage.CustomAlert;
 
 public class PROFILE_IMG {
-	private EntityManager em;
-
 	public PROFILE_IMG() {
 	}
-
 	/**
 	 * Update the profile image of the user in the database
 	 * 
@@ -45,17 +38,8 @@ public class PROFILE_IMG {
 			fis.read(img);
 			fis.close();
 			if (img.length < 52428800) {
-				if (em == null) {
-					em = Database.createEntityManager();
-				}
 				USER_PROFILE p = SESSION.getProfileLogged();
-				this.em.getTransaction().begin();
-				p.setPhoto(img);
-				this.em.merge(p);
-				this.em.getTransaction().commit();
-				this.em.clear();
-				this.em.close();
-				this.em = null;
+				DB_OPERATION.MERGE(p);
 				return;
 			}
 			new CustomAlert(AlertType.INFORMATION, "Erro", "Arquivo muito grande", "Foto deve ser menor que 50 mb");

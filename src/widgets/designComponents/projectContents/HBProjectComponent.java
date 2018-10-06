@@ -1,11 +1,9 @@
-package widgets.designComponents;
+package widgets.designComponents.projectContents;
 
 import db.pojos.PROJECT;
-import db.pojos.USER_PROFILE;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import statics.DB_OPERATION;
 
 public class HBProjectComponent extends HBox{
 

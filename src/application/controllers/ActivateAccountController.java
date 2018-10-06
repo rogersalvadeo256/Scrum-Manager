@@ -24,7 +24,7 @@ import statics.ENUMS;
 import view.popoups.ActivateAccount;
 import view.popoups.ForgotPasswordPOPOUP;
 import widgets.alertMessage.CustomAlert;
-import widgets.designComponents.HBProfileContentReactivateAccount;
+import widgets.designComponents.profileContents.HBProfileContentReactivateAccount;
 
 
 public class ActivateAccountController {
