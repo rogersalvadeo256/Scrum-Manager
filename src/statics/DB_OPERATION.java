@@ -70,15 +70,14 @@ public class DB_OPERATION {
 		return q.getResultList();
 
 	}
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")  
 	public static List<Object> QUERY(String query, String param, Object paramArgs) {
 		EntityManager em = Database.createEntityManager();
-
+		
 		Query q = em.createQuery(query);
 		q.setParameter(param, paramArgs);
 
-		return q.getResultList();
-
+		 return q.getResultList();
 	}
 	/**
 	 * For querys with more than one parameter the parameters has to be int numbers
@@ -125,7 +124,6 @@ public class DB_OPERATION {
 		}
 		return q.getResultList();
 	}
-	
 	/** 
 	 * Any parameters
 	 */
@@ -139,5 +137,27 @@ public class DB_OPERATION {
 		}
 		return q.getResultList();
 	}
+
+	@SuppressWarnings("unchecked")	
+	public static List<Object> QUERY(String query, List<String> strings, List<Integer> paramArgs) {
+		EntityManager em = Database.createEntityManager();
+		Query q = em.createQuery(query);
+
+		for (int i = 0; i < strings.size(); i++) {
+			q.setParameter(strings.get(i), paramArgs.get(i));
+		}
+		return q.getResultList();
+	}
+	@SuppressWarnings("unchecked")	
+	public static List<Object> QUERY(String query, String string, List<Integer> paramArgs) {
+		EntityManager em = Database.createEntityManager();
+		Query q = em.createQuery(query);
+
+		for (int i = 0; i < paramArgs.size(); i++) {
+			q.setParameter(string, paramArgs.get(i));
+		}
+		return q.getResultList();
+	}
+
 }
 

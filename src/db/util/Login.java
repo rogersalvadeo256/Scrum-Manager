@@ -4,11 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
 import application.main.Window;
-import db.hibernate.factory.Database;
 import db.pojos.USER_REGISTRATION;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;

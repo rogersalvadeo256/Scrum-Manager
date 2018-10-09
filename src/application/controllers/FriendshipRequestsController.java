@@ -25,7 +25,6 @@ public class FriendshipRequestsController {
 		drawRequests(layout, screen);
 		this.requestsList = new ArrayList<USER_PROFILE>();
 	}
-
 	/**
 	 * This method are for bring the friendship requests of the database and put on
 	 * a component with the user that send the request informations

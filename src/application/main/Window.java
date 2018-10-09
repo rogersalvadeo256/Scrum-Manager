@@ -18,7 +18,6 @@ import javafx.stage.Stage;
 import statics.SERIALIZATION;
 import statics.SERIALIZATION.FileType;
 import statics.SESSION;
-import view.popoups.NewProjectPOPOUP;
 import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
 
@@ -37,6 +36,7 @@ public class Window extends Stage {
 
 		if (SERIALIZATION.fileExists(FileType.SESSION)) {
 			EntityManager em = Database.createEntityManager();
+
 			Query q = em.createQuery("FROM USER_REGISTRATION");
 			if (!q.getResultList().isEmpty()) {
 

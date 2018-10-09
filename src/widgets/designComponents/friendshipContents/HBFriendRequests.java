@@ -40,6 +40,8 @@ public class HBFriendRequests extends HBox {
 
 		this.image.setFitHeight(100);
 		this.image.setFitWidth(100);
+
+		
 		this.path = new File("resources/images/icons/scrum_icon.png");
 		this.fis = new FileInputStream(path);
 

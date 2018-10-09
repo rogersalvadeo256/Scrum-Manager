@@ -39,6 +39,7 @@ import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
+import view.popoups.ProjectInvite;
 import widgets.designComponents.photoContent.ShowImage;
 import widgets.designComponents.profileContents.HBStatusBar;
 import widgets.toaster.Toast;
@@ -64,6 +65,7 @@ public class HomePageScene extends Scene {
 
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
+		
 
 		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
 
@@ -73,6 +75,7 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setHeight(800);
 
 		Window.mainStage.setResizable(true);
+
 
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
@@ -214,6 +217,14 @@ public class HomePageScene extends Scene {
 			this.setOnMouseMoved(e2 -> {
 				this.toast.close();
 			});
+		});
+
+		this.btnProjectInvitation.setOnAction(e->{
+			try {
+				new ProjectInvite(Window.mainStage).show();;
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 		});
 
 		this.btnFriendRequest.setId("friend-request");

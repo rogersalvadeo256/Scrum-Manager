@@ -1,4 +1,4 @@
-package project.invitation;
+package project.querys;
 
 import java.util.ArrayList;
 

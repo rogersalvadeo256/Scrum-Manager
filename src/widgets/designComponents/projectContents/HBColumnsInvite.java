@@ -6,21 +6,20 @@ import java.util.List;
 
 import db.pojos.USER_PROFILE;
 import friendship.QUERYs_FRIENDSHIP;
-import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import project.invitation.TEMP_STORE_INVITATIONS;
+import project.querys.TEMP_STORE_INVITATIONS;
 import widgets.designComponents.profileContents.HBProfileContentForInvite;
 
-public class ComponentInvite extends HBox {
+public class HBColumnsInvite extends HBox {
+
 
 	private List<HBProfileContentForInvite> listComponents;
 
 	private VBox vbLeft;
 	private VBox vbRight;
-	private ScrollBar sc;
 
-	public ComponentInvite() throws IOException {
+	public HBColumnsInvite() throws IOException {
 
 		loadFriendContent();
 
@@ -81,16 +80,17 @@ public class ComponentInvite extends HBox {
 
 		for (USER_PROFILE p : QUERYs_FRIENDSHIP.friendsList()) {
 			HBProfileContentForInvite component = new HBProfileContentForInvite(p);
+			
+			
 			component.setClickedEvent(e -> {
 
-				if (!TEMP_STORE_INVITATIONS.LIST_INVITATION().isEmpty()) {
 					for (USER_PROFILE var : TEMP_STORE_INVITATIONS.LIST_INVITATION()) {
 						if (var == component.getProfile()) {
 							TEMP_STORE_INVITATIONS.REMOVE_FROM_LIST(var);
 							return;
 						}
 					}
-				}
+//				}
 				TEMP_STORE_INVITATIONS.LIST_INVITATION().add(component.getProfile());
 				return;
 			});

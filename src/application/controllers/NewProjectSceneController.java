@@ -3,7 +3,7 @@ package application.controllers;
 import java.io.IOException;
 
 import db.pojos.PROJECT;
-import project.invitation.TEMP_STORE_INVITATIONS;
+import project.querys.TEMP_STORE_INVITATIONS;
 import project.querys.InvitationQuerys;
 import statics.DB_OPERATION;
 import statics.GENERAL_STORE;
@@ -17,6 +17,7 @@ public class NewProjectSceneController {
 
 	public NewProjectSceneController(NewProjectPOPOUP screen) throws IOException {
 		this.screen = screen;
+		this.invitation  = new InvitationQuerys();
 	}
 	public void actionBack() {
 		this.screen.close();
@@ -33,7 +34,10 @@ public class NewProjectSceneController {
 		/*
 		 * see if exist a project with the same name
 		 */
-		if (sendInvites())
+		
+		
+		
+		if (!TEMP_STORE_INVITATIONS.LIST_INVITATION().isEmpty())
 			invitation.invite(TEMP_STORE_INVITATIONS.LIST_INVITATION(), project);
 
 		try {
@@ -42,9 +46,25 @@ public class NewProjectSceneController {
 			e.printStackTrace();
 		}
 		screen.close();
-
-	}
-	private boolean sendInvites() {
-		return TEMP_STORE_INVITATIONS.LIST_INVITATION().isEmpty() ? true : false;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

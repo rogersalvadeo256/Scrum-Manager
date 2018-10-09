@@ -10,21 +10,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-@Entity(name = "PROJECT_MEMBER_INVITATION")
-public class PROJECT_MEMBER_INVITATION {
+@Entity(name = "PROJECT_MEMBER")
+public class PROJECT_MEMBER {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "MBR_COD")
 	private int mbrCod;
 
-	@Column(name = "MBR_PROF_COD_WHO_INVITED")
+	@Column(name = "MBR_PROF_COD_INVITED_BY", nullable = false)
 	private int mbrInvitedBy;
 
-	@Column(name = "MBR_PROF_COD")
+	@Column(name = "MBR_PROF_COD" , nullable = false)
 	private int mbrProfCod;
 
-	@Column(name = "MBR_PROJECT")
+	@Column(name = "MBR_PROJECT" , nullable = false)
 	private int mbrProjectCod;
 
 	@Temporal(TemporalType.DATE)
@@ -34,7 +34,7 @@ public class PROJECT_MEMBER_INVITATION {
 	@Column(name = "MBR_DT_INVITE_ANSWERED")
 	private Date mbrInviteAnsweredDate;
 
-	@Column(name = "MBR_INVITE_STATUS")
+	@Column(name = "MBR_INVITE_STATUS" , nullable = false)
 	private String mbrInviteStatus;
 	/**
 	 * if someone drop out the project
