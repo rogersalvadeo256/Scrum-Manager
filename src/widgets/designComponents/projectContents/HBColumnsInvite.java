@@ -80,8 +80,7 @@ public class HBColumnsInvite extends HBox {
 
 		for (USER_PROFILE p : QUERYs_FRIENDSHIP.friendsList()) {
 			HBProfileContentForInvite component = new HBProfileContentForInvite(p);
-			
-			
+						
 			component.setClickedEvent(e -> {
 
 					for (USER_PROFILE var : TEMP_STORE_INVITATIONS.LIST_INVITATION()) {

@@ -58,13 +58,12 @@ public class ProjectInviteController {
 		}
 		x.clear();
 	}
-	
 	public ArrayList<HBProjectInvitationComponent> loadComponents() throws IOException {
 		
 		ArrayList<HBProjectInvitationComponent> listComponents = new ArrayList<HBProjectInvitationComponent>();
 		if (loadValues()) {
 			int i = 0;
-			while (i  < listProfiles.size() ) {
+			while (i < listProfiles.size()) {
 				PROJECT p = (PROJECT) this.listProjects.get(i);
 				USER_PROFILE up = (USER_PROFILE) this.listProfiles.get(i);
 				PROJECT_MEMBER pm = (PROJECT_MEMBER) this.listInvites.get(i);
@@ -78,7 +77,8 @@ public class ProjectInviteController {
 					listComponents.add(new HBProjectInvitationComponent(up, p));
 				i++;
 				
-				if(i > this.listInvites.size() || i > this.listProjects.size() || i > this.listProfiles.size()) break;
+				if (i > this.listInvites.size() || i > this.listProjects.size() || i > this.listProfiles.size())
+					break;
 			}
 		}
 		
@@ -87,17 +87,17 @@ public class ProjectInviteController {
 	}
 	
 	public boolean loadValues() {
-		boolean y = DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_PROF_COD = :COD AND MBR_INVITE_STATUS='ON_HOLD'", "COD", SESSION.getProfileLogged().getCod()).isEmpty();
+		this.listInvites = (ArrayList<?>) DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_PROF_COD = :COD AND MBR_INVITE_STATUS='ON_HOLD'", "COD", SESSION.getProfileLogged().getCod());
 		
-		if (y)
-			return y;
+		boolean y = this.listInvites.isEmpty();
+		
+		if (y) return y;
 		
 		this.listProfiles.clear();
 		this.listProjects.clear();
 		this.listInvites.clear();
-		
 		this.listInvites = (ArrayList<?>) DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_PROF_COD = :COD AND MBR_INVITE_STATUS='ON_HOLD'", "COD", SESSION.getProfileLogged().getCod());
-		
+			
 		int[] profiles = new int[listInvites.size()];
 		int[] projects = new int[listInvites.size()];
 		
