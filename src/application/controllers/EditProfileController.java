@@ -49,7 +49,6 @@ public class EditProfileController {
 		this.btnChangeQuestion = new Button("Alterar");
 		this.hbDeleteAccount = new HBStatusBar(false, "Desativar Conta", "Conta Ativa");
 
-		// this.btnDeleteAccount = new Button("Deletar conta");
 
 		this.hbDeleteAccount.setGroupEvent(new ChangeListener<Toggle>() {
 
@@ -194,18 +193,7 @@ public class EditProfileController {
 				hbChangeAnswer.getChildren().add(btnChangeAnswer);
 			});
 		});
-
-		// this.btnDeleteAccount.setOnAction(e4 -> {
-		// try {
-		// deleteAccount(e4, stage);
-		// } catch (ClassNotFoundException | FileNotFoundException |
-		// SQLException e2) {
-		// e2.printStackTrace();
-		// }
-		// });
-
 		backToNormalOptions(e, btnBack, screen);
-
 	}
 
 	public void setEventFinish(ActionEvent e, TextField txtName, PasswordField txtCurrentPassword, PasswordField txtNewPassword) {
@@ -262,6 +250,7 @@ public class EditProfileController {
 			});
 		});
 	}
+	@SuppressWarnings("unused")
 	private void deleteAccount(ActionEvent e, Stage stage) throws ClassNotFoundException, FileNotFoundException, SQLException {
 
 		if (this.em == null)

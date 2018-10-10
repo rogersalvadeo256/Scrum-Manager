@@ -49,8 +49,8 @@ public class QUERYs_FRIENDSHIP {
 					new int[]{friend.getRequestedBy(), friend.getReceiver()});
 			
 			for (USER_PROFILE profile : (List<USER_PROFILE>) profileList) {
-				if(profile.getCod() == SESSION.getProfileLogged().getCod()) break;
-				listReturn.add(profile);
+				if(profile.getCod() != SESSION.getProfileLogged().getCod())
+					listReturn.add(profile);
 			}
 		}
 		return listReturn;
@@ -63,3 +63,4 @@ public class QUERYs_FRIENDSHIP {
 		return (List<FRIENDSHIP>) list;
 	}
 }
+

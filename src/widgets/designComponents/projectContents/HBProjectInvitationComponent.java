@@ -41,13 +41,12 @@ public class HBProjectInvitationComponent extends HBox {
 		this.lblProjectName = new Label(project.getProjName());
 		
 		this.lblAbout = new Text(project.getProjDescription());
-		
+		this.imgInvitedBy = new ImageView();
 		boolean profileImage = invitedBy.getPhoto() == null ? true : false;
 		if (profileImage)
 			this.imgInvitedBy = new ImageView(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 		else
-			this.imgInvitedBy.setImage(PROFILE_IMG.getImage(invitedBy));
-		
+			this.imgInvitedBy.setImage(PROFILE_IMG.getImage(invitedBy.getPhoto()));
 		
 		int size = 60;
 		this.imgInvitedBy.setFitHeight(size);

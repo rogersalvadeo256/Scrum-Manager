@@ -39,6 +39,7 @@ public class PROFILE_IMG {
 			fis.close();
 			if (img.length < 52428800) {
 				USER_PROFILE p = SESSION.getProfileLogged();
+				p.setPhoto(img);
 				DB_OPERATION.MERGE(p);
 				return;
 			}
@@ -46,7 +47,6 @@ public class PROFILE_IMG {
 			return;
 		}
 	}
-
 	public static Image getImage(USER_PROFILE p) throws IOException {
 		BufferedImage bfi = ImageIO.read(new ByteArrayInputStream(p.getPhoto()));
 		Image img = SwingFXUtils.toFXImage(bfi, null);

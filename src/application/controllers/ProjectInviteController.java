@@ -11,7 +11,7 @@ import project.querys.InvitationQuerys;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.SESSION;
-import view.popoups.ProjectInvite;
+import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.projectContents.HBProjectInvitationComponent;
 
 public class ProjectInviteController {
@@ -20,13 +20,13 @@ public class ProjectInviteController {
 	private ArrayList<?> listProjects;
 	private ArrayList<?> listProfiles;
 	
-	public ProjectInviteController(ProjectInvite screen, VBox layout) throws IOException {
+	public ProjectInviteController(ProjectInvitePOPOUP screen, VBox layout) throws IOException {
 		this.listInvites = new ArrayList<PROJECT_MEMBER>();
 		this.listProjects = new ArrayList<PROJECT>();
 		this.listProfiles = new ArrayList<USER_PROFILE>();
 	}
 	
-	public void drawInvites(ProjectInvite screen, VBox layout) throws IOException {
+	public void drawInvites(ProjectInvitePOPOUP screen, VBox layout) throws IOException {
 		layout.getChildren().clear();
 		
 		ArrayList<HBProjectInvitationComponent> x = loadComponents();

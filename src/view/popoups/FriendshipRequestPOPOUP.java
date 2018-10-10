@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import application.controllers.FriendshipRequestsController;
 import javafx.geometry.Orientation;
 import javafx.scene.control.ScrollBar;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
 public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
@@ -22,7 +23,10 @@ public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
 		super(owner);
 		this.controller = new FriendshipRequestsController();
 		this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
+		
 
+		this.initStyle(StageStyle.DECORATED);
+		
 		this.setScene(scene);
 
 		controller.init(this.layout, this);

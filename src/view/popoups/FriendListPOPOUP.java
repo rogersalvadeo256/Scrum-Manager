@@ -16,7 +16,7 @@ public class FriendListPOPOUP extends StandartLayoutPOPOUP {
 		this.controller = new FriendsComponentController();
 
 		this.initStyle(StageStyle.DECORATED);
-
+		
 		controller.init(layout, this);
 	}
 }

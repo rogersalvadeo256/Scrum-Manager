@@ -4,7 +4,8 @@ import java.io.IOException;
 
 import application.controllers.ProjectInviteController;
 import javafx.stage.Stage;
-public class ProjectInvite extends StandartLayoutPOPOUP { 
+import javafx.stage.StageStyle;
+public class ProjectInvitePOPOUP extends StandartLayoutPOPOUP { 
 
 
       private ProjectInviteController controller;
@@ -15,13 +16,20 @@ public class ProjectInvite extends StandartLayoutPOPOUP {
        * button to go back
        * 
        */
-      public ProjectInvite(Stage owner) throws IOException{ 
+      public ProjectInvitePOPOUP(Stage owner) throws IOException{ 
             super(owner);
 
+
+       	
+//  		this.layout.getStylesheets().add(this.getClass().getResource("/css/INVITATION_COMPONENT.css").toExternalForm());
+//  		this.layout.applyCss();
+  		            
             this.controller = new ProjectInviteController(this, this.layout);
 
             this.controller.drawInvites(this, layout);
             
+            
+            this.initStyle(StageStyle.DECORATED);
             
       }
 

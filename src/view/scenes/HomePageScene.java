@@ -39,13 +39,13 @@ import view.popoups.FriendListPOPOUP;
 import view.popoups.FriendshipRequestPOPOUP;
 import view.popoups.NewProjectPOPOUP;
 import view.popoups.ProfileEditPOPOUP;
-import view.popoups.ProjectInvite;
+import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.photoContent.ShowImage;
 import widgets.designComponents.profileContents.HBStatusBar;
 import widgets.toaster.Toast;
 
 public class HomePageScene extends Scene {
-
+	
 	private AnchorPane layout;
 	private Button btnExit, btnLogOut;
 	private Button btnEditProfile;
@@ -62,25 +62,25 @@ public class HomePageScene extends Scene {
 	private SearchFriend searchUser;
 	private Toast toast, toast2;
 	private HBStatusBar statusBar;
-
+	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
 		
-
+		
 		this.getStylesheets().add(this.getClass().getResource("/css/HOME_PAGE_SCENE.css").toExternalForm());
-
+		
 		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-
+		
 		Window.mainStage.setResizable(true);
-
-
+		
+		
 		this.lblCurrentProject = new Label("Projetos Atuais");
 		this.lblProjectsDone = new Label("Projetos Concluidos");
 		this.lblEmail = new Label();
-
+		
 		this.lblName = new Label();
 		this.lblUsername = new Label();
 		this.profileImg = new ImageView();
@@ -88,22 +88,21 @@ public class HomePageScene extends Scene {
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
 		this.btnProjectInvitation = new Button();
-
+		
 		Window.mainStage.setResizable(false);
-
+		
 		this.statusBar = new HBStatusBar(true, "Ocupado", "Disponivel");
-
+		
 		this.statusBar.setGroupEvent(new ChangeListener<Toggle>() {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
-
+				
 				newValue = newValue == null ? oldValue : newValue;
-				newValue.setSelected(true);						
-
+				newValue.setSelected(true);
+				
 				if (newValue.isSelected()) {
-
-					if (SESSION.getProfileLogged().getStatus()
-							.equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
+					
+					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
 						USER_PROFILE up = SESSION.getProfileLogged();
 						DB_OPERATION.MERGE(up);
 					}
@@ -118,10 +117,9 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation, vbLeftColumn,
-				vbRightColumn);
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation, vbLeftColumn, vbRightColumn);
 		GENERAL_STORE.loadComponentsHOME();
-
+		
 		this.profileImg.setOnMouseClicked(e -> {
 			try {
 				ShowImage show = new ShowImage(PROFILE_IMG.loadImage(), Window.mainStage);
@@ -129,30 +127,30 @@ public class HomePageScene extends Scene {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
+			
 		});
-
+		
 		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
-
+		
 		this.lblCurrentProject = new Label("Projetos em andamento");
 		this.lblName.setId("lblProject");
 		this.lblProjectsDone = new Label("Projetos finalizados");
 		this.lblName.setId("lblProject");
-
+		
 		this.vbSearchResult = new VBox();
 		// this.vbSearchResult.setLayoutX(5);
 		this.vbSearchResult.getStyleClass().add("vbox");
 		this.vbSearchResult.setId("sugestions");
-
+		
 		this.txtSearch = new TextField();
-
+		
 		this.txtSearch.setFocusTraversable(false);
 		this.txtSearch.getStyleClass().add("text-field");
 		this.txtSearch.setId("search");
-
+		
 		this.searchUser = new SearchFriend();
-
+		
 		txtSearch.setPromptText("Encontre outros usuarios");
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
@@ -175,7 +173,7 @@ public class HomePageScene extends Scene {
 			}
 			vbSearchResult.getChildren().clear();
 		});
-
+		
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
 			try {
@@ -186,10 +184,10 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-
+		
 		this.btnExit = new Button();
 		this.btnExit.setOnAction(new Close(Window.mainStage));
-
+		
 		this.btnFriends.setOnAction(e -> {
 			if (!QUERYs_FRIENDSHIP.friendsList().isEmpty()) {
 				try {
@@ -218,65 +216,65 @@ public class HomePageScene extends Scene {
 				this.toast.close();
 			});
 		});
-
-		this.btnProjectInvitation.setOnAction(e->{
+		
+		this.btnProjectInvitation.setOnAction(e -> {
 			try {
-				new ProjectInvite(Window.mainStage).show();
+				new ProjectInvitePOPOUP(Window.mainStage).show();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
 		});
-
+		
 		this.btnFriendRequest.setId("friend-request");
 		this.btnHome = new Button();
-
+		
 		final int SIZE = 50;
 		ImageView icon_p = new ImageView();
 		icon_p.setImage(new Image(new FileInputStream(new File("resources/images/icons/friends.png"))));
 		icon_p.setFitHeight(SIZE);
 		icon_p.setFitWidth(SIZE);
 		this.btnFriends.setGraphic(icon_p);
-
+		
 		ImageView icon_f = new ImageView();
 		icon_f.setImage(new Image(new FileInputStream(new File("resources/images/icons/friend_request.png"))));
 		icon_f.setFitHeight(SIZE);
 		icon_f.setFitWidth(SIZE);
 		this.btnFriendRequest.setGraphic(icon_f);
-
+		
 		ImageView icon_invitation = new ImageView();
 		icon_invitation.setFitHeight(SIZE);
 		icon_invitation.setFitWidth(SIZE);
 		icon_invitation.setImage(new Image(new FileInputStream(new File("resources/images/icons/project_invitation.png"))));
 		this.btnProjectInvitation.setGraphic(icon_invitation);
-
+		
 		ImageView icon_u = new ImageView();
 		icon_u.setFitHeight(SIZE);
 		icon_u.setFitWidth(SIZE);
-
+		
 		ImageView icon_edit_profile = new ImageView();
 		icon_edit_profile.setImage(new Image(new FileInputStream(new File("resources/images/icons/edit_profile.png"))));
 		icon_edit_profile.setFitHeight(SIZE);
 		icon_edit_profile.setFitWidth(SIZE);
 		this.btnEditProfile.setGraphic(icon_edit_profile);
-
+		
 		ImageView icon_exit = new ImageView();
 		icon_exit.setImage(new Image(new FileInputStream(new File("resources/images/icons/exit.png"))));
 		icon_exit.setFitHeight(SIZE);
 		icon_exit.setFitWidth(SIZE);
 		this.btnExit.setGraphic(icon_exit);
-
+		
 		ImageView icon_scrum = new ImageView();
 		icon_scrum.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 		icon_scrum.setFitHeight(SIZE);
 		icon_scrum.setFitWidth(SIZE);
 		this.btnHome.setGraphic(icon_scrum);
-
+		
 		ImageView icon_logout = new ImageView();
 		icon_logout.setImage(new Image(new FileInputStream(new File("resources/images/icons/logout.png"))));
 		icon_logout.setFitHeight(SIZE);
 		icon_logout.setFitWidth(SIZE);
 		this.btnLogOut.setGraphic(icon_logout);
-
+		
 		this.btnHome.getStyleClass().add("header-buttons");
 		this.btnProjectInvitation.getStyleClass().add("header-buttons");
 		this.btnFriendRequest.getStyleClass().add("header-buttons");
@@ -284,7 +282,7 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
 		this.btnLogOut.getStyleClass().add("header-buttons");
-
+		
 		this.btnLogOut.setOnAction(e -> {
 			SESSION.RESET();
 			try {
@@ -294,46 +292,45 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-
+		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
-
+		
 		this.hbHeader = new HBox();
 		this.hbHeader.getStyleClass().add("hbox");
 		this.hbHeader.setId("header");
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile,
-				btnLogOut, btnExit);
-
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
+		
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
 		AnchorPane.setLeftAnchor(hbHeader, 0.0);
 		AnchorPane.setRightAnchor(hbHeader, 0.0);
 		this.layout.getChildren().add(hbHeader);
-
+		
 		this.vbProfileInfo = new VBox();
 		this.vbProfileInfo.getStyleClass().add("vbox");
 		this.vbProfileInfo.setId("profile-info");
-
+		
 		this.hbStartProject = new HBox();
 		this.hbStartProject.getChildren().add(new Label("Começar projeto"));
 		this.hbStartProject.setAlignment(Pos.TOP_CENTER);
 		this.hbStartProject.getStyleClass().add("hbox");
 		this.hbStartProject.setId("project");
-
+		
 		this.hbStartProject.setOnMouseClicked(e -> {
 			try {
 				new NewProjectPOPOUP(Window.mainStage).showAndWait();
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
-			} catch  ( IOException e2) { 
+			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
-		
+			
 		});
-
+		
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
@@ -343,43 +340,43 @@ public class HomePageScene extends Scene {
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
 		AnchorPane.setRightAnchor(vbProfileInfo, 750.0);
 		this.layout.getChildren().add(vbProfileInfo);
-
+		
 		this.vbLeftColumn = new VBox();
 		this.vbLeftColumn.getStyleClass().add("vbox");
 		this.vbLeftColumn.getChildren().add(this.lblProjectsDone);
-
+		
 		this.vbLeftColumn.setPrefWidth(400);
 		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
-
+		
 		this.vbRightColumn = new VBox();
 		this.vbRightColumn.getStyleClass().add("vbox");
 		this.vbRightColumn.setId("rightColumn");
 		this.vbRightColumn.getChildren().add(this.lblCurrentProject);
-
+		
 		this.vbRightColumn.setPrefWidth(400);
 		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);
-
+		
 		this.vbRightColumn.setSpacing(50);
-
+		
 		AnchorPane.setTopAnchor(vbRightColumn, 70.0);
 		AnchorPane.setBottomAnchor(vbRightColumn, 5.0);
 		AnchorPane.setLeftAnchor(vbRightColumn, 250.0);
 		AnchorPane.setRightAnchor(vbRightColumn, 350.0);
 		this.layout.getChildren().add(vbRightColumn);
-
+		
 		AnchorPane.setTopAnchor(vbLeftColumn, 70.0);
 		AnchorPane.setBottomAnchor(vbLeftColumn, 5.0);
 		AnchorPane.setLeftAnchor(vbLeftColumn, 620.0);
 		AnchorPane.setRightAnchor(vbLeftColumn, 0.0);
 		this.layout.getChildren().add(vbLeftColumn);
-
+		
 		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
 		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
 		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
 		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
 		this.layout.getChildren().add(vbSearchResult);
-
+		
 		this.setRoot(layout);
-
+		
 	}
 }

@@ -1,0 +1,32 @@
+.vbox { 
+    -fx-font-weight:bold;
+	-fx-border-width : 3.0px;
+	-fx-font-weight: bold;
+   	-fx-font-size: 14.0;
+}
+#busy { 
+}
+#available {
+}
+#lblName  { 
+	-fx-font-weight: bold;
+   	-fx-font-size: 18.0;
+ 	-fx-text-fill:  #646464;
+}
+#circleAvailable{
+    -fx-background-color: #64CC8A;
+    -fx-fill: #64CC8A;
+    -fx-cell-hover-color: #64CC8A;
+    -fx-border-width: 1px;
+    -fx-border-color : black;
+}
+
+#circleBusy { 
+    -fx-background-color: #DD715A;
+    -fx-fill: #DD715A;
+    -fx-cell-hover-color: #DD715A;
+     -fx-border-width: 1px;
+    -fx-border-color : black;
+}
+
+

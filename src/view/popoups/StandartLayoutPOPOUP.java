@@ -21,6 +21,6 @@ public class StandartLayoutPOPOUP extends Stage {
 		this.setScene(scene);
 		this.initStyle(StageStyle.UNDECORATED);
 
-		this.scene.getStylesheets().add(this.getClass().getResource("/css/STANDART_LAYOUT.css").toExternalForm());
+//		this.scene.getStylesheets().add(this.getClass().getResource("/css/STANDART_LAYOUT.css").toExternalForm());
 	}
 }

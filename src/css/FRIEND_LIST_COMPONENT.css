@@ -1,0 +1,37 @@
+.hbox { 
+	  -fx-background-color: #64CC8A;
+    -fx-font-weight:bold;
+	-fx-border-width : 3.0px;
+	-fx-font-weight: bold;
+   	-fx-font-size: 14.0;
+}
+#circleAvailable{
+    -fx-background-color: #64CC8A;
+    -fx-fill: #64CC8A;
+    -fx-cell-hover-color: #64CC8A;
+    -fx-border-width: 1.0px;
+    -fx-border-color : black;
+}
+#circleBusy { 
+    -fx-background-color: #DD715A;
+    -fx-fill: #DD715A;
+    -fx-cell-hover-color: #DD715A;
+     -fx-border-width: 1.0px;
+    -fx-border-color : black;
+}
+.button{
+	-fx-background-color:#5fb69c;
+	-fx-width:195px;
+	-fx-height:80px;
+	-fx-text-aligment:center;
+	-fx-fill-color:black;
+}
+.button:hover{
+	-fx-background-color:#5BB870;
+}
+
+
+
+
+
+
