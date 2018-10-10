@@ -221,7 +221,7 @@ public class HomePageScene extends Scene {
 
 		this.btnProjectInvitation.setOnAction(e->{
 			try {
-				new ProjectInvite(Window.mainStage).show();;
+				new ProjectInvite(Window.mainStage).show();
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}

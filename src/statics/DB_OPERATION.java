@@ -77,7 +77,7 @@ public class DB_OPERATION {
 		Query q = em.createQuery(query);
 		q.setParameter(param, paramArgs);
 
-		 return q.getResultList();
+		return q.getResultList();
 	}
 	/**
 	 * For querys with more than one parameter the parameters has to be int numbers
@@ -103,7 +103,16 @@ public class DB_OPERATION {
 		}
 		return q.getResultList();
 	}
+	@SuppressWarnings("unchecked")
+	public static List<Object> QUERY(String query, String string, int[] paramArgs) {
+		EntityManager em = Database.createEntityManager();
+		Query q = em.createQuery(query);
 
+		for (int i = 0; i < paramArgs.length; i++) {
+			q.setParameter(string, paramArgs[i]);
+		}
+		return q.getResultList();
+	}
 	/**
 	 * @example List<Object> = (Object) QUERY(em, "FROM MY_TABLE WHERE MY_COLUMN = :PARAM1
 	 *          AND MY_COLUMN2 = :PARAM2", new String[]{'PARAM1','PARAM2'}, new String[] {

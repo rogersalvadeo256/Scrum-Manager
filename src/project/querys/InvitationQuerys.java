@@ -30,6 +30,8 @@ public class InvitationQuerys {
 			case REFUSED :
 				invitation.setMbrInviteStatus(ENUMS.REQUEST_STATUS.REFUSED.getValue());
 				break;
+			default :
+				break;
 		}
 		
 		
@@ -47,34 +49,35 @@ public class InvitationQuerys {
 		
 		DB_OPERATION.PERSIST(invite);
 	}
-	@SuppressWarnings("unchecked")
 	public void invite(ArrayList<USER_PROFILE> list, PROJECT p) {
 		List<?> x = DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_PROJECT = :COD", "COD", p.getProjectCod());
-		List<Integer> y = new ArrayList<Integer>();
 		
-		for (PROJECT_MEMBER p1 : (List<PROJECT_MEMBER>) x) {
-			y.add(p1.getMbrProfCod());
-		}
-		
-		for (int i = 0; i < list.size(); i++) {
-			
-			boolean a = list.get(i).getCod() == y.get(i) ? true : false;
-			
-			if (a)
-				list.remove(i);
-		}
-		if (!list.isEmpty())
-			for (USER_PROFILE var : list) {
-				PROJECT_MEMBER invite = new PROJECT_MEMBER();
-				
-				invite.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
-				invite.setMbrProfCod(var.getCod());
-				invite.setMbrProjectCod(p.getProjectCod());
-				invite.setMbrInviteSendedDate();
-				invite.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
-				
-				DB_OPERATION.PERSIST(invite);
+		boolean a = x.isEmpty();
+		if (!a) {
+			int[] y = new int[x.size()];
+
+			for (int i = 0; i < x.size(); i++) {
+				PROJECT_MEMBER p1 = (PROJECT_MEMBER) x.get(i);
+				y[i] = p1.getMbrProfCod();
 			}
+			for (int i = 0; i < list.size(); i++) {
+				
+				boolean b = list.get(i).getCod() == y[i] ? true : false;
+				
+				if (b)list.remove(i);
+			}
+		}
+		for (USER_PROFILE var : list) {
+			PROJECT_MEMBER invite = new PROJECT_MEMBER();
+			
+			invite.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
+			invite.setMbrProfCod(var.getCod());
+			invite.setMbrProjectCod(p.getProjectCod());
+			invite.setMbrInviteSendedDate();
+			invite.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
+			
+			DB_OPERATION.PERSIST(invite);
+		}
 		TEMP_STORE_INVITATIONS.LIST_INVITATION().clear();
 	}
 }
