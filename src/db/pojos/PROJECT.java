@@ -31,7 +31,19 @@ public class PROJECT {
 	
 	@Column(name="PROJ_STATUS")
 	private String projStatus;
+	
+	@Column(name ="PROJ_TYPE")
+	private String projType;
 
+	public String getProjType() {
+		return projType;
+	}
+	public void setProjType(String projType) {
+		this.projType = projType;
+	}
+	public void setProjStatus(String projStatus) {
+		this.projStatus = projStatus;
+	}
 	/**
 	 * @return the projStatus
 	 */

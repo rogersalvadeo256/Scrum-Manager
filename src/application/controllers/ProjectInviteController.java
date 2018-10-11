@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import db.pojos.PROJECT;
 import db.pojos.PROJECT_MEMBER;
 import db.pojos.USER_PROFILE;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import project.querys.InvitationQuerys;
 import statics.DB_OPERATION;

@@ -43,6 +43,7 @@ public class RegistrationFromSceneController {
 		validation.setFieldName(fieldName);
 		p.setName(txtName.getText());
 		p.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
+		u.setuDateRegistrated();
 		u.setEmail(txtEmail.getText());
 		u.setUserName(txtUserName.getText());
 		u.setPassword(txtPasswordConfirmation.getText());
@@ -79,6 +80,7 @@ public class RegistrationFromSceneController {
 			p.setName(txtName.getText());
 			p.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
 			u.setEmail(txtEmail.getText());
+			u.setuDateRegistrated();
 			u.setUserName(txtUserName.getText());
 			u.setPassword(txtPasswordConfirmation.getText());
 			u.setSecurityQuestion(txtQuestion.getText());

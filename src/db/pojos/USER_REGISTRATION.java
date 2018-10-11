@@ -1,6 +1,7 @@
 package db.pojos;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 @SuppressWarnings("serial")
 @Entity(name = "USER_REGISTRATION")
 public class USER_REGISTRATION implements Serializable {
@@ -34,6 +36,19 @@ public class USER_REGISTRATION implements Serializable {
 	@Column(nullable = false, name = "USER_SECURITY_ANSWER")
 	private String uSecurityAnswer;
 	
+	@Temporal(TemporalType.DATE)
+	@Column (nullable = false, name="USER_DATE_REGISTRATION")
+	private java.util.Date uDateRegistrated;
+	
+	
+	public java.util.Date getuDateRegistrated() {
+		return uDateRegistrated;
+	}
+
+	public void setuDateRegistrated() {
+		this.uDateRegistrated = Calendar.getInstance().getTime();
+	}
+
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JoinColumn(name = "USER_PROFILE")
 	private USER_PROFILE userProfile;

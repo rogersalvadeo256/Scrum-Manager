@@ -1,0 +1,27 @@
+.hbox { 
+	  -fx-background-color: #F5F3F3;
+    -fx-font-weight:bold;
+	-fx-border-width : 3.0px;
+}
+.label
+{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+   -fx-font-size: 14;
+}
+.button{
+	-fx-background-color:#5fb69c;
+	-fx-width:195px;
+	-fx-height:80px;
+	-fx-text-aligment:center;
+	-fx-fill-color:black;
+}
+.button:hover{
+	-fx-background-color:#11EA41;
+}
+
+
+
+
+
+

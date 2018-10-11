@@ -1,44 +1,39 @@
 .toggle-button {
-    -fx-focus-color: transparent;
-    -fx-border-color: grey;
-    -fx-border-height: 20.0px;
     -fx-min-height: 40.0px;
     -fx-min-width: 40.0px;
     -fx-border-radius: 100.0px;
     -fx-background-radius:100.0px;
-}
-
-.toggle-button:selected {
-    -fx-text-fill: black;
-    -fx-base: transparent;
-    -fx-background: transparent;
+	-fx-border-width: 2px;
     -fx-border-color: transparent;
-   
+     -fx-font-weight: bold;
+     -fx-text-fill: #F5F3F3;
+    
 }
 .toggle-button#btnBusy:selected{ 
-      -fx-base:#ff3333;
+      -fx-base:#CF2E1A;
+	   -fx-text-fill: #F5F3F3;
+	   -fx-border-color: #F5F3F3;
 }
 .toggle-button#btnBusy{ 
-    -fx-background: transparent;
+    -fx-base: #F17777;
+    	   -fx-border-color: #CF2E1A;
 }
 .toggle-button#btnAvailable:selected{
-    -fx-base:#66ff66;
+    -fx-base:#5fb69c;
+         -fx-text-fill: #F5F3F3;
+         -fx-border-color: #F5F3F3;
+          -fx-border-color: #00D45D;
 }
 .toggle-button#btnAvailable{
-    -fx-base:transparent;
+    -fx-base:#5fb69c;
+     -fx-border-color: #00D45D;
 }
-
-
-
-
 .hbox{ 
     -fx-background:transparent;
     -fx-background-radius:50.0px;
     -fx-border-width: 1.0px;
-    -fx-border-color:grey;
+    -fx-border-color:transparent;
     -fx-border-radius:50.0px;
-    
-    
 }
 
 

@@ -1,36 +1,48 @@
 .root{
-	-fx-background-color:#e4ebff;
-}
-.text-field{
-	-fx-border-radius:15px;
-	-fx-text-fill: black;
-	-fx-text-size:20.0pt;
-}
-.text-area#descProject .content{
-	-fx-border-radius:0px 95px 9px 24px;
-	-fx-fill-color:black;
-	-fx-font-size: 20.0pt;
-}
-.label{
-	 -fx-font-family: "Segoe UI Semibold";
-	 -fx-font-size: 10.0pt;
-	 -fx-font-color: black;
+	-fx-background-color:#F5F3F3;
+	 /*
+	  -fx-background-color: linear-gradient(to bottom right, white 0%, cornflowerblue 100% );
+	 */
 }
 .button{
-	-fx-background-color:#5fb69c;
-	-fx-width:192px;
-	-fx-height:70px;
-	-fx-text-aligment:center;
-	-fx-fill-color:black;
+  -fx-background-color:#44B492;
+   -fx-pref-height: 30.0px;
+    -fx-pref-width: 200.0px;
+     -fx-text-fill: white;
+		-fx-background-radius: 30;
+	    -fx-background-insets: 0;
+	     -fx-font-weight: bold;
 }
-.button#btncancel:hover{
-	-fx-text-fill:white;
-	-fx-background-color:#cc2a2a;
+.text-input{
+ 	-fx-font-family: "Quicksand";
+   -fx-font-size: 18.0;
+   -fx-padding: 1.0,1.0,1.0,1.0;
+   -fx-border-color: black;
+   -fx-border-width: 0.0 0.0 2.0 0.0;
+   -fx-border-radius: 1.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight:bold;
+   
 }
-.hyperlink{
-	-fx-text-fill:#5eb5b5;
+.text-input:focused{
 }
-.button:hover{
-	-fx-background-color:#020704;
-	-fx-text-fill: #d8d8d8;
+ .text-area, .text-area .viewport, .text-area .content {
+    -fx-background-color: transparent ;
 }
+
+
+.label { 
+	-fx-font-size:16pt;
+	 -fx-font-weight: bold; 
+	 	
+	-fx-font-family: "Quicksand";
+	 	-fx-text-fill: #343736;
+}
+
+
+
+
+
+
+

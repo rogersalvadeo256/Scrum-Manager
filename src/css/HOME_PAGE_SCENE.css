@@ -1,5 +1,5 @@
 .root{
-	-fx-background-color:#e4ebff;
+	-fx-background-color:#F5F3F3;
 }
 .hbox#header{
 	-fx-background-color:#5fb69c;
@@ -13,18 +13,24 @@
 	-fx-background-color:#5fb69c;
 }
 .header-buttons:hover{
-	-fx-background-color:#ffff;
+	-fx-background-color:#E7E9DF;
+	-fx-text-fill:black;
 }
 .header-buttons#btnCancel:hover{
 	-fx-background-color: red;
 }
-.text-field{
-   -fx-font-size: 10.0pt;
-   -fx-border-width: 0.0 2.0 2.0 2.0 ;
+.text-input{
+ 	-fx-font-family: "Quicksand";
+   -fx-font-size: 12.0;
+   -fx-padding: 1.0,1.0,1.0,1.0;
    -fx-border-color: black;
-    -fx-background-color: transparent;
-    -fx-background-insets: 0.0 -1.0 -1.0 -1.0, 0.0 0.0 0.0 0.0, 0.0 -1.0 3.0 -1.0;
-	-fx-text-fill: black;
+   -fx-border-width: 0.0 0.0 2.0 0.0;
+   -fx-border-radius: 1.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   
+}
+.text-input:focused{
 }
 .vbox#collumns{ 
        -fx-background-color:#41f4d3;
@@ -56,77 +62,66 @@
     -fx-fill-color:black;
 	-fx-text-aligment:center;
 }
-.button#editBio{
-	-fx-fill-color:black;
-	-fx-text-aligment:center;
-	-fx-pref-width:500.0;
-	-fx-pref-height:40.0;
-	-fx-background-color:#e6f2f2;
-	-fx-border-radius: 4.0;
-    -fx-font-size: 11.0pt;
-    -fx-font-weight: bold;
-}
-.button#editBio:hover{ 
-	-fx-background-color:#020704;
-	-fx-text-fill: #d8d8d8;
-}
-.button#cancel{
-	-fx-pref-height:50.0;
-	-fx-pref-width:100.0;
-	-fx-fill-color:black;
-	-fx-background-color:#c5d8db;
-	-fx-background-radius: 5.0,4.0,3.0,5.0;
-    -fx-background-insets: 0.0,1.0,2.0,0.0;
-    -fx-font-size: 10.0pt;
-    -fx-font-weight: bold;
-}
-.button#cancel:hover{ 
-	-fx-text-fill:white;
-	-fx-background-color:#cc2a2a;
-}
-.button#save{ 
-	-fx-background-color: #32c156;
-	-fx-text-fill:white;
-	-fx-font-weight: bold;
-	-fx-pref-height:30.0;
-	-fx-pref-width:100.0;
-	-fx-background-radius: 5.0,4.0,3.0,5.0;
-    -fx-background-insets: 0.0,1.0,2.0,0.0;
-    -fx-text-fill: white;
-}
-.button#save:hover{ 
-	-fx-background-color: #11a037;
-}
-.hbox#menu{
-	
-	-fx-pref-height:50.0;
-}
-.button#menu{
-	-fx-pref-height:50.0;
-	-fx-pref-width:50.0;
-	-fx-background-color:transparent;
-	-fx-text-fill:#F5FFFA;
-	-fx-font-size: 10.0pt;
-    }
-.button#menu:hover{ 
-	-fx-border-color: white;
-}
 .hbox#hSugestions { 
     -fx-background-color:#e4ebff;
     -fx-text-fill:#000;
     -fx-background-color:#e6f2f2;
 	-fx-border-radius: 4.0;
 	-fx-border-style: solid;
-        
 }
 .hbox#hSugestions:hover { 
     -fx-background-color:#32c156;
     -fx-opacity:1;
 }
-
-#lblSearch{
-	-fx-text-fill:#000;
+#project {
+	-fx-background-color: transparent;
+	 -fx-pref-height: 150.0px;
+    -fx-pref-width: 80.0px;
 }
+.button { 
+	-fx-pref-width:160px;
+	-fx-font-size:14;
+	-fx-text-fill: #F5F3F3;
+	-fx-font-weight:bold;
+}
+#exit { 
+	-fx-pref-width:80px;
+}	
+
+#avarage { 
+	-fx-pref-width:120px;
+}
+
+
+#vbNav   
+{
+	
+}
+#hbNav { 
+	-fx-border-width: 0 0 2 0 ;
+	-fx-border-color: transparent;
+}
+#lOverview:hover { 
+	-fx-border-width: 0 0 2 0 ;
+		-fx-border-color: black;
+}
+#lProject:hover{ 
+	-fx-border-width: 0 0 2 0 ;
+		-fx-border-color: black;
+}
+
+#test { 
+		-fx-background-color: #DD715A;
+	 -fx-pref-height: 150.0px;
+    -fx-pref-width: 80.0px;
+}
+
+
+
+
+
+
+
 
 
 

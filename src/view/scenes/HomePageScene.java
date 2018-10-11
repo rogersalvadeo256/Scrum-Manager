@@ -42,6 +42,7 @@ import view.popoups.ProfileEditPOPOUP;
 import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.photoContent.ShowImage;
 import widgets.designComponents.profileContents.HBStatusBar;
+import widgets.designComponents.projectContents.ProjectContentHomePage;
 import widgets.toaster.Toast;
 
 public class HomePageScene extends Scene {
@@ -50,18 +51,20 @@ public class HomePageScene extends Scene {
 	private Button btnExit, btnLogOut;
 	private Button btnEditProfile;
 	private ImageView profileImg;
-	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblEmail;
-	private HBox hbHeader;
+	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblEmail, lblProjects;
+	private HBox hbHeader, hbNav;
 	private TextField txtSearch;
 	private Button btnProjectInvitation, btnHome;
 	private VBox vbProfileInfo;
 	private Button btnFriendRequest, btnFriends;
 	private VBox vbLeftColumn, vbRightColumn;
 	private VBox vbSearchResult;
-	private HBox hbStartProject;
+	private HBox hbIcon;
 	private SearchFriend searchUser;
 	private Toast toast, toast2;
 	private HBStatusBar statusBar;
+	private Label lblOverview;
+	private VBox vbNav;
 	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
@@ -74,7 +77,8 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
 		
-		Window.mainStage.setResizable(true);
+//		Window.mainStage.setResizable(true);
+		
 		
 		
 		this.lblCurrentProject = new Label("Projetos Atuais");
@@ -228,24 +232,28 @@ public class HomePageScene extends Scene {
 		this.btnFriendRequest.setId("friend-request");
 		this.btnHome = new Button();
 		
-		final int SIZE = 50;
+		final int SIZE = 15;
 		ImageView icon_p = new ImageView();
 		icon_p.setImage(new Image(new FileInputStream(new File("resources/images/icons/friends.png"))));
 		icon_p.setFitHeight(SIZE);
 		icon_p.setFitWidth(SIZE);
 		this.btnFriends.setGraphic(icon_p);
+		this.btnFriends.setText("Amigos");
+		
 		
 		ImageView icon_f = new ImageView();
 		icon_f.setImage(new Image(new FileInputStream(new File("resources/images/icons/friend_request.png"))));
 		icon_f.setFitHeight(SIZE);
 		icon_f.setFitWidth(SIZE);
 		this.btnFriendRequest.setGraphic(icon_f);
+		this.btnFriendRequest.setText("Pedidos de \n amizade");
 		
 		ImageView icon_invitation = new ImageView();
 		icon_invitation.setFitHeight(SIZE);
 		icon_invitation.setFitWidth(SIZE);
 		icon_invitation.setImage(new Image(new FileInputStream(new File("resources/images/icons/project_invitation.png"))));
 		this.btnProjectInvitation.setGraphic(icon_invitation);
+		this.btnProjectInvitation.setText("Convites\npara projetos");
 		
 		ImageView icon_u = new ImageView();
 		icon_u.setFitHeight(SIZE);
@@ -256,24 +264,31 @@ public class HomePageScene extends Scene {
 		icon_edit_profile.setFitHeight(SIZE);
 		icon_edit_profile.setFitWidth(SIZE);
 		this.btnEditProfile.setGraphic(icon_edit_profile);
+		this.btnEditProfile.setText("Editar perfil");
+		
 		
 		ImageView icon_exit = new ImageView();
 		icon_exit.setImage(new Image(new FileInputStream(new File("resources/images/icons/exit.png"))));
 		icon_exit.setFitHeight(SIZE);
 		icon_exit.setFitWidth(SIZE);
 		this.btnExit.setGraphic(icon_exit);
+		this.btnExit.setText("Sair");
 		
 		ImageView icon_scrum = new ImageView();
 		icon_scrum.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 		icon_scrum.setFitHeight(SIZE);
 		icon_scrum.setFitWidth(SIZE);
 		this.btnHome.setGraphic(icon_scrum);
+		this.btnHome.setMaxSize(20, 50);
+		
 		
 		ImageView icon_logout = new ImageView();
 		icon_logout.setImage(new Image(new FileInputStream(new File("resources/images/icons/logout.png"))));
 		icon_logout.setFitHeight(SIZE);
 		icon_logout.setFitWidth(SIZE);
 		this.btnLogOut.setGraphic(icon_logout);
+		this.btnLogOut.setText("Logout");
+		
 		
 		this.btnHome.getStyleClass().add("header-buttons");
 		this.btnProjectInvitation.getStyleClass().add("header-buttons");
@@ -282,6 +297,11 @@ public class HomePageScene extends Scene {
 		this.btnEditProfile.getStyleClass().add("header-buttons");
 		this.btnExit.getStyleClass().add("header-buttons");
 		this.btnLogOut.getStyleClass().add("header-buttons");
+		
+		this.btnExit.setId("exit");
+		this.btnLogOut.setId("avarage");
+		this.btnFriends.setId("avarage");
+		
 		
 		this.btnLogOut.setOnAction(e -> {
 			SESSION.RESET();
@@ -292,7 +312,7 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-		
+
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
 		
@@ -302,7 +322,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
+		this.hbHeader.getChildren().addAll(btnHome,txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
 		
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -314,13 +334,13 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.getStyleClass().add("vbox");
 		this.vbProfileInfo.setId("profile-info");
 		
-		this.hbStartProject = new HBox();
-		this.hbStartProject.getChildren().add(new Label("Começar projeto"));
-		this.hbStartProject.setAlignment(Pos.TOP_CENTER);
-		this.hbStartProject.getStyleClass().add("hbox");
-		this.hbStartProject.setId("project");
+		this.hbIcon = new HBox();
+//		this.hbIcon.getChildren().add(new Label("Começar projeto"));
+		this.hbIcon.setAlignment(Pos.CENTER);
+		this.hbIcon.getStyleClass().add("hbox");
+		this.hbIcon.setId("project");
 		
-		this.hbStartProject.setOnMouseClicked(e -> {
+		this.hbIcon.setOnMouseClicked(e -> {
 			try {
 				new NewProjectPOPOUP(Window.mainStage).showAndWait();
 			} catch (FileNotFoundException e1) {
@@ -334,7 +354,7 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail, statusBar, hbStartProject);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail, statusBar);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
@@ -358,23 +378,93 @@ public class HomePageScene extends Scene {
 		
 		this.vbRightColumn.setSpacing(50);
 		
-		AnchorPane.setTopAnchor(vbRightColumn, 70.0);
-		AnchorPane.setBottomAnchor(vbRightColumn, 5.0);
-		AnchorPane.setLeftAnchor(vbRightColumn, 250.0);
-		AnchorPane.setRightAnchor(vbRightColumn, 350.0);
-		this.layout.getChildren().add(vbRightColumn);
+//		AnchorPane.setTopAnchor(vbRightColumn, 70.0);
+//		AnchorPane.setBottomAnchor(vbRightColumn, 5.0);
+//		AnchorPane.setLeftAnchor(vbRightColumn, 250.0);
+//		AnchorPane.setRightAnchor(vbRightColumn, 350.0);
+////		this.layout.getChildren().add(vbRightColumn);
+//		
+//		AnchorPane.setTopAnchor(vbLeftColumn, 70.0);
+//		AnchorPane.setBottomAnchor(vbLeftColumn, 5.0);
+//		AnchorPane.setLeftAnchor(vbLeftColumn, 620.0);
+//		AnchorPane.setRightAnchor(vbLeftColumn, 0.0);
+////		this.layout.getChildren().add(vbLeftColumn);
+//		
+//		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
+//		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
+//		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
+//		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
+////		this.layout.getChildren().add(vbSearchResult);
 		
-		AnchorPane.setTopAnchor(vbLeftColumn, 70.0);
-		AnchorPane.setBottomAnchor(vbLeftColumn, 5.0);
-		AnchorPane.setLeftAnchor(vbLeftColumn, 620.0);
-		AnchorPane.setRightAnchor(vbLeftColumn, 0.0);
-		this.layout.getChildren().add(vbLeftColumn);
 		
-		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
-		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
-		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
-		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
-		this.layout.getChildren().add(vbSearchResult);
+		this.hbNav = new HBox();
+		
+		this.lblProjects= new Label("Meus Projetos");
+		this.lblOverview = new Label("Visão geral");
+		this.lblProjects.setId("lProject");
+		this.lblOverview.setId("lOverview");
+		
+		this.hbNav.getChildren().addAll(lblOverview,lblProjects);
+		this.hbNav.setId("hbNav");	
+		this.hbNav.setSpacing(30);
+		this.hbNav.setAlignment(Pos.CENTER);
+		
+		this.vbNav = new VBox();
+		
+		this.vbNav.setId("vbNav");
+		
+		vbNav.getChildren().add(hbNav);
+		
+		AnchorPane.setTopAnchor(vbNav, 70.0);
+		AnchorPane.setBottomAnchor(vbNav, 5.0);
+		AnchorPane.setLeftAnchor(vbNav, 250.0);
+		AnchorPane.setRightAnchor(vbNav, 0.0);
+		this.layout.getChildren().add(vbNav);
+		
+		ProjectContentHomePage pch = new ProjectContentHomePage(this.getHeight());
+		
+		this.vbNav.getChildren().add(pch);
+		
+		
+		AnchorPane.setTopAnchor(hbIcon, 600.0);
+		AnchorPane.setBottomAnchor(hbIcon, 5.0);
+		AnchorPane.setLeftAnchor(hbIcon, 240.0);
+		AnchorPane.setRightAnchor(hbIcon, 0.0);
+		this.layout.getChildren().add(hbIcon);
+		
+		ImageView icon = new ImageView();
+		icon.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
+		icon.setFitHeight(180);
+		icon.setFitWidth(200);
+		this.hbIcon.getChildren().add(icon);
+		this.hbIcon.setAlignment(Pos.CENTER_RIGHT);
+		
+		
+		
+		
+		/*
+		 * space reserved for the calendar
+		HBox teste = new HBox();
+		teste.setId("test");
+		teste.setAlignment(Pos.CENTER);
+		teste.getChildren().add(new Label("teste"));
+		
+		AnchorPane.setTopAnchor(teste, 200.0);
+		AnchorPane.setBottomAnchor(teste, 200.0);
+		AnchorPane.setLeftAnchor(teste, 240.0);
+		AnchorPane.setRightAnchor(teste, 0.0);
+		this.layout.getChildren().add(teste);
+		
+		*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		this.setRoot(layout);
 		

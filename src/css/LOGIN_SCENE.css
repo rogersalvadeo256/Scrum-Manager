@@ -5,7 +5,7 @@
 }
 
 .root{
-	-fx-background-color:#e4ebff;
+	-fx-background-color:#F5F3F3;
 }
 .vbox {
     -fx-background-color: #2f4f4f;
@@ -13,14 +13,13 @@
     -fx-height:100.0;
 }
 .label { 
-	-fx-font-size:1pt;
+	   -fx-font-size: 14.0;
 	 -fx-font-weight: bold;
 	-fx-text-fill: #2f4f8f;
 }
 .title{ 
-	-fx-font-size:18pt;
 	 -fx-font-weight: bold;
-	-fx-text-fill: #2f4f8f;
+	-fx-text-fill: #464646;
 }
 .button#btnCancel:hover{
 	-fx-text-fill:white;
@@ -39,7 +38,7 @@
 .label { 
 	-fx-font-size:12pt;
 	 -fx-font-weight: bold;
-	-fx-text-fill: #2f4f8f;
+	-fx-text-fill: #464646;
 }
 
 .label#messageWrong{
@@ -70,26 +69,32 @@
 	-fx-background-color:#ffff;
 }
 .hyperlink{
+	   -fx-font-size: 14.0;
 	-fx-text-fill:green;
 }
-
-
-
 .text-input{
- 	 -fx-min-width: 20.0%;
- 	-fx-background-color: #2A363F;
-	-fx-border-color:#465058;
-	-fx-text-fill:#ffff;
-	-fx-input-width:100.0%;
+ 	-fx-font-family: "Quicksand";
+   -fx-font-size: 18.0;
+   -fx-padding: 1.0,1.0,1.0,1.0;
+   -fx-border-color: black;
+   -fx-border-width: 0.0 0.0 2.0 0.0;
+   -fx-border-radius: 1.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight:bold;
+   
 }
-.text-input:focused{
-	 -fx-min-width: 20.0%;
-	 -fx-background-color: #2A363F;
-	-fx-border-color:#465058;
-	-fx-text-fill:#ffff;
-	-fx-placeholder-size:40.0px;
-	-fx-padding: 10.0px;
-	-fx-border-radius: 0.5em;
+.text-input{
+ 	-fx-font-family: "Quicksand";
+   -fx-font-size: 18.0;
+   -fx-padding: 1.0,1.0,1.0,1.0;
+   -fx-border-color: black;
+   -fx-border-width: 0.0 0.0 2.0 0.0;
+   -fx-border-radius: 1.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight:bold;	
+   
 }
 .button {
     -fx-pref-width: 100.0px;
@@ -99,11 +104,11 @@
 	-fx-text-fill:#2A363F;
 	-fx-background-color:#ffff;
 }
-
 .button{
 	-fx-text-fill:#2A363F;
 	-fx-background-color:#5Fb69C;
 	-fx-padding:10.0;
+	-fx-font-weight:bold;
 }
 
 

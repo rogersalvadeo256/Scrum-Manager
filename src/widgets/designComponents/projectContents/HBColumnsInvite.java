@@ -7,6 +7,7 @@ import java.util.List;
 import application.main.Window;
 import db.pojos.USER_PROFILE;
 import friendship.QUERYs_FRIENDSHIP;
+import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import project.querys.TEMP_STORE_INVITATIONS;
@@ -25,6 +26,9 @@ public class HBColumnsInvite extends HBox {
 	public HBColumnsInvite() throws IOException {
 		
 		loadFriendContent();
+		
+		this.setSpacing(10);
+		this.setAlignment(Pos.CENTER);
 		
 	}
 	

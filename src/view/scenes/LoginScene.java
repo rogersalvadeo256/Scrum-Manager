@@ -57,11 +57,12 @@ public class LoginScene extends Scene {
 		this.getStylesheets().add(this.getClass().getResource("/css/LOGIN_SCENE.css").toExternalForm());
 
 		Window.mainStage.setTitle("Tela Login");
-
+		Window.mainStage.sizeToScene();
+		
 		this.controller = new LoginSceneController();
 		this.layout = new AnchorPane();
 		this.layoutContent = new HBox();
-
+		
 		this.vbRegistration = new RegistrationFormComponent();
 
 		this.vbLogin = new VBox();

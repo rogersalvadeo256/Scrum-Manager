@@ -18,7 +18,9 @@ import widgets.toaster.Toast;
 public class HBProfileContentForInvite extends HBProfileContentForgotPassword {
 	
 	private USER_PROFILE p;
-	private VBox layout;
+	protected VBox layout;
+	protected Circle circle;
+	protected HBox hbStatus = new HBox();
 	public HBProfileContentForInvite(USER_PROFILE p) throws IOException {
 		super(p);
 		this.layout = new VBox();
@@ -27,7 +29,7 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword {
 		
 		this.getChildren().add(layout);
 		
-		Circle circle = new Circle();
+		this.circle = new Circle();
 		circle.setCenterX(30.0f);
 		circle.setCenterY(15.0f);
 		circle.setRadius(10.0f);
@@ -52,9 +54,8 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword {
 		
 		lblStatus.applyCss();
 		
-		HBox hbStatus = new HBox();
+		this.hbStatus = new HBox();
 		hbStatus.setAlignment(Pos.CENTER);
-		
 		
 		hbStatus.getChildren().addAll(circle, lblStatus);
 		hbStatus.setSpacing(10);

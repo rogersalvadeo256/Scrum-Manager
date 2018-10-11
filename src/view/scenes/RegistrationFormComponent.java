@@ -74,7 +74,7 @@ public class RegistrationFormComponent extends VBox {
 
 		this.hbButtons = new HBox(10);
 		this.btnRegister = new Button("Cadastrar");
-		this.btnCancel = new Button();
+		this.btnCancel = new Button("Cancelar");
 		this.btnCancel.setId("btnCancel");
 
 		this.hbButtons.getChildren().addAll(btnCancel, btnRegister);
