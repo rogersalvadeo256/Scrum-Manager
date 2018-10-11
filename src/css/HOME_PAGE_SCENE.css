@@ -34,9 +34,6 @@
 }
 .text-input:focused{
 }
-.vbox#collumns{ 
-       -fx-background-color:#41f4d3;
-}
 .vbox#profile-info{
     -fx-border-width: 0.0 2.0 0.0 0.0 ;
     -fx-border-color: white;
@@ -45,12 +42,6 @@
 .vbox#rightColumn{ 
    -fx-border-width: 0.0 4.0 0.0 0.0 ;
    -fx-border-color: white;
-}
-.label#bio{
-	-fx-font-size:12.0pt;
-	-fx-padding:63px;
-	-fx-border-radius: 12px;
-	-fx-border-bottom-left-radius: 10px;
 }
 .label{
     -fx-font-size: 15.0pt;
@@ -63,17 +54,6 @@
     -fx-font-weight: bold;
     -fx-fill-color:black;
 	-fx-text-aligment:center;
-}
-.hbox#hSugestions { 
-    -fx-background-color:#e4ebff;
-    -fx-text-fill:#000;
-    -fx-background-color:#e6f2f2;
-	-fx-border-radius: 4.0;
-	-fx-border-style: solid;
-}
-.hbox#hSugestions:hover { 
-    -fx-background-color:#32c156;
-    -fx-opacity:1;
 }
 #project {
 	-fx-background-color: transparent;
@@ -109,7 +89,7 @@
 }
 #lProject:hover{ 
 	-fx-border-width: 0 0 2 0 ;
-		-fx-border-color: black;
+	-fx-border-color: black;
 }
 
 #test { 
@@ -117,9 +97,6 @@
 	 -fx-pref-height: 150.0px;
     -fx-pref-width: 80.0px;
 }
-
-
-
 
 
 

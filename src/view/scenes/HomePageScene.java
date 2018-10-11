@@ -44,29 +44,33 @@ import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.photoContent.ShowImage;
 import widgets.designComponents.profileContents.HBStatusBar;
 import widgets.designComponents.projectContents.HBProjectComponent;
-import widgets.designComponents.projectContents.ProjectContentHomePage;
 import widgets.toaster.Toast;
 
 public class HomePageScene extends Scene {
 	
-	private AnchorPane layout;
+	
 	private Button btnExit, btnLogOut;
 	private Button btnEditProfile;
-	private ImageView profileImg;
-	private Label lblName, lblUsername, lblCurrentProject, lblProjectsDone, lblEmail, lblProjects;
-	private HBox hbHeader, hbNav;
-	private TextField txtSearch;
 	private Button btnProjectInvitation, btnHome;
-	private VBox vbProfileInfo;
 	private Button btnFriendRequest, btnFriends;
-	private VBox vbLeftColumn, vbRightColumn;
-	private VBox vbSearchResult;
-	private HBox hbIcon;
-	private SearchFriend searchUser;
+
+	private ImageView profileImg;
+	private Label lblName, lblUsername, lblProjects;
+	private Label lblOverview;
+
+	private TextField txtSearch;
 	private Toast toast, toast2;
 	private HBStatusBar statusBar;
-	private Label lblOverview;
+
+	private AnchorPane layout;
+	
+	private VBox vbProfileInfo;
+	private HBox hbHeader, hbNav;
+	private VBox vbSearchResult;
+	private HBox hbIcon;
 	private VBox vbNav;
+
+	private SearchFriend searchUser;
 	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
@@ -76,14 +80,9 @@ public class HomePageScene extends Scene {
 		
 		this.layout = new AnchorPane();
 		Window.mainStage.setTitle("Home");
-		Window.mainStage.setWidth(1000);
-		Window.mainStage.setHeight(800);
+		Window.mainStage.setWidth(1024);
+		Window.mainStage.setHeight(768);
 		
-		
-		
-		this.lblCurrentProject = new Label("Projetos Atuais");
-		this.lblProjectsDone = new Label("Projetos Concluidos");
-		this.lblEmail = new Label();
 		
 		this.lblName = new Label();
 		this.lblUsername = new Label();
@@ -121,7 +120,7 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation, vbLeftColumn, vbRightColumn);
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation); // , vbLeftColumn, vbRightColumn);
 		GENERAL_STORE.loadComponentsHOME();
 		
 		this.profileImg.setOnMouseClicked(e -> {
@@ -137,9 +136,7 @@ public class HomePageScene extends Scene {
 		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
 		
-		this.lblCurrentProject = new Label("Projetos em andamento");
 		this.lblName.setId("lblProject");
-		this.lblProjectsDone = new Label("Projetos finalizados");
 		this.lblName.setId("lblProject");
 		
 		this.vbSearchResult = new VBox();
@@ -155,7 +152,7 @@ public class HomePageScene extends Scene {
 		
 		this.searchUser = new SearchFriend();
 		
-		txtSearch.setPromptText("Encontre outros usuarios");
+		txtSearch.setPromptText("Localize usuarios");
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
@@ -171,11 +168,20 @@ public class HomePageScene extends Scene {
 						searchUser.getResults().get(i).getStyleClass().add("hbox");
 						searchUser.getResults().get(i).setId("hSugestions");
 						vbSearchResult.getChildren().add(searchUser.getResults().get(i));
+						
+						if(this.vbSearchResult.getChildren().size() > 5)  { 
+							
+						}
 					}
 					return;
 				}
 			}
 			vbSearchResult.getChildren().clear();
+		});
+		this.setOnMouseClicked(e->{
+			
+			if(!this.vbSearchResult.getChildren().isEmpty())
+				this.vbSearchResult.getChildren().clear();
 		});
 		
 		this.btnEditProfile = new Button();
@@ -353,48 +359,18 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
 		this.vbProfileInfo.setAlignment(Pos.CENTER);
-		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, lblEmail, statusBar);
+		this.vbProfileInfo.getChildren().addAll(profileImg, lblName, lblUsername, statusBar);
 		AnchorPane.setTopAnchor(vbProfileInfo, 70.0);
 		AnchorPane.setBottomAnchor(vbProfileInfo, 5.0);
 		AnchorPane.setLeftAnchor(vbProfileInfo, 0.0);
-		AnchorPane.setRightAnchor(vbProfileInfo, 750.0);
+		AnchorPane.setRightAnchor(vbProfileInfo, 780.0);
 		this.layout.getChildren().add(vbProfileInfo);
 		
-		this.vbLeftColumn = new VBox();
-		this.vbLeftColumn.getStyleClass().add("vbox");
-		this.vbLeftColumn.getChildren().add(this.lblProjectsDone);
-		
-		this.vbLeftColumn.setPrefWidth(400);
-		this.vbLeftColumn.setAlignment(Pos.TOP_CENTER);
-		
-		this.vbRightColumn = new VBox();
-		this.vbRightColumn.getStyleClass().add("vbox");
-		this.vbRightColumn.setId("rightColumn");
-		this.vbRightColumn.getChildren().add(this.lblCurrentProject);
-		
-		this.vbRightColumn.setPrefWidth(400);
-		this.vbRightColumn.setAlignment(Pos.TOP_CENTER);
-		
-		this.vbRightColumn.setSpacing(50);
-		
-//		AnchorPane.setTopAnchor(vbRightColumn, 70.0);
-//		AnchorPane.setBottomAnchor(vbRightColumn, 5.0);
-//		AnchorPane.setLeftAnchor(vbRightColumn, 250.0);
-//		AnchorPane.setRightAnchor(vbRightColumn, 350.0);
-////		this.layout.getChildren().add(vbRightColumn);
-//		
-//		AnchorPane.setTopAnchor(vbLeftColumn, 70.0);
-//		AnchorPane.setBottomAnchor(vbLeftColumn, 5.0);
-//		AnchorPane.setLeftAnchor(vbLeftColumn, 620.0);
-//		AnchorPane.setRightAnchor(vbLeftColumn, 0.0);
-////		this.layout.getChildren().add(vbLeftColumn);
-//		
 		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
 		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
-		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
-		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
+		AnchorPane.setLeftAnchor(vbSearchResult, 20.0);
+		AnchorPane.setRightAnchor(vbSearchResult, 800.0);
 		this.layout.getChildren().add(vbSearchResult);
-		
 		
 		this.hbNav = new HBox();
 		

@@ -21,7 +21,7 @@ public class GENERAL_STORE {
 
 	public static void setComponentsHOME(Label lblName, Label lblUserName, ImageView imgProfile,
 																					Button btnFriendRequest,
-																					Button btnFriendsList, Button btnProjectInvitation,VBox vbCurrentProjects,VBox vbFinishedProjects) {
+																					Button btnFriendsList, Button btnProjectInvitation) { //,VBox vbCurrentProjects,VBox vbFinishedProjects) {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
 		GENERAL_STORE.imgProfile = imgProfile;

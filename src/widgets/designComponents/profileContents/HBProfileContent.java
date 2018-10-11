@@ -44,36 +44,42 @@ public class HBProfileContent extends HBox {
 		this.image = new ImageView();
 		this.btnAdd = new Button();
 		this.fRequest = new FriendshipActions(p);
+		
+		this.getStylesheets().add(this.getClass().getResource("/css/PROFILE_CONTENT.css").toExternalForm());
 		this.btnAdd.setOnAction(e -> {
 			fRequest.sendFriendshipRequest();
 		});
-		
 		if (p.getPhoto() == null || p.getPhoto().length == 0) {
 			this.image.setImage(new Image(new FileInputStream("resources/images/icons/profile_picture.png")));
 		} else {
 			this.image.setImage(PROFILE_IMG.getImage(p));
 		}
-		this.image.setFitWidth(100);
+		this.image.setFitWidth(70);
 		this.image.setFitHeight(100);
 		
 		this.vbUsrIMG.getChildren().addAll(this.image);
+		this.vbUsrIMG.setAlignment(Pos.CENTER);
+		
 		this.vbUsrBUTTON.getChildren().add(btnAdd);
+		this.vbUsrBUTTON.setAlignment(Pos.CENTER);
+		
+		this.lblName.setPrefWidth(this.vbUsrLABEL.getMaxWidth());
 		this.vbUsrLABEL.getChildren().addAll(this.lblName);
 		this.vbUsrLABEL.setAlignment(Pos.CENTER);
 		
-		this.setAlignment(Pos.CENTER);
-		this.vbUsrBUTTON.setAlignment(Pos.CENTER);
 		
 		try {
 			ImageView icon_add = new ImageView();
 			icon_add.setImage(new Image(new FileInputStream(new File("resources/images/icons/add.png"))));
-			icon_add.setFitHeight(100);
-			icon_add.setFitWidth(50);
+			icon_add.setFitHeight(30);
+			icon_add.setFitWidth(30);
 			this.btnAdd.setGraphic(icon_add);
-			this.btnAdd.prefHeight(this.getHeight());
+			
+	
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		}
+		btnAdd.setMaxWidth(40);
 		HBox.setHgrow(vbUsrLABEL, Priority.ALWAYS);
 		
 		this.getChildren().addAll(vbUsrIMG, vbUsrLABEL, vbUsrBUTTON);
