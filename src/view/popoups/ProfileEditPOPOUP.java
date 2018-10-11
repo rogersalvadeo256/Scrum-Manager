@@ -94,7 +94,6 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.lblNewPassword = new Label("Nova Senha: ");
 		
 		this.txtName = new TextField();
-		this.txtName.setPrefColumnCount(15);
 		
 		this.txtCurrentPassword = new PasswordField();
 		this.txtNewPassword = new PasswordField();

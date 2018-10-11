@@ -8,10 +8,14 @@
   -fx-background-color:#44B492;
    -fx-pref-height: 30.0px;
     -fx-pref-width: 200.0px;
-     -fx-text-fill: white;
+     -fx-text-fill: #E7E9DF;
 		-fx-background-radius: 30;
 	    -fx-background-insets: 0;
 	     -fx-font-weight: bold;
+}
+.button:hover{
+	-fx-background-color:#E7E9DF;
+	-fx-text-fill:black;
 }
 .text-input{
  	-fx-font-family: "Quicksand";

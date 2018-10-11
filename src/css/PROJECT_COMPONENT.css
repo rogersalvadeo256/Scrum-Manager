@@ -1,7 +1,7 @@
 #name {  
 	-fx-font-size : 22;
 	-fx-font-weight: bold;
-	-fx-text-fill: black;
+	-fx-text-fill: #0D3AC7;
 }
 
 #about { 
@@ -10,7 +10,11 @@
 #type {
 	-fx-font-size : 16;
 }
-#v { 
-	-fx-border-width: 0 0 2 0 ;
+#v { 	
+	-fx-border-radius: 10;
+	-fx-border-insets: 5 5 5 5;
+	-fxborder-spacing: 10px 50px;
+	-fx-border-width: 2 2 2 2 ;
 	-fx-border-color: black;
+	-fx-padding: 15px;
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import application.main.Window;
+import db.pojos.PROJECT;
 import db.pojos.USER_PROFILE;
 import friendship.QUERYs_FRIENDSHIP;
 import friendship.SearchFriend;
@@ -42,6 +43,7 @@ import view.popoups.ProfileEditPOPOUP;
 import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.photoContent.ShowImage;
 import widgets.designComponents.profileContents.HBStatusBar;
+import widgets.designComponents.projectContents.HBProjectComponent;
 import widgets.designComponents.projectContents.ProjectContentHomePage;
 import widgets.toaster.Toast;
 
@@ -76,8 +78,6 @@ public class HomePageScene extends Scene {
 		Window.mainStage.setTitle("Home");
 		Window.mainStage.setWidth(1000);
 		Window.mainStage.setHeight(800);
-		
-//		Window.mainStage.setResizable(true);
 		
 		
 		
@@ -188,7 +188,6 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-		
 		this.btnExit = new Button();
 		this.btnExit.setOnAction(new Close(Window.mainStage));
 		
@@ -390,11 +389,11 @@ public class HomePageScene extends Scene {
 //		AnchorPane.setRightAnchor(vbLeftColumn, 0.0);
 ////		this.layout.getChildren().add(vbLeftColumn);
 //		
-//		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
-//		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
-//		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
-//		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
-////		this.layout.getChildren().add(vbSearchResult);
+		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
+		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
+		AnchorPane.setLeftAnchor(vbSearchResult, 30.0);
+		AnchorPane.setRightAnchor(vbSearchResult, 600.0);
+		this.layout.getChildren().add(vbSearchResult);
 		
 		
 		this.hbNav = new HBox();
@@ -421,9 +420,20 @@ public class HomePageScene extends Scene {
 		AnchorPane.setRightAnchor(vbNav, 0.0);
 		this.layout.getChildren().add(vbNav);
 		
-		ProjectContentHomePage pch = new ProjectContentHomePage(this.getHeight());
 		
-		this.vbNav.getChildren().add(pch);
+		PROJECT teste = new PROJECT();
+		
+		teste.setProjName("TESTES");
+		teste.setProjDescription("NADA NÂO bla bla  bla bla  bla bla  bla bla  bla bla  bla bla  bla bla  bla bla ");
+		teste.setProjType("Logistica");
+
+		
+		
+		this.vbNav.setSpacing(20);
+		this.vbNav.getChildren().add(new HBProjectComponent(teste));
+		
+		
+		
 		
 		
 		AnchorPane.setTopAnchor(hbIcon, 600.0);
@@ -456,11 +466,6 @@ public class HomePageScene extends Scene {
 		this.layout.getChildren().add(teste);
 		
 		*/
-		
-		
-		
-		
-		
 		
 		
 		

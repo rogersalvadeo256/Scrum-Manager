@@ -36,7 +36,7 @@ public class InvitationQuerys {
 		
 		
 		DB_OPERATION.MERGE(invitation);
-		
+	        		
 	}
 	public void invite(USER_PROFILE invited, PROJECT p) {
 		PROJECT_MEMBER invite = new PROJECT_MEMBER();

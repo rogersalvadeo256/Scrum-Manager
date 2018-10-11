@@ -1,13 +1,16 @@
 .root{
 	-fx-background-color:#F5F3F3;
 }
-.text-field{
-	-fx-border-radius:15px;
-	-fx-text-fill: black;
-	-fx-text-size:20.0pt;
-}
-.text-field:onclick{
-	-fx-border-radius-color:yellow;
+.text-input{
+ 	-fx-font-family: "Quicksand";
+   -fx-font-size: 18.0;
+   -fx-padding: 1.0,1.0,1.0,1.0;
+   -fx-border-color: black;
+   -fx-border-width: 0.0 0.0 2.0 0.0;
+   -fx-border-radius: 1.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight:bold;
 }
 .hbox{
     -fx-background-color: #5fb69c;
@@ -19,23 +22,23 @@
     -fx-background-color: #5fb69c;
     -fx-opacity: 1.0;
 }
-.label{
-	 -fx-font-family: "Segoe UI Semibold";
-	 -fx-font-size: 10.0pt;
-	 -fx-font-color: black;
+.label { 
+	-fx-font-size:14;
+     -fx-font-weight: bold; 
+	-fx-font-family: "Quicksand";
+	 -fx-text-fill: #343736;
 }
+
 .button{
-	-fx-background-color:#5fb69c;
-	-fx-width:195px;
-	-fx-height:80px;
-	-fx-text-aligment:center;
-	-fx-fill-color:black;
-}
-.button#back:hover{
-	-fx-text-fill:white;
-	-fx-background-color:#cc2a2a;
+  -fx-background-color:#44B492;
+   -fx-pref-height: 30.0px;
+    -fx-pref-width: 100px;
+     -fx-text-fill: #E7E9DF;
+		-fx-background-radius: 30;
+	    -fx-background-insets: 0;
+	     -fx-font-weight: bold;
 }
 .button:hover{
-	-fx-background-color:#020704;
-	-fx-text-fill: #d8d8d8;
+	-fx-background-color:#E7E9DF;
+	-fx-text-fill:black;
 }

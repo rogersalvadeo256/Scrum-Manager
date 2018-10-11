@@ -14,20 +14,12 @@ public class ProjectContentHomePage extends VBox {
 	
 	public ProjectContentHomePage(double d) {
 		this.setPrefHeight(d);
-		PROJECT teste = new PROJECT();
-		
-		teste.setProjName("TESTES");
-		teste.setProjDescription("NADA NÂO bla bla  bla bla  bla bla  bla bla  bla bla  bla bla  bla bla  bla bla ");
-		teste.setProjType("Logistica");
+	
 
-
-		
-		
-		this.getChildren().add(new HBProjectComponent(teste));
-		
 	
 	}
 }
+
 
 
 

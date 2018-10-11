@@ -20,14 +20,16 @@
 	-fx-background-color: red;
 }
 .text-input{
- 	-fx-font-family: "Quicksand";
+    -fx-font-family: "Segoe UI Semibold";
    -fx-font-size: 12.0;
    -fx-padding: 1.0,1.0,1.0,1.0;
    -fx-border-color: black;
    -fx-border-width: 0.0 0.0 2.0 0.0;
    -fx-border-radius: 1.0;
    -fx-background-color: transparent;
-   -fx-text-fill: black;
+   -fx-text-fill: #E7E9DF;
+    -fx-prompt-text-fill: #E7E9DF;
+        -fx-font-weight:bold;
    
 }
 .text-input:focused{

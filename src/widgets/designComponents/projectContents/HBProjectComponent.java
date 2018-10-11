@@ -48,6 +48,7 @@ public class HBProjectComponent extends HBox {
 		hbTypeProject.setSpacing(10);
 		
 		
+		
 		this.setAlignment(Pos.CENTER_LEFT);
 		
 		layout.getChildren().addAll(lblName, lblAboutProject, hbTypeProject);
