@@ -2,6 +2,7 @@ package friendship;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -33,11 +34,21 @@ public class SearchFriend {
 		q.setParameter("LOGGED_USER_PROF_COD", SESSION.getProfileLogged().getCod());
 
 		this.result = (ArrayList<USER_PROFILE>) q.getResultList();
-
+		
+		List<USER_PROFILE> a = QUERYs_FRIENDSHIP.friendsList();
+		
+		/*
+		 * not tested yet
+		 * 
+		 */
+		for(int i = 0; i < a.size(); i ++) { 
+			boolean x = a.get(i).getCod() == result.get(i).getCod();
+			if(x) result.remove(i);
+		}
 		for (int i = 0; i < this.result.size(); i++) {
+			
 			this.returnFromSearch.add(new HBProfileContent(result.get(i)));
 		}
-
 		em.clear();
 		em.close();
 		em = null;

@@ -20,7 +20,7 @@
 	-fx-background-color: red;
 }
 .text-input{
-    -fx-font-family: "Segoe UI Semibold";
+   -fx-font-family: "Segoe UI Semibold";
    -fx-font-size: 12.0;
    -fx-padding: 1.0,1.0,1.0,1.0;
    -fx-border-color: black;
@@ -28,8 +28,8 @@
    -fx-border-radius: 1.0;
    -fx-background-color: transparent;
    -fx-text-fill: #E7E9DF;
-    -fx-prompt-text-fill: #E7E9DF;
-        -fx-font-weight:bold;
+   -fx-prompt-text-fill: #E7E9DF;
+   -fx-font-weight:bold;
    
 }
 .text-input:focused{
@@ -46,7 +46,6 @@
 .label{
     -fx-font-size: 15.0pt;
     -fx-font-family: "Segoe UI Semibold";
-    -fx-text-fill: black;
     -fx-font-weight:bold;
     -fx-opacity: 6.0;
 }
@@ -73,12 +72,6 @@
 #avarage { 
 	-fx-pref-width:120px;
 }
-
-
-#vbNav   
-{
-	
-}
 #hbNav { 
 	-fx-border-width: 0 0 2 0 ;
 	-fx-border-color: transparent;
@@ -91,35 +84,26 @@
 	-fx-border-width: 0 0 2 0 ;
 	-fx-border-color: black;
 }
+#project  { 
+	-fx-border-radius: 10;
+	-fx-border-insets: 5 5 5 5;
+	-fx-border-spacing: 10px 50px;
+	-fx-background-radius: 10;
+	
+	-fx-border-width: 2 2 2 2 ;
+	-fx-border-color: #E7E9DF;
 
-#test { 
-		-fx-background-color: #DD715A;
-	 -fx-pref-height: 150.0px;
-    -fx-pref-width: 80.0px;
+    -fx-background-color:#5fb69c;
+   
+}
+#project:hover { 
+	-fx-border-color:#5fb69c ;
+    -fx-background-color:#5FC3A0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#labelProject { 
+	-fx-padding: 15px;
+	-fx-font-size:34;
+	-fx-text-fill: #E7E9DF;
+    -fx-font-weight:bold;
+}

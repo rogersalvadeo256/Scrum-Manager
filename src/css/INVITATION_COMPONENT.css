@@ -1,17 +1,33 @@
-.vbox { 
-    -fx-font-weight:bold;
-	-fx-border-width : 3.0px;
-	-fx-font-weight: bold;
-   	-fx-font-size: 14.0;
+.hbox {
+	-fx-border-radius: 10;
+	-fx-border-insets: 5 5 5 5;
+	-fxborder-spacing: 10px 50px;
+	-fx-border-width: 2 2 2 2 ;
+	-fx-border-color: black;
+	-fx-padding: 15px;
+	-fx-background-color: transparent;
+	-fx-background-radius:10;
 }
-#busy { 
+.hbox:hover { 
+	-fx-background-color: #ddd5d5;
 }
-#available {
+.hbox:pressed{ 
+	-fx-background-color: #b09c9c;
+}
+#not-selected{ 
+	-fx-background-color: transparent;
+}
+#selected  { 
+	-fx-background-color: #85c7b3;
 }
 #lblName  { 
 	-fx-font-weight: bold;
    	-fx-font-size: 18.0;
- 	-fx-text-fill:  #646464;
+ 	-fx-text-fill:  #182F26;
+}
+#status { 
+ 	-fx-font-size: 13.0;
+ 	-fx-text-fill:  #8c8c8c;
 }
 #circleAvailable{
     -fx-background-color: #64CC8A;
@@ -20,7 +36,6 @@
     -fx-border-width: 1px;
     -fx-border-color : black;
 }
-
 #circleBusy { 
     -fx-background-color: #DD715A;
     -fx-fill: #DD715A;

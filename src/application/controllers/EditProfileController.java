@@ -250,6 +250,11 @@ public class EditProfileController {
 			});
 		});
 	}
+	
+	/*
+	 * 
+	 * not used anymore
+	 */
 	@SuppressWarnings("unused")
 	private void deleteAccount(ActionEvent e, Stage stage) throws ClassNotFoundException, FileNotFoundException, SQLException {
 

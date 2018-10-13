@@ -44,6 +44,7 @@ import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.photoContent.ShowImage;
 import widgets.designComponents.profileContents.HBStatusBar;
 import widgets.designComponents.projectContents.HBProjectComponent;
+import widgets.designComponents.search.ScrollSearch;
 import widgets.toaster.Toast;
 
 public class HomePageScene extends Scene {
@@ -53,15 +54,15 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private Button btnProjectInvitation, btnHome;
 	private Button btnFriendRequest, btnFriends;
-
+	
 	private ImageView profileImg;
 	private Label lblName, lblUsername, lblProjects;
 	private Label lblOverview;
-
+	
 	private TextField txtSearch;
 	private Toast toast, toast2;
 	private HBStatusBar statusBar;
-
+	
 	private AnchorPane layout;
 	
 	private VBox vbProfileInfo;
@@ -69,8 +70,10 @@ public class HomePageScene extends Scene {
 	private VBox vbSearchResult;
 	private HBox hbIcon;
 	private VBox vbNav;
-
+	
 	private SearchFriend searchUser;
+	private ScrollSearch scroll;
+	private Label lblStart;
 	
 	public HomePageScene() throws ClassNotFoundException, SQLException, IOException {
 		super(new HBox());
@@ -96,6 +99,7 @@ public class HomePageScene extends Scene {
 		
 		this.statusBar = new HBStatusBar(true, "Ocupado", "Disponivel");
 		
+		
 		this.statusBar.setGroupEvent(new ChangeListener<Toggle>() {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
@@ -103,16 +107,22 @@ public class HomePageScene extends Scene {
 				newValue = newValue == null ? oldValue : newValue;
 				newValue.setSelected(true);
 				
-				if (newValue.isSelected()) {
-					
+				if (newValue.isSelected()) {	
 					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
 						USER_PROFILE up = SESSION.getProfileLogged();
+						
+						up.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue());
+						
 						DB_OPERATION.MERGE(up);
+						return;
 					}
 					if (SESSION.getProfileLogged().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue())) {
 						USER_PROFILE up = SESSION.getProfileLogged();
+					
 						up.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
+					
 						DB_OPERATION.MERGE(up);
+						return;	
 					}
 				}
 			}
@@ -120,7 +130,9 @@ public class HomePageScene extends Scene {
 		/*
 		 * in this class the components are treated
 		 */
-		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation); // , vbLeftColumn, vbRightColumn);
+		GENERAL_STORE.setComponentsHOME(lblName, lblUsername, profileImg, btnFriendRequest, btnFriends, btnProjectInvitation); // ,
+																										// vbLeftColumn,
+																										// vbRightColumn);
 		GENERAL_STORE.loadComponentsHOME();
 		
 		this.profileImg.setOnMouseClicked(e -> {
@@ -130,8 +142,8 @@ public class HomePageScene extends Scene {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-			
 		});
+		
 		
 		this.lblName.setId("lblName");
 		this.lblName.setId("userName");
@@ -143,6 +155,10 @@ public class HomePageScene extends Scene {
 		// this.vbSearchResult.setLayoutX(5);
 		this.vbSearchResult.getStyleClass().add("vbox");
 		this.vbSearchResult.setId("sugestions");
+		
+		this.scroll = new ScrollSearch(vbSearchResult);
+		scroll.setVisible(false);
+		
 		
 		this.txtSearch = new TextField();
 		
@@ -169,19 +185,23 @@ public class HomePageScene extends Scene {
 						searchUser.getResults().get(i).setId("hSugestions");
 						vbSearchResult.getChildren().add(searchUser.getResults().get(i));
 						
-						if(this.vbSearchResult.getChildren().size() > 5)  { 
-							
-						}
+						if (!vbSearchResult.getChildren().isEmpty())
+							this.scroll.setVisible(true);
 					}
 					return;
 				}
 			}
 			vbSearchResult.getChildren().clear();
 		});
-		this.setOnMouseClicked(e->{
+		this.setOnMouseClicked(e -> {
 			
-			if(!this.vbSearchResult.getChildren().isEmpty())
+			if (!this.vbSearchResult.getChildren().isEmpty()) {
 				this.vbSearchResult.getChildren().clear();
+				this.scroll.setVisible(false);
+				this.txtSearch.setText(new String());
+				
+				
+			}
 		});
 		
 		this.btnEditProfile = new Button();
@@ -317,7 +337,7 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
-
+		
 		this.profileImg.setFitHeight(200);
 		this.profileImg.setFitWidth(200);
 		
@@ -327,7 +347,7 @@ public class HomePageScene extends Scene {
 		this.hbHeader.setPrefWidth(Window.mainStage.getMaxWidth());
 		this.hbHeader.setSpacing(5);
 		this.hbHeader.setAlignment(Pos.CENTER);
-		this.hbHeader.getChildren().addAll(btnHome,txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
+		this.hbHeader.getChildren().addAll(btnHome, txtSearch, btnProjectInvitation, btnFriendRequest, btnFriends, btnEditProfile, btnLogOut, btnExit);
 		
 		AnchorPane.setTopAnchor(hbHeader, 0.0);
 		AnchorPane.setBottomAnchor(hbHeader, Window.mainStage.getHeight() - 100);
@@ -340,21 +360,8 @@ public class HomePageScene extends Scene {
 		this.vbProfileInfo.setId("profile-info");
 		
 		this.hbIcon = new HBox();
-//		this.hbIcon.getChildren().add(new Label("Começar projeto"));
 		this.hbIcon.setAlignment(Pos.CENTER);
-		this.hbIcon.getStyleClass().add("hbox");
-		this.hbIcon.setId("project");
 		
-		this.hbIcon.setOnMouseClicked(e -> {
-			try {
-				new NewProjectPOPOUP(Window.mainStage).showAndWait();
-			} catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
-			
-		});
 		
 		this.vbProfileInfo.setPadding(new Insets(0, 0, 0, 10));
 		this.vbProfileInfo.setSpacing(25);
@@ -366,21 +373,24 @@ public class HomePageScene extends Scene {
 		AnchorPane.setRightAnchor(vbProfileInfo, 780.0);
 		this.layout.getChildren().add(vbProfileInfo);
 		
-		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
-		AnchorPane.setBottomAnchor(vbSearchResult, Window.mainStage.getHeight());
-		AnchorPane.setLeftAnchor(vbSearchResult, 20.0);
-		AnchorPane.setRightAnchor(vbSearchResult, 800.0);
-		this.layout.getChildren().add(vbSearchResult);
+		
+		AnchorPane.setTopAnchor(scroll, 65.0);
+		// AnchorPane.setBottomAnchor(scroll, 0d);
+		AnchorPane.setLeftAnchor(scroll, 0d);
+		// AnchorPane.setRightAnchor(scroll, 800.0);
+		this.layout.getChildren().add(scroll);
+		
 		
 		this.hbNav = new HBox();
 		
-		this.lblProjects= new Label("Meus Projetos");
+		this.lblProjects = new Label("Meus Projetos");
 		this.lblOverview = new Label("Visão geral");
+		
 		this.lblProjects.setId("lProject");
 		this.lblOverview.setId("lOverview");
 		
-		this.hbNav.getChildren().addAll(lblOverview,lblProjects);
-		this.hbNav.setId("hbNav");	
+		this.hbNav.getChildren().addAll(lblOverview, lblProjects);
+		this.hbNav.setId("hbNav");
 		this.hbNav.setSpacing(30);
 		this.hbNav.setAlignment(Pos.CENTER);
 		
@@ -402,21 +412,11 @@ public class HomePageScene extends Scene {
 		teste.setProjName("TESTES");
 		teste.setProjDescription("NADA NÂO bla bla  bla bla  bla bla  bla bla  bla bla  bla bla  bla bla  bla bla ");
 		teste.setProjType("Logistica");
-
 		
 		
 		this.vbNav.setSpacing(20);
 		this.vbNav.getChildren().add(new HBProjectComponent(teste));
 		
-		
-		
-		
-		
-		AnchorPane.setTopAnchor(hbIcon, 600.0);
-		AnchorPane.setBottomAnchor(hbIcon, 5.0);
-		AnchorPane.setLeftAnchor(hbIcon, 240.0);
-		AnchorPane.setRightAnchor(hbIcon, 0.0);
-		this.layout.getChildren().add(hbIcon);
 		
 		ImageView icon = new ImageView();
 		icon.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
@@ -426,28 +426,39 @@ public class HomePageScene extends Scene {
 		this.hbIcon.setAlignment(Pos.CENTER_RIGHT);
 		
 		
-		
+		AnchorPane.setTopAnchor(hbIcon, 450.0);
+		AnchorPane.setBottomAnchor(hbIcon, 150.0);
+		AnchorPane.setLeftAnchor(hbIcon, 240.0);
+		AnchorPane.setRightAnchor(hbIcon, 0.0);
+		this.layout.getChildren().add(hbIcon);
 		
 		/*
-		 * space reserved for the calendar
-		HBox teste = new HBox();
-		teste.setId("test");
-		teste.setAlignment(Pos.CENTER);
-		teste.getChildren().add(new Label("teste"));
+		 * space reserved for the calendar HBox teste = new HBox(); teste.setId("test");
+		 * teste.setAlignment(Pos.CENTER); teste.getChildren().add(new Label("teste"));
+		 */
+		HBox hbStartProject = new HBox();
 		
-		AnchorPane.setTopAnchor(teste, 200.0);
-		AnchorPane.setBottomAnchor(teste, 200.0);
-		AnchorPane.setLeftAnchor(teste, 240.0);
-		AnchorPane.setRightAnchor(teste, 0.0);
-		this.layout.getChildren().add(teste);
-		
-		*/
-		
-		
-		
-		
-		
+		this.lblStart = new Label("COMEÇAR PROJETO");
+		lblStart.setId("labelProject");
+		hbStartProject.setId("project");
+		hbStartProject.getChildren().add(lblStart);
+		hbStartProject.setAlignment(Pos.CENTER);
+	
+		hbStartProject.setOnMouseClicked(e -> {
+			try {
+				new NewProjectPOPOUP(Window.mainStage).showAndWait();
+			} catch (FileNotFoundException e1) {
+				e1.printStackTrace();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		});
+		AnchorPane.setTopAnchor(hbStartProject, 600.0);
+		AnchorPane.setBottomAnchor(hbStartProject, 5.0);
+		AnchorPane.setLeftAnchor(hbStartProject, 240.0);
+		AnchorPane.setRightAnchor(hbStartProject, 0.0);
+		this.layout.getChildren().add(hbStartProject);
+
 		this.setRoot(layout);
-		
 	}
 }

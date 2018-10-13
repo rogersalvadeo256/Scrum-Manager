@@ -38,7 +38,7 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		
 		this.initStyle(StageStyle.DECORATED);
 		
-		this.setWidth(600);
+		this.setWidth(500);
 		this.setHeight(500);
 		
 		this.controller = new NewProjectSceneController(this);
@@ -118,9 +118,13 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 			this.scene.setRoot(layoutForInviteComponents);
 			this.btnInvite.setText("Finalizar");
 			
+			
+			
 			HBColumnsInvite component = new HBColumnsInvite();
 			
 			this.layoutForInviteComponents.getChildren().add(component);
+			
+			this.sizeToScene();
 			
 			return;
 		}
@@ -141,6 +145,7 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.layout.getChildren().addAll(lblAboutTheProject);
 		this.layout.getChildren().add(txtAboutTheProject);
 		this.layout.getChildren().add(btnAboutTheProject);
+		this.sizeToScene();
 		
 		this.btnAboutTheProject.setText("Cancelar ");
 		this.btnAboutTheProject.setOnAction(e -> {

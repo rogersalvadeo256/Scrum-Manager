@@ -49,8 +49,8 @@ public class DB_OPERATION {
 		em.close();
 		em = null;
 	}
+	
 	public static void MERGE(Object o) {
-
 		EntityManager em = Database.createEntityManager();
 		em.getTransaction().begin();
 		em.merge(o);

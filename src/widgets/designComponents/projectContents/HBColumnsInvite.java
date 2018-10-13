@@ -10,7 +10,7 @@ import friendship.QUERYs_FRIENDSHIP;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import project.querys.TEMP_STORE_INVITATIONS;
+import project.TEMP_STORE_INVITATIONS;
 import statics.ENUMS;
 import widgets.designComponents.profileContents.HBProfileContentForInvite;
 import widgets.toaster.Toast;
@@ -94,7 +94,7 @@ public class HBColumnsInvite extends HBox {
 					}
 				}
 				if (component.getProfile().getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue())) {
-					Toast t = new Toast(Window.mainStage, "Este usuario está ocupado");
+					Toast t = new Toast(Window.mainStage, "Usuarios com status 'Ocupado' \n não podem ser convidados para projetos.");
 					t.show();
 					this.setOnMouseMoved(e1 -> {
 						t.close();
