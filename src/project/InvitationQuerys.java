@@ -72,8 +72,9 @@ public class InvitationQuerys {
 			invite.setMbrProfCod(var.getCod());
 			invite.setMbrProjectCod(p.getProjectCod());
 			invite.setMbrInviteSendedDate();
+			invite.setMbrScrumMaster(false);
 			invite.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
-			
+
 			DB_OPERATION.PERSIST(invite);
 		}
 		TEMP_STORE_INVITATIONS.LIST_INVITATION().clear();

@@ -44,6 +44,30 @@ public class PROJECT_MEMBER {
 
 	@Column(name = "MBR_FUNCTION")
 	private String mbrMemberFunction;
+
+	
+	@Column(name = "MBR_PERMISSIONS")
+	private String mbrMemberPermissions;
+
+	@Column (name = "MBR_SCRUM_MASTER")
+	private boolean mbrScrumMaster;
+	
+	public boolean isMbrScrumMaster() {
+		return mbrScrumMaster;
+	}
+
+	public void setMbrScrumMaster(boolean mbrScrumMaster) {
+		this.mbrScrumMaster = mbrScrumMaster;
+	}
+
+	public String getMbrMemberPermissions() {
+		return mbrMemberPermissions;
+	}
+
+	public void setMbrMemberPermissions(String mbrMemberPermissions) {
+		this.mbrMemberPermissions = mbrMemberPermissions;
+	}
+
 	/**
 	 * @param mbrInviteAnsweredDate the mbrInviteAnsweredDate to set
 	 */
