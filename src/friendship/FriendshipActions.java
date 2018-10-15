@@ -36,10 +36,10 @@ public class FriendshipActions {
 
 		FRIENDSHIP friendshipRequest = new FRIENDSHIP();
 
-		
 		List<?> listFriends = DB_OPERATION.QUERY(
 				" FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_USER_ONLINE AND FRQ_COD_PROF_REQUESTED_BY = :COD_USER OR FRQ_COD_PROF_RECEIVER = :COD_USER AND FRQ_COD_PROF_REQUESTED_BY = :COD_USER_ONLINE AND FRQ_REQUEST_STATUS='ON_HOLD'",
-				new String[] { "COD_USER_ONLINE", "COD_USER" }, new int[] { SESSION.getProfileLogged().getCod(), p.getCod()});
+				new String[] { "COD_USER_ONLINE", "COD_USER" },
+				new int[] { SESSION.getProfileLogged().getCod(), p.getCod() });
 
 		if (listFriends.isEmpty()) {
 
@@ -55,7 +55,7 @@ public class FriendshipActions {
 
 	public void answerRequest(REQUEST_STATUS type) {
 
-		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY(	
+		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY(
 				"FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_PROF_RECEIVER AND FRQ_COD_PROF_REQUESTED_BY = :COD_PROF_SENDER",
 				new String[] { "COD_PROF_RECEIVER", "COD_PROF_SENDER" },
 				new int[] { SESSION.getProfileLogged().getCod(), this.p.getCod() }).get(0);
@@ -66,6 +66,8 @@ public class FriendshipActions {
 			break;
 		case ACCEPTED:
 			fr.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+			break;
+		default:
 			break;
 		}
 		DB_OPERATION.MERGE(fr);

@@ -34,6 +34,7 @@ public class NewProjectSceneController {
 		/*
 		 * see if exist a project with the same name
 		 */
+		
 		if (!TEMP_STORE_INVITATIONS.LIST_INVITATION().isEmpty())
 			invitation.invite(TEMP_STORE_INVITATIONS.LIST_INVITATION(), project);
 
@@ -45,6 +46,17 @@ public class NewProjectSceneController {
 		screen.close();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

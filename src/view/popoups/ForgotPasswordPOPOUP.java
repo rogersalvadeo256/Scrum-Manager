@@ -1,6 +1,7 @@
 package view.popoups;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -21,6 +22,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.stage.Window;
+import statics.DB_OPERATION;
 import validation.CheckEmptyFields;
 import widgets.designComponents.profileContents.HBProfileContentForgotPassword;
 
@@ -29,8 +31,6 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	private Label lblQuestion, lblEmailOrUsername, lblNewPasswrd, lblConfirmPassword;
 	private TextField txtEmailUserName, txtAnswer;
 	private PasswordField newPassword, passwordConfirmation;
-	private EntityManager em;
-	private Query q;
 	private Button btnCancel, btnEmail, btnAnswer, btnPasswords;
 	private HBox hbButtons;
 	private ToggleButton tbYes, tbNot;
@@ -125,21 +125,17 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 	}
 
 	private void findUser() {
-		if (this.em == null)
-			this.em = Database.createEntityManager();
 
-		this.q = em.createQuery("from UserRegistration where email =:email or userName =:username");
-		this.q.setParameter("email", txtEmailUserName.getText());
-		this.q.setParameter("username", txtEmailUserName.getText());
-
-		if (this.q.getResultList().isEmpty()) {
+		 List<?> a = DB_OPERATION.QUERY("FROM USER_REGISTRATION WHERE USER_EMAIL = :EMAIL OR USER_NAME = :USER_NAME", new String[] {"EMAIL","USER_NAME"}, new Object[]{txtEmailUserName.getText(), txtEmailUserName.getText()});
+		
+		
+		if (a.isEmpty()) {
 			this.layout.getChildren().add(new Label("Nenhum usuario encontrado"));
 			return;
 		}
-		if (!this.q.getResultList().isEmpty()) {
 			this.layout.getChildren().clear();
 
-			this.u = (USER_REGISTRATION) this.q.getResultList().get(0);
+			this.u = (USER_REGISTRATION) a.get(0);
 			this.p = u.getProfile();
 			try {
 				this.hbp = new HBProfileContentForgotPassword(p);
@@ -159,8 +155,6 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 			} catch (IOException e1) {
 				e1.printStackTrace();
 			}
-
-		}
 	}
 
 	private void securityQuestion() {
@@ -242,10 +236,8 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 
 			update.setPassword(newPassword.getText());
 
-			this.em.getTransaction().begin();
-			this.em.merge(update);
-			this.em.getTransaction().commit();
-			this.em.clear();
+			DB_OPERATION.MERGE(update);
+			
 
 			this.layout.getChildren().add(new Label("Senha alterada"));
 

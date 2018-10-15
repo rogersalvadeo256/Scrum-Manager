@@ -18,6 +18,13 @@ public class PROJECT_MEMBER {
 	@Column(name = "MBR_COD")
 	private int mbrCod;
 
+	public int getMbrCod() {
+		return mbrCod;
+	}
+
+	public void setMbrCod(int mbrCod) {
+		this.mbrCod = mbrCod;
+	}
 	@Column(name = "MBR_PROF_COD_INVITED_BY", nullable = false)
 	private int mbrInvitedBy;
 
