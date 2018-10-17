@@ -85,7 +85,7 @@ public class FriendshipActions {
 
 				DB_OPERATION.MERGE(fr);
 				SESSION.UPDATE_SESSION();
-				GENERAL_STORE.updateComponentsHOME();
+				GENERAL_STORE.loadComponentsHOME();
 				return;
 			}
 		}

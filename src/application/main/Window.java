@@ -54,15 +54,6 @@ public class Window extends Stage {
 				return;
 			}
 		}
-		this.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent e) {
-				
-				if (e.isControlDown() && e.getCode() == KeyCode.W) {
-					
-				}
-			}
-		});
 		Window.mainStage.setOnCloseRequest(e -> {
 			new Close(Window.mainStage);
 		});
@@ -70,3 +61,19 @@ public class Window extends Stage {
 		this.show();
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

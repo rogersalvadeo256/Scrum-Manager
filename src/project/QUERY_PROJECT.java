@@ -28,7 +28,6 @@ public class QUERY_PROJECT {
 				SESSION.getProfileLogged().getCod());
 		return (ArrayList<PROJECT>) x;
 	}
-
 	/**
 	 * return the list of project that the user is in
 	 * 
@@ -49,7 +48,7 @@ public class QUERY_PROJECT {
 			project[i] = y.get(i).getMbrProjectCod();
 		}
 
-		List<?> b = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_COD = :COD", "COD", project[1]);
+		List<?> b = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_COD = :COD", "COD", project[0]);
 
 		return (ArrayList<PROJECT>) b;
 	}

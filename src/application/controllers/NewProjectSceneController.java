@@ -39,7 +39,7 @@ public class NewProjectSceneController {
 			invitation.invite(TEMP_STORE_INVITATIONS.LIST_INVITATION(), project);
 
 		try {
-			GENERAL_STORE.updateComponentsHOME();
+			GENERAL_STORE.loadComponentsHOME();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

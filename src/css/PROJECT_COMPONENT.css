@@ -3,7 +3,6 @@
 	-fx-font-weight: bold;
 	-fx-text-fill: #0D3AC7;
 }
-
 #about { 
 	-fx-font-size : 14;
 }
@@ -17,4 +16,9 @@
 	-fx-border-width: 2 2 2 2 ;
 	-fx-border-color: black;
 	-fx-padding: 15px;
+}
+#v:hover{  
+	-fx-border-color: #1F2723;
+	-fx-background-color: #B8DACB;
+	-fx-background-radius : 10;
 }

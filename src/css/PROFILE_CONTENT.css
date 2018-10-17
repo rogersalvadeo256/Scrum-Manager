@@ -3,6 +3,7 @@
     -fx-font-weight:bold;
 	-fx-border-width : 3.0px;
 }
+
 .label
 {
     -fx-text-fill: black;

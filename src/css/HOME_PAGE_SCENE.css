@@ -72,17 +72,33 @@
 #avarage { 
 	-fx-pref-width:120px;
 }
-#hbNav { 
+#vbNav { 
 	-fx-border-width: 0 0 2 0 ;
 	-fx-border-color: transparent;
+}
+
+#lOverview , #lProject { 
+	-fx-background-color: transparent;	
+    -fx-font-weight: bold;
+    -fx-font-size:18;
+    -fx-text-fill: #14251E;
 }
 #lOverview:hover { 
 	-fx-border-width: 0 0 2 0 ;
 		-fx-border-color: black;
 }
+#lOverview:selected{ 
+	-fx-border-width: 0 0 2 0 ;
+	-fx-border-color:black;
+}
 #lProject:hover{ 
 	-fx-border-width: 0 0 2 0 ;
 	-fx-border-color: black;
+}
+#lProject:selected { 
+	-fx-border-width: 0 0 2 0 ;
+	-fx-border-color: black;
+	
 }
 #project  { 
 	-fx-border-radius: 10;
@@ -100,10 +116,30 @@
 	-fx-border-color:#5fb69c ;
     -fx-background-color:#5FC3A0;
 }
-
 #labelProject { 
 	-fx-padding: 15px;
 	-fx-font-size:34;
 	-fx-text-fill: #E7E9DF;
     -fx-font-weight:bold;
 }
+#haveNoProject { 
+		
+	-fx-background-color : 
+	
+}
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+

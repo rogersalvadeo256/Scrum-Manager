@@ -17,8 +17,12 @@ public class HBProjectComponent extends HBox {
 	Text  lblAboutProject;
 	VBox layout;
 	Circle circle;
-	public HBProjectComponent(PROJECT p) {
+	PROJECT project;
+	public HBProjectComponent(PROJECT p, Pos position ){
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_COMPONENT.css").toExternalForm());
+		
+		this.project=p;
+	
 		
 		this.applyCss();
 		this.setId("v");	
@@ -44,18 +48,24 @@ public class HBProjectComponent extends HBox {
 		lblTypeProject.setId("type");
 
 		hbTypeProject.getChildren().addAll(circle,lblTypeProject);
-		hbTypeProject.setAlignment(Pos.CENTER_LEFT);
+		hbTypeProject.setAlignment(position);
 		hbTypeProject.setSpacing(10);
 		
 		
-		
-		this.setAlignment(Pos.CENTER_LEFT);
+		this.setAlignment(position);
+		this.layout.setAlignment(position);
 		
 		layout.getChildren().addAll(lblName, lblAboutProject, hbTypeProject);
 		
 		this.getChildren().add(layout);
-		
-		
+	}
+
+	public PROJECT getProject() {
+		return project;
+	}
+
+	public void setProject(PROJECT project) {
+		this.project = project;
 	}
 	public Paint randomColor() {
 		Random random = new Random();
@@ -64,39 +74,4 @@ public class HBProjectComponent extends HBox {
 		int b = random.nextInt(255);
 		return Color.rgb(r, g, b);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-
