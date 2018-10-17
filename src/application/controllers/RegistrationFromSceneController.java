@@ -26,7 +26,7 @@ public class RegistrationFromSceneController {
 																					TextField txtName,
 																					ArrayList<String> confirmationMessage,
 																					TextField txtUserName,
-																					TextField txtEmail,
+																					String email,
 																					TextField txtQuestion,
 																					TextField txtAnswer,
 																					PasswordField txtPasswordField,
@@ -44,7 +44,7 @@ public class RegistrationFromSceneController {
 		p.setName(txtName.getText());
 		p.setAvailability(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue());
 		u.setuDateRegistrated();
-		u.setEmail(txtEmail.getText());
+		u.setEmail(email);
 		u.setUserName(txtUserName.getText());
 		u.setPassword(txtPasswordConfirmation.getText());
 		u.setSecurityQuestion(txtQuestion.getText());

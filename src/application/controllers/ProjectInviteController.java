@@ -8,7 +8,7 @@ import db.pojos.PROJECT_MEMBER;
 import db.pojos.USER_PROFILE;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import project.querys.InvitationQuerys;
+import project.InvitationQuerys;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.SESSION;
@@ -29,7 +29,6 @@ public class ProjectInviteController {
 	
 	public void drawInvites(ProjectInvitePOPOUP screen, VBox layout) throws IOException {
 		layout.getChildren().clear();
-		
 		ArrayList<HBProjectInvitationComponent> x = loadComponents();
 		
 		if (!x.isEmpty()) {
@@ -65,6 +64,7 @@ public class ProjectInviteController {
 		if (loadValues()) {
 			int i = 0;
 			while (i < listProfiles.size()) {
+				
 				PROJECT p = (PROJECT) this.listProjects.get(i);
 				USER_PROFILE up = (USER_PROFILE) this.listProfiles.get(i);
 				PROJECT_MEMBER pm = (PROJECT_MEMBER) this.listInvites.get(i);

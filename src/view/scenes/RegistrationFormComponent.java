@@ -110,15 +110,16 @@ public class RegistrationFormComponent extends VBox {
 		this.controller = new RegistrationFromSceneController();
 
 		this.btnRegister.setOnAction(e -> {
-			email = txtEmail.getText();
 
-			if (validar(email) == false) {
+			if (validar(txtEmail.getText()) == false) {
 				emailError.showAndWait();
 			} else {
-
+				
 				try {
+					email = txtEmail.getText();
+
 					this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
-							txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+							txtUserName, email, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}

@@ -35,23 +35,31 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword {
 		circle.setRadius(10.0f);
 		circle.applyCss();
 		
-		this.layout.getStylesheets().add(this.getClass().getResource("/css/INVITATION_COMPONENT.css").toExternalForm());
-		this.layout.applyCss();
+		this.getStylesheets().add(this.getClass().getResource("/css/INVITATION_COMPONENT.css").toExternalForm());
+		this.getStyleClass().add("hbox");
+		this.setId("not-selected");
 		
+		this.layout.setOnMouseClicked(e->{
+			if(p.getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.BUSY.getValue())) return;
+		
+			boolean x = this.getId() == "not-selected" ;
+			if(x)  { this.setId("selected"); return;}
+			this.setId("not-selected");
+	
+		});
 		if (p.getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue())) {
-			this.layout.setId("available");
 			circle.setId("circleAvailable");
 		} else {
-			this.layout.setId("busy");
 			circle.setId("circleBusy");
 		}
 		this.lblName.applyCss();
 		this.lblName.setId("lblName");
+
 		
 		
 		String status = p.getStatus().equals(ENUMS.DISPONIBILITY_FOR_PROJECT.AVAILABLE.getValue()) ? "Disponivel" : "Ocupado";
 		Label lblStatus = new Label(status);
-		
+		lblStatus.setId("status");
 		lblStatus.applyCss();
 		
 		this.hbStatus = new HBox();
@@ -63,10 +71,16 @@ public class HBProfileContentForInvite extends HBProfileContentForgotPassword {
 		
 		this.layout.getChildren().addAll(image, lblName, hbStatus);
 		
+		this.layout.setAlignment(Pos.CENTER);
 		this.setAlignment(Pos.CENTER);
+
 		int size = 80;
 		this.image.setFitHeight(size);
 		this.image.setFitWidth(size);
+
+		
+		
+		
 	}
 	public void setClickedEvent(EventHandler<MouseEvent> e) {
 		this.setOnMouseClicked(e);

@@ -1,4 +1,4 @@
-package project.querys;
+package project;
 
 import java.util.ArrayList;
 

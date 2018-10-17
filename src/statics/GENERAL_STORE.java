@@ -2,7 +2,6 @@ package statics;
 
 import java.io.IOException;
 
-import friendship.QUERYs_FRIENDSHIP;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -15,8 +14,8 @@ public class GENERAL_STORE {
 	 */
 	private static Label lblName, lblUserName;
 	private static ImageView imgProfile;
-	private static Button btnFriendRequest, btnFriendsList, btnProjectInvitation;
-	private static VBox vbCurrentProjects, vbFinishedProjects;
+//	private static Button btnFriendRequest, btnFriendsList, btnProjectInvitation;
+//	private static VBox vbCurrentProjects, vbFinishedProjects;
 	
 
 	public static void setComponentsHOME(Label lblName, Label lblUserName, ImageView imgProfile,
@@ -25,11 +24,11 @@ public class GENERAL_STORE {
 		GENERAL_STORE.lblName = lblName;
 		GENERAL_STORE.lblUserName = lblUserName;
 		GENERAL_STORE.imgProfile = imgProfile;
-		GENERAL_STORE.btnFriendRequest = btnFriendRequest;
-		GENERAL_STORE.btnFriendsList = btnFriendsList;
-		GENERAL_STORE.btnProjectInvitation = btnProjectInvitation;
-		GENERAL_STORE.vbCurrentProjects = vbCurrentProjects;
-		GENERAL_STORE.vbFinishedProjects = vbFinishedProjects;
+//		GENERAL_STORE.btnFriendRequest = btnFriendRequest;
+//		GENERAL_STORE.btnFriendsList = btnFriendsList;
+//		GENERAL_STORE.btnProjectInvitation = btnProjectInvitation;
+//		GENERAL_STORE.vbCurrentProjects = vbCurrentProjects;
+//		GENERAL_STORE.vbFinishedProjects = vbFinishedProjects;
 	}
 	public static void updateComponentsHOME() throws IOException {
 		lblName.setText(SESSION.getProfileLogged().getName());

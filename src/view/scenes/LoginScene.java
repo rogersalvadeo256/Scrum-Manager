@@ -109,6 +109,10 @@ public class LoginScene extends Scene {
 		this.imgIcon.setFitWidth(200);
 		this.imgIcon.setFitHeight(200);
 
+		this.layout.setPrefHeight(450);
+		this.layout.setPrefWidth(300);
+		
+		
 		this.txtLogin.setOnMouseClicked(e -> {
 			this.messageLoginValidation.setVisible(false);
 		});
@@ -148,11 +152,15 @@ public class LoginScene extends Scene {
 
 		this.btnSignUp.setOnAction(e -> {
 			this.layoutContent.getChildren().clear();
+			this.getWindow().setWidth(300);
+			this.getWindow().setHeight(700);
 			this.registration();
 		});
 
 		this.vbRegistration.setEventCancel(e -> {
 			this.layoutContent.getChildren().clear();
+			this.getWindow().setWidth(300);
+			this.getWindow().setHeight(500);
 			this.login();
 		});
 
@@ -169,7 +177,7 @@ public class LoginScene extends Scene {
 		this.btnExit.setMaxWidth(Double.MAX_VALUE);
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.vbLogin.getChildren().addAll(imgIcon, lblUser, txtLogin, lblPassword);
+		this.vbLogin.getChildren().addAll(lblUser, txtLogin, lblPassword);
 		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword, reactivateAccount,
 				hbStayConnected, btnLogin, btnExit, btnSignUp);
 
@@ -183,19 +191,28 @@ public class LoginScene extends Scene {
 		this.vbRegistration.setMaxHeight(Double.MAX_VALUE);
 		this.vbRegistration.setAlignment(Pos.CENTER);
 
-		this.vbLogin.setSpacing(20);
+		this.vbLogin.setSpacing(5);
 		this.vbRegistration.setSpacing(30);
 
 		this.layoutContent.setAlignment(Pos.CENTER);
 
+		AnchorPane.setTopAnchor(vbLogin, 10d);
+		AnchorPane.setLeftAnchor(vbLogin, 10d);
+		AnchorPane.setRightAnchor(vbLogin, 10d);
+		AnchorPane.setBottomAnchor(vbLogin, 10d);
+		vbLogin.setId("fundo");
+		
+		
 		AnchorPane.setTopAnchor(this.layoutContent, 0.0);
 		AnchorPane.setLeftAnchor(this.layoutContent, 0.0);
 		AnchorPane.setRightAnchor(this.layoutContent, 0.0);
 		AnchorPane.setBottomAnchor(this.layoutContent, 0.0);
 		this.layout.getChildren().add(layoutContent);
-
+		
+		
+		
 		login();
-
+		
 		this.setRoot(layout);
 	}
 

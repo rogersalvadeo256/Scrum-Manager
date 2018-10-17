@@ -1,4 +1,4 @@
-package project.querys;
+package project;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +33,6 @@ public class InvitationQuerys {
 			default :
 				break;
 		}
-		
-		
 		DB_OPERATION.MERGE(invitation);
 	        		
 	}

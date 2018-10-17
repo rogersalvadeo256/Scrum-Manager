@@ -3,8 +3,8 @@ package application.controllers;
 import java.io.IOException;
 
 import db.pojos.PROJECT;
-import project.querys.TEMP_STORE_INVITATIONS;
-import project.querys.InvitationQuerys;
+import project.InvitationQuerys;
+import project.TEMP_STORE_INVITATIONS;
 import statics.DB_OPERATION;
 import statics.GENERAL_STORE;
 import statics.SESSION;
