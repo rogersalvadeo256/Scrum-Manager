@@ -10,7 +10,9 @@ public class CustomAlert extends Alert {
 	public CustomAlert(AlertType alert, String title, String header, String contentText) {
 		super(alert);
 		init(alert, title, header, contentText);
+
 	}
+
 	public void init(AlertType alert, String title, String header, String contentText) {
 		dialogPane = new MessageDialog();
 		this.setDialogPane(dialogPane);

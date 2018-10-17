@@ -303,7 +303,7 @@ public class HomePageScene extends Scene {
 		this.btnExit.getStyleClass().add("header-buttons");
 		this.btnLogOut.getStyleClass().add("header-buttons");
 		
-		this.btnExit.setId("exit");
+		this.btnExit.setId("back");
 		this.btnLogOut.setId("avarage");
 		this.btnFriends.setId("avarage");
 		
