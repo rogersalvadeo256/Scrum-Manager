@@ -200,25 +200,12 @@ public class HomePageScene extends Scene {
 					return;
 				}
 			}
-			vbSearchResult.getChildren().clear();
 		});
 
 		this.setOnMouseClicked(e -> {
 
 			test();
-
-//			if (!this.vbSearchResult.getChildren().isEmpty()) {
-//				this.vbSearchResult.getChildren().clear();
-//				this.layout.getChildren().remove(scroll);
-//				/*
-//				 * WTF
-//				 */
-//				this.layout.getChildren().remove(vbSearchResult);
-//				this.layout.getChildren().add(vbSearchResult);
-//
-//				this.scroll.setVisible(false);
 			this.txtSearch.setText(new String());
-//			}
 		});
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
@@ -542,8 +529,7 @@ public class HomePageScene extends Scene {
 				boolean y = vbProjectComponents.getChildren().size() > 3;
 
 				if (y) {
-					
-					
+
 					layout.getChildren().add(scrollProjects);
 					scrollProjects.setComponent(vbProjectComponents);
 					scrollProjects.setVisible(true);
@@ -571,41 +557,62 @@ public class HomePageScene extends Scene {
 		x = true;
 	}
 
+
 	private void test() {
-		boolean a = this.vbSearchResult.getChildren().isEmpty();
 
-		if (!a) {
+		boolean vbSearchStatus = this.vbSearchResult.getChildren().isEmpty();
 
-			if (this.vbSearchResult.getChildren().size() < 4) {
-				this.scroll.setVisible(false);
-				boolean x = vbSearchResult.getParent() != layout;
-				if (x) {
-					layout.getChildren().remove(scroll);
-					layout.getChildren().add(vbSearchResult);
+		if(vbSearchStatus) return;
+		
+		if (!vbSearchStatus) {
+
+			boolean amountToScrollBar = vbSearchResult.getChildren().size() > 3;
+			boolean parentVBsearch = vbSearchResult.getParent() == layout;
+
+			if (amountToScrollBar) {
+
+				if (parentVBsearch) {
+					layout.getChildren().remove(vbSearchResult);
+
+					this.scroll.setContent(vbSearchResult);
+
+					this.layout.getChildren().add(scroll);
+
+					return;
 				}
+			}
+			if(!parentVBsearch) { 
+				
+				layout.getChildren().remove(scroll);
+				
+				layout.getChildren().add(vbSearchResult);
+				
 				return;
 			}
-
-			boolean y = scroll.getContent() != vbSearchResult;
-
-			if (y) {
-				layout.getChildren().remove(vbSearchResult);
-				layout.getChildren().add(scroll);
-				this.scroll.setComponent(this.vbSearchResult);
-				this.scroll.setVisible(true);
-				return;
-			}
-
-			layout.getChildren().remove(scroll);
-			return;
 		}
+		this.layout.getChildren().remove(scroll);
+		this.layout.getChildren().remove(vbSearchResult);
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
