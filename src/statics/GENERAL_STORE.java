@@ -2,8 +2,11 @@ package statics;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import db.pojos.PROJECT;
+import db.pojos.USER_PROFILE;
+import friendship.QUERYs_FRIENDSHIP;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,6 +25,7 @@ public class GENERAL_STORE {
 	private static ArrayList<HBProjectComponent> listProjectComponent;
 	private static ArrayList<PROJECT> memberInProjects;
 	private static ArrayList<PROJECT> myProjects;
+	private static ArrayList<USER_PROFILE> usersList;
 	private static VBox vbProjectComponent;
 
 	public static void setComponentsHOME(Label lblName, Label lblUserName, ImageView imgProfile,
@@ -34,12 +38,6 @@ public class GENERAL_STORE {
 		GENERAL_STORE.imgProfile = imgProfile;
 		GENERAL_STORE.vbProjectComponent = vbProjectComponents;
 	}
-//	public static void updateComponentsHOME() throws IOException {
-//		lblName.setText(SESSION.getProfileLogged().getName());
-//		lblUserName.setText(SESSION.getUserLogged().getUserName());
-//		imgProfile.setImage(PROFILE_IMG.loadImage());
-//
-//	}
 
 	public static void loadComponentsHOME() throws IOException {
 		lblName.setText(SESSION.getProfileLogged().getName());
@@ -49,7 +47,7 @@ public class GENERAL_STORE {
 	}
 
 	private static void updateListProjects() {
-		
+
 		GENERAL_STORE.vbProjectComponent.getChildren().clear();
 		for (HBProjectComponent component : projectComponent()) {
 			GENERAL_STORE.vbProjectComponent.getChildren().add(component);
@@ -83,4 +81,45 @@ public class GENERAL_STORE {
 		return p;
 	}
 
+	@SuppressWarnings("unchecked")
+	private static ArrayList<USER_PROFILE> searchUsers() {
+
+		GENERAL_STORE.usersList = new ArrayList<USER_PROFILE>();
+		List<?> userlist = DB_OPERATION.QUERY("FROM USER_PROFILE WHERE PROF_COD <> :COD", "COD",
+				SESSION.getProfileLogged().getCod());
+
+		List<USER_PROFILE> friendslist = QUERYs_FRIENDSHIP.friendsList();
+
+		if (!friendslist.isEmpty() && !userlist.isEmpty()) {
+			
+			for (int i = 0; i < friendslist.size(); i++) {
+				USER_PROFILE p = (USER_PROFILE) userlist.get(i);
+				if (p.getCod() == friendslist.get(i).getCod()) {
+					userlist.remove(i);
+				}
+			}
+			for (USER_PROFILE up : (ArrayList<USER_PROFILE>) userlist) {
+				GENERAL_STORE.usersList.add(up);
+			}
+		}
+		return GENERAL_STORE.usersList;
+	}
+	public static ArrayList<USER_PROFILE> listUsers ()  {
+		GENERAL_STORE.usersList = GENERAL_STORE.usersList == null ? searchUsers() : usersList;
+		return GENERAL_STORE.usersList;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

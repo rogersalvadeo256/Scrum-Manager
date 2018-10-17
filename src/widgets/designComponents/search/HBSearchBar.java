@@ -78,6 +78,9 @@ public class HBSearchBar extends HBox{
 	}
 	
 	
+	public TextField getTxtSearch() {
+		return txtSearch;
+	}
 	public void  setTextSearchEvent(EventHandler<KeyEvent> e ) { 
 		this.txtSearch.setOnKeyTyped(e);
 	}
@@ -85,3 +88,18 @@ public class HBSearchBar extends HBox{
 		this.btnDoIt.setOnAction(e);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

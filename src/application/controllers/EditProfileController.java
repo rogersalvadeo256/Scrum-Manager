@@ -228,7 +228,7 @@ public class EditProfileController {
 		SESSION.UPDATE_SESSION();
 
 		try {
-			GENERAL_STORE.updateComponentsHOME();
+			GENERAL_STORE.loadComponentsHOME();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}

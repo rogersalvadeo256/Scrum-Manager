@@ -58,7 +58,7 @@ public class FriendshipRequestsController {
 					this.loadRequests();
 					try {
 						drawRequests(layout, screen);
-						GENERAL_STORE.updateComponentsHOME();
+						GENERAL_STORE.loadComponentsHOME();
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {
@@ -71,7 +71,7 @@ public class FriendshipRequestsController {
 					loadRequests();
 					try {
 						drawRequests(layout, screen);
-						GENERAL_STORE.updateComponentsHOME();
+						GENERAL_STORE.loadComponentsHOME();
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {

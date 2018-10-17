@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import application.main.Window;
-import db.pojos.PROJECT;
 import db.pojos.USER_PROFILE;
 import friendship.QUERYs_FRIENDSHIP;
 import friendship.SearchFriend;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -194,38 +194,31 @@ public class HomePageScene extends Scene {
 						searchUser.getResults().get(i).setId("hSugestions");
 						vbSearchResult.getChildren().add(searchUser.getResults().get(i));
 
-						if (vbSearchResult.getChildren().size() >= 3) {
-
-							this.scroll.setVisible(true);
-
-							layout.getChildren().remove(vbSearchResult);
-
-							this.scroll.setComponent(vbSearchResult);
-							/*
-							 * WTF
-							 */
-							this.layout.getChildren().remove(scroll);
-							this.layout.getChildren().add(scroll);
-						}
+						test();
 					}
+
 					return;
 				}
 			}
 			vbSearchResult.getChildren().clear();
 		});
-		this.setOnMouseClicked(e -> {
-			if (!this.vbSearchResult.getChildren().isEmpty()) {
-				this.vbSearchResult.getChildren().clear();
-				this.layout.getChildren().remove(scroll);
-				/*
-				 * WTF
-				 */
-				this.layout.getChildren().remove(vbSearchResult);
-				this.layout.getChildren().add(vbSearchResult);
 
-				this.scroll.setVisible(false);
-				this.txtSearch.setText(new String());
-			}
+		this.setOnMouseClicked(e -> {
+
+			test();
+
+//			if (!this.vbSearchResult.getChildren().isEmpty()) {
+//				this.vbSearchResult.getChildren().clear();
+//				this.layout.getChildren().remove(scroll);
+//				/*
+//				 * WTF
+//				 */
+//				this.layout.getChildren().remove(vbSearchResult);
+//				this.layout.getChildren().add(vbSearchResult);
+//
+//				this.scroll.setVisible(false);
+			this.txtSearch.setText(new String());
+//			}
 		});
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
@@ -404,8 +397,6 @@ public class HomePageScene extends Scene {
 		AnchorPane.setTopAnchor(vbSearchResult, 65.0);
 		AnchorPane.setLeftAnchor(vbSearchResult, 0d);
 
-		this.layout.getChildren().add(vbSearchResult);
-
 		this.hbNav = new HBox();
 
 		this.tbOverview = new ToggleButton("Visão Geral");
@@ -426,7 +417,7 @@ public class HomePageScene extends Scene {
 		this.vbNav.setId("vbNav");
 
 		this.scrollProjects = new CustomScroll();
-
+		this.scrollProjects.setFitToWidth(true);
 		if (x) {
 
 			vbNav.getChildren().add(hbNav);
@@ -505,8 +496,8 @@ public class HomePageScene extends Scene {
 
 		this.setRoot(layout);
 	}
-	
-	private  void changeScreenComponents () { 
+
+	private void changeScreenComponents() {
 		if (x) {
 			vbNav.getChildren().clear();
 			vbNav.getChildren().add(hbNav);
@@ -514,10 +505,26 @@ public class HomePageScene extends Scene {
 
 			try {
 				searchBar = new HBSearchBar();
-				
-//				searchBar.setTextSearchEvent(new KeyEventeve);
-				
-				
+
+				searchBar.setTextSearchEvent(new EventHandler<KeyEvent>() {
+
+					ArrayList<HBProjectComponent> projectComponent = GENERAL_STORE.projectComponent();
+
+					@Override
+					public void handle(KeyEvent e) {
+						vbProjectComponents.getChildren().clear();
+						for (int i = 0; i < projectComponent.size(); i++) {
+							boolean begin = projectComponent.get(i).getProject().getProjName()
+									.startsWith(searchBar.getTxtSearch().getText());
+							boolean end = projectComponent.get(i).getProject().getProjName()
+									.endsWith(searchBar.getTxtSearch().getText());
+
+							if (begin || end) {
+								vbProjectComponents.getChildren().add(projectComponent.get(i));
+							}
+						}
+					}
+				});
 				vbNav.getChildren().add(searchBar);
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -530,12 +537,13 @@ public class HomePageScene extends Scene {
 
 				vbProjectComponents.setId("project-list");
 
-				for (HBProjectComponent p : components) {
-					vbProjectComponents.getChildren().add(p);
-				}
+				vbProjectComponents.getChildren().addAll(components);
+
 				boolean y = vbProjectComponents.getChildren().size() > 3;
 
 				if (y) {
+					
+					
 					layout.getChildren().add(scrollProjects);
 					scrollProjects.setComponent(vbProjectComponents);
 					scrollProjects.setVisible(true);
@@ -562,6 +570,42 @@ public class HomePageScene extends Scene {
 		layout.getChildren().addAll(hbIcon, hbStartProject);
 		x = true;
 	}
+
+	private void test() {
+		boolean a = this.vbSearchResult.getChildren().isEmpty();
+
+		if (!a) {
+
+			if (this.vbSearchResult.getChildren().size() < 4) {
+				this.scroll.setVisible(false);
+				boolean x = vbSearchResult.getParent() != layout;
+				if (x) {
+					layout.getChildren().remove(scroll);
+					layout.getChildren().add(vbSearchResult);
+				}
+				return;
+			}
+
+			boolean y = scroll.getContent() != vbSearchResult;
+
+			if (y) {
+				layout.getChildren().remove(vbSearchResult);
+				layout.getChildren().add(scroll);
+				this.scroll.setComponent(this.vbSearchResult);
+				this.scroll.setVisible(true);
+				return;
+			}
+
+			layout.getChildren().remove(scroll);
+			return;
+		}
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 }
