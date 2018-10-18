@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -54,6 +55,11 @@ public class HomePageScene extends Scene {
 	private Button btnEditProfile;
 	private Button btnProjectInvitation, btnHome;
 	private Button btnFriendRequest, btnFriends;
+	
+	private Tooltip toolExit, toolLogOut;
+	private Tooltip toolEditProfile;
+	private Tooltip toolProjectInvitation, toolHome;
+	private Tooltip toolFriendRequest, toolFriends;
 	
 	private ImageView profileImg;
 	private Label lblName, lblUsername, lblProjects;
@@ -94,6 +100,21 @@ public class HomePageScene extends Scene {
 		this.btnLogOut = new Button();
 		this.btnFriends = new Button();
 		this.btnProjectInvitation = new Button();
+		
+		toolExit = new Tooltip();
+		toolExit.setText("Fechar");
+		toolLogOut = new Tooltip();
+		toolLogOut.setText("Sair");
+		toolEditProfile = new Tooltip();
+		toolEditProfile.setText("Editar Perfil");
+		toolProjectInvitation = new Tooltip();
+		toolProjectInvitation.setText("Convidar para projeto");
+		toolHome = new Tooltip();
+		toolHome.setText("Inicio");
+		toolFriendRequest = new Tooltip();
+		toolFriendRequest.setText("Solicitações de amizade");
+		toolFriends = new Tooltip();
+		toolFriends.setText("Amigos");
 		
 		Window.mainStage.setResizable(false);
 		
@@ -253,6 +274,16 @@ public class HomePageScene extends Scene {
 				e1.printStackTrace();
 			}
 		});
+		
+		
+		btnExit.setTooltip(toolExit);
+		btnLogOut.setTooltip(toolLogOut);
+		btnEditProfile.setTooltip(toolEditProfile);
+		btnProjectInvitation.setTooltip(toolProjectInvitation);
+		btnHome.setTooltip(toolHome);
+		btnFriendRequest.setTooltip(toolFriendRequest);
+		btnFriends.setTooltip(toolFriends);
+		
 		
 		this.btnFriendRequest.setId("friend-request");
 		this.btnHome = new Button();

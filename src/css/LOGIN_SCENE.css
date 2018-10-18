@@ -98,20 +98,15 @@
 .button {
     -fx-pref-width: 100.0px;
     -fx-pref-height: 50.0px;
+    -fx-text-fill:#2A363F;
+	-fx-background-color:#5Fb69C;
+	-fx-padding:10.0;
+	-fx-font-weight:bold;
 }
 .button:hover{
 	-fx-text-fill:#2A363F;
 	-fx-background-color:#ffff;
 }
-.button{
-	-fx-text-fill:#2A363F;
-	-fx-background-color:#5Fb69C;
-	-fx-padding:10.0;
-	-fx-font-weight:bold;
-}
-
-
-
 
 
 
