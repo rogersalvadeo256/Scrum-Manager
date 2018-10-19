@@ -178,6 +178,7 @@ public class HomePageScene extends Scene {
 		this.scroll = new CustomScroll();
 
 		txtSearch.setPromptText("Localize usuarios");
+
 		this.txtSearch.setOnKeyTyped(event -> {
 			HomePageScene.this.vbSearchResult.getChildren().clear();
 			if (!HomePageScene.this.txtSearch.getText().trim().isEmpty()) {
@@ -194,19 +195,40 @@ public class HomePageScene extends Scene {
 						searchUser.getResults().get(i).setId("hSugestions");
 						vbSearchResult.getChildren().add(searchUser.getResults().get(i));
 
-						test();
-					}
+						if (vbSearchResult.getChildren().size() >= 3) {
 
+							this.scroll.setVisible(true);
+
+							layout.getChildren().remove(vbSearchResult);
+
+							this.scroll.setComponent(vbSearchResult);
+							/*
+							 * WTF
+							 */
+							this.layout.getChildren().remove(scroll);
+							this.layout.getChildren().add(scroll);
+						}
+					}
 					return;
 				}
 			}
+			vbSearchResult.getChildren().clear();
 		});
-
 		this.setOnMouseClicked(e -> {
+			if (!this.vbSearchResult.getChildren().isEmpty()) {
+				this.vbSearchResult.getChildren().clear();
+				this.layout.getChildren().remove(scroll);
+				/*
+				 * WTF
+				 */
+				this.layout.getChildren().remove(vbSearchResult);
+				this.layout.getChildren().add(vbSearchResult);
 
-			test();
-			this.txtSearch.setText(new String());
+				this.scroll.setVisible(false);
+				this.txtSearch.setText(new String());
+			}
 		});
+
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
 			try {
@@ -557,62 +579,4 @@ public class HomePageScene extends Scene {
 		x = true;
 	}
 
-
-	private void test() {
-
-		boolean vbSearchStatus = this.vbSearchResult.getChildren().isEmpty();
-
-		if(vbSearchStatus) return;
-		
-		if (!vbSearchStatus) {
-
-			boolean amountToScrollBar = vbSearchResult.getChildren().size() > 3;
-			boolean parentVBsearch = vbSearchResult.getParent() == layout;
-
-			if (amountToScrollBar) {
-
-				if (parentVBsearch) {
-					layout.getChildren().remove(vbSearchResult);
-
-					this.scroll.setContent(vbSearchResult);
-
-					this.layout.getChildren().add(scroll);
-
-					return;
-				}
-			}
-			if(!parentVBsearch) { 
-				
-				layout.getChildren().remove(scroll);
-				
-				layout.getChildren().add(vbSearchResult);
-				
-				return;
-			}
-		}
-		this.layout.getChildren().remove(scroll);
-		this.layout.getChildren().remove(vbSearchResult);
-
-	}
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
