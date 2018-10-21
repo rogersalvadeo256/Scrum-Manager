@@ -13,11 +13,8 @@ public class CustomScroll extends ScrollPane{
 		this.getStylesheets().add(this.getClass().getResource("/css/SCROLL.css").toExternalForm());
 		this.setHbarPolicy(ScrollBarPolicy.NEVER);
 		this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		
 		this.content = new VBox();
-		
 	}
-	
 	public void setComponent( VBox content)  { 
 		this.setContent(content);
 		this.content = content;

@@ -1,6 +1,7 @@
 package db.pojos;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-import statics.ENUMS.REQUEST_STATUS;
 
 @Entity(name = "FRIENDSHIP")
 public class FRIENDSHIP {
@@ -31,7 +30,7 @@ public class FRIENDSHIP {
 
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false, name = "FRQ_DATE_REQUEST_SENDED")
-	private java.util.Date sendDate;
+	private Date sendDate;
 
 	public java.util.Date getSendDate() {
 		return sendDate;

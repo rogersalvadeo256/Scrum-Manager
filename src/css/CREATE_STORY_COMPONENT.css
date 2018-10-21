@@ -1,0 +1,74 @@
+.root{ 
+	-fx-background-color:#F5F3F3;
+}
+.text-input{
+   -fx-font-size: 18.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight:bold;
+   
+}
+.text-input{
+   -fx-font-size: 18.0;
+   -fx-background-color: transparent;
+   -fx-text-fill: black;
+   -fx-font-weight:bold;	
+   
+}
+ .text-area, .text-area .viewport, .text-area .content {
+    -fx-background-color: transparent ;
+    
+}
+
+.label { 
+	-fx-font-size: 20;
+	-fx-font-weight:bold;
+	
+}
+.button { 
+	-fx-background-color: #5fb69c;
+	-fx-text-fill: #F5F3F3;
+	-fx-font-size: 16;
+}
+.button {
+	-fx-pref-height:50.0;
+	-fx-pref-width:100.0;
+}
+.button:hover{
+	-fx-background-color:#E7E9DF;
+	-fx-text-fill:black;
+}
+.toggle-button {
+    -fx-min-height: 40.0px;
+    -fx-min-width: 40.0px;
+    -fx-border-radius: 100.0px;
+    -fx-background-radius:100.0px;
+	-fx-border-width: 2.0px;
+    -fx-border-color: black;
+     -fx-font-weight: bold;
+     -fx-text-fill: black;
+}
+.toggle-button:hover {
+	-fx-border-color: #F5F5F5;
+	-fx-text-fill: #F5F5F5;
+	-fx-background-color: #5fb69c;
+}
+.toggle-button:selected{ 
+	  -fx-base : #5fb69c;
+	  -fx-border-color: #F5F5F5;
+	  -fx-text-fill: #F5F3F3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

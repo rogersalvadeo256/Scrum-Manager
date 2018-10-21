@@ -1,0 +1,38 @@
+.root{
+	-fx-background-color:#F5F3F3;
+}
+.button { 
+	-fx-pref-width:220px;
+	-fx-pref-height:100px;
+	-fx-font-size:14;
+	-fx-text-fill: #F5F3F3;
+	-fx-font-weight:bold;
+}
+.button { 
+	-fx-background-color: #5fb69c;
+}
+.button:hover{ 
+	
+	-fx-background-color: #F5F3F3;
+	-fx-text-fill : black;
+	
+}
+.label { 
+	-fx-font-size :23;
+	-fx-font-weight:bold;
+	-fx-text-fill: black;
+}
+.label:hover { 
+}
+#teste .label { 
+	-fx-font-size :15;
+		
+		
+		
+}
+
+
+
+
+
+
