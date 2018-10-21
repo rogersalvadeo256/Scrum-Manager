@@ -5,12 +5,20 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
+import db.hibernate.factory.Database;
+import db.pojos.USER_REGISTRATION;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import listeners.Close;
+import statics.SERIALIZATION;
+import statics.SERIALIZATION.FileType;
+import statics.SESSION;
+import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
 import view.scenes.ProjectScene;
-import widgets.designComponents.projectContents.CreateStoryComponent;
 
 public class Window extends Stage {
 	
@@ -24,34 +32,31 @@ public class Window extends Stage {
 		
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(true);
-		
-//		Window.mainStage.setScene(new ProjectScene());
 
-		new CreateStoryComponent();
 		
-//		if (SERIALIZATION.fileExists(FileType.SESSION)) {
-//			EntityManager em = Database.createEntityManager();
-//			
-//			Query q = em.createQuery("FROM USER_REGISTRATION");
-//			if (!q.getResultList().isEmpty()) {
-//				
-//				USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
-//				
-//				for (int i = 0; i < q.getResultList().size(); i++) {
-//					USER_REGISTRATION r = (USER_REGISTRATION) q.getResultList().get(i);
-//					if (u.getCodUser() == r.getCodUser()) {
-//						SESSION.START_SESSION(u);
-//					}
-//				}
-//				setScene(new HomePageScene());
-//				this.show();
-//				return;
-//			}
-//		}
+		if (SERIALIZATION.fileExists(FileType.SESSION)) {
+			EntityManager em = Database.createEntityManager();
+			
+			Query q = em.createQuery("FROM USER_REGISTRATION");
+			if (!q.getResultList().isEmpty()) {
+				
+				USER_REGISTRATION u = (USER_REGISTRATION) SERIALIZATION.undoSerialization(FileType.SESSION);
+				
+				for (int i = 0; i < q.getResultList().size(); i++) {
+					USER_REGISTRATION r = (USER_REGISTRATION) q.getResultList().get(i);
+					if (u.getCodUser() == r.getCodUser()) {
+						SESSION.START_SESSION(u);
+					}
+				}
+				setScene(new HomePageScene());
+				this.show();
+				return;
+			}
+		}
 		Window.mainStage.setOnCloseRequest(e -> {
 			new Close(Window.mainStage);
 		});
-//		mainStage.setScene(new LoginScene());
+		mainStage.setScene(new LoginScene());
 		this.show();
 	}
 }

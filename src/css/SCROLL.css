@@ -11,7 +11,7 @@
 }
 
 .scroll-bar:vertical > .thumb, .scroll-bar:horizontal > .thumb {
-    -fx-background-color: #BCBCBC;
+    -fx-background-color: #5fb69c;
     -fx-background-insets: 0.0;
     -fx-background-radius: 1.0;
 }

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import application.main.Window;
 import db.pojos.PROJECT;
 import db.pojos.USER_PROFILE;
 import friendship.QUERYs_FRIENDSHIP;
@@ -12,7 +13,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import project.PROJECT_SESSION;
 import project.QUERY_PROJECT;
+import view.scenes.ProjectScene;
 import widgets.designComponents.projectContents.HBProjectComponent;
 
 public class GENERAL_STORE {
@@ -22,7 +25,6 @@ public class GENERAL_STORE {
 	 */
 	private static Label lblName, lblUserName;
 	private static ImageView imgProfile;
-	private static ArrayList<HBProjectComponent> listProjectComponent;
 	private static ArrayList<PROJECT> memberInProjects;
 	private static ArrayList<PROJECT> myProjects;
 	private static ArrayList<USER_PROFILE> usersList;
@@ -60,6 +62,13 @@ public class GENERAL_STORE {
 		for (PROJECT p : allProjects()) {
 			list.add(new HBProjectComponent(p, Pos.CENTER_LEFT));
 		}
+		for (int i = 0; i < list.size(); i++) {
+			PROJECT p = list.get(i).getProject();
+			list.get(i).setOnClick(e -> {
+				PROJECT_SESSION.initSession(p);
+				Window.mainStage.setScene(new ProjectScene(PROJECT_SESSION.getProject()));
+			});
+		}
 		return list;
 	}
 
@@ -91,35 +100,22 @@ public class GENERAL_STORE {
 		List<USER_PROFILE> friendslist = QUERYs_FRIENDSHIP.friendsList();
 
 		if (!friendslist.isEmpty() && !userlist.isEmpty()) {
-			
 			for (int i = 0; i < friendslist.size(); i++) {
 				USER_PROFILE p = (USER_PROFILE) userlist.get(i);
 				if (p.getCod() == friendslist.get(i).getCod()) {
 					userlist.remove(i);
 				}
 			}
+		}
+		if (!userlist.isEmpty())
 			for (USER_PROFILE up : (ArrayList<USER_PROFILE>) userlist) {
 				GENERAL_STORE.usersList.add(up);
 			}
-		}
 		return GENERAL_STORE.usersList;
 	}
-	public static ArrayList<USER_PROFILE> listUsers ()  {
+
+	public static ArrayList<USER_PROFILE> listUsers() {
 		GENERAL_STORE.usersList = GENERAL_STORE.usersList == null ? searchUsers() : usersList;
 		return GENERAL_STORE.usersList;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -32,12 +32,9 @@
    -fx-font-weight:bold;
    
 }
-.text-input:focused{
-}
 .vbox#profile-info{
     -fx-border-width: 0.0 2.0 0.0 0.0 ;
     -fx-border-color: white;
-    
 }
 .vbox#rightColumn{ 
    -fx-border-width: 0.0 4.0 0.0 0.0 ;
@@ -68,7 +65,6 @@
 #exit { 
 	-fx-pref-width:80px;
 }	
-
 #avarage { 
 	-fx-pref-width:120px;
 }
@@ -123,9 +119,6 @@
     -fx-font-weight:bold;
 }
 #haveNoProject { 
-		
-	-fx-background-color : 
-	
 }
  
  

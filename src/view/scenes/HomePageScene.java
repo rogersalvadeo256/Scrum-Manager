@@ -195,40 +195,28 @@ public class HomePageScene extends Scene {
 						searchUser.getResults().get(i).setId("hSugestions");
 						vbSearchResult.getChildren().add(searchUser.getResults().get(i));
 
-						if (vbSearchResult.getChildren().size() >= 3) {
+						this.scroll.setVisible(true);
 
-							this.scroll.setVisible(true);
+						boolean x = scroll.getParent() == layout ? true : false;
 
-							layout.getChildren().remove(vbSearchResult);
-
-							this.scroll.setComponent(vbSearchResult);
-							/*
-							 * WTF
-							 */
-							this.layout.getChildren().remove(scroll);
+						if (!x)
 							this.layout.getChildren().add(scroll);
-						}
+
+						this.scroll.setContent(vbSearchResult);
+
 					}
 					return;
 				}
 			}
 			vbSearchResult.getChildren().clear();
 		});
+
 		this.setOnMouseClicked(e -> {
-			if (!this.vbSearchResult.getChildren().isEmpty()) {
-				this.vbSearchResult.getChildren().clear();
-				this.layout.getChildren().remove(scroll);
-				/*
-				 * WTF
-				 */
-				this.layout.getChildren().remove(vbSearchResult);
-				this.layout.getChildren().add(vbSearchResult);
-
-				this.scroll.setVisible(false);
-				this.txtSearch.setText(new String());
-			}
+			this.vbSearchResult.getChildren().clear();
+			this.layout.getChildren().remove(scroll);
+			this.scroll.setVisible(false);
+			this.txtSearch.setText(new String());
 		});
-
 		this.btnEditProfile = new Button();
 		this.btnEditProfile.setOnAction(e -> {
 			try {

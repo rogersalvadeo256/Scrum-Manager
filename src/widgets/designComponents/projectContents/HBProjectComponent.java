@@ -3,8 +3,10 @@ package widgets.designComponents.projectContents;
 import java.util.Random;
 
 import db.pojos.PROJECT;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,8 +24,6 @@ public class HBProjectComponent extends HBox {
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_COMPONENT.css").toExternalForm());
 		
 		this.project=p;
-	
-		
 		this.applyCss();
 		this.setId("v");	
 		this.layout = new VBox();
@@ -51,7 +51,6 @@ public class HBProjectComponent extends HBox {
 		hbTypeProject.setAlignment(position);
 		hbTypeProject.setSpacing(10);
 		
-		
 		this.setAlignment(position);
 		this.layout.setAlignment(position);
 		
@@ -60,6 +59,10 @@ public class HBProjectComponent extends HBox {
 		this.getChildren().add(layout);
 	}
 
+	public void setOnClick(EventHandler<MouseEvent> e) { 
+		this.setOnMouseClicked(e);
+	}
+	
 	public PROJECT getProject() {
 		return project;
 	}

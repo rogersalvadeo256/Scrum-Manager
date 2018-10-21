@@ -2,34 +2,60 @@
 	-fx-background-color:#F5F3F3;
 }
 .button { 
-	-fx-pref-width:220px;
-	-fx-pref-height:100px;
+	-fx-pref-width: 200px;
+	-fx-pref-height: 100px;
 	-fx-font-size:14;
 	-fx-text-fill: #F5F3F3;
 	-fx-font-weight:bold;
+	-fx-border-width: 3px;
+	-fx-border-radius: 1.0;
+	-fx-padding: 1.0,1.0,1.0,1.0;
+	-fx-border-color:#F5F5F5;
+	-fx-border-issets:10px;
 }
 .button { 
 	-fx-background-color: #5fb69c;
 }
 .button:hover{ 
-	
 	-fx-background-color: #F5F3F3;
 	-fx-text-fill : black;
-	
+	-fx-border-color:#5fb69c;
+	-fx-text-fill:#5fb69c;
 }
-.label { 
-	-fx-font-size :23;
+#project-info{
+	-fx-pref-width: 200px;
+	-fx-pref-height: 100px;
+}
+#project-info{
+	-fx-border-width: 3px;
+	-fx-border-radius: 1.0;
+	-fx-padding: 1.0,1.0,1.0,1.0;
+	-fx-border-color:#F5F5F5;
+	-fx-border-issets:10px;
+}
+#vbProject-info .label { 
+	-fx-font-size:23;
 	-fx-font-weight:bold;
+}
+
+#header{
+	-fx-border-width:0px 0px 2px 0px;
+	-fx-boder-color: #F5F5F5;
+}
+#header{
+	-fx-background-color: #5fb69c;
+}
+#header .label {
+	-fx-font-size:30;
+	-fx-text-fill: #F5F3F3;
+	-fx-font-weight:bold;
+}
+#member-actions .label {
+	-fx-font-size:20;
 	-fx-text-fill: black;
+	-fx-font-weight:bold;
 }
-.label:hover { 
-}
-#teste .label { 
-	-fx-font-size :15;
-		
-		
-		
-}
+
 
 
 

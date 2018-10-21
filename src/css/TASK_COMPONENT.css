@@ -1,27 +1,25 @@
-.root{ 
-	-fx-background-color:#F5F3F3;
+#title{
+	-fx-font-size: 12;
 }
-.text-input{
-   -fx-font-size: 18.0;
-   -fx-background-color: transparent;
-   -fx-text-fill: black;
-   -fx-font-weight:bold;
-   
+#pontuation{
+-fx-font-size: 8 ;	
 }
-.text-input{
-   -fx-font-size: 18.0;
-   -fx-background-color: transparent;
-   -fx-text-fill: black;
-   -fx-font-weight:bold;	
-   
+#task{
+	-fx-font-size: 11;
 }
- .text-area, .text-area .viewport, .text-area .content {
-    -fx-background-color: transparent ;
-    
+#content {
+	-fx-border-width: 2 0 2 0;
+	-fx-border-color: #5fb69c;	
+}
+#content:hover { 
+	-fx-border-color: #F5F5F5;
+	-fx-background-color:#5fb69c;
+	-fx-text-fill: #F5F5F5;
 }
 
-.label { 
-	-fx-font-size: 20;
-	-fx-font-weight:bold;
-	
-}
+
+
+
+
+
+

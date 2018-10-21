@@ -14,7 +14,7 @@ import org.hibernate.annotations.Type;
 
 import javafx.scene.text.Text;
 
-@Entity(name = "PROJECT_STORIES")
+@Entity(name = "PROJECT_TASK")
 public class PROJECT_TASK {
 
 	@Id
@@ -27,7 +27,7 @@ public class PROJECT_TASK {
 
 	@Column(name = "TASK_TEXT")
 	@Type(type = "text")
-	private Text task;
+	private String task;
 
 	@Column(name = "TASK_PONTUATION")
 	private int taskPontuation;
@@ -36,7 +36,7 @@ public class PROJECT_TASK {
 	private USER_PROFILE taskCreator;
 
 	@Column(name = "TASK_EXECUTOR")
-	private USER_PROFILE taskExecutor;
+	private int taskExecutor;
 
 	@Column(name = "TASK_STATUS")
 	private String taskStatus;
@@ -45,12 +45,11 @@ public class PROJECT_TASK {
 	@Column(name = "TASK_DT_STARTED")
 	private Date taskDateStart;
 
-	public Text getTask() {
+	public String getTask() {
 		return task;
 	}
-
-	public void setTask(Text task) {
-		this.task = task;
+	public void setTask(String string) {
+		this.task = string;
 	}
 
 	public int getTaskPontuation() {
@@ -69,11 +68,11 @@ public class PROJECT_TASK {
 		this.taskCreator = taskCreator;
 	}
 
-	public USER_PROFILE getTaskExecutor() {
+	public int getTaskExecutor() {
 		return taskExecutor;
 	}
 
-	public void setTaskExecutor(USER_PROFILE taskExecutor) {
+	public void setTaskExecutor(int taskExecutor) {
 		this.taskExecutor = taskExecutor;
 	}
 

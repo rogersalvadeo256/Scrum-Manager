@@ -11,8 +11,8 @@ public class CustomScroll extends ScrollPane{
 	private Node content;
 	public CustomScroll () {  
 		this.getStylesheets().add(this.getClass().getResource("/css/SCROLL.css").toExternalForm());
-		this.setHbarPolicy(ScrollBarPolicy.NEVER);
-		this.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+		this.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
 		this.content = new VBox();
 	}
 	public void setComponent( VBox content)  { 

@@ -2,15 +2,8 @@ package friendship;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-
-import db.hibernate.factory.Database;
-import db.pojos.USER_PROFILE;
 import statics.GENERAL_STORE;
-import statics.SESSION;
 import widgets.designComponents.profileContents.HBProfileContent;
 
 public class SearchFriend {

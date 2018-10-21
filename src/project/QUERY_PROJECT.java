@@ -66,7 +66,6 @@ public class QUERY_PROJECT {
 						ENUMS.REQUEST_STATUS.ON_HOLD.getValue().toString() });
 		return (ArrayList<PROJECT_MEMBER>) invitations;
 	}
-
 	@SuppressWarnings("unchecked")
 	public static ArrayList<USER_PROFILE> INVITED_BY() {
 
@@ -102,4 +101,8 @@ public class QUERY_PROJECT {
 		l = (l == null ? new ArrayList<PROJECT_MEMBER>() : l);
 		return l;
 	}
+	
+	
+	
+	
 }
