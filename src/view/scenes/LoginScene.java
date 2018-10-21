@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +47,10 @@ public class LoginScene extends Scene {
 	private VBox vbLogin;
 	private AnchorPane layout;
 	private ImageView imgIcon;
+	
+	private Tooltip toolLogin = new Tooltip();
+	private Tooltip toolExit = new Tooltip();
+	private Tooltip toolSignup = new Tooltip();
 
 	private LoginSceneController controller;
 
@@ -84,6 +89,10 @@ public class LoginScene extends Scene {
 
 		this.lblWelcome.getStyleClass().add("title");
 		this.lblSignIn.getStyleClass().add("title");
+		
+		toolLogin.setText("Fazer Login");
+		toolExit.setText("Sair");
+		toolSignup.setText("Cadastre-se");
 
 		this.messageLoginValidation = new Label("Login ou senha incorretos");
 		this.messageLoginValidation.setVisible(false);
@@ -103,12 +112,20 @@ public class LoginScene extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnSignUp.setId("btnSingUp");
 
+		btnLogin.setTooltip(toolLogin);
+		btnExit.setTooltip(toolExit);
+		btnSignUp.setTooltip(toolSignup);
+		
 		this.imgIcon = new ImageView();
 		this.imgIcon.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 
 		this.imgIcon.setFitWidth(200);
 		this.imgIcon.setFitHeight(200);
 
+		this.layout.setPrefHeight(450);
+		this.layout.setPrefWidth(300);
+		
+		
 		this.txtLogin.setOnMouseClicked(e -> {
 			this.messageLoginValidation.setVisible(false);
 		});
@@ -148,11 +165,15 @@ public class LoginScene extends Scene {
 
 		this.btnSignUp.setOnAction(e -> {
 			this.layoutContent.getChildren().clear();
+			this.getWindow().setWidth(300);
+			this.getWindow().setHeight(700);
 			this.registration();
 		});
 
 		this.vbRegistration.setEventCancel(e -> {
 			this.layoutContent.getChildren().clear();
+			this.getWindow().setWidth(300);
+			this.getWindow().setHeight(500);
 			this.login();
 		});
 
@@ -169,7 +190,7 @@ public class LoginScene extends Scene {
 		this.btnExit.setMaxWidth(Double.MAX_VALUE);
 		this.btnLogin.setMaxWidth(Double.MAX_VALUE);
 
-		this.vbLogin.getChildren().addAll(imgIcon, lblUser, txtLogin, lblPassword);
+		this.vbLogin.getChildren().addAll(lblUser, txtLogin, lblPassword);
 		this.vbLogin.getChildren().addAll(passwordField, messageLoginValidation, forgotPassword, reactivateAccount,
 				hbStayConnected, btnLogin, btnExit, btnSignUp);
 
@@ -183,19 +204,28 @@ public class LoginScene extends Scene {
 		this.vbRegistration.setMaxHeight(Double.MAX_VALUE);
 		this.vbRegistration.setAlignment(Pos.CENTER);
 
-		this.vbLogin.setSpacing(20);
+		this.vbLogin.setSpacing(5);
 		this.vbRegistration.setSpacing(30);
 
 		this.layoutContent.setAlignment(Pos.CENTER);
 
+		AnchorPane.setTopAnchor(vbLogin, 10d);
+		AnchorPane.setLeftAnchor(vbLogin, 10d);
+		AnchorPane.setRightAnchor(vbLogin, 10d);
+		AnchorPane.setBottomAnchor(vbLogin, 10d);
+		vbLogin.setId("fundo");
+		
+		
 		AnchorPane.setTopAnchor(this.layoutContent, 0.0);
 		AnchorPane.setLeftAnchor(this.layoutContent, 0.0);
 		AnchorPane.setRightAnchor(this.layoutContent, 0.0);
 		AnchorPane.setBottomAnchor(this.layoutContent, 0.0);
 		this.layout.getChildren().add(layoutContent);
-
+		
+		
+		
 		login();
-
+		
 		this.setRoot(layout);
 	}
 

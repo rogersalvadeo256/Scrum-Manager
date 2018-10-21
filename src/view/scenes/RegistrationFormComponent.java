@@ -1,15 +1,10 @@
 package view.scenes;
 
 import java.io.FileNotFoundException;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import antlr.ByteBuffer;
-
-import java.security.MessageDigest;
 
 import application.controllers.RegistrationFromSceneController;
 import javafx.event.ActionEvent;
@@ -21,9 +16,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import widgets.alertMessage.CustomAlert;
 
 public class RegistrationFormComponent extends VBox {
 
@@ -37,7 +34,9 @@ public class RegistrationFormComponent extends VBox {
 	private HBox hbButtons;
 	private RegistrationFromSceneController controller;
 	private String email;
-
+	private Tooltip toolRegister, toolCancel;
+	
+	
 	public RegistrationFormComponent() throws ClassNotFoundException, SQLException {
 
 		this.fieldName = new ArrayList<String>();
@@ -77,6 +76,14 @@ public class RegistrationFormComponent extends VBox {
 		this.btnCancel = new Button("Cancelar");
 		this.btnCancel.setId("btnCancel");
 
+		this.toolCancel = new Tooltip();
+		this.toolCancel.setText("Cancelar");
+		this.toolRegister = new Tooltip();
+		this.toolRegister.setText("Registre-se");
+		
+		btnCancel.setTooltip(toolCancel);
+		btnRegister.setTooltip(toolRegister);
+		
 		this.hbButtons.getChildren().addAll(btnCancel, btnRegister);
 		this.hbButtons.setAlignment(Pos.CENTER);
 
@@ -100,25 +107,21 @@ public class RegistrationFormComponent extends VBox {
 		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
-			
+		CustomAlert emailError = new CustomAlert(AlertType.ERROR, "Erro", "Erro no campo de email.", "O Campo de Email nao é um email válido, por favor arrume.");
 		
-		Alert emailError = new Alert(AlertType.ERROR);
-		emailError.setTitle("Error");
-		emailError.setHeaderText("Erro no campo de email.");
-		emailError.setContentText("O Campo de Email nao é um email válido, por favor arrume.");
-
 		this.controller = new RegistrationFromSceneController();
 
 		this.btnRegister.setOnAction(e -> {
-			email = txtEmail.getText();
 
-			if (validar(email) == false) {
+			if (validar(txtEmail.getText()) == false) {
 				emailError.showAndWait();
 			} else {
-
+				
 				try {
+					email = txtEmail.getText();
+
 					this.controller.setEventBtnLogin(e, field, fieldName, passwordField, txtName, confirmationMessage,
-							txtUserName, txtEmail, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
+							txtUserName, email, txtQuestion, txtAnswer, txtPasswordField, txtPasswordConfirmation);
 				} catch (ClassNotFoundException | FileNotFoundException | SQLException e1) {
 					e1.printStackTrace();
 				}
