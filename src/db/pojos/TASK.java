@@ -14,8 +14,8 @@ import org.hibernate.annotations.Type;
 
 import javafx.scene.text.Text;
 
-@Entity(name = "PROJECT_TASK")
-public class PROJECT_TASK {
+@Entity(name = "TASK")
+public class TASK {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

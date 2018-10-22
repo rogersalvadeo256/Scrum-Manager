@@ -2,7 +2,7 @@ package view.scenes;
 
 import application.main.Window;
 import db.pojos.PROJECT;
-import db.pojos.PROJECT_TASK;
+import db.pojos.TASK;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,7 +49,7 @@ public class ProjectScene extends Scene{
 
 		init();
 		
-		PROJECT_TASK task = new PROJECT_TASK();
+		TASK task = new TASK();
 		
 		task.setTask("lasfkalfkalsf gakslajçj laksjlagkjlgkjs lkgajlk j");
 		task.setTaskTitle(" isso isso isso ");

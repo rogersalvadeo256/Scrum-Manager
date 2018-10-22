@@ -1,6 +1,6 @@
 package widgets.designComponents.projectContents;
 
-import db.pojos.PROJECT_TASK;
+import db.pojos.TASK;
 import db.pojos.USER_PROFILE;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -37,7 +37,7 @@ public class TaskComponentPOPOUP extends Stage{
 	public TaskComponentPOPOUP () { 
 		init();
 	}
-	public TaskComponentPOPOUP(PROJECT_TASK task) { 
+	public TaskComponentPOPOUP(TASK task) { 
 		init();	
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());
@@ -59,7 +59,7 @@ public class TaskComponentPOPOUP extends Stage{
 		}
 		blockContents();
 	}
-	public TaskComponentPOPOUP(PROJECT_TASK task, USER_PROFILE p) {
+	public TaskComponentPOPOUP(TASK task, USER_PROFILE p) {
 		init();
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());

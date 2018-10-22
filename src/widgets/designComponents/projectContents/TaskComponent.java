@@ -1,6 +1,6 @@
 package widgets.designComponents.projectContents;
 
-import db.pojos.PROJECT_TASK;
+import db.pojos.TASK;
 import db.pojos.USER_PROFILE;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -13,17 +13,17 @@ public class TaskComponent  extends VBox {
 	
 	private Label lblTitle, lblPontuation;
 	private Text lblTask;
-	private PROJECT_TASK task;
+	private TASK task;
 	
 	private HBox hbExecutor;
 	
-	public TaskComponent(PROJECT_TASK task, USER_PROFILE p) {
+	public TaskComponent(TASK task, USER_PROFILE p) {
 		this.task = task;
 		init();
 		hbExecutor.getChildren().addAll(lblPontuation, new Label(p.getName()));
 	}
 	
-	public TaskComponent(PROJECT_TASK task) { 
+	public TaskComponent(TASK task) { 
 		this.task = task;
 		init();
 		
@@ -55,11 +55,11 @@ public class TaskComponent  extends VBox {
 	}
 	
 	
-	public PROJECT_TASK getTask() {
+	public TASK getTask() {
 		return task;
 	}
 
-	public void setTask(PROJECT_TASK task) {
+	public void setTask(TASK task) {
 		this.task = task;
 	}
 	

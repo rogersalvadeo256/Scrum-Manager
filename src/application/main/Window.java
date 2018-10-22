@@ -18,7 +18,6 @@ import statics.SERIALIZATION.FileType;
 import statics.SESSION;
 import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
-import view.scenes.ProjectScene;
 
 public class Window extends Stage {
 	
@@ -32,7 +31,6 @@ public class Window extends Stage {
 		
 		Window.mainStage.getIcons().add(new Image(fis));
 		Window.mainStage.setResizable(true);
-
 		
 		if (SERIALIZATION.fileExists(FileType.SESSION)) {
 			EntityManager em = Database.createEntityManager();
