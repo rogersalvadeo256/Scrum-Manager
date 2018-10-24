@@ -28,7 +28,12 @@
 	-fx-font-family: "Quicksand";
 	 -fx-text-fill: #343736;
 }
-
+#hbChangeQuestion{
+	-fx-background-color:#44B492;
+}
+#hbChangeAnswer{
+	-fx-background-color:#44B492;
+}
 .button{
   -fx-background-color:#44B492;
    -fx-pref-height: 30.0px;
@@ -41,4 +46,8 @@
 .button:hover{
 	-fx-background-color:#E7E9DF;
 	-fx-text-fill:black;
+}
+.button#back:hover{
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
 }
