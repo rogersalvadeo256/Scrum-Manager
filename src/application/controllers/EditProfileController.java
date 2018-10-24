@@ -35,8 +35,7 @@ public class EditProfileController {
 
 	private EntityManager em;
 	private CheckEmptyFields check;
-	private Button btnDesativar;
-//	private HBStatusBar hbDeleteAccount;
+	private Button btnDesativar,btnChangeQuestion,btnChangeAnswer;
 	private ProfileEditPOPOUP screen;
 
 	public EditProfileController() {
@@ -44,8 +43,10 @@ public class EditProfileController {
 //		this.btnChangeAnswer = new Button();
 //		this.btnChangeQuestion = new Button();
 		this.btnDesativar = new Button("Desativar conta");
+		this.btnChangeAnswer = new Button("Alterar resposta");
+		this.btnChangeQuestion = new Button("Alterar pergunta");
+		this.btnDesativar.setId("desativa");
 //		this.hbDeleteAccount = new HBStatusBar(false, "Desativar Conta", "Conta Ativa");
-
 		this.btnDesativar.setOnAction(e -> {
 			Optional<ButtonType> result = new CustomAlert(AlertType.WARNING, "Apagar conta", "Sua conta ficará inativa",
 					"Para reativar sua conta vá até a opção \n na tela de login").showAndWait();
@@ -125,6 +126,7 @@ public class EditProfileController {
 
 		hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
 		hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
+		
 //
 //		hbChangeQuestion.getChildren().addAll(this.btnChangeQuestion);
 //		hbChangeAnswer.getChildren().addAll(this.btnChangeAnswer);
@@ -135,11 +137,9 @@ public class EditProfileController {
 		hbChangeAnswer.setSpacing(20);
 		hbChangeQuestion.setSpacing(20);
 
-		layout.getChildren().add(new Label("Alterar pergunta"));
-		layout.getChildren().addAll(hbChangeQuestion);
+		layout.getChildren().addAll(hbChangeQuestion,btnChangeQuestion);
 		hbChangeQuestion.setId("hbChangeQuestion");
-		layout.getChildren().add(new Label("Alterar resposta"));
-		layout.getChildren().addAll(hbChangeAnswer);
+		layout.getChildren().addAll(hbChangeAnswer,btnChangeAnswer);
 		hbChangeAnswer.setId("hbChangeAnswer");
 		layout.getChildren().add(btnDesativar);
 		// layout.getChildren().add(hbDeleteAccount);

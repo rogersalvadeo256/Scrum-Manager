@@ -34,10 +34,14 @@
 #hbChangeAnswer{
 	-fx-background-color:#44B492;
 }
+.button#desativa{
+	-fx-pref-height:35.0px;
+	-fx-pref-width:150px;
+}
 .button{
   -fx-background-color:#44B492;
    -fx-pref-height: 30.0px;
-    -fx-pref-width: 100px;
+    -fx-pref-width: 150px;
      -fx-text-fill: #E7E9DF;
 		-fx-background-radius: 30;
 	    -fx-background-insets: 0;
