@@ -26,7 +26,7 @@ public class FriendshipRequestsController {
 		this.requestsList = new ArrayList<USER_PROFILE>();
 	}
 	/**
-	 * This method are for bring the friendship requests of the database and put on
+	 * This method are for     bring the friendship requests of the database and put on
 	 * a component with the user that send the request informations
 	 * HBFriendshipRequest and show for the user, according to the amount of
 	 * registers in the database the hbox's will be drawn on the scene
@@ -58,7 +58,7 @@ public class FriendshipRequestsController {
 					this.loadRequests();
 					try {
 						drawRequests(layout, screen);
-						GENERAL_STORE.updateComponentsHOME();
+						GENERAL_STORE.loadComponentsHOME();
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {
@@ -71,7 +71,7 @@ public class FriendshipRequestsController {
 					loadRequests();
 					try {
 						drawRequests(layout, screen);
-						GENERAL_STORE.updateComponentsHOME();
+						GENERAL_STORE.loadComponentsHOME();
 					} catch (FileNotFoundException e1) {
 						e1.printStackTrace();
 					} catch (IOException e1) {

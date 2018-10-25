@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -46,6 +47,10 @@ public class LoginScene extends Scene {
 	private VBox vbLogin;
 	private AnchorPane layout;
 	private ImageView imgIcon;
+	
+	private Tooltip toolLogin = new Tooltip();
+	private Tooltip toolExit = new Tooltip();
+	private Tooltip toolSignup = new Tooltip();
 
 	private LoginSceneController controller;
 
@@ -84,6 +89,10 @@ public class LoginScene extends Scene {
 
 		this.lblWelcome.getStyleClass().add("title");
 		this.lblSignIn.getStyleClass().add("title");
+		
+		toolLogin.setText("Fazer Login");
+		toolExit.setText("Sair");
+		toolSignup.setText("Cadastre-se");
 
 		this.messageLoginValidation = new Label("Login ou senha incorretos");
 		this.messageLoginValidation.setVisible(false);
@@ -103,6 +112,10 @@ public class LoginScene extends Scene {
 		this.btnExit.setId("exitbtn");
 		this.btnSignUp.setId("btnSingUp");
 
+		btnLogin.setTooltip(toolLogin);
+		btnExit.setTooltip(toolExit);
+		btnSignUp.setTooltip(toolSignup);
+		
 		this.imgIcon = new ImageView();
 		this.imgIcon.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 

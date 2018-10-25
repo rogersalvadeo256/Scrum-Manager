@@ -1,7 +1,5 @@
-package view.popoups;
+	package view.popoups;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 
 import application.controllers.NewProjectSceneController;
@@ -11,9 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -64,14 +59,8 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.btnInvite = new Button("Convidar Amigos");
 		this.btnInvite.setId("btnInvite");
 		
-//		int SIZE = 30;
-//		ImageView buttonImage = new ImageView(new Image(new FileInputStream(new File("resources/images/icons/back_arrow_icon.png"))));
-//		buttonImage.setFitWidth(SIZE);
-//		buttonImage.setFitHeight(SIZE);
-		
 		this.btnGoBack = new Button("Cancelar");
 		this.btnGoBack.setId("back");
-//		this.btnGoBack.setGraphic(buttonImage);
 		
 		this.txtProjectName.setAlignment(Pos.CENTER);
 		

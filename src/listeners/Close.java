@@ -12,7 +12,6 @@ public class Close implements EventHandler<ActionEvent> {
 	public Close(Stage parent) {
 		this.parent = parent;
 	}
-	
 	@Override
 	public void handle(ActionEvent event) {
 		Database.close();

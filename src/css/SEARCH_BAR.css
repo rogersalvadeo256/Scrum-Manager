@@ -1,0 +1,41 @@
+#hbox { 
+	-fx-background-color:#5fb69c;
+	 -fx-pref-height: 80.0px;
+}
+.button  { 
+	-fx-background-color: transparent;
+}
+.button:hover { 
+	-fx-background-color: #F5F3F3;
+}
+.label{
+    -fx-font-size: 15.0pt;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-weight:bold;
+    -fx-opacity: 6.0;
+      -fx-text-fill: #F5F3F3;
+}	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -36,14 +36,23 @@ public class FriendshipActions {
 
 		FRIENDSHIP friendshipRequest = new FRIENDSHIP();
 
-		friendshipRequest.setRequestedBy(SESSION.getProfileLogged().getCod());
-		friendshipRequest.setReceiver(this.p.getCod());
-		friendshipRequest.setSendDate();
-		friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
+		List<?> listFriends = DB_OPERATION.QUERY(
+				" FROM FRIENDSHIP WHERE FRQ_COD_PROF_RECEIVER = :COD_USER_ONLINE AND FRQ_COD_PROF_REQUESTED_BY = :COD_USER OR FRQ_COD_PROF_RECEIVER = :COD_USER AND FRQ_COD_PROF_REQUESTED_BY = :COD_USER_ONLINE AND FRQ_REQUEST_STATUS='ON_HOLD'",
+				new String[] { "COD_USER_ONLINE", "COD_USER" },
+				new int[] { SESSION.getProfileLogged().getCod(), p.getCod() });
 
-		DB_OPERATION.PERSIST(friendshipRequest);
+		if (listFriends.isEmpty()) {
+
+			friendshipRequest.setRequestedBy(SESSION.getProfileLogged().getCod());
+			friendshipRequest.setReceiver(this.p.getCod());
+			friendshipRequest.setSendDate();
+			friendshipRequest.setStatus(ENUMS.REQUEST_STATUS.ON_HOLD.getValue());
+
+			DB_OPERATION.PERSIST(friendshipRequest);
+		}
 
 	}
+
 	public void answerRequest(REQUEST_STATUS type) {
 
 		FRIENDSHIP fr = (FRIENDSHIP) DB_OPERATION.QUERY(
@@ -57,6 +66,8 @@ public class FriendshipActions {
 			break;
 		case ACCEPTED:
 			fr.setStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+			break;
+		default:
 			break;
 		}
 		DB_OPERATION.MERGE(fr);
@@ -74,7 +85,7 @@ public class FriendshipActions {
 
 				DB_OPERATION.MERGE(fr);
 				SESSION.UPDATE_SESSION();
-				GENERAL_STORE.updateComponentsHOME();
+				GENERAL_STORE.loadComponentsHOME();
 				return;
 			}
 		}

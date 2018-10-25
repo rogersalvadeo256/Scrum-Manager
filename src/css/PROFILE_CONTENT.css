@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .hbox { 
 	 -fx-background-color: #F5F3F3;
     -fx-font-weight:bold;
@@ -45,3 +46,53 @@
 
 
 
+=======
+.hbox { 
+	 -fx-background-color: #F5F3F3;
+    -fx-font-weight:bold;
+	-fx-border-width : 3.0px;
+}
+
+.label
+{
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-font-size: 14;
+}
+.button{
+	-fx-background-color:#5fb69c;
+	-fx-fill-color:white;
+}
+.button:hover{
+	-fx-background-color:white;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 181af3707eb1985662b896b65b1ff44792a725af

@@ -1,155 +1,151 @@
 package view.scenes;
-//package scenes.scenes;
-//
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.TableColumn;
-//import javafx.scene.control.TableView;
-//import javafx.scene.control.cell.PropertyValueFactory;
-//import javafx.scene.image.ImageView;
-//import javafx.scene.shape.Rectangle;
-//
-//import java.util.List;
-//
-//import application.main.Window;
-//import db.pojos.Integrantes;
-//import db.pojos.Quadro;
-//import javafx.collections.FXCollections;
-//import javafx.collections.ObservableList;
-//import javafx.scene.Node;
-//import javafx.scene.Scene;
-//import javafx.scene.layout.AnchorPane;
-//import javafx.scene.layout.HBox;
-//import javafx.scene.layout.VBox;
-//import javafx.scene.text.Text;
-//import javafx.stage.Stage;
-//
-//public class ProjectScene extends Scene {
-//
-//	private AnchorPane layout = new AnchorPane();
-//	private ObservableList<Integrantes> listaInteg;
-//	private TableView<Integrantes> integrantes;
-//	private TableView<Quadro> quadro;
-//	private ObservableList<Quadro> listaQuadro;
-//	private Button btnAddMember, btnCommit, btnSla;
-//	private Label lblPjtName;
-//	private Text lblBio;
-//	private VBox vbxLbl, vbxParty;
-//	private HBox hbxBtns;
-//
-//	public ProjectScene() {
-//		super(new AnchorPane());
-//		integrantes = new TableView<Integrantes>();
-//		quadro = new TableView<Quadro>();
-//		this.listaInteg = FXCollections.observableArrayList();
-//		this.listaQuadro = FXCollections.observableArrayList();
-//		btnAddMember = new Button("addMember");
-//		lblPjtName = new Label();
-//		lblBio = new Text();
-//		btnCommit = new Button("#");
-//		btnCommit.setPrefWidth(120);
-//		btnCommit.setPrefHeight(60);
-//		btnSla = new Button("sla");
-//		btnSla.setPrefWidth(120);
-//		btnSla.setPrefHeight(60);
-//		vbxLbl = new VBox();
-//		vbxParty = new VBox();
-//		hbxBtns = new HBox();
-//		
-//		Window.mainStage.setWidth(1200);
-//		Window.mainStage.setHeight(700);
-//		
-//		
-//
-//		hbxBtns.getChildren().addAll(btnSla, btnCommit);
-//		hbxBtns.setSpacing(20);
-//
-//		vbxParty.getChildren().addAll(integrantes, btnAddMember);
-//		vbxParty.setSpacing(15);
-//
-//		String bio;
-//		bio = "Projeto destinado a ajudar outras pessoas \ncom seus TCCs";
-//
-//		lblPjtName.setText("TCC");
-//		lblBio.setText(bio);
-//
-//		// Tabela integrantes
-//
-//		TableColumn<Integrantes, Integer> foto = new TableColumn<Integrantes, Integer>();
-//		TableColumn<Integrantes, String> namee = new TableColumn<Integrantes, String>("Nome");
-//		TableColumn<Integrantes, String> funcao = new TableColumn<Integrantes, String>("Fun��o");
-//
-//		this.integrantes.getColumns().addAll(foto, namee, funcao);
-//
-//		vbxLbl.getChildren().addAll(lblPjtName, lblBio);
-//		vbxLbl.setSpacing(20d);
-//
-//		this.integrantes.setItems(listaInteg);
-//
-//		foto.setCellValueFactory(new PropertyValueFactory("foto"));
-//		namee.setCellValueFactory(new PropertyValueFactory("name"));
-//		funcao.setCellValueFactory(new PropertyValueFactory("funcao"));
-//
-//		// Kill me
-//
-//		// Tabela do quadro
-//
-//		TableColumn<Quadro, String> toDo = new TableColumn<Quadro, String>("To Do");
-//		TableColumn<Quadro, String> inProg = new TableColumn<Quadro, String>("In Progress");
-//		TableColumn<Quadro, String> done = new TableColumn<Quadro, String>("Done!");
-//
-//		this.quadro.getColumns().addAll(toDo, inProg, done);
-//
-//		quadro.resizeColumn(toDo, 150d);
-//		quadro.resizeColumn(inProg, 150d);
-//		quadro.resizeColumn(done, 150d);
-//
-//		this.quadro.setItems(listaQuadro);
-//		this.btnAddMember.setOnAction(evento -> {
-//			Integrantes i = new Integrantes();
-//			i.setFoto(new ImageView("image.jpg"));
-//			i.setName("sla");
-//			i.setFuncao("programador");
-//
-//			this.listaInteg.add(i);
-//		});
-//		
-//		this.btnCommit.setOnAction(evento -> {
-//			Quadro q = new Quadro();
-////			q.setToDo("tem que fazer isso");
-////			q.setInProg("to fazendo isso");
-////			q.setDone("fizemos isso");
-//			
-//			this.listaQuadro.add(q);
-//		});
-//		
-//		
-//		toDo.setCellValueFactory(new PropertyValueFactory("toDo"));
-//		inProg.setCellValueFactory(new PropertyValueFactory("inProg"));
-//		done.setCellValueFactory(new PropertyValueFactory("done"));
-//
-//		quadro.setMaxWidth(15d);
-//
-//		// foi
-//		
-//
-//		layout.getChildren().addAll(vbxLbl, vbxParty, quadro, hbxBtns);
-//		AnchorPane.setTopAnchor(vbxLbl, 15d);
-//		AnchorPane.setLeftAnchor(vbxLbl, 15d);
-//
-//		AnchorPane.setTopAnchor(vbxParty, 15d);
-//		AnchorPane.setRightAnchor(vbxParty, 15d);
-//
-//		AnchorPane.setTopAnchor(quadro, 220d);
-//		AnchorPane.setLeftAnchor(quadro, 15d);
-//		AnchorPane.setRightAnchor(quadro, 300d);
-//
-//		AnchorPane.setBottomAnchor(hbxBtns, 20d);
-//		AnchorPane.setRightAnchor(hbxBtns, 300d);
-//		
-//		
-//		this.setRoot(layout);
-//		
-//	}
-//
-//}
+
+import application.main.Window;
+import db.pojos.PROJECT;
+import db.pojos.PROJECT_TASK;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import statics.SESSION;
+import widgets.designComponents.projectContents.ScrumFrame;
+import widgets.designComponents.projectContents.TaskComponent;
+
+public class ProjectScene extends Scene{ 
+	
+	
+	private Button btnSprints, btnStartSprint, btnTeam;
+	
+	private VBox content;
+	private HBox layout;
+	
+	private HBox vFrame;
+	private ScrumFrame frame;
+	
+	private VBox vMemberActions;
+	private Button btnLeaveProject, btnBack;
+	
+	
+	private HBox hHeader;
+	private Label lblProjectName;
+	
+	private HBox hInfo;
+	private VBox projectInformations;
+	
+	
+	private AnchorPane anchor;
+	private Label lblFuncion;
+
+	private Button btnTaskDone;
+	public ProjectScene (PROJECT p) { 
+		super(new AnchorPane());
+		Window.mainStage.setResizable(true);
+		
+		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_SCENE.css").toExternalForm());
+
+		init();
+		
+		PROJECT_TASK task = new PROJECT_TASK();
+		
+		task.setTask("lasfkalfkalsf gakslajçj laksjlagkjlgkjs lkgajlk j");
+		task.setTaskTitle(" isso isso isso ");
+		
+		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task), btnTaskDone,  btnLeaveProject,btnBack);
+		
+	}
+	
+	
+	private void init( ) { 
+		this.content = new VBox();
+		this.layout=new HBox();
+		content.setAlignment(Pos.CENTER);
+		layout.setAlignment(Pos.CENTER);
+		
+		Window.mainStage.setWidth(1050);
+		Window.mainStage.setHeight(768);
+
+		content.getChildren().add(layout);
+		this.anchor  = new AnchorPane();
+
+		//		this.lblProjectName = new Label(projectName);
+			
+		
+		this.hHeader=new HBox();
+		hHeader.setId("header");
+		hHeader.getChildren().add(new Label ("nome do projeto"));
+		hHeader.setAlignment(Pos.CENTER);
+		
+		AnchorPane.setLeftAnchor(hHeader, this.widthProperty().get());
+		AnchorPane.setRightAnchor(hHeader, this.widthProperty().get());
+		anchor.getChildren().add(hHeader);
+		
+		this.btnStartSprint = new Button("Definir novo sprint");
+		this.btnSprints=new Button("ver sprints anteriores");
+		this.btnTeam=new Button("equipe");
+		
+		this.hInfo = new HBox();
+		this.projectInformations=new VBox();
+		projectInformations.setId("vbProject-info");
+		projectInformations.getChildren().addAll( new Label("data de inicio"), new Label("sprint atual"));
+		
+		hInfo.getChildren().addAll(btnStartSprint, btnSprints,btnTeam, projectInformations);
+		hInfo.setSpacing(20);
+
+		
+		
+		AnchorPane.setTopAnchor(hInfo, 60d);
+		AnchorPane.setLeftAnchor(hInfo, this.widthProperty().get());
+		AnchorPane.setRightAnchor(hInfo, this.widthProperty().get());
+		anchor.getChildren().add(hInfo);
+
+		
+		this.vFrame=new HBox();
+		HBox.setHgrow(vFrame, Priority.ALWAYS);
+		this.frame=new ScrumFrame();
+		
+		vFrame.getChildren().add(frame);
+		
+		AnchorPane.setTopAnchor(vFrame , 170d);
+		AnchorPane.setLeftAnchor(vFrame, this.widthProperty().get());
+		AnchorPane.setBottomAnchor(vFrame,0d);
+		anchor.getChildren().add(vFrame);
+		
+		
+		this.btnTaskDone = new Button ("historias feitas \n nesse sprint");
+		
+		this.vMemberActions = new VBox();
+		this.lblFuncion = new Label("função");
+		this.btnBack=new Button("voltar");
+		this.btnLeaveProject=new Button("abandonar projeto");
+		
+		
+		vMemberActions.setAlignment(Pos.TOP_CENTER);
+		vMemberActions.setSpacing(20);
+		
+		vMemberActions.setId("member-actions");
+		
+		AnchorPane.setTopAnchor(vMemberActions , 170d);
+		AnchorPane.setRightAnchor(vMemberActions, this.widthProperty().get());
+		AnchorPane.setBottomAnchor(vMemberActions,0d);
+		anchor.getChildren().add(vMemberActions);
+		
+		anchor.getChildren().add(content);
+		
+		this.setRoot(anchor);
+		
+	}
+	
+}
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,6 @@ package widgets.designComponents.projectContents;
 
 import java.util.List;
 
-import db.pojos.PROJECT;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 

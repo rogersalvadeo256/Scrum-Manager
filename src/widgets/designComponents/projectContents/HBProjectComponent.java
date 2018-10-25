@@ -3,8 +3,10 @@ package widgets.designComponents.projectContents;
 import java.util.Random;
 
 import db.pojos.PROJECT;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -17,9 +19,11 @@ public class HBProjectComponent extends HBox {
 	Text  lblAboutProject;
 	VBox layout;
 	Circle circle;
-	public HBProjectComponent(PROJECT p) {
+	PROJECT project;
+	public HBProjectComponent(PROJECT p, Pos position ){
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_COMPONENT.css").toExternalForm());
 		
+		this.project=p;
 		this.applyCss();
 		this.setId("v");	
 		this.layout = new VBox();
@@ -44,18 +48,27 @@ public class HBProjectComponent extends HBox {
 		lblTypeProject.setId("type");
 
 		hbTypeProject.getChildren().addAll(circle,lblTypeProject);
-		hbTypeProject.setAlignment(Pos.CENTER_LEFT);
+		hbTypeProject.setAlignment(position);
 		hbTypeProject.setSpacing(10);
 		
-		
-		
-		this.setAlignment(Pos.CENTER_LEFT);
+		this.setAlignment(position);
+		this.layout.setAlignment(position);
 		
 		layout.getChildren().addAll(lblName, lblAboutProject, hbTypeProject);
 		
 		this.getChildren().add(layout);
-		
-		
+	}
+
+	public void setOnClick(EventHandler<MouseEvent> e) { 
+		this.setOnMouseClicked(e);
+	}
+	
+	public PROJECT getProject() {
+		return project;
+	}
+
+	public void setProject(PROJECT project) {
+		this.project = project;
 	}
 	public Paint randomColor() {
 		Random random = new Random();
@@ -64,39 +77,4 @@ public class HBProjectComponent extends HBox {
 		int b = random.nextInt(255);
 		return Color.rgb(r, g, b);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
-

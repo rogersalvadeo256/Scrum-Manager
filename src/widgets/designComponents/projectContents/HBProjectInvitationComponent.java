@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 import db.pojos.PROJECT;
+import db.pojos.PROJECT_MEMBER;
 import db.pojos.USER_PROFILE;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +17,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import project.InvitationQuerys;
+import statics.ENUMS;
 import widgets.designComponents.profileContents.HBProfileInvitedBy;
 
 /**
@@ -31,11 +34,11 @@ public class HBProjectInvitationComponent extends HBox {
 	private Label lblProjectName;
 	private Text lblAbout;
 	private HBProfileInvitedBy invitedByContent;
+
 	public HBProjectInvitationComponent(USER_PROFILE invitedBy, PROJECT project) throws IOException {
 		
 		this.btnAccept = new Button();
 		this.btnRefuse = new Button();
-	
 		
 		final int SIZE = 30;
 		ImageView icon_a = new ImageView();
@@ -128,18 +131,13 @@ public class HBProjectInvitationComponent extends HBox {
 		this.vbContent.getChildren().addAll(this.vbProjectContent ,this.hbButtons);
 		this.hbButtons.getChildren().addAll(this.btnAccept, this.btnRefuse);
 		this.getChildren().add(this.vbContent);
-
-		
 		
 		this.btnAbout.setOnAction(e -> {
 			showAboutProject();
 		});
 		
 		
-		
-		
 	}
-	
 	
 	public void setAcceptEvent(EventHandler<ActionEvent> e) {
 		this.btnAccept.setOnAction(e);

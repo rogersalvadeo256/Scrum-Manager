@@ -146,7 +146,6 @@ public class DB_OPERATION {
 		}
 		return q.getResultList();
 	}
-
 	@SuppressWarnings("unchecked")	
 	public static List<Object> QUERY(String query, List<String> strings, List<Integer> paramArgs) {
 		EntityManager em = Database.createEntityManager();
@@ -167,6 +166,5 @@ public class DB_OPERATION {
 		}
 		return q.getResultList();
 	}
-
 }
 
