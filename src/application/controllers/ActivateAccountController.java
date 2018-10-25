@@ -38,12 +38,12 @@ public class ActivateAccountController {
 	private HBox hbYesNot;
 	private Button btnYes, btnNot;
 	private TextField txtAnswer;
+	private Label lblEVoce;
 
 	public ActivateAccountController(ActivateAccount screen, VBox layout) throws IOException {
 
 		this.layout = layout;
 		this.screen = screen;
-
 	}
 
 	public void setButtonQueryEvent(ActionEvent e, String loginEmail) throws IOException {
@@ -110,12 +110,13 @@ public class ActivateAccountController {
 
 		layout.getChildren().add(this.profileContent);
 
+		this.lblEVoce = new Label("Esse é você?");
 		this.btnNot = new Button("Nao");
 		this.btnYes = new Button("Sim");
 
 		this.hbYesNot = new HBox();
 
-		this.hbYesNot.getChildren().addAll(btnYes, btnNot);
+		this.hbYesNot.getChildren().addAll(lblEVoce, btnYes, btnNot);
 
 		layout.getChildren().add(hbYesNot);
 
@@ -151,7 +152,7 @@ public class ActivateAccountController {
 		layout.getChildren().clear();
 
 
-		Label lblInformation = new Label("Responda a pergunta de segurança para reativar a sua conta");
+		Label lblInformation = new Label("Responda a pergunta de /n segurança para reativar a sua conta");
 
 		Label lblQuestion = new Label(ur.getSecurityQuestion());
 		this.txtAnswer = new TextField();

@@ -47,6 +47,7 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 
 	public void init() {
 
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/FORGOT_PASSWORDPOPOUP.css").toExternalForm());
 		this.checkFields = new CheckEmptyFields();
 
 		this.lblQuestion = new Label("Este(ª) é voce?");

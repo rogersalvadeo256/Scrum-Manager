@@ -21,7 +21,8 @@ public class ActivateAccount extends StandartLayoutPOPOUP {
 
 	public ActivateAccount(Window owner) throws IOException {
 		super(owner);
-
+		
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/ACTIVEACCOUNTPOPOUP.css").toExternalForm());
 		this.controller = new ActivateAccountController(this, this.layout);
 
 		this.lblInformation= new Label("Digite seu login ou email");
@@ -29,8 +30,10 @@ public class ActivateAccount extends StandartLayoutPOPOUP {
 		this.txtUserNameOrEmail.setPromptText("Informe seu login ou email");
 		this.btnQuery = new Button("Enviar");
 		this.btnCancel= new Button("Cancelar");
+		btnCancel.setId("back");
 
-		this.layout.getChildren().addAll(lblInformation,txtUserNameOrEmail, btnQuery,btnCancel);
+		this.layout.getChildren().addAll(lblInformation,txtUserNameOrEmail, btnQuery);
+		this.layout.getChildren().add(btnCancel);
 		this.layout.setAlignment(Pos.CENTER);
 		
 		
