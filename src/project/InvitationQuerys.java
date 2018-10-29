@@ -18,9 +18,11 @@ public class InvitationQuerys {
 	public InvitationQuerys(PROJECT_MEMBER pm) {
 		this.invitation = pm;
 	}
+
 	public InvitationQuerys() {
 
 	}
+
 	public void answerInvite(REQUEST_STATUS answer) {
 
 		this.invitation.getMbrCod();
@@ -89,9 +91,3 @@ public class InvitationQuerys {
 		TEMP_STORE_INVITATIONS.LIST_INVITATION().clear();
 	}
 }
-
-
-
-
-
->>>>>>> 181af3707eb1985662b896b65b1ff44792a725af
