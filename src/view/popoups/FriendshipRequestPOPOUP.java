@@ -22,7 +22,7 @@ public class FriendshipRequestPOPOUP extends StandartLayoutPOPOUP {
 	public FriendshipRequestPOPOUP(Window owner) throws FileNotFoundException {
 		super(owner);
 		this.controller = new FriendshipRequestsController();
-		this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST.css").toExternalForm());
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/FRIEND_REQUEST2.css").toExternalForm());
 		
 
 		this.initStyle(StageStyle.DECORATED);

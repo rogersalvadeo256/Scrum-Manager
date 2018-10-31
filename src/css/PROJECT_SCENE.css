@@ -36,11 +36,13 @@
 #vbProject-info .label { 
 	-fx-font-size:23;
 	-fx-font-weight:bold;
+	-fx-padding:10;
+	
 }
-
 #header{
-	-fx-border-width:0px 0px 2px 0px;
+	-fx-border-width:0px 0px -5px 0px;
 	-fx-boder-color: #F5F5F5;
+	-fx-padding:9.0;
 }
 #header{
 	-fx-background-color: #5fb69c;

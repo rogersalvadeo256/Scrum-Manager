@@ -133,6 +133,10 @@ public class TaskComponentPOPOUP extends Stage{
 		content.getChildren().addAll(txtTittle, txtTask,hToggle);
 		
 		this.btnCancel = new Button("Cancelar");
+		this.btnCancel.setId("back");
+		this.btnCancel.setOnAction(e -> {
+			this.close();
+		});
 		this.btnFinish = new Button("Finalizar");
 
 		this.hButtons = new HBox();

@@ -6,6 +6,7 @@
    -fx-background-color: transparent;
    -fx-text-fill: black;
    -fx-font-weight:bold;
+   -fx-padding:15.0;
    
 }
 .text-input{
@@ -47,6 +48,10 @@
     -fx-border-color: black;
      -fx-font-weight: bold;
      -fx-text-fill: black;
+}
+.button#back:hover{
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
 }
 .toggle-button:hover {
 	-fx-border-color: #F5F5F5;
