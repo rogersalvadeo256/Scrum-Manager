@@ -107,7 +107,8 @@ public class RegistrationFormComponent extends VBox {
 		this.confirmationMessage.add("Voce está cadastrado no Scrum Manager");
 		this.confirmationMessage.add("boa");
 
-		CustomAlert emailError = new CustomAlert(AlertType.ERROR, "Erro", "Erro no campo de email.", "O Campo de Email nao é um email válido, por favor arrume.");
+		CustomAlert emailError = new CustomAlert(AlertType.ERROR, "Erro", "Erro no campo de email.", "O Campo de Email não é um email válido, por favor arrumar.");
+		CustomAlert passError = new CustomAlert(AlertType.ERROR, "Erro", "Erro no campo de senha.", "O Campo de Senha não informa uma senha válida, por favor arrumar.");
 		
 		this.controller = new RegistrationFromSceneController();
 
@@ -115,7 +116,10 @@ public class RegistrationFormComponent extends VBox {
 
 			if (validar(txtEmail.getText()) == false) {
 				emailError.showAndWait();
-			} else {
+			} else if(txtPasswordField.getLength()<8 || txtPasswordConfirmation.getLength()<8){
+				passError.showAndWait();
+			}
+			else{
 				
 				try {
 					email = txtEmail.getText();
