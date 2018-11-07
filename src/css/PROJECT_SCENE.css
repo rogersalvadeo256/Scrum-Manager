@@ -16,6 +16,9 @@
 .button { 
 	-fx-background-color: #5fb69c;
 }
+.button#th{
+	-fx-background-color: #000;
+}
 .button:hover{ 
 	-fx-background-color: #F5F3F3;
 	-fx-text-fill : black;

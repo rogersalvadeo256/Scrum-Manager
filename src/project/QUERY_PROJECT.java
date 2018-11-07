@@ -28,6 +28,7 @@ public class QUERY_PROJECT {
 				SESSION.getProfileLogged().getCod());
 		return (ArrayList<PROJECT>) x;
 	}
+
 	/**
 	 * return the list of project that the user is in
 	 * 
@@ -66,6 +67,7 @@ public class QUERY_PROJECT {
 						ENUMS.REQUEST_STATUS.ON_HOLD.getValue().toString() });
 		return (ArrayList<PROJECT_MEMBER>) invitations;
 	}
+
 	@SuppressWarnings("unchecked")
 	public static ArrayList<USER_PROFILE> INVITED_BY() {
 
@@ -80,6 +82,16 @@ public class QUERY_PROJECT {
 
 		return (ArrayList<USER_PROFILE>) y;
 	}
+
+	@SuppressWarnings("uncheked")
+	public static ArrayList<PROJECT_MEMBER> LEAVE_PROJECT() {
+		List<?> leaves = DB_OPERATION.QUERY(
+				"FROM PROJECT_MEMBER WHERE MRB_PROF_COD =:COD AND MRB_INVITE_STATUS = :STATUS",
+				new String[] { "COD", "STATUS" }, new Object[] { SESSION.getProfileLogged().getCod(),
+						ENUMS.REQUEST_STATUS.REFUSED.getValue().toString() });
+		return (ArrayList<PROJECT_MEMBER>) leaves;
+	}
+
 	public static ArrayList<HBProjectInvitationComponent> teste() throws IOException {
 
 		ArrayList<HBProjectInvitationComponent> list = new ArrayList<HBProjectInvitationComponent>();
@@ -93,6 +105,7 @@ public class QUERY_PROJECT {
 		}
 		return list;
 	}
+
 	/*
 	 * i hate that i had to do this shit
 	 * 
@@ -101,8 +114,5 @@ public class QUERY_PROJECT {
 		l = (l == null ? new ArrayList<PROJECT_MEMBER>() : l);
 		return l;
 	}
-	
-	
-	
-	
+
 }

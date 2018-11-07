@@ -1,5 +1,8 @@
 package view.scenes;
 
+import java.io.IOException;
+import java.sql.SQLException;
+
 import application.main.Window;
 import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
@@ -11,6 +14,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import statics.DB_OPERATION;
 import statics.SESSION;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
@@ -111,8 +115,18 @@ public class ProjectScene extends Scene {
 		this.vMemberActions = new VBox();
 		this.lblFuncion = new Label("Função");
 		this.btnBack = new Button("Voltar");
+		this.btnBack.setOnAction(e->{
+			try {
+				Window.mainStage.setScene(new HomePageScene());
+			} catch (ClassNotFoundException | SQLException | IOException e1) {
+				e1.printStackTrace();
+			}
+			
+		});
 		this.btnLeaveProject = new Button("Abandonar projeto");
-		
+		this.btnLeaveProject.setOnAction(e->{
+			
+		});
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
 		projectInformations.getChildren().addAll(new Label("Data de inicio"), new Label("Sprint atual"));

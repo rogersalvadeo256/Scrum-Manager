@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import statics.ENUMS;
 import widgets.designComponents.profileContents.HBProfileContent;
+import widgets.toaster.Toast;
 
 public class HBFriendContent extends HBProfileContent {
 	
