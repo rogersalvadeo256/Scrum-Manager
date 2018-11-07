@@ -1,23 +1,38 @@
 package view.scenes;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Member;
 import java.sql.SQLException;
+import java.util.Optional;
 
+import javax.management.Query;
+
+import org.hibernate.sql.Delete;
+
+import application.controllers.LoginSceneController;
 import application.main.Window;
 import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
+import friendship.QUERYs_FRIENDSHIP;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import project.QUERY_PROJECT;
 import statics.DB_OPERATION;
 import statics.SESSION;
+import view.popoups.FriendshipRequestPOPOUP;
+import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
+import widgets.toaster.Toast;
 
 public class ProjectScene extends Scene {
 
@@ -89,7 +104,6 @@ public class ProjectScene extends Scene {
 
 		this.hInfo = new HBox();
 		hInfo.setId("hInfo");
-		
 
 		hInfo.getChildren().addAll(btnStartSprint, btnSprints, btnTeam);
 		hInfo.setSpacing(20);
@@ -115,18 +129,19 @@ public class ProjectScene extends Scene {
 		this.vMemberActions = new VBox();
 		this.lblFuncion = new Label("Função");
 		this.btnBack = new Button("Voltar");
-		this.btnBack.setOnAction(e->{
+		this.btnBack.setOnAction(e -> {
 			try {
 				Window.mainStage.setScene(new HomePageScene());
 			} catch (ClassNotFoundException | SQLException | IOException e1) {
 				e1.printStackTrace();
 			}
-			
+
 		});
 		this.btnLeaveProject = new Button("Abandonar projeto");
-		this.btnLeaveProject.setOnAction(e->{
-			
-		});
+//		this.btnLeaveProject.setOnAction(e -> getListView().getItems().remove(getItem())); {
+//			if (QUERY_PROJECT.USER_PROJECTS_MEMBER().size() == 1){
+//				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído", "O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
+//				}};
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
 		projectInformations.getChildren().addAll(new Label("Data de inicio"), new Label("Sprint atual"));

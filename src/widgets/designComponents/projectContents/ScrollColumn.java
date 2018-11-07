@@ -1,5 +1,6 @@
 package widgets.designComponents.projectContents;
 
+import db.pojos.PROJECT_TASK;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -22,17 +23,24 @@ public class ScrollColumn extends ScrollPane{
 		
 		column.setPrefWidth(220);
 		
+
+		PROJECT_TASK task = new PROJECT_TASK();
+		
+		task.setTask("KSAFKFJ");
+		
+		for( int i = 0 ; i < 100 ; i++) { 
+			column.getChildren().add(new TaskComponent(task));
+		}
 		
 		column.setAlignment(Pos.CENTER);
 		column.getChildren().add(new Label(title.getValue()));
 		this.setContent(column);
 		
-
-		
-		
 	}
 
-
+	public VBox get_column()  { 
+		return this.column;
+	}
 
 
 
