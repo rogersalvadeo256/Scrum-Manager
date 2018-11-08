@@ -8,53 +8,51 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
-public class TaskComponent  extends VBox { 
-	
-	
+public class TaskComponent extends VBox {
+
 	private Label lblTitle, lblPontuation;
 	private Text lblTask;
 	private PROJECT_TASK task;
-	
+
 	private HBox hbExecutor;
-	
+
 	public TaskComponent(PROJECT_TASK task, USER_PROFILE p) {
 		this.task = task;
 		init();
 		hbExecutor.getChildren().addAll(lblPontuation, new Label(p.getName()));
 	}
-	
-	public TaskComponent(PROJECT_TASK task) { 
+
+	public TaskComponent(PROJECT_TASK task) {
 		this.task = task;
 		init();
-		
+
 	}
-	
-	private void init ()  { 
+
+	private void init() {
 		this.getStylesheets().add(this.getClass().getResource("/css/TASK_COMPONENT.css").toExternalForm());
 		this.setId("content");
-		
-		this.lblTitle=new Label(task.getTaskTitle());
-		this.lblPontuation =new Label(String.valueOf(task.getTaskPontuation()));
-		this.lblTask=new Text(task.getTask());
-		
+
+		this.lblTitle = new Label(task.getTaskTitle());
+		this.lblPontuation = new Label(String.valueOf(task.getTaskPontuation()));
+		this.lblTask = new Text(task.getTask());
+
 		lblTask.setWrappingWidth(this.widthProperty().get());
-		
+
 		lblTitle.setId("title");
 		lblPontuation.setId("pontuation");
 		lblTask.setId("task");
-		
-		this.hbExecutor=new HBox();
+
+		this.hbExecutor = new HBox();
 		hbExecutor.setAlignment(Pos.CENTER_RIGHT);
 		hbExecutor.setSpacing(20);
-		
-		this.getChildren().addAll(lblTitle,lblTask,hbExecutor);
-		
-		this.setOnMouseClicked(e->{
+
+		this.getChildren().addAll(lblTitle, lblTask, hbExecutor);
+
+		this.setOnMouseClicked(e -> {
 			new TaskComponentPOPOUP(getTask());
 		});
 	}
-	
-	
+
 	public PROJECT_TASK getTask() {
 		return task;
 	}
@@ -62,19 +60,5 @@ public class TaskComponent  extends VBox {
 	public void setTask(PROJECT_TASK task) {
 		this.task = task;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

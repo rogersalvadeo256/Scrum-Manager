@@ -51,7 +51,7 @@ public class TaskComponentPOPOUP extends Stage{
 		case 5:
 			t5.setSelected(true);
 			break;
-		case 8:
+		case 7:
 			t8.setSelected(true);
 			break;
 		default:
@@ -82,14 +82,12 @@ public class TaskComponentPOPOUP extends Stage{
 		blockContents();
 	}
 	private void blockContents() { 
-		txtTittle.setEditable(false);
-		txtTask.setEditable(false);
+		txtTittle.setEditable(true);
+		txtTask.setEditable(true);
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle> () {
-			Toggle x = group.getSelectedToggle();
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				newValue = newValue == null ? oldValue : newValue;
-				newValue = newValue == x ? newValue : x;
 				newValue.setSelected(true);
 			}
 		});;
@@ -129,6 +127,10 @@ public class TaskComponentPOPOUP extends Stage{
 		
 		
 		content = new VBox();
+		
+		this.txtTittle.setOnMouseClicked(e->{
+			
+		});
 		
 		content.getChildren().addAll(txtTittle, txtTask,hToggle);
 		

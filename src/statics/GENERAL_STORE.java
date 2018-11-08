@@ -65,8 +65,7 @@ public class GENERAL_STORE {
 		for (int i = 0; i < list.size(); i++) {
 			PROJECT p = list.get(i).getProject();
 			list.get(i).setOnClick(e -> {
-				PROJECT_SESSION.initSession(p);
-				Window.mainStage.setScene(new ProjectScene(PROJECT_SESSION.getProject()));
+				Window.mainStage.setScene(new ProjectScene(p));
 			});
 		}
 		return list;
