@@ -29,9 +29,11 @@ import project.QUERY_PROJECT;
 import statics.DB_OPERATION;
 import statics.SESSION;
 import view.popoups.FriendshipRequestPOPOUP;
+import view.popoups.ProfileEditPOPOUP;
 import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
+import widgets.designComponents.projectContents.TaskComponentPOPOUP;
 import widgets.toaster.Toast;
 
 public class ProjectScene extends Scene {
@@ -57,13 +59,14 @@ public class ProjectScene extends Scene {
 	private Label lblFuncion;
 
 	private Button btnTaskDone;
+	
+	private PROJECT_TASK task;
 
 	public ProjectScene(PROJECT p) {
 		super(new AnchorPane());
 		Window.mainStage.setResizable(true);
 
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_SCENE.css").toExternalForm());
-
 		init();
 
 		PROJECT_TASK task = new PROJECT_TASK();
@@ -99,6 +102,9 @@ public class ProjectScene extends Scene {
 		anchor.getChildren().add(hHeader);
 
 		this.btnStartSprint = new Button("Definir novo sprint");
+		this.btnStartSprint.setOnMouseClicked(e->{
+			new TaskComponentPOPOUP(getTask());
+		});
 		this.btnSprints = new Button("Ver sprints anteriores");
 		this.btnTeam = new Button("Equipe");
 
@@ -138,9 +144,13 @@ public class ProjectScene extends Scene {
 
 		});
 		this.btnLeaveProject = new Button("Abandonar projeto");
-//		this.btnLeaveProject.setOnAction(e -> getListView().getItems().remove(getItem())); {
+//		this.btnLeaveProject.setOnAction(e ->{
 //			if (QUERY_PROJECT.USER_PROJECTS_MEMBER().size() == 1){
 //				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído", "O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
+//				if (result.get() == ButtonType.OK) {
+//					
+//					
+//				}
 //				}};
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
@@ -165,4 +175,14 @@ public class ProjectScene extends Scene {
 
 	}
 
+	private PROJECT_TASK getTask() {
+
+		return task();
+	}
+
+	private PROJECT_TASK task() {
+
+		return null;
+	}
 }
+

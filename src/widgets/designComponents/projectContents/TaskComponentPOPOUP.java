@@ -25,7 +25,7 @@ public class TaskComponentPOPOUP extends Stage{
 	
 	private TextField txtTittle;
 	private TextArea txtTask;
-	private ToggleButton t1,t3,t5,t7;
+	private ToggleButton t1,t3,t5,t8;
 	private ToggleGroup group;
 	private HBox hToggle;
 	private HBox hButtons;
@@ -51,8 +51,8 @@ public class TaskComponentPOPOUP extends Stage{
 		case 5:
 			t5.setSelected(true);
 			break;
-		case 7:
-			t7.setSelected(true);
+		case 8:
+			t8.setSelected(true);
 			break;
 		default:
 			break;
@@ -73,8 +73,8 @@ public class TaskComponentPOPOUP extends Stage{
 		case 5:
 			t5.setSelected(true);
 			break;
-		case 7:
-			t7.setSelected(true);
+		case 8:
+			t8.setSelected(true);
 			break;
 		default:
 			break;
@@ -110,21 +110,21 @@ public class TaskComponentPOPOUP extends Stage{
 		t1 = new ToggleButton("1");
 		t3 = new ToggleButton("3");
 		t5 = new ToggleButton("5");
-		t7 = new ToggleButton("7");
+		t8 = new ToggleButton("8");
 		
 		group = new ToggleGroup();
 		
 		t1.setToggleGroup(group);
 		t3.setToggleGroup(group);
 		t5.setToggleGroup(group);
-		t7.setToggleGroup(group);
+		t8.setToggleGroup(group);
 		
 		t3.setSelected(true);
 		
 		this.lblPontuation = new  Label("Defina a pontuação: ");
 		
 		hToggle=new HBox();
-		hToggle.getChildren().addAll(lblPontuation,t1,t3,t5,t7);
+		hToggle.getChildren().addAll(lblPontuation,t1,t3,t5,t8);
 		hToggle.setAlignment(Pos.CENTER);
 		
 		
