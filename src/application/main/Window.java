@@ -55,6 +55,7 @@ public class Window extends Stage {
 		}
 		Window.mainStage.setOnCloseRequest(e -> {
 			new Close(Window.mainStage);
+			Database.close();
 		});
 		mainStage.setScene(new LoginScene());
 		this.show();

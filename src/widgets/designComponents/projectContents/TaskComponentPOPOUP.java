@@ -25,7 +25,7 @@ public class TaskComponentPOPOUP extends Stage{
 	
 	private TextField txtTittle;
 	private TextArea txtTask;
-	private ToggleButton t1,t3,t5,t7;
+	private ToggleButton t1,t3,t5,t8;
 	private ToggleGroup group;
 	private HBox hToggle;
 	private HBox hButtons;
@@ -52,7 +52,7 @@ public class TaskComponentPOPOUP extends Stage{
 			t5.setSelected(true);
 			break;
 		case 7:
-			t7.setSelected(true);
+			t8.setSelected(true);
 			break;
 		default:
 			break;
@@ -74,7 +74,7 @@ public class TaskComponentPOPOUP extends Stage{
 			t5.setSelected(true);
 			break;
 		case 7:
-			t7.setSelected(true);
+			t8.setSelected(true);
 			break;
 		default:
 			break;
@@ -82,14 +82,12 @@ public class TaskComponentPOPOUP extends Stage{
 		blockContents();
 	}
 	private void blockContents() { 
-		txtTittle.setEditable(false);
-		txtTask.setEditable(false);
+		txtTittle.setEditable(true);
+		txtTask.setEditable(true);
 		group.selectedToggleProperty().addListener(new ChangeListener<Toggle> () {
-			Toggle x = group.getSelectedToggle();
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				newValue = newValue == null ? oldValue : newValue;
-				newValue = newValue == x ? newValue : x;
 				newValue.setSelected(true);
 			}
 		});;
@@ -110,25 +108,29 @@ public class TaskComponentPOPOUP extends Stage{
 		t1 = new ToggleButton("1");
 		t3 = new ToggleButton("3");
 		t5 = new ToggleButton("5");
-		t7 = new ToggleButton("7");
+		t8 = new ToggleButton("8");
 		
 		group = new ToggleGroup();
 		
 		t1.setToggleGroup(group);
 		t3.setToggleGroup(group);
 		t5.setToggleGroup(group);
-		t7.setToggleGroup(group);
+		t8.setToggleGroup(group);
 		
 		t3.setSelected(true);
 		
 		this.lblPontuation = new  Label("Defina a pontuação: ");
 		
 		hToggle=new HBox();
-		hToggle.getChildren().addAll(lblPontuation,t1,t3,t5,t7);
+		hToggle.getChildren().addAll(lblPontuation,t1,t3,t5,t8);
 		hToggle.setAlignment(Pos.CENTER);
 		
 		
 		content = new VBox();
+		
+		this.txtTittle.setOnMouseClicked(e->{
+			
+		});
 		
 		content.getChildren().addAll(txtTittle, txtTask,hToggle);
 		

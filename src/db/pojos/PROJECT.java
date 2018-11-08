@@ -61,7 +61,7 @@ public class PROJECT {
 	 * @param dateStart the dateStart to set
 	 */
 	public void setDateStart() {
-		this.projDateStart = Calendar.getInstance().getTime(); ;
+		this.projDateStart = Calendar.getInstance().getTime();
 	}
 	/**
 	 * @return the projDateStart

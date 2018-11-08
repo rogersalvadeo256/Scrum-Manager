@@ -1,6 +1,7 @@
 package application.controllers;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 import db.pojos.PROJECT;
 import project.InvitationQuerys;
@@ -22,11 +23,15 @@ public class NewProjectSceneController {
 	public void actionBack() {
 		this.screen.close();
 	}
+	
 
 	public void actionFinish(String projectName, String projectDescription) {
 
+	
+		
 		PROJECT project = new PROJECT();
 		project.setProjName(projectName);
+		project.setProjDateStart(Calendar.getInstance().getTime());
 		project.setProjDescription(projectDescription);
 		project.setProjCreator(SESSION.getProfileLogged().getCod());
 
