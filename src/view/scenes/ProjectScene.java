@@ -4,17 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Query;
 
 import application.main.Window;
-import db.hibernate.factory.Database;
 import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
 import javafx.geometry.Pos;
@@ -26,15 +18,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import project.PROJECT_SESSION;
-import statics.DB_OPERATION;
-import statics.SESSION;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
 import widgets.designComponents.projectContents.TaskComponentPOPOUP;
 
 public class ProjectScene extends Scene {
 
-	private Button btnSprints, btnStartSprint, btnTeam;
+	private Button btnSprints, btnStartTask, btnTeam;
 
 	private VBox content;
 	private Label lblProjDate;
@@ -101,10 +91,8 @@ public class ProjectScene extends Scene {
 		AnchorPane.setRightAnchor(hHeader, this.widthProperty().get());
 		anchor.getChildren().add(hHeader);
 
-		this.btnStartSprint = new Button("Definir novo sprint");
-		this.btnStartSprint.setOnMouseClicked(e->{
-			new TaskComponentPOPOUP(getTask());
-		});
+		this.btnStartTask = new Button("Definir nova tarefa");
+		
 		this.btnSprints = new Button("Ver sprints anteriores");
 		this.btnTeam = new Button("Equipe");
 
@@ -112,7 +100,7 @@ public class ProjectScene extends Scene {
 		hInfo.setId("hInfo");
 		
 
-		hInfo.getChildren().addAll(btnStartSprint, btnSprints, btnTeam);
+		hInfo.getChildren().addAll(btnStartTask, btnSprints, btnTeam);
 		hInfo.setSpacing(20);
 
 		AnchorPane.setTopAnchor(hInfo, 60d);
@@ -170,12 +158,8 @@ public class ProjectScene extends Scene {
 
 		vMemberActions.setId("member-actions");
 		
-		btnStartSprint.setOnAction(e->{
-			PROJECT_TASK task = new PROJECT_TASK();
-			System.out.println("AA");
-			task.setTask("Defina uma tarefa aqui.");
-			task.setTaskTitle(" Defina o título da tarefa aqui. ");
-			new TaskComponent(task);
+		btnStartTask.setOnAction(e->{
+			new TaskComponentPOPOUP(getTask(), this.frame);
 		});
 
 		AnchorPane.setTopAnchor(projectInformations, 50d);
@@ -193,13 +177,13 @@ public class ProjectScene extends Scene {
 	}
 
 	private PROJECT_TASK getTask() {
-
+		
 		return task();
 	}
 
 	private PROJECT_TASK task() {
-
-		return null;
+		PROJECT_TASK task = new PROJECT_TASK();
+		return task;
 	}
 }
 

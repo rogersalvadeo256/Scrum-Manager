@@ -32,7 +32,7 @@ public class ENUMS {
 	}
 
 	public static enum PROJECT_FRAMEWORK { 
-		TO_DO("FAZER "), DOING("FAZENDO"), DONE("FEITO");
+		TO_DO("FAZER"), DOING("FAZENDO"), DONE("FEITO");
 		
 		private String value;
 		

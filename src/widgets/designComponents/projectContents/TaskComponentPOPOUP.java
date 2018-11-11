@@ -20,25 +20,28 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class TaskComponentPOPOUP extends Stage{
+public class TaskComponentPOPOUP extends Stage {
 
-	
 	private TextField txtTittle;
 	private TextArea txtTask;
-	private ToggleButton t1,t3,t5,t8;
+	private ToggleButton t1, t3, t5, t8;
 	private ToggleGroup group;
 	private HBox hToggle;
 	private HBox hButtons;
 	private Button btnCancel, btnFinish;
 	private Label lblPontuation;
-	
+
 	private VBox content;
-		
-	public TaskComponentPOPOUP () { 
+
+	private ScrumFrame sprintColumns;
+
+	public TaskComponentPOPOUP() {
 		init();
 	}
-	public TaskComponentPOPOUP(PROJECT_TASK task) { 
-		init();	
+
+	public TaskComponentPOPOUP(PROJECT_TASK task, ScrumFrame f) {
+		init();
+		sprintColumns = f;
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());
 		switch (task.getTaskPontuation()) {
@@ -59,6 +62,7 @@ public class TaskComponentPOPOUP extends Stage{
 		}
 		blockContents();
 	}
+
 	public TaskComponentPOPOUP(PROJECT_TASK task, USER_PROFILE p) {
 		init();
 		this.txtTittle.setText(task.getTaskTitle());
@@ -81,87 +85,99 @@ public class TaskComponentPOPOUP extends Stage{
 		}
 		blockContents();
 	}
-	private void blockContents() { 
+
+	public TaskComponentPOPOUP(PROJECT_TASK task) {
+		init();
+	}
+
+	private void blockContents() {
 		txtTittle.setEditable(true);
 		txtTask.setEditable(true);
-		group.selectedToggleProperty().addListener(new ChangeListener<Toggle> () {
+		group.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			@Override
 			public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
 				newValue = newValue == null ? oldValue : newValue;
 				newValue.setSelected(true);
 			}
-		});;
+		});
+		;
 	}
+
 	private void init() {
-		
+
 		this.initStyle(StageStyle.UNDECORATED);
 		this.setWidth(400);
-	
-		this.txtTittle  = new TextField();
+
+		this.txtTittle = new TextField();
 		txtTittle.setAlignment(Pos.CENTER);
 		txtTittle.setPromptText("Titulo");
-		
-		this.txtTask = new  TextArea();
+
+		this.txtTask = new TextArea();
 		txtTask.setWrapText(true);
-		txtTask.setPromptText( " Digite .. ");
-		
+		txtTask.setPromptText(" Digite .. ");
+
 		t1 = new ToggleButton("1");
 		t3 = new ToggleButton("3");
 		t5 = new ToggleButton("5");
 		t8 = new ToggleButton("8");
-		
+
 		group = new ToggleGroup();
-		
+
 		t1.setToggleGroup(group);
 		t3.setToggleGroup(group);
 		t5.setToggleGroup(group);
 		t8.setToggleGroup(group);
-		
+
 		t3.setSelected(true);
-		
-		this.lblPontuation = new  Label("Defina a pontuação: ");
-		
-		hToggle=new HBox();
-		hToggle.getChildren().addAll(lblPontuation,t1,t3,t5,t8);
+
+		this.lblPontuation = new Label("Defina a pontuação: ");
+
+		hToggle = new HBox();
+		hToggle.getChildren().addAll(lblPontuation, t1, t3, t5, t8);
 		hToggle.setAlignment(Pos.CENTER);
-		
-		
+
 		content = new VBox();
-		
-		this.txtTittle.setOnMouseClicked(e->{
-			
+
+		this.txtTittle.setOnMouseClicked(e -> {
+
 		});
-		
-		content.getChildren().addAll(txtTittle, txtTask,hToggle);
-		
+
+		content.getChildren().addAll(txtTittle, txtTask, hToggle);
+
 		this.btnCancel = new Button("Cancelar");
 		this.btnCancel.setId("back");
 		this.btnCancel.setOnAction(e -> {
 			this.close();
 		});
 		this.btnFinish = new Button("Finalizar");
+		this.btnFinish.setOnAction(e -> {
 
+			System.out.println("AA");
+
+			PROJECT_TASK task = new PROJECT_TASK();
+			task.setTask(txtTask.getText());
+			task.setTaskTitle(txtTittle.getText());
+			sprintColumns.addTodo(task);
+			this.close();
+		});
 		this.hButtons = new HBox();
-		
-		hButtons.getChildren().addAll(btnCancel,btnFinish);
+
+		hButtons.getChildren().addAll(btnCancel, btnFinish);
 		hButtons.setAlignment(Pos.CENTER);
 		hButtons.setSpacing(20);
-		
+
 		content.getChildren().add(hButtons);
 		content.setSpacing(10);
 
 		Scene scene = new Scene(content);
-		
+
 		scene.getStylesheets().add(this.getClass().getResource("/css/CREATE_STORY_COMPONENT.css").toExternalForm());
-		
+
 		this.setScene(scene);
-		this.show();		
+		this.show();
 	}
 
-	public void setFinishAction (EventHandler<ActionEvent> e) { 
-		this.btnFinish.setOnAction(e);
-	}
-	public void setCancelAction (EventHandler<ActionEvent> e) { 
+	public void setCancelAction(EventHandler<ActionEvent> e) {
 		this.btnCancel.setOnAction(e);
 	}
 }
