@@ -1,5 +1,7 @@
 package widgets.designComponents.projectContents;
 
+import java.util.Calendar;
+
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.beans.value.ChangeListener;
@@ -19,6 +21,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import statics.DB_OPERATION;
+import statics.SESSION;
 
 public class TaskComponentPOPOUP extends Stage {
 
@@ -31,6 +35,8 @@ public class TaskComponentPOPOUP extends Stage {
 	private Button btnCancel, btnFinish;
 	private Label lblPontuation;
 
+	private int pontuation = 0;
+	
 	private VBox content;
 
 	private ScrumFrame sprintColumns;
@@ -128,7 +134,7 @@ public class TaskComponentPOPOUP extends Stage {
 		t5.setToggleGroup(group);
 		t8.setToggleGroup(group);
 
-		t3.setSelected(true);
+		t1.setSelected(true);
 
 		this.lblPontuation = new Label("Defina a pontuação: ");
 
@@ -151,13 +157,28 @@ public class TaskComponentPOPOUP extends Stage {
 		});
 		this.btnFinish = new Button("Finalizar");
 		this.btnFinish.setOnAction(e -> {
-
-			System.out.println("AA");
+			
+			
+			if(t1.isSelected()==true) {
+				pontuation=1;
+			}else if(t3.isSelected()==true) {
+				pontuation=3;
+			}else if(t5.isSelected()==true) {
+				pontuation=5;
+			}else if(t8.isSelected()==true) {
+				pontuation=8;
+			}
+			
 
 			PROJECT_TASK task = new PROJECT_TASK();
 			task.setTask(txtTask.getText());
+			task.setTaskCreator(SESSION.getProfileLogged());
 			task.setTaskTitle(txtTittle.getText());
+			task.setTaskDateStart(Calendar.getInstance().getTime());
+			task.setTaskPontuation(pontuation);
+			task.setTaskStatus("FAZER");
 			sprintColumns.addTodo(task);
+			DB_OPERATION.PERSIST(task);
 			this.close();
 		});
 		this.hButtons = new HBox();

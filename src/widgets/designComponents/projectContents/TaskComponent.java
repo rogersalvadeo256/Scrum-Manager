@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import statics.DB_OPERATION;
+import statics.SESSION;
 
 public class TaskComponent extends VBox {
 
@@ -50,6 +52,18 @@ public class TaskComponent extends VBox {
 
 		this.setOnMouseClicked(e -> {
 			new TaskComponentPOPOUP(getTask());
+			
+			PROJECT_TASK doingT = new PROJECT_TASK();
+			doingT.setTaskCod(this.task.getTaskCod());
+			doingT.setTaskTitle(this.task.getTaskTitle());
+			doingT.setTask(this.task.getTask());
+			doingT.setTaskCreator(this.task.getTaskCreator());
+			doingT.setTaskExecutor(SESSION.getProfileLogged().getCod());
+			doingT.setTaskDateStart(this.task.getTaskDateStart());
+			doingT.setTaskPontuation(this.task.getTaskPontuation());
+			doingT.setTaskStatus("FAZENDO");
+			DB_OPERATION.MERGE(doingT);
+			
 		});
 	}
 
