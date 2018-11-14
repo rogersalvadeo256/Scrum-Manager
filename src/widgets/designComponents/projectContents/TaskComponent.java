@@ -16,18 +16,21 @@ public class TaskComponent extends VBox {
 	private Text lblTask;
 	private PROJECT_TASK task;
 
+	private ScrumFrame parentScrumFrame;
+	
 	private HBox hbExecutor;
 
-	public TaskComponent(PROJECT_TASK task, USER_PROFILE p) {
+	public TaskComponent(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc) {
 		this.task = task;
 		init();
 		hbExecutor.getChildren().addAll(lblPontuation, new Label(p.getName()));
+		this.parentScrumFrame = sc;
 	}
 
-	public TaskComponent(PROJECT_TASK task) {
+	public TaskComponent(PROJECT_TASK task, ScrumFrame sc) {
 		this.task = task;
 		init();
-
+		this.parentScrumFrame = sc;
 	}
 
 	private void init() {
@@ -49,9 +52,9 @@ public class TaskComponent extends VBox {
 		hbExecutor.setSpacing(20);
 
 		this.getChildren().addAll(lblTitle, lblTask, hbExecutor);
-
+		
 		this.setOnMouseClicked(e -> {
-			new TaskComponentPOPOUP(getTask());
+//			new TaskComponentPOPOUP(getTask());
 			
 			PROJECT_TASK doingT = new PROJECT_TASK();
 			doingT.setTaskCod(this.task.getTaskCod());
@@ -62,7 +65,11 @@ public class TaskComponent extends VBox {
 			doingT.setTaskDateStart(this.task.getTaskDateStart());
 			doingT.setTaskPontuation(this.task.getTaskPontuation());
 			doingT.setTaskStatus("FAZENDO");
+			parentScrumFrame.removeTodo(task, this);
+			parentScrumFrame.addDoing(doingT);
 			DB_OPERATION.MERGE(doingT);
+			
+			
 			
 		});
 	}

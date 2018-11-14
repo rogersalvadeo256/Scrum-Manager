@@ -9,8 +9,9 @@ import statics.ENUMS.PROJECT_FRAMEWORK;
 
 public class ScrollColumn extends ScrollPane {
 	private VBox column;
+	private ScrumFrame frame;
 
-	public ScrollColumn(PROJECT_FRAMEWORK title) {
+	public ScrollColumn(PROJECT_FRAMEWORK title, ScrumFrame sc) {
 		this.getStylesheets().add(this.getClass().getResource("/css/SCROLL.css").toExternalForm());
 		this.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 
@@ -26,7 +27,7 @@ public class ScrollColumn extends ScrollPane {
 		column.setAlignment(Pos.CENTER);
 
 		this.setContent(column);
-
+		this.frame = sc;
 	}
 
 	public VBox get_column() {
@@ -34,8 +35,12 @@ public class ScrollColumn extends ScrollPane {
 	}
 
 	public void setNewTask(PROJECT_TASK task) {
-		this.column.getChildren().add(new TaskComponent(task));
+		this.column.getChildren().add(new TaskComponent(task, frame ));
 		this.setContent(column);
+	}
+
+	public void deleteTask(PROJECT_TASK task, TaskComponent tc) {
+		this.column.getChildren().remove(tc);
 	}
 	
 }

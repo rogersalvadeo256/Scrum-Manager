@@ -63,7 +63,7 @@ public class ProjectScene extends Scene {
 		task.setTask("Defina uma tarefa aqui.");
 		task.setTaskTitle(" Defina título da tarefa aqui. ");
 		
-		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task), btnTaskDone, btnLeaveProject, btnBack);
+		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnTaskDone, btnLeaveProject, btnBack);
 
 	}
 

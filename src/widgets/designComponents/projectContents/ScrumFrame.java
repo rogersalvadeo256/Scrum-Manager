@@ -16,9 +16,9 @@ public class ScrumFrame extends HBox {
 
 		this.setId("hbox");
 
-		this.toDo = new ScrollColumn(ENUMS.PROJECT_FRAMEWORK.TO_DO);
-		this.doing = new ScrollColumn(ENUMS.PROJECT_FRAMEWORK.DOING);
-		this.done = new ScrollColumn(ENUMS.PROJECT_FRAMEWORK.DONE);
+		this.toDo = new ScrollColumn(ENUMS.PROJECT_FRAMEWORK.TO_DO, this);
+		this.doing = new ScrollColumn(ENUMS.PROJECT_FRAMEWORK.DOING, this);
+		this.done = new ScrollColumn(ENUMS.PROJECT_FRAMEWORK.DONE, this);
 		this.getChildren().addAll(toDo, doing, done);
 
 	}
@@ -27,6 +27,10 @@ public class ScrumFrame extends HBox {
 		this.toDo.setNewTask(task);
 	}
 
+	public void removeTodo(PROJECT_TASK task,TaskComponent tc) {
+		this.toDo.deleteTask(task,tc);
+	}
+	
 	public void addDoing(PROJECT_TASK task) {
 		this.doing.setNewTask(task);
 	}
