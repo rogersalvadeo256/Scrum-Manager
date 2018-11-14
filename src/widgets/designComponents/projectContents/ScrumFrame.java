@@ -35,8 +35,16 @@ public class ScrumFrame extends HBox {
 		this.doing.setNewTask(task);
 	}
 
+	public void removeDoing(PROJECT_TASK task,TaskComponent tc) {
+		this.toDo.deleteTask(task,tc);
+	}
+	
 	public void addDone(PROJECT_TASK task) {
 		this.done.setNewTask(task);
 	}
 
+	public void removeDone(PROJECT_TASK task,TaskComponent tc) {
+		this.toDo.deleteTask(task,tc);
+	}
+	
 }

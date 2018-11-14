@@ -7,7 +7,9 @@ import db.pojos.PROJECT_MEMBER;
 import javafx.scene.layout.VBox;
 import project.InvitationQuerys;
 import project.QUERY_PROJECT;
+import statics.DB_OPERATION;
 import statics.ENUMS;
+import statics.SESSION;
 import view.popoups.ProjectInvitePOPOUP;
 import widgets.designComponents.projectContents.HBProjectInvitationComponent;
 
@@ -30,7 +32,17 @@ public class ProjectInviteController {
 				x.get(i).setAcceptEvent(e -> {
 					try {
 						answer.answerInvite(ENUMS.REQUEST_STATUS.ACCEPTED);
+						
+//						pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
+//						pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
+//						pm.setMbrProjectCod(project.getProjectCod());
+//						pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+//						pm.setMbrScrumMaster(true);
+//						
+//						DB_OPERATION.PERSIST(pm);
+						
 						drawInvites(screen, layout);
+						
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}

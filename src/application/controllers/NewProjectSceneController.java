@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.Calendar;
 
 import db.pojos.PROJECT;
+import db.pojos.PROJECT_MEMBER;
 import project.InvitationQuerys;
 import project.TEMP_STORE_INVITATIONS;
 import statics.DB_OPERATION;
+import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
 import view.popoups.NewProjectPOPOUP;
@@ -35,7 +37,16 @@ public class NewProjectSceneController {
 		project.setProjDescription(projectDescription);
 		project.setProjCreator(SESSION.getProfileLogged().getCod());
 
+		PROJECT_MEMBER pm = new PROJECT_MEMBER();
+		
+		pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
+		pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
+		pm.setMbrProjectCod(project.getProjectCod());
+		pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+		pm.setMbrScrumMaster(true);
+		
 		DB_OPERATION.PERSIST(project);
+		DB_OPERATION.PERSIST(pm);
 		/*
 		 * see if exist a project with the same name
 		 */
