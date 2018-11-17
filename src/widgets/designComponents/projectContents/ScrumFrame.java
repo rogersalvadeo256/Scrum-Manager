@@ -36,7 +36,7 @@ public class ScrumFrame extends HBox {
 	}
 
 	public void removeDoing(PROJECT_TASK task,TaskComponent tc) {
-		this.toDo.deleteTask(task,tc);
+		this.doing.deleteTask(task,tc);
 	}
 	
 	public void addDone(PROJECT_TASK task) {
@@ -44,7 +44,7 @@ public class ScrumFrame extends HBox {
 	}
 
 	public void removeDone(PROJECT_TASK task,TaskComponent tc) {
-		this.toDo.deleteTask(task,tc);
+		this.done.deleteTask(task,tc);
 	}
 	
 }

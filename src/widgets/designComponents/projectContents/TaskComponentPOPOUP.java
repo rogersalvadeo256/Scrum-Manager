@@ -22,6 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import statics.DB_OPERATION;
+import statics.ENUMS;
 import statics.SESSION;
 
 public class TaskComponentPOPOUP extends Stage {
@@ -176,7 +177,7 @@ public class TaskComponentPOPOUP extends Stage {
 			task.setTaskTitle(txtTittle.getText());
 			task.setTaskDateStart(Calendar.getInstance().getTime());
 			task.setTaskPontuation(pontuation);
-			task.setTaskStatus("FAZER");
+			task.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.TO_DO.getValue());
 			sprintColumns.addTodo(task);
 			DB_OPERATION.PERSIST(task);
 			this.close();

@@ -8,7 +8,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import statics.DB_OPERATION;
+import statics.ENUMS;
 import statics.SESSION;
+import view.popoups.TaskDoingPOPUP;
+import view.popoups.TaskDonePopUp;
 
 public class TaskComponent extends VBox {
 
@@ -56,19 +59,11 @@ public class TaskComponent extends VBox {
 		this.setOnMouseClicked(e -> {
 //			new TaskComponentPOPOUP(getTask());
 			
-			PROJECT_TASK doingT = new PROJECT_TASK();
-			doingT.setTaskCod(this.task.getTaskCod());
-			doingT.setTaskTitle(this.task.getTaskTitle());
-			doingT.setTask(this.task.getTask());
-			doingT.setTaskCreator(this.task.getTaskCreator());
-			doingT.setTaskExecutor(SESSION.getProfileLogged().getCod());
-			doingT.setTaskDateStart(this.task.getTaskDateStart());
-			doingT.setTaskPontuation(this.task.getTaskPontuation());
-			doingT.setTaskStatus("FAZENDO");
-			parentScrumFrame.removeTodo(task, this);
-			parentScrumFrame.addDoing(doingT);
-			DB_OPERATION.MERGE(doingT);
-			
+			if (task.getTaskStatus()==ENUMS.PROJECT_FRAMEWORK.TO_DO.getValue()) {
+				new TaskDoingPOPUP(this.task, SESSION.getProfileLogged(), parentScrumFrame, this);
+			}else if(task.getTaskStatus()==ENUMS.PROJECT_FRAMEWORK.DOING.getValue()) {
+				new TaskDonePopUp(this.task, SESSION.getProfileLogged(), parentScrumFrame, this);
+			}
 			
 			
 		});

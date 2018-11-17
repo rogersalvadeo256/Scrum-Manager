@@ -5,7 +5,6 @@
     -fx-text-fill: black;
 }
 .dialog-pane:header .header-panel {
-    -fx-font-style: bold;
     -fx-font-size: 2em;
     -fx-background-color:#5fb69c;
 }
