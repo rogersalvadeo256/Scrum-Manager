@@ -2,6 +2,7 @@ package view.popoups;
 
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,8 +33,12 @@ public class TaskDonePopUp extends Stage {
 	TaskComponent taskc;
 	
 	public TaskDonePopUp(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc) {
-
+		this.initStyle(StageStyle.DECORATED);
+		
+		this.setWidth(240);
+		this.setHeight(240);
 		btnCancel = new Button("Cancelar");
+		btnCancel.setId("back");
 		btnFinish = new Button("Finalizar");
 		
 		
@@ -65,6 +70,10 @@ public class TaskDonePopUp extends Stage {
 		hbxOrg4.getChildren().addAll(btnCancel,btnFinish);
 		layout.getChildren().addAll(hbxOrg1,hbxOrg2,hbxOrg3,lblPontuation,hbxOrg4);
 		
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.setSpacing(10);
+		
+		
 		this.btnFinish.setOnAction(e->{
 			PROJECT_TASK doneT = new PROJECT_TASK();
 			doneT.setTaskCod(this.tk.getTaskCod());
@@ -80,14 +89,13 @@ public class TaskDonePopUp extends Stage {
 			DB_OPERATION.MERGE(doneT);
 			this.close();
 		});
-		
 		btnCancel.setOnAction(e->{
 			this.close();
 		});
 		
 		this.initStyle(StageStyle.UNDECORATED);
 		Scene cena = new Scene(layout);
-		this.layout.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
+		this.layout.getStylesheets().add(this.getClass().getResource("/css/TASKDDPOPOUP.css").toExternalForm());
 		
 		this.setScene(cena);
 		this.show();

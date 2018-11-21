@@ -45,7 +45,7 @@ public class NewProjectPOPOUP extends StandartLayoutPOPOUP {
 		this.txtAboutTheProject.setId("descProject");
 		this.txtAboutTheProject.setId("txtDescProject");
 		
-		this.scene.getStylesheets().add(this.getClass().getResource("/css/NEW_PROJECT.css").toExternalForm());
+		this.scene.getStylesheets().add(this.getClass().getResource("/css/TASKDDPOPOUP.css").toExternalForm());
 		
 		this.txtProjectName.setMaxWidth(300);
 		this.txtAboutTheProject.setMaxWidth(300);

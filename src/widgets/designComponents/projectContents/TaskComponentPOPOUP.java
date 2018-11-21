@@ -117,11 +117,11 @@ public class TaskComponentPOPOUP extends Stage {
 
 		this.txtTittle = new TextField();
 		txtTittle.setAlignment(Pos.CENTER);
-		txtTittle.setPromptText("Titulo");
+		txtTittle.setPromptText("Titulo da tarefa");
 
 		this.txtTask = new TextArea();
 		txtTask.setWrapText(true);
-		txtTask.setPromptText(" Digite .. ");
+		txtTask.setPromptText("Digite uma tarefa");
 
 		t1 = new ToggleButton("1");
 		t3 = new ToggleButton("3");

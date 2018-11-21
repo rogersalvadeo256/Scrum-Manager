@@ -1,7 +1,10 @@
 package view.popoups;
 
+import com.mchange.io.impl.LazyReadOnlyMemoryFileImpl;
+
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -31,10 +34,14 @@ public class TaskDoingPOPUP extends Stage {
 	ScrumFrame parentFrame;
 	TaskComponent taskc;
 	
-	public TaskDoingPOPUP(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc) {
-
+	public TaskDoingPOPUP(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc) {		
+		this.initStyle(StageStyle.DECORATED);
+		
+		this.setWidth(240);
+		this.setHeight(240);
 		btnCancel = new Button("Cancelar");
-		btnFinish = new Button("Finalizar");
+		btnCancel.setId("back");
+		btnFinish = new Button("Fazer tarefa");
 		
 		
 		this.txtTaskName= new TextField();
@@ -65,6 +72,9 @@ public class TaskDoingPOPUP extends Stage {
 		hbxOrg4.getChildren().addAll(btnCancel,btnFinish);
 		layout.getChildren().addAll(hbxOrg1,hbxOrg2,hbxOrg3,lblPontuation,hbxOrg4);
 		
+		this.layout.setAlignment(Pos.CENTER);
+		this.layout.setSpacing(10);
+		
 		this.btnFinish.setOnAction(e->{
 			PROJECT_TASK doingT = new PROJECT_TASK();
 			doingT.setTaskCod(this.tk.getTaskCod());
@@ -80,7 +90,6 @@ public class TaskDoingPOPUP extends Stage {
 			DB_OPERATION.MERGE(doingT);
 			this.close();
 		});
-		
 		btnCancel.setOnAction(e->{
 			this.close();
 		});
