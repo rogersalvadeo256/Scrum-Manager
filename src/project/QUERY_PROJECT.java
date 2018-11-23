@@ -46,7 +46,12 @@ public class QUERY_PROJECT {
 		int project[] = new int[1];
 
 		for (int i = 0; i < y.size(); i++) {
-			project[i] = y.get(i).getMbrProjectCod();
+			try {
+				project[i] = y.get(i).getMbrProjectCod();
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			
 		}
 
 		List<?> b = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_COD = :COD", "COD", project[0]);
