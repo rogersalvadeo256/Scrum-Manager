@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import statics.PROFILE_IMG;
 import statics.SESSION;
@@ -37,8 +38,11 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	private HBox hbSteadyButtons;
 	
 	public ProfileEditPOPOUP(Window owner) throws IOException {
-		
 		super(owner);
+		this.initStyle(StageStyle.DECORATED);
+		
+		this.setWidth(500);
+		this.setHeight(650);
 		this.profileImage = new PROFILE_IMG();
 		
 		

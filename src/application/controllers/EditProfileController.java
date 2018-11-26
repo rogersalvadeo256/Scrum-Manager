@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import javax.transaction.Transactional.TxType;
 
 import application.main.Window;
 import db.hibernate.factory.Database;
@@ -22,6 +23,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import statics.ENUMS;
 import statics.GENERAL_STORE;
@@ -145,63 +147,74 @@ public class EditProfileController {
 		// layout.getChildren().add(hbDeleteAccount);
 		layout.getChildren().add(hbButtons);
 		layout.setSpacing(20);
-	}
-	/*
-	 * this.btnChangeQuestion.setOnAction(e1 -> {
-	 * 
-	 * hbChangeQuestion.getChildren().clear();
-	 * 
-	 * TextField txtQuestion = new TextField(); Button btnCancel = new
-	 * Button("Cancelar"); Button btnChange = new Button("Alterar");
-	 * 
-	 * txtQuestion.setPromptText(SESSION.getUserLogged().getSecurityQuestion().
-	 * toString());
-	 * 
-	 * hbChangeQuestion.getChildren().addAll(txtQuestion, btnChange, btnCancel);
-	 * 
-	 * btnChange.setOnAction(e2 -> { if (em == null) em =
-	 * Database.createEntityManager(); USER_REGISTRATION u =
-	 * SESSION.getUserLogged(); if (!check.isTextFieldEmpty(txtQuestion)) {
-	 * 
-	 * u.setSecurityQuestion(txtQuestion.getText()); em.getTransaction().begin();
-	 * em.merge(u); em.getTransaction().commit(); em.clear(); em.close(); em = null;
-	 * SESSION.UPDATE_SESSION(); hbChangeQuestion.getChildren().clear();
-	 * 
-	 * hbChangeQuestion.getChildren().add(new
-	 * Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
-	 * hbChangeQuestion.getChildren().addAll(btnChangeQuestion); } });
-	 * 
-	 * btnCancel.setOnAction(e3 -> { hbChangeQuestion.getChildren().clear();
-	 * hbChangeQuestion.getChildren().add(new
-	 * Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
-	 * hbChangeQuestion.getChildren().add(btnChangeQuestion); });
-	 * 
-	 * }); this.btnChangeAnswer.setOnAction(e1 -> {
-	 * 
-	 * hbChangeAnswer.getChildren().clear(); TextField txtAnswer = new TextField();
-	 * Button btnCancel = new Button("Cancelar"); Button btnChange = new
-	 * Button("Alterar");
-	 * 
-	 * txtAnswer.setPromptText(SESSION.getUserLogged().getSecurityAnswer().toString(
-	 * ));
-	 * 
-	 * hbChangeAnswer.getChildren().addAll(txtAnswer, btnChange, btnCancel);
-	 * 
-	 * btnChange.setOnAction(e2 -> { if (em == null) em =
-	 * Database.createEntityManager(); USER_REGISTRATION u =
-	 * SESSION.getUserLogged(); if (!check.isTextFieldEmpty(txtAnswer)) {
-	 * u.setSecurityAnswer(txtAnswer.getText()); em.getTransaction().begin();
-	 * em.merge(u); em.getTransaction().commit(); em.clear(); em.close(); em = null;
-	 * SESSION.UPDATE_SESSION(); hbChangeAnswer.getChildren().clear();
-	 * hbChangeAnswer.getChildren().add(new
-	 * Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
-	 * hbChangeAnswer.getChildren().addAll(btnChangeAnswer); } });
-	 * btnCancel.setOnAction(e3 -> { hbChangeAnswer.getChildren().clear();
-	 * hbChangeAnswer.getChildren().add(new
-	 * Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
-	 * hbChangeAnswer.getChildren().add(btnChangeAnswer); }); });
-	 * backToNormalOptions(e, btnBack, screen); }
-	 */
+		this.btnChangeQuestion.setOnAction(event->{
+			hbChangeQuestion.getChildren().clear();
+			TextField txtQuestion = new TextField();
+			Button btnCancel = new Button("Cancelar");
+			Button btnChange = new Button("Alterar");
+			txtQuestion.setPromptText(SESSION.getUserLogged().getSecurityQuestion().toString());
+			hbChangeQuestion.getChildren().addAll(txtQuestion,btnChange,btnCancel);				
+			
+			
+			  btnChange.setOnAction(event2 -> { 
+				  if (em == null) em =
+					  Database.createEntityManager(); USER_REGISTRATION u =
+					  SESSION.getUserLogged(); 
+					  if (!check.isTextFieldEmpty(txtQuestion)) {
+					  
+					  u.setSecurityQuestion(txtQuestion.getText()); 
+					  em.getTransaction().begin();
+					  em.merge(u); em.getTransaction().commit(); 
+					  em.clear(); 
+					  em.close(); 
+					  em = null;
+					  SESSION.UPDATE_SESSION(); 
+					  hbChangeQuestion.getChildren().clear();
+					  
+					  hbChangeQuestion.getChildren().add(new
+					  Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
+					  hbChangeQuestion.getChildren().addAll(btnChangeQuestion); } });
+					  
+					  btnCancel.setOnAction(event3 -> { hbChangeQuestion.getChildren().clear();
+					  hbChangeQuestion.getChildren().add(new
+					  Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
+					  hbChangeQuestion.getChildren().add(btnChangeQuestion); });
+					  
+					  }); this.btnChangeAnswer.setOnAction(event1 -> {
+					  
+					  hbChangeAnswer.getChildren().clear(); 
+					  TextField txtAnswer = new TextField();
+					  Button btnCancel = new Button("Cancelar"); 
+					  Button btnChange = new Button("Alterar");
+					  
+					  txtAnswer.setPromptText(SESSION.getUserLogged().getSecurityAnswer().toString(
+					  ));
+					  
+					  hbChangeAnswer.getChildren().addAll(txtAnswer, btnChange, btnCancel);
+					  
+					  btnChange.setOnAction(event2 -> { 
+						  if (em == null) em =
+							  Database.createEntityManager(); USER_REGISTRATION u =
+							  SESSION.getUserLogged(); 
+							  if (!check.isTextFieldEmpty(txtAnswer)) {
+							  u.setSecurityAnswer(txtAnswer.getText());
+							  em.getTransaction().begin();
+							  em.merge(u);
+							  em.getTransaction().commit();
+							  em.clear();
+							  em.close(); 
+							  em = null;
+							  SESSION.UPDATE_SESSION(); hbChangeAnswer.getChildren().clear();
+							  hbChangeAnswer.getChildren().add(new
+							  Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
+							  hbChangeAnswer.getChildren().addAll(btnChangeAnswer); } });
+					  
+							  btnCancel.setOnAction(event3 -> { hbChangeAnswer.getChildren().clear();
+							  hbChangeAnswer.getChildren().add(new
+							  Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
+							  hbChangeAnswer.getChildren().add(btnChangeAnswer); }); });
+							  backToNormalOptions(e, btnBack, screen); 
+							  };
 
 	public void setEventFinish(ActionEvent e, TextField txtName, PasswordField txtCurrentPassword,
 			PasswordField txtNewPassword) {
