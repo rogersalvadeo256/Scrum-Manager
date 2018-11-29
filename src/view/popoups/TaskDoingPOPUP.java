@@ -2,6 +2,7 @@ package view.popoups;
 
 import com.mchange.io.impl.LazyReadOnlyMemoryFileImpl;
 
+import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.geometry.Pos;
@@ -30,19 +31,21 @@ public class TaskDoingPOPUP extends Stage {
 	HBox hbxOrg1 = new HBox(), hbxOrg2 = new HBox(), hbxOrg3 = new HBox(),hbxOrg4 = new HBox();
 
 	PROJECT_TASK tk;
+	PROJECT proj;
 	
 	ScrumFrame parentFrame;
 	TaskComponent taskc;
 	
-	public TaskDoingPOPUP(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc) {		
+	public TaskDoingPOPUP(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc, PROJECT pj) {		
 		this.initStyle(StageStyle.DECORATED);
-		
 		this.setWidth(240);
 		this.setHeight(240);
 		btnCancel = new Button("Cancelar");
 		btnCancel.setId("back");
 		btnFinish = new Button("Fazer tarefa");
 		
+		
+		this.proj = pj;
 		
 		this.txtTaskName= new TextField();
 		this.txtTask=new TextArea();
@@ -63,7 +66,7 @@ public class TaskDoingPOPUP extends Stage {
 		this.txtTask.setText(tk.getTask());
 		this.lblPontuation.setText(Integer.toString(tk.getTaskPontuation()));
 		this.lblDoingName.setText(SESSION.getUserLogged().getUserName());
-		this.lblStatus.setText(task.getTaskStatus());
+		this.lblStatus.setText(task.getTaskStatus().getValue());
 		
 		
 		hbxOrg1.getChildren().add(txtTaskName);
@@ -84,10 +87,14 @@ public class TaskDoingPOPUP extends Stage {
 			doingT.setTaskExecutor(p.getCod());
 			doingT.setTaskDateStart(this.tk.getTaskDateStart());
 			doingT.setTaskPontuation(this.tk.getTaskPontuation());
-			doingT.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.DOING.getValue());
+			doingT.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.DOING);
 			parentFrame.removeTodo(task, taskc);
 			parentFrame.addDoing(doingT);
 			DB_OPERATION.MERGE(doingT);
+						
+//			proj.getProjTasks().add(doingT);
+//			DB_OPERATION.MERGE(proj);
+			
 			this.close();
 		});
 		btnCancel.setOnAction(e->{

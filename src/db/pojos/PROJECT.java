@@ -1,12 +1,18 @@
 package db.pojos;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 @Entity(name = "PROJECT")
@@ -35,6 +41,22 @@ public class PROJECT {
 	@Column(name ="PROJ_TYPE")
 	private String projType;
 
+	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="PROJ_COD")
+	private List<PROJECT_TASK> projTasks;
+
+	public PROJECT() {
+		this.projTasks = new ArrayList<PROJECT_TASK>();
+	}
+	
+	public List<PROJECT_TASK> getProjTasks() {
+		return projTasks;
+	}
+
+	public void setProjTasks(List<PROJECT_TASK> projTasks) {
+		this.projTasks = projTasks;
+	}
+	
 	public String getProjType() {
 		return projType;
 	}

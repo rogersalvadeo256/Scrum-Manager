@@ -17,6 +17,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import project.CheckNewTasks;
 import project.PROJECT_SESSION;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
@@ -48,11 +49,14 @@ public class ProjectScene extends Scene {
 
 	private Button btnTaskDone;
 
+	PROJECT pj;
+	
 	public ProjectScene(PROJECT p) {
 		super(new AnchorPane());
 		Window.mainStage.setResizable(true);
 		PROJECT_SESSION.initSession(p);
 		
+		pj=p;
 		
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_SCENE.css").toExternalForm());
 
@@ -147,6 +151,8 @@ public class ProjectScene extends Scene {
 		Date now = PROJECT_SESSION.getProject().getProjDateStart();
 		String date = formatter.format(now);
 		
+		new CheckNewTasks(pj, getTask(), frame);
+		
 		lblProjDate.setText(date);
 		
 		this.projectInformations = new VBox();
@@ -159,9 +165,11 @@ public class ProjectScene extends Scene {
 		vMemberActions.setId("member-actions");
 		
 		btnStartTask.setOnAction(e->{
-			new TaskComponentPOPOUP(getTask(), this.frame);
+			new TaskComponentPOPOUP(getTask(),this.frame,pj);
 		});
-
+		
+		
+		
 		AnchorPane.setTopAnchor(projectInformations, 50d);
 		AnchorPane.setRightAnchor(projectInformations, this.widthProperty().get());
 		AnchorPane.setBottomAnchor(projectInformations, 50d);

@@ -1,7 +1,12 @@
 package widgets.designComponents.projectContents;
 
-import java.util.Calendar;
+import java.util.Calendar;import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
+import org.hibernate.criterion.ProjectionList;
+
+import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.beans.value.ChangeListener;
@@ -46,8 +51,10 @@ public class TaskComponentPOPOUP extends Stage {
 		init();
 	}
 
-	public TaskComponentPOPOUP(PROJECT_TASK task, ScrumFrame f) {
+	public TaskComponentPOPOUP(PROJECT_TASK task, ScrumFrame f, PROJECT pj) {
+		this.proj=pj;
 		init();
+		
 		sprintColumns = f;
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());
@@ -70,7 +77,10 @@ public class TaskComponentPOPOUP extends Stage {
 		blockContents();
 	}
 
-	public TaskComponentPOPOUP(PROJECT_TASK task, USER_PROFILE p) {
+	PROJECT proj;
+	
+	public TaskComponentPOPOUP(PROJECT_TASK task, USER_PROFILE p, PROJECT pj) {
+		proj=pj;
 		init();
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());
@@ -171,14 +181,21 @@ public class TaskComponentPOPOUP extends Stage {
 			}
 			
 
+						
+			
+			
 			PROJECT_TASK task = new PROJECT_TASK();
 			task.setTask(txtTask.getText());
-			task.setTaskCreator(SESSION.getProfileLogged());
+			task.setTaskCreator(SESSION.getProfileLogged().getCod());
 			task.setTaskTitle(txtTittle.getText());
 			task.setTaskDateStart(Calendar.getInstance().getTime());
 			task.setTaskPontuation(pontuation);
-			task.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.TO_DO.getValue());
+			task.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.TO_DO);
 			sprintColumns.addTodo(task);
+						
+			proj.getProjTasks().add(task);
+			DB_OPERATION.MERGE(proj);
+						
 			DB_OPERATION.PERSIST(task);
 			this.close();
 		});

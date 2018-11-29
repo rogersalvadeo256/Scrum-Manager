@@ -1,5 +1,6 @@
 package view.popoups;
 
+import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.geometry.Pos;
@@ -28,13 +29,15 @@ public class TaskDonePopUp extends Stage {
 	HBox hbxOrg1 = new HBox(), hbxOrg2 = new HBox(), hbxOrg3 = new HBox(),hbxOrg4 = new HBox();
 
 	PROJECT_TASK tk;
+	PROJECT pj;
 	
 	ScrumFrame parentFrame;
 	TaskComponent taskc;
 	
-	public TaskDonePopUp(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc) {
+	
+	public TaskDonePopUp(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc,TaskComponent tc,PROJECT proj) {
 		this.initStyle(StageStyle.DECORATED);
-		
+		pj=proj;
 		this.setWidth(240);
 		this.setHeight(240);
 		btnCancel = new Button("Cancelar");
@@ -61,7 +64,7 @@ public class TaskDonePopUp extends Stage {
 		this.txtTask.setText(tk.getTask());
 		this.lblPontuation.setText(Integer.toString(tk.getTaskPontuation()));
 		this.lblDoingName.setText(SESSION.getUserLogged().getUserName());
-		this.lblStatus.setText(task.getTaskStatus());
+		this.lblStatus.setText(task.getTaskStatus().getValue());
 		
 		
 		hbxOrg1.getChildren().add(txtTaskName);
@@ -83,10 +86,14 @@ public class TaskDonePopUp extends Stage {
 			doneT.setTaskExecutor(p.getCod());
 			doneT.setTaskDateStart(this.tk.getTaskDateStart());
 			doneT.setTaskPontuation(this.tk.getTaskPontuation());
-			doneT.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.DONE.getValue());
+			doneT.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.DONE);
 			parentFrame.removeDoing(task, taskc);
 			parentFrame.addDone(doneT);
 			DB_OPERATION.MERGE(doneT);
+			
+//			proj.getProjTasks().add(doneT);
+//			DB_OPERATION.MERGE(proj);
+			
 			this.close();
 		});
 		btnCancel.setOnAction(e->{
