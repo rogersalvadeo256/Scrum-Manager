@@ -84,6 +84,7 @@ public class TaskDonePopUp extends Stage {
 			doneT.setTask(this.tk.getTask());
 			doneT.setTaskCreator(this.tk.getTaskCreator());
 			doneT.setTaskExecutor(p.getCod());
+			doneT.setProjCod(this.tk.getProjCod());
 			doneT.setTaskDateStart(this.tk.getTaskDateStart());
 			doneT.setTaskPontuation(this.tk.getTaskPontuation());
 			doneT.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.DONE);

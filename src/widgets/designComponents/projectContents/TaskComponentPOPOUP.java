@@ -26,6 +26,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import project.PROJECT_SESSION;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.SESSION;
@@ -191,10 +192,8 @@ public class TaskComponentPOPOUP extends Stage {
 			task.setTaskDateStart(Calendar.getInstance().getTime());
 			task.setTaskPontuation(pontuation);
 			task.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.TO_DO);
+			task.setProjCod(PROJECT_SESSION.getProject().getProjectCod());
 			sprintColumns.addTodo(task);
-						
-			proj.getProjTasks().add(task);
-			DB_OPERATION.MERGE(proj);
 						
 			DB_OPERATION.PERSIST(task);
 			this.close();

@@ -87,6 +87,7 @@ public class TaskDoingPOPUP extends Stage {
 			doingT.setTaskExecutor(p.getCod());
 			doingT.setTaskDateStart(this.tk.getTaskDateStart());
 			doingT.setTaskPontuation(this.tk.getTaskPontuation());
+			doingT.setProjCod(this.tk.getProjCod());
 			doingT.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.DOING);
 			parentFrame.removeTodo(task, taskc);
 			parentFrame.addDoing(doingT);

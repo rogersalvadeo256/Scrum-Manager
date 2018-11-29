@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 @Entity(name = "PROJECT")
 public class PROJECT {
 	@Id
@@ -31,67 +32,55 @@ public class PROJECT {
 	@Column(name = "PROJ_CREATOR")
 	private int projCreator;
 
-	@Temporal(TemporalType.DATE) 
+	@Temporal(TemporalType.DATE)
 	@Column(name = "PROJ_DT_START")
 	private java.util.Date projDateStart;
-	
-	@Column(name="PROJ_STATUS")
+
+	@Column(name = "PROJ_STATUS")
 	private String projStatus;
-	
-	@Column(name ="PROJ_TYPE")
+
+	@Column(name = "PROJ_TYPE")
 	private String projType;
 
-	@OneToMany(cascade = CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="PROJ_COD")
-	private List<PROJECT_TASK> projTasks;
-
-	public PROJECT() {
-		this.projTasks = new ArrayList<PROJECT_TASK>();
-	}
-	
-	public List<PROJECT_TASK> getProjTasks() {
-		return projTasks;
-	}
-
-	public void setProjTasks(List<PROJECT_TASK> projTasks) {
-		this.projTasks = projTasks;
-	}
-	
 	public String getProjType() {
 		return projType;
 	}
+
 	public void setProjType(String projType) {
 		this.projType = projType;
 	}
+
 	public void setProjStatus(String projStatus) {
 		this.projStatus = projStatus;
 	}
+
 	/**
 	 * @return the projStatus
 	 */
 	public String getProjStatus() {
 		return projStatus;
 	}
+
 	/**
 	 * @param projDateStart the projDateStart to set
 	 */
 	public void setProjDateStart(java.util.Date projDateStart) {
 		this.projDateStart = projDateStart;
 	}
-	
+
 	/**
 	 * @param dateStart the dateStart to set
 	 */
 	public void setDateStart() {
 		this.projDateStart = Calendar.getInstance().getTime();
 	}
+
 	/**
 	 * @return the projDateStart
 	 */
 	public java.util.Date getProjDateStart() {
 		return projDateStart;
 	}
-	
 
 	public int getProjectCod() {
 		return projectCod;
@@ -126,25 +115,3 @@ public class PROJECT {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -41,11 +41,15 @@ public class PROJECT_TASK {
 
 	@Column(name = "TASK_STATUS")
 	private ENUMS.PROJECT_FRAMEWORK taskStatus;
+	
+	@Column(name = "PROJ_COD")
+	private int projCod;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "TASK_DT_STARTED")
 	private Date taskDateStart;
 
+	
 	public String getTask() {
 		return task;
 	}
@@ -108,4 +112,12 @@ public class PROJECT_TASK {
 	public void setTaskTitle(String taskTitle) {
 		this.taskTitle = taskTitle;
 	}
+	public int getProjCod() {
+		return projCod;
+	}
+	public void setProjCod(int projCod) {
+		this.projCod = projCod;
+	}
+	
+	
 }
