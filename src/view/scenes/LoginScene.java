@@ -8,6 +8,7 @@ import java.sql.SQLException;
 
 import application.controllers.LoginSceneController;
 import application.main.Window;
+import db.util.StartConfiguration;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -47,7 +48,7 @@ public class LoginScene extends Scene {
 	private VBox vbLogin;
 	private AnchorPane layout;
 	private ImageView imgIcon;
-	
+
 	private Tooltip toolLogin = new Tooltip();
 	private Tooltip toolExit = new Tooltip();
 	private Tooltip toolSignup = new Tooltip();
@@ -63,11 +64,11 @@ public class LoginScene extends Scene {
 
 		Window.mainStage.setTitle("Tela Login");
 		Window.mainStage.sizeToScene();
-		
+
 		this.controller = new LoginSceneController();
 		this.layout = new AnchorPane();
 		this.layoutContent = new HBox();
-		
+
 		this.vbRegistration = new RegistrationFormComponent();
 
 		this.vbLogin = new VBox();
@@ -89,7 +90,7 @@ public class LoginScene extends Scene {
 
 		this.lblWelcome.getStyleClass().add("title");
 		this.lblSignIn.getStyleClass().add("title");
-		
+
 		toolLogin.setText("Fazer Login");
 		toolExit.setText("Sair");
 		toolSignup.setText("Cadastre-se");
@@ -115,7 +116,7 @@ public class LoginScene extends Scene {
 		btnLogin.setTooltip(toolLogin);
 		btnExit.setTooltip(toolExit);
 		btnSignUp.setTooltip(toolSignup);
-		
+
 		this.imgIcon = new ImageView();
 		this.imgIcon.setImage(new Image(new FileInputStream(new File("resources/images/icons/scrum_icon.png"))));
 
@@ -124,8 +125,7 @@ public class LoginScene extends Scene {
 
 		this.layout.setPrefHeight(450);
 		this.layout.setPrefWidth(300);
-		
-		
+
 		this.txtLogin.setOnMouseClicked(e -> {
 			this.messageLoginValidation.setVisible(false);
 		});
@@ -214,18 +214,15 @@ public class LoginScene extends Scene {
 		AnchorPane.setRightAnchor(vbLogin, 10d);
 		AnchorPane.setBottomAnchor(vbLogin, 10d);
 		vbLogin.setId("fundo");
-		
-		
+
 		AnchorPane.setTopAnchor(this.layoutContent, 0.0);
 		AnchorPane.setLeftAnchor(this.layoutContent, 0.0);
 		AnchorPane.setRightAnchor(this.layoutContent, 0.0);
 		AnchorPane.setBottomAnchor(this.layoutContent, 0.0);
 		this.layout.getChildren().add(layoutContent);
-		
-		
-		
+
 		login();
-		
+
 		this.setRoot(layout);
 	}
 

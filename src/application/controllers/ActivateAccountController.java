@@ -70,6 +70,7 @@ public class ActivateAccountController {
 	private boolean userExists(String loginEmail) {
 
 
+		
 		if (this.em == null)
 			this.em = Database.createEntityManager();
 

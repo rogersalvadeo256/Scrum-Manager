@@ -18,7 +18,6 @@ import statics.SERIALIZATION.FileType;
 import statics.SESSION;
 import view.scenes.HomePageScene;
 import view.scenes.LoginScene;
-import view.scenes.ProjectScene;
 
 public class Window extends Stage {
 	

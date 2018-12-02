@@ -49,7 +49,7 @@ public class QUERY_PROJECT {
 			try {
 				project[i] = y.get(i).getMbrProjectCod();
 			} catch (Exception e) {
-				System.out.println(e);
+				
 			}
 			
 		}
