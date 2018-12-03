@@ -28,12 +28,6 @@
 	-fx-font-family: "Quicksand";
 	 -fx-text-fill: #343736;
 }
-#hbChangeQuestion{
-	-fx-background-color:#44B492;
-}
-#hbChangeAnswer{
-	-fx-background-color:#44B492;
-}
 .button#desativa{
 	-fx-pref-height:35.0px;
 	-fx-pref-width:150px;
@@ -42,6 +36,8 @@
   -fx-background-color:#44B492;
    -fx-pref-height: 30.0px;
     -fx-pref-width: 150px;
+    -fx-text-aligment:center;
+	-fx-fill-color:black;
      -fx-text-fill: #E7E9DF;
 		-fx-background-radius: 30;
 	    -fx-background-insets: 0;
@@ -56,7 +52,10 @@
 	-fx-background-color:#cc2a2a;
 }
 
-
+.button:hover#volta{
+	-fx-text-fill:white;
+	-fx-background-color:#cc2a2a;
+}
 
 
 

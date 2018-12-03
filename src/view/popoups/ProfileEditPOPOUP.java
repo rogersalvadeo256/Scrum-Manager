@@ -41,8 +41,8 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		super(owner);
 		this.initStyle(StageStyle.DECORATED);
 		
-		this.setWidth(500);
-		this.setHeight(650);
+		this.setWidth(450);
+		this.setHeight(520);
 		this.profileImage = new PROFILE_IMG();
 		
 		
@@ -130,6 +130,8 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 		this.hbChangeAnswer.setAlignment(Pos.CENTER);
 		
 		this.btnAdvanced.setOnAction(e -> {
+			this.setWidth(435);
+			this.setHeight(350);
 			controller.setEventFinish(e, txtName, txtCurrentPassword, txtNewPassword);
 			controller.setEventAdvancedOptions(e, ProfileEditPOPOUP.this, this.layout, this, this.hbChangeAnswer, this.hbChangeQuestion, this.hbSteadyButtons, this.btnBack);
 		});
@@ -144,6 +146,8 @@ public class ProfileEditPOPOUP extends StandartLayoutPOPOUP {
 	
 	public void init() {
 		this.hbSteadyButtons.getChildren().clear();
+		this.setWidth(455);
+		this.setHeight(535);
 		this.hbSteadyButtons.getChildren().addAll(this.btnBack, this.btnFinish);
 		this.layout.getChildren().clear();
 		this.layout.setSpacing(10);

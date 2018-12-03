@@ -58,7 +58,20 @@ public class QUERY_PROJECT {
 
 		return (ArrayList<PROJECT>) b;
 	}
+	@SuppressWarnings("unchecked")
+	public static List<PROJECT_MEMBER> memberList() {
+		List<PROJECT_MEMBER> listTeam = new ArrayList<PROJECT_MEMBER>();
 
+		List<?> listMembers = DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_INVITE_STATUS= 'ACCEPTED' ", "COD",
+				SESSION.getProfileLogged().getCod());
+		
+		for(PROJECT_MEMBER member : (List<PROJECT_MEMBER>) listMembers) {
+			List<?> memberList = DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_COD = :COD OR MBR_COD =:COD2", 
+					new String[] {"COD", "COD2"}, new int [] { member.getMbrInvitedBy(), member.getMbrCod()});
+		}
+		return listTeam;
+	}
+	
 	/**
 	 * return the list of invitations for project that the user have
 	 * 

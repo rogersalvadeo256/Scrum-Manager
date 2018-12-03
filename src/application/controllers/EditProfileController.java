@@ -25,6 +25,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
@@ -41,9 +42,10 @@ public class EditProfileController {
 	private ProfileEditPOPOUP screen;
 
 	public EditProfileController() {
+		
 		this.check = new CheckEmptyFields();
-//		this.btnChangeAnswer = new Button();
-//		this.btnChangeQuestion = new Button();
+		this.btnChangeAnswer = new Button();
+		this.btnChangeQuestion = new Button();
 		this.btnDesativar = new Button("Desativar conta");
 		this.btnChangeAnswer = new Button("Alterar resposta");
 		this.btnChangeQuestion = new Button("Alterar pergunta");
@@ -112,7 +114,6 @@ public class EditProfileController {
 //		});
 //
 	}
-
 	/*
 	 * this code is huge and redundant, but was the best way that i find to do this
 	 * and understand later
@@ -127,11 +128,12 @@ public class EditProfileController {
 		hbChangeQuestion.getChildren().clear();
 
 		hbChangeQuestion.getChildren().add(new Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
-		hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
+		hbChangeQuestion.getChildren().add(btnChangeQuestion);
 		
-//
-//		hbChangeQuestion.getChildren().addAll(this.btnChangeQuestion);
-//		hbChangeAnswer.getChildren().addAll(this.btnChangeAnswer);
+		hbChangeAnswer.getChildren().add(new Label(SESSION.getUserLogged().getSecurityAnswer().toString()));
+		hbChangeAnswer.getChildren().add(btnChangeAnswer); 
+		
+
 
 		hbChangeAnswer.setAlignment(Pos.CENTER);
 		hbChangeQuestion.setAlignment(Pos.CENTER);
@@ -139,9 +141,11 @@ public class EditProfileController {
 		hbChangeAnswer.setSpacing(20);
 		hbChangeQuestion.setSpacing(20);
 
-		layout.getChildren().addAll(hbChangeQuestion,btnChangeQuestion);
+		layout.getChildren().add(hbChangeQuestion);
+		layout.getChildren().add(btnChangeQuestion);
 		hbChangeQuestion.setId("hbChangeQuestion");
-		layout.getChildren().addAll(hbChangeAnswer,btnChangeAnswer);
+		layout.getChildren().addAll(hbChangeAnswer);
+		layout.getChildren().add(btnChangeAnswer);
 		hbChangeAnswer.setId("hbChangeAnswer");
 		layout.getChildren().add(btnDesativar);
 		// layout.getChildren().add(hbDeleteAccount);
@@ -152,14 +156,14 @@ public class EditProfileController {
 			TextField txtQuestion = new TextField();
 			Button btnCancel = new Button("Cancelar");
 			Button btnChange = new Button("Alterar");
+			btnCancel.setId("back");
 			txtQuestion.setPromptText(SESSION.getUserLogged().getSecurityQuestion().toString());
 			hbChangeQuestion.getChildren().addAll(txtQuestion,btnChange,btnCancel);				
 			
 			
 			  btnChange.setOnAction(event2 -> { 
-				  if (em == null) em =
-					  Database.createEntityManager(); USER_REGISTRATION u =
-					  SESSION.getUserLogged(); 
+				  if (em == null) em =Database.createEntityManager(); 
+				  	  USER_REGISTRATION u = SESSION.getUserLogged(); 
 					  if (!check.isTextFieldEmpty(txtQuestion)) {
 					  
 					  u.setSecurityQuestion(txtQuestion.getText()); 
@@ -169,13 +173,14 @@ public class EditProfileController {
 					  em.close(); 
 					  em = null;
 					  SESSION.UPDATE_SESSION(); 
-					  hbChangeQuestion.getChildren().clear();
 					  
+					  hbChangeQuestion.getChildren().clear();
 					  hbChangeQuestion.getChildren().add(new
 					  Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
-					  hbChangeQuestion.getChildren().addAll(btnChangeQuestion); } });
+					  hbChangeQuestion.getChildren().add(btnChangeQuestion); } });
 					  
-					  btnCancel.setOnAction(event3 -> { hbChangeQuestion.getChildren().clear();
+					  btnCancel.setOnAction(event3 -> { 
+					  hbChangeQuestion.getChildren().clear();
 					  hbChangeQuestion.getChildren().add(new
 					  Label(SESSION.getUserLogged().getSecurityQuestion().toString()));
 					  hbChangeQuestion.getChildren().add(btnChangeQuestion); });
@@ -185,6 +190,7 @@ public class EditProfileController {
 					  hbChangeAnswer.getChildren().clear(); 
 					  TextField txtAnswer = new TextField();
 					  Button btnCancel = new Button("Cancelar"); 
+						btnCancel.setId("volta");
 					  Button btnChange = new Button("Alterar");
 					  
 					  txtAnswer.setPromptText(SESSION.getUserLogged().getSecurityAnswer().toString(

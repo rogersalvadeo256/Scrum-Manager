@@ -3,6 +3,7 @@ package application.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import db.pojos.PROJECT;
 import db.pojos.PROJECT_MEMBER;
 import javafx.scene.layout.VBox;
 import project.InvitationQuerys;
@@ -33,13 +34,13 @@ public class ProjectInviteController {
 					try {
 						answer.answerInvite(ENUMS.REQUEST_STATUS.ACCEPTED);
 						
-//						pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
-//						pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
-//						pm.setMbrProjectCod(project.getProjectCod());
-//						pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
-//						pm.setMbrScrumMaster(true);
-//						
-//						DB_OPERATION.PERSIST(pm);
+						pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
+						pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
+						pm.setMbrProjectCod(PROJECT.getProjectCod());
+						pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+						pm.setMbrScrumMaster(true);
+						
+						DB_OPERATION.PERSIST(pm);
 						
 						drawInvites(screen, layout);
 						

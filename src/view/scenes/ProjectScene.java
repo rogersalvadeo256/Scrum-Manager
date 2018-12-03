@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import project.PROJECT_SESSION;
+import view.popoups.TeamPOPOup;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
 import widgets.designComponents.projectContents.TaskComponentPOPOUP;
@@ -52,18 +53,18 @@ public class ProjectScene extends Scene {
 		super(new AnchorPane());
 		Window.mainStage.setResizable(true);
 		PROJECT_SESSION.initSession(p);
-		
-		
+
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_SCENE.css").toExternalForm());
 
 		init();
 
 		PROJECT_TASK task = new PROJECT_TASK();
 
-		task.setTask("Defina uma tarefa aqui.");
-		task.setTaskTitle(" Defina título da tarefa aqui. ");
-		
-		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnTaskDone, btnLeaveProject, btnBack);
+		task.setTask("Defina um sprint.");
+		task.setTaskTitle(" Defina um título ao sprint. ");
+
+		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnTaskDone, btnLeaveProject,
+				btnBack);
 
 	}
 
@@ -92,13 +93,18 @@ public class ProjectScene extends Scene {
 		anchor.getChildren().add(hHeader);
 
 		this.btnStartTask = new Button("Definir nova tarefa");
-		
 		this.btnSprints = new Button("Ver sprints anteriores");
 		this.btnTeam = new Button("Equipe");
-
+		this.btnTeam.setOnAction(e->{
+			try {
+				new TeamPOPOup(Window.mainStage).show();
+				return;
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 		this.hInfo = new HBox();
 		hInfo.setId("hInfo");
-		
 
 		hInfo.getChildren().addAll(btnStartTask, btnSprints, btnTeam);
 		hInfo.setSpacing(20);
@@ -131,16 +137,16 @@ public class ProjectScene extends Scene {
 				(e1).printStackTrace();
 			}
 
-		});
+		});	
 		this.btnLeaveProject = new Button("Abandonar projeto");
 //		this.btnLeaveProject.setOnAction(e ->{
 //			if (QUERY_PROJECT.USER_PROJECTS_MEMBER().size() == 1){
 //				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído", "O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
 //				if (result.get() == ButtonType.OK) {
+//				
+//		
+//					}	
 //					
-//					
-//				}
-//				}};
 		lblProjDate = new Label("");
 		
 		Format formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -177,7 +183,7 @@ public class ProjectScene extends Scene {
 	}
 
 	private PROJECT_TASK getTask() {
-		
+
 		return task();
 	}
 
@@ -186,4 +192,3 @@ public class ProjectScene extends Scene {
 		return task;
 	}
 }
-

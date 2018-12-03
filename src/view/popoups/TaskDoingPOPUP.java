@@ -63,12 +63,11 @@ public class TaskDoingPOPUP extends Stage {
 		this.txtTask.setText(tk.getTask());
 		this.lblPontuation.setText(Integer.toString(tk.getTaskPontuation()));
 		this.lblDoingName.setText(SESSION.getUserLogged().getUserName());
-		this.lblStatus.setText(task.getTaskStatus());
 		
 		
 		hbxOrg1.getChildren().add(txtTaskName);
 		hbxOrg2.getChildren().add(txtTask);
-		hbxOrg3.getChildren().addAll(lblDoingName,lblStatus);
+		hbxOrg3.getChildren().addAll(lblDoingName);
 		hbxOrg4.getChildren().addAll(btnCancel,btnFinish);
 		layout.getChildren().addAll(hbxOrg1,hbxOrg2,hbxOrg3,lblPontuation,hbxOrg4);
 		
