@@ -561,7 +561,10 @@ public class HomePageScene extends Scene {
 		}
 		vbNav.getChildren().clear();
 		vbNav.getChildren().addAll(hbNav);
-		vbNav.getChildren().add(GENERAL_STORE.projectComponent().get(1));
+		if (!GENERAL_STORE.projectComponent().isEmpty()) {
+			vbNav.getChildren().add(GENERAL_STORE.projectComponent().get(0));
+		}
+		
 		layout.getChildren().remove(scrollProjects);
 		layout.getChildren().addAll(hbIcon, hbStartProject);
 		x = true;

@@ -24,7 +24,7 @@ public class QUERY_PROJECT {
 	 */
 	@SuppressWarnings("unchecked")
 	public static ArrayList<PROJECT> USER_PROJECTS() {
-		List<?> x = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_CREATOR = :COD", "COD",
+		List<?> x = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_CREATOR = :COD AND PROJ_STATUS <> 'DELETADO'", "COD",
 				SESSION.getProfileLogged().getCod());
 		return (ArrayList<PROJECT>) x;
 	}
@@ -49,27 +49,13 @@ public class QUERY_PROJECT {
 			try {
 				project[i] = y.get(i).getMbrProjectCod();
 			} catch (Exception e) {
-				System.out.println(e);
+				
 			}
 			
 		}
-
 		List<?> b = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_COD = :COD", "COD", project[0]);
 
 		return (ArrayList<PROJECT>) b;
-	}
-	@SuppressWarnings("unchecked")
-	public static List<PROJECT_MEMBER> memberList() {
-		List<PROJECT_MEMBER> listTeam = new ArrayList<PROJECT_MEMBER>();
-
-		List<?> listMembers = DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_INVITE_STATUS= 'ACCEPTED' ", "COD",
-				SESSION.getProfileLogged().getCod());
-		
-		for(PROJECT_MEMBER member : (List<PROJECT_MEMBER>) listMembers) {
-			List<?> memberList = DB_OPERATION.QUERY("FROM PROJECT_MEMBER WHERE MBR_COD = :COD OR MBR_COD =:COD2", 
-					new String[] {"COD", "COD2"}, new int [] { member.getMbrInvitedBy(), member.getMbrCod()});
-		}
-		return listTeam;
 	}
 	
 	/**
@@ -101,7 +87,7 @@ public class QUERY_PROJECT {
 		return (ArrayList<USER_PROFILE>) y;
 	}
 
-	@SuppressWarnings("uncheked")
+	@SuppressWarnings("unchecked")
 	public static ArrayList<PROJECT_MEMBER> LEAVE_PROJECT() {
 		List<?> leaves = DB_OPERATION.QUERY(
 				"FROM PROJECT_MEMBER WHERE MRB_PROF_COD =:COD AND MRB_INVITE_STATUS = :STATUS",

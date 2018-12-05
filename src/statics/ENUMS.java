@@ -14,6 +14,20 @@ public class ENUMS {
 		private REQUEST_STATUS(String value) {
 			this.value = value;
 		}
+	}
+
+	public static enum PROJECT_WORKING {
+		IN_PROGRESS("PROGRESSO"), FINAL("ACABADO"), DELETADO("APAGADO");
+
+		private String value;
+
+		public String getValue() {
+			return this.value;
+		}
+
+		private PROJECT_WORKING(String value) {
+			this.value = value;
+		}
 
 	}
 
@@ -31,15 +45,16 @@ public class ENUMS {
 		}
 	}
 
-	public static enum PROJECT_FRAMEWORK { 
+	public static enum PROJECT_FRAMEWORK {
 		TO_DO("FAZER"), DOING("FAZENDO"), DONE("FEITO");
-		
+
 		private String value;
-		
-		private PROJECT_FRAMEWORK (String value) { 
-			this.value=value;
+
+		private PROJECT_FRAMEWORK(String value) {
+			this.value = value;
 		}
-		public String getValue () { 
+
+		public String getValue() {
 			return value;
 		}
 	}

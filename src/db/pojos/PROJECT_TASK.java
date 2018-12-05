@@ -13,6 +13,7 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 
 import javafx.scene.text.Text;
+import statics.ENUMS;
 
 @Entity(name = "PROJECT_TASK")
 public class PROJECT_TASK {
@@ -33,18 +34,22 @@ public class PROJECT_TASK {
 	private int taskPontuation;
 
 	@Column(name = "TASK_CREATOR")
-	private USER_PROFILE taskCreator;
+	private int taskCreator;
 
 	@Column(name = "TASK_EXECUTOR")
 	private int taskExecutor;
 
 	@Column(name = "TASK_STATUS")
-	private String taskStatus;
+	private ENUMS.PROJECT_FRAMEWORK taskStatus;
+	
+	@Column(name = "PROJ_COD")
+	private int projCod;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "TASK_DT_STARTED")
 	private Date taskDateStart;
 
+	
 	public String getTask() {
 		return task;
 	}
@@ -60,11 +65,11 @@ public class PROJECT_TASK {
 		this.taskPontuation = taskPontuation;
 	}
 
-	public USER_PROFILE getTaskCreator() {
+	public int getTaskCreator() {
 		return taskCreator;
 	}
 
-	public void setTaskCreator(USER_PROFILE taskCreator) {
+	public void setTaskCreator(int taskCreator) {
 		this.taskCreator = taskCreator;
 	}
 
@@ -76,11 +81,11 @@ public class PROJECT_TASK {
 		this.taskExecutor = taskExecutor;
 	}
 
-	public String getTaskStatus() {
+	public ENUMS.PROJECT_FRAMEWORK getTaskStatus() {
 		return taskStatus;
 	}
 
-	public void setTaskStatus(String taskStatus) {
+	public void setTaskStatus(ENUMS.PROJECT_FRAMEWORK taskStatus) {
 		this.taskStatus = taskStatus;
 	}
 
@@ -107,4 +112,12 @@ public class PROJECT_TASK {
 	public void setTaskTitle(String taskTitle) {
 		this.taskTitle = taskTitle;
 	}
+	public int getProjCod() {
+		return projCod;
+	}
+	public void setProjCod(int projCod) {
+		this.projCod = projCod;
+	}
+	
+	
 }

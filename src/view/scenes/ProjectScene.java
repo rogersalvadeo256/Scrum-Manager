@@ -5,23 +5,36 @@ import java.sql.SQLException;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 import application.main.Window;
+import db.hibernate.factory.Database;
 import db.pojos.PROJECT;
+import db.pojos.PROJECT_MEMBER;
 import db.pojos.PROJECT_TASK;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import project.CheckNewTasks;
 import project.PROJECT_SESSION;
-import view.popoups.TeamPOPOup;
+import statics.DB_OPERATION;
+import statics.ENUMS;
+import statics.SESSION;
+import view.popoups.TaskComponentPOPOUP;
+import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
-import widgets.designComponents.projectContents.TaskComponentPOPOUP;
 
 public class ProjectScene extends Scene {
 
@@ -49,10 +62,14 @@ public class ProjectScene extends Scene {
 
 	private Button btnTaskDone;
 
+	PROJECT pj;
+
 	public ProjectScene(PROJECT p) {
 		super(new AnchorPane());
 		Window.mainStage.setResizable(true);
 		PROJECT_SESSION.initSession(p);
+
+		pj = p;
 
 		this.getStylesheets().add(this.getClass().getResource("/css/PROJECT_SCENE.css").toExternalForm());
 
@@ -74,7 +91,6 @@ public class ProjectScene extends Scene {
 		content.setAlignment(Pos.CENTER);
 		layout.setAlignment(Pos.CENTER);
 
-		
 		Window.mainStage.setWidth(1050);
 		Window.mainStage.setHeight(768);
 
@@ -95,14 +111,6 @@ public class ProjectScene extends Scene {
 		this.btnStartTask = new Button("Definir nova tarefa");
 		this.btnSprints = new Button("Ver sprints anteriores");
 		this.btnTeam = new Button("Equipe");
-		this.btnTeam.setOnAction(e->{
-			try {
-				new TeamPOPOup(Window.mainStage).show();
-				return;
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		});
 		this.hInfo = new HBox();
 		hInfo.setId("hInfo");
 
@@ -137,24 +145,60 @@ public class ProjectScene extends Scene {
 				(e1).printStackTrace();
 			}
 
-		});	
+		});
 		this.btnLeaveProject = new Button("Abandonar projeto");
-//		this.btnLeaveProject.setOnAction(e ->{
-//			if (QUERY_PROJECT.USER_PROJECTS_MEMBER().size() == 1){
-//				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído", "O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
-//				if (result.get() == ButtonType.OK) {
-//				
-//		
-//					}	
-//					
+		this.btnLeaveProject.setOnAction(e1 -> {
+			// if (QUERY_PROJECT.USER_PROJECTS_MEMBER().size()> 1) {
+
+			EntityManager em = Database.createEntityManager();
+
+			Query q = em.createQuery("from PROJECT_MEMBER where MBR_PROJECT =:codigo");
+			q.setParameter("codigo", pj.getProjectCod());
+			List<PROJECT_MEMBER> lista_membros = q.getResultList();
+
+			if (lista_membros.size() > 1) {
+				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído",
+						"O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
+
+				if (result.get() == ButtonType.OK) {
+
+					for (int i = 0; i < lista_membros.size(); i++) {
+
+						if (lista_membros.get(i).getMbrProfCod() == SESSION.getProfileLogged().getCod()) {
+
+							PROJECT_MEMBER pm = lista_membros.get(i);
+
+							pm.setMbrMemberStatus(ENUMS.REQUEST_STATUS.REMOVED.getValue());
+
+							DB_OPERATION.MERGE(pm);
+							return;
+						}
+					}
+				}
+			}
+			if (lista_membros.size() < 1) {
+				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído",
+						"O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
+				if (result.get() == ButtonType.OK) {
+
+					
+					pj.setProjStatus(ENUMS.PROJECT_WORKING.DELETADO.getValue());
+					DB_OPERATION.MERGE(pj);
+					
+					
+				}
+			}
+		});
 		lblProjDate = new Label("");
-		
+
 		Format formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Date now = PROJECT_SESSION.getProject().getProjDateStart();
 		String date = formatter.format(now);
-		
+
+		new CheckNewTasks(pj, getTask(), frame);
+
 		lblProjDate.setText(date);
-		
+
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
 		projectInformations.getChildren().addAll(lblProjDate, new Label("Sprint atual"));
@@ -163,9 +207,9 @@ public class ProjectScene extends Scene {
 		vMemberActions.setSpacing(20);
 
 		vMemberActions.setId("member-actions");
-		
-		btnStartTask.setOnAction(e->{
-			new TaskComponentPOPOUP(getTask(), this.frame);
+
+		btnStartTask.setOnAction(e -> {
+			new TaskComponentPOPOUP(getTask(), this.frame, pj);
 		});
 
 		AnchorPane.setTopAnchor(projectInformations, 50d);

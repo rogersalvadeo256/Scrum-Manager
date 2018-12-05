@@ -1,7 +1,12 @@
-package widgets.designComponents.projectContents;
+package view.popoups;
 
-import java.util.Calendar;
+import java.util.Calendar;import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 
+import org.hibernate.criterion.ProjectionList;
+
+import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.beans.value.ChangeListener;
@@ -21,9 +26,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import project.PROJECT_SESSION;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.SESSION;
+import widgets.designComponents.projectContents.ScrumFrame;
 
 public class TaskComponentPOPOUP extends Stage {
 
@@ -46,8 +53,10 @@ public class TaskComponentPOPOUP extends Stage {
 		init();
 	}
 
-	public TaskComponentPOPOUP(PROJECT_TASK task, ScrumFrame f) {
+	public TaskComponentPOPOUP(PROJECT_TASK task, ScrumFrame f, PROJECT pj) {
+		this.proj=pj;
 		init();
+		
 		sprintColumns = f;
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());
@@ -70,7 +79,10 @@ public class TaskComponentPOPOUP extends Stage {
 		blockContents();
 	}
 
-	public TaskComponentPOPOUP(PROJECT_TASK task, USER_PROFILE p) {
+	PROJECT proj;
+	
+	public TaskComponentPOPOUP(PROJECT_TASK task, USER_PROFILE p, PROJECT pj) {
+		proj=pj;
 		init();
 		this.txtTittle.setText(task.getTaskTitle());
 		this.txtTask.setText(task.getTask());
@@ -171,14 +183,19 @@ public class TaskComponentPOPOUP extends Stage {
 			}
 			
 
+						
+			
+			
 			PROJECT_TASK task = new PROJECT_TASK();
 			task.setTask(txtTask.getText());
-			task.setTaskCreator(SESSION.getProfileLogged());
+			task.setTaskCreator(SESSION.getProfileLogged().getCod());
 			task.setTaskTitle(txtTittle.getText());
 			task.setTaskDateStart(Calendar.getInstance().getTime());
 			task.setTaskPontuation(pontuation);
-			task.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.TO_DO.getValue());
+			task.setTaskStatus(ENUMS.PROJECT_FRAMEWORK.TO_DO);
+			task.setProjCod(PROJECT_SESSION.getProject().getProjectCod());
 			sprintColumns.addTodo(task);
+						
 			DB_OPERATION.PERSIST(task);
 			this.close();
 		});

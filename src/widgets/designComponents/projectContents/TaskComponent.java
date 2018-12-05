@@ -1,5 +1,6 @@
 package widgets.designComponents.projectContents;
 
+import db.pojos.PROJECT;
 import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.geometry.Pos;
@@ -21,10 +22,13 @@ public class TaskComponent extends VBox {
 
 	private ScrumFrame parentScrumFrame;
 	
+	PROJECT pj;
+	
 	private HBox hbExecutor;
 
-	public TaskComponent(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc) {
+	public TaskComponent(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc, PROJECT proj) {
 		this.task = task;
+		pj=proj;
 		init();
 		hbExecutor.getChildren().addAll(lblPontuation, new Label(p.getName()));
 		this.parentScrumFrame = sc;
@@ -59,10 +63,10 @@ public class TaskComponent extends VBox {
 		this.setOnMouseClicked(e -> {
 //			new TaskComponentPOPOUP(getTask());
 			
-			if (task.getTaskStatus()==ENUMS.PROJECT_FRAMEWORK.TO_DO.getValue()) {
-				new TaskDoingPOPUP(this.task, SESSION.getProfileLogged(), parentScrumFrame, this);
-			}else if(task.getTaskStatus()==ENUMS.PROJECT_FRAMEWORK.DOING.getValue()) {
-				new TaskDonePopUp(this.task, SESSION.getProfileLogged(), parentScrumFrame, this);
+			if (task.getTaskStatus()==ENUMS.PROJECT_FRAMEWORK.TO_DO) {
+				new TaskDoingPOPUP(this.task, SESSION.getProfileLogged(), parentScrumFrame, this,pj);
+			}else if(task.getTaskStatus()==ENUMS.PROJECT_FRAMEWORK.DOING) {
+				new TaskDonePopUp(this.task, SESSION.getProfileLogged(), parentScrumFrame, this,pj);
 			}
 			
 			
