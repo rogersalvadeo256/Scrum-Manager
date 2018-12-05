@@ -35,6 +35,7 @@ public class NewProjectSceneController {
 		project.setProjName(projectName);
 		project.setProjDateStart(Calendar.getInstance().getTime());
 		project.setProjDescription(projectDescription);
+		project.setProjStatus(ENUMS.PROJECT_WORKING.IN_PROGRESS.getValue());
 		project.setProjCreator(SESSION.getProfileLogged().getCod());
 
 		PROJECT_MEMBER pm = new PROJECT_MEMBER();

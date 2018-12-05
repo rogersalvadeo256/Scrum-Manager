@@ -31,7 +31,6 @@ import project.PROJECT_SESSION;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.SESSION;
-import view.popoups.TaskComponentPOPOUP;
 import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
