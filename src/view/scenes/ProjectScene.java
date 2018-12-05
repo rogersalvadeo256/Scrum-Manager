@@ -60,7 +60,6 @@ public class ProjectScene extends Scene {
 	private AnchorPane anchor;
 	private Label lblFuncion;
 
-	private Button btnTaskDone;
 
 	PROJECT pj;
 
@@ -80,7 +79,7 @@ public class ProjectScene extends Scene {
 		task.setTask("Defina um sprint.");
 		task.setTaskTitle(" Defina um título ao sprint. ");
 
-		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnTaskDone, btnLeaveProject,
+		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnLeaveProject,
 				btnBack);
 
 	}
@@ -91,8 +90,8 @@ public class ProjectScene extends Scene {
 		content.setAlignment(Pos.CENTER);
 		layout.setAlignment(Pos.CENTER);
 
-		Window.mainStage.setWidth(1050);
-		Window.mainStage.setHeight(768);
+		Window.mainStage.setWidth(1030);
+		Window.mainStage.setHeight(670);
 
 		content.getChildren().add(layout);
 		this.anchor = new AnchorPane();
@@ -133,7 +132,6 @@ public class ProjectScene extends Scene {
 		AnchorPane.setBottomAnchor(vFrame, 0d);
 		anchor.getChildren().add(vFrame);
 
-		this.btnTaskDone = new Button("Historias feitas \n nesse sprint");
 
 		this.vMemberActions = new VBox();
 		this.lblFuncion = new Label("Função");
@@ -158,8 +156,8 @@ public class ProjectScene extends Scene {
 			List<PROJECT_MEMBER> lista_membros = q.getResultList();
 
 			if (lista_membros.size() > 1) {
-				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído",
-						"O projeto só possui um membro se você sair o projeto será excluído", null).showAndWait();
+				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Você será removido",
+						"Você será removido do projeto, porém o projeto continuará intacto para os outros membros", null).showAndWait();
 
 				if (result.get() == ButtonType.OK) {
 
@@ -179,7 +177,7 @@ public class ProjectScene extends Scene {
 			}
 			if (lista_membros.size() < 1) {
 				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído",
-						"O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
+						"O projeto só possui um membro se você sair, o projeto será exluído.", null).showAndWait();
 				if (result.get() == ButtonType.OK) {
 
 					
