@@ -30,6 +30,7 @@ import project.CheckNewTasks;
 import project.PROJECT_SESSION;
 import statics.DB_OPERATION;
 import statics.ENUMS;
+import statics.GENERAL_STORE;
 import statics.SESSION;
 import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
@@ -140,6 +141,8 @@ public class ProjectScene extends Scene {
 		this.btnBack.setOnAction(e -> {
 			try {
 				Window.mainStage.setScene(new HomePageScene());
+				GENERAL_STORE.loadProjects();
+				GENERAL_STORE.loadComponentsHOME();
 			} catch (ClassNotFoundException | SQLException | IOException e1) {
 				(e1).printStackTrace();
 			}
@@ -147,7 +150,6 @@ public class ProjectScene extends Scene {
 		});
 		this.btnLeaveProject = new Button("Abandonar projeto");
 		this.btnLeaveProject.setOnAction(e1 -> {
-			// if (QUERY_PROJECT.USER_PROJECTS_MEMBER().size()> 1) {
 
 			EntityManager em = Database.createEntityManager();
 
@@ -157,7 +159,7 @@ public class ProjectScene extends Scene {
 
 			if (lista_membros.size() > 1) {
 				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Projeto será excluído",
-						"O projeto só possui um membro se você sair, o projeto será exluído", null).showAndWait();
+						"O projeto só possui um membro se você sair o projeto será excluído", null).showAndWait();
 
 				if (result.get() == ButtonType.OK) {
 
@@ -183,7 +185,7 @@ public class ProjectScene extends Scene {
 					
 					pj.setProjStatus(ENUMS.PROJECT_WORKING.DELETADO.getValue());
 					DB_OPERATION.MERGE(pj);
-					
+				
 					
 				}
 			}

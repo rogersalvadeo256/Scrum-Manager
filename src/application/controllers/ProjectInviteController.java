@@ -20,6 +20,7 @@ public class ProjectInviteController {
 		drawInvites(screen, layout);
 	}
 	public void drawInvites(ProjectInvitePOPOUP screen, VBox layout) throws IOException {
+		PROJECT pj = new PROJECT();
 		layout.getChildren().clear();
 		ArrayList<HBProjectInvitationComponent> x = QUERY_PROJECT.teste();
 		
@@ -36,7 +37,7 @@ public class ProjectInviteController {
 						
 						pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
 						pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
-						pm.setMbrProjectCod(PROJECT.getProjectCod());
+						pm.setMbrProjectCod(pj.getProjectCod());
 						pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
 						pm.setMbrScrumMaster(true);
 						
