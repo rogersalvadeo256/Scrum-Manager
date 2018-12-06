@@ -24,7 +24,7 @@ public class QUERY_PROJECT {
 	 */
 	@SuppressWarnings("unchecked")
 	public static ArrayList<PROJECT> USER_PROJECTS() {
-		List<?> x = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_CREATOR = :COD, PROJ_STATUS <> 'APAGADO' AND MBR_STATUS <> 'ISNT'", "COD",
+		List<?> x = DB_OPERATION.QUERY("FROM PROJECT WHERE PROJ_CREATOR = :COD AND PROJ_STATUS <> 'APAGADO'", "COD",
 				SESSION.getProfileLogged().getCod());
 		return (ArrayList<PROJECT>) x;
 	}

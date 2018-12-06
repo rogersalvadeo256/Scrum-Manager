@@ -178,7 +178,7 @@ public class ProjectScene extends Scene {
 
 							PROJECT_MEMBER pm = lista_membros.get(i);
 
-							pm.setMbrMemberStatus(ENUMS.MEMBER_STATUS.ISNT.getValue());
+							pm.setMbrMemberStatus(ENUMS.REQUEST_STATUS.REMOVED.getValue());
 
 							DB_OPERATION.MERGE(pm);
 							return;
