@@ -1,5 +1,6 @@
 package view.scenes;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.Format;
@@ -15,6 +16,7 @@ import application.main.Window;
 import db.hibernate.factory.Database;
 import db.pojos.PROJECT;
 import db.pojos.PROJECT_MEMBER;
+import db.pojos.PROJECT_SPRINT;
 import db.pojos.PROJECT_TASK;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,6 +28,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import project.CheckNewTasks;
 import project.PROJECT_SESSION;
 import statics.DB_OPERATION;
@@ -33,6 +36,8 @@ import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
 import view.TempFXML.TeamPOPUP;
+import view.popoups.DefinedSprintPOPOUP;
+import view.popoups.NewProjectPOPOUP;
 import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
@@ -59,7 +64,6 @@ public class ProjectScene extends Scene {
 	private VBox projectInformations;
 
 	private AnchorPane anchor;
-	private Label lblFuncion;
 
 
 	PROJECT pj;
@@ -79,10 +83,11 @@ public class ProjectScene extends Scene {
 
 		task.setTask("Defina um sprint.");
 		task.setTaskTitle(" Defina um título ao sprint. ");
-
-		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnLeaveProject,
+		vMemberActions.getChildren().addAll(new TaskComponent(task, frame), btnLeaveProject,
 				btnBack);
-
+		vMemberActions.setOnMouseClicked(e -> {
+			new DefinedSprintPOPOUP().show();
+		});
 	}
 
 	private void init() {
@@ -135,7 +140,6 @@ public class ProjectScene extends Scene {
 
 
 		this.vMemberActions = new VBox();
-		this.lblFuncion = new Label("Função");
 		this.btnBack = new Button("Voltar");
 		this.btnBack.setOnAction(e -> {
 			try {
@@ -208,10 +212,11 @@ public class ProjectScene extends Scene {
 		new CheckNewTasks(pj, getTask(), frame);
 
 		lblProjDate.setText(date);
-
+		PROJECT_SPRINT sprint = new PROJECT_SPRINT();
+		Label lblsprint = new Label("sprint atual:  ");
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
-		projectInformations.getChildren().addAll(lblProjDate, new Label("Sprint atual"));
+		projectInformations.getChildren().addAll(lblProjDate, lblsprint);
 
 		vMemberActions.setAlignment(Pos.TOP_CENTER);
 		vMemberActions.setSpacing(20);

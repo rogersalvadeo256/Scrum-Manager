@@ -58,6 +58,19 @@ public class ENUMS {
 			return value;
 		}
 	}
+	public static enum SPRINT_PROJECT {
+		DOING("FAZENDO"), DONE("FEITO");
+
+		private String value;
+
+		private SPRINT_PROJECT(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
+	}
 
 	public static enum ACCOUNT_STATUS {
 		ACTIVE("ACTIVE"), INACTIVE("INACTIVE");
