@@ -15,7 +15,19 @@ public class ENUMS {
 			this.value = value;
 		}
 	}
+	public static enum MEMBER_STATUS{
+		IS("IS"), ISNT("ISNT");
+		private String value;
 
+		private MEMBER_STATUS(String value) {
+			this.value = value;
+		}
+
+		public String getValue() {
+			return value;
+		}
+
+	}
 	public static enum PROJECT_WORKING {
 		IN_PROGRESS("PROGRESSO"), FINAL("ACABADO"), DELETADO("APAGADO");
 

@@ -163,6 +163,7 @@ public class ProjectScene extends Scene {
 
 			Query q = em.createQuery("from PROJECT_MEMBER where MBR_PROJECT =:codigo");
 			q.setParameter("codigo", pj.getProjectCod());
+			@SuppressWarnings("unchecked")
 			List<PROJECT_MEMBER> lista_membros = q.getResultList();
 
 			if (lista_membros.size() > 1) {
@@ -177,7 +178,7 @@ public class ProjectScene extends Scene {
 
 							PROJECT_MEMBER pm = lista_membros.get(i);
 
-							pm.setMbrMemberStatus(ENUMS.REQUEST_STATUS.REMOVED.getValue());
+							pm.setMbrMemberStatus(ENUMS.MEMBER_STATUS.ISNT.getValue());
 
 							DB_OPERATION.MERGE(pm);
 							return;
