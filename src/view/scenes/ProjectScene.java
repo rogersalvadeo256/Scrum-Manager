@@ -32,6 +32,7 @@ import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.GENERAL_STORE;
 import statics.SESSION;
+import view.TempFXML.TeamPOPUP;
 import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
@@ -146,6 +147,15 @@ public class ProjectScene extends Scene {
 			}
 
 		});
+		this.btnTeam.setOnAction(e->{
+			try {
+				new TeamPOPUP();
+			} catch (IOException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+		});
+		
 		this.btnLeaveProject = new Button("Abandonar projeto");
 		this.btnLeaveProject.setOnAction(e1 -> {
 

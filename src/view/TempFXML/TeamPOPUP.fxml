@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane prefHeight="414.0" prefWidth="566.0" stylesheets="@../../css/FRIEND_LIST_COMPONENT.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TempFXML.TeamController">
+   <children>
+      <Pane prefHeight="414.0" prefWidth="566.0">
+         <children>
+            <VBox fx:id="vbxAndre" alignment="CENTER" layoutX="28.0" layoutY="24.0" prefHeight="153.0" prefWidth="121.0" spacing="5.0" style="-fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2;">
+               <children>
+                  <ImageView fx:id="imgAndre" fitHeight="106.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/images/icons/profile_picture.png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblAndre" text="Andre" />
+                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Circle fill="#5fb69c" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Label text="Disponivel" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox fx:id="vbxRoger" alignment="CENTER" layoutX="169.0" layoutY="24.0" prefHeight="153.0" prefWidth="121.0" spacing="5.0" style="-fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2;">
+               <children>
+                  <ImageView fx:id="imgRoger" fitHeight="106.0" fitWidth="76.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/images/icons/profile_picture.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Roger" />
+                  <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Circle fill="#5fb69c" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <Label text="Disponivel" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" layoutX="431.0" layoutY="314.0" onMouseClicked="#addMember" prefHeight="86.0" prefWidth="121.0" style="-fx-border-color: black; -fx-border-radius: 15;">
+               <children>
+                  <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../resources/images/icons/add.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Adicionar Membro" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
