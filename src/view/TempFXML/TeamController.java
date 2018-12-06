@@ -8,12 +8,7 @@ import javafx.scene.layout.VBox;
 
 public class TeamController {
 
-	PROJECT_MEMBER pm;
-	public TeamController(PROJECT_MEMBER prm) {
-		pm = prm;
 		
-	}
-	
 	
 	@FXML
 	ImageView imgAndre, imgRoger;
