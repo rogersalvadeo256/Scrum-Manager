@@ -85,6 +85,7 @@ public class ProjectScene extends Scene {
 		task.setTaskTitle(" Defina um título ao sprint. ");
 		vMemberActions.getChildren().addAll(new TaskComponent(task, frame), btnLeaveProject,
 				btnBack);
+		
 		vMemberActions.setOnMouseClicked(e -> {
 			new DefinedSprintPOPOUP().show();
 		});
@@ -153,7 +154,7 @@ public class ProjectScene extends Scene {
 		});
 		this.btnTeam.setOnAction(e->{
 			try {
-				new TeamPOPUP();
+				new TeamPOPUP(pj);
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();

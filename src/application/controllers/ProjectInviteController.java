@@ -35,13 +35,13 @@ public class ProjectInviteController {
 					try {
 						answer.answerInvite(ENUMS.REQUEST_STATUS.ACCEPTED);
 						
-						pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
-						pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
-						pm.setMbrProjectCod(pj.getProjectCod());
-						pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
-						pm.setMbrScrumMaster(true);
-						
-						DB_OPERATION.PERSIST(pm);
+//						pm.setMbrInvitedBy(SESSION.getProfileLogged().getCod());
+//						pm.setMbrProfCod(SESSION.getProfileLogged().getCod());
+//						pm.setMbrProjectCod(pj.getProjectCod());
+//						pm.setMbrInviteStatus(ENUMS.REQUEST_STATUS.ACCEPTED.getValue());
+//						pm.setMbrScrumMaster(true);
+//						
+//						DB_OPERATION.PERSIST(pm);
 						
 						drawInvites(screen, layout);
 						

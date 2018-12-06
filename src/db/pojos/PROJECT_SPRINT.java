@@ -24,6 +24,25 @@ public class PROJECT_SPRINT {
 	@Column(name = "SPRINT_TEXT")
 	@Type(type = "text")
 	private String 	sprint;
+	
+	@Column(name = "SPRINT_COD")
+	private int sprintCod;
+	
+	@Column(name = "SPRINT_PONTUATION")
+	private int sprintPontuation;
+	
+	public int getSprintCod() {
+		return sprintCod;
+	}
+
+	public void setSprintCod(int sprintCod) {
+		this.sprintCod = sprintCod;
+	}
+
+	@Column(name = "SPRINT_STATUS")
+	private ENUMS.SPRINT_PROJECT sprintStatus;
+	
+
 
 	public int getMbrId() {
 		return mbrId;
@@ -65,10 +84,4 @@ public class PROJECT_SPRINT {
 		this.sprintStatus = sprintStatus;
 	}
 
-	@Column(name = "SPRINT_PONTUATION")
-	private int sprintPontuation;
-	
-	@Column(name = "SPRINT_STATUS")
-	private ENUMS.SPRINT_PROJECT sprintStatus;
-	
 }
