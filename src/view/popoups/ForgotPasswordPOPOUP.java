@@ -21,6 +21,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
+import javafx.stage.StageStyle;
 import javafx.stage.Window;
 import statics.DB_OPERATION;
 import validation.CheckEmptyFields;
@@ -65,8 +66,9 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 		this.hbButtons = new HBox();
 
 		this.tbNot = new ToggleButton("Não");
+		tbNot.setId("no");
 		this.tbYes = new ToggleButton("Sim");
-
+		
 		this.btnCancel = new Button("Cancelar");
 		this.btnCancel.setId("back");
 		this.btnCancel.setOnAction(e -> {
@@ -139,6 +141,9 @@ public class ForgotPasswordPOPOUP extends StandartLayoutPOPOUP {
 			this.u = (USER_REGISTRATION) a.get(0);
 			this.p = u.getProfile();
 			try {
+				
+				this.setWidth(250);
+				this.setHeight(300);
 				this.hbp = new HBProfileContentForgotPassword(p);
 
 				this.hbButtons.getChildren().clear();

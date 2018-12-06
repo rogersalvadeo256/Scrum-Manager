@@ -41,7 +41,7 @@ public class ActivateAccountController {
 	private Label lblEVoce;
 
 	public ActivateAccountController(ActivateAccount screen, VBox layout) throws IOException {
-
+		
 		this.layout = layout;
 		this.screen = screen;
 	}
@@ -104,10 +104,11 @@ public class ActivateAccountController {
 		}
 	}
 	private void loadProfileContent() throws IOException {
-
+		
 		layout.getChildren().clear();
-
+		
 		this.profileContent = new HBProfileContentReactivateAccount(ur);
+		
 
 		layout.getChildren().add(this.profileContent);
 
@@ -153,7 +154,7 @@ public class ActivateAccountController {
 		layout.getChildren().clear();
 
 
-		Label lblInformation = new Label("Responda a pergunta de /n segurança para reativar a sua conta");
+		Label lblInformation = new Label("Responda para reativar a sua conta");
 
 		Label lblQuestion = new Label(ur.getSecurityQuestion());
 		this.txtAnswer = new TextField();

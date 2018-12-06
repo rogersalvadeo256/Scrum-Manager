@@ -5,6 +5,7 @@ import db.pojos.PROJECT_TASK;
 import db.pojos.USER_PROFILE;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -16,7 +17,7 @@ import view.popoups.TaskDonePopUp;
 
 public class TaskComponent extends VBox {
 
-	private Label lblTitle, lblPontuation;
+	private Label lblTitle, lblPontuation, lblCreatorOfTheTask;
 	private Text lblTask;
 	private PROJECT_TASK task;
 
@@ -29,8 +30,7 @@ public class TaskComponent extends VBox {
 	public TaskComponent(PROJECT_TASK task, USER_PROFILE p, ScrumFrame sc, PROJECT proj) {
 		this.task = task;
 		pj=proj;
-		init();
-		hbExecutor.getChildren().addAll(lblPontuation, new Label(p.getName()));
+		hbExecutor.getChildren().addAll(lblPontuation, lblCreatorOfTheTask);
 		this.parentScrumFrame = sc;
 	}
 
@@ -45,6 +45,7 @@ public class TaskComponent extends VBox {
 		this.setId("content");
 
 		this.lblTitle = new Label(task.getTaskTitle());
+		this.lblCreatorOfTheTask = new Label(String.valueOf(task.getTaskCreator()));
 		this.lblPontuation = new Label(String.valueOf(task.getTaskPontuation()));
 		this.lblTask = new Text(task.getTask());
 

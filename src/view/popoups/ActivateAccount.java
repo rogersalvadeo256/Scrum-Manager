@@ -49,6 +49,8 @@ public class ActivateAccount extends StandartLayoutPOPOUP {
 
 		this.btnQuery.setOnAction(e -> {
 			try {
+				this.setWidth(225);
+				this.setHeight(189);
 				this.controller.setButtonQueryEvent(e, txtUserNameOrEmail.getText());
 			} catch (IOException e1) {
 				e1.printStackTrace();
