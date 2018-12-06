@@ -3,6 +3,8 @@ package view.TempFXML;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import db.pojos.PROJECT;
+import db.pojos.PROJECT_MEMBER;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -16,10 +18,15 @@ public class TeamPOPUP extends Stage {
 
 	// it was the only way
 
-	public TeamPOPUP() throws IOException {
+	public TeamPOPUP(PROJECT pj) throws IOException {
 		
 		try {
-			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("TeamPOPUP.fxml"));
+	        FXMLLoader loader = new FXMLLoader(getClass().getResource("TeamPOPUP.fxml"));
+
+			
+			TeamController team = new TeamController(pj);
+			loader.setController(team);
+			AnchorPane root = loader.load();
 			Scene scene = new Scene(root);
 			this.setScene(scene);
 			this.show();

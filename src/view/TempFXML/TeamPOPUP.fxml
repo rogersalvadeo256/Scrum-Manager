@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<AnchorPane prefHeight="414.0" prefWidth="566.0" stylesheets="@../../css/TEAM_POPUP.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.TempFXML.TeamController">
+<AnchorPane prefHeight="414.0" prefWidth="566.0" stylesheets="@../../css/TEAM_POPUP.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="414.0" prefWidth="566.0" stylesheets="@../../css/TEAM_POPUP.css">
          <children>
@@ -36,7 +36,7 @@
                         <Image url="@../../../resources/images/icons/profile_picture.png" />
                      </image>
                   </ImageView>
-                  <Label text="Roger" />
+                  <Label fx:id="lblRoger" text="Roger" />
                   <HBox alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                      <children>
                         <Circle fill="#5fb69c" radius="12.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
@@ -45,7 +45,7 @@
                   </HBox>
                </children>
             </VBox>
-            <VBox id="test" fx:id="vbxAddM" alignment="CENTER" layoutX="431.0" layoutY="296.0" onMouseClicked="#addMember" onMouseEntered="#mouseEntered" prefHeight="104.0" prefWidth="121.0" stylesheets="@../../css/TEAM_POPUP.css">
+            <VBox id="test" fx:id="vbxAddM" alignment="CENTER" layoutX="431.0" layoutY="296.0" onMouseClicked="#addMember" prefHeight="104.0" prefWidth="121.0" stylesheets="@../../css/TEAM_POPUP.css">
                <children>
                   <ImageView fitHeight="51.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true">
                      <image>

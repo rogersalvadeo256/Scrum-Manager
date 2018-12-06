@@ -82,7 +82,9 @@ public class ProjectScene extends Scene {
 
 		vMemberActions.getChildren().addAll(lblFuncion, new TaskComponent(task, frame), btnLeaveProject,
 				btnBack);
-
+		vMemberActions.setOnMouseClicked(e->{
+			System.out.println("a");
+		});
 	}
 
 	private void init() {
@@ -149,7 +151,7 @@ public class ProjectScene extends Scene {
 		});
 		this.btnTeam.setOnAction(e->{
 			try {
-				new TeamPOPUP();
+				new TeamPOPUP(pj);
 			} catch (IOException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
@@ -163,6 +165,7 @@ public class ProjectScene extends Scene {
 
 			Query q = em.createQuery("from PROJECT_MEMBER where MBR_PROJECT =:codigo");
 			q.setParameter("codigo", pj.getProjectCod());
+			@SuppressWarnings("unchecked")
 			List<PROJECT_MEMBER> lista_membros = q.getResultList();
 
 			if (lista_membros.size() > 1) {
