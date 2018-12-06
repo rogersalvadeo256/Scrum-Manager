@@ -21,7 +21,6 @@ public class TeamPOPUP extends Stage {
 		try {
 			AnchorPane root = (AnchorPane)FXMLLoader.load(getClass().getResource("TeamPOPUP.fxml"));
 			Scene scene = new Scene(root);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			this.setScene(scene);
 			this.show();
 		} catch(Exception e) {
