@@ -18,7 +18,7 @@ public class StartConfiguration {
 
 		if(q.getResultList().isEmpty()) {
 			USER_PROFILE up = new USER_PROFILE();
-			up.setName("a");
+			up.setName("Andre");
 			up.setAvailability("AVAILABLE");
 			
 			em.clear();
@@ -28,12 +28,30 @@ public class StartConfiguration {
 			ur.setStatus("ACTIVE");
 			ur.setuDateRegistrated();
 			ur.setEmail("a");
-			ur.setUserName("a");
+			ur.setUserName("andre");
 			ur.setPassword("a");
 			ur.setSecurityAnswer("a");
 			ur.setSecurityQuestion("a");
 			ur.setProfile(up);
 			DB_OPERATION.PERSIST(ur);
+			
+			USER_PROFILE up2 = new USER_PROFILE();
+			up2.setName("Roger");
+			up2.setAvailability("AVAILABLE");
+			
+			em.clear();
+			
+			
+			USER_REGISTRATION ur2 = new USER_REGISTRATION();
+			ur2.setStatus("ACTIVE");
+			ur2.setuDateRegistrated();
+			ur2.setEmail("a");
+			ur2.setUserName("roger");
+			ur2.setPassword("a");
+			ur2.setSecurityAnswer("a");
+			ur2.setSecurityQuestion("a");
+			ur2.setProfile(up2);
+			DB_OPERATION.PERSIST(ur2);
 			
 			em.close();
 		}
