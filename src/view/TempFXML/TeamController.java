@@ -17,6 +17,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import statics.PROFILE_IMG;
+import statics.SESSION;
 
 public class TeamController {
 
@@ -99,7 +100,7 @@ public class TeamController {
 		} else {
 			this.imgAndre.setImage(PROFILE_IMG.getImage(p2));
 		}
-		this.lblAndre.setText(p2.getName());
+		this.lblAndre.setText(SESSION.getProfileLogged().getName());
 		
 	}
 	

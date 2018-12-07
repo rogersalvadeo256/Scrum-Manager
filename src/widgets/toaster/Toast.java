@@ -19,19 +19,6 @@ public class Toast extends Stage {
 		this.initStyle(StageStyle.UNDECORATED);
 		this.show();
 		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
+	
 }
