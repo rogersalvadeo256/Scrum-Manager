@@ -69,6 +69,7 @@ public class ProjectScene extends Scene {
 
 	private HBox hInfo;
 	private VBox projectInformations;
+	private Toast toast;
 
 	private AnchorPane anchor;
 
@@ -145,18 +146,29 @@ public class ProjectScene extends Scene {
 		anchor.getChildren().add(vFrame);
 
 		this.btnEndSprint = new Button("Finalizar Sprint");
-		this.btnEndSprint.setOnAction(e->{
-			if (frame.checkTasksTODO()==1 && frame.checkTasksDoing()==1) {
-				lblSprint.setText(txt);
-			}else if(frame.checkTasksDone()==1){
-				new Toast(this.getWindow(), "É necessário ter pelo menos uma tarefa nesse sprint.");
-			}else
-			{
-				new Toast(this.getWindow(), "É necessário terminar todas as tarefas.");
+		this.btnEndSprint.setOnAction(e -> {
+			if (frame.checkTasksTODO() == 0 && frame.checkTasksDoing() == 0 && frame.checkTasksDone() == 1) {
+				this.toast = new Toast(Window.mainStage, "Sprint finalizado. Defina próximo sprint");
+				this.setOnMouseMoved(e1 -> {
+					this.toast.close();
+				});
+				if (frame.checkTasksTODO() == 1 && frame.checkTasksDoing() == 1) {
+					lblSprint.setText(txt);
+				} else if (frame.checkTasksDone() == 1) {
+					this.toast = new Toast(Window.mainStage, "Termine suas as tarefas");
+					this.setOnMouseMoved(e1 -> {
+						this.toast.close();
+					});
+				} else {
+					this.toast = new Toast(Window.mainStage, "É necessário terminar todas as tarefas");
+					this.setOnMouseMoved(e1 -> {
+						this.toast.close();
+					});
+				}
 			}
+
 		});
-		
-		
+
 		this.vMemberActions = new VBox();
 		this.btnBack = new Button("Voltar");
 		this.btnBack.setOnAction(e -> {
@@ -230,15 +242,14 @@ public class ProjectScene extends Scene {
 		EntityManager em = Database.createEntityManager();
 		Query q = em.createQuery("from PROJECT_SPRINT where PROJ_SPRINT_COD=:codigo");
 		q.setParameter("codigo", pj.getProjectCod());
-		
+
 		if (!q.getResultList().isEmpty()) {
 			PROJECT_SPRINT ps = (PROJECT_SPRINT) q.getResultList().get(0);
 			System.out.println(ps.getSprint());
-			lblSprint.setText("Sprint atual: "+ps.getSprintTitle());
-			
+			lblSprint.setText("Sprint atual: " + ps.getSprintTitle());
+
 		}
-		
-		
+
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
 		projectInformations.getChildren().addAll(lblProjDate, lblSprint);
@@ -267,11 +278,11 @@ public class ProjectScene extends Scene {
 	}
 
 	private Label setLblSprint(String text) {
-		this.lblSprint.setText(txt+text);
+		this.lblSprint.setText(txt + text);
 		return lblProjDate;
-		
+
 	}
-	
+
 	private PROJECT_TASK getTask() {
 
 		return task();
