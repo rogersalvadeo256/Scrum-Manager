@@ -15,8 +15,8 @@ public class PROJECT_SPRINT {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PROJ_SPRINT")
-	private int mbrId;
+	@Column(name = "COD_SPRINT")
+	private int spId;
 
 	@Column(name = "SPRINT_TITLE")
 	private String sprintTitle;
@@ -25,18 +25,18 @@ public class PROJECT_SPRINT {
 	@Type(type = "text")
 	private String 	sprint;
 	
-	@Column(name = "SPRINT_COD")
-	private int sprintCod;
+	@Column(name = "PROJ_SPRINT_COD")
+	private int projSprintCod;
 	
 	@Column(name = "SPRINT_PONTUATION")
 	private int sprintPontuation;
 	
-	public int getSprintCod() {
-		return sprintCod;
+	public int getProjectSprintCod() {
+		return projSprintCod;
 	}
 
-	public void setSprintCod(int sprintCod) {
-		this.sprintCod = sprintCod;
+	public void setProjectSprintCod(int sprintCod) {
+		this.projSprintCod = sprintCod;
 	}
 
 	@Column(name = "SPRINT_STATUS")
@@ -44,12 +44,12 @@ public class PROJECT_SPRINT {
 	
 
 
-	public int getMbrId() {
-		return mbrId;
+	public int getSpId() {
+		return spId;
 	}
 
-	public void setMbrId(int mbrId) {
-		this.mbrId = mbrId;
+	public void setSpId(int mbrId) {
+		this.spId = mbrId;
 	}
 
 	public String getSprintTitle() {

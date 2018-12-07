@@ -24,6 +24,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -55,7 +56,7 @@ public class ProjectScene extends Scene {
 	private ScrumFrame frame;
 
 	private VBox vMemberActions;
-	private Button btnLeaveProject, btnBack;
+	private Button btnLeaveProject, btnBac, lblSprint;
 
 	private HBox hHeader;
 	private Label lblProjectName;
@@ -198,14 +199,12 @@ public class ProjectScene extends Scene {
 
 					
 					pj.setProjStatus(ENUMS.PROJECT_WORKING.DELETADO.getValue());
-					DB_OPERATION.MERGE(pj);
-				
-					
+					DB_OPERATION.MERGE(pj);	
 				}
 			}
 		});
 		lblProjDate = new Label("");
-
+		
 		Format formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Date now = PROJECT_SESSION.getProject().getProjDateStart();
 		String date = formatter.format(now);
@@ -213,11 +212,22 @@ public class ProjectScene extends Scene {
 		new CheckNewTasks(pj, getTask(), frame);
 
 		lblProjDate.setText(date);
-		PROJECT_SPRINT sprint = new PROJECT_SPRINT();
-		Label lblsprint = new Label("sprint atual:  ");
+		
+		
+//		Label lblSprint = new Label();
+//		EntityManager em = Database.createEntityManager();
+//		Query q = em.createQuery("from PROJECT_SPRINT where COD_SPRINT =:codigo");
+//		q.setParameter("codigo", pj.getProjectCod());
+//		PROJECT_SPRINT ps = (PROJECT_SPRINT)q.getResultList().get(0);
+//		this.lblTitle = new Label(ps.getSprintTitle());
+//		
+//		this.lblSprint = (ps.getSprintTitle());
+//		
+//		
+//		
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
-		projectInformations.getChildren().addAll(lblProjDate, lblsprint);
+		projectInformations.getChildren().addAll(lblProjDate);
 
 		vMemberActions.setAlignment(Pos.TOP_CENTER);
 		vMemberActions.setSpacing(20);
