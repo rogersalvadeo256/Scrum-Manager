@@ -23,6 +23,21 @@ public class ScrumFrame extends HBox {
 
 	}
 
+	public int checkTasksTODO() {
+		int i = this.toDo.checkTasks();
+		return i;
+	}
+	
+	public int checkTasksDoing() {
+		int i = this.doing.checkTasks();
+		return i;
+	}
+	
+	public int checkTasksDone() {
+		int i = this.done.checkTasks();
+		return i;
+	}
+	
 	public void addTodo(PROJECT_TASK task) {
 		this.toDo.setNewTask(task);
 	}

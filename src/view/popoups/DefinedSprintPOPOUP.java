@@ -32,6 +32,7 @@ import project.PROJECT_SESSION;
 import statics.DB_OPERATION;
 import statics.ENUMS;
 import statics.ENUMS.SPRINT_PROJECT;
+import view.scenes.ProjectScene;
 import statics.SESSION;
 import widgets.designComponents.projectContents.ScrumFrame;
 
@@ -49,10 +50,12 @@ public class DefinedSprintPOPOUP extends Stage{
 	private int pontuation = 0;
 	
 	private VBox content;
+	
 
 	private ScrumFrame sprintColumns;
 
-	public DefinedSprintPOPOUP() {
+	public DefinedSprintPOPOUP(USER_PROFILE p, PROJECT pj) {
+		proj=pj;
 		init();
 	}
 
@@ -191,12 +194,15 @@ public class DefinedSprintPOPOUP extends Stage{
 			
 			PROJECT_SPRINT sprint = new PROJECT_SPRINT();
 			sprint.setSprint(txtTask.getText());
+			sprint.setProjectSprintCod(proj.getProjectCod());
 			sprint.setSprintTitle(txtTittle.getText());
 			sprint.setSprintPontuation(pontuation);
 			sprint.setSprintStatus(ENUMS.SPRINT_PROJECT.DOING);
 						
 			DB_OPERATION.PERSIST(sprint);
 			this.close();
+			
+			
 		});
 		this.hButtons = new HBox();
 

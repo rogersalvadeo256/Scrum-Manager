@@ -33,7 +33,12 @@ public class ScrollColumn extends ScrollPane {
 	public VBox get_column() {
 		return this.column;
 	}
-
+	
+	public int checkTasks() {
+		int i = this.column.getChildren().size();
+		return i;
+	}
+	
 	public void setNewTask(PROJECT_TASK task) {
 		this.column.getChildren().add(new TaskComponent(task, frame ));
 		this.setContent(column);

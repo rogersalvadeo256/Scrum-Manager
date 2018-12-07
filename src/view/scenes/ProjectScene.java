@@ -42,6 +42,7 @@ import view.popoups.NewProjectPOPOUP;
 import widgets.alertMessage.CustomAlert;
 import widgets.designComponents.projectContents.ScrumFrame;
 import widgets.designComponents.projectContents.TaskComponent;
+import widgets.toaster.Toast;
 
 public class ProjectScene extends Scene {
 
@@ -49,14 +50,19 @@ public class ProjectScene extends Scene {
 
 	private VBox content;
 	private Label lblProjDate;
+	private String txt = "Sprint atual: ";
 	private java.util.Date projDateStart;
 	private HBox layout;
+	private Button btnBack;
+	private Button btnEndSprint;
 
 	private HBox vFrame;
 	private ScrumFrame frame;
 
 	private VBox vMemberActions;
-	private Button btnLeaveProject, btnBac, lblSprint;
+	private Button btnLeaveProject;
+
+	private Label lblSprint = new Label(txt);
 
 	private HBox hHeader;
 	private Label lblProjectName;
@@ -65,7 +71,6 @@ public class ProjectScene extends Scene {
 	private VBox projectInformations;
 
 	private AnchorPane anchor;
-
 
 	PROJECT pj;
 
@@ -84,11 +89,10 @@ public class ProjectScene extends Scene {
 
 		task.setTask("Defina um sprint.");
 		task.setTaskTitle(" Defina um título ao sprint. ");
-		vMemberActions.getChildren().addAll(new TaskComponent(task, frame), btnLeaveProject,
-				btnBack);
-		
+		vMemberActions.getChildren().addAll(new TaskComponent(task, frame), btnLeaveProject, btnEndSprint, btnBack);
+
 		vMemberActions.setOnMouseClicked(e -> {
-			new DefinedSprintPOPOUP().show();
+			new DefinedSprintPOPOUP(SESSION.getProfileLogged(), pj);
 		});
 	}
 
@@ -140,7 +144,19 @@ public class ProjectScene extends Scene {
 		AnchorPane.setBottomAnchor(vFrame, 0d);
 		anchor.getChildren().add(vFrame);
 
-
+		this.btnEndSprint = new Button("Finalizar Sprint");
+		this.btnEndSprint.setOnAction(e->{
+			if (frame.checkTasksTODO()==1 && frame.checkTasksDoing()==1) {
+				lblSprint.setText(txt);
+			}else if(frame.checkTasksDone()==1){
+				new Toast(this.getWindow(), "É necessário ter pelo menos uma tarefa nesse sprint.");
+			}else
+			{
+				new Toast(this.getWindow(), "É necessário terminar todas as tarefas.");
+			}
+		});
+		
+		
 		this.vMemberActions = new VBox();
 		this.btnBack = new Button("Voltar");
 		this.btnBack.setOnAction(e -> {
@@ -153,7 +169,7 @@ public class ProjectScene extends Scene {
 			}
 
 		});
-		this.btnTeam.setOnAction(e->{
+		this.btnTeam.setOnAction(e -> {
 			try {
 				new TeamPOPUP(pj);
 			} catch (IOException e2) {
@@ -161,7 +177,7 @@ public class ProjectScene extends Scene {
 				e2.printStackTrace();
 			}
 		});
-		
+
 		this.btnLeaveProject = new Button("Abandonar projeto");
 		this.btnLeaveProject.setOnAction(e1 -> {
 
@@ -174,7 +190,8 @@ public class ProjectScene extends Scene {
 
 			if (lista_membros.size() > 1) {
 				Optional<ButtonType> result = new CustomAlert(AlertType.INFORMATION, "Você será removido",
-						"Você será removido do projeto, porém o projeto continuará intacto para os outros membros", null).showAndWait();
+						"Você será removido do projeto, porém o projeto continuará intacto para os outros membros",
+						null).showAndWait();
 
 				if (result.get() == ButtonType.OK) {
 
@@ -197,37 +214,34 @@ public class ProjectScene extends Scene {
 						"O projeto só possui um membro se você sair, o projeto será exluído.", null).showAndWait();
 				if (result.get() == ButtonType.OK) {
 
-					
 					pj.setProjStatus(ENUMS.PROJECT_WORKING.DELETADO.getValue());
-					DB_OPERATION.MERGE(pj);	
+					DB_OPERATION.MERGE(pj);
 				}
 			}
 		});
-		lblProjDate = new Label("");
-		
+
 		Format formatter = new SimpleDateFormat("dd-MM-yyyy");
 		Date now = PROJECT_SESSION.getProject().getProjDateStart();
 		String date = formatter.format(now);
+		lblProjDate = new Label(date);
 
 		new CheckNewTasks(pj, getTask(), frame);
 
-		lblProjDate.setText(date);
+		EntityManager em = Database.createEntityManager();
+		Query q = em.createQuery("from PROJECT_SPRINT where PROJ_SPRINT_COD=:codigo");
+		q.setParameter("codigo", pj.getProjectCod());
+		
+		if (!q.getResultList().isEmpty()) {
+			PROJECT_SPRINT ps = (PROJECT_SPRINT) q.getResultList().get(0);
+			System.out.println(ps.getSprint());
+			lblSprint.setText("Sprint atual: "+ps.getSprintTitle());
+			
+		}
 		
 		
-//		Label lblSprint = new Label();
-//		EntityManager em = Database.createEntityManager();
-//		Query q = em.createQuery("from PROJECT_SPRINT where COD_SPRINT =:codigo");
-//		q.setParameter("codigo", pj.getProjectCod());
-//		PROJECT_SPRINT ps = (PROJECT_SPRINT)q.getResultList().get(0);
-//		this.lblTitle = new Label(ps.getSprintTitle());
-//		
-//		this.lblSprint = (ps.getSprintTitle());
-//		
-//		
-//		
 		this.projectInformations = new VBox();
 		projectInformations.setId("vbProject-info");
-		projectInformations.getChildren().addAll(lblProjDate);
+		projectInformations.getChildren().addAll(lblProjDate, lblSprint);
 
 		vMemberActions.setAlignment(Pos.TOP_CENTER);
 		vMemberActions.setSpacing(20);
@@ -252,6 +266,12 @@ public class ProjectScene extends Scene {
 
 	}
 
+	private Label setLblSprint(String text) {
+		this.lblSprint.setText(txt+text);
+		return lblProjDate;
+		
+	}
+	
 	private PROJECT_TASK getTask() {
 
 		return task();
