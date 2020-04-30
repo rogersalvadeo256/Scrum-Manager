@@ -1,8 +1,3 @@
-# SCRUM MANAGER
+# SCRUM MANAGER WILL BE BACK *BABY*
 
-First JavaFX and Hibernate Project
-
-  Small project for management of your personal or team project, is not integrated with git
-
-
-
+If you want to use Scrum Manager in it's current state, use MySQL version 5.7 and update the configs file!
