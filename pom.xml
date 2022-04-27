@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
  
-  <groupId>com</groupId>
-  <artifactId>Scrum Manager</artifactId>
+  <groupId>application.main</groupId>
+  <artifactId>main</artifactId>
   <version>1</version>
 </project>
