@@ -21,6 +21,8 @@ server:
   port: 8080
 
 app:
+  cors:
+    allowed-origins: ${APP_CORS_ALLOWED_ORIGINS:http://localhost:5173,http://127.0.0.1:5173}
   jwt:
     # REQUIRED: set a Base64-encoded 256-bit secret via environment variable
     secret: ${JWT_SECRET:bXlWZXJ5U2VjcmV0S2V5Rm9yU2NydW1NYW5hZ2VyQXBwMjAyNA==}
