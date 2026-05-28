@@ -22,6 +22,12 @@ CREATE TABLE IF NOT EXISTS users (
     security_answer_hash  VARCHAR(255) NOT NULL,
     registration_date     DATE         NOT NULL,
     account_status        VARCHAR(20)  NOT NULL DEFAULT 'ACTIVE',
+    token_version         INT          NOT NULL DEFAULT 0,
+    failed_login_attempts INT          NOT NULL DEFAULT 0,
+    account_locked_until  TIMESTAMP,
+    last_password_change_at TIMESTAMP,
+    password_expires_at   TIMESTAMP,
+    last_login_at         TIMESTAMP,
     profile_id            BIGINT       NOT NULL REFERENCES user_profile(prof_cod) ON DELETE CASCADE
 );
 

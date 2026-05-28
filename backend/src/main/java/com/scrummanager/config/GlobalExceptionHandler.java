@@ -4,6 +4,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.CredentialsExpiredException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -46,7 +48,7 @@ public class GlobalExceptionHandler {
         return pd;
     }
 
-    @ExceptionHandler({BadCredentialsException.class, LockedException.class})
+    @ExceptionHandler({BadCredentialsException.class, LockedException.class, CredentialsExpiredException.class, DisabledException.class})
     public ProblemDetail handleAuth(RuntimeException ex) {
         ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.UNAUTHORIZED);
         pd.setTitle("Authentication failed");

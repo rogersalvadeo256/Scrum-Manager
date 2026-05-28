@@ -4,6 +4,16 @@ spring:
     username: ${DB_USERNAME:postgres}
     password: ${DB_PASSWORD:postgres}
     driver-class-name: org.postgresql.Driver
+  cache:
+    type: redis
+    redis:
+      time-to-live: ${CACHE_TTL_MS:1800000}
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:}
+      timeout: 2000ms
 
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -16,6 +26,15 @@ spring:
   # flyway:
   #   enabled: true
   #   locations: classpath:db/migration
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USERNAME:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+    listener:
+      simple:
+        default-requeue-rejected: false
+        missing-queues-fatal: false
 
 server:
   port: 8080
@@ -27,6 +46,26 @@ app:
     # REQUIRED: set a Base64-encoded 256-bit secret via environment variable
     secret: ${JWT_SECRET:bXlWZXJ5U2VjcmV0S2V5Rm9yU2NydW1NYW5hZ2VyQXBwMjAyNA==}
     expiration-ms: 86400000     # 24 h
+  messaging:
+    exchange: ${APP_EVENTS_EXCHANGE:scrum-manager.events}
+    auth-queue: ${APP_AUTH_QUEUE:scrum-manager.auth.events}
+    project-queue: ${APP_PROJECT_QUEUE:scrum-manager.project.events}
+    security-queue: ${APP_SECURITY_QUEUE:scrum-manager.security.events}
+  security:
+    password:
+      min-length: ${APP_PASSWORD_MIN_LENGTH:12}
+      max-age-days: ${APP_PASSWORD_MAX_AGE_DAYS:90}
+      reminder-window-days: ${APP_PASSWORD_REMINDER_WINDOW_DAYS:7}
+    lockout:
+      max-attempts: ${APP_LOCKOUT_MAX_ATTEMPTS:5}
+      duration-minutes: ${APP_LOCKOUT_DURATION_MINUTES:15}
+    background:
+      invite-reminder-after-days: ${APP_INVITE_REMINDER_AFTER_DAYS:3}
+  background:
+    token-cleanup-ms: ${APP_TOKEN_CLEANUP_MS:300000}
+    unlock-cron: ${APP_UNLOCK_CRON:0 */5 * * * *}
+    password-reminder-cron: ${APP_PASSWORD_REMINDER_CRON:0 0 8 * * *}
+    invite-reminder-cron: ${APP_INVITE_REMINDER_CRON:0 0 9 * * *}
 
 logging:
   level:

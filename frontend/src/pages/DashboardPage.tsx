@@ -12,6 +12,7 @@ import {
 import type { ReactNode } from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout as logoutRequest } from '../api/auth';
 import { answerFriendRequest, getFriends, getPendingFriendRequests, sendFriendRequest } from '../api/friendships';
 import {
   answerProjectInvite,
@@ -181,6 +182,10 @@ export function DashboardPage() {
     },
   });
 
+  const logoutMutation = useMutation({
+    mutationFn: logoutRequest,
+  });
+
   const ownedProjects = ownedProjectsQuery.data ?? [];
   const memberProjects = memberProjectsQuery.data ?? [];
   const allProjects = uniqueProjects([...ownedProjects, ...memberProjects]);
@@ -203,10 +208,16 @@ export function DashboardPage() {
     friendsQuery.isLoading ||
     friendRequestsQuery.isLoading;
 
-  function handleLogout() {
-    logout();
-    queryClient.clear();
-    navigate('/login');
+  async function handleLogout() {
+    try {
+      await logoutMutation.mutateAsync();
+    } catch {
+      // always clear the local session even if the backend token is already invalid
+    } finally {
+      logout();
+      queryClient.clear();
+      navigate('/login');
+    }
   }
 
   async function handleProjectSubmit(values: { description: string; name: string; type: string }) {
