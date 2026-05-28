@@ -55,7 +55,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .csrf(AbstractHttpConfigurer::disable)
+            .csrf(AbstractHttpConfigurer::disable)   // Safe: stateless JWT API; tokens are in Authorization headers, not cookies
             .sessionManagement(session ->
                     session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
