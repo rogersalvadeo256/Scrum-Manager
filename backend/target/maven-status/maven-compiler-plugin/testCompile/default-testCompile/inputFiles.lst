@@ -1,1 +1,3 @@
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/ScrumManagerApplicationTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/security/PasswordPolicyValidatorTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/service/AuthServiceTests.java

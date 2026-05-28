@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.scrummanager.ScrumManagerApplicationTests" time="6.664" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.scrummanager.service.AuthServiceTests" time="1.668" tests="3" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="17"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
@@ -8,7 +8,6 @@
     <property name="sun.arch.data.model" value="64"/>
     <property name="java.vendor.url" value="https://adoptium.net/"/>
     <property name="user.timezone" value="Etc/UTC"/>
-    <property name="org.jboss.logging.provider" value="slf4j"/>
     <property name="os.name" value="Linux"/>
     <property name="java.vm.specification.version" value="17"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
@@ -28,8 +27,6 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
-    <property name="java.awt.headless" value="true"/>
     <property name="surefire.real.class.path" value="/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/target/surefire/surefirebooter-20260528143211073_3.jar"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="17.0.19+10"/>
@@ -43,13 +40,10 @@
     <property name="localRepository" value="/home/runner/.m2/repository"/>
     <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
     <property name="java.io.tmpdir" value="/tmp"/>
-    <property name="com.zaxxer.hikari.pool_number" value="1"/>
     <property name="java.version" value="17.0.19"/>
     <property name="user.dir" value="/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="PID" value="4818"/>
-    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
     <property name="native.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib64:/lib64:/lib:/usr/lib"/>
     <property name="java.vm.info" value="mixed mode, sharing"/>
@@ -59,52 +53,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="61.0"/>
   </properties>
-  <testcase name="contextLoads" classname="com.scrummanager.ScrumManagerApplicationTests" time="0.014">
-    <system-out><![CDATA[14:32:13.570 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [com.scrummanager.ScrumManagerApplicationTests]: ScrumManagerApplicationTests does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-14:32:13.697 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration com.scrummanager.ScrumManagerApplication for test class com.scrummanager.ScrumManagerApplicationTests
-
-  .   ____          _            __ _ _
- /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
-( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
- \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
-  '  |____| .__|_| |_|_| |_\__, | / / / /
- =========|_|==============|___/=/_/_/_/
-
- :: Spring Boot ::                (v3.3.5)
-
-2026-05-28T14:32:14.329Z  INFO 4818 --- [           main] c.s.ScrumManagerApplicationTests         : Starting ScrumManagerApplicationTests using Java 17.0.19 with PID 4818 (started by runner in /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend)
-2026-05-28T14:32:14.333Z  INFO 4818 --- [           main] c.s.ScrumManagerApplicationTests         : The following 1 profile is active: "test"
-2026-05-28T14:32:15.516Z  INFO 4818 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
-2026-05-28T14:32:15.518Z  INFO 4818 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2026-05-28T14:32:15.698Z  INFO 4818 --- [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 171 ms. Found 6 JPA repository interfaces.
-2026-05-28T14:32:16.224Z  INFO 4818 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
-2026-05-28T14:32:16.379Z  INFO 4818 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:testdb user=SA
-2026-05-28T14:32:16.380Z  INFO 4818 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
-2026-05-28T14:32:16.488Z  INFO 4818 --- [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
-2026-05-28T14:32:16.530Z  INFO 4818 --- [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
-2026-05-28T14:32:16.558Z  INFO 4818 --- [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
-2026-05-28T14:32:16.650Z  INFO 4818 --- [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
-2026-05-28T14:32:16.686Z  WARN 4818 --- [           main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-2026-05-28T14:32:17.385Z  INFO 4818 --- [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-Hibernate: drop table if exists friendship cascade 
-Hibernate: drop table if exists project cascade 
-Hibernate: drop table if exists project_member cascade 
-Hibernate: drop table if exists project_sprint cascade 
-Hibernate: drop table if exists project_task cascade 
-Hibernate: drop table if exists user_profile cascade 
-Hibernate: drop table if exists users cascade 
-Hibernate: create table friendship (frq_sent_date date not null, frq_id bigint generated by default as identity, frq_receiver_id bigint not null, frq_requested_by_id bigint not null, frq_status enum ('ACCEPTED','ON_HOLD','REFUSED','REMOVED') not null, primary key (frq_id))
-Hibernate: create table project (proj_date_start date not null, proj_cod bigint generated by default as identity, proj_creator_id bigint not null, proj_description varchar(255), proj_name varchar(255) not null, proj_type varchar(255), proj_status enum ('DELETED','FINISHED','IN_PROGRESS') not null, primary key (proj_cod))
-Hibernate: create table project_member (mbr_invite_answered_date date, mbr_invite_sent_date date, mbr_scrum_master boolean not null, mbr_cod bigint generated by default as identity, mbr_invited_by_id bigint not null, mbr_project_id bigint not null, mbr_user_id bigint not null, mbr_function varchar(255), mbr_permissions varchar(255), mbr_invite_status enum ('ACCEPTED','ON_HOLD','REFUSED','REMOVED') not null, mbr_status enum ('ACCEPTED','ON_HOLD','REFUSED','REMOVED'), primary key (mbr_cod))
-Hibernate: create table project_sprint (sprint_points integer, proj_sprint_cod bigint not null, sprint_cod bigint generated by default as identity, sprint_text TEXT, sprint_title varchar(255) not null, sprint_status enum ('DOING','DONE') not null, primary key (sprint_cod))
-Hibernate: create table project_task (task_date_start date, task_points integer, proj_cod bigint not null, task_cod bigint generated by default as identity, task_creator_id bigint not null, task_executor_id bigint, task_text TEXT, task_title varchar(255) not null, task_status enum ('DOING','DONE','TO_DO') not null, primary key (task_cod))
-Hibernate: create table user_profile (prof_cod bigint generated by default as identity, prof_name varchar(255) not null, prof_availability enum ('AVAILABLE','BUSY') not null, prof_photo BYTEA, primary key (prof_cod))
-Hibernate: create table users (failed_login_attempts integer not null, registration_date date not null, token_version integer not null, account_locked_until timestamp(6), last_login_at timestamp(6), last_password_change_at timestamp(6), password_expires_at timestamp(6), profile_id bigint not null unique, user_cod bigint generated by default as identity, email varchar(255) not null unique, password_hash varchar(255) not null, security_answer_hash varchar(255) not null, security_question varchar(255) not null, username varchar(255) not null unique, account_status enum ('ACTIVE','INACTIVE') not null, primary key (user_cod))
-Hibernate: alter table if exists users add constraint FKo47sw84ajr24vfq4ccoha1256 foreign key (profile_id) references user_profile
-2026-05-28T14:32:17.438Z  INFO 4818 --- [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
-2026-05-28T14:32:17.747Z  INFO 4818 --- [           main] o.s.d.j.r.query.QueryEnhancerFactory     : Hibernate is in classpath; If applicable, HQL parser will be used.
-2026-05-28T14:32:18.098Z  WARN 4818 --- [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
-2026-05-28T14:32:20.083Z  INFO 4818 --- [           main] c.s.ScrumManagerApplicationTests         : Started ScrumManagerApplicationTests in 6.259 seconds (process running for 8.904)
-]]></system-out>
-  </testcase>
+  <testcase name="activateAccountRotatesTokenVersionAndResetsLockout" classname="com.scrummanager.service.AuthServiceTests" time="1.586"/>
+  <testcase name="loginResetsFailureCountersOnSuccess" classname="com.scrummanager.service.AuthServiceTests" time="0.021"/>
+  <testcase name="loginLocksAccountAfterRepeatedFailures" classname="com.scrummanager.service.AuthServiceTests" time="0.019"/>
 </testsuite>

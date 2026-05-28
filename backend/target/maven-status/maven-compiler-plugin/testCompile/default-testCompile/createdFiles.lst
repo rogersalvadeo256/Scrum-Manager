@@ -1,1 +1,3 @@
+com/scrummanager/service/AuthServiceTests.class
 com/scrummanager/ScrumManagerApplicationTests.class
+com/scrummanager/security/PasswordPolicyValidatorTests.class

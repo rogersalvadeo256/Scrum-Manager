@@ -1,3 +1,4 @@
+com/scrummanager/security/JwtTokenProvider$TokenMetadata.class
 com/scrummanager/domain/entity/ProjectSprint.class
 com/scrummanager/domain/enums/RequestStatus.class
 com/scrummanager/domain/entity/ProjectMember.class
@@ -5,6 +6,7 @@ com/scrummanager/config/GlobalExceptionHandler.class
 com/scrummanager/repository/ProjectRepository.class
 com/scrummanager/repository/UserRepository.class
 com/scrummanager/service/TaskService.class
+com/scrummanager/service/DomainEventPublisher$DomainEvent.class
 com/scrummanager/config/SecurityConfig.class
 com/scrummanager/dto/request/ProjectRequest.class
 com/scrummanager/domain/entity/ProjectMember$ProjectMemberBuilder.class
@@ -21,12 +23,18 @@ com/scrummanager/service/ProjectService.class
 com/scrummanager/domain/entity/UserProfile$UserProfileBuilder.class
 com/scrummanager/domain/enums/ProjectStatus.class
 com/scrummanager/service/AuthService.class
+com/scrummanager/security/AuthenticatedUserPrincipal.class
+com/scrummanager/service/TokenStateService.class
 com/scrummanager/dto/request/TaskRequest.class
 com/scrummanager/dto/request/LoginRequest.class
 com/scrummanager/domain/enums/Availability.class
+com/scrummanager/service/BackgroundMaintenanceService.class
+com/scrummanager/service/CacheInvalidationService.class
 com/scrummanager/domain/entity/Friendship.class
 com/scrummanager/domain/entity/User.class
 com/scrummanager/dto/response/TaskResponse.class
+com/scrummanager/config/AppSecurityProperties$Lockout.class
+com/scrummanager/security/PasswordPolicyValidator.class
 com/scrummanager/dto/response/SprintResponse.class
 com/scrummanager/ScrumManagerApplication.class
 com/scrummanager/repository/FriendshipRepository.class
@@ -34,7 +42,9 @@ com/scrummanager/domain/entity/Project$ProjectBuilder.class
 com/scrummanager/domain/entity/ProjectSprint$ProjectSprintBuilder.class
 com/scrummanager/domain/entity/Friendship$FriendshipBuilder.class
 com/scrummanager/dto/response/UserResponse.class
+com/scrummanager/config/AppSecurityProperties$Password.class
 com/scrummanager/domain/entity/ProjectTask$ProjectTaskBuilder.class
+com/scrummanager/config/AppSecurityProperties$Background.class
 com/scrummanager/security/UserDetailsServiceImpl.class
 com/scrummanager/security/JwtTokenProvider.class
 com/scrummanager/repository/ProjectSprintRepository.class
@@ -42,9 +52,12 @@ com/scrummanager/controller/ProjectController.class
 com/scrummanager/repository/ProjectMemberRepository.class
 com/scrummanager/domain/entity/ProjectTask.class
 com/scrummanager/service/FriendshipService.class
+com/scrummanager/config/AppSecurityProperties.class
+com/scrummanager/config/CacheConfig.class
 com/scrummanager/dto/request/SprintRequest.class
 com/scrummanager/controller/AuthController.class
 com/scrummanager/controller/TaskController.class
+com/scrummanager/config/MessagingConfig.class
 com/scrummanager/domain/enums/SprintStatus.class
 com/scrummanager/controller/UserController.class
 com/scrummanager/domain/entity/Project.class
@@ -52,3 +65,4 @@ com/scrummanager/dto/request/ActivateAccountRequest.class
 com/scrummanager/controller/FriendshipController.class
 com/scrummanager/domain/enums/AccountStatus.class
 com/scrummanager/domain/entity/User$UserBuilder.class
+com/scrummanager/service/DomainEventPublisher.class
