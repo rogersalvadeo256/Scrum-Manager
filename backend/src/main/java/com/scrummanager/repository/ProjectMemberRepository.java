@@ -15,6 +15,7 @@ public interface ProjectMemberRepository extends JpaRepository<ProjectMember, Lo
     List<ProjectMember> findByProjectIdAndInviteStatus(Long projectId, RequestStatus status);
     Optional<ProjectMember> findByProjectIdAndUserId(Long projectId, Long userId);
     boolean existsByProjectIdAndUserId(Long projectId, Long userId);
+    boolean existsByProjectIdAndUserIdAndInviteStatus(Long projectId, Long userId, RequestStatus status);
 
     @Query("""
             select pm from ProjectMember pm

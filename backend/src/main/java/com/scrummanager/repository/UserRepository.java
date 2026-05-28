@@ -16,6 +16,13 @@ public interface UserRepository extends JpaRepository<User, Long> {
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
 
+    @Query("""
+            select u from User u
+            where lower(u.profile.name) like lower(concat('%', :name, '%'))
+               or lower(u.username) like lower(concat('%', :name, '%'))
+            """)
+    List<User> searchByNameOrUsername(@Param("name") String name);
+
     @Query("select u from User u where u.accountLockedUntil is not null and u.accountLockedUntil <= :now")
     List<User> findUsersReadyToUnlock(@Param("now") LocalDateTime now);
 

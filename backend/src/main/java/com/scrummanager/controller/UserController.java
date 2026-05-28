@@ -1,11 +1,11 @@
 package com.scrummanager.controller;
 
 import com.scrummanager.dto.response.UserResponse;
+import com.scrummanager.security.AuthenticatedUserPrincipal;
 import com.scrummanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public class UserController {
     @PatchMapping("/{id}/photo")
     public ResponseEntity<UserResponse> updatePhoto(@PathVariable Long id,
                                                     @RequestBody byte[] photo,
-                                                    @AuthenticationPrincipal UserDetails principal) {
-        return ResponseEntity.ok(userService.updateProfilePhoto(id, photo, principal.getUsername()));
+                                                    @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        return ResponseEntity.ok(userService.updateProfilePhoto(id, photo, principal.getId()));
     }
 }
