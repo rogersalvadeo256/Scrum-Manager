@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/scrum_manager
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate          # use Flyway / Liquibase in production; 'create' for first run
+    show-sql: false
+    open-in-view: false
+
+  # Optional – enable Flyway when you add migrations
+  # flyway:
+  #   enabled: true
+  #   locations: classpath:db/migration
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    # REQUIRED: set a Base64-encoded 256-bit secret via environment variable
+    secret: ${JWT_SECRET:bXlWZXJ5U2VjcmV0S2V5Rm9yU2NydW1NYW5hZ2VyQXBwMjAyNA==}
+    expiration-ms: 86400000     # 24 h
+
+logging:
+  level:
+    com.scrummanager: INFO
+    org.springframework.security: WARN
