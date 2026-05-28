@@ -4,14 +4,13 @@ import com.scrummanager.dto.request.SprintRequest;
 import com.scrummanager.dto.request.TaskRequest;
 import com.scrummanager.dto.response.SprintResponse;
 import com.scrummanager.dto.response.TaskResponse;
-import com.scrummanager.repository.UserRepository;
+import com.scrummanager.security.AuthenticatedUserPrincipal;
 import com.scrummanager.service.TaskService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,20 +21,15 @@ import java.util.List;
 public class TaskController {
 
     private final TaskService taskService;
-    private final UserRepository userRepository;
-
-    private Long resolveUserId(UserDetails principal) {
-        return userRepository.findByUsername(principal.getUsername()).orElseThrow().getId();
-    }
 
     // ── Tasks ──────────────────────────────────────────────────────────────
 
     @PostMapping("/tasks")
     public ResponseEntity<TaskResponse> createTask(@PathVariable Long projectId,
                                                    @Valid @RequestBody TaskRequest req,
-                                                   @AuthenticationPrincipal UserDetails principal) {
+                                                   @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(taskService.createTask(projectId, req, resolveUserId(principal)));
+                .body(taskService.createTask(projectId, req, principal.getId()));
     }
 
     @GetMapping("/tasks")
@@ -47,15 +41,15 @@ public class TaskController {
     public ResponseEntity<TaskResponse> updateTask(@PathVariable Long projectId,
                                                    @PathVariable Long taskId,
                                                    @Valid @RequestBody TaskRequest req,
-                                                   @AuthenticationPrincipal UserDetails principal) {
-        return ResponseEntity.ok(taskService.updateTask(taskId, req, resolveUserId(principal)));
+                                                   @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        return ResponseEntity.ok(taskService.updateTask(projectId, taskId, req, principal.getId()));
     }
 
     @DeleteMapping("/tasks/{taskId}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long projectId,
                                            @PathVariable Long taskId,
-                                           @AuthenticationPrincipal UserDetails principal) {
-        taskService.deleteTask(taskId, resolveUserId(principal));
+                                           @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        taskService.deleteTask(projectId, taskId, principal.getId());
         return ResponseEntity.noContent().build();
     }
 
@@ -63,9 +57,10 @@ public class TaskController {
 
     @PostMapping("/sprints")
     public ResponseEntity<SprintResponse> createSprint(@PathVariable Long projectId,
-                                                       @Valid @RequestBody SprintRequest req) {
+                                                       @Valid @RequestBody SprintRequest req,
+                                                       @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body(taskService.createSprint(projectId, req));
+                .body(taskService.createSprint(projectId, req, principal.getId()));
     }
 
     @GetMapping("/sprints")
@@ -76,14 +71,16 @@ public class TaskController {
     @PutMapping("/sprints/{sprintId}")
     public ResponseEntity<SprintResponse> updateSprint(@PathVariable Long projectId,
                                                        @PathVariable Long sprintId,
-                                                       @Valid @RequestBody SprintRequest req) {
-        return ResponseEntity.ok(taskService.updateSprint(sprintId, req));
+                                                       @Valid @RequestBody SprintRequest req,
+                                                       @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        return ResponseEntity.ok(taskService.updateSprint(projectId, sprintId, req, principal.getId()));
     }
 
     @DeleteMapping("/sprints/{sprintId}")
     public ResponseEntity<Void> deleteSprint(@PathVariable Long projectId,
-                                             @PathVariable Long sprintId) {
-        taskService.deleteSprint(sprintId);
+                                             @PathVariable Long sprintId,
+                                             @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        taskService.deleteSprint(projectId, sprintId, principal.getId());
         return ResponseEntity.noContent().build();
     }
 }

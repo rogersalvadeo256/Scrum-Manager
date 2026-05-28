@@ -28,17 +28,14 @@ public class UserService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "user-search", key = "#name.toLowerCase()")
     public List<UserResponse> searchByName(String name) {
-        return userRepository.findAll().stream()
-                .filter(u -> u.getProfile().getName().toLowerCase().contains(name.toLowerCase())
-                        || u.getUsername().toLowerCase().contains(name.toLowerCase()))
-                .map(UserService::toResponse)
-                .toList();
+        return userRepository.searchByNameOrUsername(name)
+                .stream().map(UserService::toResponse).toList();
     }
 
     @Transactional
-    public UserResponse updateProfilePhoto(Long id, byte[] photo, String username) {
+    public UserResponse updateProfilePhoto(Long id, byte[] photo, Long requesterId) {
         User user = findOrThrow(id);
-        if (!user.getUsername().equals(username)) {
+        if (!user.getId().equals(requesterId)) {
             throw new AccessDeniedException("You can only update your own profile photo");
         }
         user.getProfile().setPhoto(photo);
