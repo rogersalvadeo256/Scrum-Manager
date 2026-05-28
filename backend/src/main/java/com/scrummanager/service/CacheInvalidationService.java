@@ -1,6 +1,6 @@
 package com.scrummanager.service;
 
-import com.scrummanager.domain.entity.User;
+import com.scrummanager.domain.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;

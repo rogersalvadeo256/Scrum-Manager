@@ -1,6 +1,6 @@
 package com.scrummanager.repository;
 
-import com.scrummanager.domain.entity.Friendship;
+import com.scrummanager.domain.model.Friendship;
 import com.scrummanager.domain.enums.RequestStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

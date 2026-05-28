@@ -1,6 +1,6 @@
 package com.scrummanager.repository;
 
-import com.scrummanager.domain.entity.Project;
+import com.scrummanager.domain.model.Project;
 import com.scrummanager.domain.enums.ProjectStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 

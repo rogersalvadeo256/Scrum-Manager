@@ -1,6 +1,6 @@
 package com.scrummanager.repository;
 
-import com.scrummanager.domain.entity.ProjectSprint;
+import com.scrummanager.domain.model.ProjectSprint;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

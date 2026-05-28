@@ -1,7 +1,7 @@
-com/scrummanager/service/ProjectServiceTests.class
-com/scrummanager/service/TaskServiceTests.class
-com/scrummanager/service/UserServiceTests.class
-com/scrummanager/service/AuthServiceTests.class
+com/scrummanager/business/AuthBusinessTests.class
+com/scrummanager/business/FriendshipBusinessTests.class
+com/scrummanager/business/ProjectBusinessTests.class
+com/scrummanager/business/UserBusinessTests.class
 com/scrummanager/ScrumManagerApplicationTests.class
+com/scrummanager/business/TaskBusinessTests.class
 com/scrummanager/security/PasswordPolicyValidatorTests.class
-com/scrummanager/service/FriendshipServiceTests.class
