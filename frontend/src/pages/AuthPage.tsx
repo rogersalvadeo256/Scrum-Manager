@@ -13,7 +13,7 @@ import { LoginForm } from '../components/auth/LoginForm';
 import { RegisterForm } from '../components/auth/RegisterForm';
 import { Card } from '../components/ui/Card';
 import { getErrorMessage } from '../lib/errors';
-import { useAuth } from '../features/auth/AuthContext';
+import { useAuth } from '../features/auth/useAuth';
 
 type TabId = 'activate' | 'login' | 'register';
 

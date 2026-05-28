@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Task, TaskPayload, TaskStatus, User } from '../../types/api';
 import { Button } from '../ui/Button';
 import { Field } from '../ui/Field';
@@ -36,23 +36,18 @@ export function TaskFormModal({
   onClose,
   onSubmit,
 }: Props) {
-  const [form, setForm] = useState<TaskPayload>(emptyState);
+  const [form, setForm] = useState<TaskPayload>(() =>
+    initialValue
+      ? {
+          executorId: initialValue.executorId,
+          points: initialValue.points,
+          status: initialValue.status,
+          text: initialValue.text ?? '',
+          title: initialValue.title,
+        }
+      : emptyState,
+  );
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!initialValue) {
-      setForm(emptyState);
-      return;
-    }
-
-    setForm({
-      executorId: initialValue.executorId,
-      points: initialValue.points,
-      status: initialValue.status,
-      text: initialValue.text ?? '',
-      title: initialValue.title,
-    });
-  }, [initialValue]);
 
   async function handleSubmit() {
     if (form.title.trim().length < 3) {

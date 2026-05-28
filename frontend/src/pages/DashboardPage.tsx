@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
-  Bell,
   FolderKanban,
   LogOut,
   Plus,
@@ -10,7 +9,8 @@ import {
   UserPlus,
   Users,
 } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { answerFriendRequest, getFriends, getPendingFriendRequests, sendFriendRequest } from '../api/friendships';
 import {
@@ -30,9 +30,9 @@ import { EmptyState } from '../components/ui/EmptyState';
 import { Input } from '../components/ui/Input';
 import { SectionHeading } from '../components/ui/SectionHeading';
 import { StatusBadge } from '../components/ui/StatusBadge';
-import { formatDate } from '../lib/format';
 import { getErrorMessage } from '../lib/errors';
-import { useAuth } from '../features/auth/AuthContext';
+import { formatDate } from '../lib/format';
+import { useAuth } from '../features/auth/useAuth';
 import type { Project, RequestStatus, User } from '../types/api';
 
 type Section = 'friends' | 'overview' | 'profile' | 'projects';
@@ -183,18 +183,17 @@ export function DashboardPage() {
 
   const ownedProjects = ownedProjectsQuery.data ?? [];
   const memberProjects = memberProjectsQuery.data ?? [];
-  const allProjects = useMemo(() => uniqueProjects([...ownedProjects, ...memberProjects]), [memberProjects, ownedProjects]);
+  const allProjects = uniqueProjects([...ownedProjects, ...memberProjects]);
   const currentUser = currentUserQuery.data;
   const friends = friendsQuery.data ?? [];
   const pendingFriendRequests = friendRequestsQuery.data ?? [];
   const pendingProjectInvites = projectInvitesQuery.data ?? [];
 
-  const searchResults = useMemo(() => {
-    const currentId = session?.userId;
-    const friendIds = new Set(friends.map((friend) => friend.id));
-
-    return (searchUsersQuery.data ?? []).filter((user) => user.id !== currentId && !friendIds.has(user.id));
-  }, [friends, searchUsersQuery.data, session?.userId]);
+  const currentId = session?.userId;
+  const friendIds = new Set(friends.map((friend) => friend.id));
+  const searchResults = (searchUsersQuery.data ?? []).filter(
+    (user) => user.id !== currentId && !friendIds.has(user.id),
+  );
 
   const isLoading =
     currentUserQuery.isLoading ||
@@ -708,7 +707,7 @@ export function DashboardPage() {
   );
 }
 
-function UserRow({ action, user }: { action?: React.ReactNode; user: User }) {
+function UserRow({ action, user }: { action?: ReactNode; user: User }) {
   return (
     <div className="surface-muted flex flex-col gap-3 p-4 md:flex-row md:items-center md:justify-between">
       <div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Project, ProjectPayload } from '../../types/api';
 import { Button } from '../ui/Button';
 import { Field } from '../ui/Field';
@@ -19,22 +19,21 @@ const emptyState: ProjectPayload = {
   type: '',
 };
 
+function getInitialState(initialValue?: Project | null): ProjectPayload {
+  if (!initialValue) {
+    return emptyState;
+  }
+
+  return {
+    description: initialValue.description ?? '',
+    name: initialValue.name,
+    type: initialValue.type ?? '',
+  };
+}
+
 export function ProjectFormModal({ initialValue, isSaving = false, onClose, onSubmit }: Props) {
-  const [form, setForm] = useState<ProjectPayload>(emptyState);
+  const [form, setForm] = useState<ProjectPayload>(() => getInitialState(initialValue));
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!initialValue) {
-      setForm(emptyState);
-      return;
-    }
-
-    setForm({
-      description: initialValue.description ?? '',
-      name: initialValue.name,
-      type: initialValue.type ?? '',
-    });
-  }, [initialValue]);
 
   async function handleSubmit() {
     if (form.name.trim().length < 3) {

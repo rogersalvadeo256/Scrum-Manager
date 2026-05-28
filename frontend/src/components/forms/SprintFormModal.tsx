@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { Sprint, SprintPayload, SprintStatus } from '../../types/api';
 import { Button } from '../ui/Button';
 import { Field } from '../ui/Field';
@@ -27,22 +27,17 @@ const statusOptions: { label: string; value: SprintStatus }[] = [
 ];
 
 export function SprintFormModal({ initialValue, isSaving = false, onClose, onSubmit }: Props) {
-  const [form, setForm] = useState<SprintPayload>(emptyState);
+  const [form, setForm] = useState<SprintPayload>(() =>
+    initialValue
+      ? {
+          points: initialValue.points,
+          status: initialValue.status,
+          text: initialValue.text ?? '',
+          title: initialValue.title,
+        }
+      : emptyState,
+  );
   const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (!initialValue) {
-      setForm(emptyState);
-      return;
-    }
-
-    setForm({
-      points: initialValue.points,
-      status: initialValue.status,
-      text: initialValue.text ?? '',
-      title: initialValue.title,
-    });
-  }, [initialValue]);
 
   async function handleSubmit() {
     if (form.title.trim().length < 3) {

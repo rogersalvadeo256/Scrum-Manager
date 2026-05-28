@@ -1,7 +1,6 @@
 package com.scrummanager.controller;
 
 import com.scrummanager.dto.response.UserResponse;
-import com.scrummanager.security.UserDetailsServiceImpl;
 import com.scrummanager.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +31,6 @@ public class UserController {
     public ResponseEntity<UserResponse> updatePhoto(@PathVariable Long id,
                                                     @RequestBody byte[] photo,
                                                     @AuthenticationPrincipal UserDetails principal) {
-        return ResponseEntity.ok(userService.updateProfilePhoto(id, photo));
+        return ResponseEntity.ok(userService.updateProfilePhoto(id, photo, principal.getUsername()));
     }
 }

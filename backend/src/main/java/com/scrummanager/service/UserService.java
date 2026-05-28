@@ -4,6 +4,7 @@ import com.scrummanager.domain.entity.User;
 import com.scrummanager.dto.response.UserResponse;
 import com.scrummanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,8 +32,11 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponse updateProfilePhoto(Long id, byte[] photo) {
+    public UserResponse updateProfilePhoto(Long id, byte[] photo, String username) {
         User user = findOrThrow(id);
+        if (!user.getUsername().equals(username)) {
+            throw new AccessDeniedException("You can only update your own profile photo");
+        }
         user.getProfile().setPhoto(photo);
         userRepository.save(user);
         return toResponse(user);

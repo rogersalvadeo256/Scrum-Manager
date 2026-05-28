@@ -25,8 +25,8 @@ import { SectionHeading } from '../components/ui/SectionHeading';
 import { StatusBadge } from '../components/ui/StatusBadge';
 import { formatDate } from '../lib/format';
 import { getErrorMessage } from '../lib/errors';
-import { useAuth } from '../features/auth/AuthContext';
-import type { Project, Sprint, SprintPayload, Task, TaskPayload, TaskStatus, User } from '../types/api';
+import { useAuth } from '../features/auth/useAuth';
+import type { Sprint, SprintPayload, Task, TaskPayload, TaskStatus, User } from '../types/api';
 
 type TaskModalState = { mode: 'create' | 'edit'; value: Task | null } | null;
 type SprintModalState = { mode: 'create' | 'edit'; value: Sprint | null } | null;
@@ -99,11 +99,10 @@ export function ProjectPage() {
   const project = projects.find((entry) => entry.id === numericProjectId) ?? null;
   const isOwner = project?.creatorId === session?.userId;
   const currentUser = currentUserQuery.data;
-  const friends = friendsQuery.data ?? [];
   const assignableUsers = useMemo(() => {
-    const source = [currentUser, ...friends].filter(Boolean) as User[];
+    const source = [currentUser, ...(friendsQuery.data ?? [])].filter(Boolean) as User[];
     return source.filter((user, index, array) => array.findIndex((item) => item.id === user.id) === index);
-  }, [currentUser, friends]);
+  }, [currentUser, friendsQuery.data]);
 
   const inviteCandidates = useMemo(() => {
     const assignedIds = new Set(assignableUsers.map((user) => user.id));
