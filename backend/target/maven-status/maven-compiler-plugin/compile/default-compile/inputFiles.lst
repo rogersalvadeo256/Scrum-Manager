@@ -1,5 +1,8 @@
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/ScrumManagerApplication.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/AppSecurityProperties.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/CacheConfig.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/GlobalExceptionHandler.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/MessagingConfig.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/SecurityConfig.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/AuthController.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/FriendshipController.java
@@ -37,11 +40,17 @@
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/repository/ProjectSprintRepository.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/repository/ProjectTaskRepository.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/repository/UserRepository.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/security/AuthenticatedUserPrincipal.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/security/JwtAuthenticationFilter.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/security/JwtTokenProvider.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/security/PasswordPolicyValidator.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/security/UserDetailsServiceImpl.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/AuthService.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/BackgroundMaintenanceService.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/CacheInvalidationService.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/DomainEventPublisher.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/FriendshipService.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/ProjectService.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/TaskService.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/TokenStateService.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/service/UserService.java

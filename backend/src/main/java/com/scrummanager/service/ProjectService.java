@@ -9,12 +9,14 @@ import com.scrummanager.dto.response.ProjectResponse;
 import com.scrummanager.repository.ProjectMemberRepository;
 import com.scrummanager.repository.ProjectRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +24,8 @@ public class ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ProjectMemberRepository memberRepository;
+    private final CacheInvalidationService cacheInvalidationService;
+    private final DomainEventPublisher domainEventPublisher;
 
     @Transactional
     public ProjectResponse create(ProjectRequest req, Long userId) {
@@ -33,16 +37,26 @@ public class ProjectService {
                 .dateStart(LocalDate.now())
                 .status(ProjectStatus.IN_PROGRESS)
                 .build();
-        return toResponse(projectRepository.save(project));
+        Project savedProject = projectRepository.save(project);
+        cacheInvalidationService.evictProjectCaches();
+        domainEventPublisher.publish(
+                "project.created",
+                userId,
+                "project",
+                savedProject.getId(),
+                Map.of("name", savedProject.getName()));
+        return toResponse(savedProject);
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "project-mine", key = "#userId")
     public List<ProjectResponse> getMyProjects(Long userId) {
         return projectRepository.findByCreatorIdAndStatusNot(userId, ProjectStatus.DELETED)
                 .stream().map(ProjectService::toResponse).toList();
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "project-member", key = "#userId")
     public List<ProjectResponse> getProjectsAsMember(Long userId) {
         return memberRepository.findByUserIdAndInviteStatus(userId, RequestStatus.ACCEPTED)
                 .stream()
@@ -58,7 +72,15 @@ public class ProjectService {
         project.setName(req.name());
         project.setDescription(req.description());
         project.setType(req.type());
-        return toResponse(projectRepository.save(project));
+        Project savedProject = projectRepository.save(project);
+        cacheInvalidationService.evictProjectCaches();
+        domainEventPublisher.publish(
+                "project.updated",
+                userId,
+                "project",
+                savedProject.getId(),
+                Map.of("name", savedProject.getName()));
+        return toResponse(savedProject);
     }
 
     @Transactional
@@ -66,6 +88,9 @@ public class ProjectService {
         Project project = findAndAuthorize(projectId, userId);
         project.setStatus(ProjectStatus.DELETED);
         projectRepository.save(project);
+        cacheInvalidationService.evictProjectCaches();
+        cacheInvalidationService.evictTaskCaches(projectId);
+        domainEventPublisher.publish("project.deleted", userId, "project", projectId, Map.of("status", project.getStatus().name()));
     }
 
     @Transactional
@@ -83,6 +108,13 @@ public class ProjectService {
                 .scrumMaster(false)
                 .build();
         memberRepository.save(member);
+        cacheInvalidationService.evictProjectCaches();
+        domainEventPublisher.publish(
+                "project.member.invited",
+                invitedById,
+                "project-member",
+                member.getId(),
+                Map.of("projectId", projectId, "targetUserId", targetUserId));
     }
 
     @Transactional
@@ -95,9 +127,17 @@ public class ProjectService {
         member.setInviteStatus(answer);
         member.setInviteAnsweredDate(LocalDate.now());
         memberRepository.save(member);
+        cacheInvalidationService.evictProjectCaches();
+        domainEventPublisher.publish(
+                "project.member.invite-answered",
+                userId,
+                "project-member",
+                memberId,
+                Map.of("answer", answer.name(), "projectId", member.getProjectId()));
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "project-invites", key = "#userId")
     public List<ProjectMember> getPendingInvites(Long userId) {
         return memberRepository.findByUserIdAndInviteStatus(userId, RequestStatus.ON_HOLD);
     }

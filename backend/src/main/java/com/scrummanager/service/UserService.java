@@ -4,6 +4,7 @@ import com.scrummanager.domain.entity.User;
 import com.scrummanager.dto.response.UserResponse;
 import com.scrummanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -16,13 +17,16 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final CacheInvalidationService cacheInvalidationService;
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "user-by-id", key = "#id")
     public UserResponse getById(Long id) {
         return toResponse(findOrThrow(id));
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "user-search", key = "#name.toLowerCase()")
     public List<UserResponse> searchByName(String name) {
         return userRepository.findAll().stream()
                 .filter(u -> u.getProfile().getName().toLowerCase().contains(name.toLowerCase())
@@ -39,6 +43,7 @@ public class UserService {
         }
         user.getProfile().setPhoto(photo);
         userRepository.save(user);
+        cacheInvalidationService.evictUserCaches(user);
         return toResponse(user);
     }
 

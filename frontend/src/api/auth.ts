@@ -20,3 +20,7 @@ export async function register(payload: RegisterPayload) {
 export async function activateAccount(payload: ActivateAccountPayload) {
   await http.post('/api/auth/activate', payload);
 }
+
+export async function logout() {
+  await http.post('/api/auth/logout');
+}

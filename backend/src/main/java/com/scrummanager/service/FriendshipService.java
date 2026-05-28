@@ -8,6 +8,7 @@ import com.scrummanager.dto.response.UserResponse;
 import com.scrummanager.repository.FriendshipRepository;
 import com.scrummanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class FriendshipService {
 
     private final FriendshipRepository friendshipRepository;
     private final UserRepository userRepository;
+    private final CacheInvalidationService cacheInvalidationService;
 
     @Transactional
     public void sendRequest(Long fromId, Long toId) {
@@ -37,6 +39,7 @@ public class FriendshipService {
                 .sentDate(LocalDate.now())
                 .build();
         friendshipRepository.save(friendship);
+        cacheInvalidationService.evictFriendshipCaches();
     }
 
     @Transactional
@@ -49,6 +52,7 @@ public class FriendshipService {
         }
         f.setStatus(answer);
         friendshipRepository.save(f);
+        cacheInvalidationService.evictFriendshipCaches();
     }
 
     @Transactional
@@ -61,15 +65,18 @@ public class FriendshipService {
         }
         f.setStatus(RequestStatus.REMOVED);
         friendshipRepository.save(f);
+        cacheInvalidationService.evictFriendshipCaches();
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "friendships-pending", key = "#userId")
     public List<FriendshipResponse> getPendingRequests(Long userId) {
         return friendshipRepository.findByReceiverIdAndStatus(userId, RequestStatus.ON_HOLD)
                 .stream().map(f -> toResponse(f)).toList();
     }
 
     @Transactional(readOnly = true)
+    @Cacheable(cacheNames = "friendships-list", key = "#userId")
     public List<UserResponse> getFriends(Long userId) {
         List<Friendship> friendships = friendshipRepository.findAcceptedFriendships(userId);
         return friendships.stream()

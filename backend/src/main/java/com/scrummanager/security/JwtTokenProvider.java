@@ -3,18 +3,23 @@ package com.scrummanager.security;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
+import java.time.Instant;
 import java.util.Date;
+import java.util.Objects;
+import java.util.UUID;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class JwtTokenProvider {
+
+    private final com.scrummanager.service.TokenStateService tokenStateService;
 
     @Value("${app.jwt.secret}")
     private String jwtSecret;
@@ -26,10 +31,13 @@ public class JwtTokenProvider {
         return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
     }
 
-    public String generateToken(Authentication authentication) {
-        UserDetails principal = (UserDetails) authentication.getPrincipal();
+    public String generateToken(AuthenticatedUserPrincipal principal) {
+        String tokenId = UUID.randomUUID().toString();
         return Jwts.builder()
                 .subject(principal.getUsername())
+                .id(tokenId)
+                .claim("uid", principal.getId())
+                .claim("ver", principal.getTokenVersion())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationMs))
                 .signWith(key())
@@ -37,21 +45,40 @@ public class JwtTokenProvider {
     }
 
     public String getUsernameFromToken(String token) {
-        return Jwts.parser()
-                .verifyWith(key())
-                .build()
-                .parseSignedClaims(token)
-                .getPayload()
-                .getSubject();
+        return parseClaims(token).getSubject();
     }
 
-    public boolean validateToken(String token) {
+    public TokenMetadata getTokenMetadata(String token) {
+        Claims claims = parseClaims(token);
+        return new TokenMetadata(
+                claims.getSubject(),
+                claims.get("uid", Long.class),
+                claims.get("ver", Integer.class),
+                claims.getId(),
+                claims.getExpiration().toInstant());
+    }
+
+    public boolean validateToken(String token, AuthenticatedUserPrincipal principal) {
         try {
-            Jwts.parser().verifyWith(key()).build().parseSignedClaims(token);
-            return true;
+            TokenMetadata tokenMetadata = getTokenMetadata(token);
+            return Objects.equals(tokenMetadata.username(), principal.getUsername())
+                    && Objects.equals(tokenMetadata.userId(), principal.getId())
+                    && Objects.equals(tokenMetadata.tokenVersion(), principal.getTokenVersion())
+                    && !tokenStateService.isBlacklisted(tokenMetadata.tokenId());
         } catch (JwtException | IllegalArgumentException ex) {
             log.warn("Invalid JWT token: {}", ex.getMessage());
         }
         return false;
+    }
+
+    private Claims parseClaims(String token) {
+        return Jwts.parser()
+                .verifyWith(key())
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
+
+    public record TokenMetadata(String username, Long userId, Integer tokenVersion, String tokenId, Instant expiresAt) {
     }
 }
