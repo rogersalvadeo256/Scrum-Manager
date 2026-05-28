@@ -33,8 +33,9 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public ResponseEntity<List<TaskResponse>> getTasks(@PathVariable Long projectId) {
-        return ResponseEntity.ok(taskService.getTasksByProject(projectId));
+    public ResponseEntity<List<TaskResponse>> getTasks(@PathVariable Long projectId,
+                                                       @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        return ResponseEntity.ok(taskService.getTasksByProject(projectId, principal.getId()));
     }
 
     @PutMapping("/tasks/{taskId}")
@@ -64,8 +65,9 @@ public class TaskController {
     }
 
     @GetMapping("/sprints")
-    public ResponseEntity<List<SprintResponse>> getSprints(@PathVariable Long projectId) {
-        return ResponseEntity.ok(taskService.getSprintsByProject(projectId));
+    public ResponseEntity<List<SprintResponse>> getSprints(@PathVariable Long projectId,
+                                                           @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        return ResponseEntity.ok(taskService.getSprintsByProject(projectId, principal.getId()));
     }
 
     @PutMapping("/sprints/{sprintId}")

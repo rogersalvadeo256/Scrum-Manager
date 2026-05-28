@@ -62,8 +62,9 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "project-tasks", key = "#projectId")
-    public List<TaskResponse> getTasksByProject(Long projectId) {
+    @Cacheable(cacheNames = "project-tasks", key = "#projectId + '_' + #userId")
+    public List<TaskResponse> getTasksByProject(Long projectId, Long userId) {
+        assertProjectAccess(projectId, userId);
         return taskRepository.findByProjectId(projectId)
                 .stream().map(TaskService::toTaskResponse).toList();
     }
@@ -128,8 +129,9 @@ public class TaskService {
     }
 
     @Transactional(readOnly = true)
-    @Cacheable(cacheNames = "project-sprints", key = "#projectId")
-    public List<SprintResponse> getSprintsByProject(Long projectId) {
+    @Cacheable(cacheNames = "project-sprints", key = "#projectId + '_' + #userId")
+    public List<SprintResponse> getSprintsByProject(Long projectId, Long userId) {
+        assertProjectAccess(projectId, userId);
         return sprintRepository.findByProjectId(projectId)
                 .stream().map(TaskService::toSprintResponse).toList();
     }
