@@ -2,6 +2,26 @@
 
 Plataforma full stack para gestão de projetos Scrum com backend Spring Boot, frontend React e foco em segurança, automação e integrações assíncronas.
 
+## Screenshots
+
+### Dashboard geral (Visão geral)
+
+![Dashboard visão geral](docs/screenshots/dashboard-overview.png)
+
+### Dashboard do Scrum Master por projeto
+
+![Dashboard Scrum Master](docs/screenshots/scrum-dashboard.png)
+
+### Board de tarefas (Kanban)
+
+![Board Kanban](docs/screenshots/project-board.png)
+
+### Documentação interativa da API (Scalar)
+
+![Scalar API Docs](docs/screenshots/scalar-docs.png)
+
+> **Nota:** as capturas acima são geradas com a aplicação rodando localmente. Execute o stack completo e acesse `http://localhost:5173` (frontend) e `http://localhost:8080/docs` (Scalar) para visualizá-las.
+
 ## Visão geral
 
 O repositório está dividido em dois aplicativos:
@@ -193,6 +213,24 @@ pnpm run build
 - configure Redis para aproveitar cache distribuído e blacklist persistente de tokens
 - configure RabbitMQ para consumo dos eventos por serviços externos ou workers internos
 - o profile de teste usa cache em memória simples e desativa listeners AMQP
+
+## Documentação da API (Scalar)
+
+A documentação interativa da API é servida automaticamente pelo backend com [Scalar](https://scalar.com), uma alternativa moderna ao Swagger UI.
+
+Acesse após iniciar o backend:
+
+```
+http://localhost:8080/docs
+```
+
+A especificação OpenAPI (JSON) fica disponível em:
+
+```
+http://localhost:8080/v3/api-docs
+```
+
+Scalar exibe todos os endpoints com autenticação JWT, exemplos de request/response e permite testar as chamadas diretamente no navegador.
 
 ## Documentação específica
 

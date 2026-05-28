@@ -2,6 +2,7 @@ package com.scrummanager.controller;
 
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.dto.request.ProjectRequest;
+import com.scrummanager.dto.response.ProjectMetricsResponse;
 import com.scrummanager.dto.response.ProjectResponse;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
 import com.scrummanager.service.ProjectService;
@@ -73,5 +74,11 @@ public class ProjectController {
     @GetMapping("/invites/pending")
     public ResponseEntity<?> pendingInvites(@AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
         return ResponseEntity.ok(projectService.getPendingInvites(principal.getId()));
+    }
+
+    @GetMapping("/{id}/metrics")
+    public ResponseEntity<ProjectMetricsResponse> metrics(@PathVariable Long id,
+                                                          @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
+        return ResponseEntity.ok(projectService.getProjectMetrics(id, principal.getId()));
     }
 }

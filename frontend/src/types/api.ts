@@ -116,3 +116,22 @@ export type SprintPayload = {
   points: number;
   status: SprintStatus;
 };
+
+export type ProjectMetrics = {
+  currentMonth: string;
+  totalTasks: number;
+  todoCount: number;
+  doingCount: number;
+  doneCount: number;
+  tasksThisMonth: number;
+  doneThisMonth: number;
+  totalPoints: number;
+  completedPoints: number;
+  velocityThisMonth: number;
+  totalSprints: number;
+  activeSprints: number;
+  completedSprints: number;
+  sprintCompletionRate: number;
+  taskCompletionRate: number;
+  membersCount: number;
+};

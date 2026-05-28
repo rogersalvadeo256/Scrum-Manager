@@ -1,5 +1,5 @@
 import { http } from './http';
-import type { Project, ProjectInvite, ProjectPayload, RequestStatus } from '../types/api';
+import type { Project, ProjectInvite, ProjectMetrics, ProjectPayload, RequestStatus } from '../types/api';
 
 export async function getOwnedProjects() {
   const { data } = await http.get<Project[]>('/api/projects/mine');
@@ -36,4 +36,9 @@ export async function answerProjectInvite(memberId: number, answer: Extract<Requ
 
 export async function inviteProjectMember(projectId: number, userId: number) {
   await http.post(`/api/projects/${projectId}/invite/${userId}`);
+}
+
+export async function getProjectMetrics(projectId: number) {
+  const { data } = await http.get<ProjectMetrics>(`/api/projects/${projectId}/metrics`);
+  return data;
 }

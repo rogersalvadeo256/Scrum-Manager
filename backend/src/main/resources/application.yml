@@ -73,3 +73,9 @@ logging:
   level:
     com.scrummanager: INFO
     org.springframework.security: WARN
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    path: /v3/api-docs
