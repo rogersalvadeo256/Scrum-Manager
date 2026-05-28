@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.scrummanager.service.TaskServiceTests
 -------------------------------------------------------------------------------
-Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.473 s -- in com.scrummanager.service.TaskServiceTests
+Tests run: 18, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.655 s -- in com.scrummanager.service.TaskServiceTests
