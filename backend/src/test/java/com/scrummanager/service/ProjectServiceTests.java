@@ -8,6 +8,8 @@ import com.scrummanager.dto.request.ProjectRequest;
 import com.scrummanager.dto.response.ProjectResponse;
 import com.scrummanager.repository.ProjectMemberRepository;
 import com.scrummanager.repository.ProjectRepository;
+import com.scrummanager.repository.ProjectSprintRepository;
+import com.scrummanager.repository.ProjectTaskRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -28,6 +30,8 @@ class ProjectServiceTests {
 
     @Mock private ProjectRepository projectRepository;
     @Mock private ProjectMemberRepository memberRepository;
+    @Mock private ProjectTaskRepository taskRepository;
+    @Mock private ProjectSprintRepository sprintRepository;
     @Mock private CacheInvalidationService cacheInvalidationService;
     @Mock private DomainEventPublisher domainEventPublisher;
 
@@ -36,7 +40,7 @@ class ProjectServiceTests {
     @BeforeEach
     void setUp() {
         projectService = new ProjectService(projectRepository, memberRepository,
-                cacheInvalidationService, domainEventPublisher);
+                taskRepository, sprintRepository, cacheInvalidationService, domainEventPublisher);
     }
 
     @Test

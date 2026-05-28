@@ -3,10 +3,12 @@
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/CacheConfig.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/GlobalExceptionHandler.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/MessagingConfig.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/OpenApiConfig.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/config/SecurityConfig.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/AuthController.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/FriendshipController.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/ProjectController.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/ScalarController.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/TaskController.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/controller/UserController.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/domain/entity/Friendship.java
@@ -30,6 +32,7 @@
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/request/TaskRequest.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/response/AuthResponse.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/response/FriendshipResponse.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/response/ProjectMetricsResponse.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/response/ProjectResponse.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/response/SprintResponse.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/main/java/com/scrummanager/dto/response/TaskResponse.java

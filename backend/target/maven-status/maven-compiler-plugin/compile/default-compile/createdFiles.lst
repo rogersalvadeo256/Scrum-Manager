@@ -16,7 +16,9 @@ com/scrummanager/domain/entity/UserProfile.class
 com/scrummanager/domain/enums/TaskStatus.class
 com/scrummanager/service/UserService.class
 com/scrummanager/dto/request/RegisterRequest.class
+com/scrummanager/controller/ScalarController.class
 com/scrummanager/security/JwtAuthenticationFilter.class
+com/scrummanager/dto/response/ProjectMetricsResponse.class
 com/scrummanager/dto/response/FriendshipResponse.class
 com/scrummanager/dto/response/ProjectResponse.class
 com/scrummanager/service/ProjectService.class
@@ -28,6 +30,7 @@ com/scrummanager/service/TokenStateService.class
 com/scrummanager/dto/request/TaskRequest.class
 com/scrummanager/dto/request/LoginRequest.class
 com/scrummanager/domain/enums/Availability.class
+com/scrummanager/config/OpenApiConfig.class
 com/scrummanager/service/BackgroundMaintenanceService.class
 com/scrummanager/service/CacheInvalidationService.class
 com/scrummanager/domain/entity/Friendship.class

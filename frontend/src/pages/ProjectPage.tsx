@@ -1,9 +1,9 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { ArrowLeft, ArrowRight, CheckCircle2, CircleDashed, Plus, Search, TrendingUp, UserPlus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, BarChart3, CheckCircle2, CircleDashed, Plus, Search, TrendingUp, UserPlus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { getFriends } from '../api/friendships';
-import { getMemberProjects, getOwnedProjects, inviteProjectMember } from '../api/projects';
+import { getMemberProjects, getOwnedProjects, getProjectMetrics, inviteProjectMember } from '../api/projects';
 import {
   createSprint,
   createTask,
@@ -86,6 +86,12 @@ export function ProjectPage() {
     enabled: Number.isFinite(numericProjectId),
     queryFn: () => getSprints(numericProjectId),
     queryKey: ['projects', numericProjectId, 'sprints'],
+  });
+
+  const metricsQuery = useQuery({
+    enabled: Number.isFinite(numericProjectId),
+    queryFn: () => getProjectMetrics(numericProjectId),
+    queryKey: ['projects', numericProjectId, 'metrics'],
   });
 
   const inviteSearchQuery = useQuery({
@@ -221,6 +227,7 @@ export function ProjectPage() {
 
   const tasks = tasksQuery.data ?? [];
   const sprints = sprintsQuery.data ?? [];
+  const metrics = metricsQuery.data ?? null;
   const totalTaskPoints = tasks.reduce((total, task) => total + task.points, 0);
   const doneTaskPoints = tasksByStatus.DONE.reduce((total, task) => total + task.points, 0);
   const sprintPoints = sprints.reduce((total, sprint) => total + sprint.points, 0);
@@ -313,7 +320,8 @@ export function ProjectPage() {
       ) : null}
 
       {!isLoading && project ? (
-        <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <>
+          <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <Card className="space-y-2 p-5">
             <p className="text-xs uppercase tracking-[0.2em] text-brand-200">Tarefas concluídas</p>
             <p className="text-3xl font-semibold text-white">{taskCompletionRate}%</p>
@@ -335,6 +343,125 @@ export function ProjectPage() {
             <p className="text-subtle">Acompanhe evolução da cadência</p>
           </Card>
         </section>
+
+        {metrics ? (
+          <section className="space-y-4">
+            <div className="flex items-center gap-3">
+              <BarChart3 className="size-5 text-brand-200" />
+              <div>
+                <h2 className="text-lg font-semibold text-white">Dashboard do Scrum Master</h2>
+                <p className="text-sm text-slate-400 capitalize">{metrics.currentMonth}</p>
+              </div>
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <Card className="space-y-2 p-5">
+                <p className="text-xs uppercase tracking-[0.2em] text-brand-200">Tarefas no mês</p>
+                <p className="text-3xl font-semibold text-white">{metrics.tasksThisMonth}</p>
+                <p className="text-subtle">{metrics.doneThisMonth} concluídas este mês</p>
+              </Card>
+              <Card className="space-y-2 p-5">
+                <p className="text-xs uppercase tracking-[0.2em] text-brand-200">Velocidade (mês)</p>
+                <p className="text-3xl font-semibold text-white">{metrics.velocityThisMonth} pts</p>
+                <p className="text-subtle">Pontos entregues no mês atual</p>
+              </Card>
+              <Card className="space-y-2 p-5">
+                <p className="text-xs uppercase tracking-[0.2em] text-brand-200">Membros ativos</p>
+                <p className="text-3xl font-semibold text-white">{metrics.membersCount}</p>
+                <p className="text-subtle">Pessoas no projeto</p>
+              </Card>
+              <Card className="space-y-2 p-5">
+                <p className="text-xs uppercase tracking-[0.2em] text-brand-200">Sprints ativos</p>
+                <p className="text-3xl font-semibold text-white">{metrics.activeSprints}</p>
+                <p className="text-subtle">{metrics.completedSprints} de {metrics.totalSprints} finalizados</p>
+              </Card>
+            </div>
+
+            <div className="grid gap-6 xl:grid-cols-2">
+              <Card className="space-y-4">
+                <SectionHeading
+                  description="Distribuição atual das tarefas por status."
+                  title="Status das tarefas"
+                />
+                <div className="space-y-3">
+                  {[
+                    { color: 'bg-slate-500', count: metrics.todoCount, label: 'A fazer' },
+                    { color: 'bg-brand-400', count: metrics.doingCount, label: 'Em andamento' },
+                    { color: 'bg-emerald-400', count: metrics.doneCount, label: 'Concluído' },
+                  ].map((item) => (
+                    <div className="space-y-1" key={item.label}>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-slate-300">{item.label}</span>
+                        <span className="text-white font-semibold">{item.count}</span>
+                      </div>
+                      <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+                        <div
+                          className={`h-full rounded-full ${item.color} transition-all`}
+                          style={{ width: metrics.totalTasks === 0 ? '0%' : `${Math.round((item.count / metrics.totalTasks) * 100)}%` }}
+                        />
+                      </div>
+                    </div>
+                  ))}
+                  <div className="pt-2">
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-emerald-400 transition-all"
+                        style={{ width: `${metrics.taskCompletionRate}%` }}
+                      />
+                    </div>
+                    <p className="mt-1 text-xs text-slate-500 uppercase tracking-[0.2em]">
+                      {metrics.taskCompletionRate}% do total concluído
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              <Card className="space-y-4">
+                <SectionHeading
+                  description="Resumo consolidado de pontos e entregas."
+                  title="Pontuação geral"
+                />
+                <div className="space-y-4">
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">Pontos entregues</span>
+                      <span className="text-white font-semibold">{metrics.completedPoints} / {metrics.totalPoints}</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-brand-400 transition-all"
+                        style={{ width: metrics.totalPoints === 0 ? '0%' : `${Math.round((metrics.completedPoints / metrics.totalPoints) * 100)}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">Sprints finalizados</span>
+                      <span className="text-white font-semibold">{metrics.completedSprints} / {metrics.totalSprints}</span>
+                    </div>
+                    <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+                      <div
+                        className="h-full rounded-full bg-emerald-400 transition-all"
+                        style={{ width: `${metrics.sprintCompletionRate}%` }}
+                      />
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 gap-3 pt-2 text-sm">
+                    <div className="surface-muted p-3 text-center">
+                      <p className="text-2xl font-semibold text-white">{metrics.velocityThisMonth}</p>
+                      <p className="text-slate-500 text-xs uppercase tracking-[0.2em] mt-1">pts este mês</p>
+                    </div>
+                    <div className="surface-muted p-3 text-center">
+                      <p className="text-2xl font-semibold text-white">{metrics.doneThisMonth}</p>
+                      <p className="text-slate-500 text-xs uppercase tracking-[0.2em] mt-1">tarefas no mês</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </section>
+        ) : null}
+      </>
       ) : null}
 
       {isLoading ? <Card className="p-8 text-center text-slate-300">Carregando projeto...</Card> : null}
