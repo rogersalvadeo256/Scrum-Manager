@@ -95,7 +95,7 @@ Scrum-Manager/
 - Java 17+
 - Maven 3.9+
 - Node.js 20+
-- npm 10+
+- pnpm 10+
 - PostgreSQL 16+
 - Redis 7+ (recomendado para cache e blacklist)
 - RabbitMQ 3.13+ (recomendado para eventos)
@@ -128,8 +128,8 @@ mvn spring-boot:run
 ```bash
 cd frontend
 cp .env.example .env
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Variáveis de ambiente principais
@@ -183,8 +183,8 @@ mvn test
 
 ```bash
 cd frontend
-npm run lint
-npm run build
+pnpm run lint
+pnpm run build
 ```
 
 ## Observações operacionais

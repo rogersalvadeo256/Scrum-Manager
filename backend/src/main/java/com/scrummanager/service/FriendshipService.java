@@ -15,6 +15,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -71,28 +75,45 @@ public class FriendshipService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "friendships-pending", key = "#userId")
     public List<FriendshipResponse> getPendingRequests(Long userId) {
-        return friendshipRepository.findByReceiverIdAndStatus(userId, RequestStatus.ON_HOLD)
-                .stream().map(f -> toResponse(f)).toList();
+        List<Friendship> pendingRequests = friendshipRepository.findByReceiverIdAndStatus(userId, RequestStatus.ON_HOLD);
+        if (pendingRequests.isEmpty()) {
+            return List.of();
+        }
+        Set<Long> userIds = pendingRequests.stream()
+                .flatMap(f -> java.util.stream.Stream.of(f.getRequestedById(), f.getReceiverId()))
+                .collect(Collectors.toSet());
+        Map<Long, String> usernames = userRepository.findAllById(userIds).stream()
+                .collect(Collectors.toMap(User::getId, User::getUsername));
+        return pendingRequests.stream()
+                .map(f -> toResponse(f, usernames))
+                .toList();
     }
 
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "friendships-list", key = "#userId")
     public List<UserResponse> getFriends(Long userId) {
         List<Friendship> friendships = friendshipRepository.findAcceptedFriendships(userId);
+        if (friendships.isEmpty()) {
+            return List.of();
+        }
+        Set<Long> friendIds = friendships.stream()
+                .map(f -> f.getRequestedById().equals(userId) ? f.getReceiverId() : f.getRequestedById())
+                .collect(Collectors.toSet());
+        Map<Long, UserResponse> usersById = userRepository.findAllById(friendIds).stream()
+                .map(UserService::toResponse)
+                .collect(Collectors.toMap(UserResponse::id, Function.identity()));
         return friendships.stream()
                 .map(f -> {
                     Long friendId = f.getRequestedById().equals(userId) ? f.getReceiverId() : f.getRequestedById();
-                    return userRepository.findById(friendId).map(UserService::toResponse).orElse(null);
+                    return usersById.get(friendId);
                 })
                 .filter(u -> u != null)
                 .toList();
     }
 
-    private FriendshipResponse toResponse(Friendship f) {
-        String reqByUsername = userRepository.findById(f.getRequestedById())
-                .map(User::getUsername).orElse("unknown");
-        String receiverUsername = userRepository.findById(f.getReceiverId())
-                .map(User::getUsername).orElse("unknown");
+    private FriendshipResponse toResponse(Friendship f, Map<Long, String> usernames) {
+        String reqByUsername = usernames.getOrDefault(f.getRequestedById(), "unknown");
+        String receiverUsername = usernames.getOrDefault(f.getReceiverId(), "unknown");
         return new FriendshipResponse(f.getId(), f.getRequestedById(), reqByUsername,
                 f.getReceiverId(), receiverUsername, f.getStatus(), f.getSentDate());
     }

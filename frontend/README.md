@@ -38,8 +38,8 @@ Frontend React moderno para o Scrum Manager, alinhado ao fluxo do app legado e i
 ```bash
 cd frontend
 cp .env.example .env
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Por padrão o frontend espera a API em `http://localhost:8080`.
@@ -48,7 +48,7 @@ Por padrão o frontend espera a API em `http://localhost:8080`.
 
 ```bash
 cd frontend
-npm run build
+pnpm run build
 ```
 
 ## Variáveis de ambiente
