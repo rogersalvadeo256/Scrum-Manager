@@ -8,8 +8,6 @@ import javafx.stage.Stage;
 public class DevelopmentScreen extends Stage{
 
 	public DevelopmentScreen() {
-		// TODO Auto-generated constructor stub
-
 		try {
 			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("DevelopmentScene.fxml"));
 			Scene scene = new Scene(root);

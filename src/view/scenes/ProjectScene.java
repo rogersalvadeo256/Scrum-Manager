@@ -185,7 +185,6 @@ public class ProjectScene extends Scene {
 			try {
 				new TeamPOPUP(pj);
 			} catch (IOException e2) {
-				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 		});
