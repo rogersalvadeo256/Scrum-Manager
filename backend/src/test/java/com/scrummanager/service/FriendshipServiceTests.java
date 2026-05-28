@@ -127,8 +127,10 @@ class FriendshipServiceTests {
         Friendship f = baseFriendship(10L, 1L, 2L, RequestStatus.ON_HOLD);
         when(friendshipRepository.findByReceiverIdAndStatus(2L, RequestStatus.ON_HOLD))
                 .thenReturn(List.of(f));
-        when(userRepository.findById(1L)).thenReturn(Optional.of(baseUser(1L, "sender")));
-        when(userRepository.findById(2L)).thenReturn(Optional.of(baseUser(2L, "receiver")));
+        when(userRepository.findAllById(any())).thenReturn(List.of(
+                baseUser(1L, "sender"),
+                baseUser(2L, "receiver")
+        ));
 
         List<FriendshipResponse> result = friendshipService.getPendingRequests(2L);
 
@@ -141,7 +143,7 @@ class FriendshipServiceTests {
     void getFriendsReturnsAcceptedFriends() {
         Friendship f = baseFriendship(10L, 1L, 2L, RequestStatus.ACCEPTED);
         when(friendshipRepository.findAcceptedFriendships(1L)).thenReturn(List.of(f));
-        when(userRepository.findById(2L)).thenReturn(Optional.of(baseUser(2L, "friend")));
+        when(userRepository.findAllById(any())).thenReturn(List.of(baseUser(2L, "friend")));
 
         List<UserResponse> result = friendshipService.getFriends(1L);
 

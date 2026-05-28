@@ -58,10 +58,16 @@ public class ProjectService {
     @Transactional(readOnly = true)
     @Cacheable(cacheNames = "project-member", key = "#userId")
     public List<ProjectResponse> getProjectsAsMember(Long userId) {
-        return memberRepository.findByUserIdAndInviteStatus(userId, RequestStatus.ACCEPTED)
+        List<Long> projectIds = memberRepository.findByUserIdAndInviteStatus(userId, RequestStatus.ACCEPTED)
                 .stream()
-                .map(m -> projectRepository.findById(m.getProjectId()).orElseThrow())
-                .filter(p -> p.getStatus() != ProjectStatus.DELETED)
+                .map(ProjectMember::getProjectId)
+                .distinct()
+                .toList();
+        if (projectIds.isEmpty()) {
+            return List.of();
+        }
+        return projectRepository.findByIdInAndStatusNot(projectIds, ProjectStatus.DELETED)
+                .stream()
                 .map(ProjectService::toResponse)
                 .toList();
     }
