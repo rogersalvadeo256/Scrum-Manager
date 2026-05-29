@@ -1,14 +1,16 @@
 package com.scrummanager.facade;
 
-import com.scrummanager.business.ProjectBusiness;
+import com.scrummanager.business.contract.ProjectBusinessContract;
+import com.scrummanager.business.contract.ProjectMetricsData;
 import com.scrummanager.domain.dto.request.ProjectRequest;
 import com.scrummanager.domain.dto.response.ProjectMetricsResponse;
 import com.scrummanager.domain.dto.response.ProjectResponse;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.domain.model.Project;
 import com.scrummanager.domain.model.ProjectMember;
-import com.scrummanager.service.CacheInvalidationService;
-import com.scrummanager.service.DomainEventPublisher;
+import com.scrummanager.facade.contract.ProjectFacadeContract;
+import com.scrummanager.service.contract.CacheInvalidationContract;
+import com.scrummanager.service.contract.DomainEventPublisherContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,11 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class ProjectFacade {
+public class ProjectFacade implements ProjectFacadeContract {
 
-    private final ProjectBusiness projectBusiness;
-    private final CacheInvalidationService cacheInvalidationService;
-    private final DomainEventPublisher domainEventPublisher;
+    private final ProjectBusinessContract projectBusiness;
+    private final CacheInvalidationContract cacheInvalidationService;
+    private final DomainEventPublisherContract domainEventPublisher;
 
     public ProjectResponse create(ProjectRequest req, Long userId) {
         Project project = projectBusiness.create(req.name(), req.description(), req.type(), userId);
@@ -78,7 +80,7 @@ public class ProjectFacade {
     }
 
     public ProjectMetricsResponse getProjectMetrics(Long projectId, Long userId) {
-        ProjectBusiness.ProjectMetricsData d = projectBusiness.computeMetrics(projectId, userId);
+        ProjectMetricsData d = projectBusiness.computeMetrics(projectId, userId);
         return new ProjectMetricsResponse(
                 d.currentMonth(), d.totalTasks(), d.todoCount(), d.doingCount(), d.doneCount(),
                 d.tasksThisMonth(), d.doneThisMonth(), d.totalPoints(), d.completedPoints(),

@@ -35,15 +35,16 @@ backend/
     └── main/
         ├── java/com/scrummanager/
         │   ├── ScrumManagerApplication.java
+        │   ├── api/             # REST controllers
+        │   ├── business/        # regras de negócio
+        │   │   └── contract/    # interfaces da camada de negócio
+        │   ├── facade/          # orquestração dos casos de uso
+        │   │   └── contract/    # interfaces usadas pelos controllers
+        │   ├── service/         # integrações e infraestrutura
+        │   │   └── contract/    # interfaces de suporte
         │   ├── config/          # SecurityConfig, GlobalExceptionHandler
-        │   ├── domain/
-        │   │   ├── entity/      # User, UserProfile, Project, ProjectTask,
-        │   │   │                #   ProjectSprint, ProjectMember, Friendship
-        │   │   └── enums/       # AccountStatus, RequestStatus, …
+        │   ├── domain/          # models, DTOs e enums
         │   ├── repository/      # Spring Data JPA interfaces
-        │   ├── service/         # AuthService, ProjectService, TaskService, …
-        │   ├── controller/      # REST controllers
-        │   ├── dto/             # request / response records
         │   └── security/        # JwtTokenProvider, JwtAuthenticationFilter,
         │                        #   UserDetailsServiceImpl
         └── resources/

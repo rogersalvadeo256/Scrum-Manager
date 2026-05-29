@@ -1,1 +1,4 @@
-bin
+backend/target/
+frontend/dist/
+frontend/node_modules/
+hs_err_pid*

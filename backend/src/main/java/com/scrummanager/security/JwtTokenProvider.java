@@ -1,5 +1,6 @@
 package com.scrummanager.security;
 
+import com.scrummanager.service.contract.TokenStateContract;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -19,7 +20,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class JwtTokenProvider {
 
-    private final com.scrummanager.service.TokenStateService tokenStateService;
+    private final TokenStateContract tokenStateService;
 
     @Value("${app.jwt.secret}")
     private String jwtSecret;

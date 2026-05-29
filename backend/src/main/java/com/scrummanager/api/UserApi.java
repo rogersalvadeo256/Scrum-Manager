@@ -1,7 +1,7 @@
 package com.scrummanager.api;
 
 import com.scrummanager.domain.dto.response.UserResponse;
-import com.scrummanager.facade.UserFacade;
+import com.scrummanager.facade.contract.UserFacadeContract;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserApi {
 
-    private final UserFacade userFacade;
+    private final UserFacadeContract userFacade;
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {

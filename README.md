@@ -104,6 +104,18 @@ Scrum-Manager/
 ├── backend/
 │   ├── pom.xml
 │   └── src/
+│       └── main/java/com/scrummanager/
+│           ├── api/
+│           ├── business/
+│           │   └── contract/
+│           ├── facade/
+│           │   └── contract/
+│           ├── service/
+│           │   └── contract/
+│           ├── config/
+│           ├── domain/
+│           ├── repository/
+│           └── security/
 ├── frontend/
 │   ├── package.json
 │   └── src/
@@ -236,3 +248,7 @@ Scalar exibe todos os endpoints com autenticação JWT, exemplos de request/resp
 
 - backend: [`/backend/README.md`](./backend/README.md)
 - frontend: [`/frontend/README.md`](./frontend/README.md)
+
+## Limpeza do repositório
+
+O código legado da aplicação desktop em JavaFX foi removido da raiz do repositório. A manutenção ativa agora fica concentrada apenas em `backend/` e `frontend/`.

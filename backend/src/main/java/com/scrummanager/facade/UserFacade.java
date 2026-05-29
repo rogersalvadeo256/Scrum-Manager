@@ -1,9 +1,10 @@
 package com.scrummanager.facade;
 
-import com.scrummanager.business.UserBusiness;
+import com.scrummanager.business.contract.UserBusinessContract;
 import com.scrummanager.domain.dto.response.UserResponse;
 import com.scrummanager.domain.model.User;
-import com.scrummanager.service.CacheInvalidationService;
+import com.scrummanager.facade.contract.UserFacadeContract;
+import com.scrummanager.service.contract.CacheInvalidationContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,10 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserFacade {
+public class UserFacade implements UserFacadeContract {
 
-    private final UserBusiness userBusiness;
-    private final CacheInvalidationService cacheInvalidationService;
+    private final UserBusinessContract userBusiness;
+    private final CacheInvalidationContract cacheInvalidationService;
 
     @Cacheable(cacheNames = "user-by-id", key = "#id")
     public UserResponse getById(Long id) {

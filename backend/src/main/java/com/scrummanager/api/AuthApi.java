@@ -5,7 +5,7 @@ import com.scrummanager.domain.dto.request.LoginRequest;
 import com.scrummanager.domain.dto.request.RegisterRequest;
 import com.scrummanager.domain.dto.response.AuthResponse;
 import com.scrummanager.domain.dto.response.UserResponse;
-import com.scrummanager.facade.AuthFacade;
+import com.scrummanager.facade.contract.AuthFacadeContract;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class AuthApi {
 
-    private final AuthFacade authFacade;
+    private final AuthFacadeContract authFacade;
 
     @PostMapping("/register")
     public ResponseEntity<UserResponse> register(@Valid @RequestBody RegisterRequest req) {

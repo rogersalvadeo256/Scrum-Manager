@@ -3,7 +3,7 @@ package com.scrummanager.api;
 import com.scrummanager.domain.dto.response.FriendshipResponse;
 import com.scrummanager.domain.dto.response.UserResponse;
 import com.scrummanager.domain.enums.RequestStatus;
-import com.scrummanager.facade.FriendshipFacade;
+import com.scrummanager.facade.contract.FriendshipFacadeContract;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class FriendshipApi {
 
-    private final FriendshipFacade friendshipFacade;
+    private final FriendshipFacadeContract friendshipFacade;
 
     @PostMapping("/request/{targetUserId}")
     public ResponseEntity<Void> sendRequest(@PathVariable Long targetUserId,

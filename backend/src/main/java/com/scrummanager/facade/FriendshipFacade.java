@@ -1,12 +1,13 @@
 package com.scrummanager.facade;
 
-import com.scrummanager.business.FriendshipBusiness;
+import com.scrummanager.business.contract.FriendshipBusinessContract;
 import com.scrummanager.domain.dto.response.FriendshipResponse;
 import com.scrummanager.domain.dto.response.UserResponse;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.domain.model.Friendship;
 import com.scrummanager.domain.model.User;
-import com.scrummanager.service.CacheInvalidationService;
+import com.scrummanager.facade.contract.FriendshipFacadeContract;
+import com.scrummanager.service.contract.CacheInvalidationContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,10 +19,10 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FriendshipFacade {
+public class FriendshipFacade implements FriendshipFacadeContract {
 
-    private final FriendshipBusiness friendshipBusiness;
-    private final CacheInvalidationService cacheInvalidationService;
+    private final FriendshipBusinessContract friendshipBusiness;
+    private final CacheInvalidationContract cacheInvalidationService;
 
     public void sendRequest(Long fromId, Long toId) {
         friendshipBusiness.sendRequest(fromId, toId);

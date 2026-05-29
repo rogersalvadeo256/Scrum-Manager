@@ -1,5 +1,6 @@
 package com.scrummanager.business;
 
+import com.scrummanager.business.contract.UserBusinessContract;
 import com.scrummanager.domain.model.User;
 import com.scrummanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class UserBusiness {
+public class UserBusiness implements UserBusinessContract {
 
     private final UserRepository userRepository;
 

@@ -1,5 +1,7 @@
 package com.scrummanager.business;
 
+import com.scrummanager.business.contract.ProjectBusinessContract;
+import com.scrummanager.business.contract.ProjectMetricsData;
 import com.scrummanager.domain.enums.ProjectStatus;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.domain.enums.SprintStatus;
@@ -24,7 +26,7 @@ import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
-public class ProjectBusiness {
+public class ProjectBusiness implements ProjectBusinessContract {
 
     private final ProjectRepository projectRepository;
     private final ProjectMemberRepository memberRepository;
@@ -184,10 +186,4 @@ public class ProjectBusiness {
         }
         return project;
     }
-
-    public record ProjectMetricsData(
-            String currentMonth, int totalTasks, int todoCount, int doingCount, int doneCount,
-            int tasksThisMonth, int doneThisMonth, int totalPoints, int completedPoints, int velocityThisMonth,
-            int totalSprints, int activeSprints, int completedSprints,
-            int sprintCompletionRate, int taskCompletionRate, int membersCount) {}
 }
