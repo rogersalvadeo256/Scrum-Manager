@@ -1,3 +1,39 @@
+export type Availability = 'AVAILABLE' | 'BUSY';
+
+export type UserSettings = {
+  id: number;
+  username: string;
+  email: string;
+  status: AccountStatus;
+  registrationDate: string;
+  profileName: string;
+  availability: Availability;
+};
+
+export type ApiKey = {
+  id: number;
+  name: string;
+  keyPrefix: string;
+  rawKey: string | null;
+  createdAt: string;
+  expiresAt: string | null;
+};
+
+export type UpdateProfilePayload = {
+  name: string;
+  availability: Availability;
+};
+
+export type ChangePasswordPayload = {
+  currentPassword: string;
+  newPassword: string;
+};
+
+export type CreateApiKeyPayload = {
+  name: string;
+  expiresInDays: number | null;
+};
+
 export type AuthSession = {
   token: string;
   tokenType: string;

@@ -4,6 +4,7 @@ import {
   LogOut,
   Plus,
   Search,
+  Settings,
   Shield,
   UserCircle2,
   UserPlus,
@@ -23,8 +24,9 @@ import {
   getPendingProjectInvites,
   updateProject,
 } from '../api/projects';
-import { getUser, searchUsers, updateProfilePhoto } from '../api/users';
+import { getMySettings, getUser, searchUsers, updateProfilePhoto } from '../api/users';
 import { ProjectFormModal } from '../components/forms/ProjectFormModal';
+import { UserSettingsModal } from '../components/forms/UserSettingsModal';
 import { Button } from '../components/ui/Button';
 import { Card } from '../components/ui/Card';
 import { EmptyState } from '../components/ui/EmptyState';
@@ -36,7 +38,7 @@ import { formatDate } from '../lib/format';
 import { useAuth } from '../features/auth/useAuth';
 import type { Project, RequestStatus, User } from '../types/api';
 
-type Section = 'friends' | 'overview' | 'profile' | 'projects';
+type Section = 'friends' | 'overview' | 'profile' | 'projects' | 'settings';
 
 const sectionCopy: Record<Section, { description: string; title: string }> = {
   friends: {
@@ -54,6 +56,10 @@ const sectionCopy: Record<Section, { description: string; title: string }> = {
   projects: {
     description: 'Projetos próprios e como membro, com ações rápidas e navegação direta.',
     title: 'Projetos',
+  },
+  settings: {
+    description: 'Atualize nome, disponibilidade, senha e gerencie suas chaves de API.',
+    title: 'Configurações',
   },
 };
 
@@ -77,12 +83,19 @@ export function DashboardPage() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
   const [feedback, setFeedback] = useState<string | null>(null);
   const [projectModal, setProjectModal] = useState<{ mode: 'create' | 'edit'; value: Project | null } | null>(null);
+  const [showSettings, setShowSettings] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const currentUserQuery = useQuery({
     enabled: Boolean(session),
     queryFn: () => getUser(session!.userId),
     queryKey: ['user', session?.userId],
+  });
+
+  const userSettingsQuery = useQuery({
+    enabled: Boolean(session),
+    queryFn: getMySettings,
+    queryKey: ['user-settings'],
   });
 
   const ownedProjectsQuery = useQuery({
@@ -278,6 +291,7 @@ export function DashboardPage() {
                 { icon: FolderKanban, id: 'projects', label: 'Projetos' },
                 { icon: Users, id: 'friends', label: 'Amizades' },
                 { icon: UserCircle2, id: 'profile', label: 'Perfil' },
+                { icon: Settings, id: 'settings', label: 'Configurações' },
               ] as const
             ).map((item) => (
               <button
@@ -705,12 +719,44 @@ export function DashboardPage() {
           </div>
         ) : null}
 
+        {!isLoading && activeSection === 'settings' ? (
+          <div className="space-y-4">
+            <Card className="space-y-4">
+              <SectionHeading
+                description="Atualize seu nome, disponibilidade, senha e gerencie chaves de API para integrações externas."
+                title="Configurações da conta"
+              />
+              <div className="flex flex-wrap gap-3">
+                <Button onClick={() => setShowSettings(true)}>
+                  <Settings className="size-4" />
+                  Abrir configurações
+                </Button>
+              </div>
+              {userSettingsQuery.data ? (
+                <div className="surface-muted space-y-2 p-5 text-sm text-slate-300">
+                  <p><span className="text-slate-500">Nome:</span> {userSettingsQuery.data.profileName}</p>
+                  <p><span className="text-slate-500">Disponibilidade:</span> {userSettingsQuery.data.availability === 'AVAILABLE' ? 'Disponível' : 'Ocupado'}</p>
+                  <p><span className="text-slate-500">E-mail:</span> {userSettingsQuery.data.email}</p>
+                  <p><span className="text-slate-500">Status da conta:</span> {userSettingsQuery.data.status}</p>
+                </div>
+              ) : null}
+            </Card>
+          </div>
+        ) : null}
+
         {projectModal ? (
           <ProjectFormModal
             initialValue={projectModal.value}
             isSaving={projectMutation.isPending}
             onClose={() => setProjectModal(null)}
             onSubmit={handleProjectSubmit}
+          />
+        ) : null}
+
+        {showSettings && userSettingsQuery.data ? (
+          <UserSettingsModal
+            onClose={() => setShowSettings(false)}
+            settings={userSettingsQuery.data}
           />
         ) : null}
       </section>
