@@ -1,7 +1,7 @@
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/ScrumManagerApplicationTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/business/AuthBusinessTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/business/FriendshipBusinessTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/business/ProjectBusinessTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/business/TaskBusinessTests.java
+/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/business/UserBusinessTests.java
 /tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/security/PasswordPolicyValidatorTests.java
-/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/service/AuthServiceTests.java
-/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/service/FriendshipServiceTests.java
-/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/service/ProjectServiceTests.java
-/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/service/TaskServiceTests.java
-/tmp/workspace/rogersalvadeo256/Scrum-Manager/backend/src/test/java/com/scrummanager/service/UserServiceTests.java

@@ -1,6 +1,6 @@
 package com.scrummanager.security;
 
-import com.scrummanager.domain.entity.User;
+import com.scrummanager.domain.model.User;
 import com.scrummanager.domain.enums.AccountStatus;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

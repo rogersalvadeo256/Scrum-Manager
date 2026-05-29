@@ -1,8 +1,8 @@
 package com.scrummanager.service;
 
 import com.scrummanager.config.AppSecurityProperties;
-import com.scrummanager.domain.entity.ProjectMember;
-import com.scrummanager.domain.entity.User;
+import com.scrummanager.domain.model.ProjectMember;
+import com.scrummanager.domain.model.User;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.repository.ProjectMemberRepository;
 import com.scrummanager.repository.UserRepository;

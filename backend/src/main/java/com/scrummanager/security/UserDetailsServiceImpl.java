@@ -1,6 +1,6 @@
 package com.scrummanager.security;
 
-import com.scrummanager.domain.entity.User;
+import com.scrummanager.domain.model.User;
 import com.scrummanager.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
