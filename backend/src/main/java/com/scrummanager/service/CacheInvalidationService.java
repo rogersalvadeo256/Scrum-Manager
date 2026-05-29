@@ -1,6 +1,7 @@
 package com.scrummanager.service;
 
 import com.scrummanager.domain.model.User;
+import com.scrummanager.service.contract.CacheInvalidationContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -10,7 +11,7 @@ import java.util.Locale;
 
 @Service
 @RequiredArgsConstructor
-public class CacheInvalidationService {
+public class CacheInvalidationService implements CacheInvalidationContract {
 
     private final CacheManager cacheManager;
 

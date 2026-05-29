@@ -1,14 +1,15 @@
 package com.scrummanager.facade;
 
-import com.scrummanager.business.TaskBusiness;
+import com.scrummanager.business.contract.TaskBusinessContract;
 import com.scrummanager.domain.dto.request.SprintRequest;
 import com.scrummanager.domain.dto.request.TaskRequest;
 import com.scrummanager.domain.dto.response.SprintResponse;
 import com.scrummanager.domain.dto.response.TaskResponse;
 import com.scrummanager.domain.model.ProjectSprint;
 import com.scrummanager.domain.model.ProjectTask;
-import com.scrummanager.service.CacheInvalidationService;
-import com.scrummanager.service.DomainEventPublisher;
+import com.scrummanager.facade.contract.TaskFacadeContract;
+import com.scrummanager.service.contract.CacheInvalidationContract;
+import com.scrummanager.service.contract.DomainEventPublisherContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -18,11 +19,11 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class TaskFacade {
+public class TaskFacade implements TaskFacadeContract {
 
-    private final TaskBusiness taskBusiness;
-    private final CacheInvalidationService cacheInvalidationService;
-    private final DomainEventPublisher domainEventPublisher;
+    private final TaskBusinessContract taskBusiness;
+    private final CacheInvalidationContract cacheInvalidationService;
+    private final DomainEventPublisherContract domainEventPublisher;
 
     public TaskResponse createTask(Long projectId, TaskRequest req, Long userId) {
         ProjectTask task = taskBusiness.createTask(

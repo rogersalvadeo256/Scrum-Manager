@@ -6,6 +6,9 @@ import com.scrummanager.domain.model.User;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.repository.ProjectMemberRepository;
 import com.scrummanager.repository.UserRepository;
+import com.scrummanager.service.contract.CacheInvalidationContract;
+import com.scrummanager.service.contract.DomainEventPublisherContract;
+import com.scrummanager.service.contract.TokenStateContract;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,9 +28,9 @@ public class BackgroundMaintenanceService {
 
     private final UserRepository userRepository;
     private final ProjectMemberRepository projectMemberRepository;
-    private final CacheInvalidationService cacheInvalidationService;
-    private final DomainEventPublisher domainEventPublisher;
-    private final TokenStateService tokenStateService;
+    private final CacheInvalidationContract cacheInvalidationService;
+    private final DomainEventPublisherContract domainEventPublisher;
+    private final TokenStateContract tokenStateService;
     private final AppSecurityProperties securityProperties;
 
     @Value("${app.background.token-cleanup-ms}")

@@ -1,6 +1,9 @@
 package com.scrummanager.business;
 
+import com.scrummanager.business.contract.TaskBusinessContract;
 import com.scrummanager.domain.enums.RequestStatus;
+import com.scrummanager.domain.enums.SprintStatus;
+import com.scrummanager.domain.enums.TaskStatus;
 import com.scrummanager.domain.model.Project;
 import com.scrummanager.domain.model.ProjectMember;
 import com.scrummanager.domain.model.ProjectSprint;
@@ -20,7 +23,7 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class TaskBusiness {
+public class TaskBusiness implements TaskBusinessContract {
 
     private final ProjectTaskRepository taskRepository;
     private final ProjectSprintRepository sprintRepository;
@@ -30,7 +33,7 @@ public class TaskBusiness {
     @Transactional
     public ProjectTask createTask(Long projectId, String title, String text, int points,
                                   Long creatorId, Long executorId,
-                                  com.scrummanager.domain.enums.TaskStatus status) {
+                                  TaskStatus status) {
         assertProjectAccess(projectId, creatorId);
         ProjectTask task = ProjectTask.builder()
                 .title(title)
@@ -54,7 +57,7 @@ public class TaskBusiness {
     @Transactional
     public ProjectTask updateTask(Long projectId, Long taskId, String title, String text,
                                   int points, Long executorId,
-                                  com.scrummanager.domain.enums.TaskStatus status, Long userId) {
+                                  TaskStatus status, Long userId) {
         ProjectTask task = taskRepository.findById(taskId)
                 .orElseThrow(() -> new IllegalArgumentException("Task not found"));
         if (!task.getProjectId().equals(projectId)) {
@@ -87,7 +90,7 @@ public class TaskBusiness {
 
     @Transactional
     public ProjectSprint createSprint(Long projectId, String title, String text, int points,
-                                      com.scrummanager.domain.enums.SprintStatus status, Long userId) {
+                                      SprintStatus status, Long userId) {
         assertProjectAccess(projectId, userId);
         ProjectSprint sprint = ProjectSprint.builder()
                 .title(title)
@@ -107,7 +110,7 @@ public class TaskBusiness {
 
     @Transactional
     public ProjectSprint updateSprint(Long projectId, Long sprintId, String title, String text,
-                                      int points, com.scrummanager.domain.enums.SprintStatus status,
+                                      int points, SprintStatus status,
                                       Long userId) {
         assertProjectAccess(projectId, userId);
         ProjectSprint sprint = sprintRepository.findById(sprintId)

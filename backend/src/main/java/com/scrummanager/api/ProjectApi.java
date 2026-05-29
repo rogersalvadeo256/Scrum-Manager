@@ -4,7 +4,7 @@ import com.scrummanager.domain.dto.request.ProjectRequest;
 import com.scrummanager.domain.dto.response.ProjectMetricsResponse;
 import com.scrummanager.domain.dto.response.ProjectResponse;
 import com.scrummanager.domain.enums.RequestStatus;
-import com.scrummanager.facade.ProjectFacade;
+import com.scrummanager.facade.contract.ProjectFacadeContract;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +21,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ProjectApi {
 
-    private final ProjectFacade projectFacade;
+    private final ProjectFacadeContract projectFacade;
 
     @PostMapping
     public ResponseEntity<ProjectResponse> create(@Valid @RequestBody ProjectRequest req,

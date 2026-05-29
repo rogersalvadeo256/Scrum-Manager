@@ -1,6 +1,7 @@
 package com.scrummanager.business;
 
 import com.scrummanager.config.AppSecurityProperties;
+import com.scrummanager.business.contract.LoginResult;
 import com.scrummanager.domain.dto.request.ActivateAccountRequest;
 import com.scrummanager.domain.dto.request.LoginRequest;
 import com.scrummanager.domain.model.User;
@@ -9,9 +10,8 @@ import com.scrummanager.domain.enums.AccountStatus;
 import com.scrummanager.domain.enums.Availability;
 import com.scrummanager.repository.UserRepository;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
-import com.scrummanager.security.JwtTokenProvider;
 import com.scrummanager.security.PasswordPolicyValidator;
-import com.scrummanager.service.TokenStateService;
+import com.scrummanager.service.contract.TokenStateContract;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +37,7 @@ class AuthBusinessTests {
     @Mock private UserRepository userRepository;
     @Mock private PasswordEncoder passwordEncoder;
     @Mock private AuthenticationManager authenticationManager;
-    @Mock private TokenStateService tokenStateService;
+    @Mock private TokenStateContract tokenStateService;
 
     private AuthBusiness authBusiness;
 
@@ -83,7 +83,7 @@ class AuthBusinessTests {
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(authentication);
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
-        AuthBusiness.LoginResult result = authBusiness.login(new LoginRequest("roger", "UltraSecure#2026"));
+        LoginResult result = authBusiness.login(new LoginRequest("roger", "UltraSecure#2026"));
 
         assertEquals(user.getUsername(), result.user().getUsername());
         assertEquals(0, result.user().getFailedLoginAttempts());

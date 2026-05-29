@@ -1,5 +1,6 @@
 package com.scrummanager.service;
 
+import com.scrummanager.service.contract.DomainEventPublisherContract;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.AmqpException;
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class DomainEventPublisher {
+public class DomainEventPublisher implements DomainEventPublisherContract {
 
     private final ObjectProvider<RabbitTemplate> rabbitTemplateProvider;
 

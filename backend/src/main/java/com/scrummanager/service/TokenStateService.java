@@ -1,5 +1,6 @@
 package com.scrummanager.service;
 
+import com.scrummanager.service.contract.TokenStateContract;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectProvider;
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TokenStateService {
+public class TokenStateService implements TokenStateContract {
 
     private static final String BLACKLIST_PREFIX = "scrum-manager:blacklist:";
 

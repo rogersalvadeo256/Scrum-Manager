@@ -4,7 +4,7 @@ import com.scrummanager.domain.dto.request.SprintRequest;
 import com.scrummanager.domain.dto.request.TaskRequest;
 import com.scrummanager.domain.dto.response.SprintResponse;
 import com.scrummanager.domain.dto.response.TaskResponse;
-import com.scrummanager.facade.TaskFacade;
+import com.scrummanager.facade.contract.TaskFacadeContract;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskApi {
 
-    private final TaskFacade taskFacade;
+    private final TaskFacadeContract taskFacade;
 
     @PostMapping("/tasks")
     public ResponseEntity<TaskResponse> createTask(@PathVariable Long projectId,

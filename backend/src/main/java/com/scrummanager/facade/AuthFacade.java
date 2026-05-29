@@ -1,15 +1,17 @@
 package com.scrummanager.facade;
 
-import com.scrummanager.business.AuthBusiness;
+import com.scrummanager.business.contract.AuthBusinessContract;
+import com.scrummanager.business.contract.LoginResult;
 import com.scrummanager.domain.dto.request.ActivateAccountRequest;
 import com.scrummanager.domain.dto.request.LoginRequest;
 import com.scrummanager.domain.dto.request.RegisterRequest;
 import com.scrummanager.domain.dto.response.AuthResponse;
 import com.scrummanager.domain.dto.response.UserResponse;
 import com.scrummanager.domain.model.User;
+import com.scrummanager.facade.contract.AuthFacadeContract;
 import com.scrummanager.security.JwtTokenProvider;
-import com.scrummanager.service.CacheInvalidationService;
-import com.scrummanager.service.DomainEventPublisher;
+import com.scrummanager.service.contract.CacheInvalidationContract;
+import com.scrummanager.service.contract.DomainEventPublisherContract;
 import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -21,12 +23,12 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class AuthFacade {
+public class AuthFacade implements AuthFacadeContract {
 
-    private final AuthBusiness authBusiness;
+    private final AuthBusinessContract authBusiness;
     private final JwtTokenProvider tokenProvider;
-    private final CacheInvalidationService cacheInvalidationService;
-    private final DomainEventPublisher domainEventPublisher;
+    private final CacheInvalidationContract cacheInvalidationService;
+    private final DomainEventPublisherContract domainEventPublisher;
 
     public UserResponse register(RegisterRequest req) {
         User user = authBusiness.register(req);
@@ -38,7 +40,7 @@ public class AuthFacade {
     }
 
     public AuthResponse login(LoginRequest req) {
-        AuthBusiness.LoginResult result = authBusiness.login(req);
+        LoginResult result = authBusiness.login(req);
         User user = result.user();
         cacheInvalidationService.evictUserCaches(user);
         String token = tokenProvider.generateToken(result.principal());

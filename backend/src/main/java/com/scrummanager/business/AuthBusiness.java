@@ -1,6 +1,8 @@
 package com.scrummanager.business;
 
 import com.scrummanager.config.AppSecurityProperties;
+import com.scrummanager.business.contract.AuthBusinessContract;
+import com.scrummanager.business.contract.LoginResult;
 import com.scrummanager.domain.dto.request.ActivateAccountRequest;
 import com.scrummanager.domain.dto.request.LoginRequest;
 import com.scrummanager.domain.dto.request.RegisterRequest;
@@ -11,7 +13,7 @@ import com.scrummanager.domain.model.UserProfile;
 import com.scrummanager.repository.UserRepository;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
 import com.scrummanager.security.PasswordPolicyValidator;
-import com.scrummanager.service.TokenStateService;
+import com.scrummanager.service.contract.TokenStateContract;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -29,14 +31,14 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AuthBusiness {
+public class AuthBusiness implements AuthBusinessContract {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authManager;
     private final PasswordPolicyValidator passwordPolicyValidator;
     private final AppSecurityProperties securityProperties;
-    private final TokenStateService tokenStateService;
+    private final TokenStateContract tokenStateService;
 
     @Transactional
     public User register(RegisterRequest req) {
@@ -154,5 +156,4 @@ public class AuthBusiness {
         user.setAccountLockedUntil(null);
     }
 
-    public record LoginResult(User user, AuthenticatedUserPrincipal principal) {}
 }

@@ -1,5 +1,6 @@
 package com.scrummanager.business;
 
+import com.scrummanager.business.contract.FriendshipBusinessContract;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.domain.model.Friendship;
 import com.scrummanager.domain.model.User;
@@ -18,7 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-public class FriendshipBusiness {
+public class FriendshipBusiness implements FriendshipBusinessContract {
 
     private final FriendshipRepository friendshipRepository;
     private final UserRepository userRepository;
