@@ -1,10 +1,12 @@
 package com.scrummanager.api;
 
+import com.scrummanager.domain.dto.request.AnswerRequest;
 import com.scrummanager.domain.dto.response.FriendshipResponse;
 import com.scrummanager.domain.dto.response.UserResponse;
 import com.scrummanager.domain.enums.RequestStatus;
 import com.scrummanager.facade.contract.FriendshipFacadeContract;
 import com.scrummanager.security.AuthenticatedUserPrincipal;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +14,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/friendships")
@@ -30,10 +31,9 @@ public class FriendshipApi {
 
     @PatchMapping("/{friendshipId}/answer")
     public ResponseEntity<Void> answer(@PathVariable Long friendshipId,
-                                       @RequestBody Map<String, String> body,
+                                       @Valid @RequestBody AnswerRequest body,
                                        @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
-        RequestStatus answer = RequestStatus.valueOf(body.get("answer"));
-        friendshipFacade.answerRequest(friendshipId, answer, principal.getId());
+        friendshipFacade.answerRequest(friendshipId, body.answer(), principal.getId());
         return ResponseEntity.noContent().build();
     }
 

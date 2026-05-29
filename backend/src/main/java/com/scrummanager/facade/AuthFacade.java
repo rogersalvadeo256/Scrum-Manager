@@ -7,6 +7,7 @@ import com.scrummanager.domain.dto.request.LoginRequest;
 import com.scrummanager.domain.dto.request.RegisterRequest;
 import com.scrummanager.domain.dto.response.AuthResponse;
 import com.scrummanager.domain.dto.response.UserResponse;
+import com.scrummanager.domain.mapper.UserMapper;
 import com.scrummanager.domain.model.User;
 import com.scrummanager.facade.contract.AuthFacadeContract;
 import com.scrummanager.security.JwtTokenProvider;
@@ -36,7 +37,7 @@ public class AuthFacade implements AuthFacadeContract {
         domainEventPublisher.publish(
                 "auth.user.registered", user.getId(), "user", user.getId(),
                 Map.of("username", user.getUsername(), "email", user.getEmail()));
-        return toUserResponse(user);
+        return UserMapper.toResponse(user);
     }
 
     public AuthResponse login(LoginRequest req) {
@@ -78,9 +79,7 @@ public class AuthFacade implements AuthFacadeContract {
     }
 
     private static UserResponse toUserResponse(User u) {
-        return new UserResponse(
-                u.getId(), u.getUsername(), u.getEmail(), u.getStatus(),
-                u.getRegistrationDate(), u.getProfile().getName());
+        return UserMapper.toResponse(u);
     }
 
     private String extractBearerToken(String authorizationHeader) {

@@ -1,5 +1,6 @@
 package com.scrummanager.api;
 
+import com.scrummanager.domain.dto.request.AnswerRequest;
 import com.scrummanager.domain.dto.request.ProjectRequest;
 import com.scrummanager.domain.dto.response.ProjectMetricsResponse;
 import com.scrummanager.domain.dto.response.ProjectResponse;
@@ -14,7 +15,6 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/projects")
@@ -66,10 +66,9 @@ public class ProjectApi {
 
     @PatchMapping("/invites/{memberId}")
     public ResponseEntity<Void> answerInvite(@PathVariable Long memberId,
-                                             @RequestBody Map<String, String> body,
+                                             @Valid @RequestBody AnswerRequest body,
                                              @AuthenticationPrincipal AuthenticatedUserPrincipal principal) {
-        RequestStatus answer = RequestStatus.valueOf(body.get("answer"));
-        projectFacade.answerInvite(memberId, answer, principal.getId());
+        projectFacade.answerInvite(memberId, body.answer(), principal.getId());
         return ResponseEntity.noContent().build();
     }
 

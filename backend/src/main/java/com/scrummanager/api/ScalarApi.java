@@ -13,14 +13,14 @@ public class ScalarApi {
                 <!doctype html>
                 <html lang="pt-BR">
                   <head>
-                    <title>Scrum Manager – API Reference</title>
+                    <title>Scrum Manager – External API Reference</title>
                     <meta charset="utf-8" />
                     <meta name="viewport" content="width=device-width, initial-scale=1" />
                   </head>
                   <body>
                     <script
                       id="api-reference"
-                      data-url="/v3/api-docs"
+                      data-url="/v3/api-docs/external"
                       data-configuration='{"theme":"purple","layout":"modern"}'
                       src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
                   </body>
